@@ -1,0 +1,185 @@
+.support-company-area{
+	.support-wrapper{
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		// Left Content
+		.left-content{
+			width: 54%;
+			padding-left: 366px;
+
+			@media #{$laptop}{
+				width: 49%;
+			}
+			@media #{$big_screen}{
+				padding-left: 30px;
+				width: 49%;
+			}
+			@media #{$big_screen2}{
+				padding-left: 50px;
+				width: 49%;
+			}
+			@media #{$big_screen3}{
+				padding-left: 100px;
+				width: 49%;
+			}
+			@media #{$lg}{
+				width: 48%;
+				padding-left: 20px;
+			}
+			@media #{$md}{
+				width: 100%;
+				padding-left: 30px;
+			}
+			@media #{$sm}{
+				width: 100%;
+				padding-left: 30px;
+			}
+			@media #{$xs}{
+				width: 100%;
+				padding-left: 30px;
+			}
+			// Left Content
+			.support-caption{
+				padding-right: 144px;
+				@media #{$xs}{
+					padding-right: 0px;
+				}
+				@media #{$sm}{
+					padding-right: 0px;
+				}
+				@media #{$lg}{
+					padding-right:70px;
+				}
+				p{
+					margin-bottom: 46px;
+					font-size: 15px;
+				}
+				p.pera-top{
+					font-size: 18px;
+					font-weight: 400;
+					color: #425140;
+				}
+			}
+		}
+		// Right Content
+		.right-content{
+			width: 40%;
+			@media #{$laptop}{
+				width: 49%;
+			}
+			@media #{$lg}{
+				width: 49%;
+				padding-top: 10px;
+				margin: 0;
+			}
+			@media #{$md}{
+				width: 80%;
+				padding-top: 50px;
+			}
+			@media #{$md}{
+				width: 100%;
+				padding-top: 50px;
+			}
+			@media #{$sm}{
+				width: 100%;
+				padding-top: 50px;
+			}
+			@media #{$xs}{
+				width: 100%;
+				padding-top: 50px;
+			}
+
+			position: relative;
+			.right-img{
+				img{
+					width: 100%;
+				}
+			}
+			.support-img-cap{
+				position: absolute;
+				bottom: 0px;
+				background: rgb(111,214,108);
+				background: linear-gradient(90deg, rgba(111,214,108,1) 0%, rgba(72,193,185,1) 100%);
+				padding: 0px 25px;
+				left: -250px;
+				bottom: 50px;
+
+				@media #{$lg}{
+					left: -150px;
+					bottom: 20px;
+				}
+				@media #{$md}{
+					left: 0px;
+				}
+				@media #{$sm}{
+					left: 0px;
+				}
+				@media #{$xs}{
+					padding: 0px 0px;
+					left: 0px;
+					bottom: 0;
+				}
+				span{
+				
+					font-size: 60px;
+					color:#fff;
+					text-transform: uppercase;
+					font-weight: 400;
+					font-family: $font_1;
+					line-height: 1.2;
+					@media #{$xs}{
+						padding:6px 40px;
+						font-size: 38px;
+					}
+					@media #{$lg}{
+						font-size: 35px;
+					}
+					@media #{$md}{
+						font-size: 35px;
+					}
+					@media #{$sm}{
+						font-size: 35px;
+					}
+
+				}
+				P{
+					color: #fff;
+					line-height: 1;
+					margin: 0;
+					font-size: 16px;
+				}
+			}
+			.single-one {
+				padding: 30px 17px;
+				@media #{$xs}{
+					padding: 30px 2px;
+				}
+			}
+			.single-two {
+				padding: 30px 17px;
+				@media #{$xs}{
+					padding: 30px 2px;
+				}
+			}
+		
+		}
+	}
+}
+
+
+.support-company-area{
+	// background-image: url(../img/gallery/safe_in.png);
+	// background-size: 40%;
+	// background-repeat: no-repeat;
+	// background-position: right;
+	.left-content{
+
+	}
+	.right-content
+	{
+	
+	}
+}
+
+

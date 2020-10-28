@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="petProject.vo.LoginRequest" alias="loginRequest"/>
+		<typeAlias type="petProject.vo.Owner" alias="owner"/>
+		<typeAlias type="petProject.vo.PetRegisterRequest" alias="petRegisterRequest" />
+		<typeAlias type="petProject.vo.Pet" alias="pet" />
+		<typeAlias type="petProject.vo.ImageUploadRequest" alias="imageUploadRequest" />
+	</typeAliases>
+   
+</configuration>

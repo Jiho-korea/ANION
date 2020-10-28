@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petProject.dao.PetDAO">
+    <insert id="insertPet" parameterType="petRegisterRequest">
+    	INSERT INTO "public"."pet"(
+	"OWNER_ID", "PET_NAME", "PET_KIND", "PET_BIRTHDAY", "PET_REGISTRATION_NUMBER", "PET_REGISTRATION_DATE", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_MICROCHIP", "PET_SEX")
+	VALUES (#{petRegisterRequest.ownerId}, #{petRegisterRequest.petName}, #{petRegisterRequest.petKind}, to_date(#{petRegisterRequest.petBirthday}, 'YYYY-MM-DD'), DEFAULT, now(), #{petRegisterRequest.petMothername}, #{petRegisterRequest.petFathername}, #{petRegisterRequest.petMicrochip}, #{petRegisterRequest.petSex});
+    </insert>
+    
+    <select id="selectCurrval" resultType="int">
+    	select currval('public.Pet_PET_REGISTRATION_NUMBER_seq')
+    </select>
+    
+    <select id="selectPetList" parameterType="String" resultMap="petResultMap">
+    	select * from "public"."pet" where "OWNER_ID"= #{ownerId} ORDER BY "PET_REGISTRATION_DATE" DESC, "PET_REGISTRATION_NUMBER" DESC
+    </select>
+    
+    <resultMap type="pet" id="petResultMap">
+		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
+		<result column="OWNER_ID" property="ownerId" />
+		<result column="PET_NAME" property="petName" />
+		<result column="PET_KIND" property="petKind" />
+		<result column="PET_BIRTHDAY" property="petBirthday" />
+		<result column="PET_REGISTRATION_DATE" property="petRegistrationDate" />
+		<result column="PET_MICROCHIP" property="petMicrochip" />
+		<result column="PET_MOTHERNAME" property="petMothername" />
+		<result column="PET_FATHERNAME" property="petFathername" />
+		<result column="PET_SEX" property="petSex" />
+	</resultMap>
+</mapper>
