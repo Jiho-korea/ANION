@@ -1,31 +1,18 @@
-<%--
-========================================================================
-파    일    명 : list.jsp
-========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.10.10
-작  성  내  용 : 견명목록
-========================================================================
-수    정    자 : 배준철
-수    정    일 : 2020.10.19
-수  정  내  용 : 목록 레이아웃 재구성
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.10.22
-수  정  내  용 : 반려견 이름을 VO에서 꺼내도록 수정, 스프링 메세지 사용(리터럴 제거)
-========================================================================
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-<meta charset="UTF-8">
-<!-- 기존의 폰트 사용해라 -->
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><spring:message code="home.title" /></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
+
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -55,67 +42,52 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
-<style>
-#main {
-	width: 100%;
-	margin-top: 50px;
-}
-</style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<title><spring:message code="list.pet" /></title>
 </head>
-<body class="text-center">
+<body>
+
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div style="float: right" align="center">
-		<form action="${pageContext.request.contextPath}/register/step1"
-			class="form-inline">
-			<div class="form-group mx-sm-3 mb-2">
-				<button type="submit" class="btn btn-info pull-right">
-					<spring:message code="register.pet" />
-				</button>
+	<main> <!--? Hero Start -->
+	<div class="slider-area2">
+		<div class="slider-height2 d-flex align-items-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap hero-cap2 pt-70">
+							<h2>
+								<spring:message code="freeze.preservation" />
+							</h2>
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html"><spring:message
+												code="company.introduction.title" /></a></li>
+									<li class="breadcrumb-item"><a href="#"><spring:message
+												code="freeze.preservation" /></a></li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
 			</div>
-		</form>
+		</div>
 	</div>
-	<div class="container">
-		<h2>
-			<spring:message code="list.pet" />
-		</h2>
-		<%--p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p--%>
-		<%-- table(기본) table-striped(스트라이프 무늬 추가), table-bordered(선) --%>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<!-- table head -->
-				<tr>
-					<!-- table row -->
-					<th><spring:message code="list.num" /></th>
-					<th><spring:message code="list.pet.name" /></th>
-					<th><spring:message code="list.image.count" /></th>
-					<th><spring:message code="list.image.upload" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="pet" items="${petList}" varStatus="status">
-					<tr>
-						<td>${status.index + 1}</td>
-						<td><a href="#" style="color: #000000;">${pet.petName}</a></td>
-						<td>0 건</td>
-						<td><a
-							href="${pageContext.request.contextPath}/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
-							name="btn_photo" id="btn_photo" class="btn btn-info pull-right"><spring:message
-									code="list.image.upload" /></a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+	<br>
+	<br>
+	<div class="container" id="main">
+		<div class="jumbotron">
+			<img src="${pageContext.request.contextPath}/img/gallery/freeze1.png"
+				style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block"
+				alt=""> <img
+				src="${pageContext.request.contextPath}/img/gallery/freeze2.png"
+				style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block"
+				alt="">
+		</div>
 	</div>
-
+	<!-- Visit Our Tailor End --> </main>
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-
 	<!-- Scroll Up -->
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -174,5 +146,6 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 </body>
 </html>

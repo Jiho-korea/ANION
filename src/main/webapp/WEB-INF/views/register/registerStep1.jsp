@@ -134,8 +134,17 @@
 			</form:form>
 		</div>
 	</div>
-	
-		<!-- JS here -->
+
+	<c:import url="../included/bottom.jsp">
+		<c:param value="main" name="type" />
+	</c:import>
+
+	<!-- Scroll Up -->
+	<div id="back-top">
+		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+	</div>
+
+	<!-- JS here -->
 
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>

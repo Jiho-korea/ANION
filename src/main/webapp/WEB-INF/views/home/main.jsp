@@ -7,10 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>애니온</title>
+<title><spring:message code="home.title" /></title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
 
@@ -47,10 +46,10 @@
 
 <body>
 	<c:import url="../included/top.jsp">
-			<c:param value="main" name="type" />
+		<c:param value="main" name="type" />
 	</c:import>
-
-	<main> <!-- slider Area Start-->
+	<main>
+	 <!-- slider Area Start-->
 	<div class="slider-area position-relative">
 		<div class="slider-active dot-style">
 			<!-- Single Slider -->
@@ -60,14 +59,17 @@
 					<div class="row">
 						<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
 							<div class="hero__caption">
-								<h1 data-animation="fadeInUp" data-delay=".2s">(주)애니온</h1>
+								<h1 data-animation="fadeInUp" data-delay=".2s">
+									<spring:message code="company.name" />
+								</h1>
 								<P data-animation="fadeInUp" data-delay=".4s">
-									㈜애니온 은 사람과 동물의 아름다운 공존을 위해 건강하고 조화로운 환경을 만들자는 사명을 가지고 설립되었습니다.
+									<spring:message code="company.introduction" />
 								</P>
 								<!-- Hero-btn -->
 								<div class="hero__btn">
 									<a href="industries.html" class="hero-btn mb-10"
-										data-animation="fadeInUp" data-delay=".8s">Link</a>
+										data-animation="fadeInUp" data-delay=".8s"><spring:message
+											code="company.link" /></a>
 								</div>
 							</div>
 						</div>
@@ -81,14 +83,17 @@
 					<div class="row">
 						<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
 							<div class="hero__caption">
-								<h1 data-animation="fadeInUp" data-delay=".2s">(주)애니온</h1>
+								<h1 data-animation="fadeInUp" data-delay=".2s">
+									<spring:message code="company.name" />
+								</h1>
 								<P data-animation="fadeInUp" data-delay=".4s">
-									㈜애니온 은 사람과 동물의 아름다운 공존을 위해 건강하고 조화로운 환경을 만들자는 사명을 가지고 설립되었습니다.
+									<spring:message code="company.introduction" />
 								</P>
 								<!-- Hero-btn -->
 								<div class="hero__btn">
 									<a href="industries.html" class="hero-btn mb-10"
-										data-animation="fadeInUp" data-delay=".8s">Link</a>
+										data-animation="fadeInUp" data-delay=".8s"><spring:message
+											code="company.link" /></a>
 								</div>
 							</div>
 						</div>
@@ -102,14 +107,17 @@
 					<div class="row">
 						<div class="col-xl-8 col-lg-8 col-md-8 col-sm-10">
 							<div class="hero__caption">
-								<h1 data-animation="fadeInUp" data-delay=".2s">(주)애니온</h1>
+								<h1 data-animation="fadeInUp" data-delay=".2s">
+									<spring:message code="company.name" />
+								</h1>
 								<P data-animation="fadeInUp" data-delay=".4s">
-									㈜애니온 은 사람과 동물의 아름다운 공존을 위해 건강하고 조화로운 환경을 만들자는 사명을 가지고 설립되었습니다.
+									<spring:message code="company.introduction" />
 								</P>
 								<!-- Hero-btn -->
 								<div class="hero__btn">
 									<a href="industries.html" class="hero-btn mb-10"
-										data-animation="fadeInUp" data-delay=".8s">Link</a>
+										data-animation="fadeInUp" data-delay=".8s"><spring:message
+											code="company.link" /></a>
 								</div>
 							</div>
 						</div>
@@ -138,14 +146,19 @@
 		<div class="tailor-offers"></div>
 		<!-- left Contents -->
 		<div class="tailor-details">
-			<span>(주)애니온 소개</span>
-			<h2>애니온은 포스텍홀딩스가 출자 참여한 과학기술부 인증 연구소기업입니다.</h2>
+			<span><spring:message code="anion.introduction.title" /></span>
+			<h2>
+				<spring:message code="anion.introduction.1" /><spring:message code="anion.introduction.2" /><spring:message code="anion.introduction.3" />
+			</h2>
+			<!--
 			<p>................(추후 추가)</p>
 			<p class="pera-bottom">................(추후 추가)</p>
+		
 			<div class="footer-tittles">
 				<p>주)애니온 대표이사 </p>
 				<h2>이동훈 / 李 東 訓 /<br>Dong-Hoon Lee</h2>
 			</div>
+			  -->
 		</div>
 	</div>
 	<%-- 
@@ -405,110 +418,12 @@
 			</div>
 		</div>
 	</section>
-	--%>
-	<!-- Blog Area End --> </main>
-	<footer>
-		<div class="footer-wrapper">
-			<!-- Footer Start-->
-			<div class="footer-area footer-padding">
-				<div class="container ">
-					<div class="row justify-content-between">
-						<div class="col-xl-4 col-lg-3 col-md-8 col-sm-8">
-							<div class="single-footer-caption mb-50">
-								<div class="single-footer-caption mb-30">
-									<!-- logo -->
-									<div class="footer-logo mb-35">
-										<a href="index.html"><img
-											src="${pageContext.request.contextPath}/img/logo/logo.jpg"
-											alt=""></a>
-									</div>
-									<div class="footer-tittle">
-										<div class="footer-pera">
-											<p>The automated process starts as soon as your clothes
-												go into the machine.</p>
-										</div>
-									</div>
-									<!-- social -->
-									<div class="footer-social">
-										<a href="#"><i class="fab fa-twitter"></i></a> <a
-											href="https://bit.ly/sai4ull"><i
-											class="fab fa-facebook-f"></i></a> <a href="#"><i
-											class="fab fa-pinterest-p"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4">
-							<div class="single-footer-caption mb-50">
-								<div class="footer-tittle">
-									<h4>Our solutions</h4>
-									<ul>
-										<li><a href="#">Design & creatives</a></li>
-										<li><a href="#">Telecommunication</a></li>
-										<li><a href="#">Restaurant</a></li>
-										<li><a href="#">Programing</a></li>
-										<li><a href="#">Architecture</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
-							<div class="single-footer-caption mb-50">
-								<div class="footer-tittle">
-									<h4>Company</h4>
-									<ul>
-										<li><a href="#">About</a></li>
-										<li><a href="#">Review</a></li>
-										<li><a href="#">Insights</a></li>
-										<li><a href="#">Carrier</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-md-6 col-sm-4">
-							<div class="single-footer-caption mb-50">
-								<div class="footer-tittle">
-									<h4>Contact us</h4>
-									<ul>
-										<li><a href="#">consulto98@gmail.com</a></li>
-										<li><a href="#">76/A, Green road, NYC</a></li>
-										<li><a href="#">Privacy Policy</a></li>
-										<li class="number"><a href="#">(80) 783 367-3904</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- footer-bottom area -->
-			<div class="footer-bottom-area">
-				<div class="container">
-					<div class="footer-border">
-						<div class="row d-flex align-items-center">
-							<div class="col-xl-12 ">
-								<div class="footer-copy-right text-center">
-									<p>
-										<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-										Copyright &copy;
-										<script>
-											document.write(new Date()
-													.getFullYear());
-										</script>
-										All rights reserved | This template is made with <i
-											class="fa fa-heart" aria-hidden="true"></i> by <a
-											href="https://colorlib.com" target="_blank">Colorlib</a>
-										<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Footer End-->
-		</div>
-	</footer>
+	--%> <!-- Blog Area End --> </main>
+
+	<c:import url="../included/bottom.jsp">
+		<c:param value="main" name="type" />
+	</c:import>
+
 	<!-- Scroll Up -->
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>

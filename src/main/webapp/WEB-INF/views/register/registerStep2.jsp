@@ -74,15 +74,25 @@
 
 				</div>
 				<div class="col-md-6 mb-1">
-					<a class="btn btn-info pull-right" href="<c:url value='/main/list'/>"
-						role="button"><spring:message code="go.list" /></a>
+					<a class="btn btn-info pull-right"
+						href="<c:url value='/main/list'/>" role="button"><spring:message
+							code="go.list" /></a>
 				</div>
 			</div>
 
 		</div>
 
 	</div>
-		<!-- JS here -->
+
+	<c:import url="../included/bottom.jsp">
+		<c:param value="main" name="type" />
+	</c:import>
+
+	<!-- Scroll Up -->
+	<div id="back-top">
+		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+	</div>
+	<!-- JS here -->
 
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
