@@ -86,7 +86,6 @@
 		<%--div class="tailor-offers"></div--%>
 		<!-- left Contents -->
 		<div class="tailor-details">
-			<!-- <span>Our Mission</span>   -->
 			<span><spring:message code="company.introduction.title" /></span>
 			<p>
 				<spring:message code="company.introduction" />
