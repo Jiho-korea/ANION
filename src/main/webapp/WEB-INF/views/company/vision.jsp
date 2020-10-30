@@ -1,5 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%--
+========================================================================
+파    일    명 : vision.jsp
+========================================================================
+작    성    자 : 강지호
+작    성    일 : 2020.10.30
+작  성  내  용 : 회사비전
+========================================================================
+수    정    자 : 
+수    정    일 : 
+수  정  내  용 : 
+========================================================================
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
@@ -71,7 +83,7 @@
 	<!-- Hero End --> <!--? Visit Our Tailor Start -->
 	<div class="visit-tailor-area fix">
 		<!--Right Contents  -->
-		<div class="tailor-offers"></div>
+		<%--div class="tailor-offers"></div--%>
 		<!-- left Contents -->
 		<div class="tailor-details">
 			<span><spring:message code="company.vision.title" /></span>

@@ -50,7 +50,6 @@
 												<ul class="submenu">
 													<li><a href="${pageContext.request.contextPath}/about"><spring:message code="company.introduction.title" /></a></li>
 													<li><a href="${pageContext.request.contextPath}/vision"><spring:message code="company.vision.title" /></a></li>
-													<li><a href="${pageContext.request.contextPath}/preservation"><spring:message code="freeze.preservation" /></a></li>
 													<li><a href="${pageContext.request.contextPath}/directions"><spring:message code="company.directions.title" /></a></li>
 												</ul>
 											</li>
@@ -80,8 +79,9 @@
 											</li>
 											<li><a href="#"><spring:message code="company.partner" /></a>
 												<ul class="submenu">
-													<li><a href="#"><spring:message code="POSTEC.holdings" /></a></li>
-													<li><a href="#"><spring:message code="techno.park" /></a></li>
+													<li><a href="http://postechholdings.com/"><spring:message code="POSTEC.holdings" /></a></li>
+													<li><a href="https://www.ptp.or.kr/"><spring:message code="techno.park" /></a></li>
+													<li><a href="${pageContext.request.contextPath}/preservation"><spring:message code="freeze.preservation" /></a></li>
 												</ul>
 											</li>
 											<%-- li><a href="contact.html">Contact</a></li --%>

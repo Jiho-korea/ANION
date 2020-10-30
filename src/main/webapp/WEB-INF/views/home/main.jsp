@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
@@ -67,9 +66,7 @@
 								</P>
 								<!-- Hero-btn -->
 								<div class="hero__btn">
-									<a href="industries.html" class="hero-btn mb-10"
-										data-animation="fadeInUp" data-delay=".8s"><spring:message
-											code="company.link" /></a>
+									<a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp" data-delay=".8s"><spring:message code="company.link" /></a>
 								</div>
 							</div>
 						</div>
@@ -91,9 +88,7 @@
 								</P>
 								<!-- Hero-btn -->
 								<div class="hero__btn">
-									<a href="industries.html" class="hero-btn mb-10"
-										data-animation="fadeInUp" data-delay=".8s"><spring:message
-											code="company.link" /></a>
+									<a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp" data-delay=".8s"><spring:message code="company.link" /></a>
 								</div>
 							</div>
 						</div>
@@ -115,9 +110,7 @@
 								</P>
 								<!-- Hero-btn -->
 								<div class="hero__btn">
-									<a href="industries.html" class="hero-btn mb-10"
-										data-animation="fadeInUp" data-delay=".8s"><spring:message
-											code="company.link" /></a>
+									<a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp" data-delay=".8s"><spring:message code="company.link" /></a>
 								</div>
 							</div>
 						</div>
@@ -125,20 +118,16 @@
 				</div>
 			</div>
 		</div>
-
 		<!--? video_start -->
 		<div
 			class="video-area d-flex align-items-center justify-content-center">
 			<div class="video-wrap position-relative">
 				<div class="video-icon">
-					<a class="popup-video btn-icon"
-						href="https://www.youtube.com/watch?v=up68UAfH0d0"><i
-						class="fas fa-play"></i></a>
+					<a class="popup-video btn-icon" href="https://youtube.com/watch?v=MG0Ly1h3Z24"><i class="fas fa-play"></i></a>
 				</div>
 			</div>
 		</div>
 		<!-- video_end -->
-
 	</div>
 	<!-- slider Area End--> <!--? Visit Our Tailor Start -->
 	<div class="visit-tailor-area fix">
@@ -146,11 +135,23 @@
 		<div class="tailor-offers"></div>
 		<!-- left Contents -->
 		<div class="tailor-details">
+			<span><spring:message code="company.introduction.title" /></span>
+			<p>
+				<spring:message code="company.introduction" />
+			</p>
+			<br />
 			<span><spring:message code="anion.introduction.title" /></span>
-			<h2>
-				<spring:message code="anion.introduction.1" /><spring:message code="anion.introduction.2" /><spring:message code="anion.introduction.3" />
-			</h2>
-			<!--
+			<p>
+				<img src="${pageContext.request.contextPath}/img/logo/anion.png" alt="">
+				<spring:message code="anion.introduction.1" /><br />
+				<img src="${pageContext.request.contextPath}/img/logo/postech.png" style="max-width: 100%; height: auto;" alt="">
+				<spring:message code="anion.introduction.2" />
+				<img src="${pageContext.request.contextPath}/img/logo/postechholdings.png" alt="">
+				<spring:message code="anion.introduction.3" />
+				<img src="${pageContext.request.contextPath}/img/logo/pohangtecnopark.png" alt="">
+				<spring:message code="anion.introduction.4" />
+			</p>
+			<%--
 			<p>................(추후 추가)</p>
 			<p class="pera-bottom">................(추후 추가)</p>
 		
@@ -158,7 +159,7 @@
 				<p>주)애니온 대표이사 </p>
 				<h2>이동훈 / 李 東 訓 /<br>Dong-Hoon Lee</h2>
 			</div>
-			  -->
+			--%>
 		</div>
 	</div>
 	<%-- 

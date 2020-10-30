@@ -1,5 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%--
+========================================================================
+파    일    명 : directions.jsp
+========================================================================
+작    성    자 : 강지호
+작    성    일 : 2020.10.30
+작  성  내  용 : 오시는길
+========================================================================
+수    정    자 : 
+수    정    일 : 
+수  정  내  용 : 
+========================================================================
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
@@ -71,12 +83,13 @@
 	<!-- Hero End --> <!--? Visit Our Tailor Start -->
 	<div class="visit-tailor-area fix">
 		<!--Right Contents  -->
-		<div class="tailor-offers"></div>
+		<%--div class="tailor-offers"></div--%>
 		<!-- left Contents -->
 		<div class="tailor-details">
 			<span><spring:message code="company.directions.inquiry" /></span>
 			<p><spring:message code="company.directions.address" /></p>
 			<p><spring:message code="company.directions.email" /></p>
+			<div style="font:normal normal 400 12px/normal dotum, sans-serif; width:400px; height:432px; color:#333; position:relative"><div style="height: 400px;"><a href="https://map.kakao.com/?urlX=1021335.0&amp;urlY=711293.0&amp;name=%EA%B2%BD%EB%B6%81%20%ED%8F%AC%ED%95%AD%EC%8B%9C%20%EB%82%A8%EA%B5%AC%20%EC%A7%80%EA%B3%A1%EB%A1%9C%20394&amp;map_type=TYPE_MAP&amp;from=roughmap" target="_blank"><img class="map" src="//t1.daumcdn.net/roughmap/imgmap/29fbeba495bd2a869dd7a6adef27fca472ea2ced096050e0d7e32fc25c6862be" width="398px" height="398px" style="border:1px solid #ccc;"></a></div><div style="overflow: hidden; padding: 7px 11px; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0px 0px 2px 2px; background-color: rgb(249, 249, 249);"><a href="https://map.kakao.com" target="_blank" style="float: left;"><img src="//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/logo_kakaomap.png" width="72" height="16" alt="카카오맵" style="display:block;width:72px;height:16px"></a><div style="float: right; position: relative; top: 1px; font-size: 11px;"><a target="_blank" href="https://map.kakao.com/?from=roughmap&amp;eName=%EA%B2%BD%EB%B6%81%20%ED%8F%AC%ED%95%AD%EC%8B%9C%20%EB%82%A8%EA%B5%AC%20%EC%A7%80%EA%B3%A1%EB%A1%9C%20394&amp;eX=1021335.0&amp;eY=711293.0" style="float:left;height:15px;padding-top:1px;line-height:15px;color:#000;text-decoration: none;">길찾기</a></div></div></div>
 			<!--
 			<p class="pera-bottom">Interdum nulla, ut commodo diam libero
 				vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem

@@ -1,5 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%--
+========================================================================
+파    일    명 : about.jsp
+========================================================================
+작    성    자 : 강지호
+작    성    일 : 2020.10.30
+작  성  내  용 : 회사소개
+========================================================================
+수    정    자 : 
+수    정    일 : 
+수  정  내  용 : 
+========================================================================
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
@@ -10,8 +22,7 @@
 <title><spring:message code="home.title" /></title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/img/favicon.ico">
 
 <!-- CSS here -->
 <link rel="stylesheet"
@@ -44,7 +55,6 @@
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -60,10 +70,8 @@
 							</h2>
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html"><spring:message
-												code="company.introduction.title" /></a></li>
-									<li class="breadcrumb-item"><a href="#"><spring:message
-												code="company.introduction.title" /></a></li>
+									<li class="breadcrumb-item"><a href="index.html"><spring:message code="company.introduction.title" /></a></li>
+									<li class="breadcrumb-item"><a href="#"><spring:message code="company.introduction.title" /></a></li>
 								</ol>
 							</nav>
 						</div>
@@ -75,32 +83,24 @@
 	<!-- Hero End --> <!--? Visit Our Tailor Start -->
 	<div class="visit-tailor-area fix">
 		<!--Right Contents  -->
-		<div class="tailor-offers"></div>
+		<%--div class="tailor-offers"></div--%>
 		<!-- left Contents -->
 		<div class="tailor-details">
-			<!-- <span>Our Mission</span>   -->
-			<h2>
-				<spring:message code="company.introduction.title" />
-			</h2>
+			<span><spring:message code="company.introduction.title" /></span>
 			<p>
 				<spring:message code="company.introduction" />
 			</p>
-			<br>
-			<h2>
-				<spring:message code="anion.introduction.title" />
-			</h2>
+			<br />
+			<span><spring:message code="anion.introduction.title" /></span>
 			<p>
-				<img src="${pageContext.request.contextPath}/img/logo/anion.png"
-					alt="">
-				<spring:message code="anion.introduction.1" />
-				</br>
-				<img
-					src="${pageContext.request.contextPath}/img/logo/postechholdings.png"
-					alt="">
+				<img src="${pageContext.request.contextPath}/img/logo/anion.png" alt="">
+				<spring:message code="anion.introduction.1" /><br />
+				<img src="${pageContext.request.contextPath}/img/logo/postech.png" style="max-width: 100%; height: auto;" alt="">
 				<spring:message code="anion.introduction.2" />
-				<img src="${pageContext.request.contextPath}/img/logo/postech.png"
-					style="max-width: 100%; height: auto;" alt="">
+				<img src="${pageContext.request.contextPath}/img/logo/postechholdings.png" alt="">
 				<spring:message code="anion.introduction.3" />
+				<img src="${pageContext.request.contextPath}/img/logo/pohangtecnopark.png" alt="">
+				<spring:message code="anion.introduction.4" />
 			</p>
 			<!--
 			<p class="pera-bottom">Interdum nulla, ut commodo diam libero
@@ -115,8 +115,7 @@
 	<br>
 	<div class="container" id="main">
 		<div class="jumbotron">
-			<img src="${pageContext.request.contextPath}/img/gallery/certification.jpg"
-				style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block" alt="">
+			<img src="${pageContext.request.contextPath}/img/gallery/certification.jpg" style="max-width:100%;height:auto;margin-left:auto;margin-right:auto;display:block;" alt="" />
 		</div>
 	</div>
 	<!-- Visit Our Tailor End --> <!--? Services Area Start -->
@@ -126,37 +125,27 @@
 				<div class="col-lg-4 col-md-6 col-sm-11">
 					<div class="single-cat text-center mb-30">
 						<div class="cat-icon">
-							<img
-								src="${pageContext.request.contextPath}/img/gallery/services1.png"
-								alt="">
+							<img src="${pageContext.request.contextPath}/img/gallery/services1.png" alt="" />
 						</div>
 						<div class="cat-cap">
-							<h5>
-								<a href="#"><spring:message code="pet.certification.title" /></a>
-							</h5>
+							<h5><a href="#"><spring:message code="pet.certification.title" /></a></h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-11">
 					<div class="single-cat active text-center mb-30">
 						<div class="cat-icon">
-							<img
-								src="${pageContext.request.contextPath}/img/gallery/services2.png"
-								alt="">
+							<img src="${pageContext.request.contextPath}/img/gallery/services2.png" alt="" />
 						</div>
 						<div class="cat-cap">
-							<h5>
-								<a href="#"><spring:message code="microbiome.title" /></a>
-							</h5>
+							<h5><a href="#"><spring:message code="microbiome.title" /></a></h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-11">
 					<div class="single-cat text-center mb-30">
 						<div class="cat-icon">
-							<img
-								src="${pageContext.request.contextPath}/img/gallery/services3.png"
-								alt="">
+							<img src="${pageContext.request.contextPath}/img/gallery/services3.png" alt="" />
 						</div>
 						<div class="cat-cap">
 							<h5>
