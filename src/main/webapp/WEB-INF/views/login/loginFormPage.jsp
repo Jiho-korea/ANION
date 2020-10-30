@@ -48,33 +48,38 @@
 <script defer src="js/bootstrap.js"></script>
 <title><spring:message code="home.title" /></title>
 </head>
-<body class="text-center">
+<body>
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container" id="main">
+	<div class="container text-center" id="main">
 		<div class="jumbotron">
 			<form:form action="${pageContext.request.contextPath}/login/login"
 				method="post" cssClass="form-signin" modelAttribute="loginRequest">
 				<h1 class="h3 mb-3 font-weight-bold">
-					<spring:message code="login.banner" />
+					<spring:message code="go.login" />
 				</h1>
 				<form:errors />
 				<br>
 
-				<label style="margin-top: 20px"><spring:message code="id" />
-					<form:input path="id" cssClass="form-control" /> <form:errors
-						path="id" /> </label>
+				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
+					<form:input path="id" cssClass="single-input" placeholder="ID"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'" />
+					<form:errors path="id" />
+				</label>
 				<br>
-				<label><spring:message code="password" /> <form:password
-						path="password" cssClass="form-control" /> <form:errors
-						path="password" /> </label>
-
+				<label> <!--<spring:message code="password" />--> <form:password
+						path="password" cssClass="single-input" placeholder="Password"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'Password'" /> <form:errors
+						path="password" />
+				</label>
+				<br><br>
 				<div class="checkbox mb-3">
 					<form:checkbox path="memory" />
 					<spring:message code="login.memory" />
 				</div>
-
+				
 				<button class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.login" />
 				</button>
