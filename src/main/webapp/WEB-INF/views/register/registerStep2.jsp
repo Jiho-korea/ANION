@@ -48,7 +48,7 @@
 <script defer
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 	charset="utf-8"></script>
-<title><spring:message code="register.pet.title" /></title>
+<title><spring:message code="home.title" /></title>
 </head>
 <body class="text-center">
 	<c:import url="../included/top.jsp">

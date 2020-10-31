@@ -74,12 +74,13 @@
 						onblur="this.placeholder = 'Password'" /> <form:errors
 						path="password" />
 				</label>
-				<br><br>
+				<br>
+				<br>
 				<div class="checkbox mb-3">
 					<form:checkbox path="memory" />
 					<spring:message code="login.memory" />
 				</div>
-				
+
 				<button class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.login" />
 				</button>

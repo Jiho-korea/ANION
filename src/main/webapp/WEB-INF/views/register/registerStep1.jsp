@@ -57,13 +57,13 @@
 }
 </style>
 
-<title><spring:message code="register.pet.title" /></title>
+<title><spring:message code="home.title" /></title>
 </head>
-<body class="text-center">
+<body>
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container" id="main">
+	<div class="container text-center" id="main">
 		<div class="jumbotron">
 			<h4 class="mb-4">
 				<spring:message code="register.pet" />
@@ -77,11 +77,13 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <spring:message code="pet.name" /> <form:input
-								path="petName" cssClass="form-control" /> <form:errors
-								path="petName" />
+						<label> <!--<spring:message code="pet.name" />--> <form:input
+								path="petName" cssClass="single-input" placeholder="견명"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '견명'" />
+							<form:errors path="petName" />
 						</label>
 					</div>
+					<!--
 					<div class="col-md-6 mb-1">
 						<label> <spring:message code="pet.kind" /><br
 							class="mb-4" /> <form:select path="petKind">
@@ -90,18 +92,43 @@
 								<form:option cssClass="form-control" value="기타" />
 							</form:select> <form:errors path="petKind" />
 						</label>
+					</div>  -->
+
+					<div class="default-select" id="default-select"
+						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
+						<select style="display: none;" name="petKind">
+							<option value="견종">견종</option>
+							<option value="동경이">동경이</option>
+							<option value="진돗개">진돗개</option>
+
+						</select>
+						<div class="nice-select" tabindex="0">
+							<span class="current">견종</span>
+							<ul class="list">
+								<li data-value="견종" class="option selected focus" hidden="">견종</li>
+								<li data-value="동경이" class="option">동경이</li>
+								<li data-value="진돗개" class="option">진돗개</li>
+
+							</ul>
+						</div>
+						<form:errors path="petKind" />
 					</div>
+
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <spring:message code="pet.mothername" /> <form:input
-								path="petMothername" cssClass="form-control" /> <form:errors
+						<label> <!--<spring:message code="pet.mothername" />--> <form:input
+								path="petMothername" cssClass="single-input" placeholder="모견명"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '모견명'" /> <form:errors
 								path="petMothername" />
 						</label>
 					</div>
 					<div class="col-md-6 mb-1">
-						<label> <spring:message code="pet.father" /> <form:input
-								path="petFathername" cssClass="form-control" /> <form:errors
+						<label> <!--<spring:message code="pet.father" />--> <form:input
+								path="petFathername" cssClass="single-input" placeholder="부견명"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '부견명'" /> <form:errors
 								path="petFathername" />
 						</label>
 					</div>
@@ -114,8 +141,10 @@
 					<br class="mb-4" /> <form:errors path="petSex" /></label>
 
 				<br class="mb-4" />
-				<label> <spring:message code="pet.microchip" /> <form:input
-						path="petMicrochip" cssClass="form-control" /> <form:errors
+				<label> <!--<spring:message code="pet.microchip" />--> <form:input
+						path="petMicrochip" cssClass="single-input" placeholder="마이크로칩 번호"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '마이크로칩 번호'" /> <form:errors
 						path="petMicrochip" />
 				</label>
 				<br class="mb-4" />
