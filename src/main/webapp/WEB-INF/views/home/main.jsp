@@ -162,7 +162,7 @@
 			--%>
 		</div>
 	</div>
-	<%-- 
+	
 	<!-- Visit Our Tailor End --> <!--? Services Area Start -->
 	<div class="service-area section-padding30">
 		<div class="container">
@@ -170,41 +170,31 @@
 				<div class="col-lg-4 col-md-6 col-sm-11">
 					<div class="single-cat text-center mb-30">
 						<div class="cat-icon">
-							<img
-								src="${pageContext.request.contextPath}/img/gallery/services1.png"
-								alt="">
+							<img src="${pageContext.request.contextPath}/img/gallery/services1.png" alt="" />
 						</div>
 						<div class="cat-cap">
-							<h5>
-								<a href="#">Clean Water</a>
-							</h5>
+							<h5><a href="#"><spring:message code="pet.certification.title" /></a></h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-11">
 					<div class="single-cat active text-center mb-30">
 						<div class="cat-icon">
-							<img
-								src="${pageContext.request.contextPath}/img/gallery/services2.png"
-								alt="">
+							<img src="${pageContext.request.contextPath}/img/gallery/services2.png" alt="" />
 						</div>
 						<div class="cat-cap">
-							<h5>
-								<a href="#">Renewable energy</a>
-							</h5>
+							<h5><a href="#"><spring:message code="microbiome.title" /></a></h5>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-11">
 					<div class="single-cat text-center mb-30">
 						<div class="cat-icon">
-							<img
-								src="${pageContext.request.contextPath}/img/gallery/services3.png"
-								alt="">
+							<img src="${pageContext.request.contextPath}/img/gallery/services3.png" alt="" />
 						</div>
 						<div class="cat-cap">
 							<h5>
-								<a href="#">Protect animals</a>
+								<a href="#"><spring:message code="pet.food.title" /></a>
 							</h5>
 						</div>
 					</div>
@@ -212,7 +202,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- Services Area End --> <!--? About Area Start -->
+	<!-- Services Area End -->
+	<%--
+	<!--? About Area Start -->
 	<section class="support-company-area fix pt-10">
 		<div class="support-wrapper align-items-center">
 			<div class="left-content">
