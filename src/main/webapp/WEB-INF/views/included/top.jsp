@@ -72,7 +72,7 @@
 											</li>
 											<li><a href="#"><spring:message code="pet.food.title" /></a>
 												<ul class="submenu">
-													<li><a href="#"><spring:message code="pet.food" /></a></li>
+													<li><a href="${pageContext.request.contextPath}/petFood"><spring:message code="pet.food" /></a></li>
 													<li><a href="#"><spring:message code="patent.introduction" /></a></li>
 													<li><a href="#"><spring:message code="product.promotion" /></a></li>
 												</ul>
