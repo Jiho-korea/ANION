@@ -13,6 +13,7 @@
 		<typeAlias type="petProject.vo.PetRegisterRequest" alias="petRegisterRequest" />
 		<typeAlias type="petProject.vo.Pet" alias="pet" />
 		<typeAlias type="petProject.vo.ImageUploadRequest" alias="imageUploadRequest" />
+		<typeAlias type="petProject.vo.Image" alias="image" />
 	</typeAliases>
    
 </configuration>
