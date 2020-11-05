@@ -9,4 +9,15 @@
 		("PET_REGISTRATION_NUMBER", "IMAGE_PATH", "OWNER_ID")
 		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.ownerId});
 	</insert>
+	
+	<select id="selectImageList" parameterType="int" resultMap="imageResultMap">
+    	select * from "public"."image" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
+    </select>
+    
+    <resultMap type="image" id="imageResultMap">
+		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
+		<id column="IMAGE_NUMBER" property="imageNumber" />
+		<result column="OWNER_ID" property="ownerId" />
+		<result column="IMAGE_PATH" property="imagePath" />
+	</resultMap>
 </mapper>

@@ -129,10 +129,22 @@
 			<spring:message code="image.list" />
 		</h2>
 		<div class="row">
+			<c:forEach var="image" items="${imageList}" varStatus="status">
+				<div class="col-md-4 text-center">
+					<a
+						href="${pageContext.request.contextPath}/upload/${image.imagePath}">
+						<%--p>시티이미지3</p--%> <img
+						src="${pageContext.request.contextPath}/upload/${image.imagePath}"
+						alt="초롱3" style="width: 180px; height: 180px"
+						class="img-thumbnail" />
+					</a>
+				</div>
+			</c:forEach>
+			<%--
 			<div class="col-md-4 text-center">
 				<a
 					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<%--p>시티이미지1</p--%> <img
+					<img
 					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
 					alt="초롱1" style="width: 180px; height: 180px" class="img-thumbnail" />
 				</a>
@@ -140,7 +152,7 @@
 			<div class="col-md-4 text-center">
 				<a
 					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<%--p>시티이미지2</p--%> <img
+					 <img
 					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
 					alt="초롱2" style="width: 180px; height: 180px" class="img-thumbnail" />
 				</a>
@@ -148,7 +160,7 @@
 			<div class="col-md-4 text-center">
 				<a
 					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<%--p>시티이미지3</p--%> <img
+					<img
 					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
 					alt="초롱3" style="width: 180px; height: 180px" class="img-thumbnail" />
 				</a>
@@ -156,7 +168,7 @@
 			<div class="col-md-4 text-center">
 				<a
 					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<%--p>시티이미지3</p--%> <img
+					<img
 					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
 					alt="초롱4" style="width: 180px; height: 180px" class="img-thumbnail" />
 				</a>
@@ -164,11 +176,12 @@
 			<div class="col-md-4 text-center">
 				<a
 					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<%--p>시티이미지3</p--%> <img
+					 <img
 					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
 					alt="초롱5" style="width: 180px; height: 180px" class="img-thumbnail" />
 				</a>
 			</div>
+			 --%>
 		</div>
 	</div>
 

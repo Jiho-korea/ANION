@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import petProject.service.ImageListService;
 import petProject.service.ImageUploadService;
+import petProject.vo.Image;
 import petProject.vo.ImageUploadRequest;
 import petProject.vo.Owner;
 
@@ -30,22 +33,23 @@ public class ImageListController {
 	@Resource(name = "imageUploadService")
 	ImageUploadService imageUploadService;
 
-	private static final Logger logger = LoggerFactory.getLogger(ImageListController.class);
+	@Resource(name = "imageListService")
+	ImageListService imageListService;
 
-	// @Resource(name = "petNameListService")
-	// PetListService petNameListService;
+	private static final Logger logger = LoggerFactory.getLogger(ImageListController.class);
 
 	@GetMapping("/image")
 	public String listImage(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpSession session, Model model) {
 		Owner owner = (Owner) session.getAttribute("login");
 		System.out.println("ownerId = " + owner.getOwnerId() + "\npetRegistrationNumber = " + petRegistrationNumber);
-		/*
-		 * Owner owner = (Owner) session.getAttribute("login"); try { List<Pet> petList
-		 * = petNameListService.selectPetList(owner.getOwnerId());
-		 * model.addAttribute("petList", petList); } catch (Exception e) {
-		 * e.printStackTrace(); }
-		 */
+		try {
+			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
+			System.out.println(imageList.isEmpty());
+			model.addAttribute("imageList", imageList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 		return "/list/image";
 	}
