@@ -62,39 +62,87 @@
 		<c:param value="main" name="type" />
 	</c:import>
 
-	<div class="container" id="main">
-		<h1>반려견 정보</h1>
+	<div class="container" id="main" style="width: 70%">
+		<h1 class="display-4">
+			<spring:message code="info.pet.banner" />
+		</h1>
 		<br>
 		<div style="background: transparent !important"
 			class="jumbotron border">
-			<h4 class="display-5" style="text-align: left">
-				<b>프로필</b>
+			<h2 style="text-align: left">
+				<b><spring:message code="info.pet.profile" /></b>
+			</h2>
+			<br> <br>
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.name">
+					<spring:argument value="${pet.petName}" />
+				</spring:message>
 			</h4>
-			<br>
-			<br> ${pet.ownerId}
 			<hr class="my-4">
-			${pet.petName}
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.kind">
+					<spring:argument value="${pet.petKind}" />
+				</spring:message>
+			</h4>
 			<hr class="my-4">
-			${pet.petKind}
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.birthday">
+					<spring:argument value="${pet.petBirthday}" />
+				</spring:message>
+			</h4>
 			<hr class="my-4">
-			${pet.petBirthday}
-			<hr class="my-4">
-			${pet.petRegistrationNumber}
-			<hr class="my-4">
-			${pet.petRegistrationDate}
-			<hr class="my-4">
-			${pet.petMicrochip}
-			<hr class="my-4">
-			${pet.petMothername}
-			<hr class="my-4">
-			${pet.petFathername}
-			<hr class="my-4">
-			${pet.petSex}
-			<hr class="my-4">
-			${pet.imageCount}
-			
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.sex">
+					<spring:argument value="${pet.petSex}" />
+				</spring:message>
+			</h4>
 		</div>
 
+		<div style="background: transparent !important"
+			class="jumbotron border">
+			<h2 style="text-align: left">
+				<b><spring:message code="info.pet.parent" /></b>
+			</h2>
+			<br> <br>
+			
+			<hr class="my-4">
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.mothername">
+					<spring:argument value="${pet.petMothername}" />
+				</spring:message>
+			</h4>
+			<hr class="my-4">
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.fathername">
+					<spring:argument value="${pet.petFathername}" />
+				</spring:message>
+			</h4>
+		</div>
+		
+		<div style="background: transparent !important"
+			class="jumbotron border">
+			<h2 style="text-align: left">
+				<b><spring:message code="info.pet.registration" /></b>
+			</h2>
+			<br> <br>
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.microchip">
+					<spring:argument value="${pet.petMicrochip}" />
+				</spring:message>
+			</h4>
+			<hr class="my-4">
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.registration.date">
+					<spring:argument value="${pet.petRegistrationDate}" />
+				</spring:message>
+			</h4>
+			<hr class="my-4">
+			<h4 style="text-align: left">
+				<spring:message code="info.pet.image.count">
+					<spring:argument value="${pet.imageCount}" />
+				</spring:message>
+			</h4>
+		</div>
 	</div>
 
 	<c:import url="../included/bottom.jsp">
