@@ -1,3 +1,17 @@
+/*
+========================================================================
+파    일    명 : Pet.java
+========================================================================
+작    성    자 : 강지호
+작    성    일 : 2020.xx.xx
+작  성  내  용 : pet table VO 객체
+========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.09
+수  정  내  용 : 반려견의 사진 개수를 저장하는 프로퍼티 추가
+========================================================================
+*/
+
 package petProject.vo;
 
 import java.io.Serializable;
@@ -17,10 +31,11 @@ public class Pet implements Serializable {
 	private String petMothername;
 	private String petFathername;
 	private String petSex;
+	private int imageCount;
 
 	public Pet(String ownerId, String petName, String petKind, String petBirthday, int petRegistrationNumber,
-			String petRegistrationDate, String petMicrochip, String petMothername, String petFathername,
-			String petSex) {
+			String petRegistrationDate, String petMicrochip, String petMothername, String petFathername, String petSex,
+			int imageCount) {
 		super();
 		this.ownerId = ownerId;
 		this.petName = petName;
@@ -32,6 +47,7 @@ public class Pet implements Serializable {
 		this.petMothername = petMothername;
 		this.petFathername = petFathername;
 		this.petSex = petSex;
+		this.imageCount = imageCount;
 	}
 
 	public Pet() {
@@ -116,6 +132,14 @@ public class Pet implements Serializable {
 
 	public void setPetSex(String petSex) {
 		this.petSex = petSex;
+	}
+
+	public int getImageCount() {
+		return imageCount;
+	}
+
+	public void setImageCount(int imageCount) {
+		this.imageCount = imageCount;
 	}
 
 	public static long getSerialversionuid() {

@@ -15,7 +15,11 @@
     </select>
     
     <select id="selectPetList" parameterType="String" resultMap="petResultMap">
-    	select * from "public"."pet" where "OWNER_ID"= #{ownerId} ORDER BY "PET_REGISTRATION_DATE" DESC, "PET_REGISTRATION_NUMBER" DESC
+    	select "PET_REGISTRATION_NUMBER", "OWNER_ID", "PET_NAME", "PET_KIND", "PET_BIRTHDAY", "PET_REGISTRATION_DATE", "PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "OWNER_ID"= #{ownerId} ORDER BY "PET_REGISTRATION_DATE" DESC, "PET_REGISTRATION_NUMBER" DESC
+    </select>
+    
+    <select id="selectPet" parameterType="int" resultType="pet">
+    	select "PET_REGISTRATION_NUMBER", "OWNER_ID", "PET_NAME", "PET_KIND", "PET_BIRTHDAY", "PET_REGISTRATION_DATE", "PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
     </select>
     
     <resultMap type="pet" id="petResultMap">
@@ -29,5 +33,6 @@
 		<result column="PET_MOTHERNAME" property="petMothername" />
 		<result column="PET_FATHERNAME" property="petFathername" />
 		<result column="PET_SEX" property="petSex" />
+		<result column="IMAGE_COUNT" property="imageCount" />
 	</resultMap>
 </mapper>
