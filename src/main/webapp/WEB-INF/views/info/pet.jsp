@@ -1,18 +1,10 @@
 <%--
 ========================================================================
-파    일    명 : list.jsp
+파    일    명 : pet.jsp
 ========================================================================
 작    성    자 : 강지호
-작    성    일 : 2020.10.10
-작  성  내  용 : 견명목록
-========================================================================
-수    정    자 : 배준철
-수    정    일 : 2020.10.19
-수  정  내  용 : 목록 레이아웃 재구성
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.10.22
-수  정  내  용 : 반려견 이름을 VO에서 꺼내도록 수정, 스프링 메세지 사용(리터럴 제거)
+작    성    일 : 2020.11.09
+작  성  내  용 : 반려견 세부 정보 페이지
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -69,47 +61,40 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div style="float: right" align="center">
-		<form action="${pageContext.request.contextPath}/register/step1"
-			class="form-inline">
-			<div class="form-group mx-sm-3 mb-2">
-				<button type="submit" class="btn btn-info pull-right">
-					<spring:message code="register.pet" />
-				</button>
-			</div>
-		</form>
-	</div>
-	<div class="container">
-		<h2>
-			<spring:message code="list.pet" />
-		</h2>
-		<%--p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p--%>
-		<%-- table(기본) table-striped(스트라이프 무늬 추가), table-bordered(선) --%>
-		<table class="table table-striped table-bordered">
-			<thead>
-				<!-- table head -->
-				<tr>
-					<!-- table row -->
-					<th><spring:message code="list.num" /></th>
-					<th><spring:message code="list.pet.name" /></th>
-					<th><spring:message code="list.image.count" /></th>
-					<th><spring:message code="list.image.upload" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="pet" items="${petList}" varStatus="status">
-					<tr>
-						<td>${status.index + 1}</td>
-						<td><a href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}" style="color: #000000;">${pet.petName}</a></td>
-						<td>${pet.imageCount} 건</td>
-						<td><a
-							href="${pageContext.request.contextPath}/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
-							name="btn_photo" id="btn_photo" class="btn btn-info pull-right"><spring:message
-									code="list.image.upload" /></a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+
+	<div class="container" id="main">
+		<h1>반려견 정보</h1>
+		<br>
+		<div style="background: transparent !important"
+			class="jumbotron border">
+			<h4 class="display-5" style="text-align: left">
+				<b>프로필</b>
+			</h4>
+			<br>
+			<br> ${pet.ownerId}
+			<hr class="my-4">
+			${pet.petName}
+			<hr class="my-4">
+			${pet.petKind}
+			<hr class="my-4">
+			${pet.petBirthday}
+			<hr class="my-4">
+			${pet.petRegistrationNumber}
+			<hr class="my-4">
+			${pet.petRegistrationDate}
+			<hr class="my-4">
+			${pet.petMicrochip}
+			<hr class="my-4">
+			${pet.petMothername}
+			<hr class="my-4">
+			${pet.petFathername}
+			<hr class="my-4">
+			${pet.petSex}
+			<hr class="my-4">
+			${pet.imageCount}
+			
+		</div>
+
 	</div>
 
 	<c:import url="../included/bottom.jsp">
