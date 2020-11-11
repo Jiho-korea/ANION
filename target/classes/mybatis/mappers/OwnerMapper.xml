@@ -5,7 +5,8 @@
 
 <mapper namespace="petProject.dao.OwnerDAO">
     <select id="selectByIdPassword" parameterType="loginRequest" resultType="owner">
-    	SELECT "OWNER_ID","OWNER_PASSWORD" FROM "owner" WHERE "OWNER_ID" = #{loginRequest.id} AND "OWNER_PASSWORD" = #{loginRequest.password}
+    	SELECT "OWNER_ID","OWNER_PASSWORD","OWNER_NAME", "OWNER_PHONE_NUMBER","OWNER_REGISTRATION_DATE", "MEMBER_LEVEL" 
+    	FROM "owner" WHERE "OWNER_ID" = #{loginRequest.id} AND "OWNER_PASSWORD" = #{loginRequest.password}
     </select>
     
     <select id="selectById" parameterType="String" resultType="int">

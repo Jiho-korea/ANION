@@ -74,7 +74,6 @@ public class LoginController {
 				memoryCookie.setMaxAge(0);
 			}
 			response.addCookie(memoryCookie);
-
 			return "redirect:/home";
 		} catch (OwnerNotFoundException e) {
 			errors.reject("notfound");

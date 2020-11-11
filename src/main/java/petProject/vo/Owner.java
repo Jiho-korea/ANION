@@ -6,6 +6,11 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 사용자의 정보를 담는 vo 클래스
 ========================================================================
+========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.xx.xx
+수  정  내  용 : 생성자 매개변수 수정
+========================================================================
 */
 package petProject.vo;
 
@@ -74,7 +79,7 @@ public class Owner implements Serializable {
 		
 	}
 	
-	public Owner(String ownerId, String ownerPassword) {
+	public Owner(String ownerId, String ownerPassword, String owerName, String ownerPhoneNumber, Date ownerRegisterDate, int memberLevel) {
 		super();
 		this.ownerId = ownerId;
 		this.ownerPassword = ownerPassword;
