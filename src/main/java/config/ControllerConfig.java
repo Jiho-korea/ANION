@@ -7,6 +7,7 @@ import controller.ImageListController;
 import controller.LoginController;
 import controller.LogoutController;
 import controller.MainController;
+import controller.OwnerRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
 
@@ -40,7 +41,13 @@ public class ControllerConfig {
 	}
 
 	@Bean
+
 	public PetInfoController petInfoController() {
 		return new PetInfoController();
+	}
+
+	@Bean
+	public OwnerRegisterController ownerRegisterController() {
+		return new OwnerRegisterController();
 	}
 }

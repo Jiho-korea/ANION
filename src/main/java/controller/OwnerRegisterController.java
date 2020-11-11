@@ -1,54 +1,56 @@
+/*
+========================================================================
+파    일    명 : 
+========================================================================
+작    성    자 : 임원석, 정세진
+작    성    일 : 2020.11.09
+작  성  내  용 : 
+========================================================================
+
+*/
+
 package controller;
 
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import petProject.service.PetRegisterService;
-import petProject.vo.Pet;
+import petProject.service.OwnerRegisterService;
+import petProject.vo.OwnerRegisterRequest;
 
 @Controller
+@RequestMapping("/signup")
 public class OwnerRegisterController {
-	PetRegisterService petRegisterService;
+	@Resource(name = "ownerRegisterService")
+	OwnerRegisterService ownerRegisterService;
 
-	public void setPetRegisterService(PetRegisterService petRegisterService) {
-		this.petRegisterService = petRegisterService;
+	public OwnerRegisterController() {
+		super();
 	}
 
-	@RequestMapping("/register/step1")
-	public String registerStep1() {
-		return "register/registerStep1";
+	@RequestMapping("/step1")
+	public String ownerRegister(OwnerRegisterRequest ownerRegisterRequest) {
+		return "register/signup";
 	}
 
-	@GetMapping("/register/step2")
-	public String registerStep2Get() {
-		return "redirect:/register/step1";
-	}
-
-	@GetMapping("/register/step3")
-	public String registerStep3Get() {
-		return "redirect:/register/step1";
-	}
-
-	@PostMapping("/register/step2")
-	public String registerStep2(@RequestParam(value = "agree", defaultValue = "false") Boolean agree, Pet pet) {
-		if (!agree) {
-			return "register/registerStep1";
+	@PostMapping("/step2")
+	public String ownerRegister(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) {
+		if (errors.hasErrors()) {
+			return "register/signup";
 		}
 
-		return "register/registerStep2";
-	}
-
-	@PostMapping("/register/step3")
-	public String registerStep3(Pet pet) {
 		try {
-			// petRegisterService.regist(pet);
-			return "register/registerStep3";
-		} catch (Exception ex) {
-			return "register/registerStep2";
+			ownerRegisterService.insertOwner(ownerRegisterRequest);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return "redirect:/login/login";
 	}
 
 }
