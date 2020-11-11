@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : RootContextConfiguration.java
+========================================================================
+작    성    자 : 강지호
+작    성    일 : 2020.xx.xx
+작  성  내  용 : configuration 클래스를 통해 설정을 한곳에 등록
+========================================================================
+*/
 package config;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -11,4 +20,5 @@ import org.springframework.context.annotation.Import;
 @Import({ ContextDataSource.class, ContextSqlMapper.class, ImageUploadConfig.class })
 @ComponentScan(basePackages = { "petProject.service.impl" })
 public class RootContextConfiguration {
+	
 }
