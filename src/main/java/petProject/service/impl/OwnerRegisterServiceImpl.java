@@ -43,8 +43,8 @@ public class OwnerRegisterServiceImpl implements OwnerRegisterService {
 		return cnt;
 	}
 	
-	public int selectById(OwnerRegisterRequest ownerRegisterRequest) throws Exception{
-		int cnt = ownerDAO.selectById(ownerRegisterRequest);
+	public int selectById(String ownerId) throws Exception{
+		int cnt = ownerDAO.selectById(ownerId);
 		return cnt;
 	}
 }

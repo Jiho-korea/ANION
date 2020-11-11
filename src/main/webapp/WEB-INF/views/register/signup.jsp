@@ -68,16 +68,37 @@
 					<spring:message code="go.register" />
 				</h1>
 				<br>
-				<label> <form:input path="ownerId" cssClass="single-input"
+
+				<label> 
+				<c:if test="${not empty duplicate}">
+					<form:input path="ownerId" cssClass="single-input"
+						placeholder="아이디" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '아이디'" readonly="true" />
+				</c:if>
+				<c:if test="${empty duplicate}">
+					<form:input path="ownerId" cssClass="single-input"
 						placeholder="아이디" onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '아이디'" />
+			
+				</c:if>
 				</label>
 				<label>
+				<c:if test="${not empty duplicate}">
 					<button type="submit"
-						formaction="${pageContext.request.contextPath}/signup/step3"
-						formmethod="post">중복체크</button> 
-						<input type="hidden" >
-						<form:errors /> <form:errors path="ownerId" />
+						formaction="${pageContext.request.contextPath}/signup/check/duplicate"
+						formmethod="post" disabled="disabled" class="btn btn-secondary">
+						<spring:message code="signup.check.duplicate" />
+					</button> <form:errors /> <form:errors path="ownerId"  />
+				</c:if>
+				<c:if test="${empty duplicate}">
+					<button type="submit"
+						formaction="${pageContext.request.contextPath}/signup/check/duplicate"
+						formmethod="post" class="btn btn-secondary">
+						<spring:message code="signup.check.duplicate" />
+					</button> <form:errors /> <form:errors path="ownerId" />
+			
+				</c:if>
+					
 				</label>
 				<Br>
 				<label> <form:password path="ownerPassword"
@@ -104,6 +125,11 @@
 				</label>
 				<br>
 				<br>
+
+
+				<c:if test="${not empty duplicate}">
+					<input type="hidden" name="dupCheck" value="true">
+				</c:if>
 				<button class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.register" />
 				</button>

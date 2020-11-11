@@ -23,5 +23,5 @@ import petProject.vo.OwnerRegisterRequest;
 public interface OwnerRegisterService {
 	int insertOwner(@Param("ownerRegisterRequest") OwnerRegisterRequest ownerRegisterRequest) throws Exception;
 	
-	int selectById(@Param("ownerRegisterRequest")OwnerRegisterRequest ownerRegisterRequest) throws Exception;
+	int selectById(@Param("ownerRegisterRequest") String ownerId) throws Exception;
 }

@@ -8,8 +8,8 @@
     	SELECT "OWNER_ID","OWNER_PASSWORD" FROM "owner" WHERE "OWNER_ID" = #{loginRequest.id} AND "OWNER_PASSWORD" = #{loginRequest.password}
     </select>
     
-    <select id="selectById" parameterType="ownerRegisterRequest" resultType="int">
-    	SELECT count(*) FROM "owner" WHERE "OWNER_ID" = #{ownerRegisterRequest.ownerId}
+    <select id="selectById" parameterType="String" resultType="int">
+    	SELECT count(*) FROM "owner" WHERE "OWNER_ID" = #{ownerId}
     </select>
     
     <insert id="insertOwner" parameterType="ownerRegisterRequest">

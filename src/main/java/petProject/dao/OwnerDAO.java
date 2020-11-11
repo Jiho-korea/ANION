@@ -33,5 +33,5 @@ public interface OwnerDAO {
 
 	int insertOwner(@Param("ownerRegisterRequest") OwnerRegisterRequest ownerRegisterRequest) throws Exception;
 	
-	int selectById(@Param("ownerRegisterRequest")OwnerRegisterRequest ownerRegisterRequest) throws Exception;
+	int selectById(@Param("ownerId")String ownerId) throws Exception;
 }

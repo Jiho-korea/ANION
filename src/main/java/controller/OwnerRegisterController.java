@@ -22,9 +22,12 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.exception.OwnerInsertException;
 import petProject.service.OwnerRegisterService;
 import petProject.vo.OwnerRegisterRequest;
 
@@ -39,36 +42,56 @@ public class OwnerRegisterController {
 	}
 
 	@RequestMapping("/step1")
-	public String ownerRegister(OwnerRegisterRequest ownerRegisterRequest) {
+	public String signStep1(OwnerRegisterRequest ownerRegisterRequest) {
 		return "register/signup";
 	}
 
+	@GetMapping("/step2")
+	public String signupStep2Get() {
+		return "redirect:/register/signup";
+	}
+	@GetMapping("/check/duplicate")
+	public String signupCheckDuplicateGet() {
+		return "redirect:/register/signup";
+	}
 	@PostMapping("/step2")
-	public String ownerRegister(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model)
+	public String signStep2(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model, @RequestParam(value="dupCheck", defaultValue="false") boolean dupCheck)
 			throws Exception {
+		if(!dupCheck) {
+			errors.reject("no.duplicate.check.ownerRegisterRequest");
+		}else {
+			model.addAttribute("duplicate", !dupCheck);//
+		}
 		if (errors.hasErrors()) {
 			return "register/signup";
 		}
 
 		try {
 			ownerRegisterService.insertOwner(ownerRegisterRequest);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (OwnerInsertException e) {
+			errors.reject("failed.signup");
+			return "register/signup";
+		}catch(Exception e) {
+			return "register/signup";
 		}
 		return "redirect:/login/login";
 	}
 
-	@RequestMapping("/step3")
-	public String duplicate(OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) throws Exception {
-		if (ownerRegisterService.selectById(ownerRegisterRequest) != 0) {
-			errors.reject("duplicate.ownerRegisterRequest");
-			return "register/signup";
-		} else if (ownerRegisterRequest.getOwnerId()=="") {
-			errors.reject("NotBlank");
+	@PostMapping("/check/duplicate")
+	public String checkDuplicate(@RequestParam(value="ownerId", required=true) String ownerId, OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) throws Exception {
+		if("".equals(ownerId)) {
+			errors.rejectValue("ownerId", "blank");
+		}
+		
+		if (errors.hasErrors()) {
 			return "register/signup";
 		}
-		errors.reject("notDuplicate");
+		if (ownerRegisterService.selectById(ownerId) != 0) {
+			errors.reject("duplicate.ownerRegisterRequest");
+			return "register/signup";
+		}else {
+			model.addAttribute("duplicate",false);
+		} 
 		return "register/signup";
 	}
 
