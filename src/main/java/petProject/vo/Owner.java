@@ -69,7 +69,11 @@ public class Owner implements Serializable {
 	public void setMemberLevel(int memberLevel) {
 		this.memberLevel = memberLevel;
 	}
-
+	
+	public Owner() {
+		
+	}
+	
 	public Owner(String ownerId, String ownerPassword) {
 		super();
 		this.ownerId = ownerId;

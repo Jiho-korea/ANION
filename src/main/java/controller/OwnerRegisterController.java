@@ -4,7 +4,12 @@
 ========================================================================
 작    성    자 : 임원석, 정세진
 작    성    일 : 2020.11.09
-작  성  내  용 : 
+작  성  내  용 : 회원가입 컨트롤러 작성
+========================================================================
+========================================================================
+수    정    자 : 정세진, 송찬영
+수    정    일 : 2020.11.11
+수  정  내  용 : 아이디 중복확인 메서드 추가 
 ========================================================================
 
 */
@@ -39,7 +44,8 @@ public class OwnerRegisterController {
 	}
 
 	@PostMapping("/step2")
-	public String ownerRegister(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) {
+	public String ownerRegister(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model)
+			throws Exception {
 		if (errors.hasErrors()) {
 			return "register/signup";
 		}
@@ -51,6 +57,19 @@ public class OwnerRegisterController {
 			e.printStackTrace();
 		}
 		return "redirect:/login/login";
+	}
+
+	@RequestMapping("/step3")
+	public String duplicate(OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) throws Exception {
+		if (ownerRegisterService.selectById(ownerRegisterRequest) != 0) {
+			errors.reject("duplicate.ownerRegisterRequest");
+			return "register/signup";
+		} else if (ownerRegisterRequest.getOwnerId()=="") {
+			errors.reject("NotBlank");
+			return "register/signup";
+		}
+		errors.reject("notDuplicate");
+		return "register/signup";
 	}
 
 }

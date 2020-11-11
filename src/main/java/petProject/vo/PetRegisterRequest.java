@@ -15,6 +15,7 @@ public class PetRegisterRequest {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotBlank
 	private String ownerId;
 	@NotBlank
 	private String petName;
