@@ -10,6 +10,10 @@
 수    정    일 : 2020.10.19
 수  정  내  용 : 파일찾기주석
 ========================================================================
+수    정    자 : 임원석, 송찬영
+수    정    일 : 2020.11.11
+수  정  내  용 : 견종 null값 data 삽입되는 오류 수정
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -97,7 +101,7 @@
 					<div class="default-select" id="default-select"
 						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
 						<select style="display: none;" name="petKind">
-							<option value="견종">견종</option>
+							<option value="">견종</option>
 							<option value="동경이">동경이</option>
 							<option value="진돗개">진돗개</option>
 
@@ -110,7 +114,7 @@
 								<li data-value="진돗개" class="option">진돗개</li>
 
 							</ul>
-						</div>
+						</div><br>
 						<form:errors path="petKind" />
 					</div>
 
