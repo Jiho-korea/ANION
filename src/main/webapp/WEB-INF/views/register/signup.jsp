@@ -1,3 +1,10 @@
+<!-- 
+========================================================================
+작    성    자 : 정세진, 임원석
+작    성    일 : 2020.11.09
+작  정  내  용 : 회원가입 폼 jsp
+========================================================================
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -50,45 +57,83 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-<div>
-<div class="container text-center" id="main">
-		<div class="jumbotron">
+
+	<div class="container text-center" id="main">
+		<div class="jumbotron"
+			style="background: transparent !important; text-align: left">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
 				modelAttribute="ownerRegisterRequest">
-				<h1 class="h3 mb-3 font-weight-bold">
+				<h1 class="h1 mb-3 font-weight-bold">
 					<spring:message code="go.register" />
 				</h1>
+				<br>
 
-				<label style="margin-top: 20px">
-					<form:input path="ownerId" cssClass="single-input" placeholder="아이디"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디'" />
+				<label> 
+				<c:if test="${not empty duplicate}">
+					<form:input path="ownerId" cssClass="single-input"
+						placeholder="아이디" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '아이디'" readonly="true" />
+				</c:if>
+				<c:if test="${empty duplicate}">
+					<form:input path="ownerId" cssClass="single-input"
+						placeholder="아이디" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '아이디'" />
+			
+				</c:if>
+				</label>
+				<label>
+				<c:if test="${not empty duplicate}">
+					<button type="submit"
+						formaction="${pageContext.request.contextPath}/signup/check/duplicate"
+						formmethod="post" disabled="disabled" class="btn btn-secondary">
+						<spring:message code="signup.check.duplicate" />
+					</button> <form:errors /> <form:errors path="ownerId"  />
+				</c:if>
+				<c:if test="${empty duplicate}">
+					<button type="submit"
+						formaction="${pageContext.request.contextPath}/signup/check/duplicate"
+						formmethod="post" class="btn btn-secondary">
+						<spring:message code="signup.check.duplicate" />
+					</button> <form:errors /> <form:errors path="ownerId" />
+			
+				</c:if>
+					
 				</label>
 				<Br>
-				<label> 
-					<form:password
-						path="ownerPassword" cssClass="single-input" placeholder="비밀번호"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" /> 
+				<label> <form:password path="ownerPassword"
+						cssClass="single-input" placeholder="비밀번호"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" />
+
 				</label>
-			<br>
-				<label> 
-					<form:input path="ownerName" cssClass="single-input" placeholder="이름"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" />
+				<label> <form:errors path="ownerPassword" />
 				</label>
-			<br>
-				<label> 
-					<form:input path="ownerPhoneNumber" cssClass="single-input" placeholder="전화번호"
+				<br>
+				<label> <form:input path="ownerName" cssClass="single-input"
+						placeholder="이름" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이름'" />
+				</label>
+				<label> <form:errors path="ownerName" />
+				</label>
+				<br>
+				<label> <form:input path="ownerPhoneNumber"
+						cssClass="single-input" placeholder="전화번호"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = '전화번호'" />
+
 				</label>
-					
-				<br><br>
-					<button class="btn btn-info pull-right" type="submit">
+				<label> <form:errors path="ownerPhoneNumber" />
+				</label>
+				<br>
+				<br>
+
+
+				<c:if test="${not empty duplicate}">
+					<input type="hidden" name="dupCheck" value="true">
+				</c:if>
+				<button class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.register" />
 				</button>
 				<br>
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
-				</p>
 			</form:form>
 
 		</div>

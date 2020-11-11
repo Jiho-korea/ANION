@@ -10,6 +10,11 @@
 수    정    일 : 2020.11.09
 수  정  내  용 : 회원가입 메소드 추가
 ========================================================================
+========================================================================
+수    정    자 : 정세진, 송찬영
+수    정    일 : 2020.11.11
+수  정  내  용 : 아이디 중복확인 메소드 추가
+========================================================================
 */
 
 package petProject.dao;
@@ -27,4 +32,6 @@ public interface OwnerDAO {
 	Owner selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
 
 	int insertOwner(@Param("ownerRegisterRequest") OwnerRegisterRequest ownerRegisterRequest) throws Exception;
+	
+	int selectById(@Param("ownerId")String ownerId) throws Exception;
 }
