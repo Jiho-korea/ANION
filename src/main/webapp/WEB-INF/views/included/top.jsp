@@ -93,11 +93,20 @@
 									<c:choose>
 										<c:when test="${empty sessionScope.login}">
 											<a href="${pageContext.request.contextPath}/login/login" class="btn header-btn"><spring:message code="go.login" /></a>
+											<a href="${pageContext.request.contextPath}/signup/step1" class="btn btn-dark"><spring:message code="go.register" /></a>
 										</c:when>
 										<c:otherwise>
 											<a href="${pageContext.request.contextPath}/logout" class="btn header-btn"><spring:message code="top.logout" /></a>
 										</c:otherwise>
+										
+										
+										
+										
+										
 									</c:choose>
+									
+									
+									
 								</div>
 							</div>
 						</div>

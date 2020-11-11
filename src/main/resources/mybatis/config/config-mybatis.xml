@@ -14,6 +14,7 @@
 		<typeAlias type="petProject.vo.Pet" alias="pet" />
 		<typeAlias type="petProject.vo.ImageUploadRequest" alias="imageUploadRequest" />
 		<typeAlias type="petProject.vo.Image" alias="image" />
+		<typeAlias type="petProject.vo.OwnerRegisterRequest" alias="ownerRegisterRequest" />
 	</typeAliases>
    
 </configuration>

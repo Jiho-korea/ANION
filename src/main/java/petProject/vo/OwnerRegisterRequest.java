@@ -9,64 +9,60 @@
 */
 package petProject.vo;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class OwnerRegisterRequest {
+	@NotBlank
+	private String ownerId;
+	@NotBlank
+	private String ownerPassword;
+	@NotBlank
+	private String ownerName;
+	@NotBlank
+	private String ownerPhoneNumber;
 
-	private String name;
-	private int sid;
-	private String password;
-	private String confirmPassword;
-	private int grade;
-	private String subject;
-
-	public String getName() {
-		return name;
+	public String getOwnerId() {
+		return ownerId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 
-	public int getSid() {
-		return sid;
+	public String getOwnerPassword() {
+		return ownerPassword;
 	}
 
-	public void setSid(int sid) {
-		this.sid = sid;
+	public void setOwnerPassword(String ownerPassword) {
+		this.ownerPassword = ownerPassword;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getOwnerName() {
+		return ownerName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
+	public String getOwnerPhoneNumber() {
+		return ownerPhoneNumber;
 	}
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
+	public void setOwnerPhoneNumber(String ownerPhoneNumber) {
+		this.ownerPhoneNumber = ownerPhoneNumber;
 	}
 
-	public int getGrade() {
-		return grade;
+	public OwnerRegisterRequest(String ownerId, String ownerPassword, String ownerName, String ownerPhoneNumber) {
+		super();
+		this.ownerId = ownerId;
+		this.ownerPassword = ownerPassword;
+		this.ownerName = ownerName;
+		this.ownerPhoneNumber = ownerPhoneNumber;
 	}
 
-	public void setGrade(int grade) {
-		this.grade = grade;
+	public OwnerRegisterRequest() {
+		super();
 	}
 
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
-	public boolean isPasswordEqualToConfirmPassword() {
-		return password.equals(confirmPassword);
-	}
 }
