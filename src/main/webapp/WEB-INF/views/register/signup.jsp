@@ -63,44 +63,47 @@
 			style="background: transparent !important; text-align: left">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
-				modelAttribute="ownerRegisterRequest">
+				modelAttribute="ownerRegisterRequest" onsubmit="return validate()">
 				<h1 class="h1 mb-3 font-weight-bold">
 					<spring:message code="go.register" />
 				</h1>
 				<br>
 
-				<label> 
-				<c:if test="${not empty duplicate}">
-					<form:input path="ownerId" cssClass="single-input"
-						placeholder="아이디" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '아이디'" readonly="true" />
-				</c:if>
-				<c:if test="${empty duplicate}">
-					<form:input path="ownerId" cssClass="single-input"
-						placeholder="아이디" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '아이디'" />
-			
-				</c:if>
+				<label> <c:if test="${not empty duplicate}">
+						<form:input path="ownerId" cssClass="single-input"
+							placeholder="아이디" onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '아이디'" readonly="true" />
+					</c:if> <c:if test="${empty duplicate}">
+						<form:input path="ownerId" cssClass="single-input"
+							placeholder="아이디" onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '아이디'" />
+
+					</c:if>
 				</label>
-				<label>
-				<c:if test="${not empty duplicate}">
-					<button type="submit"
-						formaction="${pageContext.request.contextPath}/signup/check/duplicate"
-						formmethod="post" disabled="disabled" class="btn btn-secondary">
-						<spring:message code="signup.check.duplicate" />
-					</button> <form:errors /> <form:errors path="ownerId"  />
-				</c:if>
-				<c:if test="${empty duplicate}">
-					<button type="submit"
-						formaction="${pageContext.request.contextPath}/signup/check/duplicate"
-						formmethod="post" class="btn btn-secondary">
-						<spring:message code="signup.check.duplicate" />
-					</button> <form:errors /> <form:errors path="ownerId" />
-			
-				</c:if>
-					
+				
+				<label> <c:if test="${not empty duplicate}">
+						<button type="submit"
+							formaction="${pageContext.request.contextPath}/signup/check/duplicate"
+							formmethod="post" disabled="disabled" class="btn btn-secondary">
+							<spring:message code="signup.check.duplicate" />
+						</button>
+						<form:errors />
+						<form:errors path="ownerId" />
+					</c:if> <c:if test="${empty duplicate}">
+						<button type="submit"
+							formaction="${pageContext.request.contextPath}/signup/check/duplicate"
+							formmethod="post" class="btn btn-secondary">
+							<spring:message code="signup.check.duplicate" />
+						</button>
+						<form:errors />
+						<form:errors path="ownerId" />
+
+					</c:if>
+
 				</label>
-				<Br>
+
+				<br>
+
 				<label> <form:password path="ownerPassword"
 						cssClass="single-input" placeholder="비밀번호"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" />
@@ -108,6 +111,18 @@
 				</label>
 				<label> <form:errors path="ownerPassword" />
 				</label>
+				
+				
+				<br>
+				<label> <form:password path="checkPassword"
+						cssClass="single-input" placeholder="비밀번호 확인"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호 확인'" />
+
+				</label>
+				
+				
+				
+				
 				<br>
 				<label> <form:input path="ownerName" cssClass="single-input"
 						placeholder="이름" onfocus="this.placeholder = ''"
@@ -118,7 +133,9 @@
 				<br>
 				<label> <form:input path="ownerPhoneNumber"
 						cssClass="single-input" placeholder="전화번호"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '전화번호'" />
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '전화번호'"
+						onKeyup="inputPhoneNumber(this);" maxlength="13"
+						pattern=".{13,13}" />
 
 				</label>
 				<label> <form:errors path="ownerPhoneNumber" />
@@ -150,6 +167,64 @@
 
 	<!-- JS here -->
 
+	<script>
+/* 		function validate() {
+			var userPassword = $("#ownerPassword").val();
+			var checkPassword = $("#checkPassword").val();
+		      if (userPassword != checkPassword) {
+		         alert("비밀번호를 다시 확인해주세요.");
+		         return false;
+		      } else if ($("#ownerId").val() == "") {
+		         alert("아이디를 입력해주세요.");
+		         return false;
+		      } else if ($("#ownerPassword").val() == "") {
+		         alert("비밃런호를 입력해주세요.");
+		         return false;
+		      } else if ($("#ownerName").val() == "") {
+		         alert("이름을 입력해주세요.");
+		         return false;
+		      } else if ($("#ownerPhoneNumber").val() == "") {
+		         alert("전화번호를 입력해주세요.");
+		         return false;
+		      }
+		} */
+	</script>
+	<script>
+/* 	function openIdCheck(){
+        
+        window.name = "parentForm";
+        window.open("${pageContext.request.contextPath}/register/IdCheckForm.jsp",
+                "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
+    } */
+	</script>
+	<script>
+		function inputPhoneNumber(obj) {
+
+			var number = obj.value.replace(/[^0-9]/g, "");
+			var phone = "";
+
+			if (number.length < 4) {
+				return number;
+			} else if (number.length < 7) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3);
+			} else if (number.length < 11) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 3);
+				phone += "-";
+				phone += number.substr(6);
+			} else {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 4);
+				phone += "-";
+				phone += number.substr(7);
+			}
+			obj.value = phone;
+		}
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->

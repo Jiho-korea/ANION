@@ -17,6 +17,8 @@ public class OwnerRegisterRequest {
 	@NotBlank
 	private String ownerPassword;
 	@NotBlank
+	private String checkPassword;
+	@NotBlank
 	private String ownerName;
 	@NotBlank
 	private String ownerPhoneNumber;
@@ -35,6 +37,14 @@ public class OwnerRegisterRequest {
 
 	public void setOwnerPassword(String ownerPassword) {
 		this.ownerPassword = ownerPassword;
+	}
+
+	public String getCheckPassword() {
+		return checkPassword;
+	}
+
+	public void setCheckPassword(String checkPassword) {
+		this.checkPassword = checkPassword;
 	}
 
 	public String getOwnerName() {
