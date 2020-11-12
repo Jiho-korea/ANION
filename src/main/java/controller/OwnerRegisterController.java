@@ -16,6 +16,8 @@
 
 package controller;
 
+import java.util.regex.Pattern;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -50,17 +52,23 @@ public class OwnerRegisterController {
 	public String signupStep2Get() {
 		return "redirect:/register/signup";
 	}
+
 	@GetMapping("/check/duplicate")
 	public String signupCheckDuplicateGet() {
 		return "redirect:/register/signup";
 	}
+
 	@PostMapping("/step2")
-	public String signStep2(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model, @RequestParam(value="dupCheck", defaultValue="false") boolean dupCheck)
-			throws Exception {
-		if(!dupCheck) {
+	public String signStep2(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model,
+			@RequestParam(value = "dupCheck", defaultValue = "false") boolean dupCheck) throws Exception {
+		if (!dupCheck) {
 			errors.reject("no.duplicate.check.ownerRegisterRequest");
-		}else {
+		} else {
 			model.addAttribute("duplicate", !dupCheck);//
+		}
+		if (ownerRegisterRequest.getOwnerPhoneNumber().length() < 13
+				&& !Pattern.matches("^[0-9]+$", ownerRegisterRequest.getOwnerPhoneNumber())) {
+			errors.reject("no.number.check.ownerRegisterRequest");
 		}
 		if (errors.hasErrors()) {
 			return "register/signup";
@@ -68,30 +76,31 @@ public class OwnerRegisterController {
 
 		try {
 			ownerRegisterService.insertOwner(ownerRegisterRequest);
-		}catch (OwnerInsertException e) {
+		} catch (OwnerInsertException e) {
 			errors.reject("failed.signup");
 			return "register/signup";
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return "register/signup";
 		}
 		return "redirect:/login/login";
 	}
 
 	@PostMapping("/check/duplicate")
-	public String checkDuplicate(@RequestParam(value="ownerId", required=true) String ownerId, OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) throws Exception {
-		if("".equals(ownerId)) {
+	public String checkDuplicate(@RequestParam(value = "ownerId", required = true) String ownerId,
+			OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) throws Exception {
+		if ("".equals(ownerId)) {
 			errors.rejectValue("ownerId", "blank");
 		}
-		
+
 		if (errors.hasErrors()) {
 			return "register/signup";
 		}
 		if (ownerRegisterService.selectById(ownerId) != 0) {
 			errors.reject("duplicate.ownerRegisterRequest");
 			return "register/signup";
-		}else {
-			model.addAttribute("duplicate",false);
-		} 
+		} else {
+			model.addAttribute("duplicate", false);
+		}
 		return "register/signup";
 	}
 
