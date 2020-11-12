@@ -15,6 +15,7 @@ package controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -45,18 +46,22 @@ public class LoginController {
 
 	@GetMapping
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
-			@CookieValue(value = "memory", required = false) Cookie cookie) {
+			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
+			HttpSession session) {
 		// 荑좏궎瑜� �씠�슜�븳 �븘�씠�뵒 湲곗뼲�븯湲�
 		if (cookie != null) {
 			loginRequest.setId(cookie.getValue());
 			loginRequest.setMemory(true);
 		}
+		session.setAttribute("refererPage", request.getAttribute("refererPage"));
+		// System.out.println("LoginController Get refererPage : " +
+		// request.getAttribute("refererPage"));
 		return "login/loginFormPage";
 	}
 
 	@PostMapping
 	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpServletRequest request) {
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
@@ -74,7 +79,16 @@ public class LoginController {
 				memoryCookie.setMaxAge(0);
 			}
 			response.addCookie(memoryCookie);
-			return "redirect:/home";
+
+			String refererPage = (String) session.getAttribute("refererPage");
+			// System.out.println("LoginController Post refererPage : " + refererPage);
+			if (refererPage == null) {
+				return "redirect:/";
+			} else {
+				return "redirect:" + refererPage;
+			}
+
+			// return "redirect:/home";
 		} catch (OwnerNotFoundException e) {
 			errors.reject("notfound");
 			return "login/loginFormPage";

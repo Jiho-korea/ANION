@@ -9,6 +9,7 @@
 */
 package interceptor;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,7 +30,17 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 				return true;
 			}
 		}
-		response.sendRedirect(request.getContextPath() + "/login/login");
+
+		// 컨텍스트 뒤의 경로를 request 객체에 넣어줌
+		if (request.getServletPath() != null) {
+			String refererPage = request.getServletPath();
+			// System.out.println("LoginCheckInterceptor refererPage : " + refererPage);
+			request.setAttribute("refererPage", refererPage);
+
+		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login");
+		dispatcher.forward(request, response);//
+		// response.sendRedirect(request.getContextPath() + "/login/login");
 		return false;
 	}
 

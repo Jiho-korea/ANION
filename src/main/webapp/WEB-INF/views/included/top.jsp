@@ -113,23 +113,45 @@
 														href="${pageContext.request.contextPath}/preservation"><spring:message
 																code="freeze.preservation" /></a></li>
 												</ul></li>
-											<%-- li><a href="contact.html">Contact</a></li --%>
+											<li><c:choose>
+														<c:when test="${empty sessionScope.login}">
+															<a href="${pageContext.request.contextPath}/login/login"
+																class="btn header-btn"><spring:message
+																	code="go.login" /></a>
+															<a href="${pageContext.request.contextPath}/signup/step1"
+																class="btn header-btn"><spring:message
+																	code="go.register" /></a>
+														</c:when>
+														<c:otherwise>
+															<a href="${pageContext.request.contextPath}/logout"
+																class="btn header-btn"><spring:message
+																	code="top.logout" /></a>
+															<c:if test="${sessionScope.login.memberLevel==0}">
+																<a href="#"> <img
+																	src="${pageContext.request.contextPath}/img/logo/tts.jpg"
+																	style="max-width: 50px; height: 50px;" alt=""></a>
+
+															</c:if>
+
+														</c:otherwise>
+
+													</c:choose></li>
 										</ul>
 									</nav>
 								</div>
-								<!-- Header-btn -->
+								<!-- Header-btn
 								<div class="header-right-btn d-none d-lg-block ml-20">
 									<c:choose>
 										<c:when test="${empty sessionScope.login}">
 											<a href="${pageContext.request.contextPath}/login/login"
 												class="btn header-btn"><spring:message code="go.login" /></a>
 											<a href="${pageContext.request.contextPath}/signup/step1"
-												class="btn btn-dark"><spring:message code="go.register" /></a>
+												class="btn header-btn"><spring:message code="go.register" /></a>
 										</c:when>
 										<c:otherwise>
 											<a href="${pageContext.request.contextPath}/logout"
 												class="btn header-btn"><spring:message code="top.logout" /></a>
-											<c:if test="${sessionScope.login.memberLevel==1}">
+											<c:if test="${sessionScope.login.memberLevel==0}">
 												<a href="#"> <img
 													src="${pageContext.request.contextPath}/img/logo/tts.jpg"
 													style="max-width: 50px; height: 50px;" alt=""></a>
@@ -141,7 +163,7 @@
 									</c:choose>
 
 
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<!-- Mobile Menu -->
