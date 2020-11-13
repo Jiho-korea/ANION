@@ -59,27 +59,29 @@ public class PetRegisterController {
 
 	@Resource(name = "imageUploadService")
 	ImageUploadService imageUploadService;
-	
+
 	@Resource(name = "KindcodeService")
 	KindcodeService kindcodeService;
-	
+
+	List<Kindcode> kindcodeList = null;
+
 	@RequestMapping("/step1")
 	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model) {
 		try {
-			List<Kindcode> kindcodeList = kindcodeService.selectPetKindList();
+			kindcodeList = kindcodeService.selectPetKindList();
 			model.addAttribute("kindcodeList", kindcodeList);
-			System.out.print(kindcodeList.get(0).getPetKind());
+			// System.out.print(kindcodeList.get(0).getPetKind());
 			return "register/registerStep1";
-		} catch (KindcodeNotFoundException e1) {
+		} catch (KindcodeNotFoundException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			return "redirect:/home";
-		}catch (Exception e1) {
+			e.printStackTrace();
+			return "redirect:/register/step1";
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			return "redirect:/home";
+			e.printStackTrace();
+			return "redirect:/register/step1";
 		}
-		
+
 	}
 
 	@GetMapping("/step2")
@@ -92,10 +94,19 @@ public class PetRegisterController {
 			Errors errors, HttpSession session, MultipartHttpServletRequest request, Model model) {
 		Owner owner = (Owner) session.getAttribute("login");
 		petRegisterRequest.setOwnerId(owner.getOwnerId());
-		
+
 		if (errors.hasErrors()) {
-			System.out.println(errors.toString()); //
-			return "register/registerStep1";
+			try {
+				kindcodeList = kindcodeService.selectPetKindList();
+				model.addAttribute("kindcodeList", kindcodeList);
+				return "register/registerStep1";
+			} catch (KindcodeNotFoundException e) {
+				e.printStackTrace();
+				return "redirect:/home";
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "redirect:/home";
+			}
 		}
 		try {
 			/*
