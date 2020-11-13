@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petProject.dao.KindcodeDAO">
+	<select id="selectPetKindList" resultMap="kindcodeResultMap">
+		select "PET_KIND", "PET_KIND_CODE" from "kindcode"
+	</select>
+
+	<resultMap type="kindcode" id="kindcodeResultMap">
+		<id column="PET_KIND_CODE" property="petKindcode" />
+		<result column="PET_KIND" property="petKind" />
+	</resultMap>
+</mapper>

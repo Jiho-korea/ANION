@@ -81,7 +81,7 @@
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<spring:message code="info.pet.kind">
-					<spring:argument value="${pet.petKind}" />
+					<spring:argument value="${pet.petKindcode}" />
 				</spring:message>
 			</h4>
 			<hr class="my-4">
