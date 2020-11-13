@@ -19,6 +19,8 @@
 
 package petProject.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -32,6 +34,8 @@ public interface OwnerDAO {
 	Owner selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
 
 	int insertOwner(@Param("ownerRegisterRequest") OwnerRegisterRequest ownerRegisterRequest) throws Exception;
-	
-	int selectById(@Param("ownerId")String ownerId) throws Exception;
+
+	int selectById(@Param("ownerId") String ownerId) throws Exception;
+
+	List<Owner> selectOwnerList() throws Exception;
 }

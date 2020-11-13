@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+<!--
+* { padding: 0; margin: 0; font-family: "맑은고딕","굴림"; font-size: 12px; color: #5d5d5d; }
+body { font-family: "맑은고딕","굴림"; font-size: 12px; }
+h1 { font-family: "맑은고딕","굴림"; font-size: 14px; }
+th { font-family: "맑은고딕", "굴림"; font-size: 12px; font-weight: bolder; color: #333333; }
+a:link { font-family: "맑은고딕","굴림"; color: #5d5d5d; text-decoration: none; }
+a:visited { font-family: "맑은고딕","굴림"; text-decoration: none; }
+a:hover { font-family: "맑은고딕","굴림"; color: #0688da; text-decoration: none; }
+a:active { font-family: "맑은고딕","굴림"; text-decoration: none; }
+
+#wrapper { margin: 0 auto; width: 1000px; }
+#header { color: #333; width: 1000px; height: 100px; font-size: 14px; font-family: "맑은고딕","굴림"; }
+#wrapper #rightcolumn .menu { width: 800px; height: 85px; }
+#leftcolumn { color: #333; width: 170px; padding-right:30px; float: left; height: 450px; }
+#margintop { margin-left: 10px; margin-top: 10px; }
+#rightcolumn { float: left; color: #333; width: 800px; background-repeat:no-repeat; /*background-image: url('../images/bg_gr.gif');*/ }
+#footer { color: #333; width: 1000px; clear: both; margin-top: 20px; }
+
+.logo { width: 170px; height: 80px; float: left; padding-top: 10px; padding-right:30px; }
+.top_right { float: left; width: 800px; height: 90px; padding-top: 10px; }
+.boardbg { background: url('../images/common/list01.gif') no-repeat; }
+.text_img { width: 790px; padding-left: 10px; padding-top: 20px; height:50px; background-image: url('../images/common/bg_gr.gif'); background-repeat:no-repeat; }
+.frmTxt1 { border: 1px solid #cdcdcd; height: 17px; width: 100px; }
+.btn { background-repeat: no-repeat; border: solid 0px #ccc; cursor: pointer; }
+.tbl_head { border-top:3px solid #115986; border-bottom:3px solid #115986; }
+div.btn_align { margin-top: 30px; text-align: center; }
+div.paging { margin-top: 20px; text-align: center; }
+
+#leftmenu { list-style-type:none;}
+#leftmenu li { display:block;}
+#leftmenu li  ul li { padding-left:10px; line-height:150%; }
+#leftmenu li  ul  { list-style-type:none; }
+
+#leftmenu a:link { color:#333; cursor:pointer; text-decoration:none; }
+#leftmenu a:visited { color:#333; cursor:pointer; text-decoration:none; }
+#leftmenu a:active  {color:#669933; cursor:pointer; text-decoration:underline; }
+#leftmenu a:hover {color:#669933; cursor:pointer; text-decoration:underline; }
+//-->

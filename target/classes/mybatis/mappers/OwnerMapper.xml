@@ -17,4 +17,16 @@
     	INSERT INTO "public"."owner" ("OWNER_ID", "OWNER_PASSWORD","OWNER_NAME", "OWNER_PHONE_NUMBER","OWNER_REGISTRATION_DATE")
     	VALUES (#{ownerRegisterRequest.ownerId}, #{ownerRegisterRequest.ownerPassword},#{ownerRegisterRequest.ownerName},#{ownerRegisterRequest.ownerPhoneNumber},now());
     </insert>
+    
+    <select id="selectOwnerList" resultMap="ownerResultMap">
+    	select "OWNER_ID", "OWNER_NAME", "OWNER_PHONE_NUMBER", "OWNER_REGISTRATION_DATE", "MEMBER_LEVEL" from "public"."owner" 
+    </select>
+    
+     <resultMap type="owner" id="ownerResultMap">
+		<id column="OWNER_ID" property="ownerId" />
+		<result column="OWNER_NAME" property="ownerName" />
+		<result column="OWNER_PHONE_NUMBER" property="ownerPhoneNumber" />
+		<result column="OWNER_REGISTRATION_DATE" property="ownerRegisterDate" />
+		<result column="MEMBER_LEVEL" property="memberLevel" />
+	</resultMap>
 </mapper>
