@@ -19,6 +19,7 @@ import controller.MainController;
 import controller.OwnerRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
+import controller.admin.OwnerListController;
 
 @Configuration
 public class ControllerConfig {
@@ -58,5 +59,10 @@ public class ControllerConfig {
 	@Bean
 	public OwnerRegisterController ownerRegisterController() {
 		return new OwnerRegisterController();
+	}
+
+	@Bean
+	public OwnerListController ownerListController() {
+		return new OwnerListController();
 	}
 }
