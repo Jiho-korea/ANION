@@ -87,35 +87,44 @@
 							<form:errors path="petName" />
 						</label>
 					</div>
-					<!--
+					<%--
 					<div class="col-md-6 mb-1">
 						<label> <spring:message code="pet.kind" /><br
-							class="mb-4" /> <form:select path="petKind">
+							class="mb-4" /> <form:select path="petKindcode">
 								<form:option cssClass="form-control" value="동경이" />
 								<form:option cssClass="form-control" value="진돗개" />
 								<form:option cssClass="form-control" value="기타" />
-							</form:select> <form:errors path="petKind" />
+							</form:select> <form:errors path="petKindcode" />
 						</label>
-					</div>  -->
+					</div>  --%>
 
 					<div class="default-select" id="default-select"
 						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
-						<select style="display: none;" name="petKind">
+						<select style="display: none;" name="petKindcode">
 							<option value="">견종</option>
-							<option value="동경이">동경이</option>
-							<option value="진돗개">진돗개</option>
-
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<option value="${status.index + 1}">${kindcode.petKind}</option>
+							</c:forEach>
 						</select>
 						<div class="nice-select" tabindex="0">
 							<span class="current">견종</span>
 							<ul class="list">
 								<li data-value="견종" class="option selected focus" hidden="">견종</li>
-								<li data-value="동경이" class="option">동경이</li>
-								<li data-value="진돗개" class="option">진돗개</li>
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<li data-value="${status.index + 1}" class="option">${kindcode.petKind}</li>
+								</c:forEach>
+								<%-- 
+								<li data-value="1" class="option">동경이</li>
+								<li data-value="2" class="option">진돗개</li>
+								--%>
+
 
 							</ul>
-						</div><br>
-						<form:errors path="petKind" />
+						</div>
+						<br>
+						<form:errors path="petKindcode" />
 					</div>
 
 				</div>

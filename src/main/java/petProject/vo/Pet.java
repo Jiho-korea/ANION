@@ -23,7 +23,7 @@ public class Pet implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String ownerId;
 	private String petName;
-	private String petKind;
+	private String petKindcode;
 	private String petBirthday;
 	private int petRegistrationNumber;
 	private String petRegistrationDate;
@@ -33,13 +33,13 @@ public class Pet implements Serializable {
 	private String petSex;
 	private int imageCount;
 
-	public Pet(String ownerId, String petName, String petKind, String petBirthday, int petRegistrationNumber,
+	public Pet(String ownerId, String petName, String petKindcode, String petBirthday, int petRegistrationNumber,
 			String petRegistrationDate, String petMicrochip, String petMothername, String petFathername, String petSex,
 			int imageCount) {
 		super();
 		this.ownerId = ownerId;
 		this.petName = petName;
-		this.petKind = petKind;
+		this.petKindcode = petKindcode;
 		this.petBirthday = petBirthday;
 		this.petRegistrationNumber = petRegistrationNumber;
 		this.petRegistrationDate = petRegistrationDate;
@@ -70,12 +70,12 @@ public class Pet implements Serializable {
 		this.petName = petName;
 	}
 
-	public String getPetKind() {
-		return petKind;
+	public String getPetKindcode() {
+		return petKindcode;
 	}
 
-	public void setPetKind(String petKind) {
-		this.petKind = petKind;
+	public void setPetKindcode(String petKindcode) {
+		this.petKindcode = petKindcode;
 	}
 
 	public String getPetBirthday() {

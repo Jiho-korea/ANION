@@ -6,6 +6,9 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 커맨드 객체를 register하는 클래스
 ========================================================================
+수    정    자 : 정세진
+수    정    일 : 2020.11.13
+수  정  내  용 : 견종 콤보박스 출력 추가
 =============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
 ========================================================================
@@ -13,6 +16,7 @@ uploadFile : 파일 업로드 방식 설정하는 함수
 package controller;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -31,10 +35,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.PetRegisterException;
 import petProject.service.GetCurrvalService;
 import petProject.service.ImageUploadService;
+import petProject.service.KindcodeService;
 import petProject.service.PetRegisterService;
+import petProject.vo.Kindcode;
 import petProject.vo.Owner;
 import petProject.vo.PetRegisterRequest;
 
@@ -52,10 +59,27 @@ public class PetRegisterController {
 
 	@Resource(name = "imageUploadService")
 	ImageUploadService imageUploadService;
-
+	
+	@Resource(name = "KindcodeService")
+	KindcodeService kindcodeService;
+	
 	@RequestMapping("/step1")
-	public String registerStep1(PetRegisterRequest petRegisterRequest) {
-		return "register/registerStep1";
+	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model) {
+		try {
+			List<Kindcode> kindcodeList = kindcodeService.selectPetKindList();
+			model.addAttribute("kindcodeList", kindcodeList);
+			System.out.print(kindcodeList.get(0).getPetKind());
+			return "register/registerStep1";
+		} catch (KindcodeNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return "redirect:/home";
+		}catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return "redirect:/home";
+		}
+		
 	}
 
 	@GetMapping("/step2")
@@ -68,8 +92,9 @@ public class PetRegisterController {
 			Errors errors, HttpSession session, MultipartHttpServletRequest request, Model model) {
 		Owner owner = (Owner) session.getAttribute("login");
 		petRegisterRequest.setOwnerId(owner.getOwnerId());
-
+		
 		if (errors.hasErrors()) {
+			System.out.println(errors.toString()); //
 			return "register/registerStep1";
 		}
 		try {
