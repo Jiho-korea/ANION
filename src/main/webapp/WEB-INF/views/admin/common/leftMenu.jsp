@@ -92,7 +92,7 @@ function _trace(){
 		<li><a href="../product/list.do"><img src="../images/menu/sub10<c:if test="${reURL[2] eq 'product'}">_on</c:if>.gif" name="Image10" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image10','','../images/menu/sub10_on.gif',1);" alt="" /></a></li>
 	</ul--%>
 	<div id="leftmenu">
-		<a href="${pageContext.request.contextPath}/smc/sysadm/member/list.do" class="<c:if test="${reURL[2] eq 'member'}">on</c:if>">회원관리</a>
+		<a href="${pageContext.request.contextPath}/admin/member/list" class="<c:if test="${reURL[2] eq 'member'}">on</c:if>">회원관리</a>
 		<%--
 		<a href="${pageContext.request.contextPath}/smc/sysadm/bbs/list.do" class="<c:if test="${reURL[2] eq 'bbs'}">on</c:if>">게시판관리</a>
 		<a href="${pageContext.request.contextPath}/smc/sysadm/farmbase/list.do" class="<c:if test="${reURL[2] eq 'farmbase'}">on</c:if>">생물자원기초정보관리</a>

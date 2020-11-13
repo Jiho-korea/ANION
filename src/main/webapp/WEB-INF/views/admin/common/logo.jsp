@@ -1,1 +1,1 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><a href="../../main/main.do" target="_blank"><img src="${pageContext.request.contextPath}/img/logo/anion.png" width="150" height="55" align="absmiddle" alt="애니온" border="0" /></a>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><a href="${pageContext.request.contextPath}/home" target="_blank"><img src="${pageContext.request.contextPath}/img/logo/anion.png" width="150" height="55" align="absmiddle" alt="애니온" border="0" /></a>

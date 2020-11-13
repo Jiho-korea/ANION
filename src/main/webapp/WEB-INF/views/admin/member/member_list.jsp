@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 모드</title>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/main.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/menu.js"></script>
 <script type="text/javascript">
