@@ -24,14 +24,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.LoginRequest;
 import petProject.vo.Member;
 import petProject.vo.MemberRegisterRequest;
 
 // member 테이블에 접근하는 DAO
 @Mapper
 public interface MemberDAO {
-	Member selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
+	Member selectMemberById(@Param("memberId") String memberId) throws Exception;
 
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 

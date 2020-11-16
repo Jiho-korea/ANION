@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
+import petProject.vo.AuthInfo;
 import petProject.vo.LoginRequest;
-import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/login/login")
@@ -50,7 +50,7 @@ public class LoginController {
 			HttpSession session) {
 		// 荑좏궎瑜� �씠�슜�븳 �븘�씠�뵒 湲곗뼲�븯湲�
 		if (cookie != null) {
-			loginRequest.setId(cookie.getValue());
+			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
 		}
 		session.setAttribute("refererPage", request.getAttribute("refererPage"));
@@ -67,11 +67,12 @@ public class LoginController {
 		}
 
 		try {
-			Member member = loginService.selectByIdPassword(loginRequest);
+			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
+					loginRequest.getMemberPassword());
 
-			session.setAttribute("login", member);
+			session.setAttribute("login", authInfo);
 
-			Cookie memoryCookie = new Cookie("memory", loginRequest.getId());
+			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
 			memoryCookie.setPath("/");
 			if (loginRequest.isMemory()) {
 				memoryCookie.setMaxAge(60 * 60 * 24 * 30);

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.MemberDAO;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
-import petProject.vo.LoginRequest;
+import petProject.vo.AuthInfo;
 import petProject.vo.Member;
 
 @Service("loginService")
@@ -27,12 +27,16 @@ public class LoginServiceImpl implements LoginService {
 	private MemberDAO memberDAO;
 
 	@Override
-	public Member selectByIdPassword(LoginRequest loginRequest) throws Exception {
-		Member member = memberDAO.selectByIdPassword(loginRequest);
+	public AuthInfo selectMemberById(String memberId, String memberPassword) throws Exception {
+		Member member = memberDAO.selectMemberById(memberId);
 		if (member == null) {
 			throw new MemberNotFoundException("not found");
 		}
-		// TODO Auto-generated method stub
-		return member;
+		if (!member.matchPassword(memberPassword)) {
+			throw new MemberNotFoundException("not found");
+		}
+
+		return new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberPhoneNumber(),
+				member.getMemberRegisterDate(), member.getMemberLevel());
 	}
 }

@@ -4,9 +4,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petProject.dao.MemberDAO">
-    <select id="selectByIdPassword" parameterType="loginRequest" resultType="member">
+    <select id="selectMemberById" parameterType="String" resultType="member">
     	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" 
-    	FROM "member" WHERE "MEMBER_ID" = #{loginRequest.id} AND "MEMBER_PASSWORD" = #{loginRequest.password}
+    	FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
     <select id="selectById" parameterType="String" resultType="int">

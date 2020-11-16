@@ -41,8 +41,8 @@ import petProject.service.GetCurrvalService;
 import petProject.service.ImageUploadService;
 import petProject.service.KindcodeService;
 import petProject.service.PetRegisterService;
+import petProject.vo.AuthInfo;
 import petProject.vo.Kindcode;
-import petProject.vo.Member;
 import petProject.vo.PetRegisterRequest;
 
 @Controller
@@ -92,8 +92,8 @@ public class PetRegisterController {
 	@PostMapping("/step2")
 	public String registerStep2(@Valid @ModelAttribute("petRegisterRequest") PetRegisterRequest petRegisterRequest,
 			Errors errors, HttpSession session, MultipartHttpServletRequest request, Model model) {
-		Member member = (Member) session.getAttribute("login");
-		petRegisterRequest.setMemberId(member.getMemberId());
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+		petRegisterRequest.setMemberId(authInfo.getMemberId());
 
 		if (errors.hasErrors()) {
 			try {

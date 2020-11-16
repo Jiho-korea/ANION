@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.service.PetListService;
-import petProject.vo.Member;
+import petProject.vo.AuthInfo;
 import petProject.vo.Pet;
 
 @Controller
@@ -39,9 +39,9 @@ public class MainController {
 
 	@GetMapping("/list")
 	public String listPet(HttpSession session, Model model) {
-		Member member = (Member) session.getAttribute("login");
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
-			List<Pet> petList = petListService.selectPetList(member.getMemberId());
+			List<Pet> petList = petListService.selectPetList(authInfo.getMemberId());
 			model.addAttribute("petList", petList);
 		} catch (Exception e) {
 			e.printStackTrace();
