@@ -1,10 +1,10 @@
 /*
 ========================================================================
-파    일    명 : OwnerDAO
+파    일    명 : MemberDAO
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2020.xx.xx
-작  성  내  용 : owner table 접근 DAO
+작  성  내  용 : member table 접근 DAO
 ========================================================================
 수    정    자 : 임원석, 정세진
 수    정    일 : 2020.11.09
@@ -25,17 +25,17 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.LoginRequest;
-import petProject.vo.Owner;
-import petProject.vo.OwnerRegisterRequest;
+import petProject.vo.Member;
+import petProject.vo.MemberRegisterRequest;
 
-// owner 테이블에 접근하는 DAO
+// member 테이블에 접근하는 DAO
 @Mapper
-public interface OwnerDAO {
-	Owner selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
+public interface MemberDAO {
+	Member selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
 
-	int insertOwner(@Param("ownerRegisterRequest") OwnerRegisterRequest ownerRegisterRequest) throws Exception;
+	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 
-	int selectById(@Param("ownerId") String ownerId) throws Exception;
+	int selectById(@Param("memberId") String memberId) throws Exception;
 
-	List<Owner> selectOwnerList() throws Exception;
+	List<Member> selectMemberList() throws Exception;
 }

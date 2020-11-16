@@ -38,7 +38,7 @@ import petProject.service.ImageListService;
 import petProject.service.ImageUploadService;
 import petProject.vo.Image;
 import petProject.vo.ImageUploadRequest;
-import petProject.vo.Owner;
+import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/list")
@@ -55,8 +55,8 @@ public class ImageListController {
 	@GetMapping("/image")
 	public String listImage(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpSession session, Model model) {
-		Owner owner = (Owner) session.getAttribute("login");
-		System.out.println("ownerId = " + owner.getOwnerId() + "\npetRegistrationNumber = " + petRegistrationNumber);
+		Member member = (Member) session.getAttribute("login");
+		System.out.println("memberId = " + member.getMemberId() + "\npetRegistrationNumber = " + petRegistrationNumber);
 		try {
 			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
 			System.out.println(imageList.isEmpty());
@@ -74,10 +74,10 @@ public class ImageListController {
 			HttpSession session, Model model, MultipartHttpServletRequest request) {
 
 		try {
-			Owner owner = (Owner) session.getAttribute("login");
-			String OwnerId = owner.getOwnerId();
+			Member member = (Member) session.getAttribute("login");
+			String memberId = member.getMemberId();
 
-			System.out.println("ownerId 검색 = " + OwnerId);
+			System.out.println("memberId 검색 = " + memberId);
 			System.out.println("petRegistragionNumber = " + petRegistrationNumber);
 
 			MultipartFile file = request.getFile("file");
@@ -94,7 +94,7 @@ public class ImageListController {
 			String absPath = rootPath + "\\" + savedName;
 			System.out.println("absPath = " + absPath);
 
-			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(owner.getOwnerId(), petRegistrationNumber,
+			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(member.getMemberId(), petRegistrationNumber,
 					savedName);
 			imageUploadService.insertImage(imageUploadRequest);
 

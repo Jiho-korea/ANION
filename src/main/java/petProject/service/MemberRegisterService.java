@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : OwnerRegisterService
+파    일    명 : MemberRegisterService
 ========================================================================
 작    성    자 : 임원석, 정세진, 송찬영
 작    성    일 : 2020.11.09
@@ -17,11 +17,10 @@ package petProject.service;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Owner;
-import petProject.vo.OwnerRegisterRequest;
+import petProject.vo.MemberRegisterRequest;
 
-public interface OwnerRegisterService {
-	int insertOwner(@Param("ownerRegisterRequest") OwnerRegisterRequest ownerRegisterRequest) throws Exception;
-	
-	int selectById(@Param("ownerRegisterRequest") String ownerId) throws Exception;
+public interface MemberRegisterService {
+	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
+
+	int selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
 }

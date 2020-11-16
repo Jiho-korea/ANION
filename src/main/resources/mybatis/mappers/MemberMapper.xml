@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petProject.dao.MemberDAO">
+    <select id="selectByIdPassword" parameterType="loginRequest" resultType="member">
+    	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" 
+    	FROM "member" WHERE "MEMBER_ID" = #{loginRequest.id} AND "MEMBER_PASSWORD" = #{loginRequest.password}
+    </select>
+    
+    <select id="selectById" parameterType="String" resultType="int">
+    	SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
+    </select>
+    
+    <insert id="insertMember" parameterType="memberRegisterRequest">
+    	INSERT INTO "public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
+    	VALUES (#{memberRegisterRequest.memberId}, #{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
+    </insert>
+    
+    <select id="selectMemberList" resultMap="memberResultMap">
+    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" from "public"."member" 
+    </select>
+    
+     <resultMap type="member" id="memberResultMap">
+		<id column="MEMBER_ID" property="memberId" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
+		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
+		<result column="MEMBER_LEVEL" property="memberLevel" />
+	</resultMap>
+</mapper>

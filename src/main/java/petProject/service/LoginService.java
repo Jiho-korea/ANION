@@ -12,8 +12,8 @@ package petProject.service;
 import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.LoginRequest;
-import petProject.vo.Owner;
+import petProject.vo.Member;
 
 public interface LoginService {
-	Owner selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
+	Member selectByIdPassword(@Param("loginRequest") LoginRequest loginRequest) throws Exception;
 }

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import petProject.vo.Owner;
+import petProject.vo.Member;
 
 public class LoginCheckInterceptor implements HandlerInterceptor {
 
@@ -25,8 +25,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			Owner owner = (Owner) session.getAttribute("login");
-			if (owner != null) {
+			Member member = (Member) session.getAttribute("login");
+			if (member != null) {
 				return true;
 			}
 		}

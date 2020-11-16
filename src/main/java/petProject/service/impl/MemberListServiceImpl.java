@@ -15,19 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import petProject.dao.OwnerDAO;
-import petProject.service.OwnerListService;
-import petProject.vo.Owner;
+import petProject.dao.MemberDAO;
+import petProject.service.MemberListService;
+import petProject.vo.Member;
 
-@Service("ownerListService")
+@Service("memberListService")
 @Transactional
-public class OwnerListServiceImpl implements OwnerListService {
+public class MemberListServiceImpl implements MemberListService {
 	@Autowired
-	private OwnerDAO ownerDAO;
+	private MemberDAO memberDAO;
 
 	@Override
-	public List<Owner> selectOwnerList() throws Exception {
-		List<Owner> ownerList = ownerDAO.selectOwnerList();
-		return ownerList;
+	public List<Member> selectMemberList() throws Exception {
+		List<Member> memberList = memberDAO.selectMemberList();
+		return memberList;
 	}
+
 }

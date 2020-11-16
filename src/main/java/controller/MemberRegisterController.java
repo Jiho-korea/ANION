@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : OwnerRegisterController.java
+파    일    명 : MemberRegisterController.java
 ========================================================================
 작    성    자 : 임원석, 정세진
 작    성    일 : 2020.11.09
@@ -28,22 +28,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import petProject.exception.OwnerInsertException;
-import petProject.service.OwnerRegisterService;
-import petProject.vo.OwnerRegisterRequest;
+import petProject.exception.MemberInsertException;
+import petProject.service.MemberRegisterService;
+import petProject.vo.MemberRegisterRequest;
 
 @Controller
 @RequestMapping("/signup")
-public class OwnerRegisterController {
-	@Resource(name = "ownerRegisterService")
-	OwnerRegisterService ownerRegisterService;
+public class MemberRegisterController {
+	@Resource(name = "memberRegisterService")
+	MemberRegisterService memberRegisterService;
 
-	public OwnerRegisterController() {
+	public MemberRegisterController() {
 		super();
 	}
 
 	@RequestMapping("/step1")
-	public String signStep1(OwnerRegisterRequest ownerRegisterRequest) {
+	public String signStep1(MemberRegisterRequest memberRegisterRequest) {
 		return "register/signup";
 	}
 
@@ -58,24 +58,24 @@ public class OwnerRegisterController {
 	}
 
 	@PostMapping("/step2")
-	public String signStep2(@Valid OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model,
+	public String signStep2(@Valid MemberRegisterRequest memberRegisterRequest, Errors errors, Model model,
 			@RequestParam(value = "dupCheck", defaultValue = "false") boolean dupCheck) throws Exception {
 		if (!dupCheck) {
-			errors.reject("no.duplicate.check.ownerRegisterRequest");
+			errors.reject("no.duplicate.check.memberRegisterRequest");
 		} else {
 			model.addAttribute("duplicate", !dupCheck);//
 		}
-		if (ownerRegisterRequest.getOwnerPhoneNumber().length() < 13
-				&& !Pattern.matches("^[0-9]+$", ownerRegisterRequest.getOwnerPhoneNumber())) {
-			errors.reject("no.number.check.ownerRegisterRequest");
+		if (memberRegisterRequest.getMemberPhoneNumber().length() < 13
+				&& !Pattern.matches("^[0-9]+$", memberRegisterRequest.getMemberPhoneNumber())) {
+			errors.reject("no.number.check.memberRegisterRequest");
 		}
 		if (errors.hasErrors()) {
 			return "register/signup";
 		}
 
 		try {
-			ownerRegisterService.insertOwner(ownerRegisterRequest);
-		} catch (OwnerInsertException e) {
+			memberRegisterService.insertMember(memberRegisterRequest);
+		} catch (MemberInsertException e) {
 			errors.reject("failed.signup");
 			return "register/signup";
 		} catch (Exception e) {
@@ -85,17 +85,17 @@ public class OwnerRegisterController {
 	}
 
 	@PostMapping("/check/duplicate")
-	public String checkDuplicate(@RequestParam(value = "ownerId", required = true) String ownerId,
-			OwnerRegisterRequest ownerRegisterRequest, Errors errors, Model model) throws Exception {
-		if ("".equals(ownerId)) {
-			errors.rejectValue("ownerId", "blank");
+	public String checkDuplicate(@RequestParam(value = "memberId", required = true) String memberId,
+			MemberRegisterRequest memberRegisterRequest, Errors errors, Model model) throws Exception {
+		if ("".equals(memberId)) {
+			errors.rejectValue("memberId", "blank");
 		}
 
 		if (errors.hasErrors()) {
 			return "register/signup";
 		}
-		if (ownerRegisterService.selectById(ownerId) != 0) {
-			errors.reject("duplicate.ownerRegisterRequest");
+		if (memberRegisterService.selectById(memberId) != 0) {
+			errors.reject("duplicate.memberRegisterRequest");
 			return "register/signup";
 		} else {
 			model.addAttribute("duplicate", false);
