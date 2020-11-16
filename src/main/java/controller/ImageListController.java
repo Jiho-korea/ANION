@@ -36,9 +36,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import petProject.service.ImageListService;
 import petProject.service.ImageUploadService;
+import petProject.vo.AuthInfo;
 import petProject.vo.Image;
 import petProject.vo.ImageUploadRequest;
-import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/list")
@@ -55,8 +55,9 @@ public class ImageListController {
 	@GetMapping("/image")
 	public String listImage(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpSession session, Model model) {
-		Member member = (Member) session.getAttribute("login");
-		System.out.println("memberId = " + member.getMemberId() + "\npetRegistrationNumber = " + petRegistrationNumber);
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+		System.out
+				.println("memberId = " + authInfo.getMemberId() + "\npetRegistrationNumber = " + petRegistrationNumber);
 		try {
 			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
 			System.out.println(imageList.isEmpty());
@@ -74,8 +75,8 @@ public class ImageListController {
 			HttpSession session, Model model, MultipartHttpServletRequest request) {
 
 		try {
-			Member member = (Member) session.getAttribute("login");
-			String memberId = member.getMemberId();
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+			String memberId = authInfo.getMemberId();
 
 			System.out.println("memberId 검색 = " + memberId);
 			System.out.println("petRegistragionNumber = " + petRegistrationNumber);
@@ -94,8 +95,8 @@ public class ImageListController {
 			String absPath = rootPath + "\\" + savedName;
 			System.out.println("absPath = " + absPath);
 
-			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(member.getMemberId(), petRegistrationNumber,
-					savedName);
+			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberId(),
+					petRegistrationNumber, savedName);
 			imageUploadService.insertImage(imageUploadRequest);
 
 			return "redirect:/list/image?petRegistrationNumber=" + petRegistrationNumber;

@@ -72,16 +72,16 @@
 				<br>
 
 				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:input path="id" cssClass="single-input" placeholder="ID"
+					<form:input path="memberId" cssClass="single-input" placeholder="ID"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'" />
-					<form:errors path="id" />
+					<form:errors path="memberId" />
 				</label>
 				<br>
 				<label> <!--<spring:message code="password" />--> <form:password
-						path="password" cssClass="single-input" placeholder="Password"
+						path="memberPassword" cssClass="single-input" placeholder="Password"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = 'Password'" /> <form:errors
-						path="password" />
+						path="memberPassword" />
 				</label>
 				<br>
 				<br>

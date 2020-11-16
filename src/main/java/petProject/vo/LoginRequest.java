@@ -14,38 +14,38 @@ import org.hibernate.validator.constraints.NotBlank;
 public class LoginRequest {
 
 	@NotBlank
-	private String id;
+	private String memberId;
 
 	@NotBlank
-	private String password;
+	private String memberPassword;
 
 	private boolean memory;
+
+	public LoginRequest(String memberId, String memberPassword, boolean memory) {
+		super();
+		this.memberId = memberId;
+		this.memberPassword = memberPassword;
+		this.memory = memory;
+	}
 
 	public LoginRequest() {
 		super();
 	}
 
-	public LoginRequest(String id, String password, boolean memory) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.memory = memory;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public String getId() {
-		return id;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getMemberPassword() {
+		return memberPassword;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMemberPassword(String memberPassword) {
+		this.memberPassword = memberPassword;
 	}
 
 	public boolean isMemory() {
@@ -55,5 +55,4 @@ public class LoginRequest {
 	public void setMemory(boolean memory) {
 		this.memory = memory;
 	}
-
 }
