@@ -42,7 +42,7 @@ import petProject.service.ImageUploadService;
 import petProject.service.KindcodeService;
 import petProject.service.PetRegisterService;
 import petProject.vo.Kindcode;
-import petProject.vo.Owner;
+import petProject.vo.Member;
 import petProject.vo.PetRegisterRequest;
 
 @Controller
@@ -92,8 +92,8 @@ public class PetRegisterController {
 	@PostMapping("/step2")
 	public String registerStep2(@Valid @ModelAttribute("petRegisterRequest") PetRegisterRequest petRegisterRequest,
 			Errors errors, HttpSession session, MultipartHttpServletRequest request, Model model) {
-		Owner owner = (Owner) session.getAttribute("login");
-		petRegisterRequest.setOwnerId(owner.getOwnerId());
+		Member member = (Member) session.getAttribute("login");
+		petRegisterRequest.setMemberId(member.getMemberId());
 
 		if (errors.hasErrors()) {
 			try {
@@ -127,7 +127,7 @@ public class PetRegisterController {
 			petRegisterService.insertPet(petRegisterRequest);
 			int currval = getCurrvalService.selectCurrval();
 			// ImageUploadRequest imageUploadRequest = new
-			// ImageUploadRequest(owner.getOwnerId(), currval, savedName);
+			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);
 			return "register/registerStep2";
 		} catch (PetRegisterException e) {

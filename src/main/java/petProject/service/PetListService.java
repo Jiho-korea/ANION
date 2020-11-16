@@ -16,5 +16,5 @@ import org.apache.ibatis.annotations.Param;
 import petProject.vo.Pet;
 
 public interface PetListService {
-	List<Pet> selectPetList(@Param("ownerId") String ownerId) throws Exception;
+	List<Pet> selectPetList(@Param("memberId") String memberId) throws Exception;
 }

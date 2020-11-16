@@ -13,13 +13,13 @@ public class ImageUploadRequest {
 
 	private static final long serialVersionUID = 1L;
 
-	private String ownerId;
+	private String memberId;
 	private int petRegistrationNumber;
 	private String imagePath;
 
-	public ImageUploadRequest(String ownerId, int petRegistrationNumber, String imagePath) {
+	public ImageUploadRequest(String memberId, int petRegistrationNumber, String imagePath) {
 		super();
-		this.ownerId = ownerId;
+		this.memberId = memberId;
 		this.petRegistrationNumber = petRegistrationNumber;
 		this.imagePath = imagePath;
 	}
@@ -28,12 +28,12 @@ public class ImageUploadRequest {
 		super();
 	}
 
-	public String getOwnerId() {
-		return ownerId;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public int getPetRegistrationNumber() {

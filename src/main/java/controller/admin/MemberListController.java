@@ -24,23 +24,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import petProject.service.OwnerListService;
-import petProject.vo.Owner;
+import petProject.service.MemberListService;
+import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/admin/member")
-public class OwnerListController {
+public class MemberListController {
 
-	private static final Logger logger = LoggerFactory.getLogger(OwnerListController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberListController.class);
 
-	@Resource(name = "ownerListService")
-	OwnerListService ownerListService;
+	@Resource(name = "memberListService")
+	MemberListService memberListService;
 
 	@GetMapping("/list")
 	public String listPet(HttpSession session, Model model) {
 		try {
-			List<Owner> ownerList = ownerListService.selectOwnerList();
-			model.addAttribute("ownerList", ownerList);
+			List<Member> memberList = memberListService.selectMemberList();
+			model.addAttribute("memberList", memberList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

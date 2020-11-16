@@ -1,10 +1,10 @@
 /*
 ========================================================================
-파    일    명 : OwnerNotFoundException.java
+파    일    명 : MemberInsertException.java
 ========================================================================
-작    성    자 : 강지호
+작    성    자 : 정세진, 임원석
 작    성    일 : 2020.xx.xx
-작  성  내  용 : Owner를 못찾았을때 발생하는 예외 처리 클래스
+작  성  내  용 : 회원 가입에 실패했을 때 발생하는 Exception
 ========================================================================
 =============================== 함  수  설  명  ===============================
 
@@ -12,8 +12,8 @@
 */
 package petProject.exception;
 
-public class OwnerNotFoundException extends RuntimeException {
-	public OwnerNotFoundException(String message) {
+public class MemberInsertException extends RuntimeException {
+	public MemberInsertException(String message) {
 		super(message);
 	}
 }

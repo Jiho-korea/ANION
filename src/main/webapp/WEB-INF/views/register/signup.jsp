@@ -63,18 +63,18 @@
 			style="background: transparent !important; text-align: left">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
-				modelAttribute="ownerRegisterRequest" onsubmit="return validate()">
+				modelAttribute="memberRegisterRequest" onsubmit="return validate()">
 				<h1 class="h1 mb-3 font-weight-bold">
 					<spring:message code="go.register" />
 				</h1>
 				<br>
 
 				<label> <c:if test="${not empty duplicate}">
-						<form:input path="ownerId" cssClass="single-input"
+						<form:input path="memberId" cssClass="single-input"
 							placeholder="아이디" onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '아이디'" readonly="true" />
 					</c:if> <c:if test="${empty duplicate}">
-						<form:input path="ownerId" cssClass="single-input"
+						<form:input path="memberId" cssClass="single-input"
 							placeholder="아이디" onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '아이디'" />
 
@@ -88,7 +88,7 @@
 							<spring:message code="signup.check.duplicate" />
 						</button>
 						<form:errors />
-						<form:errors path="ownerId" />
+						<form:errors path="memberId" />
 					</c:if> <c:if test="${empty duplicate}">
 						<button type="submit"
 							formaction="${pageContext.request.contextPath}/signup/check/duplicate"
@@ -96,7 +96,7 @@
 							<spring:message code="signup.check.duplicate" />
 						</button>
 						<form:errors />
-						<form:errors path="ownerId" />
+						<form:errors path="memberId" />
 
 					</c:if>
 
@@ -104,12 +104,12 @@
 
 				<br>
 
-				<label> <form:password path="ownerPassword"
+				<label> <form:password path="memberPassword"
 						cssClass="single-input" placeholder="비밀번호"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" />
 
 				</label>
-				<label> <form:errors path="ownerPassword" />
+				<label> <form:errors path="memberPassword" />
 				</label>
 				
 				
@@ -124,21 +124,21 @@
 				
 				
 				<br>
-				<label> <form:input path="ownerName" cssClass="single-input"
+				<label> <form:input path="memberName" cssClass="single-input"
 						placeholder="이름" onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '이름'" />
 				</label>
-				<label> <form:errors path="ownerName" />
+				<label> <form:errors path="memberName" />
 				</label>
 				<br>
-				<label> <form:input path="ownerPhoneNumber"
+				<label> <form:input path="memberPhoneNumber"
 						cssClass="single-input" placeholder="전화번호"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = '전화번호'"
 						onKeyup="inputPhoneNumber(this);" maxlength="13"
 						pattern=".{13,13}" />
 
 				</label>
-				<label> <form:errors path="ownerPhoneNumber" />
+				<label> <form:errors path="memberPhoneNumber" />
 				</label>
 				<br>
 				<br>
@@ -169,21 +169,21 @@
 
 	<script>
 /* 		function validate() {
-			var userPassword = $("#ownerPassword").val();
+			var userPassword = $("#memberPassword").val();
 			var checkPassword = $("#checkPassword").val();
 		      if (userPassword != checkPassword) {
 		         alert("비밀번호를 다시 확인해주세요.");
 		         return false;
-		      } else if ($("#ownerId").val() == "") {
+		      } else if ($("#memberId").val() == "") {
 		         alert("아이디를 입력해주세요.");
 		         return false;
-		      } else if ($("#ownerPassword").val() == "") {
+		      } else if ($("#memberPassword").val() == "") {
 		         alert("비밃런호를 입력해주세요.");
 		         return false;
-		      } else if ($("#ownerName").val() == "") {
+		      } else if ($("#memberName").val() == "") {
 		         alert("이름을 입력해주세요.");
 		         return false;
-		      } else if ($("#ownerPhoneNumber").val() == "") {
+		      } else if ($("#memberPhoneNumber").val() == "") {
 		         alert("전화번호를 입력해주세요.");
 		         return false;
 		      }

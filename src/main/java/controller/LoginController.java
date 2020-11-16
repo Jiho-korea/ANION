@@ -28,10 +28,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import petProject.exception.OwnerNotFoundException;
+import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
 import petProject.vo.LoginRequest;
-import petProject.vo.Owner;
+import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/login/login")
@@ -67,9 +67,9 @@ public class LoginController {
 		}
 
 		try {
-			Owner owner = loginService.selectByIdPassword(loginRequest);
+			Member member = loginService.selectByIdPassword(loginRequest);
 
-			session.setAttribute("login", owner);
+			session.setAttribute("login", member);
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getId());
 			memoryCookie.setPath("/");
@@ -89,7 +89,7 @@ public class LoginController {
 			}
 
 			// return "redirect:/home";
-		} catch (OwnerNotFoundException e) {
+		} catch (MemberNotFoundException e) {
 			errors.reject("notfound");
 			return "login/loginFormPage";
 		} catch (Exception e) {

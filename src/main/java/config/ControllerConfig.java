@@ -16,10 +16,10 @@ import controller.ImageListController;
 import controller.LoginController;
 import controller.LogoutController;
 import controller.MainController;
-import controller.OwnerRegisterController;
+import controller.MemberRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
-import controller.admin.OwnerListController;
+import controller.admin.MemberListController;
 
 @Configuration
 public class ControllerConfig {
@@ -57,12 +57,12 @@ public class ControllerConfig {
 	}
 
 	@Bean
-	public OwnerRegisterController ownerRegisterController() {
-		return new OwnerRegisterController();
+	public MemberRegisterController memberRegisterController() {
+		return new MemberRegisterController();
 	}
 
 	@Bean
-	public OwnerListController ownerListController() {
-		return new OwnerListController();
+	public MemberListController memberListController() {
+		return new MemberListController();
 	}
 }

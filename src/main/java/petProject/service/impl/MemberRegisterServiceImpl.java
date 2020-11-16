@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : OwnerRegisterServiceImpl
+파    일    명 : MemberRegisterServiceImpl
 ========================================================================
 작    성    자 : 임원석, 정세진, 송찬영
 작    성    일 : 2020.11.09
@@ -15,36 +15,34 @@
 
 package petProject.service.impl;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import petProject.dao.OwnerDAO;
-import petProject.exception.OwnerInsertException;
-import petProject.service.OwnerRegisterService;
-import petProject.vo.Owner;
-import petProject.vo.OwnerRegisterRequest;
+import petProject.dao.MemberDAO;
+import petProject.exception.MemberInsertException;
+import petProject.service.MemberRegisterService;
+import petProject.vo.MemberRegisterRequest;
 
-@Service("ownerRegisterService")
+@Service("memberRegisterService")
 @Transactional
-public class OwnerRegisterServiceImpl implements OwnerRegisterService {
+public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
-	private OwnerDAO ownerDAO;
+	private MemberDAO memberDAO;
 
 	@Override
-	public int insertOwner(OwnerRegisterRequest ownerRegisterRequest) throws Exception {
-		int cnt = ownerDAO.insertOwner(ownerRegisterRequest);
+	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
+		int cnt = memberDAO.insertMember(memberRegisterRequest);
 		if (cnt == 0) {
-			throw new OwnerInsertException("Insert failed");
+			throw new MemberInsertException("Insert failed");
 		}
 		// TODO Auto-generated method stub
 		return cnt;
 	}
-	
-	public int selectById(String ownerId) throws Exception{
-		int cnt = ownerDAO.selectById(ownerId);
+
+	public int selectById(String memberId) throws Exception {
+		int cnt = memberDAO.selectById(memberId);
 		return cnt;
 	}
 }

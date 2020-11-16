@@ -9,12 +9,12 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="petProject.vo.LoginRequest" alias="loginRequest"/>
-		<typeAlias type="petProject.vo.Owner" alias="owner"/>
+		<typeAlias type="petProject.vo.Member" alias="member"/>
 		<typeAlias type="petProject.vo.PetRegisterRequest" alias="petRegisterRequest" />
 		<typeAlias type="petProject.vo.Pet" alias="pet" />
 		<typeAlias type="petProject.vo.ImageUploadRequest" alias="imageUploadRequest" />
 		<typeAlias type="petProject.vo.Image" alias="image" />
-		<typeAlias type="petProject.vo.OwnerRegisterRequest" alias="ownerRegisterRequest" />
+		<typeAlias type="petProject.vo.MemberRegisterRequest" alias="memberRegisterRequest" />
 		<typeAlias type="petProject.vo.Kindcode" alias="kindcode" />
 	</typeAliases>
    

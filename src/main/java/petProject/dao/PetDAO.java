@@ -24,7 +24,7 @@ public interface PetDAO {
 
 	int selectCurrval() throws Exception;
 
-	List<Pet> selectPetList(@Param("ownerId") String ownerId) throws Exception;
+	List<Pet> selectPetList(@Param("memberId") String memberId) throws Exception;
 
 	Pet selectPet(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
 }

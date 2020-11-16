@@ -95,7 +95,7 @@
 				</button>
 				<!-- 
 				<a href="${pageContext.request.contextPath}/register/step1"><spring:message
-						code="go.owner.register" /></a>  -->
+						code="go.member.register" /></a>  -->
 				<p class="mt-5 mb-3 text-muted">
 					<spring:message code="company.name" />
 				</p>

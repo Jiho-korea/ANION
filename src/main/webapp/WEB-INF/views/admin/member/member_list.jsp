@@ -126,15 +126,15 @@
 						<td colspan="8" height="1" bgcolor="#EEEEEE"></td>
 					</tr>
 				</c:if>
-				<c:forEach var="owner" items="${ownerList}" varStatus="status">
+				<c:forEach var="member" items="${memberList}" varStatus="status">
 					<tr height="30">
 						<td width="5%" align="center">0</td>
-						<td width="10%" align="center">${owner.memberLevel}</td>
-						<td width="15%" align="center">${owner.ownerName }</td>
-						<td width="15%" align="center">${owner.ownerId }</td>
-						<td width="15%" align="center">${owner.ownerPhoneNumber }</td>
+						<td width="10%" align="center">${member.memberLevel}</td>
+						<td width="15%" align="center">${member.memberName }</td>
+						<td width="15%" align="center">${member.memberId }</td>
+						<td width="15%" align="center">${member.memberPhoneNumber }</td>
 						<td width="15%" align="center">승인</td>
-						<td width="15%" align="center">${owner.ownerRegisterDate }</td>
+						<td width="15%" align="center">${member.memberRegisterDate }</td>
 						<td width="15%" align="center"><button class="btn"
 								style="background-image: url('${pageContext.request.contextPath}/img/admin/btn/btn_modify.gif'); width: 30px; height: 19px;"
 								onclick="_modify('${item.user_row_id }');" title="수정"></button></td>

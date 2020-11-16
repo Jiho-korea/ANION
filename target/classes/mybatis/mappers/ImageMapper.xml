@@ -6,8 +6,8 @@
 <mapper namespace="petProject.dao.ImageDAO">
 	<insert id="insertImage" parameterType="imageUploadRequest">
 		INSERT INTO public.image
-		("PET_REGISTRATION_NUMBER", "IMAGE_PATH", "OWNER_ID")
-		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.ownerId});
+		("PET_REGISTRATION_NUMBER", "IMAGE_PATH", "MEMBER_ID")
+		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.memberId});
 	</insert>
 	
 	<select id="selectImageList" parameterType="int" resultMap="imageResultMap">
@@ -17,7 +17,7 @@
     <resultMap type="image" id="imageResultMap">
 		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
 		<id column="IMAGE_NUMBER" property="imageNumber" />
-		<result column="OWNER_ID" property="ownerId" />
+		<result column="MEMBER_ID" property="memberId" />
 		<result column="IMAGE_PATH" property="imagePath" />
 	</resultMap>
 </mapper>

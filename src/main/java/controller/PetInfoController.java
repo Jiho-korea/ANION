@@ -57,9 +57,9 @@ public class PetInfoController {
 //		}
 //
 //		try {
-//			Owner owner = loginService.selectByIdPassword(loginRequest);
+//			Member member = loginService.selectByIdPassword(loginRequest);
 //
-//			session.setAttribute("login", owner);
+//			session.setAttribute("login", member);
 //
 //			Cookie memoryCookie = new Cookie("memory", loginRequest.getId());
 //			memoryCookie.setPath("/");
@@ -71,7 +71,7 @@ public class PetInfoController {
 //			response.addCookie(memoryCookie);
 //
 //			return "redirect:/home";
-//		} catch (OwnerNotFoundException e) {
+//		} catch (MemberNotFoundException e) {
 //			errors.reject("notfound");
 //			return "login/loginFormPage";
 //		} catch (Exception e) {
