@@ -26,12 +26,12 @@ public class MailAuthConfiguration {
 		properties.put("mail.transport.protocol", "smtp");
 		properties.put("mail.smtp.starttls.required", true);
 		properties.put("mail.debug", true);
-		//
+		
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("smtp.gmail.com");
-		mailSender.setPort(587);
-//		mailSender.setUsername("관리자 gmail");
-//		mailSender.setPassword("관리자 gmail 비밀번호");
+		mailSender.setHost("mail.vv1.co.kr");
+		mailSender.setPort(25);
+		mailSender.setUsername("mailuser");
+		mailSender.setPassword("apdlf_13");
 		mailSender.setDefaultEncoding("utf-8");
 		mailSender.setJavaMailProperties(properties);
 		

@@ -53,6 +53,8 @@
 </head>
 
 <body>
+	
+
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -117,6 +119,7 @@
 								<P data-animation="fadeInUp" data-delay=".4s">
 									<spring:message code="company.introduction" />
 								</P>
+								
 								<!-- Hero-btn -->
 								<div class="hero__btn">
 									<a href="industries.html" class="hero-btn mb-10" data-animation="fadeInUp" data-delay=".8s"><spring:message code="company.link" /></a>
@@ -486,4 +489,5 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
+
 </html>
