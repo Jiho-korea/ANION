@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 사용자로부터 login 입력받는 폼 페이지
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.17
+수  정  내  용 : 디자인 수정
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -62,24 +66,26 @@
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container text-center" id="main">
-		<div class="jumbotron">
+		<div class="jumbotron border">
 			<form:form action="${pageContext.request.contextPath}/login/login"
 				method="post" cssClass="form-signin" modelAttribute="loginRequest">
-				<h1 class="h3 mb-3 font-weight-bold">
+
+				<h1 class="display-4">
 					<spring:message code="go.login" />
 				</h1>
+
 				<form:errors />
 				<br>
 
 				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:input path="memberId" cssClass="single-input" placeholder="ID"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'" />
-					<form:errors path="memberId" />
+					<form:input path="memberId" cssClass="single-input"
+						placeholder="ID" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'ID'" /> <form:errors path="memberId" />
 				</label>
 				<br>
 				<label> <!--<spring:message code="password" />--> <form:password
-						path="memberPassword" cssClass="single-input" placeholder="Password"
-						onfocus="this.placeholder = ''"
+						path="memberPassword" cssClass="single-input"
+						placeholder="Password" onfocus="this.placeholder = ''"
 						onblur="this.placeholder = 'Password'" /> <form:errors
 						path="memberPassword" />
 				</label>

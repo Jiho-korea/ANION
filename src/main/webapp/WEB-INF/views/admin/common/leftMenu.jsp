@@ -62,21 +62,24 @@ function _trace(){
 }
 //-->
 </script>
-	<%--ul id="leftmenu">
+	<ul id="leftmenu">
 		<!--li><a href="../officer/list.do"  onBlur="" onFocus=""onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image1','','../images/menu/sub1_on.gif',1)"><img src="../images/menu/sub1<c:if test="${reURL[2] == 'officer' }">_on</c:if>.gif" name="Image1" width="150" height="40" border="0" alt="권한관리" /></a>
 			<ul>
 				<li><a href="#">- 공통코드</a></li>
 				<li><a href="#">- 품목코드</a></li>
 			</ul>
 		</li-->
-		<li><a href="../member/list.do"><img src="../images/menu/sub2<c:if test="${reURL[2] eq 'member'}">_on</c:if>.gif" name="Image2" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image2','','../images/menu/sub2_on.gif',1);" alt="회원관리" /></a></li>
+		
+		<li><a href="${pageContext.request.contextPath}/admin/member/list"><img src="../images/menu/sub2<c:if test="${reURL[2] eq 'member'}">_on</c:if>.gif" name="Image2" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image2','','../images/menu/sub2_on.gif',1);" alt="회원관리" /></a></li>
+		 <!-- 
 		<li><a href="../bbs/list.do"><img src="../images/menu/sub3<c:if test="${reURL[2] eq 'bbs'}">_on</c:if>.gif" name="Image3" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image3','','../images/menu/sub3_on.gif',1);" alt="게시판관리" /></a></li>
-		<!--li><img src="../images/menu/sub4<c:if test="${reURL[2] eq 'syscode' or reURL[2] eq 'itemcode'}">_on</c:if>.gif" name="Image4" width="150" height="40" border="0" alt="기준정보관리" />
+		-->
+		<li><a href="${pageContext.request.contextPath}/admin/member/list"><img src="../images/menu/sub2<c:if test="${reURL[2] eq 'member'}">_on</c:if>.gif" name="Image2" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image2','','../images/menu/sub2_on.gif',1);" alt="기준정보관리" /></a>
 			<ul>
 				<li><a href="../mstcode/list.do">- 공통코드</a></li>
 				<li><a href="../itemcode/treeList.do">- 품목코드</a></li>
 			</ul>
-		</li-->
+		</li>
 		<!--li><a href="#" onclick="_trace();"><img src="../images/menu/sub5.gif" name="Image5" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image5','','../images/menu/sub5_on.gif',1);" alt="종자관리업무관리" /></a></li-->
 		<!--li><a href="#"><img src="../images/menu/sub6<c:if test="${reURL[2] eq 'state'}">_on</c:if>.gif" name="Image6" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image6','','../images/menu/sub6_on.gif',1);" alt="통계정보관리" /></a>
 			<ul>
@@ -87,17 +90,22 @@ function _trace(){
 			</ul>
 		</li-->
 		<!--li><a href="../crop/list.do"><img src="../images/menu/sub7<c:if test="${reURL[2] eq 'crop'}">_on</c:if>.gif" name="Image7" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image7','','../images/menu/sub7_on.gif',1);" alt="" /></a></li-->
+		<%-- 
 		<li><a href="../farmbase/list.do"><img src="../images/menu/sub8<c:if test="${reURL[2] eq 'farmbase'}">_on</c:if>.gif" name="Image8" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image8','','../images/menu/sub8_on.gif',1);" alt="" /></a></li>
+		--%>
 		<!--li><a href="../mobile/list.do"><img src="../images/menu/sub9<c:if test="${reURL[2] eq 'member'}">_on</c:if>.gif" name="Image9" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image9','','../images/menu/sub9_on.gif',1);" alt="" /></a></li-->
+		<%-- 
 		<li><a href="../product/list.do"><img src="../images/menu/sub10<c:if test="${reURL[2] eq 'product'}">_on</c:if>.gif" name="Image10" width="150" height="40" border="0" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('Image10','','../images/menu/sub10_on.gif',1);" alt="" /></a></li>
-	</ul--%>
+		--%>
+	</ul>
+	<%--
 	<div id="leftmenu">
 		<a href="${pageContext.request.contextPath}/admin/member/list" class="<c:if test="${reURL[2] eq 'member'}">on</c:if>">회원관리</a>
-		<%--
+		
 		<a href="${pageContext.request.contextPath}/smc/sysadm/bbs/list.do" class="<c:if test="${reURL[2] eq 'bbs'}">on</c:if>">게시판관리</a>
 		<a href="${pageContext.request.contextPath}/smc/sysadm/farmbase/list.do" class="<c:if test="${reURL[2] eq 'farmbase'}">on</c:if>">생물자원기초정보관리</a>
 		<a href="${pageContext.request.contextPath}/smc/sysadm/product/list.do" class="<c:if test="${reURL[2] eq 'product'}">on</c:if>">상품소개관리</a>
 		<a href="${pageContext.request.contextPath}/smc/sysadm/certify/companyList.do" class="<c:if test="${reURL[2] eq 'certify'}">on</c:if>">인증업체관리</a>
 		<a href="${pageContext.request.contextPath}/smc/sysadm/mobile/menuList.do" class="<c:if test="${reURL[2] eq 'mobile'}">on</c:if>">모바일</a>
-	 --%>
 	</div>
+	 --%>

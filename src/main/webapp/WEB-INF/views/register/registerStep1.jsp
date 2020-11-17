@@ -14,6 +14,10 @@
 수    정    일 : 2020.11.11
 수  정  내  용 : 견종 null값 data 삽입되는 오류 수정
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.17
+수  정  내  용 : 디자인 수정
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -69,9 +73,10 @@
 	</c:import>
 	<div class="container text-center" id="main">
 		<div class="jumbotron">
-			<h4 class="mb-4">
+			<h1 class="display-4">
 				<spring:message code="register.pet" />
-			</h4>
+			</h1>
+			<br>
 			<form:form action="${pageContext.request.contextPath}/register/step2"
 				method="post" cssClass="form-signin"
 				modelAttribute="petRegisterRequest" onsubmit="return clickEvent()"
@@ -128,6 +133,7 @@
 					</div>
 
 				</div>
+				<br class="mb-4" />
 				<div class="row">
 					<div class="col-md-6 mb-1">
 						<label> <!--<spring:message code="pet.mothername" />--> <form:input
@@ -146,13 +152,14 @@
 						</label>
 					</div>
 				</div>
-
-				<label><spring:message code="pet.sex" /> <br class="mb-4" />
+				<br class="mb-4" />
+				<label><spring:message code="pet.sex" /> : 
 					<!-- <input type="text" name="petSex" value="1">--> <form:radiobutton
 						path="petSex" value="수컷" /> <spring:message code="pet.male" />&nbsp;&nbsp;&nbsp;&nbsp;<form:radiobutton
 						path="petSex" value="암컷" /> <spring:message code="pet.female" />
 					<br class="mb-4" /> <form:errors path="petSex" /></label>
 
+				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
 						path="petMicrochip" cssClass="single-input" placeholder="마이크로칩 번호"
@@ -162,7 +169,7 @@
 				</label>
 				<br class="mb-4" />
 				<br class="mb-4" />
-				<label> <spring:message code="pet.birthday" /> <input
+				<label> <spring:message code="pet.birthday" /> : <input
 					type="date" name="petBirthday" /><br class="mb-4" /> <form:errors
 						path="petBirthday" />
 				</label>
