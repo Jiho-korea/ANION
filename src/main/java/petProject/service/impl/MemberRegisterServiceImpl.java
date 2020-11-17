@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.MemberDAO;
+import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MemberRegisterService;
 import petProject.vo.MemberRegisterRequest;
@@ -42,6 +43,9 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	public int selectById(String memberId) throws Exception {
 		int cnt = memberDAO.selectById(memberId);
+		if(cnt != 0) {
+			throw new MemberDuplicateException("duplicate memberId");
+		}
 		return cnt;
 	}
 

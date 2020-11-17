@@ -74,12 +74,15 @@
 				<br>
 
 				<label> <form:input path="memberId" cssClass="single-input"
-						placeholder="abc@email.com" onfocus="this.placeholder = 'abc@email.com'"
+						placeholder="abc@email.com"
+						onfocus="this.placeholder = 'abc@email.com'"
 						onblur="this.placeholder = 'abc@email.com'" />
 				</label>
-
-				<br>
+				<label> <form:errors path="memberId" />
+				</label>
 				
+				<br>
+
 				<label> <form:password path="memberPassword"
 						cssClass="single-input" placeholder="비밀번호"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" />
@@ -87,7 +90,7 @@
 				</label>
 				<label> <form:errors path="memberPassword" />
 				</label>
-				
+
 				<br>
 				<label> <form:password path="checkPassword"
 						cssClass="single-input" placeholder="비밀번호 확인"
@@ -97,9 +100,9 @@
 				</label>
 
 				<br>
-				<label> <form:input path="memberName" cssClass="single-input"
-						placeholder="이름" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '이름'" />
+				<label> <form:input path="memberName"
+						cssClass="single-input" placeholder="이름"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" />
 				</label>
 				<label> <form:errors path="memberName" />
 				</label>
@@ -136,27 +139,26 @@
 	<!-- JS here -->
 
 	<script>
-
-/* 		function validate() {
-			var userPassword = $("#memberPassword").val();
-			var checkPassword = $("#checkPassword").val();
-		      if (userPassword != checkPassword) {
-		         alert("비밀번호를 다시 확인해주세요.");
-		         return false;
-		      } else if ($("#memberId").val() == "") {
-		         alert("아이디를 입력해주세요.");
-		         return false;
-		      } else if ($("#memberPassword").val() == "") {
-		         alert("비밃런호를 입력해주세요.");
-		         return false;
-		      } else if ($("#memberName").val() == "") {
-		         alert("이름을 입력해주세요.");
-		         return false;
-		      } else if ($("#memberPhoneNumber").val() == "") {
-		         alert("전화번호를 입력해주세요.");
-		         return false;
-		      }
-		} */
+		/* 		function validate() {
+		 var userPassword = $("#memberPassword").val();
+		 var checkPassword = $("#checkPassword").val();
+		 if (userPassword != checkPassword) {
+		 alert("비밀번호를 다시 확인해주세요.");
+		 return false;
+		 } else if ($("#memberId").val() == "") {
+		 alert("아이디를 입력해주세요.");
+		 return false;
+		 } else if ($("#memberPassword").val() == "") {
+		 alert("비밃런호를 입력해주세요.");
+		 return false;
+		 } else if ($("#memberName").val() == "") {
+		 alert("이름을 입력해주세요.");
+		 return false;
+		 } else if ($("#memberPhoneNumber").val() == "") {
+		 alert("전화번호를 입력해주세요.");
+		 return false;
+		 }
+		 } */
 	</script>
 	<script>
 		function inputPhoneNumber(obj) {

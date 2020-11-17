@@ -30,6 +30,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MemberRegisterService;
 import petProject.vo.MemberRegisterRequest;
@@ -69,19 +71,26 @@ public class MemberRegisterController {
 		}
 
 		try {
+			memberRegisterService.selectById(memberRegisterRequest.getMemberId());
+			
 			memberRegisterService.insertMember(memberRegisterRequest);
 			
 			//이메일 발송
 			mailSendService.sendAuthMail(memberRegisterRequest.getMemberId(), request);
+			return "register/signupSucess";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
 			errors.reject("failed.signup");
+			return "register/signupForm";
+		} catch (MemberDuplicateException e) {
+			e.printStackTrace();
+			errors.rejectValue("memberId", "duplicate.memberId");
 			return "register/signupForm";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "register/signupForm";
 		}
-		return "register/signupSucess";
+		
 	}
 
 }
