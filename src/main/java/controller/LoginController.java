@@ -6,10 +6,6 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 로그인 Controller 작성
 ========================================================================
-수    정    자 : 송찬영, 임원석
-수    정    일 : 2020.11.17
-수  정  내  용 : 이메일 검증 예외처리 추가
-========================================================================
 =============================== 함  수  설  명  ===============================
 loginForm : 아이디 기억하기 구현하는 함수
 login : 로그인 할 때 세션 생성후 로그인
@@ -25,7 +21,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +28,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
 import petProject.vo.LoginRequest;
-import petProject.vo.MemberRegisterRequest;
 
 @Controller
 @RequestMapping("/login/login")
@@ -55,7 +48,7 @@ public class LoginController {
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
-
+		// 荑좏궎瑜� �씠�슜�븳 �븘�씠�뵒 湲곗뼲�븯湲�
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
@@ -76,7 +69,7 @@ public class LoginController {
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
-			
+
 			session.setAttribute("login", authInfo);
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
@@ -99,9 +92,6 @@ public class LoginController {
 			// return "redirect:/home";
 		} catch (MemberNotFoundException e) {
 			errors.reject("notfound");
-			return "login/loginFormPage";
-		} catch (MemberAuthStatusException e) {
-			errors.rejectValue("memberId" ,"notvalid");
 			return "login/loginFormPage";
 		} catch (Exception e) {
 			e.printStackTrace();
