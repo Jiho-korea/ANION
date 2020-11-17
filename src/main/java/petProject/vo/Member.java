@@ -26,9 +26,10 @@ public class Member implements Serializable {
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
 	private int memberLevel;
+	private int memberAuthStatus;
 
 	public Member(String memberId, String memberPassword, String memberName, String memberPhoneNumber,
-			Date memberRegisterDate, int memberLevel) {
+			Date memberRegisterDate, int memberLevel, int memberAuthStatus) {
 		super();
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
@@ -36,6 +37,7 @@ public class Member implements Serializable {
 		this.memberPhoneNumber = memberPhoneNumber;
 		this.memberRegisterDate = memberRegisterDate;
 		this.memberLevel = memberLevel;
+		this.memberAuthStatus = memberAuthStatus;
 	}
 
 	public Member() {
@@ -90,6 +92,14 @@ public class Member implements Serializable {
 		this.memberLevel = memberLevel;
 	}
 
+	public int getMemberAuthStatus() {
+		return memberAuthStatus;
+	}
+
+	public void setMemberAuthStatus(int memberAuthStatus) {
+		this.memberAuthStatus = memberAuthStatus;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

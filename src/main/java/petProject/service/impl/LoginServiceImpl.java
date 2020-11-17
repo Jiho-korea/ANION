@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
@@ -35,8 +36,11 @@ public class LoginServiceImpl implements LoginService {
 		if (!member.matchPassword(memberPassword)) {
 			throw new MemberNotFoundException("not found");
 		}
+		if (member.getMemberAuthStatus() != 1) {
+			throw new MemberAuthStatusException("not valid");
+		}
 
 		return new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberPhoneNumber(),
-				member.getMemberRegisterDate(), member.getMemberLevel());
+				member.getMemberRegisterDate(), member.getMemberLevel(), member.getMemberAuthStatus());
 	}
 }

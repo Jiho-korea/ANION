@@ -22,7 +22,6 @@ public class MemberRegisterRequest {
 	private String memberName;
 	@NotBlank
 	private String memberPhoneNumber;
-	private String authStatus;
 
 	public MemberRegisterRequest(String memberId, String memberPassword, String checkPassword, String memberName,
 			String memberPhoneNumber) {
@@ -76,13 +75,5 @@ public class MemberRegisterRequest {
 
 	public void setMemberPhoneNumber(String memberPhoneNumber) {
 		this.memberPhoneNumber = memberPhoneNumber;
-	}
-
-	public String getAuthStatus() {
-		return authStatus;
-	}
-
-	public void setAuthStatus(String authStatus) {
-		this.authStatus = authStatus;
 	}
 }
