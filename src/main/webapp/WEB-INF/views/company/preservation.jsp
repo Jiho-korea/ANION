@@ -73,7 +73,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html"><spring:message
-												code="company.introduction.title" /></a></li>
+												code="company.partner" /></a></li>
 									<li class="breadcrumb-item"><a href="#"><spring:message
 												code="freeze.preservation" /></a></li>
 								</ol>
