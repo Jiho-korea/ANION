@@ -4,6 +4,10 @@
 작    성    일 : 2020.11.09
 작  정  내  용 : 회원가입 폼 jsp
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2020.11.17
+수  정  내  용 : 아이디 중복체크 -> 이메일 인증 방식의 폼 jsp
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -69,41 +73,13 @@
 				</h1>
 				<br>
 
-				<label> <c:if test="${not empty duplicate}">
-						<form:input path="memberId" cssClass="single-input"
-							placeholder="아이디" onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '아이디'" readonly="true" />
-					</c:if> <c:if test="${empty duplicate}">
-						<form:input path="memberId" cssClass="single-input"
-							placeholder="아이디" onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '아이디'" />
-
-					</c:if>
-				</label>
-				
-				<label> <c:if test="${not empty duplicate}">
-						<button type="submit"
-							formaction="${pageContext.request.contextPath}/signup/check/duplicate"
-							formmethod="post" disabled="disabled" class="btn btn-secondary">
-							<spring:message code="signup.check.duplicate" />
-						</button>
-						<form:errors />
-						<form:errors path="memberId" />
-					</c:if> <c:if test="${empty duplicate}">
-						<button type="submit"
-							formaction="${pageContext.request.contextPath}/signup/check/duplicate"
-							formmethod="post" class="btn btn-secondary">
-							<spring:message code="signup.check.duplicate" />
-						</button>
-						<form:errors />
-						<form:errors path="memberId" />
-
-					</c:if>
-
+				<label> <form:input path="memberId" cssClass="single-input"
+						placeholder="abc@email.com" onfocus="this.placeholder = 'abc@email.com'"
+						onblur="this.placeholder = 'abc@email.com'" />
 				</label>
 
 				<br>
-
+				
 				<label> <form:password path="memberPassword"
 						cssClass="single-input" placeholder="비밀번호"
 						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" />
@@ -112,17 +88,14 @@
 				<label> <form:errors path="memberPassword" />
 				</label>
 				
-				
 				<br>
 				<label> <form:password path="checkPassword"
 						cssClass="single-input" placeholder="비밀번호 확인"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호 확인'" />
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '비밀번호 확인'" />
 
 				</label>
-				
-				
-				
-				
+
 				<br>
 				<label> <form:input path="memberName" cssClass="single-input"
 						placeholder="이름" onfocus="this.placeholder = ''"
@@ -141,12 +114,7 @@
 				<label> <form:errors path="memberPhoneNumber" />
 				</label>
 				<br>
-				<br>
 
-
-				<c:if test="${not empty duplicate}">
-					<input type="hidden" name="dupCheck" value="true">
-				</c:if>
 				<button class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.register" />
 				</button>
@@ -168,6 +136,7 @@
 	<!-- JS here -->
 
 	<script>
+
 /* 		function validate() {
 			var userPassword = $("#memberPassword").val();
 			var checkPassword = $("#checkPassword").val();
@@ -188,14 +157,6 @@
 		         return false;
 		      }
 		} */
-	</script>
-	<script>
-/* 	function openIdCheck(){
-        
-        window.name = "parentForm";
-        window.open("${pageContext.request.contextPath}/register/IdCheckForm.jsp",
-                "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
-    } */
 	</script>
 	<script>
 		function inputPhoneNumber(obj) {

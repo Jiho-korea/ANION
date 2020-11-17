@@ -124,8 +124,11 @@ public class PetRegisterController {
 			 */
 //			String absPath = rootPath + "\\" + savedName;
 //			System.out.println("abs" + absPath);
+			
 			petRegisterService.insertPet(petRegisterRequest);
+			
 			int currval = getCurrvalService.selectCurrval();
+			
 			// ImageUploadRequest imageUploadRequest = new
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);

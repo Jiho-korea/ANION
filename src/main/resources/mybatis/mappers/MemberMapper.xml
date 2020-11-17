@@ -22,6 +22,12 @@
     	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" from "public"."member" 
     </select>
     
+    <update id="updateAuthStatus" parameterType="String">
+    	update "member"
+    	set "AUTH_STATUS" = 1
+    	where "MEMBER_ID" = #{memberId}
+    </update>
+    
      <resultMap type="member" id="memberResultMap">
 		<id column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />

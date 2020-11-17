@@ -18,7 +18,6 @@ package petProject.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import petProject.dao.MemberDAO;
 import petProject.exception.MemberInsertException;
 import petProject.service.MemberRegisterService;
@@ -43,6 +42,15 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	public int selectById(String memberId) throws Exception {
 		int cnt = memberDAO.selectById(memberId);
+		return cnt;
+	}
+
+	@Override
+	public int updateAuthStatus(String memberId) throws Exception {
+		int cnt = memberDAO.updateAuthStatus(memberId);
+		if(cnt == 0) {
+			throw new MemberInsertException("Insert failed");
+		}
 		return cnt;
 	}
 }
