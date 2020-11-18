@@ -18,6 +18,10 @@
 수    정    일 : 2020.11.17
 수  정  내  용 : 디자인 수정
 ========================================================================
+수    정    자 : 정세진, 송찬영
+수    정    일 : 2020.11.19
+수  정  내  용 : 자바스크립트 유효성 검증 추가
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -153,9 +157,9 @@
 					</div>
 				</div>
 				<br class="mb-4" />
-				<label><spring:message code="pet.sex" /> : 
-					<!-- <input type="text" name="petSex" value="1">--> <form:radiobutton
-						path="petSex" value="수컷" /> <spring:message code="pet.male" />&nbsp;&nbsp;&nbsp;&nbsp;<form:radiobutton
+				<label><spring:message code="pet.sex" /> : <!-- <input type="text" name="petSex" value="1">-->
+					<form:radiobutton path="petSex" value="수컷" /> <spring:message
+						code="pet.male" />&nbsp;&nbsp;&nbsp;&nbsp;<form:radiobutton
 						path="petSex" value="암컷" /> <spring:message code="pet.female" />
 					<br class="mb-4" /> <form:errors path="petSex" /></label>
 
@@ -170,7 +174,7 @@
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <spring:message code="pet.birthday" /> : <input
-					type="date" name="petBirthday" /><br class="mb-4" /> <form:errors
+					type="date" name="petBirthday" id="petBirthday" /><br class="mb-4" /> <form:errors
 						path="petBirthday" />
 				</label>
 				<br class="mb-4" />
@@ -246,8 +250,32 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	
+	 $("#btn_register").click(function() {
+		if ($("#petName").val() == "") {
+			alert("견명을 입력해주세요.");
+			return false;
+		} else if ($("[name=petKindcode] > option:selected").val() == '') {
+			alert("견종을 선택해주세요.");
+			return false;
+		} else if ($("#petMothername").val() == "") {
+			alert("모견명을 입력해주세요.");
+			return false;
+		} else if ($("#petFathername").val() == "") {
+			alert("부견명 입력해주세요.");
+			return false;
+		} else if ($(':radio[name="petSex"]:checked').length < 1) {
+			alert("성별을 선택해주세요.");
+			return false;
+		} else if ($("#petMicrochip").val() == "") {
+			alert("마이크로칩 번호를 입력해주세요.");
+			return false;
+		} else if ($('#petBirthday').val() == "") {
+			alert("생년월일을 입력해주세요.");
+			return false;
+		}
+	});
 </script>
 </html>
