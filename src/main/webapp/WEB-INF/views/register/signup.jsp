@@ -2,7 +2,11 @@
 ========================================================================
 작    성    자 : 정세진, 임원석
 작    성    일 : 2020.11.09
-작  정  내  용 : 회원가입 폼 jsp
+작  성  내  용 : 회원가입 폼 jsp
+========================================================================
+수    정    자 : 정세진, 송찬영
+수    정    일 : 2020.11.19
+수  정  내  용 : 자바스크립트 유효성 검증 추가
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -147,7 +151,7 @@
 				<c:if test="${not empty duplicate}">
 					<input type="hidden" name="dupCheck" value="true">
 				</c:if>
-				<button class="btn btn-info pull-right" type="submit">
+				<button id="btn_register" class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.register" />
 				</button>
 				<br>
@@ -278,6 +282,25 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	
+ $("#btn_register").click(function() {
+	if ($("#memberId").val() == "") {
+		alert("이메일을 입력해주세요.");
+		return false;
+	} else if ($("#memberPassword").val() == "") {
+		alert("비밀번호을 입력해주세요.");
+		return false;
+	} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
+		alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+		return false;
+	} else if ($("#memberName").val() == "") {
+		alert("이름을 입력해주세요.");
+		return false;
+	} else if ($("#memberPhoneNumber").val() == "") {
+		alert("전화번호를 입력해주세요.");
+		return false;
+	}
+});
+
 </script>
+
 </html>
