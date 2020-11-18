@@ -1,0 +1,115 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+<head>
+<title>관리자모드</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/left.css" />
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+<!--
+//-->
+</script>
+</head>
+<body>
+<!-- wrapper 시작 -->
+<div id="wrapper">
+	<!-- header 시작 -->
+	<div id="header">
+		<div class="logo"><a href="#"><img src="images/common/logo.png" border="0" /></a></div>
+		<div class="top_menu">
+			<p align="right" style="padding-top:8px;padding-bottom:18px;">
+				<a href="#"><strong>관리자홈</strong></a>&nbsp;&nbsp;<a href="#"><img src="images/login/logout.gif" alt="로그아웃" width="51" height="18" border="0" align="absmiddle" /></a></span>
+			</p>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="menu">
+				<tr>
+					<th><a href="sysadm/delivery/list.do">코드관리</a></th>
+					<th><a href="sysadm/member/list.do">회원관리</a></th>
+					<th><a href="sysadm/product/list.do">반려견관리</a></th>
+					<th><a href="sysadm/board/list.do">게시판관리</a></th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- header 끝 -->
+	<!-- leftcolumn 시작 -->
+	<div id="leftcolumn">
+		<div id="menu">
+			<ul id="sidemenu">
+				<li><a href="#" class="more">코드관리</a>
+					<ul>
+						<li><a href="sysadm/syscfg/shopModifyFrm.do">견종관리</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- leftcolumn 끝 -->
+	<!-- rightcolumn 시작 -->
+	<div id="rightcolumn">
+		<div class="title_nav">
+			<h1>견종관리</h1>
+			<p class="location">홈 &gt; 코드관리 &gt; 견종관리</p>
+		</div>
+		<div class="boardTable">
+			<div id="serach_area" style="padding-bottom:10px;">
+				<form name="delivery" id="myForm" method="get">
+				<input type="hidden" name="find_key" id="find_key" value="delivery_company_name" />
+				검색어&nbsp;<input type="text" name="find_keyword" id="find_keyword" class="" />
+				<input type="submit" name="btn_search" id="btn_search" class="btn_search" value="조회" />
+				</form>
+			</div>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th width="5%">순번</th>
+					<th width="8%">코드</th>
+					<th width="8%">견종명</th>
+					<th width="6%">사용여부</th>
+					<th width="6%"><input type="button" name="btn_plus" id="btn_plus" class="btn_plus" value="신규등록" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><div align="center">4</div></td>
+					<td><div align="center">A001</div></td>
+					<td><div align="left">동경이</div></td>
+					<td><div align="center">Y</div></td>
+					<td><div align="center"><input type="button" name="btn_modify" id="btn_modify" class="btn_modify {delivery_no: 4}" value="수정" /><input type="button" name="btn_delete" id="btn_delete" class="btn_delete {delivery_no: 4}" value="삭제" /></div></td>
+				</tr>
+				<tr>
+					<td><div align="center">3</div></td>
+					<td><div align="center">A002</div></td>
+					<td><div align="left">풍산개</div></td>
+					<td><div align="center">Y</div></td>
+					<td><div align="center"><input type="button" name="btn_modify" id="btn_modify" class="btn_modify {delivery_no: 4}" value="수정" /><input type="button" name="btn_delete" id="btn_delete" class="btn_delete {delivery_no: 4}" value="삭제" /></div></td>
+				</tr>
+				<tr>
+					<td><div align="center">2</div></td>
+					<td><div align="center">A003</div></td>
+					<td><div align="left">삽살개</div></td>
+					<td><div align="center">Y</div></td>
+					<td><div align="center"><input type="button" name="btn_modify" id="btn_modify" class="btn_modify {delivery_no: 4}" value="수정" /><input type="button" name="btn_delete" id="btn_delete" class="btn_delete {delivery_no: 4}" value="삭제" /></div></td>
+				</tr>
+				<tr>
+					<td><div align="center">1</div></td>
+					<td><div align="center">A004</div></td>
+					<td><div align="left">진돗개</div></td>
+					<td><div align="center">Y</div></td>
+					<td><div align="center"><input type="button" name="btn_modify" id="btn_modify" class="btn_modify {delivery_no: 4}" value="수정" /><input type="button" name="btn_delete" id="btn_delete" class="btn_delete {delivery_no: 4}" value="삭제" /></div></td>
+				</tr>
+			</tbody>
+			</table>
+			<div id="paging" class="paging" style="text-align:center; padding-bottom:20px;"><img src="images/common/btn_l.gif" alt="왼쪽이동" border="0" /><strong>1</strong>&nbsp;<img src="images/common/btn_r.gif" alt="오른쪽이동" border="0" /></div></div>
+	</div>
+	<!-- rightcolumn 끝 -->
+	<!-- footer 시작 -->
+	<div id="footer">
+		<p align="center" class="pdt20">Copyright ⓒ (주)애니온. All right reserved </p>
+	</div>
+	<!-- footer 끝-->
+</div>
+<!-- wapper 끝 -->
+</body>
+</html>
