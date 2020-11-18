@@ -1,20 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- 
-<c:if test="${sessionScope.SESS_SUBJECTCD != 140 }">
-<script type="text/javascript">
-<!--
-alert("다시로그인 하시기바랍니다.");
-self.location.href="${pageContext.request.contextPath }/smc/sysadm";
-//-->
-</script>
-</c:if>
---%>
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="75%">&nbsp;</td>
-                  <td width="20%"> <b>${sessionScope.login.memberName}</b> 님 반갑습니다.</td>
-                  <td width="5%"><a href="${pageContext.request.contextPath}/logout"><img src="${pageContext.request.contextPath}/img/admin/common/logout.gif" alt="로그아웃" width="51" height="18" border="0" /></a></td>
-                </tr>
-              </table>
+
+<!-- header 시작 -->
+<div id="header">
+	<div class="logo">
+		<a href="${pageContext.request.contextPath}/home" target="_blank"><img src="${pageContext.request.contextPath}/img/admin/common/logo.png" border="0" /></a>
+	</div>
+	<div class="top_menu">
+		<p align="right" style="padding-top: 8px; padding-bottom: 18px;">
+			<a href="#"><strong>관리자홈</strong></a>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/logout"><img
+				src="${pageContext.request.contextPath}/img/admin/login/logout.gif" alt="로그아웃" width="51" height="18"
+				border="0" align="absmiddle" /></a></span>
+		</p>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"
+			class="menu">
+			<tr>
+				<th><a href="#">코드관리</a></th>
+				<th><a href="${pageContext.request.contextPath}/admin/member/list">회원관리</a></th>
+				<th><a href="#">반려견관리</a></th>
+				<th><a href="#">게시판관리</a></th>
+			</tr>
+		</table>
+	</div>
+</div>
+<!-- header 끝 -->
