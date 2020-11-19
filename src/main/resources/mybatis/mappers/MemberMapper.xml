@@ -5,7 +5,7 @@
 
 <mapper namespace="petProject.dao.MemberDAO">
     <select id="selectMemberById" parameterType="String" resultType="member">
-    	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" 
+    	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL", "MEMBER_AUTH_STATUS"
     	FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
@@ -21,6 +21,12 @@
     <select id="selectMemberList" resultMap="memberResultMap">
     	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" from "public"."member" 
     </select>
+    
+    <update id="updateAuthStatus" parameterType="String">
+    	update "member"
+    	set "MEMBER_AUTH_STATUS" = 1
+    	where "MEMBER_ID" = #{memberId}
+    </update>
     
      <resultMap type="member" id="memberResultMap">
 		<id column="MEMBER_ID" property="memberId" />

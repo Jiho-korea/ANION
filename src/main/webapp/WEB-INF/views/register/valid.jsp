@@ -1,34 +1,21 @@
 <!-- 
 ========================================================================
-파    일    명 : loginFormPage.jsp
+파    일    명 : valid.jsp
 ========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.xx.xx
-작  성  내  용 : 사용자로부터 login 입력받는 폼 페이지
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.11.17
-수  정  내  용 : 디자인 수정
-========================================================================
-수    정    자 : 정세진, 송찬영
-수    정    일 : 2020.11.19
-수  정  내  용 : 자바스크립트 유효성 검증 추가
-========================================================================
-수    정    자 : 정세진
-수    정    일 : 2020.11.20
-수  정  내  용 : 애완동물 생일 유효성 추가
+작    성    자 : 송찬영
+작    성    일 : 2020.11.17
+작  성  내  용 : 회원가입후 안내 페이지
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
 <!-- CSS here -->
 <link rel="stylesheet"
@@ -65,57 +52,39 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="js/bootstrap.js"></script>
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
+	charset="utf-8"></script>
+<script defer
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+	charset="utf-8"></script>
 <title><spring:message code="home.title" /></title>
 </head>
-<body>
+<body class="text-center">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container text-center" id="main">
-		<div class="jumbotron border">
-			<form:form action="${pageContext.request.contextPath}/login/login"
-				method="post" cssClass="form-signin" modelAttribute="loginRequest">
-
-				<h1 class="display-4">
-					<spring:message code="go.login" />
-				</h1>
-
-				<form:errors />
-				<br>
-
-				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:input path="memberId" cssClass="single-input"
-						placeholder="ID" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'ID'" /> <form:errors path="memberId" />
-				</label>
-				<br>
-				<label> <!--<spring:message code="password" />--> <form:password
-						path="memberPassword" cssClass="single-input"
-						placeholder="Password" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Password'" /> <form:errors
-						path="memberPassword" />
-				</label>
-				<br>
-				<br>
-				<div class="checkbox mb-3">
-					<form:checkbox path="memory" />
-					<spring:message code="login.memory" />
-				</div>
-
-				<button id="btn_login" class="btn btn-info pull-right" type="submit">
-					<spring:message code="go.login" />
-				</button>
-				<!-- 
-				<a href="${pageContext.request.contextPath}/register/step1"><spring:message
-						code="go.member.register" /></a>  -->
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
-				</p>
-			</form:form>
+	<div class="container" id="main">
+		<div class="jumbotron">
+			<h4 class="mb-4">
+				<spring:message code="valid.email" />
+			</h4>
+			
+			<br>
+			<br>
+			
+			<p>
+				<spring:message code="valid.email.confirm">
+					<spring:argument value="${memberRegisterRequest.memberId}" />
+				</spring:message>
+			</p>
+		
+			<br class="mb-4" />
+			<hr class="mb-4" />
+			<div class="row">
+			</div>
 
 		</div>
+
 	</div>
 
 	<c:import url="../included/bottom.jsp">
@@ -126,8 +95,6 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
-
-
 	<!-- JS here -->
 
 	<script
@@ -182,17 +149,4 @@
 	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
-<script defer type="text/javascript" charset="utf-8">
- $("#btn_login").click(function() {
-	if ($("#memberId").val() == "") {
-		alert("이메일을 입력해주세요.");
-		return false;
-	} else if ($("#memberPassword").val() == "") {
-		alert("비밀번호을 입력해주세요.");
-		return false;
-	}
-});
-
-</script>
-
 </html>
