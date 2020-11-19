@@ -174,7 +174,7 @@
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <spring:message code="pet.birthday" /> : <input
-					type="date" name="petBirthday" id="petBirthday" max="${param.today}"/><br class="mb-4" /> <form:errors
+					type="date" name="petBirthday" id="petBirthday" max="${today}"/><br class="mb-4" /> <form:errors
 						path="petBirthday" />
 				</label>
 				<br class="mb-4" />
