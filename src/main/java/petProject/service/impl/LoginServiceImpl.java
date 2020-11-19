@@ -37,7 +37,6 @@ public class LoginServiceImpl implements LoginService {
 			throw new MemberNotFoundException("not found");
 		}
 		if (!passwordEncoder.matches(memberPassword, member.getMemberPassword())) {
-
 			throw new MemberNotFoundException("not found");
 		}
 

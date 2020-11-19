@@ -48,7 +48,6 @@ public class LoginController {
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
-		// 荑좏궎瑜� �씠�슜�븳 �븘�씠�뵒 湲곗뼲�븯湲�
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
