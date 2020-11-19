@@ -16,6 +16,8 @@ uploadFile : 파일 업로드 방식 설정하는 함수
 package controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,6 +70,12 @@ public class PetRegisterController {
 	@RequestMapping("/step1")
 	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model) {
 		try {
+			String pattern = "yyyy-MM-dd";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+			String today = simpleDateFormat.format(new Date());
+			model.addAttribute("today", today);
+			
 			kindcodeList = kindcodeService.selectPetKindList();
 			model.addAttribute("kindcodeList", kindcodeList);
 			// System.out.print(kindcodeList.get(0).getPetKind());
