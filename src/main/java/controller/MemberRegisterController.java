@@ -15,7 +15,6 @@
 수  정  내  용 : 아이디 중복확인 로직 삭제(이메일 인증)
 ========================================================================
 */
-
 package controller;
 
 import java.util.regex.Pattern;
@@ -40,7 +39,7 @@ import petProject.service.MailSendService;
 @Controller
 @RequestMapping("/signup")
 public class MemberRegisterController {
-	
+
 	@Resource(name = "memberRegisterService")
 	MemberRegisterService memberRegisterService;
 	@Resource(name = "mailSendService")
@@ -61,10 +60,14 @@ public class MemberRegisterController {
 	}
 
 	@PostMapping("/step2")
-	public String signStep2(@Valid MemberRegisterRequest memberRegisterRequest, Errors errors, Model model, HttpServletRequest request) throws Exception {
+	public String signStep2(@Valid MemberRegisterRequest memberRegisterRequest, Errors errors, Model model,
+			HttpServletRequest request) throws Exception {
 		if (memberRegisterRequest.getMemberPhoneNumber().length() < 13
 				&& !Pattern.matches("^[0-9]+$", memberRegisterRequest.getMemberPhoneNumber())) {
 			errors.reject("no.number.check.memberRegisterRequest");
+		}
+		if (!memberRegisterRequest.isPasswordEqualToCheckPassword()) {
+			errors.rejectValue("checkPassword", "notmatch.password");
 		}
 		if (errors.hasErrors()) {
 			return "register/signupForm";
@@ -72,11 +75,11 @@ public class MemberRegisterController {
 
 		try {
 			memberRegisterService.selectById(memberRegisterRequest.getMemberId());
-			
+
 			memberRegisterService.insertMember(memberRegisterRequest);
-			
-			//이메일 발송
-			mailSendService.sendAuthMail(memberRegisterRequest.getMemberId(), request);
+
+			mailSendService.sendMail("mailuser@vv1.co.kr", "애니온", memberRegisterRequest.getMemberId(),
+					memberRegisterRequest.getMemberName(), request, true);
 			return "register/signupSucess";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
@@ -90,7 +93,7 @@ public class MemberRegisterController {
 			e.printStackTrace();
 			return "register/signupForm";
 		}
-		
+
 	}
 
 }

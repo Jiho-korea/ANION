@@ -25,15 +25,12 @@ import interceptor.LoginCheckInterceptor;
 @Configuration
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
-	// �씤�꽣�뀎�꽣
-
-	// 濡쒓렇�씤 �씤�꽣�뀎�꽣
+	
 	@Bean
 	public LoginCheckInterceptor loginCheckInterceptor() {
 		return new LoginCheckInterceptor();
 	}
 
-	//
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

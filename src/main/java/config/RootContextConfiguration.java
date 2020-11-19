@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Import;
  * 루트 컨텍스트 설정파일
  */
 @Configuration
-@Import({ ContextDataSource.class, ContextSqlMapper.class, ImageUploadConfig.class, MailAuthConfiguration.class})
+@Import({ ContextDataSource.class, ContextSqlMapper.class, ImageUploadConfig.class, PasswordSecurityConfig.class, MailSmtpAuthConfig.class})
 @ComponentScan(basePackages = { "petProject.service.impl" })
 public class RootContextConfiguration {
 	

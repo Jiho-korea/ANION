@@ -28,6 +28,7 @@ public class Member implements Serializable {
 	private int memberLevel;
 	private int memberAuthStatus;
 
+
 	public Member(String memberId, String memberPassword, String memberName, String memberPhoneNumber,
 			Date memberRegisterDate, int memberLevel, int memberAuthStatus) {
 		super();

@@ -96,7 +96,8 @@
 						cssClass="single-input" placeholder="비밀번호 확인"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '비밀번호 확인'" />
-
+				</label>
+				<label> <form:errors path="checkPassword" />
 				</label>
 
 				<br>

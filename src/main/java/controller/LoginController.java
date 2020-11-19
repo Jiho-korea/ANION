@@ -97,6 +97,7 @@ public class LoginController {
 			// return "redirect:/home";
 		} catch (MemberNotFoundException e) {
 			errors.reject("notfound");
+			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
 			errors.rejectValue("memberId" ,"notvalid");

@@ -76,4 +76,8 @@ public class MemberRegisterRequest {
 	public void setMemberPhoneNumber(String memberPhoneNumber) {
 		this.memberPhoneNumber = memberPhoneNumber;
 	}
+	
+	public boolean isPasswordEqualToCheckPassword() {
+		return memberPassword.equals(checkPassword);
+	}
 }

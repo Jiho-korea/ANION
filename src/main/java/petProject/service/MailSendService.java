@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface MailSendService {
 
-	void sendAuthMail(@Param("memberRegisterRequest") String memberId, HttpServletRequest request) throws Exception;
-
+	boolean sendMail(String from_addr, String from_name, String memberId, String to_name, HttpServletRequest request,
+			boolean isHtml);
 }
