@@ -10,6 +10,10 @@
 수    정    일 : 2020.11.09
 수  정  내  용 : 반려견의 사진 개수를 저장하는 프로퍼티 추가
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.20
+수  정  내  용 : kindcode를 연관조회 할 수 있도록 VO 필드 추가
+========================================================================
 */
 
 package petProject.vo;
@@ -32,10 +36,11 @@ public class Pet implements Serializable {
 	private String petFathername;
 	private String petSex;
 	private int imageCount;
+	private Kindcode kindcode;
 
 	public Pet(String memberId, String petName, String petKindcode, String petBirthday, int petRegistrationNumber,
 			String petRegistrationDate, String petMicrochip, String petMothername, String petFathername, String petSex,
-			int imageCount) {
+			int imageCount, Kindcode kindcode) {
 		super();
 		this.memberId = memberId;
 		this.petName = petName;
@@ -48,6 +53,7 @@ public class Pet implements Serializable {
 		this.petFathername = petFathername;
 		this.petSex = petSex;
 		this.imageCount = imageCount;
+		this.kindcode = kindcode;
 	}
 
 	public Pet() {
@@ -140,6 +146,14 @@ public class Pet implements Serializable {
 
 	public void setImageCount(int imageCount) {
 		this.imageCount = imageCount;
+	}
+
+	public Kindcode getKindcode() {
+		return kindcode;
+	}
+
+	public void setKindcode(Kindcode kindcode) {
+		this.kindcode = kindcode;
 	}
 
 	public static long getSerialversionuid() {

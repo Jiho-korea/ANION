@@ -6,6 +6,10 @@
 작    성    일 : 2020.11.09
 작  성  내  용 : 반려견 세부 정보 페이지
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.20
+수  정  내  용 : 모델에서 견종이름을 받을 수 있도록 수정
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -81,7 +85,7 @@
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<spring:message code="info.pet.kind">
-					<spring:argument value="${pet.petKindcode}" />
+					<spring:argument value="${pet.kindcode.petKind}" />
 				</spring:message>
 			</h4>
 			<hr class="my-4">
