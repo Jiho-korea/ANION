@@ -14,15 +14,35 @@
     	select currval('public.Pet_PET_REGISTRATION_NUMBER_seq')
     </select>
     
-    <select id="selectPetList" parameterType="String" resultMap="petResultMap">
+    <select id="selectPetList" parameterType="String" resultMap="petListResultMap">
     	select "PET_REGISTRATION_NUMBER", "MEMBER_ID", "PET_NAME", "PET_KIND_CODE", "PET_BIRTHDAY", "PET_REGISTRATION_DATE", "PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "MEMBER_ID"= #{memberId} ORDER BY "PET_REGISTRATION_DATE" DESC, "PET_REGISTRATION_NUMBER" DESC
     </select>
     
-    <select id="selectPet" parameterType="int" resultType="pet">
-    	select "PET_REGISTRATION_NUMBER", "MEMBER_ID", "PET_NAME", "PET_KIND_CODE", "PET_BIRTHDAY", "PET_REGISTRATION_DATE", "PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
+    <select id="selectPet" parameterType="int" resultMap="petResultMap">
+    	select "pet"."PET_REGISTRATION_NUMBER", "pet"."MEMBER_ID", "pet"."PET_NAME", "pet"."PET_KIND_CODE", "pet"."PET_BIRTHDAY", "pet"."PET_REGISTRATION_DATE", "pet"."PET_MICROCHIP", "pet"."PET_MOTHERNAME", "pet"."PET_FATHERNAME", "pet"."PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
     </select>
     
     <resultMap type="pet" id="petResultMap">
+		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="PET_NAME" property="petName" />
+		<result column="PET_BIRTHDAY" property="petBirthday" />
+		<result column="PET_REGISTRATION_DATE" property="petRegistrationDate" />
+		<result column="PET_MICROCHIP" property="petMicrochip" />
+		<result column="PET_MOTHERNAME" property="petMothername" />
+		<result column="PET_FATHERNAME" property="petFathername" />
+		<result column="PET_SEX" property="petSex" />
+		<result column="IMAGE_COUNT" property="imageCount" />
+		<association select="selectKindcode" property="kindcode"
+			column="{petKindcode=PET_KIND_CODE}" />
+	</resultMap>
+    
+    <select id="selectKindcode" parameterType="kindcode"
+		resultType="kindcode">
+		SELECT "PET_KIND", "PET_KIND_CODE" FROM "kindcode" WHERE "PET_KIND_CODE" = #{petKindcode}
+	</select>
+    
+    <resultMap type="pet" id="petListResultMap">
 		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="PET_NAME" property="petName" />
