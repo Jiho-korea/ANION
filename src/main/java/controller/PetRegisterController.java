@@ -9,9 +9,12 @@
 수    정    자 : 정세진
 수    정    일 : 2020.11.13
 수  정  내  용 : 견종 콤보박스 출력 추가
+========================================================================
+수    정    자 : 정세진
+수    정    일 : 2020.11.20
+수  정  내  용 : 애완동물 유효성 생일 추가
 =============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
-========================================================================
 */
 package controller;
 
@@ -132,8 +135,11 @@ public class PetRegisterController {
 			 */
 //			String absPath = rootPath + "\\" + savedName;
 //			System.out.println("abs" + absPath);
+			
 			petRegisterService.insertPet(petRegisterRequest);
+			
 			int currval = getCurrvalService.selectCurrval();
+			
 			// ImageUploadRequest imageUploadRequest = new
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);

@@ -11,8 +11,12 @@
 수    정    일 : 2020.11.11
 수  정  내  용 : 아이디 중복확인 메소드 선언
 ========================================================================
-*/
+수    정    자 : 송찬영, 임원석
+수    정    일 : 2020.11.17
+수  정  내  용 : 이메일 인증 메소드 선언
+========================================================================
 
+*/
 package petProject.service;
 
 import org.apache.ibatis.annotations.Param;
@@ -23,4 +27,6 @@ public interface MemberRegisterService {
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 
 	int selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
+	
+	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
 }

@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 로그인 Controller 작성
 ========================================================================
+수    정    자 : 송찬영, 임원석
+수    정    일 : 2020.11.17
+수  정  내  용 : 이메일 검증 예외처리 추가
+========================================================================
 =============================== 함  수  설  명  ===============================
 loginForm : 아이디 기억하기 구현하는 함수
 login : 로그인 할 때 세션 생성후 로그인
@@ -28,6 +32,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
@@ -48,6 +53,7 @@ public class LoginController {
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
+		
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
@@ -91,6 +97,10 @@ public class LoginController {
 			// return "redirect:/home";
 		} catch (MemberNotFoundException e) {
 			errors.reject("notfound");
+			e.printStackTrace();
+			return "login/loginFormPage";
+		} catch (MemberAuthStatusException e) {
+			errors.rejectValue("memberId" ,"notvalid");
 			return "login/loginFormPage";
 		} catch (Exception e) {
 			e.printStackTrace();

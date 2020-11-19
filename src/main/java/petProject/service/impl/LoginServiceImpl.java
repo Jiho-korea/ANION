@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : MemberDAO의 selectByIdPassword메서드를 이용하는 서비스
 ========================================================================
+수    정    자 : 송찬영, 임원석
+수    정    일 : 2020.11.20
+수  정  내  용 : 이메일 암호화, 인증 익셉션 추가
+========================================================================
 */
 package petProject.service.impl;
 
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
@@ -39,8 +44,11 @@ public class LoginServiceImpl implements LoginService {
 		if (!passwordEncoder.matches(memberPassword, member.getMemberPassword())) {
 			throw new MemberNotFoundException("not found");
 		}
+		if (member.getMemberAuthStatus() != 1) {
+			throw new MemberAuthStatusException("not valid");
+		}
 
 		return new AuthInfo(member.getMemberId(), member.getMemberName(), member.getMemberPhoneNumber(),
-				member.getMemberRegisterDate(), member.getMemberLevel());
+				member.getMemberRegisterDate(), member.getMemberLevel(), member.getMemberAuthStatus());
 	}
 }

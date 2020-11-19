@@ -15,8 +15,20 @@
 수    정    일 : 2020.11.11
 수  정  내  용 : 아이디 중복확인 메소드 추가
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2020.11.17
+수  정  내  용 : 이메일 인증 메소드 추가
+========================================================================
 */
-
+/*
+========================================================================
+파    일    명 : 
+========================================================================
+작    성    자 : 
+작    성    일 : 
+작  성  내  용 : 
+========================================================================
+*/
 package petProject.dao;
 
 import java.util.List;
@@ -27,7 +39,7 @@ import org.apache.ibatis.annotations.Param;
 import petProject.vo.Member;
 import petProject.vo.MemberRegisterRequest;
 
-// member 테이블에 접근하는 DAO
+//member 테이블에 접근하는 DAO
 @Mapper
 public interface MemberDAO {
 	Member selectMemberById(@Param("memberId") String memberId) throws Exception;
@@ -37,4 +49,6 @@ public interface MemberDAO {
 	int selectById(@Param("memberId") String memberId) throws Exception;
 
 	List<Member> selectMemberList() throws Exception;
+
+	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
 }
