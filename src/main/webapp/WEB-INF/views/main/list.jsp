@@ -14,6 +14,10 @@
 수    정    일 : 2020.10.22
 수  정  내  용 : 반려견 이름을 VO에서 꺼내도록 수정, 스프링 메세지 사용(리터럴 제거)
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.17
+수  정  내  용 : 디자인 수정
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -69,20 +73,24 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div style="float: right" align="center">
-		<form action="${pageContext.request.contextPath}/register/step1"
-			class="form-inline">
-			<div class="form-group mx-sm-3 mb-2">
-				<button type="submit" class="btn btn-info pull-right">
-					<spring:message code="register.pet" />
-				</button>
-			</div>
-		</form>
-	</div>
+
+
 	<div class="container">
-		<h2>
-			<spring:message code="list.pet" />
-		</h2>
+		<div class="mt-30">
+			<h1 class="display-4">
+				<spring:message code="list.pet" />
+			</h1>
+		</div>
+		<div class="text-right mb-10"><!--  -->
+
+			<a href="${pageContext.request.contextPath}/register/step1"
+				class="mb-30"><button type="submit"
+					class="btn btn-info pull-right">
+					<spring:message code="register.pet" />
+				</button></a>
+		</div>
+
+
 		<%--p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p--%>
 		<%-- table(기본) table-striped(스트라이프 무늬 추가), table-bordered(선) --%>
 		<table class="table table-striped table-bordered">
@@ -100,8 +108,10 @@
 				<c:forEach var="pet" items="${petList}" varStatus="status">
 					<tr>
 						<td>${status.index + 1}</td>
-						<td><a href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}" style="color: #000000;">${pet.petName}</a></td>
-						<td>${pet.imageCount} 건</td>
+						<td><a
+							href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
+							style="color: #000000;">${pet.petName}</a></td>
+						<td>${pet.imageCount}건</td>
 						<td><a
 							href="${pageContext.request.contextPath}/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 							name="btn_photo" id="btn_photo" class="btn btn-info pull-right"><spring:message

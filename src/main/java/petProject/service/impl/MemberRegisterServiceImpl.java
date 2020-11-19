@@ -16,7 +16,7 @@
 package petProject.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.MemberDAO;
@@ -31,15 +31,15 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
-		
-		String encodePassword = passwordEncoder.encode(memberRegisterRequest.getMemberPassword());
-		memberRegisterRequest.setMemberPassword(encodePassword);
-		
+
+		String enco = passwordEncoder.encode(memberRegisterRequest.getMemberPassword());
+		memberRegisterRequest.setMemberPassword(enco);
 		int cnt = memberDAO.insertMember(memberRegisterRequest);
 		if (cnt == 0) {
 			throw new MemberInsertException("Insert failed");

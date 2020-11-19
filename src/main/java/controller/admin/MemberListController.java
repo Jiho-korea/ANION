@@ -44,7 +44,7 @@ public class MemberListController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/admin/member/member_list";
+		return "/admin/member/list";
 	}
 
 }

@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 스프링 MVC 설정
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2020.11.18
+수  정  내  용 : 관리자 페이지, 반려견 세부정보 페이지에도 Interceptor가 동작하도록 설정
+========================================================================
 */
 package config;
 
@@ -20,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import interceptor.AdminCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
 
 @Configuration
@@ -29,6 +34,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public LoginCheckInterceptor loginCheckInterceptor() {
 		return new LoginCheckInterceptor();
+	}
+
+	@Bean
+	public AdminCheckInterceptor adminCheckInterceptor() {
+		return new AdminCheckInterceptor();
 	}
 
 	@Override
@@ -63,8 +73,10 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/main/**", "/register/**", "/list/**");
+		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/main/**", "/register/**", "/list/**",
+				"/admin/**", "/info/**");
 
+		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 	}
 
 }
