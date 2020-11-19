@@ -10,6 +10,7 @@
 package petProject.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,13 +27,17 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private MemberDAO memberDAO;
 
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+
 	@Override
 	public AuthInfo selectMemberById(String memberId, String memberPassword) throws Exception {
 		Member member = memberDAO.selectMemberById(memberId);
 		if (member == null) {
 			throw new MemberNotFoundException("not found");
 		}
-		if (!member.matchPassword(memberPassword)) {
+		if (!passwordEncoder.matches(memberPassword, member.getMemberPassword())) {
+
 			throw new MemberNotFoundException("not found");
 		}
 
