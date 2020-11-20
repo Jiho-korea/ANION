@@ -23,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import petProject.dao.MemberDAO;
+import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MemberRegisterService;
@@ -54,7 +56,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	public int selectById(String memberId) throws Exception {
 		int cnt = memberDAO.selectById(memberId);
-		if(cnt != 0) {
+		if (cnt != 0) {
 			throw new MemberDuplicateException("duplicate memberId");
 		}
 		return cnt;
@@ -63,8 +65,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	@Override
 	public int updateAuthStatus(String memberId) throws Exception {
 		int cnt = memberDAO.updateAuthStatus(memberId);
-		if(cnt == 0) {
-			throw new MemberInsertException("Insert failed");
+		if (cnt == 0) {
+			throw new MemberAuthUpdateException("auth update failed");
 		}
 		return cnt;
 	}

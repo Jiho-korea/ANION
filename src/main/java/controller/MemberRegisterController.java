@@ -36,9 +36,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
+import petProject.service.MailSendService;
 import petProject.service.MemberRegisterService;
 import petProject.vo.MemberRegisterRequest;
-import petProject.service.MailSendService;
 
 @Controller
 @RequestMapping("/signup")
@@ -82,7 +82,7 @@ public class MemberRegisterController {
 
 			memberRegisterService.insertMember(memberRegisterRequest);
 
-			mailSendService.sendMail("mailuser@vv1.co.kr", "애니온", memberRegisterRequest.getMemberId(),
+			mailSendService.sendMail("ghok1027@gmail.com", "애니온", memberRegisterRequest.getMemberId(),
 					memberRegisterRequest.getMemberName(), request, true);
 			return "register/signupSucess";
 		} catch (MemberInsertException e) {
