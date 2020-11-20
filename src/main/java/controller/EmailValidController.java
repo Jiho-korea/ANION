@@ -12,12 +12,12 @@ package controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.exception.MemberAuthUpdateException;
 import petProject.service.MemberRegisterService;
 import petProject.vo.MemberRegisterRequest;
 
@@ -31,10 +31,12 @@ public class EmailValidController {
 	public String validemail(@RequestParam(value = "memberId", required = true) String memberId,
 			@ModelAttribute("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) {
 		memberRegisterRequest.setMemberId(memberId);
-		
+
 		// DB에 authStatus 업데이트
 		try {
 			memberRegisterService.updateAuthStatus(memberId);
+		} catch (MemberAuthUpdateException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
