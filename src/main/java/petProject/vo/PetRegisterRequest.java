@@ -15,7 +15,7 @@ public class PetRegisterRequest {
 
 	private static final long serialVersionUID = 1L;
 
-	private String memberId;
+	private int memberNumber;
 	@NotBlank
 	private String petName;
 	@NotBlank
@@ -31,10 +31,10 @@ public class PetRegisterRequest {
 	@NotBlank
 	private String petSex;
 
-	public PetRegisterRequest(String memberId, String petName, String petKindcode, String petBirthday,
+	public PetRegisterRequest(int memberNumber, String petName, String petKindcode, String petBirthday,
 			String petMothername, String petFathername, String petMicrochip, String petSex) {
 		super();
-		this.memberId = memberId;
+		this.memberNumber = memberNumber;
 		this.petName = petName;
 		this.petKindcode = petKindcode;
 		this.petBirthday = petBirthday;
@@ -48,12 +48,12 @@ public class PetRegisterRequest {
 		super();
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public int getMemberNumber() {
+		return memberNumber;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
 	}
 
 	public String getPetName() {

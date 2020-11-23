@@ -6,18 +6,18 @@
 <mapper namespace="petProject.dao.ImageDAO">
 	<insert id="insertImage" parameterType="imageUploadRequest">
 		INSERT INTO public.image
-		("PET_REGISTRATION_NUMBER", "IMAGE_PATH", "MEMBER_ID")
-		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.memberId});
+		("PET_REGISTRATION_NUMBER", "IMAGE_PATH", "MEMBER_NUMBER")
+		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.memberNumber});
 	</insert>
 	
 	<select id="selectImageList" parameterType="int" resultMap="imageResultMap">
-    	select * from "public"."image" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
+    	select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER", "IMAGE_PATH" from "public"."image" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
     </select>
     
     <resultMap type="image" id="imageResultMap">
 		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
 		<id column="IMAGE_NUMBER" property="imageNumber" />
-		<result column="MEMBER_ID" property="memberId" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="IMAGE_PATH" property="imagePath" />
 	</resultMap>
 </mapper>

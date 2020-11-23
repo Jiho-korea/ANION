@@ -25,20 +25,21 @@ public class Member implements Serializable {
 	private String memberName;
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
-	private int memberLevel;
+	private int memberLevelCode;
 	private int memberAuthStatus;
-
+	private int memberNumber;
 
 	public Member(String memberId, String memberPassword, String memberName, String memberPhoneNumber,
-			Date memberRegisterDate, int memberLevel, int memberAuthStatus) {
+			Date memberRegisterDate, int memberLevelCode, int memberAuthStatus, int memberNumber) {
 		super();
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
 		this.memberName = memberName;
 		this.memberPhoneNumber = memberPhoneNumber;
 		this.memberRegisterDate = memberRegisterDate;
-		this.memberLevel = memberLevel;
+		this.memberLevelCode = memberLevelCode;
 		this.memberAuthStatus = memberAuthStatus;
+		this.memberNumber = memberNumber;
 	}
 
 	public Member() {
@@ -85,12 +86,12 @@ public class Member implements Serializable {
 		this.memberRegisterDate = memberRegisterDate;
 	}
 
-	public int getMemberLevel() {
-		return memberLevel;
+	public int getMemberLevelCode() {
+		return memberLevelCode;
 	}
 
-	public void setMemberLevel(int memberLevel) {
-		this.memberLevel = memberLevel;
+	public void setMemberLevelCode(int memberLevelCode) {
+		this.memberLevelCode = memberLevelCode;
 	}
 
 	public int getMemberAuthStatus() {
@@ -100,12 +101,17 @@ public class Member implements Serializable {
 	public void setMemberAuthStatus(int memberAuthStatus) {
 		this.memberAuthStatus = memberAuthStatus;
 	}
-	
+
+	public int getMemberNumber() {
+		return memberNumber;
+	}
+
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public boolean matchPassword(String memberPassword) {
-		return this.memberPassword.contentEquals(memberPassword);
-	}
 }
