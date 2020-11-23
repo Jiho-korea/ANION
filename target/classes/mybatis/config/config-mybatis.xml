@@ -16,6 +16,7 @@
 		<typeAlias type="petProject.vo.Image" alias="image" />
 		<typeAlias type="petProject.vo.MemberRegisterRequest" alias="memberRegisterRequest" />
 		<typeAlias type="petProject.vo.Kindcode" alias="kindcode" />
+		<typeAlias type="petProject.vo.Memberlevel" alias="memberlevel" />
 	</typeAliases>
    
 </configuration>

@@ -6,6 +6,10 @@
 작    성    일 : 2020.11.16
 작  성  내  용 : 세션에 담길 정보
 ========================================================================
+수    정    자 : 송찬영, 강지호
+수    정    일 : 2020.11.24
+수  정  내  용 : 연관조회를 위한 vo객체 필드로 선언
+========================================================================
 */
 package petProject.vo;
 
@@ -18,19 +22,19 @@ public class AuthInfo {
 	private String memberName;
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
-	private int memberLevel;
 	private int memberAuthStatus;
+	private Memberlevel memberlevel;
 
 	public AuthInfo(String memberId, int memberNumber, String memberName, String memberPhoneNumber,
-			Date memberRegisterDate, int memberLevel, int memberAuthStatus) {
+			Date memberRegisterDate, int memberAuthStatus, Memberlevel memberlevel) {
 		super();
 		this.memberId = memberId;
 		this.memberNumber = memberNumber;
 		this.memberName = memberName;
 		this.memberPhoneNumber = memberPhoneNumber;
 		this.memberRegisterDate = memberRegisterDate;
-		this.memberLevel = memberLevel;
 		this.memberAuthStatus = memberAuthStatus;
+		this.memberlevel = memberlevel;
 	}
 
 	public AuthInfo() {
@@ -77,20 +81,20 @@ public class AuthInfo {
 		this.memberRegisterDate = memberRegisterDate;
 	}
 
-	public int getMemberLevel() {
-		return memberLevel;
-	}
-
-	public void setMemberLevel(int memberLevel) {
-		this.memberLevel = memberLevel;
-	}
-
 	public int getMemberAuthStatus() {
 		return memberAuthStatus;
 	}
 
 	public void setMemberAuthStatus(int memberAuthStatus) {
 		this.memberAuthStatus = memberAuthStatus;
+	}
+
+	public Memberlevel getMemberlevel() {
+		return memberlevel;
+	}
+
+	public void setMemberlevel(Memberlevel memberlevel) {
+		this.memberlevel = memberlevel;
 	}
 
 	public static long getSerialversionuid() {
