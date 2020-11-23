@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : KindcodeServiceImpl.java
+파    일    명 : KindcodeListServiceImpl.java
 ========================================================================
 작    성    자 : 정세진
 작    성    일 : 2020.11.13
@@ -15,25 +15,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import petProject.exception.KindcodeNotFoundException;
-import petProject.service.KindcodeService;
+import petProject.service.KindcodeListService;
 import petProject.vo.Kindcode;
 
-@Service("KindcodeService")
+@Service("kindcodeListService")
 @Transactional
-public class KindcodeServiceImpl implements KindcodeService {
+public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Autowired
 	private petProject.dao.KindcodeDAO KindcodeDAO;
 
-
 	@Override
-	public List<Kindcode> selectPetKindList() throws Exception {
-		List<Kindcode> kindcodeList = KindcodeDAO.selectPetKindList();
-		if (kindcodeList.isEmpty()) {
-			throw new KindcodeNotFoundException("not found");
-		}
-		// TODO Auto-generated method stub
+	public List<Kindcode> selectKindcodeList() throws Exception {
+		List<Kindcode> kindcodeList = KindcodeDAO.selectKindcodeList();
 		return kindcodeList;
 	}
 }

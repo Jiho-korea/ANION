@@ -113,7 +113,7 @@
 							<option value="">견종</option>
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
-								<option value="${status.index + 1}">${kindcode.petKind}</option>
+								<option value="${kindcode.petKindcode}">${kindcode.petKind}</option>
 							</c:forEach>
 						</select>
 						<div class="nice-select" tabindex="0">
@@ -122,7 +122,7 @@
 								<li data-value="견종" class="option selected focus" hidden="">견종</li>
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
-									<li data-value="${status.index + 1}" class="option">${kindcode.petKind}</li>
+									<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
 								</c:forEach>
 								<%-- 
 								<li data-value="1" class="option">동경이</li>

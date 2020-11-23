@@ -11,11 +11,8 @@ package petProject.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.Kindcode;
-import petProject.vo.Pet;
 
-public interface KindcodeService {
-	List<Kindcode> selectPetKindList() throws Exception;
+public interface KindcodeListService {
+	List<Kindcode> selectKindcodeList() throws Exception;
 }

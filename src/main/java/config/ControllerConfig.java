@@ -9,18 +9,10 @@
 */
 package config;
 
-import java.io.InputStream;
-
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 
+import controller.EmailValidController;
 import controller.ImageListController;
 import controller.LoginController;
 import controller.LogoutController;
@@ -28,7 +20,7 @@ import controller.MainController;
 import controller.MemberRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
-import controller.EmailValidController;
+import controller.admin.KindcodeListController;
 import controller.admin.MemberListController;
 
 @Configuration
@@ -75,10 +67,15 @@ public class ControllerConfig {
 	public MemberListController memberListController() {
 		return new MemberListController();
 	}
-	
+
 	@Bean
 	public EmailValidController signupController() {
 		return new EmailValidController();
+	}
+
+	@Bean
+	public KindcodeListController kindcodeListController() {
+		return new KindcodeListController();
 	}
 
 }

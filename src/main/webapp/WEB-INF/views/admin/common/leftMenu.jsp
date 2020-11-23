@@ -17,10 +17,26 @@
 <div id="leftcolumn">
 	<div id="menu">
 		<ul id="sidemenu">
-			<li><a href="#" class="more"><spring:message code="admin.member.banner" /></a>
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/admin/member/list"><spring:message code="admin.member.banner" /></a></li>
-				</ul></li>
+			<c:choose>
+				<c:when test="${param.type eq 'kindcode'}">
+					<li><a href="#" class="more">코드관리</a>
+						<ul>
+							<li><a
+								href="${pageContext.request.contextPath}/admin/code/kindcode/list">견종관리</a></li>
+						</ul></li>
+				</c:when>
+
+				<c:when test="${param.type eq 'list_member'}">
+					<li><a href="#" class="more"><spring:message
+								code="admin.member.banner" /></a>
+						<ul>
+							<li><a
+								href="${pageContext.request.contextPath}/admin/member/list"><spring:message
+										code="admin.member.banner" /></a></li>
+						</ul></li>
+				</c:when>
+			</c:choose>
+
 		</ul>
 	</div>
 </div>

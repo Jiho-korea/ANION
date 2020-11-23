@@ -40,11 +40,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.PetRegisterException;
 import petProject.service.GetCurrvalService;
 import petProject.service.ImageUploadService;
-import petProject.service.KindcodeService;
+import petProject.service.KindcodeListService;
 import petProject.service.PetRegisterService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Kindcode;
@@ -65,8 +64,8 @@ public class PetRegisterController {
 	@Resource(name = "imageUploadService")
 	ImageUploadService imageUploadService;
 
-	@Resource(name = "KindcodeService")
-	KindcodeService kindcodeService;
+	@Resource(name = "kindcodeListService")
+	KindcodeListService kindcodeListService;
 
 	List<Kindcode> kindcodeList = null;
 
@@ -78,15 +77,11 @@ public class PetRegisterController {
 
 			String today = simpleDateFormat.format(new Date());
 			model.addAttribute("today", today);
-			
-			kindcodeList = kindcodeService.selectPetKindList();
+
+			kindcodeList = kindcodeListService.selectKindcodeList();
 			model.addAttribute("kindcodeList", kindcodeList);
 			// System.out.print(kindcodeList.get(0).getPetKind());
 			return "register/registerStep1";
-		} catch (KindcodeNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "redirect:/register/step1";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,12 +103,9 @@ public class PetRegisterController {
 
 		if (errors.hasErrors()) {
 			try {
-				kindcodeList = kindcodeService.selectPetKindList();
+				kindcodeList = kindcodeListService.selectKindcodeList();
 				model.addAttribute("kindcodeList", kindcodeList);
 				return "register/registerStep1";
-			} catch (KindcodeNotFoundException e) {
-				e.printStackTrace();
-				return "redirect:/home";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "redirect:/home";
@@ -135,11 +127,11 @@ public class PetRegisterController {
 			 */
 //			String absPath = rootPath + "\\" + savedName;
 //			System.out.println("abs" + absPath);
-			
+
 			petRegisterService.insertPet(petRegisterRequest);
-			
+
 			int currval = getCurrvalService.selectCurrval();
-			
+
 			// ImageUploadRequest imageUploadRequest = new
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);
