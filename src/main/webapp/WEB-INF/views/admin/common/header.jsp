@@ -26,7 +26,7 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0"
 			class="menu">
 			<tr>
-				<th><a href="#">코드관리</a></th>
+				<th><a href="${pageContext.request.contextPath}/admin/code/kindcode/list">코드관리</a></th>
 				<th><a href="${pageContext.request.contextPath}/admin/member/list">회원관리</a></th>
 				<th><a href="#">반려견관리</a></th>
 				<th><a href="#">게시판관리</a></th>

@@ -24,7 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import petProject.service.MemberListService;
+import petProject.service.admin.MemberListService;
 import petProject.vo.Member;
 
 @Controller
@@ -43,6 +43,7 @@ public class MemberListController {
 			model.addAttribute("memberList", memberList);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "/home/main";
 		}
 		return "/admin/member/list";
 	}
