@@ -56,11 +56,11 @@ public class ImageListController {
 	public String listImage(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpSession session, Model model) {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		System.out
-				.println("memberId = " + authInfo.getMemberId() + "\npetRegistrationNumber = " + petRegistrationNumber);
+		// System.out.println("memberId = " + authInfo.getMemberId() +
+		// "\npetRegistrationNumber = " + petRegistrationNumber);
 		try {
 			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
-			System.out.println(imageList.isEmpty());
+			// System.out.println(imageList.isEmpty());
 			model.addAttribute("imageList", imageList);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,10 +76,10 @@ public class ImageListController {
 
 		try {
 			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-			String memberId = authInfo.getMemberId();
+			// String memberId = authInfo.getMemberId();
 
-			System.out.println("memberId 검색 = " + memberId);
-			System.out.println("petRegistragionNumber = " + petRegistrationNumber);
+			// System.out.println("memberId 검색 = " + memberId);
+			// System.out.println("petRegistragionNumber = " + petRegistrationNumber);
 
 			MultipartFile file = request.getFile("file");
 			logger.info("originalName: " + file.getOriginalFilename());
@@ -95,7 +95,7 @@ public class ImageListController {
 			String absPath = rootPath + "\\" + savedName;
 			System.out.println("absPath = " + absPath);
 
-			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberId(),
+			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberNumber(),
 					petRegistrationNumber, savedName);
 			imageUploadService.insertImage(imageUploadRequest);
 

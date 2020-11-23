@@ -5,7 +5,7 @@
 
 <mapper namespace="petProject.dao.MemberDAO">
     <select id="selectMemberById" parameterType="String" resultType="member">
-    	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL", "MEMBER_AUTH_STATUS"
+    	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER"
     	FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
@@ -19,7 +19,7 @@
     </insert>
     
     <select id="selectMemberList" resultMap="memberResultMap">
-    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL" from "public"."member" 
+    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
     </select>
     
     <update id="updateAuthStatus" parameterType="String">
@@ -29,10 +29,12 @@
     </update>
     
      <resultMap type="member" id="memberResultMap">
-		<id column="MEMBER_ID" property="memberId" />
+		<id column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
 		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
-		<result column="MEMBER_LEVEL" property="memberLevel" />
+		<result column="MEMBER_LEVEL_CODE" property="memberLevelCode" />
+		<result column="MEMBER_AUTH_STATUS" property="memberAuthStatus" />
 	</resultMap>
 </mapper>

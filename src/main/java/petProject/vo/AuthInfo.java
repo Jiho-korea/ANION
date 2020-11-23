@@ -14,16 +14,18 @@ import java.util.Date;
 public class AuthInfo {
 	private static final long serialVersionUID = 1L;
 	private String memberId;
+	private int memberNumber;
 	private String memberName;
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
 	private int memberLevel;
 	private int memberAuthStatus;
 
-	public AuthInfo(String memberId, String memberName, String memberPhoneNumber, Date memberRegisterDate,
-			int memberLevel, int memberAuthStatus) {
+	public AuthInfo(String memberId, int memberNumber, String memberName, String memberPhoneNumber,
+			Date memberRegisterDate, int memberLevel, int memberAuthStatus) {
 		super();
 		this.memberId = memberId;
+		this.memberNumber = memberNumber;
 		this.memberName = memberName;
 		this.memberPhoneNumber = memberPhoneNumber;
 		this.memberRegisterDate = memberRegisterDate;
@@ -41,6 +43,14 @@ public class AuthInfo {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public int getMemberNumber() {
+		return memberNumber;
+	}
+
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
 	}
 
 	public String getMemberName() {
@@ -82,7 +92,7 @@ public class AuthInfo {
 	public void setMemberAuthStatus(int memberAuthStatus) {
 		this.memberAuthStatus = memberAuthStatus;
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

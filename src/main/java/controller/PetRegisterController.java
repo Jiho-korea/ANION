@@ -99,7 +99,7 @@ public class PetRegisterController {
 	public String registerStep2(@Valid @ModelAttribute("petRegisterRequest") PetRegisterRequest petRegisterRequest,
 			Errors errors, HttpSession session, MultipartHttpServletRequest request, Model model) {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		petRegisterRequest.setMemberId(authInfo.getMemberId());
+		petRegisterRequest.setMemberNumber(authInfo.getMemberNumber());
 
 		if (errors.hasErrors()) {
 			try {

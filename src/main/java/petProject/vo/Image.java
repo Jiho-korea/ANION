@@ -13,14 +13,14 @@ public class Image {
 	private static final long serialVersionUID = 1L;
 	private int petRegistrationNumber;
 	private String imagePath;
-	private String memberId;
+	private int memberNumber;
 	private int imageNumber;
 
-	public Image(int petRegistrationNumber, String imagePath, String memberId, int imageNumber) {
+	public Image(int petRegistrationNumber, String imagePath, int memberNumber, int imageNumber) {
 		super();
 		this.petRegistrationNumber = petRegistrationNumber;
 		this.imagePath = imagePath;
-		this.memberId = memberId;
+		this.memberNumber = memberNumber;
 		this.imageNumber = imageNumber;
 	}
 
@@ -44,12 +44,12 @@ public class Image {
 		this.imagePath = imagePath;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public int getMemberNumber() {
+		return memberNumber;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setMemberNumber(int memberNumber) {
+		this.memberNumber = memberNumber;
 	}
 
 	public int getImageNumber() {
@@ -63,5 +63,4 @@ public class Image {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }

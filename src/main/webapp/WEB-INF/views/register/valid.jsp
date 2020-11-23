@@ -82,9 +82,7 @@
 			<hr class="mb-4" />
 			<div class="row">
 			</div>
-
 		</div>
-
 	</div>
 
 	<c:import url="../included/bottom.jsp">

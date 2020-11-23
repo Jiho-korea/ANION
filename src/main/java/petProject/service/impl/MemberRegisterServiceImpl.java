@@ -54,6 +54,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		return cnt;
 	}
 
+	@Override
 	public int selectById(String memberId) throws Exception {
 		int cnt = memberDAO.selectById(memberId);
 		if (cnt != 0) {

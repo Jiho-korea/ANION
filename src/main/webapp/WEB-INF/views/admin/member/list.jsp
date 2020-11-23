@@ -99,12 +99,12 @@
 						</c:if>
 						<c:forEach var="member" items="${memberList}" varStatus="status">
 							<tr>
-								<td width="5%" align="center">0</td>
-								<td width="10%" align="center">${member.memberLevel}</td>
+								<td width="5%" align="center">${member.memberNumber}</td>
+								<td width="10%" align="center">${member.memberLevelCode}</td>
 								<td width="15%" align="center">${member.memberName }</td>
 								<td width="15%" align="center">${member.memberId }</td>
 								<td width="15%" align="center">${member.memberPhoneNumber }</td>
-								<td width="15%" align="center">승인</td>
+								<td width="15%" align="center">${member.memberAuthStatus}</td>
 								<td width="15%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
 								<td width="15%" align="center"><div align="center">
 										<a href="#"> <input type="button" name="btn_modify"

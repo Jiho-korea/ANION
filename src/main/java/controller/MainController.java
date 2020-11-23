@@ -41,7 +41,7 @@ public class MainController {
 	public String listPet(HttpSession session, Model model) {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
-			List<Pet> petList = petListService.selectPetList(authInfo.getMemberId());
+			List<Pet> petList = petListService.selectPetList(authInfo.getMemberNumber());
 			model.addAttribute("petList", petList);
 		} catch (Exception e) {
 			e.printStackTrace();

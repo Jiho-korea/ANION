@@ -25,8 +25,8 @@ public class PetListServiceImpl implements PetListService {
 	@Autowired
 	private PetDAO petDAO;
 
-	public List<Pet> selectPetList(String memberId) throws Exception {
-		List<Pet> petList = petDAO.selectPetList(memberId);
+	public List<Pet> selectPetList(int memberNumber) throws Exception {
+		List<Pet> petList = petDAO.selectPetList(memberNumber);
 		return petList;
 	}
 }
