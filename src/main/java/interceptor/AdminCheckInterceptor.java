@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 세션 검사하는 클래스
 ========================================================================
+수    정    자 : 송찬영, 강지호
+수    정    일 : 2020.11.24
+수  정  내  용 : authInfo의 필드 -> authInfo의 vo로 변환
+========================================================================
 */
 package interceptor;
 
@@ -16,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.vo.AuthInfo;
+import petProject.vo.Memberlevel;
 
 public class AdminCheckInterceptor implements HandlerInterceptor {
 	@Override
@@ -23,8 +28,8 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		int memberLevel = authInfo.getMemberLevel();
-		if (memberLevel != 0) {
+		Memberlevel memberLevel = authInfo.getMemberlevel();
+		if (!"0".equals(memberLevel.getMemberLevelCode())) {
 			// String refererPage = request.getServletPath();
 			response.sendRedirect(request.getContextPath() + "/");
 			return false;

@@ -6,10 +6,13 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 사용자의 정보를 담는 vo 클래스
 ========================================================================
-========================================================================
 수    정    자 : 강지호
 수    정    일 : 2020.xx.xx
 수  정  내  용 : 생성자 매개변수 수정
+========================================================================
+수    정    자 : 송찬영, 강지호
+수    정    일 : 2020.11.24
+수  정  내  용 : 연관조회를 위해 vo객체를 필드로 선언
 ========================================================================
 */
 package petProject.vo;
@@ -25,21 +28,21 @@ public class Member implements Serializable {
 	private String memberName;
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
-	private int memberLevelCode;
 	private int memberAuthStatus;
 	private int memberNumber;
+	private Memberlevel memberlevel;
 
 	public Member(String memberId, String memberPassword, String memberName, String memberPhoneNumber,
-			Date memberRegisterDate, int memberLevelCode, int memberAuthStatus, int memberNumber) {
+			Date memberRegisterDate, int memberAuthStatus, int memberNumber, Memberlevel memberlevel) {
 		super();
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
 		this.memberName = memberName;
 		this.memberPhoneNumber = memberPhoneNumber;
 		this.memberRegisterDate = memberRegisterDate;
-		this.memberLevelCode = memberLevelCode;
 		this.memberAuthStatus = memberAuthStatus;
 		this.memberNumber = memberNumber;
+		this.memberlevel = memberlevel;
 	}
 
 	public Member() {
@@ -86,14 +89,6 @@ public class Member implements Serializable {
 		this.memberRegisterDate = memberRegisterDate;
 	}
 
-	public int getMemberLevelCode() {
-		return memberLevelCode;
-	}
-
-	public void setMemberLevelCode(int memberLevelCode) {
-		this.memberLevelCode = memberLevelCode;
-	}
-
 	public int getMemberAuthStatus() {
 		return memberAuthStatus;
 	}
@@ -108,6 +103,14 @@ public class Member implements Serializable {
 
 	public void setMemberNumber(int memberNumber) {
 		this.memberNumber = memberNumber;
+	}
+
+	public Memberlevel getMemberlevel() {
+		return memberlevel;
+	}
+
+	public void setMemberlevel(Memberlevel memberlevel) {
+		this.memberlevel = memberlevel;
 	}
 
 	public static long getSerialversionuid() {

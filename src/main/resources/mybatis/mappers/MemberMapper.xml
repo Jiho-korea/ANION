@@ -4,8 +4,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petProject.dao.MemberDAO">
-    <select id="selectMemberById" parameterType="String" resultType="member">
-    	SELECT "MEMBER_ID","MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER"
+    <select id="selectMemberById" parameterType="String" resultMap="memberResultMap">
+    	SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE", "MEMBER_NUMBER"
     	FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
@@ -18,7 +18,7 @@
     	VALUES (#{memberRegisterRequest.memberId}, #{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
     </insert>
     
-    <select id="selectMemberList" resultMap="memberResultMap">
+    <select id="selectMemberList" resultMap="memberListResultMap">
     	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
     </select>
     
@@ -28,13 +28,32 @@
     	where "MEMBER_ID" = #{memberId}
     </update>
     
-     <resultMap type="member" id="memberResultMap">
-		<id column="MEMBER_NUMBER" property="memberNumber" />
+     <resultMap type="member" id="memberListResultMap">
+     	<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
 		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
-		<result column="MEMBER_LEVEL_CODE" property="memberLevelCode" />
 		<result column="MEMBER_AUTH_STATUS" property="memberAuthStatus" />
+		<association select="selectMemberlevel" property="memberlevel"
+			column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
 	</resultMap>
+	
+    <select id="selectMemberlevel" parameterType="memberlevel"
+		resultType="memberlevel">
+		SELECT "MEMBER_LEVEL_CODE", "MEMBER_LEVEL_DESCRIPTION" FROM "memberlevel" WHERE "MEMBER_LEVEL_CODE" = #{memberLevelCode}
+	</select>
+	
+	<resultMap type="member" id="memberResultMap">
+		<id column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="MEMBER_PASSWORD" property="memberPassword" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
+		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
+		<result column="MEMBER_AUTH_STATUS" property="memberAuthStatus" />
+		<association select="selectMemberlevel" property="memberlevel"
+			column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
+	</resultMap>
+	
 </mapper>

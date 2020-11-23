@@ -48,7 +48,7 @@ public class PetInfoController {
 		}
 
 	}
-//
+	
 //	@PostMapping
 //	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
 //			HttpServletResponse response) {
