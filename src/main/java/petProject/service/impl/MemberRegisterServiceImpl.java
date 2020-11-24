@@ -6,7 +6,6 @@
 작    성    일 : 2020.11.09
 작  성  내  용 : 회원가입 메소드 작성
 ========================================================================
-========================================================================
 수    정    자 : 정세진, 송찬영
 수    정    일 : 2020.11.11
 수  정  내  용 : 아이디 중복확인 메소드 추가
@@ -15,9 +14,15 @@
 수    정    일 : 2020.11.20
 수  정  내  용 : insertMember부분에 암호화 코드 삽입, 이메일 인증 메서드 추가
 ========================================================================
+수    정    자 : 강지호, 임원석
+수    정    일 : 2020.11.24
+수  정  내  용 : 트랜잭션 메소드 추가
+========================================================================
 */
 
 package petProject.service.impl;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +33,7 @@ import petProject.dao.MemberDAO;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
+import petProject.service.MailSendService;
 import petProject.service.MemberRegisterService;
 import petProject.vo.MemberRegisterRequest;
 
@@ -40,6 +46,9 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+
+	@Autowired
+	MailSendService mailSendService;
 
 	@Override
 	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
@@ -71,4 +80,15 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		}
 		return cnt;
 	}
+
+	@Override
+	@Transactional
+	public void memberRegister(MemberRegisterRequest memberRegisterRequest, String from_addr, String from_name,
+			HttpServletRequest request, boolean isHtml) throws Exception {
+		this.selectById(memberRegisterRequest.getMemberId());
+		this.insertMember(memberRegisterRequest);
+		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(),
+				memberRegisterRequest.getMemberName(), request, isHtml);
+	}
+
 }

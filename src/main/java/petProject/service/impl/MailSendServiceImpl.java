@@ -39,7 +39,7 @@ public class MailSendServiceImpl implements MailSendService {
 
 	@Override
 	public boolean sendMail(String from_addr, String from_name, String to_addr, String to_name,
-			HttpServletRequest request, boolean isHtml) {
+			HttpServletRequest request, boolean isHtml) throws Exception {
 
 		boolean result = false;
 
@@ -85,8 +85,6 @@ public class MailSendServiceImpl implements MailSendService {
 		} catch (UnsupportedEncodingException unsupportedEncodingException) {
 			result = false;
 			throw new MailException(MailStatus.SEND_FAIL, "메일을 발송하는 중 에러가 발생했습니다.", unsupportedEncodingException);
-		} catch (Exception e) {
-			result = false;
 		}
 		return result;
 	}

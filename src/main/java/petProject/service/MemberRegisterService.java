@@ -19,6 +19,8 @@
 */
 package petProject.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.MemberRegisterRequest;
@@ -27,6 +29,9 @@ public interface MemberRegisterService {
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 
 	int selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
-	
+
 	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
+
+	void memberRegister(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest, String from_addr,
+			String from_name, HttpServletRequest request, boolean isHtml) throws Exception;
 }

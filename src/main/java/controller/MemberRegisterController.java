@@ -18,6 +18,10 @@
 수    정    일 : 2020.11.20
 수  정  내  용 : 회원가입시 이메일 인증 링크 보내주는 메서드 추가
 ========================================================================
+수    정    자 :강지호, 임원석
+수    정    일 : 2020.11.24
+수  정  내  용 : 트랜잭션 메소드 추가
+========================================================================
 */
 package controller;
 
@@ -34,6 +38,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import petProject.exception.MailException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MailSendService;
@@ -78,12 +83,14 @@ public class MemberRegisterController {
 		}
 
 		try {
-			memberRegisterService.selectById(memberRegisterRequest.getMemberId());
+//			memberRegisterService.selectById(memberRegisterRequest.getMemberId());
+//
+//			memberRegisterService.insertMember(memberRegisterRequest);
+//
+//			mailSendService.sendMail("ghok1027@gmail.com", "애니온", memberRegisterRequest.getMemberId(),
+//					memberRegisterRequest.getMemberName(), request, true);
 
-			memberRegisterService.insertMember(memberRegisterRequest);
-
-			mailSendService.sendMail("ghok1027@gmail.com", "애니온", memberRegisterRequest.getMemberId(),
-					memberRegisterRequest.getMemberName(), request, true);
+			memberRegisterService.memberRegister(memberRegisterRequest, "ghok1027@gmail.com", "애니온", request, true);
 			return "register/signupSucess";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
@@ -93,9 +100,13 @@ public class MemberRegisterController {
 			e.printStackTrace();
 			errors.rejectValue("memberId", "duplicate.memberId");
 			return "register/signupForm";
+		} catch (MailException e) {
+			e.printStackTrace();
+			errors.reject("fail.mail");
+			return "register/signupForm";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "register/signupForm";
+			return "register/signupForm";//
 		}
 
 	}

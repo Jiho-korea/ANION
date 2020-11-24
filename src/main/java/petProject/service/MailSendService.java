@@ -11,10 +11,8 @@ package petProject.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface MailSendService {
 
 	boolean sendMail(String from_addr, String from_name, String memberId, String to_name, HttpServletRequest request,
-			boolean isHtml);
+			boolean isHtml) throws Exception;
 }
