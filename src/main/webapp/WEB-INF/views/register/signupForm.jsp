@@ -76,7 +76,10 @@
 					<spring:message code="go.register" />
 				</h1>
 				<br>
-
+			    
+				<form:errors />
+				<br>
+				<br>
 				<label> <form:input path="memberId" cssClass="single-input"
 						placeholder="abc@email.com"
 						onfocus="this.placeholder = 'abc@email.com'"
@@ -84,7 +87,7 @@
 				</label>
 				<label> <form:errors path="memberId" />
 				</label>
-				
+
 				<br>
 
 				<label> <form:password path="memberPassword"
@@ -123,7 +126,8 @@
 				</label>
 				<br>
 
-				<button id="btn_register" class="btn btn-info pull-right" type="submit">
+				<button id="btn_register" class="btn btn-info pull-right"
+					type="submit">
 					<spring:message code="go.register" />
 				</button>
 				<br>
@@ -246,25 +250,24 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
- $("#btn_register").click(function() {
-	if ($("#memberId").val() == "") {
-		alert("이메일을 입력해주세요.");
-		return false;
-	} else if ($("#memberPassword").val() == "") {
-		alert("비밀번호을 입력해주세요.");
-		return false;
-	} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
-		alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
-		return false;
-	} else if ($("#memberName").val() == "") {
-		alert("이름을 입력해주세요.");
-		return false;
-	} else if ($("#memberPhoneNumber").val() == "") {
-		alert("전화번호를 입력해주세요.");
-		return false;
-	}
-});
-
+	 $("#btn_register").click(function() {
+		if ($("#memberId").val() == "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		} else if ($("#memberPassword").val() == "") {
+			alert("비밀번호을 입력해주세요.");
+			return false;
+		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
+			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+			return false;
+		} else if ($("#memberName").val() == "") {
+			alert("이름을 입력해주세요.");
+			return false;
+		} else if ($("#memberPhoneNumber").val() == "") {
+			alert("전화번호를 입력해주세요.");
+			return false;
+		}
+	});
 </script>
 
 </html>
