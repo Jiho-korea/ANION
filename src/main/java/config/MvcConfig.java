@@ -25,12 +25,13 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import interceptor.AdminCheckInterceptor;
+import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
 
 @Configuration
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
-	
+
 	@Bean
 	public LoginCheckInterceptor loginCheckInterceptor() {
 		return new LoginCheckInterceptor();
@@ -39,6 +40,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public AdminCheckInterceptor adminCheckInterceptor() {
 		return new AdminCheckInterceptor();
+	}
+
+	@Bean
+	public InfoAuthCheckInterceptor infoAuthCheckInterceptor() {
+		return new InfoAuthCheckInterceptor();
 	}
 
 	@Override
@@ -69,7 +75,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/preservation").setViewName("company/preservation");
 		registry.addViewController("/directions").setViewName("company/directions");
 		registry.addViewController("/petFood").setViewName("company/petFood");
-	}
+	}//
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -77,6 +83,7 @@ public class MvcConfig implements WebMvcConfigurer {
 				"/admin/**", "/info/**");
 
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
+		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 	}
 
 }

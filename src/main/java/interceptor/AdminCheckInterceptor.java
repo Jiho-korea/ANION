@@ -23,6 +23,7 @@ import petProject.vo.AuthInfo;
 import petProject.vo.Memberlevel;
 
 public class AdminCheckInterceptor implements HandlerInterceptor {
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

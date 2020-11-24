@@ -113,7 +113,7 @@
 							style="color: #000000;">${pet.petName}</a></td>
 						<td>${pet.imageCount}건</td>
 						<td><a
-							href="${pageContext.request.contextPath}/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
+							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 							name="btn_photo" id="btn_photo" class="btn btn-info pull-right"><spring:message
 									code="list.image.upload" /></a></td>
 					</tr>
