@@ -4,30 +4,63 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petProject.dao.PetDAO">
-    <insert id="insertPet" parameterType="petRegisterRequest">
-    	INSERT INTO "public"."pet"(
-	"MEMBER_NUMBER", "PET_NAME", "PET_KIND_CODE", "PET_BIRTHDAY", "PET_REGISTRATION_NUMBER", "PET_REGISTRATION_DATE", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_MICROCHIP", "PET_SEX")
-	VALUES (#{petRegisterRequest.memberNumber}, #{petRegisterRequest.petName}, #{petRegisterRequest.petKindcode}, to_date(#{petRegisterRequest.petBirthday}, 'YYYY-MM-DD'), DEFAULT, now(), #{petRegisterRequest.petMothername}, #{petRegisterRequest.petFathername}, #{petRegisterRequest.petMicrochip}, #{petRegisterRequest.petSex});
-    </insert>
-    
-    <select id="selectCurrval" resultType="int">
-    	select currval('public.Pet_PET_REGISTRATION_NUMBER_seq')
-    </select>
-    
-    <select id="selectPetList" parameterType="int" resultMap="petListResultMap">
-    	select "PET_REGISTRATION_NUMBER", "MEMBER_NUMBER", "PET_NAME", "PET_KIND_CODE", "PET_BIRTHDAY", "PET_REGISTRATION_DATE", "PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "MEMBER_NUMBER"= #{memberNumber} ORDER BY "PET_REGISTRATION_DATE" DESC, "PET_REGISTRATION_NUMBER" DESC
-    </select>
-    
-    <select id="selectPet" parameterType="int" resultMap="petResultMap">
-    	select "pet"."PET_REGISTRATION_NUMBER", "pet"."MEMBER_NUMBER", "pet"."PET_NAME", "pet"."PET_KIND_CODE", "pet"."PET_BIRTHDAY", "pet"."PET_REGISTRATION_DATE", "pet"."PET_MICROCHIP", "pet"."PET_MOTHERNAME", "pet"."PET_FATHERNAME", "pet"."PET_SEX", (select count(*) from "public"."image" as "image" where "image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as "IMAGE_COUNT"  from "public"."pet" as "pet" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
-    </select>
-    
-    <resultMap type="pet" id="petResultMap">
-		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
+	<insert id="insertPet" parameterType="petRegisterRequest">
+		INSERT INTO "public"."pet"(
+		"MEMBER_NUMBER", "PET_NAME", "PET_KIND_CODE", "PET_BIRTHDAY",
+		"PET_REGISTRATION_NUMBER", "PET_REGISTRATION_DATE", "PET_MOTHERNAME",
+		"PET_FATHERNAME", "PET_MICROCHIP", "PET_SEX")
+		VALUES
+		(#{petRegisterRequest.memberNumber}, #{petRegisterRequest.petName},
+		#{petRegisterRequest.petKindcode},
+		to_date(#{petRegisterRequest.petBirthday}, 'YYYY-MM-DD'), DEFAULT,
+		now(), #{petRegisterRequest.petMothername},
+		#{petRegisterRequest.petFathername},
+		#{petRegisterRequest.petMicrochip}, #{petRegisterRequest.petSex});
+	</insert>
+
+	<select id="selectCurrval" resultType="int">
+		select
+		currval('public.Pet_PET_REGISTRATION_NUMBER_seq')
+	</select>
+
+	<select id="selectPetList" parameterType="int"
+		resultMap="petListResultMap">
+		select "PET_REGISTRATION_NUMBER", "MEMBER_NUMBER",
+		"PET_NAME",
+		"PET_KIND_CODE", "PET_BIRTHDAY", "PET_REGISTRATION_DATE",
+		"PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX",
+		(select count(*) from "public"."image" as "image" where
+		"image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as
+		"IMAGE_COUNT" from "public"."pet" as "pet" where "MEMBER_NUMBER"=
+		#{memberNumber} ORDER BY "PET_REGISTRATION_DATE" DESC,
+		"PET_REGISTRATION_NUMBER" DESC
+	</select>
+
+	<select id="selectPet" parameterType="int"
+		resultMap="petResultMap">
+		select "pet"."PET_REGISTRATION_NUMBER",
+		"pet"."MEMBER_NUMBER",
+		"pet"."PET_NAME", "pet"."PET_KIND_CODE",
+		"pet"."PET_BIRTHDAY",
+		"pet"."PET_REGISTRATION_DATE",
+		"pet"."PET_MICROCHIP",
+		"pet"."PET_MOTHERNAME", "pet"."PET_FATHERNAME",
+		"pet"."PET_SEX",
+		(select count(*) from "public"."image" as "image"
+		where
+		"image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as
+		"IMAGE_COUNT" from "public"."pet" as "pet" where
+		"PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
+	</select>
+
+	<resultMap type="pet" id="petResultMap">
+		<id column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
 		<result column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="PET_NAME" property="petName" />
 		<result column="PET_BIRTHDAY" property="petBirthday" />
-		<result column="PET_REGISTRATION_DATE" property="petRegistrationDate" />
+		<result column="PET_REGISTRATION_DATE"
+			property="petRegistrationDate" />
 		<result column="PET_MICROCHIP" property="petMicrochip" />
 		<result column="PET_MOTHERNAME" property="petMothername" />
 		<result column="PET_FATHERNAME" property="petFathername" />
@@ -35,20 +68,32 @@
 		<result column="IMAGE_COUNT" property="imageCount" />
 		<association select="selectKindcode" property="kindcode"
 			column="{petKindcode=PET_KIND_CODE}" />
+		<association select="selectMember" property="member"
+			column="{memberNumber=MEMBER_NUMBER}" />
 	</resultMap>
-    
-    <select id="selectKindcode" parameterType="kindcode"
+
+	<select id="selectKindcode" parameterType="kindcode"
 		resultType="kindcode">
-		SELECT "PET_KIND", "PET_KIND_CODE" FROM "kindcode" WHERE "PET_KIND_CODE" = #{petKindcode}
+		SELECT "PET_KIND", "PET_KIND_CODE" FROM "kindcode" WHERE
+		"PET_KIND_CODE" = #{petKindcode}
 	</select>
-    
-    <resultMap type="pet" id="petListResultMap">
-		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
+
+	<select id="selectMember" parameterType="member"
+		resultType="member">
+		select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" 
+		from "public"."member" 
+		WHERE "MEMBER_NUMBER" = #{memberNumber}
+	</select>
+
+	<resultMap type="pet" id="petListResultMap">
+		<id column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
 		<result column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="PET_NAME" property="petName" />
 		<result column="PET_KIND_CODE" property="petKindcode" />
 		<result column="PET_BIRTHDAY" property="petBirthday" />
-		<result column="PET_REGISTRATION_DATE" property="petRegistrationDate" />
+		<result column="PET_REGISTRATION_DATE"
+			property="petRegistrationDate" />
 		<result column="PET_MICROCHIP" property="petMicrochip" />
 		<result column="PET_MOTHERNAME" property="petMothername" />
 		<result column="PET_FATHERNAME" property="petFathername" />

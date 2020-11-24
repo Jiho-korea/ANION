@@ -34,11 +34,13 @@ public class PetInfoController {
 	}
 
 	@GetMapping
-	public String petInfo(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
+	public String petInfo(@RequestParam(value = "petRegistrationNumber", required = true) Integer petRegistrationNumber,
 			Model model) {
 		try {
+
 			Pet pet = petInfoService.selectPet(petRegistrationNumber);
 			model.addAttribute("pet", pet);
+
 			return "info/pet";
 		} catch (PetNotFoundException e) {
 			return "main/list";
@@ -48,36 +50,5 @@ public class PetInfoController {
 		}
 
 	}
-	
-//	@PostMapping
-//	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
-//			HttpServletResponse response) {
-//		if (errors.hasErrors()) {
-//			return "login/loginFormPage";
-//		}
-//
-//		try {
-//			Member member = loginService.selectByIdPassword(loginRequest);
-//
-//			session.setAttribute("login", member);
-//
-//			Cookie memoryCookie = new Cookie("memory", loginRequest.getId());
-//			memoryCookie.setPath("/");
-//			if (loginRequest.isMemory()) {
-//				memoryCookie.setMaxAge(60 * 60 * 24 * 30);
-//			} else {
-//				memoryCookie.setMaxAge(0);
-//			}
-//			response.addCookie(memoryCookie);
-//
-//			return "redirect:/home";
-//		} catch (MemberNotFoundException e) {
-//			errors.reject("notfound");
-//			return "login/loginFormPage";
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return "login/loginFormPage";
-//		}
-//	}
 
 }

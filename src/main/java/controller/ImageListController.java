@@ -41,7 +41,7 @@ import petProject.vo.Image;
 import petProject.vo.ImageUploadRequest;
 
 @Controller
-@RequestMapping("/list")
+@RequestMapping("/info/list")
 public class ImageListController {
 
 	@Resource(name = "imageUploadService")
