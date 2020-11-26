@@ -17,6 +17,7 @@
 		<typeAlias type="petProject.vo.MemberRegisterRequest" alias="memberRegisterRequest" />
 		<typeAlias type="petProject.vo.Kindcode" alias="kindcode" />
 		<typeAlias type="petProject.vo.Memberlevel" alias="memberlevel" />
+		<typeAlias type="petProject.vo.Memberauth" alias="memberauth" />
 	</typeAliases>
    
 </configuration>

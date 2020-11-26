@@ -104,7 +104,7 @@
 								<td width="15%" align="center">${member.memberName }</td>
 								<td width="15%" align="center">${member.memberId }</td>
 								<td width="15%" align="center">${member.memberPhoneNumber }</td>
-								<td width="15%" align="center">${member.memberAuthStatus}</td>
+								<td width="15%" align="center">${member.memberauth.memberStatus}</td>
 								<td width="15%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
 								<td width="15%" align="center"><div align="center">
 										<a href="#"> <input type="button" name="btn_modify"

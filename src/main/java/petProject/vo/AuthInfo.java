@@ -22,23 +22,23 @@ public class AuthInfo {
 	private String memberName;
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
-	private int memberAuthStatus;
 	private Memberlevel memberlevel;
+	private Memberauth memberauth;
+	
+	public AuthInfo() {
+		super();
+	}
 
 	public AuthInfo(String memberId, int memberNumber, String memberName, String memberPhoneNumber,
-			Date memberRegisterDate, int memberAuthStatus, Memberlevel memberlevel) {
+			Date memberRegisterDate, Memberlevel memberlevel, Memberauth memberauth) {
 		super();
 		this.memberId = memberId;
 		this.memberNumber = memberNumber;
 		this.memberName = memberName;
 		this.memberPhoneNumber = memberPhoneNumber;
 		this.memberRegisterDate = memberRegisterDate;
-		this.memberAuthStatus = memberAuthStatus;
 		this.memberlevel = memberlevel;
-	}
-
-	public AuthInfo() {
-		super();
+		this.memberauth = memberauth;
 	}
 
 	public String getMemberId() {
@@ -81,14 +81,6 @@ public class AuthInfo {
 		this.memberRegisterDate = memberRegisterDate;
 	}
 
-	public int getMemberAuthStatus() {
-		return memberAuthStatus;
-	}
-
-	public void setMemberAuthStatus(int memberAuthStatus) {
-		this.memberAuthStatus = memberAuthStatus;
-	}
-
 	public Memberlevel getMemberlevel() {
 		return memberlevel;
 	}
@@ -97,8 +89,12 @@ public class AuthInfo {
 		this.memberlevel = memberlevel;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Memberauth getMemberauth() {
+		return memberauth;
 	}
 
+	public void setMemberauth(Memberauth memberauth) {
+		this.memberauth = memberauth;
+	}
+	
 }
