@@ -34,14 +34,20 @@
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
 		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
-		<result column="MEMBER_AUTH_STATUS" property="memberAuthStatus" />
 		<association select="selectMemberlevel" property="memberlevel"
 			column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
+		<association select="selectMemberauth" property="memberauth"
+			column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
 	</resultMap>
 	
     <select id="selectMemberlevel" parameterType="memberlevel"
 		resultType="memberlevel">
 		SELECT "MEMBER_LEVEL_CODE", "MEMBER_LEVEL_DESCRIPTION" FROM "memberlevel" WHERE "MEMBER_LEVEL_CODE" = #{memberLevelCode}
+	</select>
+	
+	<select id="selectMemberauth" parameterType="memberauth"
+		resultType="memberauth">
+		SELECT "MEMBER_AUTH_STATUS", "MEMBER_STATUS" FROM "memberauth" WHERE "MEMBER_AUTH_STATUS" = #{memberAuthStatus}
 	</select>
 	
 	<resultMap type="member" id="memberResultMap">
@@ -51,9 +57,10 @@
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
 		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
-		<result column="MEMBER_AUTH_STATUS" property="memberAuthStatus" />
 		<association select="selectMemberlevel" property="memberlevel"
 			column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
+		<association select="selectMemberauth" property="memberauth"
+			column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
 	</resultMap>
 	
 </mapper>

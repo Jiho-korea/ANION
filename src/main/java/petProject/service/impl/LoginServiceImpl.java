@@ -44,10 +44,10 @@ public class LoginServiceImpl implements LoginService {
 		if (!passwordEncoder.matches(memberPassword, member.getMemberPassword())) {
 			throw new MemberNotFoundException("not found");
 		}
-		if (member.getMemberAuthStatus() != 1) {
+		if (member.getMemberauth().getMemberAuthStatus() != 1) {
 			throw new MemberAuthStatusException("not valid");
 		}
 		return new AuthInfo(member.getMemberId(), member.getMemberNumber(), member.getMemberName(), member.getMemberPhoneNumber(),
-				member.getMemberRegisterDate(), member.getMemberAuthStatus(), member.getMemberlevel());
+				member.getMemberRegisterDate(), member.getMemberlevel(), member.getMemberauth());
 	}
 }
