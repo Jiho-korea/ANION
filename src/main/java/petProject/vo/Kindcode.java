@@ -16,10 +16,14 @@ package petProject.vo;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Kindcode implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@NotBlank
 	private String petKindcode;
+	@NotBlank
 	private String petKind;
 
 	public Kindcode() {
