@@ -9,8 +9,6 @@
 */
 package controller.admin;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import petProject.service.KindcodeListService;
+import petProject.exception.KindcodeInsertException;
+import petProject.service.admin.KindcodeInsertService;
 import petProject.vo.Kindcode;
 
 @Controller
@@ -31,31 +30,27 @@ public class KindcodeInsertController {
 
 	private static final Logger logger = LoggerFactory.getLogger(KindcodeInsertController.class);
 
-	@Resource(name = "kindcodeListService")
-	KindcodeListService kindcodeListService;
+	@Resource(name = "kindcodeInsertService")
+	KindcodeInsertService kindcodeInsertService;
 
 	@GetMapping("/insert")
 	public String getKindCodeInsert(HttpSession session, Model model) {
-//		try {
-//			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
-//			model.addAttribute("kindcodeList", kindcodeList);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return "/home/main";
-//		}
 		return "/admin/code/kind/insert";
 	}
 
 	@PostMapping("/insert")
 	public String postKindCodeInsert(Kindcode kindcode, HttpSession session, Model model) {
 		try {
-			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
-			model.addAttribute("kindcodeList", kindcodeList);
+			kindcodeInsertService.insertKindcode(kindcode);
+
+		} catch (KindcodeInsertException e) {
+			e.printStackTrace();
+			return "/admin/code/kind/insert";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/home/main";
+			return "/admin/code/kind/insert";
 		}
-		return "/admin/code/kind/list";
+		return "redirect:/admin/code/kindcode/list";
 	}
 
 }
