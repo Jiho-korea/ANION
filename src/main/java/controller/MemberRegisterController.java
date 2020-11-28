@@ -31,6 +31,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -46,6 +48,7 @@ import petProject.service.MemberRegisterService;
 import petProject.vo.MemberRegisterRequest;
 
 @Controller
+@PropertySource("classpath:/mail/config/mail.properties")
 @RequestMapping("/signup")
 public class MemberRegisterController {
 
@@ -53,6 +56,11 @@ public class MemberRegisterController {
 	MemberRegisterService memberRegisterService;
 	@Resource(name = "mailSendService")
 	MailSendService mailSendService;
+
+	@Value("${mail.smtp.from_addr}")
+	private String from_addr;
+	@Value("${mail.smtp.from_name}")
+	private String from_name;
 
 	public MemberRegisterController() {
 		super();
@@ -83,14 +91,7 @@ public class MemberRegisterController {
 		}
 
 		try {
-//			memberRegisterService.selectById(memberRegisterRequest.getMemberId());
-//
-//			memberRegisterService.insertMember(memberRegisterRequest);
-//
-//			mailSendService.sendMail("ghok1027@gmail.com", "애니온", memberRegisterRequest.getMemberId(),
-//					memberRegisterRequest.getMemberName(), request, true);
-
-			memberRegisterService.memberRegister(memberRegisterRequest, "ghok1027@gmail.com", "애니온", request, true);
+			memberRegisterService.memberRegister(memberRegisterRequest, from_addr, from_name, request, true);
 			return "register/signupSucess";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
@@ -102,7 +103,7 @@ public class MemberRegisterController {
 			return "register/signupForm";
 		} catch (MailException e) {
 			e.printStackTrace();
-			errors.reject("fail.mail");
+			errors.reject("failed.mail");
 			return "register/signupForm";
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -65,8 +65,8 @@
 							<th width="8%">코드</th>
 							<th width="8%">견종명</th>
 							<th width="6%">사용여부</th>
-							<th width="6%"><input type="button" name="btn_plus"
-								id="btn_plus" class="btn_plus" value="신규등록" /></th>
+							<th width="6%"><a href="${pageContext.request.contextPath}/admin/code/kindcode/insert"><input type="button" name="btn_plus"
+								id="btn_plus" class="btn_plus" value="신규등록" /></a></th>
 						</tr>
 					</thead>
 					<tbody>
