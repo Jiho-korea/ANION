@@ -12,6 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,39 +45,41 @@
 				<h1>견종관리</h1>
 				<p class="location">홈 &gt; 코드관리 &gt; 견종관리</p>
 			</div>
-			
+
 			<div class="input_tt_style">
 				<div id="error_area"></div>
-				<form name="delivery" id="myForm" method="POST"
-					action="${pageContext.request.contextPath}/admin/code/kindcode/insert" class="delivery"
-					style="dispaly: inline;" novalidate="novalidate">
+				<form:form name="delivery" id="myForm" method="POST"
+					action="${pageContext.request.contextPath}/admin/code/kindcode/insert"
+					cssClass="delivery" cssStyle="display: inline;" modelAttribute="kindcode">
+					<!--  
 					<input type="hidden" name="act" id="act" value="insert"> <input
-						type="hidden" name="reg_mem_no" id="reg_mem_no" value="1">
+						type="hidden" name="reg_mem_no" id="reg_mem_no" value="1"> -->
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
 								<th width="15%">견종코드</th>
-								<td width="30%"><input type="text"
-									name="petKindcode" id="petKindcode"
-									class="txt_box w200" title="견종코드"></td>
+								<td width="30%"><form:input type="text" path="petKindcode"
+										cssClass="txt_box w200" title="견종코드" />
+									<form:errors path="petKindcode" /></td>
 								<th width="15%">견종명</th>
-								<td width="30%"><input type="text" name="petKind"
-									id="petKind" class="txt_box w200" maxlength="15"
-									title="견종명"></td>
+								<td width="30%"><form:input type="text" path="petKind"
+										cssClass="txt_box w200" maxlength="15" title="견종명" />
+									<form:errors path="petKind" /></td>
 							</tr>
-							
+
 						</tbody>
 					</table>
 					<!-- 개인정보 end-->
 					<p class="btn_center_area">
-						<input type="image" src="${pageContext.request.contextPath}/img/admin/button/bt_save.gif"
+						<input type="image"
+							src="${pageContext.request.contextPath}/img/admin/button/bt_save.gif"
 							name="btn_save" id="btn_save" width="31" height="19" title="저장"
 							class="btn" border="0">&nbsp; <img
-							src="${pageContext.request.contextPath}/img/admin/button/bt_cancel.gif" name="btn_cancel"
-							id="btn_cancel" width="31" height="19" alt="취소" class="btn"
-							border="0">
+							src="${pageContext.request.contextPath}/img/admin/button/bt_cancel.gif"
+							name="btn_cancel" id="btn_cancel" width="31" height="19" alt="취소"
+							class="btn" border="0">
 					</p>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<!-- rightcolumn 끝 -->

@@ -11,12 +11,15 @@ package controller.admin;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,21 +37,26 @@ public class KindcodeInsertController {
 	KindcodeInsertService kindcodeInsertService;
 
 	@GetMapping("/insert")
-	public String getKindCodeInsert(HttpSession session, Model model) {
-		return "/admin/code/kind/insert";
+	public String getKindCodeInsert(@ModelAttribute(value = "kindcode") Kindcode kindcode, HttpSession session,
+			Model model) {
+		return "admin/code/kind/insert";
 	}
 
 	@PostMapping("/insert")
-	public String postKindCodeInsert(Kindcode kindcode, HttpSession session, Model model) {
+	public String postKindCodeInsert(@Valid Kindcode kindcode, Errors errors, HttpSession session, Model model) {
+		if (errors.hasErrors()) {
+			return "admin/code/kind/insert";
+		}
+
 		try {
 			kindcodeInsertService.insertKindcode(kindcode);
 
 		} catch (KindcodeInsertException e) {
 			e.printStackTrace();
-			return "/admin/code/kind/insert";
+			return "admin/code/kind/insert";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/admin/code/kind/insert";
+			return "admin/code/kind/insert";
 		}
 		return "redirect:/admin/code/kindcode/list";
 	}
