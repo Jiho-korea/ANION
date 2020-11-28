@@ -7,6 +7,10 @@
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND", "PET_KIND_CODE" from "kindcode"
 	</select>
+	
+	<insert id="insertKindcode" parameterType="kindcode">
+    	INSERT INTO public.kindcode("PET_KIND", "PET_KIND_CODE") VALUES(#{petKind}, #{petKindcode});
+    </insert>
 
 	<resultMap type="kindcode" id="kindcodeResultMap">
 		<id column="PET_KIND_CODE" property="petKindcode" />

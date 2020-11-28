@@ -15,10 +15,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import petProject.vo.Kindcode;
 
-// DB PET 테이블에 접근하는  DAO
+// DB Kindcode 테이블에 접근하는  DAO
 @Mapper
 public interface KindcodeDAO {
 
 	List<Kindcode> selectKindcodeList() throws Exception;
 
+	int insertKindcode(Kindcode kindcode) throws Exception;
 }

@@ -20,6 +20,7 @@ import controller.MainController;
 import controller.MemberRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
+import controller.admin.KindcodeInsertController;
 import controller.admin.KindcodeListController;
 import controller.admin.MemberListController;
 
@@ -76,6 +77,11 @@ public class ControllerConfig {
 	@Bean
 	public KindcodeListController kindcodeListController() {
 		return new KindcodeListController();
+	}
+
+	@Bean
+	public KindcodeInsertController kindcodeInsertController() {
+		return new KindcodeInsertController();
 	}
 
 }
