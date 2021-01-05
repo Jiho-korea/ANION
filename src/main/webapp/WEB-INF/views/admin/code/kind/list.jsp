@@ -65,8 +65,10 @@
 							<th width="8%">코드</th>
 							<th width="8%">견종명</th>
 							<th width="6%">사용여부</th>
-							<th width="6%"><a href="${pageContext.request.contextPath}/admin/code/kindcode/insert"><input type="button" name="btn_plus"
-								id="btn_plus" class="btn_plus" value="신규등록" /></a></th>
+							<th width="6%"><a
+								href="${pageContext.request.contextPath}/admin/code/kindcode/insert"><input
+									type="button" name="btn_plus" id="btn_plus" class="btn_plus"
+									value="신규등록" /></a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -78,17 +80,18 @@
 								<td colspan="8" height="1" bgcolor="#EEEEEE"></td>
 							</tr>
 						</c:if>
-						<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
+						<c:forEach var="kindcode" items="${kindcodeList}"
+							varStatus="status">
 							<tr>
 								<td width="5%" align="center">${status.index + 1}</td>
 								<td width="8%" align="center">${kindcode.petKindcode}</td>
 								<td width="8%" align="center">${kindcode.petKind}</td>
 								<td width="6%" align="center">Y</td>
 								<td><div align="center">
-										<input type="button" name="btn_modify" id="btn_modify"
-											class="btn_modify {delivery_no: 4}" value="수정" /><input
+										<a href="${pageContext.request.contextPath}/admin/code/kindcode/update?petKindcode=${kindcode.petKindcode}"> <input type="button" name="btn_modify" id="btn_modify"
+											class="btn_modify {delivery_no: 4}" value="수정" /></a><a><input
 											type="button" name="btn_delete" id="btn_delete"
-											class="btn_delete {delivery_no: 4}" value="삭제" />
+											class="btn_delete {delivery_no: 4}" value="삭제" /> </a>
 									</div></td>
 							</tr>
 						</c:forEach>
