@@ -59,14 +59,13 @@
 							<tr>
 								<th width="15%">견종코드</th>
 								<td width="30%"><form:input type="text" path="petKindcode"
-										cssClass="txt_box w200" title="견종코드" disabled="true"/>
+										cssClass="txt_box w200" title="견종코드" readonly="true"/>
 									<form:errors path="petKindcode" /></td>
 								<th width="15%">견종명</th>
 								<td width="30%"><form:input type="text" path="petKind"
 										cssClass="txt_box w200" maxlength="15" title="견종명" />
 									<form:errors path="petKind" /></td>
 							</tr>
-
 						</tbody>
 					</table>
 					<!-- 개인정보 end-->
