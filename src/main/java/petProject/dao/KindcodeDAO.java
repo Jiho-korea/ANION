@@ -22,4 +22,8 @@ public interface KindcodeDAO {
 	List<Kindcode> selectKindcodeList() throws Exception;
 
 	int insertKindcode(Kindcode kindcode) throws Exception;
+
+	Kindcode selectKindcode(String petKindcode) throws Exception;
+
+	int updateKindcode(Kindcode kindcode) throws Exception;
 }

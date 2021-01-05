@@ -5,12 +5,25 @@
 
 <mapper namespace="petProject.dao.KindcodeDAO">
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
-		select "PET_KIND", "PET_KIND_CODE" from "kindcode"
+		select "PET_KIND",
+		"PET_KIND_CODE" from "kindcode"
 	</select>
-	
+
+	<select id="selectKindcode" resultType="kindcode">
+		select "PET_KIND",
+		"PET_KIND_CODE" from "kindcode" where "PET_KIND_CODE" = #{petKindcode}
+	</select>
+
 	<insert id="insertKindcode" parameterType="kindcode">
-    	INSERT INTO public.kindcode("PET_KIND", "PET_KIND_CODE") VALUES(#{petKind}, #{petKindcode});
-    </insert>
+		INSERT INTO public.kindcode("PET_KIND", "PET_KIND_CODE") VALUES(#{petKind},
+		#{petKindcode});
+	</insert>
+
+	<insert id="updateKindcode" parameterType="kindcode">
+		UPDATE public.kindcode
+		SET "PET_KIND"= #{petKind}
+		WHERE "PET_KIND_CODE"=#{petKindcode};
+	</insert>
 
 	<resultMap type="kindcode" id="kindcodeResultMap">
 		<id column="PET_KIND_CODE" property="petKindcode" />

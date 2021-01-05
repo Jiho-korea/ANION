@@ -40,9 +40,9 @@ public class KindcodeListController {
 			model.addAttribute("kindcodeList", kindcodeList);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/home/main";
+			return "home/main";
 		}
-		return "/admin/code/kind/list";
+		return "admin/code/kind/list";
 	}
 
 }
