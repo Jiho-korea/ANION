@@ -88,8 +88,12 @@
 								<td width="8%" align="center">${kindcode.petKind}</td>
 								<td width="6%" align="center">Y</td>
 								<td><div align="center">
-										<a href="${pageContext.request.contextPath}/admin/code/kindcode/update?petKindcode=${kindcode.petKindcode}"> <input type="button" name="btn_modify" id="btn_modify"
-											class="btn_modify {delivery_no: 4}" value="수정" /></a><a><input
+										<a
+											href="${pageContext.request.contextPath}/admin/code/kindcode/update?petKindcode=${kindcode.petKindcode}">
+											<input type="button" name="btn_modify" id="btn_modify"
+											class="btn_modify {delivery_no: 4}" value="수정" />
+										</a><a
+											href="${pageContext.request.contextPath}/admin/code/kindcode/delete?petKindcode=${kindcode.petKindcode}"><input
 											type="button" name="btn_delete" id="btn_delete"
 											class="btn_delete {delivery_no: 4}" value="삭제" /> </a>
 									</div></td>

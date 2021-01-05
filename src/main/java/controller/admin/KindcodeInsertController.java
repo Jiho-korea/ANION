@@ -15,6 +15,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -54,10 +55,14 @@ public class KindcodeInsertController {
 		} catch (KindcodeInsertException e) {
 			e.printStackTrace();
 			return "admin/code/kind/insert";
+		} catch (DuplicateKeyException e) {
+			errors.rejectValue("petKindcode", "duplicate.petKindcode");
+			return "admin/code/kind/insert";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "admin/code/kind/insert";
 		}
+
 		return "redirect:/admin/code/kindcode/list";
 	}
 
