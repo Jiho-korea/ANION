@@ -15,13 +15,20 @@
 	</select>
 
 	<insert id="insertKindcode" parameterType="kindcode">
-		INSERT INTO public.kindcode("PET_KIND", "PET_KIND_CODE") VALUES(#{petKind},
+		INSERT INTO
+		public.kindcode("PET_KIND", "PET_KIND_CODE") VALUES(#{petKind},
 		#{petKindcode});
 	</insert>
 
 	<insert id="updateKindcode" parameterType="kindcode">
 		UPDATE public.kindcode
 		SET "PET_KIND"= #{petKind}
+		WHERE "PET_KIND_CODE"=#{petKindcode};
+	</insert>
+
+	<insert id="deleteKindcode" parameterType="kindcode">
+		DELETE FROM
+		public.kindcode
 		WHERE "PET_KIND_CODE"=#{petKindcode};
 	</insert>
 

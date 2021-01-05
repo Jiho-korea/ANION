@@ -6,6 +6,10 @@
 작    성    일 : 2020.11.13
 작  성  내  용 : kindcode select메서드 작성
 ========================================================================
+작    성    자 : 강지호
+작    성    일 : 2021.01.05
+작  성  내  용 : kindcode update, delete 메서드 작성
+========================================================================
 */
 package petProject.dao;
 
@@ -26,4 +30,6 @@ public interface KindcodeDAO {
 	Kindcode selectKindcode(String petKindcode) throws Exception;
 
 	int updateKindcode(Kindcode kindcode) throws Exception;
+
+	int deleteKindcode(String petKindcode) throws Exception;
 }
