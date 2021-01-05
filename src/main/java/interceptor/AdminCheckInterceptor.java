@@ -13,6 +13,8 @@
 */
 package interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,13 +33,16 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		Memberlevel memberLevel = authInfo.getMemberlevel();
 		if (!"0".equals(memberLevel.getMemberLevelCode())) {
-			// String refererPage = request.getServletPath();
-			response.sendRedirect(request.getContextPath() + "/");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('권한이 없습니다.');");
+			out.println("location.href='" + request.getContextPath() + "/home';");
+			out.println("</script>");
+			out.flush();
 			return false;
 		}
-		// response.sendRedirect(request.getContextPath() + "/login/login");
 
-		// }
 		return true;
 	}
 

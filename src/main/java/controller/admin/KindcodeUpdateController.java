@@ -46,10 +46,10 @@ public class KindcodeUpdateController {
 
 			return "admin/code/kind/update";
 		} catch (KindcodeNotFoundException e) {
-			return "admin/code/kind/list";
+			return "redirect:/admin/code/kindcode/list";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "admin/code/kind/list";
+			return "redirect:/admin/code/kindcode/list";
 		}
 
 	}

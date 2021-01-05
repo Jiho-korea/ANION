@@ -95,7 +95,7 @@
 										</a><a
 											href="${pageContext.request.contextPath}/admin/code/kindcode/delete?petKindcode=${kindcode.petKindcode}"><input
 											type="button" name="btn_delete" id="btn_delete"
-											class="btn_delete {delivery_no: 4}" value="삭제" /> </a>
+											class="btn_delete {delivery_no: 4}" value="삭제" onclick="return confirm('정말로 삭제하시겠습니까?')" /> </a>
 									</div></td>
 							</tr>
 						</c:forEach>
