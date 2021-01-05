@@ -9,7 +9,12 @@
 */
 package controller.admin;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -34,12 +39,19 @@ public class KindcodeDeleteController {
 
 	@GetMapping("/delete")
 	public String getKindCodeDelete(@RequestParam(value = "petKindcode") String petKindcode, HttpSession session,
-			Model model) {
+			HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		try {
 			kindcodeDeleteService.deleteKindcode(petKindcode);
 			return "redirect:/admin/code/kindcode/list";
 		} catch (KindcodeDeleteException e) {
-			return "redirect:/admin/code/kindcode/list";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('잘못된 코드입니다.');");
+			out.println("location.href='" + request.getContextPath() + "/admin/code/kindcode/list';");
+			out.println("</script>");
+			out.flush();
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/admin/code/kindcode/list";
