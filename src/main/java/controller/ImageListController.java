@@ -99,18 +99,18 @@ public class ImageListController {
 					petRegistrationNumber, savedName);
 			imageUploadService.insertImage(imageUploadRequest);
 
-			return "redirect:/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-			return "redirect:/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 
-			return "redirect:/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 		}
 
 	}

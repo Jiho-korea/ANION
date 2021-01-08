@@ -114,7 +114,7 @@
 		</div--%>
 		<div class="row">
 			<div class="filebox">
-				<form action="${pageContext.request.contextPath}/list/image"
+				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
 					enctype="multipart/form-data">
 					<label for="ex_file"><spring:message code="image.face" /></label>
