@@ -28,6 +28,12 @@
     	where "MEMBER_ID" = #{memberId}
     </update>
     
+    <update id="updatePassword" parameterType="member">
+		update "member" 
+		set "MEMBER_PASSWORD" = #{member.memberPassword} 
+		where "MEMBER_ID" = #{member.memberId}
+	</update>
+    
      <resultMap type="member" id="memberListResultMap">
      	<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />

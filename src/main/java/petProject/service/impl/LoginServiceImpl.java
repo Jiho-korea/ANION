@@ -41,6 +41,7 @@ public class LoginServiceImpl implements LoginService {
 		if (member == null) {
 			throw new MemberNotFoundException("not found");
 		}
+		// memberPassword : 사용자 입력값, member.getMemberPassword : 암호화된 값
 		if (!passwordEncoder.matches(memberPassword, member.getMemberPassword())) {
 			throw new MemberNotFoundException("not found");
 		}
