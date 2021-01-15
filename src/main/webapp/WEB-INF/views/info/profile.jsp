@@ -1,14 +1,10 @@
 <%--
 ========================================================================
-파    일    명 : pet.jsp
+파    일    명 : profile.jsp
 ========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.11.09
-작  성  내  용 : 반려견 세부 정보 페이지
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.11.20
-수  정  내  용 : 모델에서 견종이름을 받을 수 있도록 수정
+작    성    자 : 송찬영
+작    성    일 : 2021.01.15
+작  성  내  용 : 회원 정보 페이지
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,12 +12,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
 <meta charset="UTF-8">
-<!-- 기존의 폰트 사용해라 -->
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><spring:message code="home.title" /></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
+
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -51,16 +52,8 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
-<style>
-#main {
-	width: 100%;
-	margin-top: 50px;
-}
-</style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<title><spring:message code="home.title" /></title>
 </head>
+
 <body class="text-center">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
@@ -68,43 +61,45 @@
 
 	<div class="container" id="main" style="width: 70%">
 		<h1 class="display-4">
-			<spring:message code="info.pet.banner" />
+			<spring:message code="info.member.banner" />
 		</h1>
 		<br>
 		<div style="background: transparent !important"
 			class="jumbotron border">
 			<h2 style="text-align: left">
-				<b><spring:message code="info.pet.profile" /></b>
+				<b><spring:message code="info.member.profile" /></b>
 			</h2>
 			<br> <br>
 			<h4 style="text-align: left">
-				<spring:message code="info.pet.name">
-					<spring:argument value="${authInfo.memberId}" />
+				<spring:message code="info.member.id">
+					<spring:argument value="${sessionScope.login.memberId }" />
 				</spring:message>
 			</h4>
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<spring:message code="info.pet.kind">
-					<spring:argument value="${authInfo.memberName}" />
+				<spring:message code="info.member.name">
+					<spring:argument value="${sessionScope.login.memberName }" />
 				</spring:message>
 			</h4>
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<spring:message code="info.pet.birthday">
-					<spring:argument value="${authInfo.memberRegisterDate}" />
+				<spring:message code="info.member.registration.date">
+					<spring:argument value="${sessionScope.login.memberRegisterDate}" />
 				</spring:message>
 			</h4>
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<spring:message code="info.pet.sex">
+				<spring:message code="info.member.authlevel">
 					<spring:argument
-						value="${authInfo.memberlevel.memberLevelDescription}" />
+						value="${sessionScope.login.memberlevel.memberLevelDescription}" />
 				</spring:message>
 			</h4>
-			
+
+			<!-- css 수정해야할 부분 -->
 			<hr class="my-4">
 			<h4 style="text-align: left">
-			<a href="${pageContext.request.contextPath}/edit">회원정보 수정</a>
+				<a href="${pageContext.request.contextPath}/edit"><spring:message
+						code="info.member.edit" /></a>
 			</h4>
 		</div>
 

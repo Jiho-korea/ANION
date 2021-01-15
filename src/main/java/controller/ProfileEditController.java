@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : ProfileEditController.java
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.01.15
+작  성  내  용 : 회원정보 수정을 누르면 동작하는 컨트롤러
+========================================================================
+*/
 package controller;
 
 import javax.annotation.Resource;
@@ -19,7 +28,7 @@ import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/edit")
-public class EditController {
+public class ProfileEditController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
@@ -34,7 +43,7 @@ public class EditController {
 	}
 
 	// 비밀번호 확인 버튼 클릭시
-	@PostMapping("/form")
+	@PostMapping
 	public String form(Member member, Errors errors, HttpSession session) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
@@ -50,13 +59,13 @@ public class EditController {
 	}
 
 	// 비밀번호 변경 폼
-	@GetMapping("/passwordForm")
+	@GetMapping("/passwordChange")
 	public String passwordform(ChangePasswordCommand changePasswordCommand, HttpSession session) {
 		return "edit/changePasswordForm";
 	}
 	
 
-	@PostMapping("/changePassword")
+	@PostMapping("/passwordChange")
 	public String submitPassword(ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
 			throws Exception {
 		if (errors.hasErrors()) {

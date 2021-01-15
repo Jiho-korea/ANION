@@ -1,14 +1,10 @@
 <%--
 ========================================================================
-파    일    명 : pet.jsp
+파    일    명 : changeForm.jsp
 ========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.11.09
-작  성  내  용 : 반려견 세부 정보 페이지
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.11.20
-수  정  내  용 : 모델에서 견종이름을 받을 수 있도록 수정
+작    성    자 : 송찬영
+작    성    일 : 2021.01.15
+작  성  내  용 : 비밀번호 변경 완료 페이지
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,12 +12,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
 <meta charset="UTF-8">
-<!-- 기존의 폰트 사용해라 -->
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><spring:message code="home.title" /></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
+
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -51,31 +52,27 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
-<style>
-#main {
-	width: 100%;
-	margin-top: 50px;
-}
-</style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<title><spring:message code="home.title" /></title>
 </head>
+
 <body class="text-center">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
-	<div class="container" id="main" style="width: 70%">
-		<h2 class="name">${sessionScope.login.memberName }</h2>
+	<div class="container text-center" id="main">
+		<div class="jumbotron">
+			<h1 class="h1 mb-3 font-weight-bold">${sessionScope.login.memberName }</h1>
+			<br>
 
-		<p>
-			변경완료
-		</p>
-		<p>
-			<a href="<c:url value='/home' />"> [홈으로]
-			</a>
-		</p>
+			<spring:message code="edit.member.password.done">
+				<spring:argument value="${sessionScope.login.memberName } " />
+			</spring:message>
+			<p>
+				<a href="<c:url value='/home' />"> [<spring:message
+						code="go.home" />]
+				</a>
+			</p>
+		</div>
 	</div>
 
 

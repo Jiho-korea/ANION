@@ -123,31 +123,35 @@ Preloader Start -->
 								</div>
 								<!-- Header-btn -->
 								<div class="header-right-btn d-none d-lg-block ml-20">
-									<c:choose>
-										<c:when test="${empty sessionScope.login}">
-											<a href="${pageContext.request.contextPath}/login/login"
-												class="btn header-btn"><spring:message code="go.login" /></a>
-											<a href="${pageContext.request.contextPath}/signup/step1"
-												class="btn header-btn"><spring:message
-													code="go.register" /></a>
-										</c:when>
-										<c:otherwise>
-											<a href="${pageContext.request.contextPath}/logout"
-												class="btn header-btn"><spring:message code="top.logout" /></a>
-											<c:if
-												test="${sessionScope.login.memberlevel.memberLevelCode eq 0}">
-												<a href="${pageContext.request.contextPath}/admin/member/list"><img
-													src="${pageContext.request.contextPath}/img/logo/tts.jpg"
-													style="max-width: 50px; height: 50px;" alt=""></a>
-											</c:if>
-											<c:if
-												test="${sessionScope.login.memberlevel.memberLevelCode eq 1}">
-												<a href="${pageContext.request.contextPath}/profile"><img
-													src="${pageContext.request.contextPath}/img/logo/tts.jpg"
-													style="max-width: 50px; height: 50px;" alt=""></a>
-											</c:if>
-										</c:otherwise>
-									</c:choose>
+									<nav class="navbar">
+										<c:choose>
+											<c:when test="${empty sessionScope.login}">
+												<a href="${pageContext.request.contextPath}/login/login"
+													class="btn header-btn"><spring:message code="go.login" /></a>
+												<a href="${pageContext.request.contextPath}/signup/step1"
+													class="btn header-btn"><spring:message
+														code="go.register" /></a>
+											</c:when>
+											<c:otherwise>
+												<nav class="btn header-btn">
+													<li class="nav-item dropdown">
+													<a href="#" id="dd_user" class="nav-link dropdown-toggle" data-toggle="dropdown">${sessionScope.login.memberName}님</a>
+														<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd_user">
+															<a href="${pageContext.request.contextPath}/profile" class="dropdown-item h5 mb-3 font-weight-bold"><spring:message code="info.member.profile"></spring:message></a>
+															<a href="${pageContext.request.contextPath}/logout" class="dropdown-item h5 mb-3 font-weight-bold">
+																<spring:message code="top.logout" /></a>
+														</div></li>
+												</nav>
+												<c:if
+													test="${sessionScope.login.memberlevel.memberLevelCode eq 0}">
+													<a
+														href="${pageContext.request.contextPath}/admin/member/list"><img
+														src="${pageContext.request.contextPath}/img/logo/tts.jpg"
+														style="max-width: 50px; height: 50px;" alt=""></a>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
+									</nav>
 								</div>
 							</div>
 						</div>
