@@ -108,7 +108,7 @@
 				<b><spring:message code="info.pet.parent" /></b>
 			</h2>
 			<br> <br>
-			
+
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<spring:message code="info.pet.mothername">
@@ -122,7 +122,7 @@
 				</spring:message>
 			</h4>
 		</div>
-		
+
 		<div style="background: transparent !important"
 			class="jumbotron border">
 			<h2 style="text-align: left">
@@ -147,6 +147,13 @@
 				</spring:message>
 			</h4>
 		</div>
+
+		<a href="#">
+		<button id="btn_modification" class="btn btn-info pull-right">
+			<spring:message code="info.pet.modification"/>
+		</button>
+		</a>
+		<br><br>
 	</div>
 
 	<c:import url="../included/bottom.jsp">
