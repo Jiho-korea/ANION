@@ -20,8 +20,15 @@ package petProject.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Member implements Serializable {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import petProject.exception.MemberInsertException;
+import petProject.exception.MemberNotFoundException;
+import petProject.exception.WrongIdPasswordException;
+
+public class Member implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	private String memberId;
 	private String memberPassword;

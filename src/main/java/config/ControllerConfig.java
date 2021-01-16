@@ -12,6 +12,7 @@ package config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import controller.ProfileEditController;
 import controller.EmailValidController;
 import controller.ImageListController;
 import controller.LoginController;
@@ -95,5 +96,9 @@ public class ControllerConfig {
 	public KindcodeDeleteController kindcodeDeleteController() {
 		return new KindcodeDeleteController();
 	}
-
+	
+	@Bean
+	public ProfileEditController editController() {
+		return new ProfileEditController();
+	}
 }
