@@ -32,7 +32,7 @@ public class ProfileEditController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
-	
+
 	@Resource(name = "changePasswordService")
 	ChangePasswordService changePasswordService;
 
@@ -49,7 +49,7 @@ public class ProfileEditController {
 
 		try {
 			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
-			
+
 			return "edit/changeForm";
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("memberPassword", "password.notMatch");
@@ -63,7 +63,6 @@ public class ProfileEditController {
 	public String passwordform(ChangePasswordCommand changePasswordCommand, HttpSession session) {
 		return "edit/changePasswordForm";
 	}
-	
 
 	@PostMapping("/passwordChange")
 	public String submitPassword(ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
@@ -73,17 +72,18 @@ public class ProfileEditController {
 		}
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
-			if (changePasswordCommand.getNewPassword() != "") {
-
+			if (changePasswordCommand.getNewPassword() != "" & (changePasswordCommand.getNewPassword()
+					.equals(changePasswordCommand.getCurrentPassword())) != true) {
 				changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 						changePasswordCommand.getNewPassword());
-
-				return "edit/changePassword";
+				session.invalidate();
+				return "edit/changePassword";//
 			}
-			errors.rejectValue("newPassword", "password.null");
-
+			errors.rejectValue("newPassword", "password.same");/////////////
 			return "edit/changePasswordForm";
-		} catch (WrongIdPasswordException e) {
+		} catch (
+
+		WrongIdPasswordException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
 			return "edit/changePasswordForm";

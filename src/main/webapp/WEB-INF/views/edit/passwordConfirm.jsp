@@ -91,7 +91,6 @@
 					<spring:message code="company.name" />
 				</p>
 			</form:form>
-
 		</div>
 	</div>
 
