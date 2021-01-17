@@ -65,18 +65,17 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+
 <title><spring:message code="home.title" /></title>
 </head>
-<body class="text-center">
+<body>
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
 
-	<div class="container">
-		<div class="mt-30">
+	<div class="container text-center">
+		<div id="main">
 			<h1 class="display-4">
 				<spring:message code="list.pet" />
 			</h1>
@@ -98,10 +97,10 @@
 				<!-- table head -->
 				<tr>
 					<!-- table row -->
-					<th><spring:message code="list.num" /></th>
-					<th><spring:message code="list.pet.name" /></th>
-					<th><spring:message code="list.image.count" /></th>
-					<th><spring:message code="list.image.upload" /></th>
+					<th width="15%"><spring:message code="list.num" /></th>
+					<th width="30%"><spring:message code="list.pet.name" /></th>
+					<th width="30%"><spring:message code="list.image.count" /></th>
+					<th width="25%"><spring:message code="list.image.upload" /></th>
 				</tr>
 			</thead>
 			<tbody>

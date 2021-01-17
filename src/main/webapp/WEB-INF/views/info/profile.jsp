@@ -52,14 +52,25 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+<style>
+#main {
+	width: 100%;
+	margin-top: 50px;
+}
+a, a:hover {
+	color: #000000;
+	text-decoration: none;
+	'
+}
+</style>
 </head>
 
-<body class="text-center">
+<body>
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
-	<div class="container" id="main" style="width: 70%">
+	<div class="container text-center" id="main" style="width: 70%">
 		<h1 class="display-4">
 			<spring:message code="info.member.banner" />
 		</h1>

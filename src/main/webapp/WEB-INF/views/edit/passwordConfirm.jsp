@@ -52,6 +52,12 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+<style>
+#main {
+	width: 100%;
+	margin-top: 50px;
+}
+</style>
 </head>
 
 <body class="text-center">
