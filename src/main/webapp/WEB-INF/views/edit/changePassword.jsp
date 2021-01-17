@@ -52,6 +52,12 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
+<style>
+#main {
+	width: 100%;
+	margin-top: 50px;
+}
+</style>
 </head>
 
 <body class="text-center">
@@ -61,14 +67,14 @@
 
 	<div class="container text-center" id="main">
 		<div class="jumbotron">
-			<h1 class="h1 mb-3 font-weight-bold">${sessionScope.login.memberName }</h1>
-			<br>
+			<h1 class="display-4">
+				<spring:message code="edit.member.password.done" />
+			</h1>
+			<br> <br>
 
-			<spring:message code="edit.member.password.done">
-				<spring:argument value="${sessionScope.login.memberName } " />
-			</spring:message>
+
 			<p>
-				<a href="<c:url value='/home' />"> [<spring:message
+				<a href="<c:url value='/home' />" style="color: black;"> [<spring:message
 						code="go.home" />]
 				</a>
 			</p>

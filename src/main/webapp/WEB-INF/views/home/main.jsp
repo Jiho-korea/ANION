@@ -56,7 +56,6 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<main>
 	 <!-- slider Area Start-->
 	<div class="slider-area position-relative">
 		<div class="slider-active dot-style">

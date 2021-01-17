@@ -53,7 +53,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
-
+<style>
+#main {
+	width: 100%;
+	margin-top: 50px;
+}
+</style>
 <body class="text-center">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
@@ -61,26 +66,33 @@
 
 	<div class="container text-center" id="main">
 		<div class="jumbotron border">
-			<h2 class="name h1 mb-3 font-weight-bold">
+			<h1 class="display-4">
 				<spring:message code="edit.member.password.change" />
-			</h2>
+			</h1>
 			<br> <br>
 
 			<form:form
 				action="${pageContext.request.contextPath}/edit/passwordChange"
 				method="post" modelAttribute="changePasswordCommand">
 				<p>
-					<label>현재 비밀번호 : <form:input path="currentPassword" /> <form:errors
+					<label> <form:input path="currentPassword"
+							cssClass="single-input" placeholder="현재 비밀번호"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '현재 비밀번호'" /> <form:errors
 							path="currentPassword" />
 					</label>
+
 				</p>
 				<p>
-					<label>새 비밀번호 : <form:input path="newPassword" /> <form:errors
+					<label> <form:input path="newPassword"
+							cssClass="single-input" placeholder="새 비밀번호"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '새 비밀번호'" /> <form:errors
 							path="newPassword" />
 					</label>
 				</p>
 				<button id="btn_login" class="btn btn-info pull-right" type="submit">
-					<spring:message code="go.change" />
+					<spring:message code="go.agree" />
 				</button>
 			</form:form>
 		</div>
