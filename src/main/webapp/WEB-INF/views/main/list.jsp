@@ -101,7 +101,7 @@
 					<th width="15%"><spring:message code="list.num" /></th>
 					<th width="30%"><spring:message code="list.pet.name" /></th>
 					<th width="30%"><spring:message code="list.image.count" /></th>
-					<th width="25%"><spring:message code="list.image.upload" /></th>
+					<th width="25%"><spring:message code="image.gallery" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -115,7 +115,7 @@
 						<td><a
 							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 							id="btn_photo" class="btn btn-info pull-right"><spring:message
-									code="list.image.upload" /></a></td>
+									code="go.right" /></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
