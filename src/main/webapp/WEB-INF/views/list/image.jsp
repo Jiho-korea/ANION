@@ -114,7 +114,8 @@
 				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
 					enctype="multipart/form-data">
-					<label for="ex_file"><spring:message code="image.face" /></label>
+					<label for="ex_file"><spring:message code="list.image.upload" /></label>
+					
 
 					<input type="file" name="file" id="ex_file" /> <input
 						type="hidden" name=petRegistrationNumber id="prn"
@@ -137,48 +138,7 @@
 					</a>
 				</div>
 			</c:forEach>
-			<%--
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱1" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					 <img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱2" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱3" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱4" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					 <img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱5" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			 --%>
+			
 		</div>
 	</div>
 
