@@ -70,7 +70,7 @@
 	<div class="container text-center">
 		<div id="main">
 			<h1 class="display-4">
-				<spring:message code="image.list" />
+				<spring:message code="image.gallery" />
 			</h1>
 		</div>
 
@@ -88,7 +88,7 @@
 				</form>
 			</div>
 		</div>
-		 
+		<!-- 
 		<div class="row">
 			<c:forEach var="image" items="${imageList}" varStatus="status">
 				<div class="col-md-4 text-center">
@@ -101,8 +101,7 @@
 					</a>
 				</div>
 			</c:forEach>
-		</div> 
-		<!--
+		</div>  -->
 		<div class="row gallery-item">
 			<c:forEach var="image" items="${imageList}" varStatus="status">
 				<div class="col-md-4">
@@ -112,7 +111,7 @@
 					</a>
 				</div>
 			</c:forEach>
-		</div>  -->
+		</div>
 	</div>
 
 	<c:import url="../included/bottom.jsp">
