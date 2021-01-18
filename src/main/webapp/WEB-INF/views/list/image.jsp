@@ -22,6 +22,8 @@
 <title><spring:message code="home.title" /></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
 <%--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script--%>
@@ -59,127 +61,58 @@
 	width: 100%;
 	margin-top: 50px;
 }
-
-/* 파일찾기 디자인 */
-.filebox label {
-	display: inline-block;
-	padding: .5em .75em;
-	color: #fff;
-	font-size: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #5cb85c;
-	cursor: pointer;
-	border: 1px solid #4cae4c;
-	border-radius: .25em;
-	-webkit-transition: background-color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.filebox label:hover {
-	background-color: #6ed36e;
-}
-
-.filebox label:active {
-	background-color: #367c36;
-}
-
-.filebox input[type="file"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
 </style>
 </head>
 <body>
 
 
 	<c:import url="../included/top.jsp" />
-	<div class="container">
-		<%--div class="jumbotron">
-			<h4 class="mb-4"></h4>
-			<form action="${pageContext.request.contextPath}/register/step2" method="post" cssClass="form-signin" modelAttribute="petRegisterRequest" onsubmit="return clickEvent()" enctype="multipart/form-data">
-				<button id="btn_register" class="btn btn-primary btn-lg btn-block" type="submit">
-					<spring:message code="go.pet.register" />
-				</button>
-			</form>
-		</div--%>
-		<div class="row">
+	<div class="container text-center">
+		<div id="main">
+			<h1 class="display-4">
+				<spring:message code="image.list" />
+			</h1>
+		</div>
+
+		<div class="text-right mb-10">
 			<div class="filebox">
 				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
 					enctype="multipart/form-data">
-					<label for="ex_file"><spring:message code="image.face" /></label>
 
-					<input type="file" name="file" id="ex_file" /> <input
-						type="hidden" name=petRegistrationNumber id="prn"
+					<label for="ex_file"><a class="btn btn-info"
+						style="color: white;"><spring:message code="list.image.upload" /></a></label>
+					<input type="file" name="file" id="ex_file" style="display: none" />
+					<input type="hidden" name=petRegistrationNumber id="prn"
 						value="${petRegistrationNumber}" />
 				</form>
 			</div>
 		</div>
-		<h2>
-			<spring:message code="image.list" />
-		</h2>
+		 
 		<div class="row">
 			<c:forEach var="image" items="${imageList}" varStatus="status">
 				<div class="col-md-4 text-center">
 					<a
 						href="${pageContext.request.contextPath}/upload/${image.imagePath}">
-						<%--p>시티이미지3</p--%> <img
+						<img
 						src="${pageContext.request.contextPath}/upload/${image.imagePath}"
-						alt="초롱3" style="width: 180px; height: 180px"
+						alt="이미지" style="width: 180px; height: 180px"
 						class="img-thumbnail" />
 					</a>
 				</div>
 			</c:forEach>
-			<%--
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱1" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					 <img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱2" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱3" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					<img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱4" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			<div class="col-md-4 text-center">
-				<a
-					href="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg">
-					 <img
-					src="${pageContext.request.contextPath}/upload/0fa2235d-4157-49af-87c9-00bb7e6b8edc.jpg"
-					alt="초롱5" style="width: 180px; height: 180px" class="img-thumbnail" />
-				</a>
-			</div>
-			 --%>
-		</div>
+		</div> 
+		<!--
+		<div class="row gallery-item">
+			<c:forEach var="image" items="${imageList}" varStatus="status">
+				<div class="col-md-4">
+					<a href="${pageContext.request.contextPath}/upload/${image.imagePath}" class="img-pop-up">
+						<div class="single-gallery-image"
+							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+					</a>
+				</div>
+			</c:forEach>
+		</div>  -->
 	</div>
 
 	<c:import url="../included/bottom.jsp">
