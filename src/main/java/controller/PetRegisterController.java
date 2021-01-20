@@ -103,6 +103,12 @@ public class PetRegisterController {
 
 		if (errors.hasErrors()) {
 			try {
+				String pattern = "yyyy-MM-dd";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+				String today = simpleDateFormat.format(new Date());
+				model.addAttribute("today", today);
+
 				kindcodeList = kindcodeListService.selectKindcodeList();
 				model.addAttribute("kindcodeList", kindcodeList);
 				return "register/registerStep1";
