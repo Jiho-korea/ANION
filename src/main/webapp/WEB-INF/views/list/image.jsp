@@ -84,7 +84,12 @@
 						style="color: white;"><spring:message code="list.image.upload" /></a></label>
 					<input type="file" name="file" id="ex_file" style="display: none" />
 					<input type="hidden" name=petRegistrationNumber id="prn"
-						value="${petRegistrationNumber}" />
+						value="${petRegistrationNumber}" /> <a
+						href="#"
+						class="mb-30"><button type="button"
+							class="btn btn-info pull-right">
+							<spring:message code="list.image.delete" />
+						</button></a>
 				</form>
 			</div>
 		</div>
@@ -105,7 +110,9 @@
 		<div class="row gallery-item">
 			<c:forEach var="image" items="${imageList}" varStatus="status">
 				<div class="col-md-4">
-					<a href="${pageContext.request.contextPath}/upload/${image.imagePath}" class="img-pop-up">
+					<a
+						href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+						class="img-pop-up">
 						<div class="single-gallery-image"
 							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
 					</a>
