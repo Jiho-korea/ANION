@@ -6,6 +6,10 @@
 작    성    일 : 2020.11.09
 작  성  내  용 : 반려견 세부 정보 컨트롤러
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2021.01.25
+수  정  내  용 : 견명 변경 폼 이동 기능 구현
+========================================================================
 */
 
 package controller;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import petProject.exception.PetNotFoundException;
 import petProject.service.PetInfoService;
 import petProject.vo.Pet;
+import petProject.vo.PetRegisterRequest;
 
 @Controller
 @RequestMapping("/info/pet")
@@ -40,6 +45,26 @@ public class PetInfoController {
 
 			Pet pet = petInfoService.selectPet(petRegistrationNumber);
 			model.addAttribute("pet", pet);
+
+			return "info/pet";
+		} catch (PetNotFoundException e) {
+			return "main/list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "main/list";
+		}
+
+	}
+
+	@GetMapping("/updatePname")
+	public String updatePname(
+			@RequestParam(value = "petRegistrationNumber", required = true) Integer petRegistrationNumber,
+			PetRegisterRequest petRegisterRequest, Model model) {
+		try {
+
+			Pet pet = petInfoService.selectPet(petRegistrationNumber);
+			model.addAttribute("pet", pet);
+			model.addAttribute("updatePname", true);
 
 			return "info/pet";
 		} catch (PetNotFoundException e) {
