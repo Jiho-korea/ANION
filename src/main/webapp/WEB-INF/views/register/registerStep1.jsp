@@ -94,7 +94,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <!--<spring:message code="pet.name" />--> <form:input
+						<label> <form:input
 								path="petName" cssClass="single-input" placeholder="견명"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = '견명'" />
 							<form:errors path="petName" />
