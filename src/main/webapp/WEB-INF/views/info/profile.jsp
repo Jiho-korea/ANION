@@ -57,6 +57,7 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
 a, a:hover {
 	color: #000000;
 	text-decoration: none;
@@ -81,17 +82,47 @@ a, a:hover {
 				<b><spring:message code="info.member.profile" /></b>
 			</h2>
 			<br> <br>
+
 			<h4 style="text-align: left">
-				<spring:message code="info.member.id">
-					<spring:argument value="${sessionScope.login.memberId }" />
-				</spring:message>
+				<c:choose>
+					<c:when test="${empty updateId}">
+						<spring:message code="info.member.id">
+							<spring:argument value="${sessionScope.login.memberId }" />
+						</spring:message>
+						<a
+							href="${pageContext.request.contextPath}/edit/updateId?memberId=${sessionScope.login.memberId }"
+							style="color: lightgray;" class="ml-10"><i
+							class="far fa-edit"></i></a>
+					</c:when>
+					<c:otherwise>
+						<form:form
+							action="${pageContext.request.contextPath}/edit/updateId?memberId=${sessionScope.login.memberId }"
+							method="post" cssClass="form-signin" modelAttribute="member" enctype="multipart/form-data">
+							<spring:message code="info.member.id">
+								<spring:argument value="" />
+							</spring:message>
+							<form:input path="memberId" placeholder="변경할 이메일"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '변경할  이메일'" />
+							<form:errors path="memberId" />
+							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
+
+							<a
+								href="${pageContext.request.contextPath}/info/profile"><input
+								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
+								value="취소" /> </a>
+						</form:form>
+					</c:otherwise>
+				</c:choose>
 			</h4>
+
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<spring:message code="info.member.name">
 					<spring:argument value="${sessionScope.login.memberName }" />
 				</spring:message>
 			</h4>
+
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<spring:message code="info.member.registration.date">
@@ -110,7 +141,7 @@ a, a:hover {
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<a href="${pageContext.request.contextPath}/edit"><spring:message
-						code="info.member.edit" /></a>
+						code="edit.member.password.change" /></a>
 			</h4>
 		</div>
 	</div>

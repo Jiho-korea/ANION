@@ -13,13 +13,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
+import petProject.service.ChangeIdService;
 import petProject.service.ChangePasswordService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
@@ -32,9 +35,36 @@ public class ProfileEditController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
-	
+
 	@Resource(name = "changePasswordService")
 	ChangePasswordService changePasswordService;
+
+	@Resource(name = "changeIdService")
+	ChangeIdService changeIdService;
+
+	@GetMapping("/updateId")
+	public String updateId(@RequestParam("memberId") String memberId, Member member, Model model) {
+		model.addAttribute("updateId", true);
+
+		return "info/profile";
+	}
+
+	@PostMapping("updateId")
+	public String updateId(@RequestParam("memberId") String memberId, Member member, HttpSession session)
+			throws Exception {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+		try {
+			if (memberId != "") {
+				changeIdService.changeId(authInfo, memberId);
+			}
+			return "info/profile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "info/profile";
+		}
+
+	}
 
 	// 회원정보 수정 버튼 클릭시
 	@GetMapping
@@ -42,28 +72,22 @@ public class ProfileEditController {
 		return "edit/passwordConfirm";
 	}
 
-	// 비밀번호 확인 버튼 클릭시
+	// 비밀번호 검증 버튼 클릭시
 	@PostMapping
-	public String form(Member member, Errors errors, HttpSession session) throws Exception {
+	public String form(Member member, ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
 		try {
 			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
-			
-			return "edit/changeForm";
+
+			return "edit/changePasswordForm";
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("memberPassword", "password.notMatch");
 
 			return "edit/passwordConfirm";
 		}
 	}
-
-	// 비밀번호 변경 폼
-	@GetMapping("/passwordChange")
-	public String passwordform(ChangePasswordCommand changePasswordCommand, HttpSession session) {
-		return "edit/changePasswordForm";
-	}
-	
 
 	@PostMapping("/passwordChange")
 	public String submitPassword(ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
