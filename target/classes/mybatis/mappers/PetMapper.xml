@@ -80,8 +80,10 @@
 
 	<select id="selectMember" parameterType="member"
 		resultType="member">
-		select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" 
-		from "public"."member" 
+		select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER",
+		"MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS",
+		"MEMBER_NUMBER"
+		from "public"."member"
 		WHERE "MEMBER_NUMBER" = #{memberNumber}
 	</select>
 
@@ -100,4 +102,11 @@
 		<result column="PET_SEX" property="petSex" />
 		<result column="IMAGE_COUNT" property="imageCount" />
 	</resultMap>
+
+
+	<update id="updatePetName" parameterType="petNameUpdateRequest">
+		UPDATE public.pet
+		SET "PET_NAME"=#{petNameUpdateRequest.petName}
+		WHERE "PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
+	</update>
 </mapper>
