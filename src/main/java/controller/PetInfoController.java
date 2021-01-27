@@ -15,17 +15,22 @@
 package controller;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.exception.PetInfoUpdateException;
 import petProject.exception.PetNotFoundException;
 import petProject.service.PetInfoService;
+import petProject.service.PetInfoUpdateService;
 import petProject.vo.Pet;
-import petProject.vo.PetRegisterRequest;
+import petProject.vo.petInfo.PetNameUpdateRequest;
 
 @Controller
 @RequestMapping("/info/pet")
@@ -33,6 +38,9 @@ public class PetInfoController {
 
 	@Resource(name = "petInfoService")
 	PetInfoService petInfoService;
+
+	@Resource(name = "petInfoUpdateService")
+	PetInfoUpdateService petInfoUpdateService;
 
 	public PetInfoController() {
 		super();
@@ -57,9 +65,9 @@ public class PetInfoController {
 	}
 
 	@GetMapping("/updatePname")
-	public String updatePname(
+	public String updatePnameGet(
 			@RequestParam(value = "petRegistrationNumber", required = true) Integer petRegistrationNumber,
-			PetRegisterRequest petRegisterRequest, Model model) {
+			PetNameUpdateRequest petNameUpdateRequest, Model model) {
 		try {
 
 			Pet pet = petInfoService.selectPet(petRegistrationNumber);
@@ -68,10 +76,42 @@ public class PetInfoController {
 
 			return "info/pet";
 		} catch (PetNotFoundException e) {
-			return "main/list";
+			e.printStackTrace();
+			return "info/pet";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "main/list";
+			return "info/pet";
+		}
+
+	}
+
+	@PostMapping("/updatePname")
+	public String updatePnamePost(@Valid PetNameUpdateRequest petNameUpdateRequest, Errors errors, Model model) {
+		if (errors.hasErrors()) {
+
+			try {
+				Pet pet = petInfoService.selectPet(petNameUpdateRequest.getPetRegistrationNumber());
+				model.addAttribute("pet", pet);
+				model.addAttribute("updatePname", true);
+				return "info/pet";
+			} catch (PetNotFoundException e) {
+				e.printStackTrace();
+				return "main/list";
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "main/list";
+			}
+
+		}
+		try {
+			petInfoUpdateService.updatePetName(petNameUpdateRequest);
+			return "redirect:/info/pet?" + "petRegistrationNumber=" + petNameUpdateRequest.getPetRegistrationNumber();
+		} catch (PetInfoUpdateException e) {
+			e.printStackTrace();
+			return "info/pet";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "info/pet";
 		}
 
 	}
