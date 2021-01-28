@@ -26,43 +26,13 @@
 <meta charset="UTF-8">
 <!-- 기존의 폰트 사용해라 -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- CSS here -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slicknav.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/progressbar_barfiller.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/gijgo.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/animate.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/animated-headline.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/magnific-popup.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/fontawesome-all.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/themify-icons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slick.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/nice-select.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css">
+
 <style>
 #main {
 	width: 100%;
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body class="text-center">
@@ -87,26 +57,35 @@
 						<spring:message code="info.pet.name">
 							<spring:argument value="${pet.petName}" />
 						</spring:message>
+
 						<a
 							href="${pageContext.request.contextPath}/info/pet/updatePname?petRegistrationNumber=${pet.petRegistrationNumber}"
 							style="color: lightgray;" class="ml-10"><i
 							class="far fa-edit"></i></a>
+
 					</c:when>
 					<c:when test="${updatePname}">
 						<form:form
 							action="${pageContext.request.contextPath}/info/pet/updatePname?petRegistrationNumber=${pet.petRegistrationNumber}"
 							method="post" cssClass="form-signin"
-							modelAttribute="petRegisterRequest" enctype="multipart/form-data">
+							modelAttribute="petNameUpdateRequest"
+							enctype="multipart/form-data">
 							<spring:message code="info.pet.name">
 								<spring:argument value="" />
 							</spring:message>
 							<form:input path="petName" placeholder="변경할 이름"
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '변경할 이름'" />
-							<form:errors path="petName" />
+								onblur="this.placeholder = '변경할 이름'" value="${pet.petName}" />
+
+							<input type="hidden" name="petRegistrationNumber"
+								value="${pet.petRegistrationNumber}" />
 							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
 
-							<a href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"><input type="button" name="btn_modify_cancle" id="btn_modify_cancle" value="취소" /> </a>
+							<a
+								href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"><input
+								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
+								value="취소" /> </a>
+							<form:errors path="petName" />
 						</form:form>
 					</c:when>
 
@@ -201,7 +180,18 @@
 	</div>
 
 	<!-- JS here -->
-
+	<script defer type="text/javascript" charset="utf-8">
+		/*
+			$('#updatePname').on('click', function() {
+				alert("테스트");
+			});
+		 */
+	</script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+		charset="utf-8"></script>
+	<script defer
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+		charset="utf-8"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
@@ -260,6 +250,6 @@
 		src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
-	<script defersrc="${pageContext.request.contextPath}/js/main.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
