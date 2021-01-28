@@ -51,7 +51,7 @@ public class ProfileEditController {
 	}
 
 	@PostMapping("updateName")
-	public String updateName(@RequestParam("memberName") String memberName, Member member, HttpSession session)
+	public String updateName(@RequestParam("memberName") String memberName, Errors error, Member member, HttpSession session)
 			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
@@ -59,6 +59,8 @@ public class ProfileEditController {
 			if (memberName != "") {
 				changeProfileService.updateName(authInfo, memberName);
 			}
+			error.rejectValue("memberName", "name.null");
+			
 			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +77,7 @@ public class ProfileEditController {
 	}
 	
 	@PostMapping("updateId")
-	public String updateId(@RequestParam("memberId") String memberId, Member member, HttpSession session, HttpServletRequest request)
+	public String updateId(@RequestParam("memberId") String memberId, Member member, Errors error, HttpSession session, HttpServletRequest request)
 			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
@@ -83,6 +85,8 @@ public class ProfileEditController {
 			if (memberId != "") {
 				changeProfileService.changeId(authInfo, memberId, request);
 			}
+			error.rejectValue("memberId", "blank");
+			
 			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
