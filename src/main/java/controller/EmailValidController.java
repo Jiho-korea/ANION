@@ -11,15 +11,18 @@ package controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.dao.MemberDAO;
 import petProject.exception.MemberAuthUpdateException;
+import petProject.service.ChangeProfileService;
 import petProject.service.MemberRegisterService;
-import petProject.vo.MemberRegisterRequest;
+import petProject.vo.ChangeIdCommand;
+import petProject.vo.Member;
 
 @Controller
 public class EmailValidController {
@@ -27,14 +30,42 @@ public class EmailValidController {
 	@Resource(name = "memberRegisterService")
 	MemberRegisterService memberRegisterService;
 
+	@Resource(name = "changeProfileService")
+	ChangeProfileService changeProfileService;
+	
+	@Autowired
+	private MemberDAO memberDAO;
+	
+	private static ChangeIdCommand changeIdCommand;
+
 	@RequestMapping(value = "/valid", method = RequestMethod.GET)
-	public String validemail(@RequestParam(value = "memberId", required = true) String memberId,
-			@ModelAttribute("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) {
-		memberRegisterRequest.setMemberId(memberId);
+	public String validemail(@RequestParam(value = "memberId", required = true) String memberId) {
 
 		// DB에 authStatus 업데이트
 		try {
 			memberRegisterService.updateAuthStatus(memberId);
+		} catch (MemberAuthUpdateException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "register/valid";
+	}
+
+	@RequestMapping(value = "/updateId", method = RequestMethod.GET)
+	public String updateEmail(@RequestParam(value = "memberId", required = true) String newId,
+			@RequestParam(value = "memberNumber", required = true) int memberNumber) {
+		Member member = memberDAO.selectByMemberNumber(memberNumber);
+		
+		changeIdCommand.setMemberId(newId);
+		changeIdCommand.setMemberNumber(memberNumber);
+		
+		// DB에 authStatus 업데이트
+		try {
+			memberRegisterService.updateAuthStatus(member.getMemberId());
+
+			changeProfileService.updateId(changeIdCommand);
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

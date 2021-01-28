@@ -36,6 +36,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import petProject.vo.ChangeIdCommand;
 import petProject.vo.Member;
 import petProject.vo.MemberRegisterRequest;
 
@@ -43,6 +44,8 @@ import petProject.vo.MemberRegisterRequest;
 @Mapper
 public interface MemberDAO {
 	Member selectMemberById(@Param("memberId") String memberId) throws Exception;
+
+	Member selectByMemberNumber(@Param("memberNumber") int memberNumber);
 
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 
@@ -52,7 +55,11 @@ public interface MemberDAO {
 
 	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
 
+	void requestEmailUpdate(@Param("memberId") String memberId);
+
 	void updatePassword(@Param("member") Member member);
 
-	void updateId(@Param("member") Member member);
+	void updateName(@Param("member") Member member);
+
+	void updateId(@Param("changeIdCommand") ChangeIdCommand changeIdCommand);
 }

@@ -46,9 +46,15 @@ public class LoginServiceImpl implements LoginService {
 			throw new MemberNotFoundException("not found");
 		}
 		if (member.getMemberauth().getMemberAuthStatus() != 1) {
-			throw new MemberAuthStatusException("not valid");
+			if (member.getMemberauth().getMemberAuthStatus() == 0) {
+				throw new MemberAuthStatusException("not valid");
+			}
+			else if(member.getMemberauth().getMemberAuthStatus() == 2) {
+				// 알람
+			}
 		}
-		return new AuthInfo(member.getMemberId(), member.getMemberNumber(), member.getMemberName(), member.getMemberPhoneNumber(),
-				member.getMemberRegisterDate(), member.getMemberlevel(), member.getMemberauth());
+		return new AuthInfo(member.getMemberId(), member.getMemberNumber(), member.getMemberName(),
+				member.getMemberPhoneNumber(), member.getMemberRegisterDate(), member.getMemberlevel(),
+				member.getMemberauth());
 	}
 }

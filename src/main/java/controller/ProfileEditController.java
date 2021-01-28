@@ -10,6 +10,7 @@
 package controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
-import petProject.service.ChangeIdService;
+import petProject.service.ChangeProfileService;
 import petProject.service.ChangePasswordService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
@@ -40,23 +41,47 @@ public class ProfileEditController {
 	ChangePasswordService changePasswordService;
 
 	@Resource(name = "changeIdService")
-	ChangeIdService changeIdService;
+	ChangeProfileService changeProfileService;
 
+	@GetMapping("/updateName")
+	public String updateName(@RequestParam("memberName") String memberName, Member member, Model model) {
+		model.addAttribute("updateName", true);
+
+		return "info/profile";
+	}
+
+	@PostMapping("updateName")
+	public String updateName(@RequestParam("memberName") String memberName, Member member, HttpSession session)
+			throws Exception {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+		try {
+			if (memberName != "") {
+				changeProfileService.updateName(authInfo, memberName);
+			}
+			return "info/profile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "info/profile";
+		}
+
+	}
+	
 	@GetMapping("/updateId")
 	public String updateId(@RequestParam("memberId") String memberId, Member member, Model model) {
 		model.addAttribute("updateId", true);
 
 		return "info/profile";
 	}
-
+	
 	@PostMapping("updateId")
-	public String updateId(@RequestParam("memberId") String memberId, Member member, HttpSession session)
+	public String updateId(@RequestParam("memberId") String memberId, Member member, HttpSession session, HttpServletRequest request)
 			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
 		try {
 			if (memberId != "") {
-				changeIdService.changeId(authInfo, memberId);
+				changeProfileService.changeId(authInfo, memberId, request);
 			}
 			return "info/profile";
 		} catch (Exception e) {

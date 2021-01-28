@@ -39,7 +39,7 @@ public class MailSendServiceImpl implements MailSendService {
 
 	@Override
 	public boolean sendMail(String from_addr, String from_name, String to_addr, String to_name,
-			HttpServletRequest request, boolean isHtml) throws Exception {
+			HttpServletRequest request, boolean isHtml, int status) throws Exception {
 
 		boolean result = false;
 
@@ -58,15 +58,28 @@ public class MailSendServiceImpl implements MailSendService {
 
 			message.setSubject("[애니온]");//
 
-			// 서버에 올릴 떈 이거 주석 풀어야함
-			String mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-					+ "<a href='http://anionbio.com:8119" + request.getContextPath() + "/valid?memberId=" + to_addr
-					+ "'target='_blank'>이메일 인증 확인</a>";
+			String mailContent = null;
+			if (status == 0) {
+				// 서버에 올릴 떈 이거 주석 풀어야함
+//				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+//						+ "<a href='http://anionbio.com:8119" + request.getContextPath() + "/valid?memberId=" + to_addr
+//						+ "'target='_blank'>이메일 인증 확인</a>";
 
-			// 로컬 호스트에서 실행시킬 떈 이거 사용
-//			String mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-//					+ "<a href='http://localhost:8080" + request.getContextPath() + "/valid?memberId=" + to_addr
-//					+ "' target='_blank'>이메일 인증 확인</a>";
+				// 로컬 호스트에서 실행시킬 떈 이거 사용
+				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+						+ "<a href='http://localhost:8080" + request.getContextPath() + "/valid?memberId=" + to_addr
+						+ "' target='_blank'>이메일 인증 확인</a>";
+			} else {
+				// 서버에 올릴 떈 이거 주석 풀어야함
+//				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+//						+ "<a href='http://anionbio.com:8119" + request.getContextPath() + "/valid?memberId=" + to_addr
+//						+ "'target='_blank'>이메일 인증 확인</a>";
+
+				// 로컬 호스트에서 실행시킬 떈 이거 사용
+				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+						+ "<a href='http://localhost:8080" + request.getContextPath() + "/updateId?memberId=" + to_addr + "&memberNumber=" + status
+						+ "' target='_blank'>이메일 인증 확인</a>";
+			}
 
 			if (isHtml) {
 				message.setContent(mailContent, "text/html;charset=UTF-8");
@@ -78,6 +91,7 @@ public class MailSendServiceImpl implements MailSendService {
 			result = true;
 		} catch (AuthenticationFailedException authenticationFailedException) {
 			result = false;
+			authenticationFailedException.printStackTrace();
 			throw new MailException(MailStatus.SEND_FAIL, "메일을 발송하는 중 에러가 발생했습니다.", authenticationFailedException);
 		} catch (MessagingException messagingException) {
 			result = false;

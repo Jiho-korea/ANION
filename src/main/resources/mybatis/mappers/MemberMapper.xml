@@ -9,6 +9,11 @@
     	FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
+    <select id="selectByMemberNumber" parameterType="int" resultMap="memberResultMap">
+    	SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE", "MEMBER_NUMBER"
+    	FROM "member" WHERE "MEMBER_NUMBER" = #{memberNumber}
+    </select>
+    
     <select id="selectById" parameterType="String" resultType="int">
     	SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
@@ -28,16 +33,28 @@
     	where "MEMBER_ID" = #{memberId}
     </update>
     
+    <update id="requestEmailUpdate" parameterType="String">
+    	update "member"
+    	set "MEMBER_AUTH_STATUS" = 2
+    	where "MEMBER_ID" = #{memberId}
+    </update>
+    
     <update id="updatePassword" parameterType="member">
 		update "member" 
 		set "MEMBER_PASSWORD" = #{member.memberPassword} 
 		where "MEMBER_ID" = #{member.memberId}
 	</update>
 	
-	<update id="updateId" parameterType="member">
+	<update id="updateName" parameterType="member">
 		update "member" 
-		set "MEMBER_ID" = #{member.memberId}
+		set "MEMBER_NAME" = #{member.memberName}
 		where "MEMBER_NUMBER" = #{member.memberNumber}
+	</update>
+	
+	<update id="updateId" parameterType="changeIdCommand">
+		update "member" 
+		set "MEMBER_ID" = #{changeIdCommand.memberId}
+		where "MEMBER_NUMBER" = #{changeIdCommand.memberNumber}
 	</update>
     
      <resultMap type="member" id="memberListResultMap">

@@ -1,6 +1,6 @@
 /*
 ========================================================================
-Kindcode파    일    명 : MemberRegisterServiceImpl
+파    일    명 : MemberRegisterServiceImpl
 ========================================================================
 작    성    자 : 임원석, 정세진, 송찬영
 작    성    일 : 2020.11.09
@@ -88,7 +88,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
 		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(),
-				memberRegisterRequest.getMemberName(), request, isHtml);
+				memberRegisterRequest.getMemberName(), request, isHtml, 0);
 	}
 
 }
