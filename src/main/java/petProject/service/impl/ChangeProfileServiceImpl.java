@@ -15,9 +15,10 @@ import petProject.service.ChangeProfileService;
 import petProject.service.MailSendService;
 import petProject.vo.AuthInfo;
 import petProject.vo.ChangeIdCommand;
+import petProject.vo.ChangeNameCommand;
 import petProject.vo.Member;
 
-@Service("changeIdService")
+@Service("changeProfileService")
 @Component
 public class ChangeProfileServiceImpl implements ChangeProfileService {
 
@@ -33,21 +34,21 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	MailSendService mailSendService;
 
 	@Transactional(rollbackFor = SQLException.class)
-	public void updateName(AuthInfo authInfo, String newName) throws Exception {
-		Member member = memberDAO.selectMemberById(authInfo.getMemberId());
+	public void updateName(ChangeNameCommand changeNameCommand, AuthInfo authInfo) throws Exception {
+		Member member = memberDAO.selectByMemberNumber(changeNameCommand.getMemberNumber());
 
-		member.setMemberName(newName);
-		authInfo.setMemberName(newName);
+		member.setMemberName(changeNameCommand.getMemberName());
+		authInfo.setMemberName(changeNameCommand.getMemberName());
 
 		memberDAO.updateName(member);
 	}
 
 	@Transactional(rollbackFor = SQLException.class)
-	public void changeId(AuthInfo authInfo, String newId, HttpServletRequest request) throws Exception {
-		Member member = memberDAO.selectMemberById(authInfo.getMemberId());
+	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws Exception {
 		memberDAO.requestEmailUpdate(authInfo.getMemberId());
-
-		mailSendService.sendMail(from_addr, from_name, newId, member.getMemberName(), request, true, member.getMemberNumber());
+		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
+		
+		mailSendService.sendMail(from_addr, from_name, changeIdCommand.getMemberId(), member, request, true);
 	}
 
 	@Transactional(rollbackFor = SQLException.class)

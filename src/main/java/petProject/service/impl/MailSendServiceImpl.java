@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import petProject.exception.MailException;
 import petProject.service.MailSendService;
 import petProject.vo.MailStatus;
+import petProject.vo.Member;
 
 @Service("mailSendService")
 public class MailSendServiceImpl implements MailSendService {
@@ -38,8 +39,8 @@ public class MailSendServiceImpl implements MailSendService {
 	private Session mailSession;
 
 	@Override
-	public boolean sendMail(String from_addr, String from_name, String to_addr, String to_name,
-			HttpServletRequest request, boolean isHtml, int status) throws Exception {
+	public boolean sendMail(String from_addr, String from_name, String to_addr, Member member,
+			HttpServletRequest request, boolean isHtml) throws Exception {
 
 		boolean result = false;
 
@@ -54,12 +55,12 @@ public class MailSendServiceImpl implements MailSendService {
 			message.setFrom(new InternetAddress(from_addr, from_name));
 			// message.setRecipients(Message.RecipientType.TO,
 			// InternetAddress.parse(to_address));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to_addr, to_name));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to_addr, member.getMemberName()));
 
 			message.setSubject("[애니온]");//
 
 			String mailContent = null;
-			if (status == 0) {
+			if (member.getMemberauth().getMemberAuthStatus() == 0) {
 				// 서버에 올릴 떈 이거 주석 풀어야함
 //				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
 //						+ "<a href='http://anionbio.com:8119" + request.getContextPath() + "/valid?memberId=" + to_addr
@@ -77,7 +78,7 @@ public class MailSendServiceImpl implements MailSendService {
 
 				// 로컬 호스트에서 실행시킬 떈 이거 사용
 				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-						+ "<a href='http://localhost:8080" + request.getContextPath() + "/updateId?memberId=" + to_addr + "&memberNumber=" + status
+						+ "<a href='http://localhost:8080" + request.getContextPath() + "/updateId?memberId=" + to_addr + "&memberNumber=" + member.getMemberNumber()
 						+ "' target='_blank'>이메일 인증 확인</a>";
 			}
 

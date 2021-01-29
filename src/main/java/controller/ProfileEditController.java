@@ -12,6 +12,7 @@ package controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
@@ -27,6 +27,8 @@ import petProject.service.ChangeProfileService;
 import petProject.service.ChangePasswordService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
+import petProject.vo.ChangeIdCommand;
+import petProject.vo.ChangeNameCommand;
 import petProject.vo.ChangePasswordCommand;
 import petProject.vo.Member;
 
@@ -40,53 +42,56 @@ public class ProfileEditController {
 	@Resource(name = "changePasswordService")
 	ChangePasswordService changePasswordService;
 
-	@Resource(name = "changeIdService")
+	@Resource(name = "changeProfileService")
 	ChangeProfileService changeProfileService;
 
-	@GetMapping("/updateName")
-	public String updateName(@RequestParam("memberName") String memberName, Member member, Model model) {
-		model.addAttribute("updateName", true);
+	@GetMapping("/updateId")
+	public String updateId(ChangeIdCommand changeIdCommand, Model model) {
+		model.addAttribute("updateId", true);
 
 		return "info/profile";
 	}
 
-	@PostMapping("updateName")
-	public String updateName(@RequestParam("memberName") String memberName, Errors error, Member member, HttpSession session)
-			throws Exception {
+	@PostMapping("updateId")
+	public String updateId(@Valid ChangeIdCommand changeIdCommand, Errors errors, HttpSession session, HttpServletRequest request,
+			Model model) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
+		if (errors.hasErrors()) {
+			model.addAttribute("updateId", true);
+
+			return "info/profile";
+		}
 		try {
-			if (memberName != "") {
-				changeProfileService.updateName(authInfo, memberName);
-			}
-			error.rejectValue("memberName", "name.null");
+			changeProfileService.changeId(changeIdCommand, authInfo, request);
 			
 			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "info/profile";
 		}
-
 	}
-	
-	@GetMapping("/updateId")
-	public String updateId(@RequestParam("memberId") String memberId, Member member, Model model) {
-		model.addAttribute("updateId", true);
+
+	@GetMapping("/updateName")
+	public String updateName(ChangeNameCommand changeNameCommand, Model model) {
+		model.addAttribute("updateName", true);
 
 		return "info/profile";
 	}
-	
-	@PostMapping("updateId")
-	public String updateId(@RequestParam("memberId") String memberId, Member member, Errors error, HttpSession session, HttpServletRequest request)
-			throws Exception {
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
+	@PostMapping("updateName")
+	public String updateName(@Valid ChangeNameCommand changeNameCommand, HttpSession session, Errors errors, Model model) throws Exception {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+		
+		if (errors.hasErrors()) {
+			model.addAttribute("updateName", true);
+
+			return "info/profile";
+		}
+		
 		try {
-			if (memberId != "") {
-				changeProfileService.changeId(authInfo, memberId, request);
-			}
-			error.rejectValue("memberId", "blank");
-			
+			changeProfileService.updateName(changeNameCommand, authInfo);
+
 			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,7 +124,7 @@ public class ProfileEditController {
 	}
 
 	@PostMapping("/passwordChange")
-	public String submitPassword(ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+	public String submitPassword(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
 			throws Exception {
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";

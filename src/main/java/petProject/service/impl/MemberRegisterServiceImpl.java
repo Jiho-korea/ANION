@@ -35,6 +35,7 @@ import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MailSendService;
 import petProject.service.MemberRegisterService;
+import petProject.vo.Member;
 import petProject.vo.MemberRegisterRequest;
 
 @Service("memberRegisterService")
@@ -87,8 +88,11 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 			HttpServletRequest request, boolean isHtml) throws Exception {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
+		
+
+		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
 		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(),
-				memberRegisterRequest.getMemberName(), request, isHtml, 0);
+				member, request, isHtml);
 	}
 
 }

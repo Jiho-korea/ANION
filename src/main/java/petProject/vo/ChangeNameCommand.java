@@ -2,19 +2,11 @@ package petProject.vo;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class ChangeIdCommand {
+public class ChangeNameCommand {
 
 	@NotBlank
-	private String memberId;
+	private String memberName;
 	private int memberNumber;
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
 
 	public int getMemberNumber() {
 		return memberNumber;
@@ -22,6 +14,14 @@ public class ChangeIdCommand {
 
 	public void setMemberNumber(int memberNumber) {
 		this.memberNumber = memberNumber;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 }

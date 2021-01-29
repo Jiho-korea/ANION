@@ -75,7 +75,7 @@
 				action="${pageContext.request.contextPath}/edit/passwordChange"
 				method="post" modelAttribute="changePasswordCommand">
 				<p>
-					<label> <form:input path="currentPassword"
+					<label> <form:password path="currentPassword"
 							cssClass="single-input" placeholder="현재 비밀번호"
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '현재 비밀번호'" /> <form:errors
@@ -84,7 +84,7 @@
 
 				</p>
 				<p>
-					<label> <form:input path="newPassword"
+					<label> <form:password path="newPassword"
 							cssClass="single-input" placeholder="새 비밀번호"
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '새 비밀번호'" /> <form:errors
