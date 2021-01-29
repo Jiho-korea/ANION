@@ -54,10 +54,7 @@ public class EmailValidController {
 	@RequestMapping(value = "/updateId", method = RequestMethod.GET)
 	public String updateEmail(ChangeIdCommand changeIdCommand) {
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
-		
-		changeIdCommand.setMemberId(changeIdCommand.getMemberId());
-		changeIdCommand.setMemberNumber(changeIdCommand.getMemberNumber());
-		
+			
 		// DB에 authStatus 업데이트
 		try {
 			memberRegisterService.updateAuthStatus(member.getMemberId());

@@ -52,7 +52,7 @@ public class ProfileEditController {
 		return "info/profile";
 	}
 
-	@PostMapping("updateId")
+	@PostMapping("/updateId")
 	public String updateId(@Valid ChangeIdCommand changeIdCommand, Errors errors, HttpSession session, HttpServletRequest request,
 			Model model) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
@@ -64,8 +64,10 @@ public class ProfileEditController {
 		}
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
+
+			model.addAttribute("updateId", true);
 			
-			return "info/profile";
+			return "register/signupSuccess";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "info/profile";
@@ -79,7 +81,7 @@ public class ProfileEditController {
 		return "info/profile";
 	}
 
-	@PostMapping("updateName")
+	@PostMapping("/updateName")
 	public String updateName(@Valid ChangeNameCommand changeNameCommand, Errors errors, HttpSession session, Model model) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		
@@ -91,7 +93,7 @@ public class ProfileEditController {
 		
 		try {
 			changeProfileService.updateName(changeNameCommand, authInfo);
-
+			
 			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
