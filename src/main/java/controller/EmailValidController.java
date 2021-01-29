@@ -6,10 +6,15 @@
 작    성    일 : 2020.11.17
 작  성  내  용 : 이메일 인증 컨트롤러
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.01.30
+수  정  내  용 : 이메일 변경 인증 메서드 추가
+========================================================================
 */
 package controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +60,7 @@ public class EmailValidController {
 	}
 
 	@RequestMapping(value = "/updateId", method = RequestMethod.GET)
-	public String updateEmail(ChangeIdCommand changeIdCommand, Model model) {
+	public String updateEmail(ChangeIdCommand changeIdCommand, Model model, HttpSession session) {
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
 			
 		// DB에 authStatus 업데이트
@@ -69,7 +74,8 @@ public class EmailValidController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		session.invalidate();
+		
 		return "register/valid";
 	}
 }

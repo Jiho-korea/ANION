@@ -68,7 +68,7 @@
 	<div class="container text-center" id="main">
 		<div class="jumbotron border">
 			<form:form action="${pageContext.request.contextPath}/edit"
-				method="post" cssClass="form-signin" modelAttribute="member">
+				method="post" cssClass="form-signin" modelAttribute="changePasswordCommand">
 
 				<h1 class="display-4">
 					<spring:message code="edit.member.password">
@@ -77,8 +77,9 @@
 				</h1>
 
 				<br>
-				<label> <form:password path="memberPassword"
+				<label> <form:password path="currentPassword"
 						placeholder="Enter your password ..." cssClass="single-input" />
+						<form:errors path="currentPassword" />
 				</label>
 				<br>
 				<br>
