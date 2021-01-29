@@ -57,6 +57,7 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
 a, a:hover {
 	color: #000000;
 	text-decoration: none;
@@ -81,17 +82,80 @@ a, a:hover {
 				<b><spring:message code="info.member.profile" /></b>
 			</h2>
 			<br> <br>
+
 			<h4 style="text-align: left">
-				<spring:message code="info.member.id">
-					<spring:argument value="${sessionScope.login.memberId }" />
-				</spring:message>
+				<c:choose>
+					<c:when test="${empty updateId}">
+						<spring:message code="info.member.id">
+							<spring:argument value="${sessionScope.login.memberId }" />
+						</spring:message>
+						<a href="${pageContext.request.contextPath}/edit/updateId"
+							style="color: lightgray;" class="ml-10"><i
+							class="far fa-edit"></i></a>
+					</c:when>
+					<c:otherwise>
+						<form:form
+							action="${pageContext.request.contextPath}/edit/updateId"
+							method="post" cssClass="form-signin"
+							modelAttribute="changeIdCommand" enctype="multipart/form-data">
+							<spring:message code="info.member.id">
+								<spring:argument value="" />
+							</spring:message>
+							<form:input path="memberId" placeholder="변경할 이메일"
+								value="${sessionScope.login.memberId }"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '변경할  이메일'" />
+							<input type="hidden" name="memberNumber"
+								value="${sessionScope.login.memberNumber }" />
+							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
+
+							<a href="${pageContext.request.contextPath}/profile"><input
+								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
+								value="취소" /> </a>
+
+							<form:errors path="memberId" />
+						</form:form>
+					</c:otherwise>
+				</c:choose>
 			</h4>
+
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<spring:message code="info.member.name">
-					<spring:argument value="${sessionScope.login.memberName }" />
-				</spring:message>
+				<c:choose>
+					<c:when test="${empty updateName}">
+						<spring:message code="info.member.name">
+							<spring:argument value="${sessionScope.login.memberName }" />
+						</spring:message>
+						<a href="${pageContext.request.contextPath}/edit/updateName"
+							style="color: lightgray;" class="ml-10"><i
+							class="far fa-edit"></i></a>
+					</c:when>
+					<c:otherwise>
+						<form:form
+							action="${pageContext.request.contextPath}/edit/updateName"
+							method="post" cssClass="form-signin"
+							modelAttribute="changeNameCommand" enctype="multipart/form-data">
+							<spring:message code="info.member.name">
+								<spring:argument value="" />
+							</spring:message>
+							<form:input path="memberName" placeholder="변경할 이름"
+								value="${sessionScope.login.memberName }"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '변경할  이름'" />
+							<input type="hidden" name="memberNumber"
+								value="${sessionScope.login.memberNumber }" />
+							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
+
+							<a href="${pageContext.request.contextPath}/profile"><input
+								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
+								value="취소" /> </a>
+
+							<form:errors path="memberName" />
+						</form:form>
+					</c:otherwise>
+				</c:choose>
 			</h4>
+
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<spring:message code="info.member.registration.date">
@@ -110,7 +174,7 @@ a, a:hover {
 			<hr class="my-4">
 			<h4 style="text-align: left">
 				<a href="${pageContext.request.contextPath}/edit"><spring:message
-						code="info.member.edit" /></a>
+						code="edit.member.password.change" /></a>
 			</h4>
 		</div>
 	</div>

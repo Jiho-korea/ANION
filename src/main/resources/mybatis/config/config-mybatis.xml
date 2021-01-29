@@ -18,6 +18,9 @@
 		<typeAlias type="petProject.vo.Kindcode" alias="kindcode" />
 		<typeAlias type="petProject.vo.Memberlevel" alias="memberlevel" />
 		<typeAlias type="petProject.vo.Memberauth" alias="memberauth" />
+		<typeAlias type="petProject.vo.ChangeIdCommand" alias="changeIdCommand" />
+		<typeAlias type="petProject.vo.petInfo.PetNameUpdateRequest" alias="petNameUpdateRequest" />
+		
 	</typeAliases>
    
 </configuration>

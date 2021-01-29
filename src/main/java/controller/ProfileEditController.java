@@ -10,9 +10,12 @@
 package controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
 import petProject.service.ChangePasswordService;
+import petProject.service.ChangeProfileService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
+import petProject.vo.ChangeIdCommand;
+import petProject.vo.ChangeNameCommand;
 import petProject.vo.ChangePasswordCommand;
 import petProject.vo.Member;
 
@@ -36,21 +42,84 @@ public class ProfileEditController {
 	@Resource(name = "changePasswordService")
 	ChangePasswordService changePasswordService;
 
+	@Resource(name = "changeProfileService")
+	ChangeProfileService changeProfileService;
+
+	@GetMapping("/updateId")
+	public String updateId(ChangeIdCommand changeIdCommand, Model model) {
+		model.addAttribute("updateId", true);
+
+		return "info/profile";
+	}
+
+	@PostMapping("/updateId")
+	public String updateId(@Valid ChangeIdCommand changeIdCommand, Errors errors, HttpSession session,
+			HttpServletRequest request, Model model) throws Exception {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+		if (errors.hasErrors()) {
+			model.addAttribute("updateId", true);
+
+			return "info/profile";
+		}
+		try {
+			changeProfileService.changeId(changeIdCommand, authInfo, request);
+
+			model.addAttribute("updateId", true);
+
+			return "register/signupSuccess";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "info/profile";
+		}
+	}
+
+	@GetMapping("/updateName")
+	public String updateName(ChangeNameCommand changeNameCommand, Model model) {
+		model.addAttribute("updateName", true);
+
+		return "info/profile";
+	}
+
+	@PostMapping("/updateName")
+	public String updateName(@Valid ChangeNameCommand changeNameCommand, Errors errors, HttpSession session,
+			Model model) throws Exception {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+		if (errors.hasErrors()) {
+			model.addAttribute("updateName", true);
+
+			return "info/profile";
+		}
+
+		try {
+			changeProfileService.updateName(changeNameCommand, authInfo);
+
+			return "info/profile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "info/profile";
+		}
+
+	}
+
 	// 회원정보 수정 버튼 클릭시
 	@GetMapping
 	public String check(Member member) {
 		return "edit/passwordConfirm";
 	}
 
-	// 비밀번호 확인 버튼 클릭시
+	// 비밀번호 검증 버튼 클릭시
 	@PostMapping
-	public String form(Member member, Errors errors, HttpSession session) throws Exception {
+	public String form(Member member, ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
 		try {
 			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
 
-			return "edit/changeForm";
+			return "edit/changePasswordForm";
+
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("memberPassword", "password.notMatch");
 
@@ -65,7 +134,7 @@ public class ProfileEditController {
 	}
 
 	@PostMapping("/passwordChange")
-	public String submitPassword(ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+	public String submitPassword(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
 			throws Exception {
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";

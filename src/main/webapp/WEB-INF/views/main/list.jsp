@@ -80,7 +80,8 @@
 				<spring:message code="list.pet" />
 			</h1>
 		</div>
-		<div class="text-right mb-10"><!--  -->
+		<div class="text-right mb-10">
+			<!--  -->
 
 			<a href="${pageContext.request.contextPath}/register/step1"
 				class="mb-30"><button type="submit"
@@ -100,7 +101,7 @@
 					<th width="15%"><spring:message code="list.num" /></th>
 					<th width="30%"><spring:message code="list.pet.name" /></th>
 					<th width="30%"><spring:message code="list.image.count" /></th>
-					<th width="25%"><spring:message code="list.image.upload" /></th>
+					<th width="25%"><spring:message code="image.gallery" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -113,8 +114,8 @@
 						<td>${pet.imageCount}건</td>
 						<td><a
 							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
-							name="btn_photo" id="btn_photo" class="btn btn-info pull-right"><spring:message
-									code="list.image.upload" /></a></td>
+							id="btn_photo" class="btn btn-info pull-right"><spring:message
+									code="go.right" /></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -35,6 +35,40 @@
 	</div>
 </div>
 Preloader Start -->
+<head>
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
+<!-- CSS here -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/slicknav.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/progressbar_barfiller.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/gijgo.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/animate.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/animated-headline.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/magnific-popup.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/fontawesome-all.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/themify-icons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/slick.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/nice-select.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css">
+
+</head>
 <header>
 	<%-- Header Start --%>
 	<div class="header-area">
