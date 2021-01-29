@@ -24,4 +24,6 @@ public interface ChangeProfileService {
 	
 	void updateId(ChangeIdCommand changeIdCommand);
 
+	int selectById(String memberId) throws Exception;
+
 }

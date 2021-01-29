@@ -89,7 +89,6 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
 		
-
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
 		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(),
 				member, request, isHtml);
