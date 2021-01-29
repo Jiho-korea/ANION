@@ -102,9 +102,9 @@
 								<td width="10%" align="center">${member.memberauth.memberStatus}</td>
 								<td width="10%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
 								<td width="10%" align="center"><div align="center">
-										<a href="#"> <input type="button" name="btn_modify"
+										<a href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}" target="_blank"> <input type="button" name="btn_modify"
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="확인" /></a>
+											value="확인"/></a>
 									</div></td>
 								
 								<td width="10%" align="center"><div align="center">
