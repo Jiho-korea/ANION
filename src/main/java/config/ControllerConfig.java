@@ -26,6 +26,7 @@ import controller.admin.KindcodeInsertController;
 import controller.admin.KindcodeListController;
 import controller.admin.KindcodeUpdateController;
 import controller.admin.MemberListController;
+import controller.admin.PetListController;
 
 @Configuration
 public class ControllerConfig {
@@ -100,6 +101,11 @@ public class ControllerConfig {
 	@Bean
 	public ProfileEditController editController() {
 		return new ProfileEditController();
+	}
+
+	@Bean
+	public PetListController petListController() {
+		return new PetListController();
 	}
 
 }

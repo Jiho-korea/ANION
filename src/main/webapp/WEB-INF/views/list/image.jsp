@@ -73,13 +73,13 @@
 				<spring:message code="image.gallery" />
 			</h1>
 		</div>
-
+		<c:if test="${empty admin}">
 		<div class="text-right mb-10">
 			<div class="filebox">
 				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
 					enctype="multipart/form-data">
-
+					
 					<label for="ex_file"><a class="btn btn-info"
 						style="color: white;"><spring:message code="list.image.upload" /></a></label>
 					<input type="file" name="file" id="ex_file" style="display: none" />
@@ -93,6 +93,7 @@
 				</form>
 			</div>
 		</div>
+		</c:if>
 		<!-- 
 		<div class="row">
 			<c:forEach var="image" items="${imageList}" varStatus="status">
