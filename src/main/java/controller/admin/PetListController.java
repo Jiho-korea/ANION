@@ -39,6 +39,7 @@ public class PetListController {
 		try {
 			List<Pet> petList = petListService.selectPetList(memberNumber);
 			model.addAttribute("petList", petList);
+			model.addAttribute("admin", true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
