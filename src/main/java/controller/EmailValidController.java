@@ -35,8 +35,6 @@ public class EmailValidController {
 	
 	@Autowired
 	private MemberDAO memberDAO;
-	
-	private static ChangeIdCommand changeIdCommand;
 
 	@RequestMapping(value = "/valid", method = RequestMethod.GET)
 	public String validemail(@RequestParam(value = "memberId", required = true) String memberId) {
@@ -54,12 +52,11 @@ public class EmailValidController {
 	}
 
 	@RequestMapping(value = "/updateId", method = RequestMethod.GET)
-	public String updateEmail(@RequestParam(value = "memberId", required = true) String newId,
-			@RequestParam(value = "memberNumber", required = true) int memberNumber) {
-		Member member = memberDAO.selectByMemberNumber(memberNumber);
+	public String updateEmail(ChangeIdCommand changeIdCommand) {
+		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
 		
-		changeIdCommand.setMemberId(newId);
-		changeIdCommand.setMemberNumber(memberNumber);
+		changeIdCommand.setMemberId(changeIdCommand.getMemberId());
+		changeIdCommand.setMemberNumber(changeIdCommand.getMemberNumber());
 		
 		// DB에 authStatus 업데이트
 		try {

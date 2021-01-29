@@ -80,7 +80,7 @@ public class ProfileEditController {
 	}
 
 	@PostMapping("updateName")
-	public String updateName(@Valid ChangeNameCommand changeNameCommand, HttpSession session, Errors errors, Model model) throws Exception {
+	public String updateName(@Valid ChangeNameCommand changeNameCommand, Errors errors, HttpSession session, Model model) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		
 		if (errors.hasErrors()) {
