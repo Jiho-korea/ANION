@@ -122,7 +122,11 @@ public class ProfileEditController {
 		}
 		
 		try {
-			if(!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
+			if(changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
+				errors.reject("password.equal");
+				
+				return "edit/changePasswordForm";
+			}else if(!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
 				errors.reject("checkNewPassword.notMatch");
 				
 				return "edit/changePasswordForm";
