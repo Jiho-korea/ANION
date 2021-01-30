@@ -19,6 +19,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <title><spring:message code="home.title" /></title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,6 +63,8 @@
 	margin-top: 50px;
 }
 </style>
+
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -75,6 +78,9 @@
 		</div>
 
 		<div class="text-right mb-10">
+			
+		<c:choose>
+		<c:when test="${multidelete ne 1}">
 			<div class="filebox">
 				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
@@ -86,37 +92,45 @@
 					<input type="hidden" name=petRegistrationNumber id="prn"
 						value="${petRegistrationNumber}" /> <a
 						href="#"
-						class="mb-30"><button type="button"
-							class="btn btn-info pull-right">
-							<spring:message code="list.image.delete" />
-						</button></a>
+						class="mb-30">
+						
+					
+					<button type="submit" name="delete" value="true"
+                            class="btn btn-info pull-right">
+                            <spring:message code="list.image.delete" />  
+                    </button></a>   	
 				</form>
 			</div>
+			</c:when>
+			<c:otherwise>
+			<button type="submit" name="delete" value="true"
+                            class="btn btn-info pull-right">
+                            <spring:message code="list.image.delete" />  
+                    </button></a>   	
+			</c:otherwise>
+			</c:choose>
 		</div>
-		<!-- 
-		<div class="row">
+
+			<div class="row gallery-item">
 			<c:forEach var="image" items="${imageList}" varStatus="status">
-				<div class="col-md-4 text-center">
-					<a
-						href="${pageContext.request.contextPath}/upload/${image.imagePath}">
-						<img
-						src="${pageContext.request.contextPath}/upload/${image.imagePath}"
-						alt="이미지" style="width: 180px; height: 180px"
-						class="img-thumbnail" />
-					</a>
-				</div>
-			</c:forEach>
-		</div>  -->
-		<div class="row gallery-item">
-			<c:forEach var="image" items="${imageList}" varStatus="status">
-				<div class="col-md-4">
-					<a
-						href="${pageContext.request.contextPath}/upload/${image.imagePath}"
-						class="img-pop-up">
-						<div class="single-gallery-image"
-							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
-					</a>
-				</div>
+			<div class="col-md-4">
+						<a
+							href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+							class="img-pop-up">
+							<div class="single-gallery-image"
+								style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+						</a>
+			   </div>
+			
+			<c:if test="${multidelete eq 1}">
+                    <div class="chekBox">
+                        <input type="checkbox" name="chBox" class="chBox"
+                            data-num="${image.imagePath}" />
+                    </div>
+           </c:if>
+
+				
+					
 			</c:forEach>
 		</div>
 	</div>
