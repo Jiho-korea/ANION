@@ -34,6 +34,7 @@ import petProject.vo.AuthInfo;
 import petProject.vo.ChangeIdCommand;
 import petProject.vo.ChangeNameCommand;
 import petProject.vo.ChangePasswordCommand;
+import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/edit")
@@ -107,22 +108,25 @@ public class ProfileEditController {
 
 	// 회원정보 수정 버튼 클릭시
 	@GetMapping
-	public String check(ChangePasswordCommand changePasswordCommand) {
+	public String check(Member member) {
 		return "edit/passwordConfirm";
 	}
 
 	// 비밀번호 검증 버튼 클릭시
 	@PostMapping
-	public String form(ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+	public String form(@Valid Member member, Errors errors, ChangePasswordCommand changePasswordCommand, HttpSession session)
 			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
+		if (errors.hasErrors()) {
+			return "edit/passwordConfirm";
+		}
 		try {
-			loginService.selectMemberById(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword());
-
+			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
+			
 			return "edit/changePasswordForm";
 		} catch (MemberNotFoundException e) {
-			errors.rejectValue("currentPassword", "password.notMatch");
+			errors.rejectValue("memberPassword", "password.notMatch");
 
 			return "edit/passwordConfirm";
 		}
@@ -139,7 +143,7 @@ public class ProfileEditController {
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
 
-			return "edit/changePasswordForm";
+			return "edit/changePassword";
 		} catch (WrongIdPasswordException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
