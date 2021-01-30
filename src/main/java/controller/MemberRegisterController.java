@@ -92,6 +92,8 @@ public class MemberRegisterController {
 
 		try {
 			memberRegisterService.memberRegister(memberRegisterRequest, from_addr, from_name, request, true);
+			
+			model.addAttribute("register", true);
 			return "register/signupSucess";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();

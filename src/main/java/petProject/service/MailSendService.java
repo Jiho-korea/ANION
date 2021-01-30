@@ -11,8 +11,10 @@ package petProject.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import petProject.vo.Member;
+
 public interface MailSendService {
 
-	boolean sendMail(String from_addr, String from_name, String memberId, String to_name, HttpServletRequest request,
-			boolean isHtml) throws Exception;
+	boolean sendMail(String from_addr, String from_name, String to_addr, Member member,
+			HttpServletRequest request, boolean isHtml) throws Exception;
 }

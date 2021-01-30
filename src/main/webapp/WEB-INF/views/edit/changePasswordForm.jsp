@@ -74,23 +74,34 @@
 			<form:form
 				action="${pageContext.request.contextPath}/edit/passwordChange"
 				method="post" modelAttribute="changePasswordCommand">
+
 				<p>
-					<label> <form:input path="currentPassword"
+					<label> <form:password path="currentPassword"
 							cssClass="single-input" placeholder="현재 비밀번호"
 							onfocus="this.placeholder = ''"
 							onblur="this.placeholder = '현재 비밀번호'" /> <form:errors
 							path="currentPassword" />
 					</label>
-
 				</p>
+
 				<p>
-					<label> <form:input path="newPassword"
+					<label> <form:password path="newPassword"
 							cssClass="single-input" placeholder="새 비밀번호"
 							onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '새 비밀번호'" /> <form:errors
-							path="newPassword" />
+							onblur="this.placeholder = '새 비밀번호'" /> <form:errors path="newPassword"/>
 					</label>
 				</p>
+				
+				<p>
+					<label> <form:password path="checkNewPassword"
+							cssClass="single-input" placeholder="새 비밀번호 확인"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '새 비밀번호 확인'" /> <form:errors path="checkNewPassword" />
+					</label>
+				</p>
+				<form:errors />
+				<br><br>
+
 				<button id="btn_login" class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.agree" />
 				</button>
@@ -162,4 +173,24 @@
 	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	 $("#btn_login").click(function() {
+		if ($("#currentPassword").val() == "") {
+			alert("비밀번호을 입력해주세요.");
+			return false;
+		} else if ($("#newPassword").val() == "") {
+			alert("새 비밀번호를 입력해주세요");
+			return false;
+		} else if ($("#checkNewPassword").val() == "") {
+			alert("새 비밀번호를 다시 입력해주세요");
+			return false;
+		} else if ($("#currentPassword").val() == $("#newPassword").val()) {
+			alert("현재 비밀번호와 새 비밀번호가 같습니다.");
+			return false;
+		} else if ($("#newPassword").val() != $("#checkNewPassword").val()) {
+			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+			return false;
+		}
+	});
+</script>
 </html>
