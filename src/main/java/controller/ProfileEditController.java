@@ -65,9 +65,9 @@ public class ProfileEditController {
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
 
-			model.addAttribute("updateId", true);
+			model.addAttribute("update", true);
+			return "register/signupSucess";
 
-			return "register/signupSuccess";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "info/profile";

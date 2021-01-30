@@ -68,20 +68,25 @@
 			<h4 class="mb-4">
 				<spring:message code="valid.email" />
 			</h4>
-			
-			<br>
-			<br>
-			
+
+			<br> <br>
+
 			<p>
 				<spring:message code="valid.email.confirm">
-					<spring:argument value="${memberRegisterRequest.memberId}" />
+					<c:choose>
+						<c:when test="${!empty register }">
+							<spring:argument value="${memberRegisterRequest.memberId}" />
+						</c:when>
+						<c:when test="${!empty update }">
+							<spring:argument value="${changeIdCommand.memberId}" />
+						</c:when>
+					</c:choose>
 				</spring:message>
 			</p>
-		
+
 			<br class="mb-4" />
 			<hr class="mb-4" />
-			<div class="row">
-			</div>
+			<div class="row"></div>
 		</div>
 	</div>
 
