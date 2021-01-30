@@ -76,7 +76,6 @@
 				<spring:message code="image.gallery" />
 			</h1>
 		</div>
-
 		<div class="text-right mb-10">
 			
 		<c:choose>
@@ -85,7 +84,7 @@
 				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
 					enctype="multipart/form-data">
-
+					
 					<label for="ex_file"><a class="btn btn-info"
 						style="color: white;"><spring:message code="list.image.upload" /></a></label>
 					<input type="file" name="file" id="ex_file" style="display: none" />
@@ -112,28 +111,28 @@
 		</div>
 
 			<div class="row gallery-item">
-			<c:forEach var="image" items="${imageList}" varStatus="status">
-			<div class="col-md-4">
+
+				<c:forEach var="image" items="${imageList}" varStatus="status">
+					<div class="col-md-4">
 						<a
 							href="${pageContext.request.contextPath}/upload/${image.imagePath}"
 							class="img-pop-up">
 							<div class="single-gallery-image"
 								style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
 						</a>
-			   </div>
-			
-			<c:if test="${multidelete eq 1}">
-                    <div class="chekBox">
-                        <input type="checkbox" name="chBox" class="chBox"
-                            data-num="${image.imagePath}" />
-                    </div>
-           </c:if>
+					</div>
 
-				
-					
-			</c:forEach>
+					<c:if test="${multidelete eq 1}">
+						<div class="chekBox">
+							<input type="checkbox" name="chBox" class="chBox"
+								data-num="${image.imagePath}" />
+						</div>
+					</c:if>
+
+
+				</c:forEach>
+			</div>
 		</div>
-	</div>
 
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />

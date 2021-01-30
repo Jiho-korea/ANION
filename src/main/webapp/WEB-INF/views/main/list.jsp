@@ -82,12 +82,13 @@
 		</div>
 		<div class="text-right mb-10">
 			<!--  -->
-
-			<a href="${pageContext.request.contextPath}/register/step1"
-				class="mb-30"><button type="submit"
-					class="btn btn-info pull-right">
-					<spring:message code="register.pet" />
-				</button></a>
+			<c:if test="${empty admin}">
+				<a href="${pageContext.request.contextPath}/register/step1"
+					class="mb-30"><button type="submit"
+						class="btn btn-info pull-right">
+						<spring:message code="register.pet" />
+					</button></a>
+			</c:if>
 		</div>
 
 

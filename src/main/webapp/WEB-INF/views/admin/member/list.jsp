@@ -71,20 +71,15 @@
 						<tr>
 							<th height="32" width="5%"><spring:message
 									code="admin.member.number" /></th>
-							<th width="5%"><spring:message code="admin.member.level" /></th>
-							<th width="15%"><spring:message code="admin.member.name" /></th>
-							<th width="15%"><spring:message code="admin.member.id" /></th>
+							<th width="10%"><spring:message code="admin.member.level" /></th>
+							<th width="10%"><spring:message code="admin.member.name" /></th>
+							<th width="20%"><spring:message code="admin.member.id" /></th>
 							<th width="15%"><spring:message
 									code="admin.member.phoneNumber" /></th>
-							<th width="15%"><spring:message code="admin.member.status" /></th>
-							<th width="15%"><spring:message code="admin.member.date" /></th>
-							<!-- 
-							<th width="5%">순번</th>
-							<th width="8%">코드</th>
-							<th width="8%">견종명</th>
-							<th width="6%">사용여부</th>
-							 -->
-							<th width="15%"><a href="#"><input type="button" name="btn_plus"
+							<th width="10%"><spring:message code="admin.member.status" /></th>
+							<th width="10%"><spring:message code="admin.member.date" /></th>
+							<th width="5%"><spring:message code="admin.member.petInfo" /></th>
+							<th width="10%"><a href="#"><input type="button" name="btn_plus"
 								id="btn_plus" class="btn_plus" value="신규등록" /></a></th>
 						</tr>
 					</thead>
@@ -101,12 +96,18 @@
 							<tr>
 								<td width="5%" align="center">${member.memberNumber}</td>
 								<td width="10%" align="center">${member.memberlevel.memberLevelDescription }</td>
-								<td width="15%" align="center">${member.memberName }</td>
-								<td width="15%" align="center">${member.memberId }</td>
+								<td width="10%" align="center">${member.memberName }</td>
+								<td width="20%" align="center">${member.memberId }</td>
 								<td width="15%" align="center">${member.memberPhoneNumber }</td>
-								<td width="15%" align="center">${member.memberauth.memberStatus}</td>
-								<td width="15%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
-								<td width="15%" align="center"><div align="center">
+								<td width="10%" align="center">${member.memberauth.memberStatus}</td>
+								<td width="10%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
+								<td width="10%" align="center"><div align="center">
+										<a href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}" target="_blank"> <input type="button" name="btn_modify"
+											id="btn_modify" class="btn_modify {delivery_no: 4}"
+											value="확인"/></a>
+									</div></td>
+								
+								<td width="10%" align="center"><div align="center">
 										<a href="#"> <input type="button" name="btn_modify"
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
 											value="수정" /></a> <a href="#"><input type="button" name="btn_delete"
