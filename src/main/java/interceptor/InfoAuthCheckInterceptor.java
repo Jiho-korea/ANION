@@ -35,7 +35,8 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 		if (request.getParameter("petRegistrationNumber") != null) {
 			Pet pet = petInfoService.selectPet(Integer.parseInt(request.getParameter("petRegistrationNumber")));
 
-			if (authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
+			if (!"0".equals(authInfo.getMemberlevel().getMemberLevelCode())
+					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -45,7 +46,10 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 				out.flush();
 				return false;
 			}
-
+			if ("0".equals(authInfo.getMemberlevel().getMemberLevelCode())
+					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
+				request.setAttribute("admin", true);
+			}
 			return true;
 		} else {
 			response.sendRedirect(request.getContextPath() + "/");
