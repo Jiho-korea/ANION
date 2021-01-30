@@ -100,7 +100,7 @@
 					</label>
 				</p>
 				<form:errors />
-				<br>
+				<br><br>
 
 				<button id="btn_login" class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.agree" />
@@ -173,7 +173,6 @@
 	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
-<!-- 
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_login").click(function() {
 		if ($("#currentPassword").val() == "") {
@@ -194,5 +193,4 @@
 		}
 	});
 </script>
- -->
 </html>
