@@ -20,13 +20,10 @@ package petProject.vo;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 public class Member implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private String memberId;
-	@NotBlank
 	private String memberPassword;
 	private String memberName;
 	private String memberPhoneNumber;

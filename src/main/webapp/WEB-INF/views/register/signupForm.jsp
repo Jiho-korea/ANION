@@ -71,7 +71,7 @@
 			style="background: transparent !important; text-align: left">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
-				modelAttribute="memberRegisterRequest" onsubmit="return validate()">
+				modelAttribute="memberRegisterRequest">
 				<h1 class="h1 mb-3 font-weight-bold">
 					<spring:message code="go.register" />
 				</h1>

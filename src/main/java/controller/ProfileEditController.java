@@ -34,7 +34,6 @@ import petProject.vo.AuthInfo;
 import petProject.vo.ChangeIdCommand;
 import petProject.vo.ChangeNameCommand;
 import petProject.vo.ChangePasswordCommand;
-import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/edit")
@@ -106,49 +105,36 @@ public class ProfileEditController {
 
 	}
 
-	// 회원정보 수정 버튼 클릭시
+	// 비밀번호 변경 버튼 클릭시
 	@GetMapping
-	public String check(Member member) {
-		return "edit/passwordConfirm";
+	public String check(ChangePasswordCommand changePasswordCommand) {
+		return "edit/changePasswordForm";
 	}
 
-	// 비밀번호 검증 버튼 클릭시
-	@PostMapping
-	public String form(@Valid Member member, Errors errors, ChangePasswordCommand changePasswordCommand, HttpSession session)
-			throws Exception {
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-
-		if (errors.hasErrors()) {
-			return "edit/passwordConfirm";
-		}
-		try {
-			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
-			
-			return "edit/changePasswordForm";
-		} catch (MemberNotFoundException e) {
-			errors.rejectValue("memberPassword", "password.notMatch");
-
-			return "edit/passwordConfirm";
-		}
-	}
-
+	// 비밀번호 변경 완료시
 	@PostMapping("/passwordChange")
-	public String submitPassword(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+	public String form(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
 			throws Exception {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";
 		}
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
 
 			return "edit/changePassword";
+		} catch (MemberNotFoundException e) {
+			errors.rejectValue("currentPassword", "password.notMatch");
+
+			return "edit/changePasswordForm";
 		} catch (WrongIdPasswordException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
 			return "edit/changePasswordForm";
 		}
 	}
+
 
 }

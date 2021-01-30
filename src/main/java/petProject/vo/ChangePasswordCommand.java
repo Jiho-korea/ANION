@@ -18,6 +18,8 @@ public class ChangePasswordCommand {
 	private String currentPassword;
 	@NotBlank
 	private String newPassword;
+	@NotBlank
+	private String checkNewPassword;
 
 	public String getCurrentPassword() {
 		return currentPassword;
@@ -33,6 +35,14 @@ public class ChangePasswordCommand {
 
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+
+	public String getCheckNewPassword() {
+		return checkNewPassword;
+	}
+
+	public void setCheckNewPassword(String checkNewPassword) {
+		this.checkNewPassword = checkNewPassword;
 	}
 
 }
