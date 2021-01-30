@@ -120,7 +120,14 @@ public class ProfileEditController {
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";
 		}
+		
 		try {
+			if(!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
+				errors.reject("checkNewPassword.notMatch");
+				
+				return "edit/changePasswordForm";
+			}
+			
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
 
