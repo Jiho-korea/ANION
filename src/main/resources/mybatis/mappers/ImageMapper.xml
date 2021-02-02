@@ -10,6 +10,11 @@
 		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.memberNumber});
 	</insert>
 	
+	
+	<delete id="deleteImage">
+	   delete from public.image where "IMAGE_PATH" = #{imagePath}
+	</delete>
+	
 	<select id="selectImageList" parameterType="int" resultMap="imageResultMap">
     	select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER", "IMAGE_PATH" from "public"."image" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
     </select>

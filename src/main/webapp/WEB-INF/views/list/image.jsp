@@ -20,6 +20,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -69,6 +70,21 @@
 </style>
 
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript"> 
+
+	$(function() {
+		$("#allCheck").click(function() {
+			if ($("#allCheck").prop("checked")) {
+				$("input[type=checkbox]").prop("checked", true);
+			} else {
+				$("input[type=checkbox]").prop("checked", false);
+			}
+		})
+	})
+</script>
+
+
 </head>
 <body>
 
@@ -84,38 +100,40 @@
 			
 		<c:choose>
 		<c:when test="${multidelete ne 1}">
-			<div class="filebox">
+			<div id="multi-file-upload" data-maxsize="1">
 				<form action="${pageContext.request.contextPath}/info/list/image"
 					id="form" method="post" class="form-signin"
 					enctype="multipart/form-data">
 					
 					<label for="ex_file"><a class="btn btn-info"
 						style="color: white;"><spring:message code="list.image.upload" /></a></label>
-					<input type="file" name="file" id="ex_file" style="display: none" />
+					<input type="file" multiple="multiple" name="file" id="ex_file" style="display: none" />
 					<input type="hidden" name=petRegistrationNumber id="prn"
-						value="${petRegistrationNumber}" /> <a
-						href="#"
-						class="mb-30">
+						value="${petRegistrationNumber}" /> 
 						
-					
+						<a href="#" class="mb-30">
 					<button type="submit" name="delete" value="true"
                             class="btn btn-info pull-right">
-                            <spring:message code="list.image.delete" />  
-                    </button></a>   	
+                        <spring:message code="list.image.delete" />  
+                    </button>
+                       </a>   	
 				</form>
 			</div>
 			</c:when>
 			<c:otherwise>
-			<button type="submit" name="delete" value="true"
-                            class="btn btn-info pull-right">
-                            <spring:message code="list.image.delete" />  
-                    </button></a>   	
-			</c:otherwise>
+					<input type="checkbox" id="allCheck" />
+					<spring:message code="check.all" />
+
+				</c:otherwise>
 			</c:choose>
 		</div>
-
+		
+			<form action="${pageContext.request.contextPath}/info/list/imageDelete"
+						id="form" method="post" class="form-signin"
+						enctype="multipart/form-data">
+			<input type="hidden" name=petRegistrationNumber id="prn"
+				value="${petRegistrationNumber}" />
 			<div class="row gallery-item">
-
 				<c:forEach var="image" items="${imageList}" varStatus="status">
 					<div class="col-md-4">
 						<a
@@ -124,18 +142,21 @@
 							<div class="single-gallery-image"
 								style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
 						</a>
-					</div>
-
 					<c:if test="${multidelete eq 1}">
-						<div class="chekBox">
+					<br>
+					
+						<div class="checkBox">
 							<input type="checkbox" name="chBox" class="chBox"
-								data-num="${image.imagePath}" />
+								value="${image.imagePath}" />
 						</div>
 					</c:if>
-
-
-				</c:forEach>
+				</div>
+			</c:forEach>
+				<c:if test="${multidelete eq 1}">
+					<input type="submit" class="btn btn-info pull-right" value="삭제">
+				</c:if>
 			</div>
+			</form>
 		</div>
 
 	<c:import url="../included/bottom.jsp">

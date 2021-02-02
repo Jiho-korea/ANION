@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -83,24 +84,25 @@ public class ImageListController {
 			try {
 				AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
-				MultipartFile file = request.getFile("file");
-				logger.info("originalName: " + file.getOriginalFilename());
-				logger.info("size: " + file.getSize());
-				logger.info("contentType: " + file.getContentType());
+				List<MultipartFile> file = request.getFiles("file");
+				// logger.info("originalName: " + file.getOriginalFilename());
+				// logger.info("size: " + file.getSize());
+				// logger.info("contentType: " + file.getContentType());
 
 				String rootPath = request.getSession().getServletContext().getRealPath("/upload");
 
 				String savedName;
-				savedName = uploadFile(file.getOriginalFilename(), file.getBytes(), rootPath);
+				for (MultipartFile mf : file) {
+					savedName = uploadFile(mf.getOriginalFilename(), mf.getBytes(), rootPath);
 
-				// model.addAttribute("savedName", savedName);
-				String absPath = rootPath + "\\" + savedName;
-				System.out.println("absPath = " + absPath);
+					// model.addAttribute("savedName", savedName);
+					String absPath = rootPath + "\\" + savedName;
+					System.out.println("absPath = " + absPath);
 
-				ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberNumber(),
-						petRegistrationNumber, savedName);
-				imageUploadService.insertImage(imageUploadRequest);
-
+					ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberNumber(),
+							petRegistrationNumber, savedName);
+					imageUploadService.insertImage(imageUploadRequest);
+				}
 				return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 
 			} catch (IOException e) {
@@ -115,6 +117,51 @@ public class ImageListController {
 				return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 			}
 		}
+
+	}
+
+	@GetMapping("/imageDelete")
+	public String listDeleteImage(
+			@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
+			HttpSession session, Model model) {
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+		try {
+			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
+			// System.out.println(imageList.isEmpty());
+			model.addAttribute("imageList", imageList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
+		return "/list/image";
+	}
+
+	@PostMapping("/imageDelete")
+	public String listDeleteImage(
+			@RequestParam(value = "petRegistrationNumber", required = false) int petRegistrationNumber,
+			@RequestParam(value = "chBox", required = false) String[] paths_id, HttpSession session,
+			HttpServletRequest request) throws IOException {
+		String rootPath = request.getSession().getServletContext().getRealPath("/upload");
+		try {
+			for (int i = 0; i < paths_id.length; i++) {
+				System.out.println(paths_id[i]);
+				imageListService.deleteImage(paths_id[i]);
+				File deleteFile = new File(rootPath + "/" + paths_id[i]);
+				deleteFile.delete();
+			}
+			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+		}
+	}
+
+	private void alert(String string) {
+		// TODO Auto-generated method stub
 
 	}
 
