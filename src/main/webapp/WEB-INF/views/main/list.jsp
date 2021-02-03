@@ -30,6 +30,9 @@
 <meta charset="UTF-8">
 <!-- 기존의 폰트 사용해라 -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
+
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
