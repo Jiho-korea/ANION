@@ -165,11 +165,6 @@
 			</h4>
 		</div>
 
-		<a href="#">
-			<button id="btn_modification" class="btn btn-info pull-right">
-				<spring:message code="go.agree" />
-			</button>
-		</a> <br> <br>
 	</div>
 
 	<c:import url="../included/bottom.jsp">

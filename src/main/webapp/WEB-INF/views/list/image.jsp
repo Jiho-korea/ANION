@@ -115,11 +115,17 @@
 						href="${pageContext.request.contextPath}/upload/${image.imagePath}"
 						class="img-pop-up">
 						<div class="single-gallery-image"
-							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});" id="${'img'}${'/'}${image.imagePath}"></div>
 					</a>
 				</div>
 			</c:forEach>
 		</div>
+		
+		<a href="${pageContext.request.contextPath}/info/list/image/download/${petRegistrationNumber}">
+			<button id="btn_download" class="btn btn-info pull-right mt-50">
+				<spring:message code="go.download" />
+			</button>
+		</a>
 	</div>
 
 	<c:import url="../included/bottom.jsp">
