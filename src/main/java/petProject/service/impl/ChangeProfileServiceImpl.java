@@ -1,3 +1,13 @@
+/*
+========================================================================
+파    일    명 : ChangeProfileServiceImpl.java
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.01.30
+작  성  내  용 : Profile의 정보를 변경하는 service
+========================================================================
+*/
+
 package petProject.service.impl;
 
 import java.sql.SQLException;
@@ -11,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.exception.MemberDuplicateException;
 import petProject.service.ChangeProfileService;
 import petProject.service.MailSendService;
 import petProject.vo.AuthInfo;
@@ -33,6 +44,15 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	@Autowired
 	MailSendService mailSendService;
 
+	@Override
+	public int selectById(String memberId) throws Exception {
+		int cnt = memberDAO.selectById(memberId);
+		if (cnt != 0) {
+			throw new MemberDuplicateException("duplicate memberId");
+		}
+		return cnt;
+	}
+	
 	@Transactional(rollbackFor = SQLException.class)
 	public void updateName(ChangeNameCommand changeNameCommand, AuthInfo authInfo) throws Exception {
 		Member member = memberDAO.selectByMemberNumber(changeNameCommand.getMemberNumber());
@@ -45,6 +65,8 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 	@Transactional(rollbackFor = SQLException.class)
 	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws Exception {
+		this.selectById(changeIdCommand.getMemberId());
+		
 		memberDAO.requestEmailUpdate(authInfo.getMemberId());
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
 		

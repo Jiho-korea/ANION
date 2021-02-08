@@ -127,6 +127,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+
 		
 			<form action="${pageContext.request.contextPath}/info/list/imageDelete"
 						id="form" method="post" class="form-signin"
@@ -150,6 +151,32 @@
 								value="${image.imagePath}" />
 						</div>
 					</c:if>
+
+		</c:if>
+		<!-- 
+		<div class="row">
+			<c:forEach var="image" items="${imageList}" varStatus="status">
+				<div class="col-md-4 text-center">
+					<a
+						href="${pageContext.request.contextPath}/upload/${image.imagePath}">
+						<img
+						src="${pageContext.request.contextPath}/upload/${image.imagePath}"
+						alt="이미지" style="width: 180px; height: 180px"
+						class="img-thumbnail" />
+					</a>
+				</div>
+			</c:forEach>
+		</div>  -->
+		<div class="row gallery-item">
+			<c:forEach var="image" items="${imageList}" varStatus="status">
+				<div class="col-md-4">
+					<a
+						href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+						class="img-pop-up">
+						<div class="single-gallery-image"
+							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});" id="${'img'}${'/'}${image.imagePath}"></div>
+					</a>
+
 				</div>
 			</c:forEach>
 				<c:if test="${multidelete eq 1}">
@@ -158,6 +185,15 @@
 			</div>
 			</form>
 		</div>
+
+		
+		<a href="${pageContext.request.contextPath}/info/list/image/download/${petRegistrationNumber}">
+			<button id="btn_download" class="btn btn-info pull-right mt-50">
+				<spring:message code="go.download" />
+			</button>
+		</a>
+	</div>
+
 
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />

@@ -6,6 +6,10 @@
 작    성    일 : 2021.01.15
 작  성  내  용 : 회원정보 수정을 누르면 동작하는 컨트롤러
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.01.30
+수  정  내  용 : ID, NAME 변경 추가
+========================================================================
 */
 package controller;
 
@@ -30,7 +34,6 @@ import petProject.vo.AuthInfo;
 import petProject.vo.ChangeIdCommand;
 import petProject.vo.ChangeNameCommand;
 import petProject.vo.ChangePasswordCommand;
-import petProject.vo.Member;
 
 @Controller
 @RequestMapping("/edit")
@@ -103,17 +106,18 @@ public class ProfileEditController {
 
 	}
 
-	// 회원정보 수정 버튼 클릭시
+	// 비밀번호 변경 버튼 클릭시
 	@GetMapping
-	public String check(Member member) {
-		return "edit/passwordConfirm";
+	public String check(ChangePasswordCommand changePasswordCommand) {
+		return "edit/changePasswordForm";
 	}
 
-	// 비밀번호 검증 버튼 클릭시
-	@PostMapping
-	public String form(Member member, ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
+	// 비밀번호 변경 완료시
+	@PostMapping("/passwordChange")
+	public String form(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
 			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
 
 		try {
 			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
@@ -136,11 +140,13 @@ public class ProfileEditController {
 	@PostMapping("/passwordChange")
 	public String submitPassword(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
 			throws Exception {
+
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";
 		}
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+		
 		try {
+
 			if (changePasswordCommand.getNewPassword() != "" & (changePasswordCommand.getNewPassword()
 					.equals(changePasswordCommand.getCurrentPassword())) != true) {
 				changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
@@ -149,6 +155,25 @@ public class ProfileEditController {
 				return "edit/changePassword";//
 			}
 			errors.rejectValue("newPassword", "password.same");/////////////
+
+			if(changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
+				errors.reject("password.equal");
+				
+				return "edit/changePasswordForm";
+			}else if(!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
+				errors.reject("checkNewPassword.notMatch");
+				
+				return "edit/changePasswordForm";
+			}
+			
+			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
+					changePasswordCommand.getNewPassword());
+
+			return "edit/changePassword";
+		} catch (MemberNotFoundException e) {
+			errors.rejectValue("currentPassword", "password.notMatch");
+
+
 			return "edit/changePasswordForm";
 		} catch (
 
@@ -158,5 +183,6 @@ public class ProfileEditController {
 			return "edit/changePasswordForm";
 		}
 	}
+
 
 }
