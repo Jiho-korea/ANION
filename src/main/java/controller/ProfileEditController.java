@@ -70,7 +70,6 @@ public class ProfileEditController {
 
 			model.addAttribute("update", true);
 			return "register/signupSucess";
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "info/profile";
@@ -118,54 +117,21 @@ public class ProfileEditController {
 			throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
-
-		try {
-			loginService.selectMemberById(authInfo.getMemberId(), member.getMemberPassword());
-
-			return "edit/changePasswordForm";
-
-		} catch (MemberNotFoundException e) {
-			errors.rejectValue("memberPassword", "password.notMatch");
-
-			return "edit/passwordConfirm";
-		}
-	}
-
-	// 비밀번호 변경 폼
-	@GetMapping("/passwordChange")
-	public String passwordform(ChangePasswordCommand changePasswordCommand, HttpSession session) {
-		return "edit/changePasswordForm";
-	}
-
-	@PostMapping("/passwordChange")
-	public String submitPassword(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
-			throws Exception {
-
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";
 		}
-		
+
 		try {
-
-			if (changePasswordCommand.getNewPassword() != "" & (changePasswordCommand.getNewPassword()
-					.equals(changePasswordCommand.getCurrentPassword())) != true) {
-				changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
-						changePasswordCommand.getNewPassword());
-				session.invalidate();
-				return "edit/changePassword";//
-			}
-			errors.rejectValue("newPassword", "password.same");/////////////
-
-			if(changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
+			if (changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
 				errors.reject("password.equal");
-				
+
 				return "edit/changePasswordForm";
-			}else if(!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
+			} else if (!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
 				errors.reject("checkNewPassword.notMatch");
-				
+
 				return "edit/changePasswordForm";
 			}
-			
+
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
 
@@ -173,16 +139,12 @@ public class ProfileEditController {
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
-
 			return "edit/changePasswordForm";
-		} catch (
-
-		WrongIdPasswordException e) {
+		} catch (WrongIdPasswordException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
 			return "edit/changePasswordForm";
 		}
 	}
-
 
 }
