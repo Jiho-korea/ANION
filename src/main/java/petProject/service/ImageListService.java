@@ -17,4 +17,6 @@ import petProject.vo.Image;
 
 public interface ImageListService {
 	List<Image> selectImageList(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+
+	void deleteImage(@Param("imagePath") String paths_id) throws Exception;
 }

@@ -24,4 +24,6 @@ public interface ImageDAO {
 	int insertImage(@Param("imageUploadRequest") ImageUploadRequest imageUploadRequest) throws Exception;
 
 	List<Image> selectImageList(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+
+	void deleteImage(@Param("imagePath") String imagePath) throws Exception;
 }
