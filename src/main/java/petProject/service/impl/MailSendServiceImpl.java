@@ -40,7 +40,7 @@ public class MailSendServiceImpl implements MailSendService {
 
 	@Override
 	public boolean sendMail(String from_addr, String from_name, String to_addr, Member member,
-			HttpServletRequest request, boolean isHtml) throws Exception {
+			HttpServletRequest request, boolean isHtml, String emailcode) throws Exception {
 
 		boolean result = false;
 
@@ -67,19 +67,21 @@ public class MailSendServiceImpl implements MailSendService {
 //						+ "'target='_blank'>이메일 인증 확인</a>";
 
 				// 로컬 호스트에서 실행시킬 떈 이거 사용
-				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-						+ "<a href='http://localhost:8080" + request.getContextPath() + "/valid?memberId=" + to_addr
-						+ "' target='_blank'>이메일 인증 확인</a>";
+				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p>"
+						+ emailcode
+						+ "<br><a href='http://localhost:8080" + request.getContextPath() + "/home"
+						+ "'target='_blank'>이메일 인증 확인</a>";
 			} else {
 				// 서버에 올릴 떈 이거 주석 풀어야함
 //				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-//						+ "<a href='http://anionbio.com:8119" + request.getContextPath() + "/valid?memberId=" + to_addr
+//						+ "<a href='http://localhost:8080" + request.getContextPath() + "/updateId?memberId=" + to_addr + "&memberNumber=" + member.getMemberNumber()
 //						+ "'target='_blank'>이메일 인증 확인</a>";
 
 				// 로컬 호스트에서 실행시킬 떈 이거 사용
-				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-						+ "<a href='http://localhost:8080" + request.getContextPath() + "/updateId?memberId=" + to_addr + "&memberNumber=" + member.getMemberNumber()
-						+ "' target='_blank'>이메일 인증 확인</a>";
+				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p>"
+						+ emailcode
+						+ "<br><a href='http://localhost:8080" + request.getContextPath() + "/home"
+						+ "'target='_blank'>이메일 인증 확인</a>";
 			}
 
 			if (isHtml) {

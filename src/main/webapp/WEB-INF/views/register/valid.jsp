@@ -11,7 +11,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,8 +71,34 @@
 
 			<br> <br>
 
-			<p>
-				<spring:message code="valid.email.confirm">
+			<form:form action="${pageContext.request.contextPath}/email/valid"
+				method="post" cssClass="form-signin" modelAttribute="emailcode">
+
+				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
+					${sessionScope.memberId}
+				</label>
+				<br>
+				<br>
+				
+				<input type="hidden" name="memberId" value="${sessionScope.memberId }" />
+				<label> <form:input path="emailCode" cssClass="single-input"
+						placeholder="emailCode" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'emailCode'" />
+				</label>
+				<br>
+				<br>
+
+				<button id="btn_login" class="btn btn-info pull-right" type="submit">
+					<spring:message code="go.login" />
+				</button>
+
+				<p class="mt-5 mb-3 text-muted">
+					<spring:message code="company.name" />
+				</p>
+			</form:form>
+
+
+			<%-- <spring:message code="valid.email.confirm">
 					<c:choose>
 						<c:when test="${!empty register }">
 							<spring:argument value="${memberRegisterRequest.memberId}" />
@@ -81,8 +107,7 @@
 							<spring:argument value="${changeIdCommand.memberId}" />
 						</c:when>
 					</c:choose>
-				</spring:message>
-			</p>
+				</spring:message> --%>
 
 			<br class="mb-4" />
 			<hr class="mb-4" />

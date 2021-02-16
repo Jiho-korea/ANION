@@ -160,7 +160,7 @@ Preloader Start -->
 									<nav class="navbar">
 										<c:choose>
 											<c:when test="${empty sessionScope.login}">
-												<a href="${pageContext.request.contextPath}/login/login"
+												<a href="${pageContext.request.contextPath}/login"
 													class="btn header-btn"><spring:message code="go.login" /></a>
 													&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="${pageContext.request.contextPath}/signup/step1"
@@ -206,7 +206,7 @@ Preloader Start -->
 								style="float: right; margin-right: 40px; margin-top: -50px;">
 								<c:choose>
 									<c:when test="${empty sessionScope.login}">
-										<a href="${pageContext.request.contextPath}/login/login"
+										<a href="${pageContext.request.contextPath}/login"
 											class="btn2"
 											style="border: none; padding: 5px 15px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 10px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;"><spring:message
 												code="go.login" /></a>

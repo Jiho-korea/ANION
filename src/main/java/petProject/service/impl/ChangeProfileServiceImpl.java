@@ -11,6 +11,7 @@
 package petProject.service.impl;
 
 import java.sql.SQLException;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,6 +28,7 @@ import petProject.service.MailSendService;
 import petProject.vo.AuthInfo;
 import petProject.vo.ChangeIdCommand;
 import petProject.vo.ChangeNameCommand;
+import petProject.vo.Emailcode;
 import petProject.vo.Member;
 
 @Service("changeProfileService")
@@ -44,6 +46,8 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	@Autowired
 	MailSendService mailSendService;
 
+	private static Emailcode emailcode = new Emailcode();
+	
 	@Override
 	public int selectById(String memberId) throws Exception {
 		int cnt = memberDAO.selectById(memberId);
@@ -62,15 +66,25 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 		memberDAO.updateName(member);
 	}
+	
+	@Transactional(rollbackFor = SQLException.class)
+	public void updateEmailCode(String memberId, ChangeIdCommand changeIdCommand) throws Exception {
+		emailcode.setMemberId(memberId);
+		emailcode.setEmailCode(random());
+		emailcode.setNewMemberId(changeIdCommand.getMemberId());
+		
+		memberDAO.updateEmailCode(emailcode);
+	}
 
 	@Transactional(rollbackFor = SQLException.class)
 	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws Exception {
 		this.selectById(changeIdCommand.getMemberId());
+		this.updateEmailCode(authInfo.getMemberId(), changeIdCommand);
 		
 		memberDAO.requestEmailUpdate(authInfo.getMemberId());
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
 		
-		mailSendService.sendMail(from_addr, from_name, changeIdCommand.getMemberId(), member, request, true);
+		mailSendService.sendMail(from_addr, from_name, changeIdCommand.getMemberId(), member, request, true, emailcode.getEmailCode());
 	}
 
 	@Transactional(rollbackFor = SQLException.class)
@@ -78,4 +92,15 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		memberDAO.updateId(changeIdCommand);
 	}
 
+	public static String random() {
+		Random rand = new Random();
+		String numStr = "";
+
+		for (int i = 0; i < 6; i++) {
+			String ran = Integer.toString(rand.nextInt(10));
+
+			numStr += ran;
+		}
+		return numStr;
+	}
 }

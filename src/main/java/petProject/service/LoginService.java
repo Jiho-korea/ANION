@@ -15,4 +15,5 @@ import petProject.vo.AuthInfo;
 
 public interface LoginService {
 	AuthInfo selectMemberById(@Param("memberId") String memberId, String memberPassword) throws Exception;
+
 }

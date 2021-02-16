@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import controller.EmailValidController;
+import controller.EmailValidController2;
 import controller.ImageListController;
 import controller.LoginController;
 import controller.LogoutController;
@@ -78,6 +79,11 @@ public class ControllerConfig {
 		return new EmailValidController();
 	}
 
+	@Bean
+	public EmailValidController2 emailValidController2() {
+		return new EmailValidController2();
+	}
+	
 	@Bean
 	public KindcodeListController kindcodeListController() {
 		return new KindcodeListController();

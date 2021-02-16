@@ -38,7 +38,7 @@ import petProject.vo.ChangePasswordCommand;
 @Controller
 @RequestMapping("/edit")
 public class ProfileEditController {
-
+	
 	@Resource(name = "loginService")
 	LoginService loginService;
 
@@ -47,7 +47,7 @@ public class ProfileEditController {
 
 	@Resource(name = "changeProfileService")
 	ChangeProfileService changeProfileService;
-
+	
 	@GetMapping("/updateId")
 	public String updateId(ChangeIdCommand changeIdCommand, Model model) {
 		model.addAttribute("updateId", true);
@@ -69,6 +69,7 @@ public class ProfileEditController {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
 
 			model.addAttribute("update", true);
+			session.setAttribute("validEmail", true);
 			return "register/signupSucess";
 		} catch (Exception e) {
 			e.printStackTrace();

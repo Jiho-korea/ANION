@@ -121,6 +121,10 @@ a, a:hover {
 						</form:form>
 					</c:otherwise>
 				</c:choose>
+				<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
+					<a href="${pageContext.request.contextPath}/email/valid"
+						class="btn header-btn">email</a>
+				</c:if>
 			</h4>
 
 			<hr class="my-4">

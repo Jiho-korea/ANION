@@ -34,16 +34,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
+import petProject.service.EmailValidService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
 import petProject.vo.LoginRequest;
 
 @Controller
-@RequestMapping("/login/login")
+@RequestMapping("/login")
 public class LoginController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
+	
+	@Resource(name = "emailValidService")
+	EmailValidService emailValidService;
 
 	public LoginController() {
 		super();
@@ -64,7 +68,7 @@ public class LoginController {
 		return "login/loginFormPage";
 	}
 
-	@PostMapping
+	@PostMapping("/login")
 	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request) {
 		if (errors.hasErrors()) {
@@ -74,8 +78,9 @@ public class LoginController {
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
-
+			
 			session.setAttribute("login", authInfo);
+			session.setAttribute("memberId", loginRequest.getMemberId());
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
 			memoryCookie.setPath("/");
@@ -101,10 +106,12 @@ public class LoginController {
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
 			errors.rejectValue("memberId" ,"notvalid");
-			return "login/loginFormPage";
+			session.setAttribute("memberId", loginRequest.getMemberId());
+			return "redirect:/email/valid";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		}
 	}
+	
 }

@@ -22,6 +22,8 @@
 
 package petProject.service.impl;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +32,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.exception.EmailcodeInsertException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MailSendService;
 import petProject.service.MemberRegisterService;
+import petProject.vo.Emailcode;
 import petProject.vo.Member;
 import petProject.vo.MemberRegisterRequest;
 
@@ -50,6 +54,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
 	MailSendService mailSendService;
+	
+	private static Emailcode emailcode = new Emailcode();
 
 	@Override
 	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
@@ -83,15 +89,41 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	}
 
 	@Override
+	public int insertCode(String memberId) throws Exception {
+		Member member = memberDAO.selectMemberById(memberId);
+		
+		emailcode.setMemberId(member.getMemberId());
+		emailcode.setEmailCode(random());
+		
+		int cnt = memberDAO.insertCode(emailcode);
+		if (cnt == 0) {
+			throw new EmailcodeInsertException("error");
+		}
+		return cnt;
+	}
+
+	@Override
 	@Transactional
 	public void memberRegister(MemberRegisterRequest memberRegisterRequest, String from_addr, String from_name,
 			HttpServletRequest request, boolean isHtml) throws Exception {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
-		
+		this.insertCode(memberRegisterRequest.getMemberId());
+
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
-		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(),
-				member, request, isHtml);
+		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(), member, request, isHtml, emailcode.getEmailCode());
 	}
 
+	public static String random() {
+		Random rand = new Random();
+		String numStr = "";
+
+		for (int i = 0; i < 6; i++) {
+			String ran = Integer.toString(rand.nextInt(10));
+
+			numStr += ran;
+		}
+		return numStr;
+	}
+	
 }

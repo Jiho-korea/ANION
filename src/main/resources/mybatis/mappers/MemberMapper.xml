@@ -18,14 +18,34 @@
     	SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
+    <select id="selectCode" parameterType="String" resultType="String">
+    	SELECT "EMAIL_CODE"
+    	FROM "emailcode" WHERE "MEMBER_ID" = #{memberId}
+    </select>
+    
+    <select id="selectMemberList" resultMap="memberListResultMap">
+    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
+    </select>
+    
+    <select id="selectNewMemberId" parameterType="String" resultType="String">
+    	SELECT "NEW_MEMBER_ID"
+    	FROM "emailcode" WHERE "MEMBER_ID" = #{memberId}
+    </select>
+    
     <insert id="insertMember" parameterType="memberRegisterRequest">
     	INSERT INTO "public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
     	VALUES (#{memberRegisterRequest.memberId}, #{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
     </insert>
     
-    <select id="selectMemberList" resultMap="memberListResultMap">
-    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
-    </select>
+    <insert id="insertCode" parameterType="emailcode">
+    	INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE")
+    	VALUES (#{emailcode.memberId}, #{emailcode.emailCode});
+    </insert>
+    
+    <insert id="updateEmailCode" parameterType="emailcode">
+		INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE", "NEW_MEMBER_ID")
+    	VALUES (#{emailcode.memberId}, #{emailcode.emailCode}, #{emailcode.newMemberId});
+	</insert>
     
     <update id="updateAuthStatus" parameterType="String">
     	update "member"
@@ -57,7 +77,12 @@
 		where "MEMBER_NUMBER" = #{changeIdCommand.memberNumber}
 	</update>
     
-     <resultMap type="member" id="memberListResultMap">
+    <delete id="doneEmailCode" parameterType="String">
+    	DELETE FROM "emailcode"
+    	WHERE "MEMBER_ID" = #{memberId}
+    </delete>
+    
+    <resultMap type="member" id="memberListResultMap">
      	<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />
