@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
-import petProject.service.ChangeProfileService;
 import petProject.service.ChangePasswordService;
+import petProject.service.ChangeProfileService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
 import petProject.vo.ChangeIdCommand;
@@ -120,18 +120,18 @@ public class ProfileEditController {
 		if (errors.hasErrors()) {
 			return "edit/changePasswordForm";
 		}
-		
+
 		try {
-			if(changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
+			if (changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
 				errors.reject("password.equal");
-				
+
 				return "edit/changePasswordForm";
-			}else if(!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
+			} else if (!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
 				errors.reject("checkNewPassword.notMatch");
-				
+
 				return "edit/changePasswordForm";
 			}
-			
+
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
 
@@ -146,6 +146,5 @@ public class ProfileEditController {
 			return "edit/changePasswordForm";
 		}
 	}
-
 
 }
