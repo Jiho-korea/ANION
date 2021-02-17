@@ -22,6 +22,7 @@ import controller.MemberRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
 import controller.ProfileEditController;
+import controller.admin.ImageDownloadController;
 import controller.admin.KindcodeDeleteController;
 import controller.admin.KindcodeInsertController;
 import controller.admin.KindcodeListController;
@@ -114,4 +115,8 @@ public class ControllerConfig {
 		return new PetListController();
 	}
 
+	@Bean
+	public ImageDownloadController imageDownloadController() {
+		return new ImageDownloadController();
+	}
 }
