@@ -101,25 +101,63 @@
 			<thead>
 				<!-- table head -->
 				<tr>
-					<!-- table row -->
-					<th width="15%"><spring:message code="list.num" /></th>
-					<th width="30%"><spring:message code="list.pet.name" /></th>
-					<th width="30%"><spring:message code="list.image.count" /></th>
-					<th width="25%"><spring:message code="image.gallery" /></th>
+
+
+					<c:choose>
+						<c:when
+							test="${sessionScope.login.memberlevel.memberLevelCode eq 0}">
+							<!-- table row -->
+							<th width="10%"><spring:message code="list.num" /></th>
+							<th width="30%"><spring:message code="list.pet.name" /></th>
+							<th width="30%"><spring:message code="list.image.count" /></th>
+							<th width="15%"><spring:message code="image.gallery" /></th>
+							<th width="15%"><spring:message code="go.zip.image" /></th>
+						</c:when>
+						<c:otherwise>
+							<!-- table row -->
+							<th width="15%"><spring:message code="list.num" /></th>
+							<th width="30%"><spring:message code="list.pet.name" /></th>
+							<th width="30%"><spring:message code="list.image.count" /></th>
+							<th width="25%"><spring:message code="image.gallery" /></th>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="pet" items="${petList}" varStatus="status">
 					<tr>
-						<td>${status.index + 1}</td>
-						<td><a
-							href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
-							style="color: #000000;">${pet.petName}</a></td>
-						<td>${pet.imageCount}건</td>
-						<td><a
-							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
-							id="btn_photo" class="btn btn-info pull-right"><spring:message
-									code="go.right" /></a></td>
+						<c:choose>
+							<c:when
+								test="${sessionScope.login.memberlevel.memberLevelCode eq 0}">
+								<td>${status.index + 1}</td>
+								<td><a
+									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
+									style="color: #000000;">${pet.petName}</a></td>
+								<td>${pet.imageCount}건</td>
+								<td><a
+									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
+									id="btn_photo" class="btn btn-info pull-right"><spring:message
+											code="go.right" /></a></td>
+								<td><a
+									href="${pageContext.request.contextPath}/info/list/image/download?petRegistrationNumber=${pet.petRegistrationNumber}">
+										<button id="btn_download" class="btn btn-info pull-right">
+											<spring:message code="go.download" />
+										</button>
+								</a></td>
+							</c:when>
+							<c:otherwise>
+								<td>${status.index + 1}</td>
+								<td><a
+									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
+									style="color: #000000;">${pet.petName}</a></td>
+								<td>${pet.imageCount}건</td>
+								<td><a
+									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
+									id="btn_photo" class="btn btn-info pull-right"><spring:message
+											code="go.right" /></a></td>
+
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</c:forEach>
 			</tbody>
