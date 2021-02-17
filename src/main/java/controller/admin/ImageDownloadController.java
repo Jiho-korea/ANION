@@ -33,9 +33,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.exception.PetNotFoundException;
 import petProject.service.ImageListService;
+import petProject.service.PetInfoService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Image;
+import petProject.vo.Pet;
 
 @Controller
 @RequestMapping("/info/list")
@@ -43,6 +46,9 @@ public class ImageDownloadController {
 
 	@Resource(name = "imageListService")
 	ImageListService imageListService;
+
+	@Resource(name = "petInfoService")
+	PetInfoService petInfoService;
 
 	private static final Logger logger = LoggerFactory.getLogger(ImageDownloadController.class);
 
@@ -57,6 +63,7 @@ public class ImageDownloadController {
 		String downloadFileName = "result";
 
 		try {
+			Pet pet = petInfoService.selectPet(petRegistrationNumber);
 			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
 			model.addAttribute("imageList", imageList);
 			// ZipOutputStream을 FileOutputStream 으로 감쌈
@@ -86,8 +93,10 @@ public class ImageDownloadController {
 			}
 
 			zout.close();
+
 			response.setContentType("application/zip");
-			response.addHeader("Content-Disposition", "attachment; filename=" + downloadFileName + ".zip");
+			response.addHeader("Content-Disposition",
+					"attachment; filename=" + new String(pet.getPetName().getBytes("UTF-8"), "ISO-8859-1") + ".zip");
 
 			FileInputStream fis = new FileInputStream(zipFile);
 			BufferedInputStream bis = new BufferedInputStream(fis);
@@ -109,6 +118,8 @@ public class ImageDownloadController {
 			if (fis != null)
 				fis.close();
 
+		} catch (PetNotFoundException e) {
+			return "main/list";
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
