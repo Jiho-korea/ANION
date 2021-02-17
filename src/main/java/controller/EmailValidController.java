@@ -14,68 +14,59 @@
 package controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import petProject.dao.MemberDAO;
+import petProject.exception.EmailcodeDeleteException;
+import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
-import petProject.service.ChangeProfileService;
-import petProject.service.MemberRegisterService;
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.Member;
+import petProject.exception.MemberIdUpdateException;
+import petProject.service.EmailValidService;
+import petProject.vo.Emailcode;
 
 @Controller
+@RequestMapping("/email")
 public class EmailValidController {
 
-	@Resource(name = "memberRegisterService")
-	MemberRegisterService memberRegisterService;
+	@Resource(name = "emailValidService")
+	EmailValidService emailValidService;
 
-	@Resource(name = "changeProfileService")
-	ChangeProfileService changeProfileService;
-	
-	@Autowired
-	private MemberDAO memberDAO;
-
-	@RequestMapping(value = "/valid", method = RequestMethod.GET)
-	public String validemail(@RequestParam(value = "memberId", required = true) String memberId, Model model) {
-
-		// DB에 authStatus 업데이트
-		try {
-			memberRegisterService.updateAuthStatus(memberId);
-			
-			model.addAttribute("register", true);
-		} catch (MemberAuthUpdateException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	@GetMapping("/valid")
+	public String validForm(@Valid Emailcode emailcode, Errors errors) {
 
 		return "register/valid";
 	}
 
-	@RequestMapping(value = "/updateId", method = RequestMethod.GET)
-	public String updateEmail(ChangeIdCommand changeIdCommand, Model model, HttpSession session) {
-		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
-			
-		// DB에 authStatus 업데이트
+	@PostMapping("/valid")
+	public String valid(@Valid Emailcode emailcode, Errors errors) throws Exception {
 		try {
-			memberRegisterService.updateAuthStatus(member.getMemberId());
-			changeProfileService.updateId(changeIdCommand);
-			
-			model.addAttribute("update", true);
+			int result = emailValidService.valid(emailcode);
+
+			if (result == 1) {
+				return "redirect:/logout";
+			}
+			return "home";
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
+			errors.rejectValue("emailCode", "notvalid");
+			return "redirect:/email/valid";
+		} catch (EmailcodeDeleteException e) {
 			e.printStackTrace();
+			errors.reject("memberId");
+			return "redirect:/email/valid";
+		} catch (MemberIdUpdateException e) {
+			e.printStackTrace();
+			errors.reject("newId");
+			return "redirect:/email/valid";
+		} catch (EmailcodeNullException e) {
+			e.printStackTrace();
+			return "redirect:/profile";
 		}
-		session.invalidate();
-		
-		return "register/valid";
+
 	}
 }

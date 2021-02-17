@@ -11,7 +11,6 @@
 package petProject.service.impl;
 
 import java.sql.SQLException;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,8 +20,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
+import petProject.exception.EmailcodeInsertException;
+import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
+import petProject.exception.MemberNameUpdateException;
 import petProject.service.ChangeProfileService;
 import petProject.service.MailSendService;
 import petProject.vo.AuthInfo;
@@ -42,11 +45,12 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private EmailcodeDAO emailcodeDAO;
 
 	@Autowired
 	MailSendService mailSendService;
-
-	private static Emailcode emailcode = new Emailcode();
 	
 	@Override
 	public int selectById(String memberId) throws Exception {
@@ -64,43 +68,40 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		member.setMemberName(changeNameCommand.getMemberName());
 		authInfo.setMemberName(changeNameCommand.getMemberName());
 
-		memberDAO.updateName(member);
+		int cnt = memberDAO.updateName(member);
+		if(cnt == 0) {
+			throw new MemberNameUpdateException("name update error");
+		}
 	}
 	
 	@Transactional(rollbackFor = SQLException.class)
-	public void updateEmailCode(String memberId, ChangeIdCommand changeIdCommand) throws Exception {
+	public Emailcode updateEmailcode(String memberId, ChangeIdCommand changeIdCommand) throws Exception {
+		Emailcode emailcode = new Emailcode();
+		
 		emailcode.setMemberId(memberId);
-		emailcode.setEmailCode(random());
+		emailcode.setEmailCode(emailcode.random());
 		emailcode.setNewMemberId(changeIdCommand.getMemberId());
 		
-		memberDAO.updateEmailCode(emailcode);
+		int cnt = emailcodeDAO.updateEmailcode(emailcode);
+		if(cnt == 0) {
+			throw new EmailcodeInsertException("emailcode error");
+		}
+		
+		return emailcode;
 	}
 
 	@Transactional(rollbackFor = SQLException.class)
 	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws Exception {
-		this.selectById(changeIdCommand.getMemberId());
-		this.updateEmailCode(authInfo.getMemberId(), changeIdCommand);
-		
-		memberDAO.requestEmailUpdate(authInfo.getMemberId());
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
+		this.selectById(changeIdCommand.getMemberId());
+		Emailcode emailcode = this.updateEmailcode(authInfo.getMemberId(), changeIdCommand);
+		
+		int cnt = emailcodeDAO.requestEmailUpdate(authInfo.getMemberId());
+		if(cnt == 0) {
+			throw new MemberAuthUpdateException("change auth error");
+		}
 		
 		mailSendService.sendMail(from_addr, from_name, changeIdCommand.getMemberId(), member, request, true, emailcode.getEmailCode());
 	}
 
-	@Transactional(rollbackFor = SQLException.class)
-	public void updateId(ChangeIdCommand changeIdCommand) {
-		memberDAO.updateId(changeIdCommand);
-	}
-
-	public static String random() {
-		Random rand = new Random();
-		String numStr = "";
-
-		for (int i = 0; i < 6; i++) {
-			String ran = Integer.toString(rand.nextInt(10));
-
-			numStr += ran;
-		}
-		return numStr;
-	}
 }

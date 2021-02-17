@@ -111,19 +111,20 @@ a, a:hover {
 								onblur="this.placeholder = '변경할  이메일'" />
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
-							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
+							<input type="submit" name="btn_modify" id="btn_modify"
+								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
 								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
-								value="취소" /> </a>
+								value=<spring:message code="cancel" /> /> </a>
 
 							<form:errors path="memberId" />
 						</form:form>
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
-					<a href="${pageContext.request.contextPath}/email/valid"
-						class="btn header-btn">email</a>
+					<a href="${pageContext.request.contextPath}/email/valid"><input
+						type="button" value=<spring:message code="valid" /> /> </a>
 				</c:if>
 			</h4>
 

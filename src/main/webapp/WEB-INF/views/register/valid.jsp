@@ -65,9 +65,9 @@
 	</c:import>
 	<div class="container" id="main">
 		<div class="jumbotron">
-			<h4 class="mb-4">
+			<h1 class="display-4">
 				<spring:message code="valid.email" />
-			</h4>
+			</h1>
 
 			<br> <br>
 
@@ -75,21 +75,23 @@
 				method="post" cssClass="form-signin" modelAttribute="emailcode">
 
 				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					${sessionScope.memberId}
+					<form:errors />
 				</label>
 				<br>
 				<br>
-				
-				<input type="hidden" name="memberId" value="${sessionScope.memberId }" />
+
+				<input type="hidden" name="memberId"
+					value="${sessionScope.memberId }" />
 				<label> <form:input path="emailCode" cssClass="single-input"
-						placeholder="emailCode" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'emailCode'" />
+						placeholder="Write Emailcode..." onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'Write Emailcode...'" />
+					<form:errors path="emailCode" />
 				</label>
 				<br>
 				<br>
 
 				<button id="btn_login" class="btn btn-info pull-right" type="submit">
-					<spring:message code="go.login" />
+					<spring:message code="valid.email" />
 				</button>
 
 				<p class="mt-5 mb-3 text-muted">

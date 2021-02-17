@@ -22,8 +22,6 @@
 
 package petProject.service.impl;
 
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeInsertException;
 import petProject.exception.MemberAuthUpdateException;
@@ -48,6 +47,9 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private EmailcodeDAO emailcodeDAO;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -55,7 +57,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	@Autowired
 	MailSendService mailSendService;
 	
-	private static Emailcode emailcode = new Emailcode();
+	private Emailcode emailcode;
 
 	@Override
 	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
@@ -93,9 +95,9 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		Member member = memberDAO.selectMemberById(memberId);
 		
 		emailcode.setMemberId(member.getMemberId());
-		emailcode.setEmailCode(random());
+		emailcode.setEmailCode(emailcode.random());
 		
-		int cnt = memberDAO.insertCode(emailcode);
+		int cnt = emailcodeDAO.insertEmailcode(emailcode);
 		if (cnt == 0) {
 			throw new EmailcodeInsertException("error");
 		}
@@ -113,17 +115,4 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
 		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(), member, request, isHtml, emailcode.getEmailCode());
 	}
-
-	public static String random() {
-		Random rand = new Random();
-		String numStr = "";
-
-		for (int i = 0; i < 6; i++) {
-			String ran = Integer.toString(rand.nextInt(10));
-
-			numStr += ran;
-		}
-		return numStr;
-	}
-	
 }

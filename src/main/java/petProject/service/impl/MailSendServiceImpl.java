@@ -59,35 +59,26 @@ public class MailSendServiceImpl implements MailSendService {
 
 			message.setSubject("[애니온]");//
 
+			String mailHead = null;
 			String mailContent = null;
+			
 			if (member.getMemberauth().getMemberAuthStatus() == 0) {
-				// 서버에 올릴 떈 이거 주석 풀어야함
-//				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-//						+ "<a href='http://anionbio.com:8119" + request.getContextPath() + "/valid?memberId=" + to_addr
-//						+ "'target='_blank'>이메일 인증 확인</a>";
+				mailHead = "<h1>[ANION] 회원가입 인증메일</h1><br><p>로그인 후 인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p><br>";
 
-				// 로컬 호스트에서 실행시킬 떈 이거 사용
-				mailContent = "<h1>[ANION] 회원가입 인증메일</h1><br><p>인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p>"
-						+ emailcode
-						+ "<br><a href='http://localhost:8080" + request.getContextPath() + "/home"
-						+ "'target='_blank'>이메일 인증 확인</a>";
 			} else {
-				// 서버에 올릴 떈 이거 주석 풀어야함
-//				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
-//						+ "<a href='http://localhost:8080" + request.getContextPath() + "/updateId?memberId=" + to_addr + "&memberNumber=" + member.getMemberNumber()
-//						+ "'target='_blank'>이메일 인증 확인</a>";
-
-				// 로컬 호스트에서 실행시킬 떈 이거 사용
-				mailContent = "<h1>[ANION] 이메일 변경 인증</h1><br><p>인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p>"
-						+ emailcode
-						+ "<br><a href='http://localhost:8080" + request.getContextPath() + "/home"
-						+ "'target='_blank'>이메일 인증 확인</a>";
+				mailHead = "<h1>[ANION] 이메일 변경 인증</h1><br><p>프로필에서 인증버튼을 클릭 후 인증번호 6자리를 입력하시면 이메일 변경이 완료됩니다.</p><br>";
 			}
+//			서버
+//			mailContent = emailcode + "<br><a href='http://anionbio.com:8119" + request.getContextPath() + "/login"
+//					+ "'target='_blank'>[ANION]</a>";
+//			로컬
+			mailContent = emailcode + "<br><a href='http://localhost:8080" + request.getContextPath() + "/login"
+					+ "'target='_blank'>[ANION]</a>";
 
 			if (isHtml) {
-				message.setContent(mailContent, "text/html;charset=UTF-8");
+				message.setContent(mailHead + mailContent, "text/html;charset=UTF-8");
 			} else {
-				message.setText(mailContent);
+				message.setText(mailHead + mailContent);
 			}
 
 			Transport.send(message);

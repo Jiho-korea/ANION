@@ -67,9 +67,9 @@ public class ProfileEditController {
 		}
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
-
+			
+			authInfo.getMemberauth().setMemberAuthStatus(2);
 			model.addAttribute("update", true);
-			session.setAttribute("validEmail", true);
 			return "register/signupSucess";
 		} catch (Exception e) {
 			e.printStackTrace();

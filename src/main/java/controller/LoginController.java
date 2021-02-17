@@ -74,13 +74,13 @@ public class LoginController {
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
+		session.setAttribute("memberId", loginRequest.getMemberId());
 
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
 			
 			session.setAttribute("login", authInfo);
-			session.setAttribute("memberId", loginRequest.getMemberId());
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
 			memoryCookie.setPath("/");
@@ -105,8 +105,6 @@ public class LoginController {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
-			errors.rejectValue("memberId" ,"notvalid");
-			session.setAttribute("memberId", loginRequest.getMemberId());
 			return "redirect:/email/valid";
 		} catch (Exception e) {
 			e.printStackTrace();
