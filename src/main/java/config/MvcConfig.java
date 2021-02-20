@@ -25,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import interceptor.AdminCheckInterceptor;
+import interceptor.EmailcodeCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
 
@@ -47,6 +48,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		return new InfoAuthCheckInterceptor();
 	}
 
+	@Bean
+	public EmailcodeCheckInterceptor emailcodeCheckInterceptor() {
+		return new EmailcodeCheckInterceptor();
+	}
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -81,10 +87,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/main/**", "/register/**", "/list/**",
-				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/email/**");
+				"/admin/**", "/info/**", "/edit/**", "/profile/**");
 
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
+		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
 	}
 
 }

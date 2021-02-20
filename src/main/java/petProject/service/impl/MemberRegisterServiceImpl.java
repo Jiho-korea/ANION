@@ -56,8 +56,6 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
 	MailSendService mailSendService;
-	
-	private Emailcode emailcode;
 
 	@Override
 	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
@@ -91,9 +89,10 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	}
 
 	@Override
-	public int insertCode(String memberId) throws Exception {
+	public Emailcode insertCode(String memberId) throws Exception {
 		Member member = memberDAO.selectMemberById(memberId);
 		
+		Emailcode emailcode = new Emailcode();
 		emailcode.setMemberId(member.getMemberId());
 		emailcode.setEmailCode(emailcode.random());
 		
@@ -101,7 +100,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		if (cnt == 0) {
 			throw new EmailcodeInsertException("error");
 		}
-		return cnt;
+		return emailcode;
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 			HttpServletRequest request, boolean isHtml) throws Exception {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
-		this.insertCode(memberRegisterRequest.getMemberId());
+		Emailcode emailcode = this.insertCode(memberRegisterRequest.getMemberId());
 
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
 		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(), member, request, isHtml, emailcode.getEmailCode());

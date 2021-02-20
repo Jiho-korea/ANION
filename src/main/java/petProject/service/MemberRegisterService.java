@@ -23,12 +23,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 
+import petProject.vo.Emailcode;
 import petProject.vo.MemberRegisterRequest;
 
 public interface MemberRegisterService {
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 
-	int insertCode(@Param("memberId") String memberId) throws Exception;
+	Emailcode insertCode(@Param("memberId") String memberId) throws Exception;
 
 	int selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
 

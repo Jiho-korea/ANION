@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import petProject.exception.MailException;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
 import petProject.service.ChangePasswordService;
@@ -38,7 +39,7 @@ import petProject.vo.ChangePasswordCommand;
 @Controller
 @RequestMapping("/edit")
 public class ProfileEditController {
-	
+
 	@Resource(name = "loginService")
 	LoginService loginService;
 
@@ -47,7 +48,7 @@ public class ProfileEditController {
 
 	@Resource(name = "changeProfileService")
 	ChangeProfileService changeProfileService;
-	
+
 	@GetMapping("/updateId")
 	public String updateId(ChangeIdCommand changeIdCommand, Model model) {
 		model.addAttribute("updateId", true);
@@ -67,12 +68,18 @@ public class ProfileEditController {
 		}
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
-			
+
 			authInfo.getMemberauth().setMemberAuthStatus(2);
 			model.addAttribute("update", true);
 			return "register/signupSucess";
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println("gd");
+			errors.rejectValue("memberId", "emailerror");
+			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("here");
 			return "info/profile";
 		}
 	}

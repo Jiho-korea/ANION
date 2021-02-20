@@ -37,7 +37,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 			// System.out.println("LoginCheckInterceptor refererPage : " + refererPage);
 			request.setAttribute("refererPage", refererPage);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
 		dispatcher.forward(request, response);
 		// response.sendRedirect(request.getContextPath() + "/login/login");
 		return false;

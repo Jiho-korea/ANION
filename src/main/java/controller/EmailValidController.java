@@ -50,7 +50,7 @@ public class EmailValidController {
 			if (result == 1) {
 				return "redirect:/logout";
 			}
-			return "home";
+			return "redirect:/home";
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "notvalid");

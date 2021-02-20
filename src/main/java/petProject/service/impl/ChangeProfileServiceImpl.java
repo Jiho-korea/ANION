@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeInsertException;
+import petProject.exception.MailException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNameUpdateException;
@@ -91,7 +92,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	}
 
 	@Transactional(rollbackFor = SQLException.class)
-	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws Exception {
+	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws MailException, Exception {
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
 		this.selectById(changeIdCommand.getMemberId());
 		Emailcode emailcode = this.updateEmailcode(authInfo.getMemberId(), changeIdCommand);

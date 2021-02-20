@@ -40,7 +40,7 @@ public class MailSendServiceImpl implements MailSendService {
 
 	@Override
 	public boolean sendMail(String from_addr, String from_name, String to_addr, Member member,
-			HttpServletRequest request, boolean isHtml, String emailcode) throws Exception {
+			HttpServletRequest request, boolean isHtml, String emailcode) throws MailException {
 
 		boolean result = false;
 
