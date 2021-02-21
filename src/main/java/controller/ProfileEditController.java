@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -72,6 +73,11 @@ public class ProfileEditController {
 			authInfo.getMemberauth().setMemberAuthStatus(2);
 			model.addAttribute("update", true);
 			return "register/signupSucess";
+		} catch (DuplicateMemberException e) {
+			e.printStackTrace();
+			model.addAttribute("updateId", true);
+			errors.rejectValue("memberId", "duplicate.memberId");
+			return "info/profile";
 		} catch (MailException e) {
 			e.printStackTrace();
 			model.addAttribute("updateId", true);
