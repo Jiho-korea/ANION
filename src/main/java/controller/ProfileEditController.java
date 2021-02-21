@@ -74,12 +74,11 @@ public class ProfileEditController {
 			return "register/signupSucess";
 		} catch (MailException e) {
 			e.printStackTrace();
-			System.out.println("gd");
+			model.addAttribute("updateId", true);
 			errors.rejectValue("memberId", "emailerror");
 			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("here");
 			return "info/profile";
 		}
 	}

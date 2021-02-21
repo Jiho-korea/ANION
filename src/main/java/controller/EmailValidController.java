@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.EmailcodeDeleteException;
+import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
@@ -38,34 +39,47 @@ public class EmailValidController {
 
 	@GetMapping("/valid")
 	public String validForm(@Valid Emailcode emailcode, Errors errors) {
+		if (errors.hasErrors()) {
+			errors.reject("error");
+		}
 
 		return "register/valid";
 	}
 
 	@PostMapping("/valid")
 	public String valid(@Valid Emailcode emailcode, Errors errors) throws Exception {
+		if (errors.hasErrors()) {
+			errors.reject("error");
+			return "register/valid";
+		}
+
 		try {
 			int result = emailValidService.valid(emailcode);
 
 			if (result == 1) {
-				return "redirect:/logout";
+				return "home/validSuccess";
 			}
-			return "redirect:/home";
-		} catch (MemberAuthUpdateException e) {
+			return "home/validSuccess";
+		} catch (EmailcodeNotMatchException e) {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "notvalid");
-			return "redirect:/email/valid";
-		} catch (EmailcodeDeleteException e) {
+			return "register/valid";
+		} catch (EmailcodeNullException e) {
 			e.printStackTrace();
-			errors.reject("memberId");
-			return "redirect:/email/valid";
+			errors.rejectValue("emailCode", "NotNull");
+			return "register/valid";
 		} catch (MemberIdUpdateException e) {
 			e.printStackTrace();
 			errors.reject("newId");
-			return "redirect:/email/valid";
-		} catch (EmailcodeNullException e) {
+			return "register/valid";
+		} catch (EmailcodeDeleteException e) {
 			e.printStackTrace();
-			return "redirect:/profile";
+			errors.reject("memberId");
+			return "register/valid";
+		} catch (MemberAuthUpdateException e) {
+			e.printStackTrace();
+			errors.rejectValue("emailCode", "notvalid");
+			return "register/valid";
 		}
 
 	}
