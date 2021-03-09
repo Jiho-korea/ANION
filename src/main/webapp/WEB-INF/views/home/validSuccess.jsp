@@ -75,7 +75,7 @@
 
 			<p>
 				<spring:message code="valid.email.confirm">
-					<spring:argument value="${sessionScope.memberId}" />
+					<spring:argument value="${memberId}" />
 				</spring:message><br>
 				<a href="<c:url value='/login' />" style="color: black;"> [<spring:message
 						code="go.login" />]

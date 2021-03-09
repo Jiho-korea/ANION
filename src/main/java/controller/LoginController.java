@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,13 +80,12 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
+	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session, Model model,
 			HttpServletResponse response, HttpServletRequest request) {
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
-		session.setAttribute("memberId", loginRequest.getMemberId());
-
+		
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
@@ -115,7 +115,8 @@ public class LoginController {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
-			return "redirect:/email/valid";
+			session.setAttribute("tempAuth", true);
+			return "redirect:/email/valid?memberId=" + loginRequest.getMemberId();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "login/loginFormPage";

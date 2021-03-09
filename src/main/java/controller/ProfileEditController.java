@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -27,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MailException;
+import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
 import petProject.service.ChangePasswordService;
@@ -71,9 +71,11 @@ public class ProfileEditController {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
 
 			authInfo.getMemberauth().setMemberAuthStatus(2);
+			
+			session.setAttribute("tempAuth", true);
 			model.addAttribute("update", true);
 			return "register/signupSucess";
-		} catch (DuplicateMemberException e) {
+		} catch (MemberDuplicateException e) {
 			e.printStackTrace();
 			model.addAttribute("updateId", true);
 			errors.rejectValue("memberId", "duplicate.memberId");

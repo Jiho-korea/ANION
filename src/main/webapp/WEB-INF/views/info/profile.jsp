@@ -94,7 +94,6 @@ a, a:hover {
 							<spring:argument value="${sessionScope.login.memberId }" />
 						</spring:message>
 
-						<form:errors path="memberId" />
 						<a href="${pageContext.request.contextPath}/edit/updateId"
 							style="color: lightgray;" class="ml-10"><i
 							class="far fa-edit"></i></a>
@@ -112,7 +111,6 @@ a, a:hover {
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '변경할  이메일'" />
 
-							<form:errors path="memberId" />
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
