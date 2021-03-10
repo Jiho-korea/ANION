@@ -30,17 +30,20 @@ public class EmailValidServiceImpl implements EmailValidService {
 	public void validCode(Emailcode emailcode) throws Exception {
 		String data = emailcodeDAO.selectEmailcode(emailcode.getMemberId());
 		if (emailcode.getEmailCode().equals("")) {
-			System.out.println(emailcode.getEmailCode() + "-");
 			throw new EmailcodeNullException("emailcode is null");
 		}
 
-		if (data.equals(emailcode.getEmailCode())) {
-			int cnt = memberDAO.updateAuthStatus(emailcode.getMemberId());
-			if (cnt == 0) {
-				throw new MemberAuthUpdateException("Auth Update Exception");
+		if (data != null) {
+			if (data.equals(emailcode.getEmailCode())) {
+				int cnt = memberDAO.updateAuthStatus(emailcode.getMemberId());
+				if (cnt == 0) {
+					throw new MemberAuthUpdateException("Auth Update Exception");
+				}
+			} else {
+				throw new EmailcodeNotMatchException("emailcode not match");
 			}
 		} else {
-			throw new EmailcodeNotMatchException("emailcode not match");
+			throw new NullPointerException();
 		}
 	}
 

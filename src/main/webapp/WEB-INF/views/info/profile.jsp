@@ -86,7 +86,8 @@ a, a:hover {
 				<b><spring:message code="info.member.profile" /></b>
 			</h2>
 			<br> <br>
-
+			
+			<form:errors />
 			<h4 style="text-align: left">
 				<c:choose>
 					<c:when test="${empty updateId}">
@@ -125,7 +126,7 @@ a, a:hover {
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
-					<a href="${pageContext.request.contextPath}/email/valid"><input
+					<a href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
 						type="button" value=<spring:message code="valid" /> /> </a>
 				</c:if>
 

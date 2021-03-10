@@ -13,7 +13,11 @@
 */
 package controller;
 
+import java.io.PrintWriter;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -50,7 +54,8 @@ public class EmailValidController {
 	}
 
 	@PostMapping("/valid")
-	public String valid(@Valid Emailcode emailcode, Errors errors, Model model, HttpSession session) throws Exception {
+	public String valid(@Valid Emailcode emailcode, Errors errors, Model model, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws Exception {
 		if (errors.hasErrors()) {
 			errors.reject("error");
 			return "register/valid";
@@ -59,7 +64,7 @@ public class EmailValidController {
 		try {
 			int result = emailValidService.valid(emailcode);
 
-			//이메일 변경시 result = 1
+			// 이메일 변경시 result = 1
 			if (result == 1) {
 				session.invalidate();
 				model.addAttribute("memberId", emailcode.getNewMemberId());
@@ -88,7 +93,21 @@ public class EmailValidController {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "notvalid");
 			return "register/valid";
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			write("잘못된 접근입니다", request, response);
+			return "info/profile";
 		}
 
+	}
+
+	private void write(String message, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('" + message + "');");
+		out.println("location.href='" + request.getContextPath() + "/profile';");
+		out.println("</script>");
+		out.flush();
 	}
 }

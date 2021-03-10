@@ -81,7 +81,7 @@
 				<br>
 
 				<input type="hidden" name="memberId"
-					value="${memberId }" />
+					value="${memberId}" />
 				<label> <form:input path="emailCode" cssClass="single-input"
 						placeholder="Write Emailcode..." onfocus="this.placeholder = ''"
 						onblur="this.placeholder = 'Write Emailcode...'" />
