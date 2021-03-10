@@ -157,11 +157,12 @@ a, a:hover {
 								onblur="this.placeholder = '변경할  이름'" />
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
-							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
+							<input type="submit" name="btn_modify" id="btn_modify"
+								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
 								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
-								value="취소" /> </a>
+								value=<spring:message code="cancel" /> /> </a>
 
 							<form:errors path="memberName" />
 						</form:form>

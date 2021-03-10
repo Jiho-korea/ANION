@@ -90,6 +90,10 @@ public class LoginController {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
 			
+			if(authInfo.getMemberauth().getMemberAuthStatus()==2) {
+				session.setAttribute("tempAuth", true);
+			}
+			
 			session.setAttribute("login", authInfo);
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
