@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import petProject.exception.MailException;
+import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
 import petProject.service.ChangePasswordService;
@@ -68,8 +70,21 @@ public class ProfileEditController {
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
 
+			authInfo.getMemberauth().setMemberAuthStatus(2);
+			
+			session.setAttribute("tempAuth", true);
 			model.addAttribute("update", true);
 			return "register/signupSucess";
+		} catch (MemberDuplicateException e) {
+			e.printStackTrace();
+			model.addAttribute("updateId", true);
+			errors.rejectValue("memberId", "duplicate.memberId");
+			return "info/profile";
+		} catch (MailException e) {
+			e.printStackTrace();
+			model.addAttribute("updateId", true);
+			errors.rejectValue("memberId", "emailerror");
+			return "info/profile";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "info/profile";

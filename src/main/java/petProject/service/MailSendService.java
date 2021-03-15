@@ -11,10 +11,12 @@ package petProject.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import petProject.exception.MailException;
 import petProject.vo.Member;
 
 public interface MailSendService {
 
 	boolean sendMail(String from_addr, String from_name, String to_addr, Member member,
-			HttpServletRequest request, boolean isHtml) throws Exception;
+			HttpServletRequest request, boolean isHtml, String emailcode) throws MailException;
+
 }

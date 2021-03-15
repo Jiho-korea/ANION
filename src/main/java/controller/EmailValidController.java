@@ -13,69 +13,101 @@
 */
 package controller;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import petProject.dao.MemberDAO;
+import petProject.exception.EmailcodeDeleteException;
+import petProject.exception.EmailcodeNotMatchException;
+import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
-import petProject.service.ChangeProfileService;
-import petProject.service.MemberRegisterService;
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.Member;
+import petProject.exception.MemberIdUpdateException;
+import petProject.service.EmailValidService;
+import petProject.vo.Emailcode;
 
 @Controller
+@RequestMapping("/email")
 public class EmailValidController {
 
-	@Resource(name = "memberRegisterService")
-	MemberRegisterService memberRegisterService;
+	@Resource(name = "emailValidService")
+	EmailValidService emailValidService;
 
-	@Resource(name = "changeProfileService")
-	ChangeProfileService changeProfileService;
-	
-	@Autowired
-	private MemberDAO memberDAO;
-
-	@RequestMapping(value = "/valid", method = RequestMethod.GET)
-	public String validemail(@RequestParam(value = "memberId", required = true) String memberId, Model model) {
-
-		// DB에 authStatus 업데이트
-		try {
-			memberRegisterService.updateAuthStatus(memberId);
-			
-			model.addAttribute("register", true);
-		} catch (MemberAuthUpdateException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+	@GetMapping("/valid")
+	public String validForm(@Valid Emailcode emailcode, Errors errors, Model model) {
+		if (errors.hasErrors()) {
+			errors.reject("error");
 		}
 
+		model.addAttribute("memberId", emailcode.getMemberId());
 		return "register/valid";
 	}
 
-	@RequestMapping(value = "/updateId", method = RequestMethod.GET)
-	public String updateEmail(ChangeIdCommand changeIdCommand, Model model, HttpSession session) {
-		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
-			
-		// DB에 authStatus 업데이트
+	@PostMapping("/valid")
+	public String valid(@Valid Emailcode emailcode, Errors errors, Model model, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws Exception {
+		if (errors.hasErrors()) {
+			errors.reject("error");
+			return "register/valid";
+		}
+
 		try {
-			memberRegisterService.updateAuthStatus(member.getMemberId());
-			changeProfileService.updateId(changeIdCommand);
-			
-			model.addAttribute("update", true);
+			int result = emailValidService.valid(emailcode);
+
+			// 이메일 변경시 result = 1
+			if (result == 1) {
+				session.invalidate();
+				model.addAttribute("memberId", emailcode.getNewMemberId());
+				return "home/validSuccess";
+			}
+			model.addAttribute("memberId", emailcode.getMemberId());
+			session.removeAttribute("tempAuth");
+			return "home/validSuccess";
+		} catch (EmailcodeNotMatchException e) {
+			e.printStackTrace();
+			errors.rejectValue("emailCode", "notvalid");
+			return "register/valid";
+		} catch (EmailcodeNullException e) {
+			e.printStackTrace();
+			errors.rejectValue("emailCode", "NotNull");
+			return "register/valid";
+		} catch (MemberIdUpdateException e) {
+			e.printStackTrace();
+			errors.reject("newId");
+			return "register/valid";
+		} catch (EmailcodeDeleteException e) {
+			e.printStackTrace();
+			errors.reject("memberId");
+			return "register/valid";
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
+			errors.rejectValue("emailCode", "notvalid");
+			return "register/valid";
+		} catch (NullPointerException e) {
 			e.printStackTrace();
+			write("잘못된 접근입니다", request, response);
+			return "info/profile";
 		}
-		session.invalidate();
-		
-		return "register/valid";
+
+	}
+
+	private void write(String message, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('" + message + "');");
+		out.println("location.href='" + request.getContextPath() + "/profile';");
+		out.println("</script>");
+		out.flush();
 	}
 }

@@ -21,8 +21,6 @@ public interface ChangeProfileService {
 	void updateName(ChangeNameCommand changeNameCommand, AuthInfo authInfo) throws Exception;
 
 	void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request) throws Exception;
-	
-	void updateId(ChangeIdCommand changeIdCommand);
 
 	int selectById(String memberId) throws Exception;
 

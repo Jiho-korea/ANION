@@ -29,12 +29,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
+import petProject.exception.EmailcodeInsertException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.MailSendService;
 import petProject.service.MemberRegisterService;
+import petProject.vo.Emailcode;
 import petProject.vo.Member;
 import petProject.vo.MemberRegisterRequest;
 
@@ -44,6 +47,9 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private EmailcodeDAO emailcodeDAO;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -83,15 +89,29 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	}
 
 	@Override
+	public Emailcode insertCode(String memberId) throws Exception {
+		Member member = memberDAO.selectMemberById(memberId);
+		
+		Emailcode emailcode = new Emailcode();
+		emailcode.setMemberId(member.getMemberId());
+		emailcode.setEmailCode(emailcode.random());
+		
+		int cnt = emailcodeDAO.insertEmailcode(emailcode);
+		if (cnt == 0) {
+			throw new EmailcodeInsertException("error");
+		}
+		return emailcode;
+	}
+
+	@Override
 	@Transactional
 	public void memberRegister(MemberRegisterRequest memberRegisterRequest, String from_addr, String from_name,
 			HttpServletRequest request, boolean isHtml) throws Exception {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
-		
-		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
-		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(),
-				member, request, isHtml);
-	}
+		Emailcode emailcode = this.insertCode(memberRegisterRequest.getMemberId());
 
+		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
+		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(), member, request, isHtml, emailcode.getEmailCode());
+	}
 }

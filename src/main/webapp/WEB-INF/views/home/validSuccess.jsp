@@ -1,22 +1,28 @@
-<!-- 
+<%--
 ========================================================================
-파    일    명 : valid.jsp
+파    일    명 : changeForm.jsp
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2020.11.17
-작  성  내  용 : 회원가입후 안내 페이지
+작    성    일 : 2021.01.15
+작  성  내  용 : 비밀번호 변경 완료 페이지
 ========================================================================
--->
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width , initial-scale=1">
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><spring:message code="home.title" /></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
+
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -52,70 +58,32 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
-	charset="utf-8"></script>
-<script defer
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-	charset="utf-8"></script>
-<title><spring:message code="home.title" /></title>
 </head>
+
 <body class="text-center">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container" id="main">
+
+	<div class="container text-center" id="main">
 		<div class="jumbotron">
 			<h1 class="display-4">
 				<spring:message code="valid.email" />
 			</h1>
-
 			<br> <br>
 
-			<form:form action="${pageContext.request.contextPath}/email/valid"
-				method="post" cssClass="form-signin" modelAttribute="emailcode">
 
-				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:errors />
-				</label>
-				<br>
-				<br>
-
-				<input type="hidden" name="memberId"
-					value="${memberId}" />
-				<label> <form:input path="emailCode" cssClass="single-input"
-						placeholder="Write Emailcode..." onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Write Emailcode...'" />
-					<form:errors path="emailCode" />
-				</label>
-				<br>
-				<br>
-
-				<button id="btn_login" class="btn btn-info pull-right" type="submit">
-					<spring:message code="valid.email" />
-				</button>
-
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
-				</p>
-			</form:form>
-
-
-			<%-- <spring:message code="valid.email.confirm">
-					<c:choose>
-						<c:when test="${!empty register }">
-							<spring:argument value="${memberRegisterRequest.memberId}" />
-						</c:when>
-						<c:when test="${!empty update }">
-							<spring:argument value="${changeIdCommand.memberId}" />
-						</c:when>
-					</c:choose>
-				</spring:message> --%>
-
-			<br class="mb-4" />
-			<hr class="mb-4" />
-			<div class="row"></div>
+			<p>
+				<spring:message code="valid.email.confirm">
+					<spring:argument value="${memberId}" />
+				</spring:message><br>
+				<a href="<c:url value='/login' />" style="color: black;"> [<spring:message
+						code="go.login" />]
+				</a>
+			</p>
 		</div>
 	</div>
+
 
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
@@ -125,6 +93,7 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
+
 	<!-- JS here -->
 
 	<script

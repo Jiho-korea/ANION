@@ -59,7 +59,6 @@ public class ControllerConfig {
 	}
 
 	@Bean
-
 	public PetInfoController petInfoController() {
 		return new PetInfoController();
 	}
@@ -75,10 +74,10 @@ public class ControllerConfig {
 	}
 
 	@Bean
-	public EmailValidController signupController() {
+	public EmailValidController emailValidController() {
 		return new EmailValidController();
 	}
-
+	
 	@Bean
 	public KindcodeListController kindcodeListController() {
 		return new KindcodeListController();

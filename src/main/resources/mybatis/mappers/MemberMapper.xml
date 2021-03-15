@@ -18,24 +18,18 @@
     	SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
     </select>
     
+    <select id="selectMemberList" resultMap="memberListResultMap">
+    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
+    </select>
+    
     <insert id="insertMember" parameterType="memberRegisterRequest">
     	INSERT INTO "public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
     	VALUES (#{memberRegisterRequest.memberId}, #{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
     </insert>
     
-    <select id="selectMemberList" resultMap="memberListResultMap">
-    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
-    </select>
-    
     <update id="updateAuthStatus" parameterType="String">
     	update "member"
     	set "MEMBER_AUTH_STATUS" = 1
-    	where "MEMBER_ID" = #{memberId}
-    </update>
-    
-    <update id="requestEmailUpdate" parameterType="String">
-    	update "member"
-    	set "MEMBER_AUTH_STATUS" = 2
     	where "MEMBER_ID" = #{memberId}
     </update>
     
@@ -57,7 +51,7 @@
 		where "MEMBER_NUMBER" = #{changeIdCommand.memberNumber}
 	</update>
     
-     <resultMap type="member" id="memberListResultMap">
+    <resultMap type="member" id="memberListResultMap">
      	<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />

@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,16 +35,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
+import petProject.service.EmailValidService;
 import petProject.service.LoginService;
 import petProject.vo.AuthInfo;
 import petProject.vo.LoginRequest;
 
 @Controller
-@RequestMapping("/login/login")
+@RequestMapping("/login")
 public class LoginController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
+	
+	@Resource(name = "emailValidService")
+	EmailValidService emailValidService;
 
 	public LoginController() {
 		super();
@@ -53,6 +58,16 @@ public class LoginController {
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
+		
+		String memberId = (String) session.getAttribute("memberId");
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+		
+		if(memberId != null) {
+			session.removeAttribute("memberId");
+			if(authInfo != null) {
+				session.removeAttribute("login");
+			}
+		}
 		
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
@@ -64,17 +79,21 @@ public class LoginController {
 		return "login/loginFormPage";
 	}
 
-	@PostMapping
-	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
+	@PostMapping("/login")
+	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session, Model model,
 			HttpServletResponse response, HttpServletRequest request) {
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
-
+		
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
-
+			
+			if(authInfo.getMemberauth().getMemberAuthStatus()==2) {
+				session.setAttribute("tempAuth", true);
+			}
+			
 			session.setAttribute("login", authInfo);
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
@@ -100,11 +119,12 @@ public class LoginController {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
-			errors.rejectValue("memberId" ,"notvalid");
-			return "login/loginFormPage";
+			session.setAttribute("tempAuth", true);
+			return "redirect:/email/valid?memberId=" + loginRequest.getMemberId();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		}
 	}
+	
 }

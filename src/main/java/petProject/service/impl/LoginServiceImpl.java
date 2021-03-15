@@ -52,4 +52,5 @@ public class LoginServiceImpl implements LoginService {
 				member.getMemberPhoneNumber(), member.getMemberRegisterDate(), member.getMemberlevel(),
 				member.getMemberauth());
 	}
+
 }
