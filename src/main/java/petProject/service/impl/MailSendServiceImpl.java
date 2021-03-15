@@ -61,7 +61,7 @@ public class MailSendServiceImpl implements MailSendService {
 
 			String mailHead = null;
 			String mailContent = null;
-			
+
 			if (member.getMemberauth().getMemberAuthStatus() == 0) {
 				mailHead = "<h1>[ANION] 회원가입 인증메일</h1><br><p>로그인 후 인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p><br>";
 
@@ -69,11 +69,11 @@ public class MailSendServiceImpl implements MailSendService {
 				mailHead = "<h1>[ANION] 이메일 변경 인증</h1><br><p>프로필에서 인증버튼을 클릭 후 인증번호 6자리를 입력하시면 이메일 변경이 완료됩니다.</p><br>";
 			}
 //			서버
-//			mailContent = emailcode + "<br><a href='http://anionbio.com:8119" + request.getContextPath() + "/login"
-//					+ "'target='_blank'>[ANION]</a>";
-//			로컬
-			mailContent = emailcode + "<br><a href='http://localhost:8080" + request.getContextPath() + "/login"
+			mailContent = emailcode + "<br><a href='http://anionbio.com:8119" + request.getContextPath() + "/login"
 					+ "'target='_blank'>[ANION]</a>";
+//			로컬
+//			mailContent = emailcode + "<br><a href='http://localhost:8080" + request.getContextPath() + "/login"
+//					+ "'target='_blank'>[ANION]</a>";
 
 			if (isHtml) {
 				message.setContent(mailHead + mailContent, "text/html;charset=UTF-8");

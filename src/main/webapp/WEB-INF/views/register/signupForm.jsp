@@ -23,6 +23,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width , initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
