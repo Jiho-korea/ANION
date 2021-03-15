@@ -14,6 +14,10 @@
 수    정    일 : 2020.11.24
 수  정  내  용 : 연관조회를 위해 vo객체를 필드로 선언
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2021.03.16
+수  정  내  용 : 등록 반려견 수, 사진 수 프로퍼티 추가
+========================================================================
 */
 package petProject.vo;
 
@@ -21,23 +25,22 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Member implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private String memberId;
 	private String memberPassword;
 	private String memberName;
 	private String memberPhoneNumber;
 	private Date memberRegisterDate;
-	private int memberNumber;
+	private Integer memberNumber;
 	private Memberlevel memberlevel;
 	private Memberauth memberauth;
-	
-	public Member() {
-		super();
-	}
+	private Integer numberOfPets;
+	private Integer numberOfImages;
 
 	public Member(String memberId, String memberPassword, String memberName, String memberPhoneNumber,
-			Date memberRegisterDate, int memberNumber, Memberlevel memberlevel, Memberauth memberauth) {
+			Date memberRegisterDate, Integer memberNumber, Memberlevel memberlevel, Memberauth memberauth,
+			Integer numberOfPets, Integer numberOfImages) {
 		super();
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
@@ -47,6 +50,12 @@ public class Member implements Serializable {
 		this.memberNumber = memberNumber;
 		this.memberlevel = memberlevel;
 		this.memberauth = memberauth;
+		this.numberOfPets = numberOfPets;
+		this.numberOfImages = numberOfImages;
+	}
+
+	public Member() {
+		super();
 	}
 
 	public String getMemberId() {
@@ -89,11 +98,11 @@ public class Member implements Serializable {
 		this.memberRegisterDate = memberRegisterDate;
 	}
 
-	public int getMemberNumber() {
+	public Integer getMemberNumber() {
 		return memberNumber;
 	}
 
-	public void setMemberNumber(int memberNumber) {
+	public void setMemberNumber(Integer memberNumber) {
 		this.memberNumber = memberNumber;
 	}
 
@@ -112,5 +121,25 @@ public class Member implements Serializable {
 	public void setMemberauth(Memberauth memberauth) {
 		this.memberauth = memberauth;
 	}
-	
+
+	public Integer getNumberOfPets() {
+		return numberOfPets;
+	}
+
+	public void setNumberOfPets(Integer numberOfPets) {
+		this.numberOfPets = numberOfPets;
+	}
+
+	public Integer getNumberOfImages() {
+		return numberOfImages;
+	}
+
+	public void setNumberOfImages(Integer numberOfImages) {
+		this.numberOfImages = numberOfImages;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

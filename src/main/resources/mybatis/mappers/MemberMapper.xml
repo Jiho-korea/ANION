@@ -4,86 +4,138 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petProject.dao.MemberDAO">
-    <select id="selectMemberById" parameterType="String" resultMap="memberResultMap">
-    	SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE", "MEMBER_NUMBER"
-    	FROM "member" WHERE "MEMBER_ID" = #{memberId}
-    </select>
-    
-    <select id="selectByMemberNumber" parameterType="int" resultMap="memberResultMap">
-    	SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE", "MEMBER_NUMBER"
-    	FROM "member" WHERE "MEMBER_NUMBER" = #{memberNumber}
-    </select>
-    
-    <select id="selectById" parameterType="String" resultType="int">
-    	SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
-    </select>
-    
-    <select id="selectMemberList" resultMap="memberListResultMap">
-    	select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER", "MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS", "MEMBER_NUMBER" from "public"."member" 
-    </select>
-    
-    <insert id="insertMember" parameterType="memberRegisterRequest">
-    	INSERT INTO "public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
-    	VALUES (#{memberRegisterRequest.memberId}, #{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
-    </insert>
-    
-    <update id="updateAuthStatus" parameterType="String">
-    	update "member"
-    	set "MEMBER_AUTH_STATUS" = 1
-    	where "MEMBER_ID" = #{memberId}
-    </update>
-    
-    <update id="updatePassword" parameterType="member">
-		update "member" 
-		set "MEMBER_PASSWORD" = #{member.memberPassword} 
-		where "MEMBER_ID" = #{member.memberId}
+	<select id="selectMemberById" parameterType="String"
+		resultMap="memberResultMap">
+		SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME",
+		"MEMBER_PHONE_NUMBER",
+		"MEMBER_REGISTRATION_DATE",
+		"MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE",
+		"MEMBER_NUMBER"
+		FROM "member"
+		WHERE "MEMBER_ID" = #{memberId}
+	</select>
+
+	<select id="selectByMemberNumber" parameterType="int"
+		resultMap="memberResultMap">
+		SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME",
+		"MEMBER_PHONE_NUMBER",
+		"MEMBER_REGISTRATION_DATE",
+		"MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE",
+		"MEMBER_NUMBER"
+		FROM "member"
+		WHERE "MEMBER_NUMBER" = #{memberNumber}
+	</select>
+
+	<select id="selectById" parameterType="String" resultType="int">
+		SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
+	</select>
+
+	<select id="selectMemberList" resultMap="memberListResultMap">
+		SELECT "MEMBER_ID",
+		"MEMBER_NAME", "MEMBER_PHONE_NUMBER",
+		"MEMBER_REGISTRATION_DATE",
+		"MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS",
+		"MEMBER_NUMBER"
+		FROM
+		"public"."member"
+		ORDER BY "MEMBER_NUMBER"
+	</select>
+
+	<insert id="insertMember" parameterType="memberRegisterRequest">
+		INSERT INTO
+		"public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME",
+		"MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
+		VALUES
+		(#{memberRegisterRequest.memberId},
+		#{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
+	</insert>
+
+	<update id="updateAuthStatus" parameterType="String">
+		update "member"
+		set
+		"MEMBER_AUTH_STATUS" = 1
+		where "MEMBER_ID" = #{memberId}
 	</update>
-	
+
+	<update id="updatePassword" parameterType="member">
+		update "member"
+		set
+		"MEMBER_PASSWORD" = #{member.memberPassword}
+		where "MEMBER_ID" =
+		#{member.memberId}
+	</update>
+
 	<update id="updateName" parameterType="member">
-		update "member" 
-		set "MEMBER_NAME" = #{member.memberName}
-		where "MEMBER_NUMBER" = #{member.memberNumber}
+		update "member"
+		set
+		"MEMBER_NAME" = #{member.memberName}
+		where "MEMBER_NUMBER" =
+		#{member.memberNumber}
 	</update>
-	
+
 	<update id="updateId" parameterType="changeIdCommand">
-		update "member" 
-		set "MEMBER_ID" = #{changeIdCommand.memberId}
-		where "MEMBER_NUMBER" = #{changeIdCommand.memberNumber}
+		update "member"
+		set
+		"MEMBER_ID" = #{changeIdCommand.memberId}
+		where "MEMBER_NUMBER" =
+		#{changeIdCommand.memberNumber}
 	</update>
-    
-    <resultMap type="member" id="memberListResultMap">
-     	<id column="MEMBER_NUMBER" property="memberNumber" />
+
+	<resultMap type="member" id="memberListResultMap">
+		<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_NAME" property="memberName" />
-		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
-		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
-		<association select="selectMemberlevel" property="memberlevel"
-			column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
-		<association select="selectMemberauth" property="memberauth"
-			column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
+		<result column="MEMBER_PHONE_NUMBER"
+			property="memberPhoneNumber" />
+		<result column="MEMBER_REGISTRATION_DATE"
+			property="memberRegisterDate" />
+		<association select="selectMemberlevel"
+			property="memberlevel" column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
+		<association select="selectMemberauth"
+			property="memberauth" column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
+		<association select="selectCountOfPets"
+			property="numberOfPets" column="{memberNumber=MEMBER_NUMBER}" />
+		<association select="selectCountOfImages"
+			property="numberOfImages" column="{memberNumber=MEMBER_NUMBER}" />
 	</resultMap>
-	
-    <select id="selectMemberlevel" parameterType="memberlevel"
+
+	<select id="selectMemberlevel" parameterType="memberlevel"
 		resultType="memberlevel">
-		SELECT "MEMBER_LEVEL_CODE", "MEMBER_LEVEL_DESCRIPTION" FROM "memberlevel" WHERE "MEMBER_LEVEL_CODE" = #{memberLevelCode}
+		SELECT "MEMBER_LEVEL_CODE", "MEMBER_LEVEL_DESCRIPTION" FROM
+		"memberlevel" WHERE "MEMBER_LEVEL_CODE" = #{memberLevelCode}
 	</select>
-	
+
 	<select id="selectMemberauth" parameterType="memberauth"
 		resultType="memberauth">
-		SELECT "MEMBER_AUTH_STATUS", "MEMBER_STATUS" FROM "memberauth" WHERE "MEMBER_AUTH_STATUS" = #{memberAuthStatus}
+		SELECT "MEMBER_AUTH_STATUS", "MEMBER_STATUS" FROM
+		"memberauth" WHERE "MEMBER_AUTH_STATUS" = #{memberAuthStatus}
 	</select>
-	
+
+	<select id="selectCountOfPets" parameterType="member"
+		resultType="int">
+		SELECT count(*) FROM pet WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
+	</select>
+
+	<select id="selectCountOfImages" parameterType="member"
+		resultType="int">
+		SELECT count(*) FROM image WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
+	</select>
+
 	<resultMap type="member" id="memberResultMap">
 		<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="MEMBER_PASSWORD" property="memberPassword" />
 		<result column="MEMBER_NAME" property="memberName" />
-		<result column="MEMBER_PHONE_NUMBER" property="memberPhoneNumber" />
-		<result column="MEMBER_REGISTRATION_DATE" property="memberRegisterDate" />
-		<association select="selectMemberlevel" property="memberlevel"
-			column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
-		<association select="selectMemberauth" property="memberauth"
-			column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
+		<result column="MEMBER_PHONE_NUMBER"
+			property="memberPhoneNumber" />
+		<result column="MEMBER_REGISTRATION_DATE"
+			property="memberRegisterDate" />
+		<association select="selectMemberlevel"
+			property="memberlevel" column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
+		<association select="selectMemberauth"
+			property="memberauth" column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
 	</resultMap>
-	
+
 </mapper>
