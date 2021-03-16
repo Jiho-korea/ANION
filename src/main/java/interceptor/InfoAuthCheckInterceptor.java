@@ -9,8 +9,6 @@
 */
 package interceptor;
 
-import java.io.PrintWriter;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +19,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import petProject.service.PetInfoService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Pet;
+import petProject.vo.ScriptWriter;
 
 public class InfoAuthCheckInterceptor implements HandlerInterceptor {
-
+	
 	@Resource(name = "petInfoService")
 	PetInfoService petInfoService;
 
@@ -37,14 +36,7 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 
 			if (!"0".equals(authInfo.getMemberlevel().getMemberLevelCode())
 					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('권한이 없습니다.');");
-				out.println("location.href='" + request.getContextPath() + "/home';");
-				out.println("</script>");
-				out.flush();
-				return false;
+				return ScriptWriter.write("권한이 없습니다", "home", request, response);
 			}
 			if ("0".equals(authInfo.getMemberlevel().getMemberLevelCode())
 					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {

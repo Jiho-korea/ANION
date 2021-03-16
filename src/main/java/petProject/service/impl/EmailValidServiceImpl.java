@@ -27,24 +27,21 @@ public class EmailValidServiceImpl implements EmailValidService {
 	private MemberDAO memberDAO;
 
 	@Override
-	public void validCode(Emailcode emailcode) throws Exception {
-		String data = emailcodeDAO.selectEmailcode(emailcode.getMemberId());
+	public Emailcode validCode(Emailcode emailcode) throws Exception {
 		if (emailcode.getEmailCode().equals("")) {
 			throw new EmailcodeNullException("emailcode is null");
 		}
 
+		Emailcode data = emailcodeDAO.selectEmailcode(emailcode);
 		if (data != null) {
-			if (data.equals(emailcode.getEmailCode())) {
-				int cnt = memberDAO.updateAuthStatus(emailcode.getMemberId());
-				if (cnt == 0) {
-					throw new MemberAuthUpdateException("Auth Update Exception");
-				}
-			} else {
-				throw new EmailcodeNotMatchException("emailcode not match");
+			int cnt = memberDAO.updateAuthStatus(data.getMemberId());
+			if (cnt == 0) {
+				throw new MemberAuthUpdateException("Auth Update Exception");
 			}
 		} else {
-			throw new NullPointerException();
+			throw new EmailcodeNotMatchException("emailcode not match");
 		}
+		return data;
 	}
 
 	@Override
@@ -63,19 +60,17 @@ public class EmailValidServiceImpl implements EmailValidService {
 	}
 
 	@Override
-	public int valid(Emailcode emailcode) throws Exception {
-		int result = 0;
-		this.validCode(emailcode);
+	public String valid(Emailcode emailcode) throws Exception {
+		String result = null;
+		Emailcode data = this.validCode(emailcode);
 
-		String newMemberId = emailcodeDAO.selectNewMemberId(emailcode);
-		if (newMemberId != null) {
-			emailcode.setNewMemberId(newMemberId);
-			this.updateEmail(emailcode);
+		if (data.getNewMemberId() != null) {
+			this.updateEmail(data);
 
-			result = 1;
+			result = data.getNewMemberId();
 		}
 
-		int cnt = emailcodeDAO.doneEmailcode(emailcode);
+		int cnt = emailcodeDAO.doneEmailcode(data);
 		if (cnt == 0) {
 			throw new EmailcodeDeleteException("invalid memberId");
 		}
