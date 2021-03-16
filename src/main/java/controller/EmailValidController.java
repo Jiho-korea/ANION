@@ -13,8 +13,6 @@
 */
 package controller;
 
-import java.io.PrintWriter;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,11 +33,12 @@ import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.service.EmailValidService;
 import petProject.vo.Emailcode;
+import petProject.vo.ScriptWriter;
 
 @Controller
 @RequestMapping("/email")
 public class EmailValidController {
-
+	
 	@Resource(name = "emailValidService")
 	EmailValidService emailValidService;
 
@@ -58,16 +57,16 @@ public class EmailValidController {
 			HttpServletResponse response, HttpSession session) throws Exception {
 		if (errors.hasErrors()) {
 			errors.reject("error");
+			model.addAttribute("memberId", emailcode.getMemberId());
 			return "register/valid";
 		}
 
 		try {
-			int result = emailValidService.valid(emailcode);
-
-			// 이메일 변경시 result = 1
-			if (result == 1) {
+			String result = emailValidService.valid(emailcode);
+			// 이메일 변경시 result != 0
+			if (result != null) {
 				session.invalidate();
-				model.addAttribute("memberId", emailcode.getNewMemberId());
+				model.addAttribute("memberId", result);
 				return "home/validSuccess";
 			}
 			model.addAttribute("memberId", emailcode.getMemberId());
@@ -76,38 +75,31 @@ public class EmailValidController {
 		} catch (EmailcodeNotMatchException e) {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "notvalid");
+			model.addAttribute("memberId", emailcode.getMemberId());
 			return "register/valid";
 		} catch (EmailcodeNullException e) {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "NotNull");
+			model.addAttribute("memberId", emailcode.getMemberId());
 			return "register/valid";
 		} catch (MemberIdUpdateException e) {
 			e.printStackTrace();
 			errors.reject("newId");
+			model.addAttribute("memberId", emailcode.getMemberId());
 			return "register/valid";
 		} catch (EmailcodeDeleteException e) {
 			e.printStackTrace();
 			errors.reject("memberId");
-			return "register/valid";
+			return "info/profile";
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
-			errors.rejectValue("emailCode", "notvalid");
-			return "register/valid";
+			errors.rejectValue("memberId", "memberId.edit");
+			return "info/profile";
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			write("잘못된 접근입니다", request, response);
+			ScriptWriter.write("잘못된 접근입니다", "profile", request, response);
 			return "info/profile";
 		}
 
-	}
-
-	private void write(String message, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('" + message + "');");
-		out.println("location.href='" + request.getContextPath() + "/profile';");
-		out.println("</script>");
-		out.flush();
 	}
 }

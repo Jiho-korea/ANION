@@ -86,7 +86,7 @@ a, a:hover {
 				<b><spring:message code="info.member.profile" /></b>
 			</h2>
 			<br> <br>
-			
+
 			<form:errors />
 			<h4 style="text-align: left">
 				<c:choose>
@@ -115,10 +115,11 @@ a, a:hover {
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
+								onclick="this.disabled=true;this.value='Loading'; this.form.submit();"
 								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
-								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
+								type="button" name="btn_modify_cancel" id="btn_modify_cancel"
 								value=<spring:message code="cancel" /> /> </a>
 
 							<form:errors path="memberId" />
@@ -126,7 +127,8 @@ a, a:hover {
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
-					<a href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
+					<a
+						href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
 						type="button" value=<spring:message code="valid" /> /> </a>
 				</c:if>
 
@@ -205,7 +207,6 @@ a, a:hover {
 	</div>
 
 	<!-- JS here -->
-
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->

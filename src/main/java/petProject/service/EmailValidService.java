@@ -6,9 +6,9 @@ import petProject.vo.Emailcode;
 
 public interface EmailValidService {
 
-	int valid(@Param("emailcode") Emailcode emailcode) throws Exception;
+	String valid(@Param("emailcode") Emailcode emailcode) throws Exception;
 
-	void validCode(@Param("emailcode") Emailcode emailcode) throws Exception;
+	Emailcode validCode(@Param("emailcode") Emailcode emailcode) throws Exception;
 
 	void updateEmail(@Param("emailcode") Emailcode emailcode) throws Exception;
 }

@@ -4,14 +4,9 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petProject.dao.EmailcodeDAO">
-    <select id="selectEmailcode" parameterType="String" resultType="String">
-    	SELECT "EMAIL_CODE"
-    	FROM "emailcode" WHERE "MEMBER_ID" = #{memberId}
-    </select>
-    
-    <select id="selectNewMemberId" parameterType="emailcode" resultType="String">
-    	SELECT "NEW_MEMBER_ID"
-    	FROM "emailcode" WHERE "MEMBER_ID" = #{emailcode.memberId}
+    <select id="selectEmailcode" parameterType="emailcode" resultType="emailcode">
+    	SELECT "EMAIL_CODE", "MEMBER_ID", "NEW_MEMBER_ID"
+    	FROM "emailcode" WHERE "MEMBER_ID" = #{emailcode.memberId} AND "EMAIL_CODE" = #{emailcode.emailCode}
     </select>
     
     <insert id="insertEmailcode" parameterType="emailcode">
@@ -32,7 +27,7 @@
     
     <delete id="doneEmailcode" parameterType="emailcode">
     	DELETE FROM "emailcode"
-    	WHERE "EMAIL_CODE" = #{emailcode.emailCode}
+    	WHERE "MEMBER_ID" = #{emailcode.newMemberId}
     </delete>
 	
 </mapper>
