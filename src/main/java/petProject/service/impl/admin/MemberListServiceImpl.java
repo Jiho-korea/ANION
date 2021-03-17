@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import petProject.dao.ImageDAO;
 import petProject.dao.MemberDAO;
+import petProject.dao.PetDAO;
 import petProject.service.admin.MemberListService;
 import petProject.vo.Member;
 
@@ -25,10 +27,31 @@ public class MemberListServiceImpl implements MemberListService {
 	@Autowired
 	private MemberDAO memberDAO;
 
+	@Autowired
+	private PetDAO petDAO;
+
+	@Autowired
+	private ImageDAO imageDAO;
+
 	@Override
 	public List<Member> selectMemberList() throws Exception {
 		List<Member> memberList = memberDAO.selectMemberList();
 		return memberList;
+	}
+
+	@Override
+	public int selectMemberCount() throws Exception {
+		return memberDAO.selectMemberCount();
+	}
+
+	@Override
+	public int selectPetCount() throws Exception {
+		return petDAO.selectPetCount();
+	}
+
+	@Override
+	public int selectImageCount() throws Exception {
+		return imageDAO.selectImageCount();
 	}
 
 }

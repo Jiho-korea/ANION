@@ -19,6 +19,10 @@
     	select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER", "IMAGE_PATH" from "public"."image" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
     </select>
     
+    <select id="selectImageCount" resultType="int">
+		SELECT count(*) FROM image
+	</select>
+    
     <resultMap type="image" id="imageResultMap">
 		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
 		<id column="IMAGE_NUMBER" property="imageNumber" />

@@ -54,11 +54,13 @@ public interface MemberDAO {
 	List<Member> selectMemberList() throws Exception;
 
 	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
-	
-	int updatePassword(@Param("member") Member member);
 
-	int updateName(@Param("member") Member member);
+	int updatePassword(@Param("member") Member member) throws Exception;
+
+	int updateName(@Param("member") Member member) throws Exception;
 
 	int updateId(@Param("changeIdCommand") ChangeIdCommand changeIdCommand) throws Exception;
-	
+
+	int selectMemberCount() throws Exception;
+
 }

@@ -41,6 +41,10 @@
 		ORDER BY "MEMBER_NUMBER"
 	</select>
 
+	<select id="selectMemberCount" resultType="int">
+		SELECT count(*) FROM member
+	</select>
+
 	<insert id="insertMember" parameterType="memberRegisterRequest">
 		INSERT INTO
 		"public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME",

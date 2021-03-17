@@ -15,4 +15,11 @@ import petProject.vo.Member;
 
 public interface MemberListService {
 	List<Member> selectMemberList() throws Exception;
+
+	int selectMemberCount() throws Exception;
+
+	int selectPetCount() throws Exception;
+
+	int selectImageCount() throws Exception;
+
 }
