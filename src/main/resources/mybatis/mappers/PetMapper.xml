@@ -53,6 +53,10 @@
 		"PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
 	</select>
 
+	<select id="selectPetCount" resultType="int">
+		SELECT count(*) FROM pet
+	</select>
+
 	<resultMap type="pet" id="petResultMap">
 		<id column="PET_REGISTRATION_NUMBER"
 			property="petRegistrationNumber" />
@@ -84,7 +88,8 @@
 		"MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS",
 		"MEMBER_NUMBER"
 		from "public"."member"
-		WHERE "MEMBER_NUMBER" = #{memberNumber}
+		WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
 	</select>
 
 	<resultMap type="pet" id="petListResultMap">
@@ -106,7 +111,9 @@
 
 	<update id="updatePetName" parameterType="petNameUpdateRequest">
 		UPDATE public.pet
-		SET "PET_NAME"=#{petNameUpdateRequest.petName}
-		WHERE "PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
+		SET
+		"PET_NAME"=#{petNameUpdateRequest.petName}
+		WHERE
+		"PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
 	</update>
 </mapper>

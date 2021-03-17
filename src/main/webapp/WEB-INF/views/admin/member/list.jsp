@@ -11,7 +11,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -20,15 +20,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/admin/common.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/admin/left.css" />
-<script type="text/javascript">
-<!--
-	
-//-->
-</script>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/css/admin/common.css" />
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/css/admin/left.css" />
+	<script type="text/javascript">
+	<!--
+		
+	//-->
+	</script>
 </head>
 <body>
 	<!-- wrapper 시작 -->
@@ -38,7 +38,7 @@
 		<!-- header 끝 -->
 
 		<!-- leftcolumn 시작 -->
-		<c:import url="../common/leftMenu.jsp" >
+		<c:import url="../common/leftMenu.jsp">
 			<c:param value="list_member" name="type" />
 		</c:import>
 		<!-- leftcolumn 끝 -->
@@ -58,6 +58,8 @@
 				</p>
 			</div>
 			<div class="boardTable">
+				<div><spring:message code="admin.member.total.member" />:&nbsp;${memberCount},&nbsp;&nbsp;<spring:message code="admin.member.total.pet" />:&nbsp;${petCount},&nbsp;&nbsp;<spring:message code="admin.member.total.image" />:&nbsp;${imageCount}</div>
+				<br/>
 				<div id="serach_area" style="padding-bottom: 10px;">
 					<form name="delivery" id="myForm" method="get">
 						<input type="hidden" name="find_key" id="find_key"
@@ -80,11 +82,13 @@
 									code="admin.member.phoneNumber" /></th>
 							<th width="10%"><spring:message code="admin.member.status" /></th>
 							<th width="10%"><spring:message code="admin.member.date" /></th>
-							<th width="5%"><spring:message code="admin.member.number.pet" /></th>
-							<th width="5%"><spring:message code="admin.member.number.image" /></th>
+							<th width="5%"><spring:message
+									code="admin.member.number.pet" /></th>
+							<th width="5%"><spring:message
+									code="admin.member.number.image" /></th>
 							<th width="6%"><spring:message code="admin.member.petInfo" /></th>
-							<th width="10%"><a href="#"><input type="button" name="btn_plus"
-								id="btn_plus" class="btn_plus" value="신규등록" /></a></th>
+							<th width="10%"><a href="#"><input type="button"
+									name="btn_plus" id="btn_plus" class="btn_plus" value="신규등록" /></a></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -104,22 +108,25 @@
 								<td width="20%" align="center">${member.memberId }</td>
 								<td width="15%" align="center">${member.memberPhoneNumber }</td>
 								<td width="10%" align="center">${member.memberauth.memberStatus}</td>
-								<td width="10%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
+								<td width="10%" align="center"><fmt:formatDate
+										value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" /></td>
 								<td width="5%" align="center">${member.numberOfPets}</td>
 								<td width="5%" align="center">${member.numberOfImages}</td>
-								
+
 								<td width="6%" align="center"><div align="center">
-										<a href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}" target="_blank"> <input type="button" name="btn_modify"
+										<a
+											href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}"
+											target="_blank"> <input type="button" name="btn_modify"
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="확인"/></a>
+											value="확인" /></a>
 									</div></td>
-								
+
 								<td width="10%" align="center"><div align="center">
 										<a href="#"> <input type="button" name="btn_modify"
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="수정" /></a> <a href="#"><input type="button" name="btn_delete"
-											id="btn_delete" class="btn_delete {delivery_no: 4}"
-											value="삭제" /> </a>
+											value="수정" /></a> <a href="#"><input type="button"
+											name="btn_delete" id="btn_delete"
+											class="btn_delete {delivery_no: 4}" value="삭제" /> </a>
 									</div></td>
 							</tr>
 							<!-- 
@@ -128,7 +135,7 @@
 							</tr>
 							 -->
 						</c:forEach>
-					
+
 					</tbody>
 				</table>
 				<div id="paging" class="paging"

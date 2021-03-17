@@ -41,6 +41,9 @@ public class MemberListController {
 		try {
 			List<Member> memberList = memberListService.selectMemberList();
 			model.addAttribute("memberList", memberList);
+			model.addAttribute("memberCount", memberListService.selectMemberCount());
+			model.addAttribute("petCount", memberListService.selectPetCount());
+			model.addAttribute("imageCount", memberListService.selectImageCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/home/main";
