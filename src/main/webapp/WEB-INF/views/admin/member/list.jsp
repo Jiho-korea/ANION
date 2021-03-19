@@ -102,7 +102,8 @@
 						</c:if>
 						<c:forEach var="member" items="${memberList}" varStatus="status">
 							<tr>
-								<td width="5%" align="center">${member.memberNumber}</td>
+								<%-- <td width="5%" align="center">${member.memberNumber}</td>--%>								
+								<td width="5%" align="center">${status.index + 1}</td>
 								<td width="8%" align="center">${member.memberlevel.memberLevelDescription }</td>
 								<td width="6%" align="center">${member.memberName }</td>
 								<td width="20%" align="center">${member.memberId }</td>
