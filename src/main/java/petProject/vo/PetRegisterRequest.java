@@ -22,9 +22,9 @@ public class PetRegisterRequest {
 	private String petKindcode;
 	@NotBlank
 	private String petBirthday;
-	@NotBlank
+
 	private String petMothername;
-	@NotBlank
+
 	private String petFathername;
 	@NotBlank
 	private String petMicrochip;
