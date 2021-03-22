@@ -21,7 +21,7 @@ public class ScriptWriter {
 		return false;
 	}
 	
-	public static void write(String message, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public static boolean write(String message, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		PrintWriter out = response.getWriter();
@@ -30,5 +30,7 @@ public class ScriptWriter {
 		out.println("alert('" + message + "');");
 		out.println("</script>");
 		out.flush();
+		
+		return false;
 	}
 }
