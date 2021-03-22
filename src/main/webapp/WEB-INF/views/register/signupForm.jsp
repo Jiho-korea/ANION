@@ -78,7 +78,7 @@
 					<spring:message code="go.register" />
 				</h1>
 				<br>
-			    
+
 				<form:errors />
 				<br>
 				<br>

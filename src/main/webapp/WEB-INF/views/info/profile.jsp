@@ -161,6 +161,7 @@ a, a:hover {
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
+								onclick="this.disabled=true;this.value='Loading'; this.form.submit();"
 								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
