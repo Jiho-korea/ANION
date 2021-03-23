@@ -2,32 +2,33 @@
 ========================================================================
 파    일    명 : ImageListServiceImpl.java
 ========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.xx.xx
-작  성  내  용 : imageDao의 selectImagelist메서드를 이용하는 서비스
+작    성    자 : 임원석
+작    성    일 : 2020.03.21
+작  성  내  용 : imageDao의 DeleteImage메서드를 이용하는 서비스
 ========================================================================
 */
 package petProject.service.impl;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.ImageDAO;
-import petProject.service.ImageListService;
-import petProject.vo.Image;
+import petProject.exception.ImageDeleteException;
+import petProject.service.ImageDeleteService;
 
-@Service("imageListService")
+@Service("imageDeleteService")
 @Transactional
-public class ImageListServiceImpl implements ImageListService {
+public class ImageDeleteServiceImpl implements ImageDeleteService {
 	@Autowired
 	private ImageDAO imageDAO;
 
-	public List<Image> selectImageList(int petRegistrationNumber) throws Exception {
-		List<Image> imageList = imageDAO.selectImageList(petRegistrationNumber);
-		return imageList;
+	public int deleteImage(String imagePath) throws Exception {
+		int result = imageDAO.deleteImage(imagePath);
+		if (result < 0) {
+			throw new ImageDeleteException("imageDeleteException");
+		}
+		return result;
 	}
 
 }

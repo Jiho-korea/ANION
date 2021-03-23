@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import controller.EmailValidController;
+import controller.ImageDeleteController;
 import controller.ImageListController;
 import controller.LoginController;
 import controller.LogoutController;
@@ -59,6 +60,11 @@ public class ControllerConfig {
 	}
 
 	@Bean
+	public ImageDeleteController imageDeleteController() {
+		return new ImageDeleteController();
+	}
+
+	@Bean
 	public PetInfoController petInfoController() {
 		return new PetInfoController();
 	}
@@ -77,7 +83,7 @@ public class ControllerConfig {
 	public EmailValidController emailValidController() {
 		return new EmailValidController();
 	}
-	
+
 	@Bean
 	public KindcodeListController kindcodeListController() {
 		return new KindcodeListController();
