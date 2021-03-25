@@ -27,5 +27,5 @@ public interface ImageDAO {
 
 	int selectImageCount() throws Exception;
 
-	void deleteImage(@Param("imagePath") String imagePath) throws Exception;
+	int deleteImage(@Param("imagePath") String imagePath) throws Exception;
 }
