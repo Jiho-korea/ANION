@@ -10,6 +10,10 @@
 수    정    일 : 2021.01.30
 수  정  내  용 : 이메일 변경 인증 메서드 추가
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.03.23
+수  정  내  용 : 에러처리 및 회원가입-이메일 변경할때 사용하는 세션이용
+========================================================================
 */
 package controller;
 
@@ -63,12 +67,13 @@ public class EmailValidController {
 
 		try {
 			String result = emailValidService.valid(emailcode);
-			// 이메일 변경시 result != 0
+			// 이메일 변경시 result != null
 			if (result != null) {
 				session.invalidate();
 				model.addAttribute("memberId", result);
 				return "home/validSuccess";
 			}
+			//회원 가입시 result = null
 			model.addAttribute("memberId", emailcode.getMemberId());
 			session.removeAttribute("tempAuth");
 			return "home/validSuccess";
