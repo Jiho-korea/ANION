@@ -39,6 +39,7 @@ public class MainController {
 
 	@GetMapping("/list")
 	public String listPet(HttpSession session, Model model) {
+
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
 			List<Pet> petList = petListService.selectPetList(authInfo.getMemberNumber());

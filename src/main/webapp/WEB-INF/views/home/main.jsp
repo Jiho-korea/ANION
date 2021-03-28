@@ -150,6 +150,8 @@
 			<br />
 			<span><spring:message code="anion.introduction.title" /></span>
 			<p>
+			
+			
 				<img src="${pageContext.request.contextPath}/img/logo/anion.png" alt="">
 				<spring:message code="anion.introduction.1" /><br />
 				<img src="${pageContext.request.contextPath}/img/logo/postech.png" style="max-width: 100%; height: auto;" alt="">
@@ -158,6 +160,7 @@
 				<spring:message code="anion.introduction.3" />
 				<img src="${pageContext.request.contextPath}/img/logo/pohangtecnopark.png" alt="">
 				<spring:message code="anion.introduction.4" />
+				
 			</p>
 			<%--
 			<p>................(추후 추가)</p>
