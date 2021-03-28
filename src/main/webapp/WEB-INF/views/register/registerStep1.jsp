@@ -97,8 +97,8 @@
 				<div class="row">
 					<div class="col-md-6 mb-1">
 						<label> <form:input
-								path="petName" cssClass="single-input" placeholder="견명"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '견명'" />
+								path="petName" cssClass="single-input" placeholder="견명 / Name"
+								onfocus="this.placeholder = ''" onblur="this.placeholder = '견명 / Name'" />
 							<form:errors path="petName" />
 						</label>
 					</div>
@@ -116,16 +116,16 @@
 					<div class="default-select" id="default-select"
 						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
 						<select style="display: none;" name="petKindcode">
-							<option value="">견종</option>
+							<option value="">견종 / Dog breed</option>
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<option value="${kindcode.petKindcode}">${kindcode.petKind}</option>
 							</c:forEach>
 						</select>
 						<div class="nice-select" tabindex="0">
-							<span class="current">견종</span>
+							<span class="current">견종 / Dog breed</span>
 							<ul class="list">
-								<li data-value="견종" class="option selected focus" hidden="">견종</li>
+								<li data-value="견종 / Dog breed" class="option selected focus" hidden="">견종 / Dog breed</li>
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
@@ -134,8 +134,6 @@
 								<li data-value="1" class="option">동경이</li>
 								<li data-value="2" class="option">진돗개</li>
 								--%>
-
-
 							</ul>
 						</div>
 						<br>
@@ -146,18 +144,21 @@
 				<br class="mb-4" />
 				<div class="row">
 					<div class="col-md-6 mb-1">
+				
 						<label> <!--<spring:message code="pet.mothername" />--> <form:input
-								path="petMothername" cssClass="single-input" placeholder="모견명"
+								path="petMothername" cssClass="single-input" placeholder="모견명 / dog's mother"
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '모견명'" /> <form:errors
+								onblur="this.placeholder = '모견명 / Mother dog's name'" /> <form:errors
 								path="petMothername" />
+								
+								
 						</label>
 					</div>
 					<div class="col-md-6 mb-1">
 						<label> <!--<spring:message code="pet.father" />--> <form:input
-								path="petFathername" cssClass="single-input" placeholder="부견명"
+								path="petFathername" cssClass="single-input" placeholder="부견명 / dog's father"
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '부견명'" /> <form:errors
+								onblur="this.placeholder = '부견명 / Dad Dog's Name'" /> <form:errors
 								path="petFathername" />
 						</label>
 					</div>
@@ -172,9 +173,9 @@
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
-						path="petMicrochip" cssClass="single-input" placeholder="마이크로칩 번호"
+						path="petMicrochip" cssClass="single-input" placeholder="Microchip number"
 						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '마이크로칩 번호'" /> <form:errors
+						onblur="this.placeholder = 'Microchip number'" /> <form:errors
 						path="petMicrochip" />
 				</label>
 				<br class="mb-4" />

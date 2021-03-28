@@ -13,16 +13,15 @@
 */
 package config;
 
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import interceptor.AdminCheckInterceptor;
 import interceptor.EmailcodeCheckInterceptor;
@@ -52,7 +51,14 @@ public class MvcConfig implements WebMvcConfigurer {
 	public EmailcodeCheckInterceptor emailcodeCheckInterceptor() {
 		return new EmailcodeCheckInterceptor();
 	}
-	
+
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+		interceptor.setParamName("lang");
+		return interceptor;
+	}
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -61,15 +67,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		registry.jsp("/WEB-INF/views/", ".jsp");
-	}
-
-	@Bean
-	public MessageSource messageSource() {
-		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
-		ms.setBasenames("message.label");
-		ms.addBasenames("message.error");
-		ms.setDefaultEncoding("UTF-8");
-		return ms;
 	}
 
 	@Override
@@ -88,7 +85,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/main/**", "/register/**", "/list/**",
 				"/admin/**", "/info/**", "/edit/**", "/profile/**");
-
+		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");

@@ -30,22 +30,22 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private MemberDAO memberDAO;
 
-	@Transactional(rollbackFor=SQLException.class)
+	@Transactional(rollbackFor = SQLException.class)
 	public void changePassword(String memberId, String oldPassword, String newPassword) throws Exception {
 		Member member = memberDAO.selectMemberById(memberId);
-		if(member == null) {
+		if (member == null) {
 			throw new MemberNotFoundException("NOT FOUND");
 		}
-		
+
 		if (!passwordEncoder.matches(oldPassword, member.getMemberPassword()))
 			throw new WrongIdPasswordException("not Matching");
-		
+
 		member.setMemberPassword(passwordEncoder.encode(newPassword));
-		
+
 		memberDAO.updatePassword(member);
 	}
 
