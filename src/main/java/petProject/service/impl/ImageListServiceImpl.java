@@ -30,8 +30,4 @@ public class ImageListServiceImpl implements ImageListService {
 		return imageList;
 	}
 
-	public void deleteImage(String imagePath) throws Exception {
-		imageDAO.deleteImage(imagePath);
-	}
-
 }
