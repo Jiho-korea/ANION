@@ -173,9 +173,9 @@
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
-						path="petMicrochip" cssClass="single-input" placeholder="Microchip number"
+						path="petMicrochip" cssClass="single-input" cssStyle="width:350px" placeholder="마이크로칩 번호 / Microchip number"
 						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Microchip number'" /> <form:errors
+						onblur="this.placeholder = '마이크로칩 번호 / Microchip number'"  /> <form:errors
 						path="petMicrochip" />
 				</label>
 				<br class="mb-4" />

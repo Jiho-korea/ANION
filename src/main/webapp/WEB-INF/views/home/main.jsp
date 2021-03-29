@@ -7,7 +7,8 @@
 작  성  내  용 : 메인 페이지
 ========================================================================
 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
@@ -56,6 +57,15 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
+	<div class="container d-flex justify-content-center align-items-center mt-5">
+		<a href="${pageContext.request.contextPath}/register/step1"
+			class="btn header-btn"><spring:message code="pet.registration.title" /></a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+			href="${pageContext.request.contextPath}/main/list"
+			class="btn header-btn"><spring:message code="pet.list.title" /></a>
+	</div>
+
+	<%-- 대문짝
 	 <!-- slider Area Start-->
 	<div class="slider-area position-relative">
 		<div class="slider-active dot-style">
@@ -137,6 +147,9 @@
 		</div>
 		<!-- video_end -->
 	</div>
+	 --%>
+
+	<%--
 	<!-- slider Area End--> <!--? Visit Our Tailor Start -->
 	<div class="visit-tailor-area fix">
 		<!--Right Contents  -->
@@ -162,7 +175,7 @@
 				<spring:message code="anion.introduction.4" />
 				
 			</p>
-			<%--
+			<!--
 			<p>................(추후 추가)</p>
 			<p class="pera-bottom">................(추후 추가)</p>
 		
@@ -170,10 +183,11 @@
 				<p>주)애니온 대표이사 </p>
 				<h2>이동훈 / 李 東 訓 /<br>Dong-Hoon Lee</h2>
 			</div>
-			--%>
+			--!>
 		</div>
 	</div>
-	
+	 --%>
+	<%-- 
 	<!-- Visit Our Tailor End --> <!--? Services Area Start -->
 	<div class="service-area section-padding30">
 		<div class="container">
@@ -214,6 +228,7 @@
 		</div>
 	</div>
 	<!-- Services Area End -->
+	--%>
 	<%--
 	<!--? About Area Start -->
 	<section class="support-company-area fix pt-10">
@@ -422,7 +437,9 @@
 			</div>
 		</div>
 	</section>
-	--%> <!-- Blog Area End --> </main>
+	--%>
+	<!-- Blog Area End -->
+	</main>
 
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />

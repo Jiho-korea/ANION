@@ -69,8 +69,8 @@
 	</c:import>
 
 	<div class="container text-center" id="main">
-		<div class="jumbotron"
-			style="background: transparent !important; text-align: left">
+		<div class="jumbotron d-flex justify-content-center align-items-center"
+			style="background: transparent !important;">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
 				modelAttribute="memberRegisterRequest">
@@ -83,9 +83,8 @@
 				<br>
 				<br>
 				<label> <form:input path="memberId" cssClass="single-input"
-						placeholder="abc@email.com"
-						onfocus="this.placeholder = 'abc@email.com'"
-						onblur="this.placeholder = 'abc@email.com'" />
+						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이메일 / Email'" cssStyle="width:350px" />
 				</label>
 				<label> <form:errors path="memberId" />
 				</label>
@@ -93,8 +92,10 @@
 				<br>
 
 				<label> <form:password path="memberPassword"
-						cssClass="single-input" placeholder="비밀번호"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'" />
+						cssClass="single-input mt-2" placeholder="비밀번호 / Password"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '비밀번호 / Password'"
+						cssStyle="width:350px" />
 
 				</label>
 				<label> <form:errors path="memberPassword" />
@@ -102,33 +103,37 @@
 
 				<br>
 				<label> <form:password path="checkPassword"
-						cssClass="single-input" placeholder="비밀번호 확인"
+						cssClass="single-input mt-2"
+						placeholder="비밀번호 확인 / Confirm Password"
 						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '비밀번호 확인'" />
+						onblur="this.placeholder = '비밀번호 확인 / Confirm Password'"
+						cssStyle="width:350px" />
 				</label>
 				<label> <form:errors path="checkPassword" />
 				</label>
 
 				<br>
 				<label> <form:input path="memberName"
-						cssClass="single-input" placeholder="이름"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" />
+						cssClass="single-input mt-2" placeholder="이름 / Name"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이름 / Name'" cssStyle="width:350px" />
 				</label>
 				<label> <form:errors path="memberName" />
 				</label>
 				<br>
 				<label> <form:input path="memberPhoneNumber"
-						cssClass="single-input" placeholder="전화번호"
-						onfocus="this.placeholder = ''" onblur="this.placeholder = '전화번호'"
+						cssClass="single-input mt-2" placeholder="전화번호 / Phone Number"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '전화번호 / Phone Number'"
 						onKeyup="inputPhoneNumber(this);" maxlength="13"
-						pattern=".{13,13}" />
+						pattern=".{13,13}" cssStyle="width:350px" />
 
 				</label>
 				<label> <form:errors path="memberPhoneNumber" />
 				</label>
 				<br>
 
-				<button id="btn_register" class="btn btn-info pull-right"
+				<button id="btn_register" class="btn btn-info pull-right mt-5"
 					type="submit">
 					<spring:message code="go.register" />
 				</button>
