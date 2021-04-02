@@ -57,11 +57,14 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container d-flex justify-content-center align-items-center mt-5">
+	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/register/step1"
-			class="btn header-btn"><spring:message code="pet.registration.title" /></a>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-			href="${pageContext.request.contextPath}/main/list"
+			class="btn header-btn"><spring:message
+				code="pet.registration.title" /></a>
+
+	</div>
+	<div class="container d-flex justify-content-center mt-5">
+		<a href="${pageContext.request.contextPath}/main/list"
 			class="btn header-btn"><spring:message code="pet.list.title" /></a>
 	</div>
 
