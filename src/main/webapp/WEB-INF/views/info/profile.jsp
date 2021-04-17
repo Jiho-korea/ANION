@@ -195,7 +195,7 @@ a, a:hover {
 			<!-- css 수정해야할 부분 -->
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<a href="${pageContext.request.contextPath}/edit"><spring:message
+				<a href="${pageContext.request.contextPath}/edit" style="color:blue;"><spring:message
 						code="edit.member.password.change" /></a>
 			</h4>
 		</div>
