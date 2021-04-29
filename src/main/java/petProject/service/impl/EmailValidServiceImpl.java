@@ -75,11 +75,10 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 		if (data.getNewMemberId() != null) {
 			this.updateEmail(data);
-
 			result = data.getNewMemberId();
 		}
 
-		int cnt = emailcodeDAO.doneEmailcode(data);
+		int cnt = emailcodeDAO.doneEmailcode(emailcode.getEmailCode());
 		if (cnt == 0) {
 			throw new EmailcodeDeleteException("emailcode delete error");
 		}
