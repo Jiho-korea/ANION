@@ -81,7 +81,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 		int cnt = emailcodeDAO.doneEmailcode(data);
 		if (cnt == 0) {
-			throw new EmailcodeDeleteException("invalid memberId");
+			throw new EmailcodeDeleteException("emailcode delete error");
 		}
 
 		return result;

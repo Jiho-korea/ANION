@@ -80,19 +80,18 @@
 			<form:form action="${pageContext.request.contextPath}/email/valid"
 				method="post" cssClass="form-signin" modelAttribute="emailcode">
 
-				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:errors />
-				</label>
+
 				<br>
 				<br>
 
-				<input type="hidden" name="memberId"
-					value="${memberId}" />
+				<input type="hidden" name="memberId" value="${memberId}" />
 				<label> <form:input path="emailCode" cssClass="single-input"
 						placeholder="Write Emailcode..." onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Write Emailcode...'" />
-					<form:errors path="emailCode" />
+						onblur="this.placeholder = 'Write Emailcode...'" /> <form:errors
+						path="emailCode" />
+					<form:errors />
 				</label>
+
 				<br>
 				<br>
 
