@@ -42,7 +42,7 @@ import petProject.vo.ScriptWriter;
 @Controller
 @RequestMapping("/email")
 public class EmailValidController {
-	
+
 	@Resource(name = "emailValidService")
 	EmailValidService emailValidService;
 
@@ -73,7 +73,7 @@ public class EmailValidController {
 				model.addAttribute("memberId", result);
 				return "home/validSuccess";
 			}
-			//회원 가입시 result = null
+			// 회원 가입시 result = null
 			model.addAttribute("memberId", emailcode.getMemberId());
 			session.removeAttribute("tempAuth");
 			return "home/validSuccess";
@@ -94,8 +94,8 @@ public class EmailValidController {
 			return "register/valid";
 		} catch (EmailcodeDeleteException e) {
 			e.printStackTrace();
-			errors.reject("memberId");
-			return "info/profile";
+			errors.reject("emailCode.deleteError");
+			return "register/valid";
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
 			errors.rejectValue("memberId", "memberId.edit");
