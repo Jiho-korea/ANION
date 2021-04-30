@@ -53,7 +53,7 @@
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 
-<body>
+<body onload="doPopupopen();">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -508,4 +508,9 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
+<script type="text/javascript">
+function doPopupopen() {
+   window. open("popup.jsp", "popup01", "width=300, height=360");
+}
+</script>
 </html>
