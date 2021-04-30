@@ -30,4 +30,8 @@
     	WHERE "EMAIL_CODE" = #{emailCode}
     </delete>
 	
+	<delete id="doneUpdateId" parameterType="String">
+    	DELETE FROM "emailcode"
+    	WHERE "MEMBER_ID" = #{memberId}
+    </delete>
 </mapper>
