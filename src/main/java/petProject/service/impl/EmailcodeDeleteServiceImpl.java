@@ -28,7 +28,7 @@ public class EmailcodeDeleteServiceImpl implements EmailcodeDeleteService {
 	//emailCode를 통해 레코드를 삭제
 	@Override
 	public void deleteEmailcode(Emailcode emailcode) {
-		int cnt = emailcodeDAO.afterEmailcode(emailcode.getEmailCode());
+		int cnt = emailcodeDAO.deleteEmailcodeAfterMemberRegistration(emailcode.getEmailCode());
 		if (cnt == 0) {
 			throw new EmailcodeDeleteException("emailcode delete error");
 		}
@@ -37,7 +37,7 @@ public class EmailcodeDeleteServiceImpl implements EmailcodeDeleteService {
 	//memberId를 통해 레코드를 삭제
 	@Override
 	public void deleteEmailcode(String newMemberId) {
-		int cnt = emailcodeDAO.afterUpdateId(newMemberId);
+		int cnt = emailcodeDAO.deleteEmailcodeAfterUpdateMemberId(newMemberId);
 		if (cnt == 0) {
 			throw new EmailcodeDeleteException("emailcode delete error");
 		}
