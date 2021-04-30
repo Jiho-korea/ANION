@@ -13,7 +13,7 @@ import petProject.vo.Emailcode;
 
 public interface EmailcodeDeleteService {
 
-	void deleteRecord(Emailcode emailcode);
+	void deleteEmailcode(Emailcode emailcode);
 
-	void deleteRecord(String newMemberId);
+	void deleteEmailcode(String newMemberId);
 }

@@ -77,13 +77,13 @@ public class EmailValidController {
 			String result = emailValidService.valid(emailcode);
 			// 이메일 변경시 result != null
 			if (result != null) {
-				emailcodeDeleteService.deleteRecord(result);
+				emailcodeDeleteService.deleteEmailcode(result);
 				session.invalidate();
 				model.addAttribute("memberId", result);
 				return "home/validSuccess";
 			}
 			// 회원 가입시 result = null
-			emailcodeDeleteService.deleteRecord(emailcode);
+			emailcodeDeleteService.deleteEmailcode(emailcode);
 			model.addAttribute("memberId", emailcode.getMemberId());
 			session.removeAttribute("tempAuth");
 			return "home/validSuccess";

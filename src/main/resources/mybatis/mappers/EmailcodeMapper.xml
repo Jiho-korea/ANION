@@ -25,13 +25,13 @@
     	where "MEMBER_ID" = #{memberId}
     </update>
     
-    <delete id="doneEmailcode" parameterType="String">
+    <delete id="afterEmailcode" parameterType="String">
     	DELETE FROM "emailcode"
     	WHERE "EMAIL_CODE" = #{emailCode}
     </delete>
 	
-	<delete id="doneUpdateId" parameterType="String">
+	<delete id="afterUpdateId" parameterType="String">
     	DELETE FROM "emailcode"
-    	WHERE "MEMBER_ID" = #{memberId}
+    	WHERE "MEMBER_ID" = #{newMemberId}
     </delete>
 </mapper>

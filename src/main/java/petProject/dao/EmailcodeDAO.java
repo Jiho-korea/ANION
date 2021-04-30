@@ -25,8 +25,8 @@ public interface EmailcodeDAO {
 
 	int requestEmailUpdate(@Param("memberId") String memberId);
 
-	int doneEmailcode(@Param("emailCode") String emailCode);
+	int afterEmailcode(@Param("emailCode") String emailCode);
 
-	int doneUpdateId(@Param("memberId") String memberId);
+	int afterUpdateId(@Param("newMemberId") String memberId);
 
 }
