@@ -69,7 +69,8 @@
 	</c:import>
 
 	<div class="container text-center" id="main">
-		<div class="jumbotron d-flex justify-content-center align-items-center"
+		<div
+			class="jumbotron d-flex justify-content-center align-items-center"
 			style="background: transparent !important;">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
@@ -133,10 +134,9 @@
 				</label>
 				<br>
 
-				<button id="btn_register" class="btn btn-info pull-right mt-5"
-					type="submit">
-					<spring:message code="go.register" />
-				</button>
+				<input type="submit" id="btn_register"
+					class="btn btn-info pull-right mt-5" onclick="btn_submit()"
+					value=<spring:message code="go.register" /> />
 				<br>
 			</form:form>
 
@@ -179,6 +179,13 @@
 				phone += number.substr(7);
 			}
 			obj.value = phone;
+		}
+		function btn_submit() {
+			const target = document.getElementById('btn_register');
+			opacity:0.3;
+			target.disabled = true;
+			target.value = 'Loading';
+			target.form.submit();
 		}
 	</script>
 	<script

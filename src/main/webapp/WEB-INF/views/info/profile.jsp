@@ -125,7 +125,7 @@ a, a:hover {
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
-								onclick="this.disabled=true;this.value='Loading'; this.form.submit();"
+								onclick="btn_submit()"
 								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
@@ -166,7 +166,7 @@ a, a:hover {
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
-								onclick="this.disabled=true;this.value='Loading'; this.form.submit();"
+								onclick="btn_submit()"
 								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
@@ -214,6 +214,14 @@ a, a:hover {
 	</div>
 
 	<!-- JS here -->
+	<script>
+		function btn_submit() {
+			const target = document.getElementById('btn_register');
+			target.disabled = true;
+			target.value = 'Loading';
+			target.form.submit();
+		}
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
