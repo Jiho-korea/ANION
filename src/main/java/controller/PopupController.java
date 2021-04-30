@@ -9,6 +9,8 @@
 */
 package controller;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,18 +19,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/popup")
 public class PopupController {
 
-	@GetMapping("")
+	@GetMapping("/1")
 	public String validForm() {
 
 		return "popup/popup1";
 	}
 
-	@GetMapping("/1")
+	// 교육 대상자 팝업의 처리 메소드
+	@GetMapping("/1/click")
 	public String valid() throws Exception {
 		/*
 		 * 
 		 * 처리 로직 구현
 		 */
+		Cookie cookie_popup01 = new Cookie("popup01", "true");
 
 		return "popup/popup1";
 	}

@@ -6,9 +6,9 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 메인 페이지
 ========================================================================
-작    성    자 : 임원석
-작    성    일 : 2021.04.30
-작  성  내  용 : 팝업창 생성
+수    정    자 : 임원석
+수    정    일 : 2021.04.30
+수  정  내  용 : 팝업창 생성
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -514,7 +514,7 @@
 </body>
 <script type="text/javascript">
 	function doPopupopen() {
-		window.open("${pageContext.request.contextPath}/popup",
+		window.open("${pageContext.request.contextPath}/popup/1",
 				"popup01", "width=300, height=360");
 	}
 </script>

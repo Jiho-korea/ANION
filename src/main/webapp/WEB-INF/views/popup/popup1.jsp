@@ -1,3 +1,12 @@
+<!-- 
+========================================================================
+파    일    명 : popup1.jsp
+========================================================================
+작    성    자 : 임원석
+작    성    일 : 2021.04.30
+작  성  내  용 : 교육 대상자를 위한 팝업페이지
+========================================================================
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,7 +46,7 @@
 </head>
 <body>
 	<div class="container d-flex justify-content-center mt-5">
-		<a href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1';window.close();" class="btn header-btn">등록하러가기</a>
+		<a href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();" class="btn header-btn">등록하러가기</a>
 	</div>
 	<!-- JS here -->
 
