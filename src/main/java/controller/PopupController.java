@@ -11,22 +11,25 @@ package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/popup")
 public class PopupController {
 
-	@GetMapping("/popup")
+	@GetMapping("")
 	public String validForm() {
 
-		return "popup/popup";
+		return "popup/popup1";
 	}
 
-	@PostMapping("/popup")
+	@GetMapping("/1")
 	public String valid() throws Exception {
+		/*
+		 * 
+		 * 처리 로직 구현
+		 */
 
-		return "popup/popup";
+		return "popup/popup1";
 	}
 }

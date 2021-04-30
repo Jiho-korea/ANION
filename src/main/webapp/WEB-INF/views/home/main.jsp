@@ -444,10 +444,10 @@
 			</div>
 		</div>
 	</section>
-	--%>
+	
 	<!-- Blog Area End -->
 	</main>
-
+--%>
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -513,8 +513,9 @@
 
 </body>
 <script type="text/javascript">
-function doPopupopen() {
-   window. open("${pageContext.request.contextPath}/popup/popup", "popup01", "width=300, height=360");
-}
+	function doPopupopen() {
+		window.open("${pageContext.request.contextPath}/popup",
+				"popup01", "width=300, height=360");
+	}
 </script>
 </html>
