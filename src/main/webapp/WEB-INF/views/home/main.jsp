@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : 메인 페이지
 ========================================================================
+작    성    자 : 임원석
+작    성    일 : 2021.04.30
+작  성  내  용 : 팝업창 생성
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -53,7 +57,7 @@
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
 
-<body>
+<body onload="doPopupopen();">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -508,4 +512,9 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
+<script type="text/javascript">
+function doPopupopen() {
+   window. open("${pageContext.request.contextPath}/popup/popup", "popup01", "width=300, height=360");
+}
+</script>
 </html>
