@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
-import petProject.exception.EmailcodeDeleteException;
 import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
@@ -35,12 +34,14 @@ public class EmailValidServiceImpl implements EmailValidService {
 	@Autowired
 	private MemberDAO memberDAO;
 
+	//Emailcode의 필드(memberId, emailCode)를 사용하는 메소드
 	@Override
 	public Emailcode validCode(Emailcode emailcode) throws Exception {
 		if (emailcode.getEmailCode().equals("")) {
 			throw new EmailcodeNullException("emailcode is null");
 		}
 
+		//code를 통해서 관련행 추출
 		Emailcode data = emailcodeDAO.selectEmailcode(emailcode);
 		if (data != null) {
 			int cnt = memberDAO.updateAuthStatus(data.getMemberId());
@@ -53,6 +54,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 		return data;
 	}
 
+	//회원수정시 id를 변경하는 메소드
 	@Override
 	public void updateEmail(Emailcode emailcode) throws Exception {
 		Member member = memberDAO.selectMemberById(emailcode.getMemberId());
@@ -76,11 +78,6 @@ public class EmailValidServiceImpl implements EmailValidService {
 		if (data.getNewMemberId() != null) {
 			this.updateEmail(data);
 			result = data.getNewMemberId();
-		}
-
-		int cnt = emailcodeDAO.doneEmailcode(emailcode.getEmailCode());
-		if (cnt == 0) {
-			throw new EmailcodeDeleteException("emailcode delete error");
 		}
 
 		return result;
