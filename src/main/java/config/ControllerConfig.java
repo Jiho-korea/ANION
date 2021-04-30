@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import controller.EmailValidController;
+import controller.GlovalExceptionController;
 import controller.ImageDeleteController;
 import controller.ImageListController;
 import controller.LoginController;
@@ -117,5 +118,10 @@ public class ControllerConfig {
 	@Bean
 	public ImageDownloadController imageDownloadController() {
 		return new ImageDownloadController();
+	}
+	
+	@Bean
+	public GlovalExceptionController glovalExceptionController() {
+		return new GlovalExceptionController();
 	}
 }

@@ -89,7 +89,6 @@ public class LoginController {
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
-		
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
