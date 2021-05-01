@@ -180,13 +180,6 @@
 			}
 			obj.value = phone;
 		}
-		function btn_submit() {
-			const target = document.getElementById('btn_register');
-			opacity:0.3;
-			target.disabled = true;
-			target.value = 'Loading';
-			target.form.submit();
-		}
 	</script>
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -242,6 +235,7 @@
 </body>
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_register").click(function() {
+		const target = document.getElementById('btn_register');
 		if ($("#memberId").val() == "") {
 			alert("이메일을 입력해주세요.");
 			return false;
@@ -258,6 +252,10 @@
 			alert("전화번호를 입력해주세요.");
 			return false;
 		}
+		opacity: 0.3;
+		target.disabled = true;
+		target.value = 'Loading';
+		target.form.submit();
 	});
 </script>
 

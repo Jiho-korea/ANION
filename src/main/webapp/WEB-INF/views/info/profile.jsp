@@ -216,7 +216,7 @@ a, a:hover {
 	<!-- JS here -->
 	<script>
 		function btn_submit() {
-			const target = document.getElementById('btn_register');
+			const target = document.getElementById('btn_modify');
 			target.disabled = true;
 			target.value = 'Loading';
 			target.form.submit();
