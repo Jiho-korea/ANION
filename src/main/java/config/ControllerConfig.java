@@ -21,6 +21,7 @@ import controller.MainController;
 import controller.MemberRegisterController;
 import controller.PetInfoController;
 import controller.PetRegisterController;
+import controller.PopupController;
 import controller.ProfileEditController;
 import controller.admin.ImageDownloadController;
 import controller.admin.KindcodeDeleteController;
@@ -117,5 +118,10 @@ public class ControllerConfig {
 	@Bean
 	public ImageDownloadController imageDownloadController() {
 		return new ImageDownloadController();
+	}
+
+	@Bean
+	public PopupController popupController() {
+		return new PopupController();
 	}
 }
