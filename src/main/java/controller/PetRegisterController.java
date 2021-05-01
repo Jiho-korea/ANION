@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -70,8 +72,13 @@ public class PetRegisterController {
 	List<Kindcode> kindcodeList = null;
 
 	@RequestMapping("/step1")
-	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model) {
+	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model, HttpServletResponse response) {
 		try {
+			Cookie cookie_popup01 = new Cookie("popup01", "true");
+			cookie_popup01.setPath("/");
+			cookie_popup01.setMaxAge(0);
+			response.addCookie(cookie_popup01);
+
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 

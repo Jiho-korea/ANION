@@ -50,7 +50,7 @@ public class LoginController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
-	
+
 	@Resource(name = "emailValidService")
 	EmailValidService emailValidService;
 
@@ -62,17 +62,17 @@ public class LoginController {
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
-		
+
 		String memberId = (String) session.getAttribute("memberId");
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		
-		if(memberId != null) {
+
+		if (memberId != null) {
 			session.removeAttribute("memberId");
-			if(authInfo != null) {
+			if (authInfo != null) {
 				session.removeAttribute("login");
 			}
 		}
-		
+
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
@@ -85,19 +85,20 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session, Model model,
-			HttpServletResponse response, HttpServletRequest request) {
+			HttpServletResponse response, HttpServletRequest request,
+			@CookieValue(value = "popup01", required = false) Cookie cookie_popup01) {
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
-		
+
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
-			
-			if(authInfo.getMemberauth().getMemberAuthStatus()==2) {
+
+			if (authInfo.getMemberauth().getMemberAuthStatus() == 2) {
 				session.setAttribute("tempAuth", true);
 			}
-			
+
 			session.setAttribute("login", authInfo);
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
@@ -112,6 +113,9 @@ public class LoginController {
 			String refererPage = (String) session.getAttribute("refererPage");
 			// System.out.println("LoginController Post refererPage : " + refererPage);
 			if (refererPage == null) {
+				if (cookie_popup01 != null) {
+					return "redirect:/register/step1";
+				}
 				return "redirect:/";
 			} else {
 				return "redirect:" + refererPage;
@@ -130,5 +134,5 @@ public class LoginController {
 			return "login/loginFormPage";
 		}
 	}
-	
+
 }
