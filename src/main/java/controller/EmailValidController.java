@@ -14,6 +14,10 @@
 수    정    일 : 2021.03.23
 수  정  내  용 : 에러처리 및 회원가입-이메일 변경할때 사용하는 세션이용
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.04.30
+수  정  내  용 : Emailcode 테이블 데이터 삭제하는법 변경
+========================================================================
 */
 package controller;
 
@@ -36,6 +40,7 @@ import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.service.EmailValidService;
+import petProject.service.EmailcodeDeleteService;
 import petProject.vo.Emailcode;
 import petProject.vo.ScriptWriter;
 
@@ -46,6 +51,9 @@ public class EmailValidController {
 	@Resource(name = "emailValidService")
 	EmailValidService emailValidService;
 
+	@Resource(name = "emailcodeDeleteService")
+	EmailcodeDeleteService emailcodeDeleteService;
+	
 	@GetMapping("/valid")
 	public String validForm(@Valid Emailcode emailcode, Errors errors, Model model) {
 		if (errors.hasErrors()) {
@@ -69,11 +77,13 @@ public class EmailValidController {
 			String result = emailValidService.valid(emailcode);
 			// 이메일 변경시 result != null
 			if (result != null) {
+				emailcodeDeleteService.deleteEmailcode(result);
 				session.invalidate();
 				model.addAttribute("memberId", result);
 				return "home/validSuccess";
 			}
 			// 회원 가입시 result = null
+			emailcodeDeleteService.deleteEmailcode(emailcode);
 			model.addAttribute("memberId", emailcode.getMemberId());
 			session.removeAttribute("tempAuth");
 			return "home/validSuccess";

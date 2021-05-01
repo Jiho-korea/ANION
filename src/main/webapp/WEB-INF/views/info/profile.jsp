@@ -102,6 +102,12 @@ a, a:hover {
 						<a href="${pageContext.request.contextPath}/edit/updateId"
 							style="color: lightgray;" class="ml-10"><i
 							class="far fa-edit"></i></a>
+
+						<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
+							<a
+								href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
+								type="button" value=<spring:message code="valid" /> /> </a>
+						</c:if>
 					</c:when>
 					<c:otherwise>
 						<form:form
@@ -130,11 +136,6 @@ a, a:hover {
 						</form:form>
 					</c:otherwise>
 				</c:choose>
-				<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
-					<a
-						href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
-						type="button" value=<spring:message code="valid" /> /> </a>
-				</c:if>
 
 				<form:errors path="memberId" />
 			</h4>
@@ -195,7 +196,8 @@ a, a:hover {
 			<!-- css 수정해야할 부분 -->
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<a href="${pageContext.request.contextPath}/edit" style="color:blue;"><spring:message
+				<a href="${pageContext.request.contextPath}/edit"
+					style="color: blue;"><spring:message
 						code="edit.member.password.change" /></a>
 			</h4>
 		</div>
