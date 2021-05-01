@@ -44,10 +44,37 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
-	<div class="container d-flex justify-content-center mt-5">
-		<a href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();" class="btn header-btn">등록하러가기</a>
+<style>
+body {
+  background-repeat: no-repeat;
+  background-size: cover
+}
+.jumbotron{
+ opacity: 0.8;
+
+}
+
+</style>
+<body background="${pageContext.request.contextPath}/img/popupBack/pop_back.png" >
+	<Br>
+	<div style="font-size: 1.5em;font-weight: bold; text-align: center; color:green;position:absolute; left: 120px;">
+		교육 이벤트 및 참석 제목
 	</div>
+	<div style="text-align:center; color:white;position:absolute; left: 200px;top:60px">
+	   교육 및 설명 
+	</div>
+	<br>
+	<div class="jumbotron"
+		style="height: 300px; width: 400px; margin-left: 50px; vertical-align: middle;position:absolute; left: 10px;top:100px">
+	</div>
+
+	<div class="container d-flex justify-content-center mt-5" >
+		<a
+			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();"
+			class="btn header-btn" style="position:fixed; left:170px;top:420px">등록하러가기</a>
+	</div>
+
+
 	<!-- JS here -->
 
 	<script

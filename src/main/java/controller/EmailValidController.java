@@ -53,7 +53,7 @@ public class EmailValidController {
 
 	@Resource(name = "emailcodeDeleteService")
 	EmailcodeDeleteService emailcodeDeleteService;
-	
+
 	@GetMapping("/valid")
 	public String validForm(@Valid Emailcode emailcode, Errors errors, Model model) {
 		if (errors.hasErrors()) {

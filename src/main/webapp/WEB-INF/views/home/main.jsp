@@ -515,7 +515,7 @@
 <script type="text/javascript">
 	function doPopupopen() {
 		window.open("${pageContext.request.contextPath}/popup/1",
-				"popup01", "width=300, height=360");
+				"popup01", "width=500, height=560, scrollbars=no, resizable=0");
 	}
 </script>
 </html>
