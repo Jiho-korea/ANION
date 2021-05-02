@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>팝업</title>
+<title>ANION popup1</title>
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -44,10 +44,39 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
 </head>
-<body>
+<style>
+body {
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-attachment: fixed;
+}
+
+.jumbotron {
+	opacity: 0.8;
+}
+</style>
+<body
+	background="${pageContext.request.contextPath}/img/popupBack/pop_back.png">
+	<Br>
+	<div
+		style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; position: absolute; left: 50px; top: 35px; width: 400px">
+		교육 이벤트 및 참석 제목</div>
+	<div
+		style="text-align: center; color: white; position: absolute; left: 50px; top: 70px; width: 400px">
+		교육 및 설명</div>
+	<br>
+	<div class="jumbotron d-flex justify-content-center align-items-center"
+		style="height: 300px; width: 400px; position: absolute; left: 50px; top: 120px">
+		참고 이미지, 그림 등</div>
+
 	<div class="container d-flex justify-content-center mt-5">
-		<a href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();" class="btn header-btn">등록하러가기</a>
+		<a
+			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();"
+			class="btn header-btn d-flex justify-content-center"
+			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
 	</div>
+
+
 	<!-- JS here -->
 
 	<script
@@ -103,4 +132,15 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
+<script type="text/javascript">
+	var width = window.outerWidth;
+	var height = window.outerHeight;
+	function popResizer() {
+
+		window.resizeTo(width, height);
+	};
+
+	popResizer();
+	$(window).resize(popResizer);
+</script>
 </html>
