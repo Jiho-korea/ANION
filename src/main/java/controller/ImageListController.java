@@ -85,7 +85,7 @@ public class ImageListController {
 			RedirectAttributes redirect, MultipartHttpServletRequest request) {
 
 		if (deleteButton != null) {
-			redirect.addFlashAttribute("multidelete", 1);
+			redirect.addFlashAttribute("delete", 1);
 			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 		} else {
 			try {
