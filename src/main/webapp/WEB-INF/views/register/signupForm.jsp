@@ -69,8 +69,7 @@
 	</c:import>
 
 	<div class="container text-center" id="main">
-		<div
-			class="jumbotron d-flex justify-content-center align-items-center"
+		<div class="jumbotron d-flex justify-content-center align-items-center"
 			style="background: transparent !important;">
 			<form:form action="${pageContext.request.contextPath}/signup/step2"
 				method="post" cssClass="form-signin"
@@ -235,51 +234,23 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	$("#btn_register").click(function() {
-		const target = document.getElementById('btn_register');
-		opacity: 0.3;
-		target.disabled = true;
-		target.value = 'Loading';
-
+	 $("#btn_register").click(function() {
 		if ($("#memberId").val() == "") {
-			setTimeout(function() {
-				alert("이메일을 입력해주세요.");
-				target.disabled = false;
-				target.value = '<spring:message code="go.register" />';
-			}, 100);
+			alert("이메일을 입력해주세요.");
 			return false;
 		} else if ($("#memberPassword").val() == "") {
-			setTimeout(function() {
-				alert("비밀번호을 입력해주세요.");
-				target.disabled = false;
-				target.value = '<spring:message code="go.register" />';
-			}, 100);
+			alert("비밀번호을 입력해주세요.");
 			return false;
 		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
-			setTimeout(function() {
-				alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
-				target.disabled = false;
-				target.value = '<spring:message code="go.register" />';
-			}, 100);
+			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
 			return false;
 		} else if ($("#memberName").val() == "") {
-			setTimeout(function() {
-				alert("이름을 입력해주세요.");
-				target.disabled = false;
-				target.value = '<spring:message code="go.register" />';
-			}, 100);
+			alert("이름을 입력해주세요.");
 			return false;
 		} else if ($("#memberPhoneNumber").val() == "") {
-			setTimeout(function() {
-				alert("전화번호를 입력해주세요.");
-				target.disabled = false;
-				target.value = '<spring:message code="go.register" />';
-			}, 100);
+			alert("전화번호를 입력해주세요.");
 			return false;
 		}
-
-		target.form.submit();
-
 	});
 </script>
 
