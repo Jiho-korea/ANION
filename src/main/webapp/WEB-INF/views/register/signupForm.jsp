@@ -84,7 +84,8 @@
 				<br>
 				<br>
 				<label> <form:input path="memberId" cssClass="single-input"
-						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
+						type="email" placeholder="이메일 / Email"
+						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '이메일 / Email'" cssStyle="width:350px" />
 				</label>
 				<label> <form:errors path="memberId" />
@@ -93,7 +94,7 @@
 				<br>
 
 				<label> <form:password path="memberPassword"
-						cssClass="single-input mt-2" placeholder="비밀번호 / Password"
+						cssClass="single-input mt-2" placeholder="비밀번호 / Password" id="memberPassword"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '비밀번호 / Password'"
 						cssStyle="width:350px" />
@@ -105,7 +106,7 @@
 				<br>
 				<label> <form:password path="checkPassword"
 						cssClass="single-input mt-2"
-						placeholder="비밀번호 확인 / Confirm Password"
+						placeholder="비밀번호 확인 / Confirm Password" id="checkPassword"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '비밀번호 확인 / Confirm Password'"
 						cssStyle="width:350px" />
@@ -181,6 +182,16 @@
 			obj.value = phone;
 		}
 	</script>
+	<script>
+		function CheckEmail(str) {
+			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			if (!reg_email.test(str)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	</script>
 	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
@@ -236,25 +247,57 @@
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_register").click(function() {
 		const target = document.getElementById('btn_register');
-		if ($("#memberId").val() == "") {
-			alert("이메일을 입력해주세요.");
-			return false;
-		} else if ($("#memberPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
-			return false;
-		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
-			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
-			return false;
-		} else if ($("#memberName").val() == "") {
-			alert("이름을 입력해주세요.");
-			return false;
-		} else if ($("#memberPhoneNumber").val() == "") {
-			alert("전화번호를 입력해주세요.");
-			return false;
-		}
+		const checkPassword = document.getElementById('checkPassword');
+		const memberPassword = document.getElementById('memberPassword');
 		opacity: 0.3;
 		target.disabled = true;
 		target.value = 'Loading';
+
+		if ($("#memberId").val() == "") {
+			setTimeout(function() {
+				alert("이메일을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if (!CheckEmail($("#memberId").val())) {
+			setTimeout(function() {
+				alert("이메일의 형식이 아닙니다.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberPassword").val() == "") {
+			setTimeout(function() {
+				alert("비밀번호을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
+			setTimeout(function() {
+				alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+				memberPassword.value = checkPassword.value = "";
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberName").val() == "") {
+			setTimeout(function() {
+				alert("이름을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberPhoneNumber").val() == "") {
+			setTimeout(function() {
+				alert("전화번호를 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		}
+
 		target.form.submit();
 	});
 </script>
