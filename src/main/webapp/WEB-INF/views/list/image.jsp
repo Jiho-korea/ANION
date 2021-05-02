@@ -76,7 +76,7 @@
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script type="text/javascript">
+<script defer type="text/javascript">
 	$(function() {
 		$("#allCheck").click(function() {
 			if ($("#allCheck").prop("checked")) {
@@ -84,6 +84,23 @@
 			} else {
 				$("input[type=checkbox]").prop("checked", false);
 			}
+		})
+	})
+	const target = document.getElementById('deleteButton');
+	$(function() {
+		$("#deleteButton").click(function() {
+			if ($("input:checkbox[type=checkbox]:checked").length == 0) {
+				alert("삭제할 사진을 선택해 주세요.");
+				return false;
+			} else {
+				return true
+			}
+		})
+	})
+
+	$(function() {
+		$("#cancleButton").click(function() {
+			window.history.back();
 		})
 	})
 </script>
@@ -146,7 +163,10 @@
 						<input type="checkbox" id="allCheck" />
 						<spring:message code="check.all" />
 						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="삭제 "> <input type="hidden"
+							value="삭제 " id="deleteButton"> &nbsp; <a href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
+							class="btn btn-info pull-right" id="cancleButton" style="color: #ffffff">취소</a> <input
+							type="hidden" name=petRegistrationNumber id="prn"
+							value="${petRegistrationNumber}" /> <input type="hidden"
 							name=petRegistrationNumber id="prn"
 							value="${petRegistrationNumber}" />
 						<div class="row gallery-item">
@@ -158,7 +178,8 @@
 										<div class="single-gallery-image"
 											style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
 									</a> <br>
-									<div class="checkBox d-flex justify-content-center align-items-center">
+									<div
+										class="checkBox d-flex justify-content-center align-items-center">
 										<input type="checkbox" name="chBox" class="chBox"
 											value="${image.imagePath}" />
 									</div>
