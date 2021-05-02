@@ -184,7 +184,7 @@
 			});
 		 */
 	</script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
 		charset="utf-8"></script>
 	<script defer
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
