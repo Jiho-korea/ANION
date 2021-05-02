@@ -18,6 +18,10 @@
 수    정    일 : 2021.02.02
 수  정  내  용 : 사진 다중업로드 및 전체삭제 외관 수정
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2021.05.02
+수  정  내  용 : 사진 삭제 시 체크된 사진이 있는 지 검사, 취소 버튼 추가
+========================================================================
 * 파일선택하면 자동으로 비동기식으로 업로드 되도록 처리하면 될듯
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -86,7 +90,6 @@
 			}
 		})
 	})
-	const target = document.getElementById('deleteButton');
 	$(function() {
 		$("#deleteButton").click(function() {
 			if ($("input:checkbox[type=checkbox]:checked").length == 0) {
@@ -95,12 +98,6 @@
 			} else {
 				return true
 			}
-		})
-	})
-
-	$(function() {
-		$("#cancleButton").click(function() {
-			window.history.back();
 		})
 	})
 </script>
@@ -163,8 +160,8 @@
 						<input type="checkbox" id="allCheck" />
 						<spring:message code="check.all" />
 						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="삭제 " id="deleteButton"> &nbsp; <a href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
-							class="btn btn-info pull-right" id="cancleButton" style="color: #ffffff">취소</a> <input
+							value="<spring:message code="delete.button" /> " id="deleteButton"> &nbsp; <a href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
+							class="btn btn-info pull-right" id="cancleButton" style="color: #ffffff"><spring:message code="cancel" /></a> <input
 							type="hidden" name=petRegistrationNumber id="prn"
 							value="${petRegistrationNumber}" /> <input type="hidden"
 							name=petRegistrationNumber id="prn"
