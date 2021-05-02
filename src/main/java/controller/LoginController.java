@@ -113,6 +113,7 @@ public class LoginController {
 			String refererPage = (String) session.getAttribute("refererPage");
 			// System.out.println("LoginController Post refererPage : " + refererPage);
 			if (refererPage == null) {
+				// 교육 이벤트 팝업의 등록하러가기 버튼을 누를 시 로그인 후 바로 반려견 등록 페이지로 이동 시킴
 				if (cookie_popup01 != null) {
 					return "redirect:/register/step1";
 				}
