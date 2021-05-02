@@ -158,7 +158,7 @@
 										<div class="single-gallery-image"
 											style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
 									</a> <br>
-									<div class="checkBox">
+									<div class="checkBox d-flex justify-content-center align-items-center">
 										<input type="checkbox" name="chBox" class="chBox"
 											value="${image.imagePath}" />
 									</div>
