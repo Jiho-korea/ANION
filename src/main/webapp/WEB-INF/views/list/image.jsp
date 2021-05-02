@@ -103,7 +103,7 @@
 		<div class="text-right mb-10">
 
 			<c:choose>
-				<c:when test="${multidelete ne 1}">
+				<c:when test="${delete ne 1}">
 					<div class="filebox">
 						<form action="${pageContext.request.contextPath}/info/list/image"
 							id="form" method="post" class="form-signin"
@@ -122,47 +122,54 @@
 									<spring:message code="list.image.delete" />
 								</button>
 							</a>
+							<div class="row gallery-item">
+								<c:forEach var="image" items="${imageList}" varStatus="status">
+									<div class="col-md-4">
+										<a
+											href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+											class="img-pop-up">
+											<div class="single-gallery-image"
+												style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+										</a>
+									</div>
+								</c:forEach>
+							</div>
 						</form>
 					</div>
 				</c:when>
+
+				<c:otherwise>
+					<form
+						action="${pageContext.request.contextPath}/info/list/imageDelete"
+						id="form" method="post" class="form-signin"
+						enctype="multipart/form-data">
+						<input type="checkbox" id="allCheck" />
+						<spring:message code="check.all" />
+						&nbsp; <input type="submit" class="btn btn-info pull-right"
+							value="삭제 "> <input type="hidden"
+							name=petRegistrationNumber id="prn"
+							value="${petRegistrationNumber}" />
+						<div class="row gallery-item">
+							<c:forEach var="image" items="${imageList}" varStatus="status">
+								<div class="col-md-4">
+									<a
+										href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+										class="img-pop-up">
+										<div class="single-gallery-image"
+											style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+									</a> <br>
+									<div class="checkBox">
+										<input type="checkbox" name="chBox" class="chBox"
+											value="${image.imagePath}" />
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</form>
+				</c:otherwise>
 			</c:choose>
 
-			<form
-				action="${pageContext.request.contextPath}/info/list/imageDelete"
-				id="form" method="post" class="form-signin"
-				enctype="multipart/form-data">
-				<c:if test="${multidelete eq 1}">
-					<input type="checkbox" id="allCheck" />
-					<spring:message code="check.all" /> &nbsp;
-               <input type="submit" class="btn btn-info pull-right"
-						value="삭제 ">
-				</c:if>
-				<input type="hidden" name=petRegistrationNumber id="prn"
-					value="${petRegistrationNumber}" />
 		</div>
-
-		<div class="row gallery-item">
-			<c:forEach var="image" items="${imageList}" varStatus="status">
-				<div class="col-md-4">
-					<a
-						href="${pageContext.request.contextPath}/upload/${image.imagePath}"
-						class="img-pop-up">
-						<div class="single-gallery-image"
-							style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
-					</a>
-					<c:if test="${multidelete eq 1}">
-						<br>
-
-						<div class="checkBox">
-							<input type="checkbox" name="chBox" class="chBox"
-								value="${image.imagePath}" />
-						</div>
-					</c:if>
-				</div>
-			</c:forEach>
-
-		</div>
-		</form>
 	</div>
 
 	<c:import url="../included/bottom.jsp">
