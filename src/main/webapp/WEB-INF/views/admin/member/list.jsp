@@ -24,7 +24,7 @@
 		href="${pageContext.request.contextPath}/css/admin/common.css" />
 	<link rel="stylesheet" type="text/css"
 		href="${pageContext.request.contextPath}/css/admin/left.css" />
-	<script type="text/javascript">
+	<script defer type="text/javascript">
 	<!--
 		
 	//-->

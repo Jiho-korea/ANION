@@ -35,8 +35,8 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
 <%--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script--%>
+<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script defer src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script--%>
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -73,10 +73,10 @@
 }
 </style>
 
-<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
+<script defer src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script defer type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script type="text/javascript">
+<script defer type="text/javascript">
 	$(function() {
 		$("#allCheck").click(function() {
 			if ($("#allCheck").prop("checked")) {
@@ -183,57 +183,57 @@
 
 	<!-- JS here -->
 
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
-	<script src="${pageContext.request.contextPath}/js/wow.min.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/animated.headline.js"></script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
 
 	<!-- Date Picker -->
-	<script src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
 	<!-- Nice-select, sticky -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/hover-direction-snake.min.js"></script>
 
 	<!-- contact js -->
-	<script src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/mail-script.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 
 <script defer type="text/javascript">
