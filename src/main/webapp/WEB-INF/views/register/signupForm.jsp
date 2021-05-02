@@ -234,27 +234,49 @@
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	 $("#btn_register").click(function() {
+	$("#btn_register").click(function() {
 		const target = document.getElementById('btn_register');
-		if ($("#memberId").val() == "") {
-			alert("이메일을 입력해주세요.");
-			return false;
-		} else if ($("#memberPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
-			return false;
-		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
-			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
-			return false;
-		} else if ($("#memberName").val() == "") {
-			alert("이름을 입력해주세요.");
-			return false;
-		} else if ($("#memberPhoneNumber").val() == "") {
-			alert("전화번호를 입력해주세요.");
-			return false;
-		}
 		opacity: 0.3;
 		target.disabled = true;
 		target.value = 'Loading';
+
+		if ($("#memberId").val() == "") {
+			setTimeout(function() {
+				alert("이메일을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberPassword").val() == "") {
+			setTimeout(function() {
+				alert("비밀번호을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
+			setTimeout(function() {
+				alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberName").val() == "") {
+			setTimeout(function() {
+				alert("이름을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if ($("#memberPhoneNumber").val() == "") {
+			setTimeout(function() {
+				alert("전화번호를 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		}
+
 		target.form.submit();
 	});
 </script>
