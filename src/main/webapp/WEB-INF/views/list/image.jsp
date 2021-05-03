@@ -18,10 +18,6 @@
 수    정    일 : 2021.02.02
 수  정  내  용 : 사진 다중업로드 및 전체삭제 외관 수정
 ========================================================================
-수    정    자 : 강지호
-수    정    일 : 2021.05.02
-수  정  내  용 : 사진 삭제 시 체크된 사진이 있는 지 검사, 취소 버튼 추가
-========================================================================
 * 파일선택하면 자동으로 비동기식으로 업로드 되도록 처리하면 될듯
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -39,8 +35,8 @@
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
 <%--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script defer src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script--%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script--%>
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -77,10 +73,10 @@
 }
 </style>
 
-<script defer src="/resources/jquery/jquery-3.3.1.min.js"></script>
-<script defer type="text/javascript"
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script defer type="text/javascript">
+<script type="text/javascript">
 	$(function() {
 		$("#allCheck").click(function() {
 			if ($("#allCheck").prop("checked")) {
@@ -90,6 +86,7 @@
 			}
 		})
 	})
+
 	$(function() {
 		$("#deleteButton").click(function() {
 			if ($("input:checkbox[type=checkbox]:checked").length == 0) {
@@ -160,11 +157,11 @@
 						<input type="checkbox" id="allCheck" />
 						<spring:message code="check.all" />
 						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="<spring:message code="delete.button" /> " id="deleteButton"> &nbsp; <a href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
-							class="btn btn-info pull-right" id="cancleButton" style="color: #ffffff"><spring:message code="cancel" /></a> <input
+							value="<spring:message code="delete.button" /> " id="deleteButton">&nbsp; <a
+							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
+							class="btn btn-info pull-right" id="cancleButton"
+							style="color: #ffffff"><spring:message code="cancel" /></a> <input
 							type="hidden" name=petRegistrationNumber id="prn"
-							value="${petRegistrationNumber}" /> <input type="hidden"
-							name=petRegistrationNumber id="prn"
 							value="${petRegistrationNumber}" />
 						<div class="row gallery-item">
 							<c:forEach var="image" items="${imageList}" varStatus="status">
@@ -201,57 +198,57 @@
 
 	<!-- JS here -->
 
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
-	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
-	<script defer
+	<script src="${pageContext.request.contextPath}/js/wow.min.js"></script>
+	<script
 		src="${pageContext.request.contextPath}/js/animated.headline.js"></script>
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
 
 	<!-- Date Picker -->
-	<script defer src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
 	<!-- Nice-select, sticky -->
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
-	<script defer
+	<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
-	<script defer
+	<script
 		src="${pageContext.request.contextPath}/js/hover-direction-snake.min.js"></script>
 
 	<!-- contact js -->
-	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-	<script defer
+	<script src="${pageContext.request.contextPath}/js/contact.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
-	<script defer
+	<script src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 
 <script defer type="text/javascript">
