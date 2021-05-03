@@ -84,7 +84,8 @@
 				<br>
 				<br>
 				<label> <form:input path="memberId" cssClass="single-input"
-						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
+						type="email" placeholder="이메일 / Email"
+						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '이메일 / Email'" cssStyle="width:350px" />
 				</label>
 				<label> <form:errors path="memberId" />
@@ -93,7 +94,7 @@
 				<br>
 
 				<label> <form:password path="memberPassword"
-						cssClass="single-input mt-2" placeholder="비밀번호 / Password"
+						cssClass="single-input mt-2" placeholder="비밀번호 / Password" id="memberPassword"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '비밀번호 / Password'"
 						cssStyle="width:350px" />
@@ -105,7 +106,7 @@
 				<br>
 				<label> <form:password path="checkPassword"
 						cssClass="single-input mt-2"
-						placeholder="비밀번호 확인 / Confirm Password"
+						placeholder="비밀번호 확인 / Confirm Password" id="checkPassword"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '비밀번호 확인 / Confirm Password'"
 						cssStyle="width:350px" />
@@ -153,7 +154,7 @@
 	</div>
 
 	<!-- JS here -->
-	<script>
+	<script defer>
 		function inputPhoneNumber(obj) {
 
 			var number = obj.value.replace(/[^0-9]/g, "");
@@ -180,84 +181,123 @@
 			}
 			obj.value = phone;
 		}
-		function btn_submit() {
-			const target = document.getElementById('btn_register');
-			opacity:0.3;
-			target.disabled = true;
-			target.value = 'Loading';
-			target.form.submit();
+
+		function CheckEmail(str) {
+			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			if (!reg_email.test(str)) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 	</script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
-	<script src="${pageContext.request.contextPath}/js/wow.min.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/animated.headline.js"></script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
 
 	<!-- Date Picker -->
-	<script src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
 	<!-- Nice-select, sticky -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/hover-direction-snake.min.js"></script>
 
 	<!-- contact js -->
-	<script src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/mail-script.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_register").click(function() {
+		const target = document.getElementById('btn_register');
+		const checkPassword = document.getElementById('checkPassword');
+		const memberPassword = document.getElementById('memberPassword');
+		opacity: 0.3;
+		target.disabled = true;
+		target.value = 'Loading';
+
 		if ($("#memberId").val() == "") {
-			alert("이메일을 입력해주세요.");
+			setTimeout(function() {
+				alert("이메일을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if (!CheckEmail($("#memberId").val())) {
+			setTimeout(function() {
+				alert("이메일의 형식이 아닙니다.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
 			return false;
 		} else if ($("#memberPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
+			setTimeout(function() {
+				alert("비밀번호을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
 			return false;
 		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
-			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+			setTimeout(function() {
+				alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+				memberPassword.value = checkPassword.value = "";
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
 			return false;
 		} else if ($("#memberName").val() == "") {
-			alert("이름을 입력해주세요.");
+			setTimeout(function() {
+				alert("이름을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
 			return false;
 		} else if ($("#memberPhoneNumber").val() == "") {
-			alert("전화번호를 입력해주세요.");
+			setTimeout(function() {
+				alert("전화번호를 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
 			return false;
 		}
+
+		target.form.submit();
 	});
 </script>
 

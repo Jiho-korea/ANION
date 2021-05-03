@@ -214,64 +214,64 @@ a, a:hover {
 	</div>
 
 	<!-- JS here -->
-	<script>
+	<script defer>
 		function btn_submit() {
-			const target = document.getElementById('btn_register');
+			const target = document.getElementById('btn_modify');
 			target.disabled = true;
 			target.value = 'Loading';
 			target.form.submit();
 		}
 	</script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
-	<script src="${pageContext.request.contextPath}/js/wow.min.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/animated.headline.js"></script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
 
 	<!-- Date Picker -->
-	<script src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
 	<!-- Nice-select, sticky -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
-	<script
+	<script defer
 		src="${pageContext.request.contextPath}/js/hover-direction-snake.min.js"></script>
 
 	<!-- contact js -->
-	<script src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/mail-script.js"></script>
-	<script
+	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script src="${pageContext.request.contextPath}/js/plugins.js"></script>
-	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 </html>
