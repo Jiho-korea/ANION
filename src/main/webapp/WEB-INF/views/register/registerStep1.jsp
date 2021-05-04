@@ -96,10 +96,10 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <form:input
-								path="petName" cssClass="single-input" placeholder="견명 / Name"
-								onfocus="this.placeholder = ''" onblur="this.placeholder = '견명 / Name'" />
-							<form:errors path="petName" />
+						<label> <form:input path="petName" cssClass="single-input"
+								placeholder="견명 / Name" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '견명 / Name'" /> <form:errors
+								path="petName" />
 						</label>
 					</div>
 					<%--
@@ -115,27 +115,11 @@
 
 					<div class="default-select" id="default-select"
 						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
-						<select style="display: none;" name="petKindcode">
-							<option value="">견종 / Dog breed</option>
-							<c:forEach var="kindcode" items="${kindcodeList}"
-								varStatus="status">
-								<option value="${kindcode.petKindcode}">${kindcode.petKind}</option>
-							</c:forEach>
-						</select>
-						<div class="nice-select" tabindex="0">
-							<span class="current">견종 / Dog breed</span>
-							<ul class="list">
-								<li data-value="견종 / Dog breed" class="option selected focus" hidden="">견종 / Dog breed</li>
-								<c:forEach var="kindcode" items="${kindcodeList}"
-									varStatus="status">
-									<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
-								</c:forEach>
-								<%-- 
-								<li data-value="1" class="option">동경이</li>
-								<li data-value="2" class="option">진돗개</li>
-								--%>
-							</ul>
-						</div>
+
+						<button type="button" onclick="dogmapPopup();"
+							class="btn btn-info">Dog Map Select</button>
+						<input type="hidden" name="petKindcode" id="petKindcode" value="">
+						
 						<br>
 						<form:errors path="petKindcode" />
 					</div>
@@ -144,20 +128,20 @@
 				<br class="mb-4" />
 				<div class="row">
 					<div class="col-md-6 mb-1">
-				
+
 						<label> <!--<spring:message code="pet.mothername" />--> <form:input
-								path="petMothername" cssClass="single-input" placeholder="모견명 / dog's mother"
-								onfocus="this.placeholder = ''"
+								path="petMothername" cssClass="single-input"
+								placeholder="모견명 / dog's mother" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '모견명 / Mother dog's name'" /> <form:errors
 								path="petMothername" />
-								
-								
+
+
 						</label>
 					</div>
 					<div class="col-md-6 mb-1">
 						<label> <!--<spring:message code="pet.father" />--> <form:input
-								path="petFathername" cssClass="single-input" placeholder="부견명 / dog's father"
-								onfocus="this.placeholder = ''"
+								path="petFathername" cssClass="single-input"
+								placeholder="부견명 / dog's father" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '부견명 / Dad Dog's Name'" /> <form:errors
 								path="petFathername" />
 						</label>
@@ -173,16 +157,17 @@
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
-						path="petMicrochip" cssClass="single-input" cssStyle="width:350px" placeholder="마이크로칩 번호 / Microchip number"
+						path="petMicrochip" cssClass="single-input" cssStyle="width:350px"
+						placeholder="마이크로칩 번호 / Microchip number"
 						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '마이크로칩 번호 / Microchip number'"  /> <form:errors
+						onblur="this.placeholder = '마이크로칩 번호 / Microchip number'" /> <form:errors
 						path="petMicrochip" />
 				</label>
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <spring:message code="pet.birthday" /> : <input
-					type="date" name="petBirthday" id="petBirthday" max="${today}"/><br class="mb-4" /> <form:errors
-						path="petBirthday" />
+					type="date" name="petBirthday" id="petBirthday" max="${today}" /><br
+					class="mb-4" /> <form:errors path="petBirthday" />
 				</label>
 				<br class="mb-4" />
 				<br class="mb-4" />
@@ -212,13 +197,15 @@
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
 	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
@@ -232,14 +219,17 @@
 	<!-- Nice-select, sticky -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 	<script defer
@@ -247,10 +237,12 @@
 
 	<!-- contact js -->
 	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
