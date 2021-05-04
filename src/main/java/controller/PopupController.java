@@ -13,16 +13,27 @@
 */
 package controller;
 
+import java.util.List;
+
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import petProject.service.KindcodeService;
+import petProject.vo.Kindcode;
 
 @Controller
 @RequestMapping("/popup")
 public class PopupController {
+
+	@Resource(name = "kindcodeListService")
+	KindcodeService kindcodeService;
 
 	@GetMapping("/1")
 	public String popup1() {
@@ -40,5 +51,26 @@ public class PopupController {
 		response.addCookie(cookie_popup01);
 
 		return "redirect:/register/step1";
+	}
+
+	@GetMapping(value = {"/2/{petKindcode}", "/2"})
+	public String popup2(Model model, @PathVariable(name = "petKindcode", required = false) String petKindcode)
+			throws Exception {
+
+		List<Kindcode> kindcodeList = kindcodeService.selectKindcodeList();
+		model.addAttribute("kindcodeList", kindcodeList);
+		
+		if(petKindcode != null) {
+			Kindcode kindcode = kindcodeService.selectKindcode(petKindcode);
+			model.addAttribute("kindcode", kindcode);
+		}
+
+		return "popup/popup2";
+	}
+
+	@GetMapping("/2/click/{petKindcode}")
+	public String popup2_click(@PathVariable("petKindcode") String petKindcode) throws Exception {
+		
+		return "redirect:/popup/2/" + petKindcode;
 	}
 }

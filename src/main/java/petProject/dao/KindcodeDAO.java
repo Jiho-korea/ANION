@@ -16,6 +16,7 @@ package petProject.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.Kindcode;
 
@@ -27,7 +28,7 @@ public interface KindcodeDAO {
 
 	int insertKindcode(Kindcode kindcode) throws Exception;
 
-	Kindcode selectKindcode(String petKindcode) throws Exception;
+	Kindcode selectKindcode(@Param("petKindcode") String petKindcode) throws Exception;
 
 	int updateKindcode(Kindcode kindcode) throws Exception;
 

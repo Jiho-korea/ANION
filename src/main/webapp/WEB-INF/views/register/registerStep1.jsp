@@ -255,7 +255,7 @@
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-	<script defersrc="${pageContext.request.contextPath}/js/plugins.js"></script>
+	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
@@ -263,9 +263,6 @@
 	 $("#btn_register").click(function() {
 		if ($("#petName").val() == "") {
 			alert("견명을 입력해주세요.");
-			return false;
-		} else if ($("[name=petKindcode] > option:selected").val() == '') {
-			alert("견종을 선택해주세요.");
 			return false;
 		} else if ($(':radio[name="petSex"]:checked').length < 1) {
 			alert("성별을 선택해주세요.");
@@ -277,15 +274,10 @@
 			alert("생년월일을 입력해주세요.");
 			return false;
 		}
-		<%--
-		else if ($("#petMothername").val() == "") {
-			alert("모견명을 입력해주세요.");
-			return false;
-		} else if ($("#petFathername").val() == "") {
-			alert("부견명 입력해주세요.");
-			return false;
-		} 
-		--%>
 	});
+	function dogmapPopup() {
+		parentObj = window.open("${pageContext.request.contextPath}/popup/2",
+			"popup02", "width=920, height=750, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
+	}
 </script>
 </html>

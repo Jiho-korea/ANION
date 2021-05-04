@@ -9,7 +9,7 @@
 		"PET_KIND_CODE" from "kindcode"
 	</select>
 
-	<select id="selectKindcode" resultType="kindcode">
+	<select id="selectKindcode" parameterType="String" resultType="kindcode">
 		select "PET_KIND",
 		"PET_KIND_CODE" from "kindcode" where "PET_KIND_CODE" = #{petKindcode}
 	</select>
