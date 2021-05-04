@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -36,8 +37,7 @@ public class PopupController {
 	KindcodeService kindcodeService;
 
 	@GetMapping("/1")
-	public String popup1() {
-
+	public String popup1(HttpServletRequest request) {
 		return "popup/popup1";
 	}
 
