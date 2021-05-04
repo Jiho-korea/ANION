@@ -269,7 +269,7 @@
 	});
 	function dogmapPopup() {
 		parentObj = window.open("${pageContext.request.contextPath}/popup/2",
-			"popup02", "width=920, height=750, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
+			"popup02", "width=1100, height=800, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
 	}
 </script>
 </html>

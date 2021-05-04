@@ -67,6 +67,7 @@
 							<th width="8%">코드</th>
 							<th width="8%">견종명</th>
 							<th width="6%">사용여부</th>
+							<th width="6%">서식지(국가코드)</th>
 							<th width="6%"><a
 								href="${pageContext.request.contextPath}/admin/code/kindcode/insert"><input
 									type="button" name="btn_plus" id="btn_plus" class="btn_plus"
@@ -89,6 +90,7 @@
 								<td width="8%" align="center">${kindcode.petKindcode}</td>
 								<td width="8%" align="center">${kindcode.petKind}</td>
 								<td width="6%" align="center">Y</td>
+								<td width="6%" align="center">${kindcode.petKindHabitat }</td>
 								<td><div align="center">
 										<a
 											href="${pageContext.request.contextPath}/admin/code/kindcode/update?petKindcode=${kindcode.petKindcode}">
