@@ -71,6 +71,14 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+.btn_share {
+	border: none;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	background-color: white;
+}
 </style>
 
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
@@ -142,6 +150,14 @@
 											<div class="single-gallery-image"
 												style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
 										</a>
+										<%-- 버튼안 텍스트 옆에 이미지를 넣는 방법
+										<button type="button" id="" class="btn btnEvent">
+											<img
+												src="https://img.icons8.com/flat-round/64/000000/share--v1.png"
+												alt="btnImages" class="btnImages">
+										</button>
+										--%>
+										<button class="btn_share mt-2 mr-3" id="btn_share" type="button"><img src="${pageContext.request.contextPath}/img/button/share1.png"></button>
 									</div>
 								</c:forEach>
 							</div>
@@ -157,7 +173,8 @@
 						<input type="checkbox" id="allCheck" />
 						<spring:message code="check.all" />
 						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="<spring:message code="delete.button" /> " id="deleteButton">&nbsp; <a
+							value="<spring:message code="delete.button" /> "
+							id="deleteButton">&nbsp; <a
 							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
 							class="btn btn-info pull-right" id="cancleButton"
 							style="color: #ffffff"><spring:message code="cancel" /></a> <input
