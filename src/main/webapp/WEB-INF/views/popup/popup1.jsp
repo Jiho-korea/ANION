@@ -6,6 +6,10 @@
 작    성    일 : 2021.04.30
 작  성  내  용 : 교육 대상자를 위한 팝업페이지
 ========================================================================
+수    정    자 : 임원석,정세진
+수    정    일 : 2021.05.03
+수  정  내  용 : 팝업창 하루동안 보지않기 기능 추가
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -55,6 +59,8 @@ body {
 	opacity: 0.8;
 }
 </style>
+
+
 <body
 	background="${pageContext.request.contextPath}/img/popupBack/pop_back.png">
 	<Br>
@@ -75,8 +81,16 @@ body {
 			class="btn header-btn d-flex justify-content-center"
 			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
 	</div>
+	<div style="position: fixed; right: 5px; bottom: 4px;">
+		<form name="frm" class="d-flex align-items-center">
+			<input id="closeCheck" type="checkbox" name="Notice" onclick="check()"> <a
+				style="font-size: 13px">하루동안 열지 않음</a> &nbsp;<input type=button
+				value="닫기" onclick="closeWin()"
+				style="width: 30pt; height: 20pt; font-size: 13px"
+				class="d-flex align-items-center">
 
-
+		</form>
+	</div>
 	<!-- JS here -->
 
 	<script defer
@@ -85,13 +99,15 @@ body {
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
 	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
@@ -105,14 +121,17 @@ body {
 	<!-- Nice-select, sticky -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 	<script defer
@@ -120,10 +139,12 @@ body {
 
 	<!-- contact js -->
 	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
@@ -142,5 +163,24 @@ body {
 
 	popResizer();
 	$(window).resize(popResizer);
+
+	function setCookie(name, value, expiredays) {
+		var todayDate = new Date();
+		todayDate.setDate(todayDate.getDate() + expiredays);
+		document.cookie = name + "=" + escape(value) + "; path=/; expires="
+				+ todayDate.toGMTString() + ";"
+	}
+
+	function closeWin() {
+		self.close();
+	}
+	
+	function check() {
+		setCookie("Notice", "done", 1);
+		self.close();
+	}
+
 </script>
+
+
 </html>
