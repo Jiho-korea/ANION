@@ -19,7 +19,6 @@ import org.springframework.context.annotation.Configuration;
 import controller.EmailValidController;
 import controller.ImageDeleteController;
 import controller.ImageListController;
-import controller.ImagePostingController;
 import controller.LoginController;
 import controller.LogoutController;
 import controller.MemberRegisterController;
@@ -36,6 +35,7 @@ import controller.admin.KindcodeListController;
 import controller.admin.KindcodeUpdateController;
 import controller.admin.MemberListController;
 import controller.admin.PetListAdminController;
+import controller.bbs.image.ImagePostingController;
 
 @Configuration
 public class ControllerConfig {

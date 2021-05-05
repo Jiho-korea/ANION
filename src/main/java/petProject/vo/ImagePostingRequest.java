@@ -15,7 +15,6 @@ public class ImagePostingRequest {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank
 	private int imgpostNo;
 	@NotBlank
 	private String imgpostTitle;
