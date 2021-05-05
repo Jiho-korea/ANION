@@ -86,7 +86,7 @@
 				</div>
 				<div class="col-md-6 mb-1">
 					<a class="btn btn-info pull-right"
-						href="<c:url value='/main/list'/>" role="button"><spring:message
+						href="<c:url value='/pet/list'/>" role="button"><spring:message
 							code="go.list" /></a>
 				</div>
 			</div>
