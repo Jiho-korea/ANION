@@ -107,10 +107,36 @@
 						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
 
 						<form:input path="petKind" cssClass="single-input"
-							placeholder="견종 / Kind" name="petKind" id="petKind" readonly="true"/>
+							placeholder="견종 / Kind" name="petKind" id="petKind"
+							readonly="true" />
 						<button type="button" onclick="dogmapPopup();"
 							class="btn btn-info">Select</button>
 
+						<!-- 
+						<select style="display: none;" name="petKindcode">
+							<option value="">견종 / Dog breed</option>
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<option value="${kindcode.petKindcode}">${kindcode.petKind}</option>
+							</c:forEach>
+						</select>
+						<div class="nice-select" tabindex="0">
+							<span class="current">견종 / Dog breed</span>
+							<ul class="list">
+								<li data-value="견종 / Dog breed" class="option selected focus"
+									hidden="">견종 / Dog breed</li>
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
+								</c:forEach>
+								<%-- 
+								<li data-value="1" class="option">동경이</li>
+								<li data-value="2" class="option">진돗개</li>
+								--%>
+							</ul>
+						</div>
+						 -->
+						 
 						<br>
 						<form:errors path="petKind" />
 					</div>
