@@ -29,10 +29,10 @@ import petProject.vo.AuthInfo;
 import petProject.vo.Pet;
 
 @Controller
-@RequestMapping("/main")
-public class MainController {
+@RequestMapping("/pet")
+public class PetListController {
 
-	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PetListController.class);
 
 	@Resource(name = "petNameListService")
 	PetListService petListService;
@@ -47,7 +47,7 @@ public class MainController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/main/list";
+		return "/list/pet";
 	}
 
 }

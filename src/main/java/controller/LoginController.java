@@ -83,7 +83,7 @@ public class LoginController {
 		return "login/loginFormPage";
 	}
 
-	@PostMapping("/login")
+	@PostMapping()
 	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session, Model model,
 			HttpServletResponse response, HttpServletRequest request,
 			@CookieValue(value = "popup01", required = false) Cookie cookie_popup01) {

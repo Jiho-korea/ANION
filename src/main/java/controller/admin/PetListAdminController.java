@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : PetListController.java
+파    일    명 : PetListAdminController.java
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2021.01.30
@@ -22,12 +22,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import controller.PetListController;
 import petProject.service.PetListService;
 import petProject.vo.Pet;
 
 @Controller
 @RequestMapping("/admin/pet")
-public class PetListController {
+public class PetListAdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PetListController.class);
 
@@ -43,7 +44,7 @@ public class PetListController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/main/list";
+		return "list/pet";
 	}
 
 }

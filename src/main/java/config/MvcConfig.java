@@ -79,15 +79,15 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/directions").setViewName("company/directions");
 		registry.addViewController("/petFood").setViewName("company/petFood");
 		registry.addViewController("/profile").setViewName("info/profile");
-	}//
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/main/**", "/register/**", "/list/**",
-				"/admin/**", "/info/**", "/edit/**", "/profile/**");
+		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
+				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
-		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
+		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**", "/posting/**");
 		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
 	}
 

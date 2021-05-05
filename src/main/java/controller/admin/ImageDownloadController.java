@@ -119,7 +119,7 @@ public class ImageDownloadController {
 				fis.close();
 
 		} catch (PetNotFoundException e) {
-			return "main/list";
+			return "list/pet";
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
