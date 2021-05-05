@@ -67,6 +67,17 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+
+#petName:hover {
+   font-size: 1.2em;
+}
+
+.btn_download, .btn_gallery {
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
+}
 </style>
 
 <title><spring:message code="home.title" /></title>
@@ -108,17 +119,17 @@
 							test="${sessionScope.login.memberlevel.memberLevelCode eq 0}">
 							<!-- table row -->
 							<th width="10%"><spring:message code="list.num" /></th>
-							<th width="30%"><spring:message code="list.pet.name" /></th>
+							<th width="35%"><spring:message code="list.pet.name" /></th>
 							<th width="30%"><spring:message code="list.image.count" /></th>
 							<th width="15%"><spring:message code="image.gallery" /></th>
-							<th width="15%"><spring:message code="go.zip.image" /></th>
+							<th width="10%"><spring:message code="go.zip.image" /></th>
 						</c:when>
 						<c:otherwise>
 							<!-- table row -->
 							<th width="15%"><spring:message code="list.num" /></th>
-							<th width="30%"><spring:message code="list.pet.name" /></th>
+							<th width="40%"><spring:message code="list.pet.name" /></th>
 							<th width="30%"><spring:message code="list.image.count" /></th>
-							<th width="25%"><spring:message code="image.gallery" /></th>
+							<th width="15%"><spring:message code="image.gallery" /></th>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -132,16 +143,27 @@
 								<td>${status.index + 1}</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
-									style="color: #000000;">${pet.petName}</a></td>
+									style="color: #000000;" id="petName">${pet.petName}</a></td>
 								<td>${pet.imageCount}건</td>
-								<td><a
+								<td>
+									<!-- <a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 									id="btn_photo" class="btn btn-info pull-right"><spring:message
-											code="go.right" /></a></td>
+											code="go.right" /></a> --> <a
+									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+										<button class="btn_gallery" id="btn_gallery"
+											type="button">
+											<img
+												src="${pageContext.request.contextPath}/img/button/gallery1.png">
+										</button>
+								</a>
+								</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/image/download?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button id="btn_download" class="btn btn-info pull-right">
-											<spring:message code="go.download" />
+										<button class="btn_download" id="btn_download"
+											type="button">
+											<img
+												src="${pageContext.request.contextPath}/img/button/download1.png">
 										</button>
 								</a></td>
 							</c:when>
@@ -149,12 +171,16 @@
 								<td>${status.index + 1}</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
-									style="color: #000000;">${pet.petName}</a></td>
+									style="color: #000000;" id="petName">${pet.petName}</a></td>
 								<td>${pet.imageCount}건</td>
 								<td><a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
-									id="btn_photo" class="btn btn-info pull-right"><spring:message
-											code="go.right" /></a></td>
+									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+										<button class="btn_gallery" id="btn_gallery"
+											type="button">
+											<img
+												src="${pageContext.request.contextPath}/img/button/gallery1.png">
+										</button>
+								</a></td>
 
 							</c:otherwise>
 						</c:choose>
