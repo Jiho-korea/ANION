@@ -73,7 +73,7 @@ p {
 	animation-iteration-count: infinite;
 	animation-name: pop;
 	border-radius: 50%;
-	border: 1px solid #ce606f;
+	border: 0.5px solid #ce606f;
 	content: "";
 	height: 2em;
 	left: 0;
@@ -81,7 +81,7 @@ p {
 	opacity: 0;
 	position: absolute;
 	top: 0;
-	width: 2em;
+	width: 1.5em;
 }
 
 .map__marker:hover .map__marker-info {
@@ -91,56 +91,25 @@ p {
 .map__marker>a {
 	background-color: #ce606f;
 	border-radius: 50%;
-	height: 1em;
+	height: 0.7em;
 	display: block;
 	text-indent: -9999px;
-	width: 1em;
+	width: 0.7em;
 }
 
-.map__marker--chicago {
-	left: 65%;
-	top: 35%;
+.map__marker--america {
+	left: 22%;
+	top: 25%;
 }
 
-.map__marker--florida {
-	left: 85%;
-	top: 86%;
+.map__marker--korea {
+	left: 97%;
+	top: 38%;
 }
 
-.map__marker--florida:after {
-	animation-delay: 3s;
-}
-
-.map__marker--los-angeles {
-	left: 7%;
-	top: 60%;
-}
-
-.map__marker--los-angeles:after {
-	animation-delay: 5s;
-}
-
-.map__marker--new-york {
-	left: 91%;
-	top: 31%;
-}
-
-.map__marker--san-francisco {
-	left: 1%;
-	top: 46%;
-}
-
-.map__marker--san-francisco:after {
-	animation-delay: 3s;
-}
-
-.map__marker--seattle {
-	left: 8%;
-	top: 1%;
-}
-
-.map__marker--seattle:after {
-	animation-delay: 5s;
+.map__marker--japan {
+	left: 98%;
+	top: 40%;
 }
 
 .map__marker-info {

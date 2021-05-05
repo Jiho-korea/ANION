@@ -78,7 +78,7 @@ a:hover {
 	<div>
 		<div class="map">
 			<ul class="map__markers">
-				<li class="map__marker map__marker--chicago"><a href="#">Chicago</a>
+				<li class="map__marker map__marker--america"><a href="#">Chicago</a>
 					<div class="map__marker-info">
 						<div class="map__marker-info-inner animate animate--bounce-in">
 							<header class="map__marker-info-header">
@@ -99,7 +99,7 @@ a:hover {
 						</div>
 					</div></li>
 
-				<li class="map__marker map__marker--florida"><a href="#">Florida</a>
+				<li class="map__marker map__marker--korea"><a href="#">Florida</a>
 					<div class="map__marker-info">
 						<div class="map__marker-info-inner animate animate--bounce-in">
 							<header class="map__marker-info-header">
@@ -119,55 +119,24 @@ a:hover {
 							</main>
 						</div>
 					</div></li>
-
-				<li class="map__marker map__marker--los-angeles"><a href="#">Los
-						Angeles</a>
+					
+				<li class="map__marker map__marker--japan"><a href="#">Florida</a>
 					<div class="map__marker-info">
 						<div class="map__marker-info-inner animate animate--bounce-in">
 							<header class="map__marker-info-header">
-								<h2>Los Angeles</h2>
+								<span class="current">일본 / Japan</span>
 							</header>
 							<main class="map__marker-info-main">
-								<p>Test</p>
-							</main>
-						</div>
-
-					</div></li>
-
-				<li class="map__marker map__marker--new-york"><a href="#">New
-						York</a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<h2>New York</h2>
-							</header>
-							<main class="map__marker-info-main">
-								<p>Test</p>
-							</main>
-						</div>
-					</div></li>
-
-				<li class="map__marker map__marker--san-francisco"><a href="#">San
-						Francisco</a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<h2>San Francisco</h2>
-							</header>
-							<main class="map__marker-info-main">
-								<p>Test</p>
-							</main>
-						</div>
-					</div></li>
-
-				<li class="map__marker map__marker--seattle"><a href="#">Seattle</a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<h2>Seattle</h2>
-							</header>
-							<main class="map__marker-info-main">
-								<p>Test</p>
+								<p>
+									<c:forEach var="kindcode" items="${kindcodeList}"
+										varStatus="status">
+										<c:if test="${kindcode.petKindHabitat eq 'JP' }">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+										</c:if>
+									</c:forEach>
+								</p>
 							</main>
 						</div>
 					</div></li>
