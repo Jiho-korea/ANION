@@ -102,26 +102,17 @@
 								path="petName" />
 						</label>
 					</div>
-					<%--
-					<div class="col-md-6 mb-1">
-						<label> <spring:message code="pet.kind" /><br
-							class="mb-4" /> <form:select path="petKindcode">
-								<form:option cssClass="form-control" value="동경이" />
-								<form:option cssClass="form-control" value="진돗개" />
-								<form:option cssClass="form-control" value="기타" />
-							</form:select> <form:errors path="petKindcode" />
-						</label>
-					</div>  --%>
 
 					<div class="default-select" id="default-select"
 						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
 
+						<form:input path="petKind" cssClass="single-input"
+							placeholder="견종 / Kind" name="petKind" id="petKind" readonly="true"/>
 						<button type="button" onclick="dogmapPopup();"
-							class="btn btn-info">Dog Map Select</button>
-						<input type="hidden" name="petKindcode" id="petKindcode" value="">
-						
+							class="btn btn-info">Select</button>
+
 						<br>
-						<form:errors path="petKindcode" />
+						<form:errors path="petKind" />
 					</div>
 
 				</div>

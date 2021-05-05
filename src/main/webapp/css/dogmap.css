@@ -1,5 +1,4 @@
-@
-use postcss-preset-env {
+@use postcss-preset-env {
 	stage: 0;
 }
 
@@ -12,7 +11,7 @@ html {
 }
 
 body {
-	background-color: #32425a;
+	background-color: #7b9acc;
 	color: #7e7e7e;
 	font-family: Source Sans Pro, sans-serif;
 	line-height: 1.5;
@@ -22,7 +21,7 @@ body {
 }
 
 a {
-	color: #ce606f;
+	color: #06d587;
 }
 
 h1, h2, h3 {
@@ -51,29 +50,11 @@ p {
 	margin: 0.5em 0;
 }
 
-svg {
-	height: auto;
-	max-width: 100%;
-}
-
 .text-center {
 	text-align: center;
 }
 
-.align {
-	display: grid;
-	place-items: center;
-}
-
-.grid {
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 740px;
-	width: 90%;
-}
-
 .map {
-	margin-top: 3em;
 	position: relative;
 }
 
@@ -168,12 +149,12 @@ svg {
 	position: absolute;
 	bottom: 0;
 	transform: translate(-50%, -2em);
-	width: 20em;
+	width: 15em;
 	z-index: 999;
 }
 
 .map__marker-info-header {
-	background-color: #ce606f;
+	background-color: #98E37C;
 	border-top-left-radius: 0.5em;
 	border-top-right-radius: 0.5em;
 	color: #fff;
@@ -181,7 +162,7 @@ svg {
 }
 
 .map__marker-info-main {
-	background-color: #fff;
+	background-color: #FBEAEB;
 	border-bottom-left-radius: 0.5em;
 	border-bottom-right-radius: 0.5em;
 	color: #7e7e7e;
@@ -216,218 +197,31 @@ svg {
 	animation-fill-mode: both;
 }
 
-@
-keyframes bounce-in { 0%, 20%, 40%, 60%, 80%, 100% {
-	transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-0
-
-
-%
-{
-opacity
-
-
-:
-
-
-0
-;
-
-
-transform
-
-
-:
-
-
-scale3d
-(
-
-
-0
-.3
-,
-0
-.3
-,
-0
-.3
-
-
-)
-;
-
-
-}
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-scale3d
-(
-
-
-1
-.1
-,
-1
-.1
-,
-1
-.1
-
-
-)
-;
-
-
-}
-40
-
-
-%
-{
-transform
-
-
-:
-
-
-scale3d
-(
-
-
-0
-.9
-,
-0
-.9
-,
-0
-.9
-
-
-)
-;
-
-
-}
-60
-
-
-%
-{
-opacity
-
-
-:
-
-
-1
-;
-
-
-transform
-
-
-:
-
-
-scale3d
-(
-
-
-1
-.03
-,
-1
-.03
-,
-1
-.03
-
-
-)
-;
-
-
-}
-80
-
-
-%
-{
-transform
-
-
-:
-
-
-scale3d
-(
-
-
-0
-.97
-,
-0
-.97
-,
-0
-.97
-
-
-)
-;
-
-
-}
-100
-
-
-%
-{
-opacity
-
-
-:
-
-
-1
-;
-
-
-transform
-
-
-:
-
-
-scale3d
-(
-
-
-1
-,
-1
-,
-1
-
-
-)
-;
-
-
-}
+@keyframes bounce-in {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
 }
 .animate--bounce-in {
 	animation-duration: 0.75s;

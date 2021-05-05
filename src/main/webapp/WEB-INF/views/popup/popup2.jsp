@@ -1,6 +1,6 @@
 <!-- 
 ========================================================================
-파    일    명 : popup2.jsp	/	백그라운드
+파    일    명 : popup2.jsp	/	svg
 ========================================================================
 작    성    자 : 송찬영
 작    성    일 : 2021.05.03
@@ -67,6 +67,11 @@ body {
 .jumbotron {
 	opacity: 0.8;
 }
+
+a:hover {
+	color: #06d587;
+	font-size: 1.3em;
+}
 </style>
 <body>
 
@@ -123,11 +128,7 @@ body {
 								<h2>Los Angeles</h2>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Aliquid asperiores, quae eos modi temporibus vitae nesciunt, <a
-										href="#">quia voluptatem</a> repellat recusandae!
-								</p>
+								<p>Test</p>
 							</main>
 						</div>
 
@@ -141,11 +142,7 @@ body {
 								<h2>New York</h2>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Aliquid asperiores, <a href="#">quae eos</a> modi temporibus
-									vitae nesciunt, quia voluptatem repellat recusandae!
-								</p>
+								<p>Test</p>
 							</main>
 						</div>
 					</div></li>
@@ -158,11 +155,7 @@ body {
 								<h2>San Francisco</h2>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									Lorem ipsum dolor sit amet, <a href="#">consectetur
-										adipisicing</a> elit. Aliquid asperiores, quae eos modi temporibus
-									vitae nesciunt, quia voluptatem repellat recusandae!
-								</p>
+								<p>Test</p>
 							</main>
 						</div>
 					</div></li>
@@ -174,20 +167,16 @@ body {
 								<h2>Seattle</h2>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. <a
-										href="#">Aliquid asperiores</a>, quae eos modi temporibus
-									vitae nesciunt, quia voluptatem repellat recusandae!
-								</p>
+								<p>Test</p>
 							</main>
 						</div>
 					</div></li>
 			</ul>
 			<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-				viewBox="21.263 7.056 906.273 561.17" fill="#003f7f">
+				viewBox="21.263 7.056 906.273 561.17" fill="#CED46A">
         <g
 					transform="translate(0.000000,722.000000) scale(0.100000,-0.100000)"
-					fill="#eee6c4" stroke="none">
+					fill="#FCF6F5" stroke="none">
         <path
 					d="M0 6940 l0 -280 109 0 c96 0 110 2 115 18 3 9 14 67 26 127 11 61 25
 128 30 150 9 35 34 161 47 238 l5 27 -166 0 -166 0 0 -280z" />
@@ -1698,16 +1687,16 @@ c-57 0 -74 -4 -90 -20 -14 -13 -17 -25 -12 -33 10 -17 11 -20 13 -60 1 -24 7
 		</div>
 
 		<div class="container d-flex justify-content-center mt-5">
-			<select style="display: none;" id="childKindcode"
-				name="childKindcode">
+			<select style="display: none;" id="childKind"
+				name="childKind">
 				<c:if test="${empty kindcode}">
 					<option value=""></option>
 				</c:if>
 				<c:if test="${not empty kindcode}">
-					<option value="${kindcode.petKindcode }"></option>
+					<option value="${kindcode.petKind }"></option>
 				</c:if>
 				<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-					<option value="${kindcode.petKindcode}">${kindcode.petKind}</option>
+					<option value="${kindcode.petKind}">${kindcode.petKind}</option>
 				</c:forEach>
 			</select>
 			<div class="nice-select" tabindex="0">
@@ -1732,7 +1721,7 @@ c-57 0 -74 -4 -90 -20 -14 -13 -17 -25 -12 -33 10 -17 11 -20 13 -60 1 -24 7
 				class="btn header-btn d-flex justify-content-center"
 				onclick="dogSelect();">Select</button>
 		</div>
-		
+
 	</div>
 
 	<!-- JS here -->
@@ -1813,8 +1802,8 @@ c-57 0 -74 -4 -90 -20 -14 -13 -17 -25 -12 -33 10 -17 11 -20 13 -60 1 -24 7
 			return false;
 		}
 
-		$("#petKindcode", opener.document).val(
-				document.getElementById("childKindcode").value);
+		$("#petKind", opener.document).val(
+				document.getElementById("childKind").value);
 		window.close();
 	}
 </script>
