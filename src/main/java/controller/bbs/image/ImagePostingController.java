@@ -7,7 +7,7 @@
 작  성  내  용 : 사진 자랑 게시물 작성 페이지로 이동, 업로드하는 컨트롤러
 ========================================================================
 */
-package controller;
+package controller.bbs.image;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
