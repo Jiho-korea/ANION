@@ -15,6 +15,8 @@
 package controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,7 @@ import petProject.exception.PetNotFoundException;
 import petProject.service.PetInfoService;
 import petProject.service.PetInfoUpdateService;
 import petProject.vo.Pet;
+import petProject.vo.ScriptWriter;
 import petProject.vo.petInfo.PetNameUpdateRequest;
 
 @Controller
@@ -48,7 +51,7 @@ public class PetInfoController {
 
 	@GetMapping
 	public String petInfo(@RequestParam(value = "petRegistrationNumber", required = true) Integer petRegistrationNumber,
-			Model model) {
+			Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
 
 			Pet pet = petInfoService.selectPet(petRegistrationNumber);
@@ -56,10 +59,12 @@ public class PetInfoController {
 
 			return "info/pet";
 		} catch (PetNotFoundException e) {
-			return "main/list";
+			e.printStackTrace();
+			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "main/list";
+			return "list/pet";
 		}
 
 	}
@@ -67,7 +72,8 @@ public class PetInfoController {
 	@GetMapping("/updatePname")
 	public String updatePnameGet(
 			@RequestParam(value = "petRegistrationNumber", required = true) Integer petRegistrationNumber,
-			PetNameUpdateRequest petNameUpdateRequest, Model model) {
+			PetNameUpdateRequest petNameUpdateRequest, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		try {
 
 			Pet pet = petInfoService.selectPet(petRegistrationNumber);
@@ -77,7 +83,8 @@ public class PetInfoController {
 			return "info/pet";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			return "info/pet";
+			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "info/pet";
@@ -96,10 +103,10 @@ public class PetInfoController {
 				return "info/pet";
 			} catch (PetNotFoundException e) {
 				e.printStackTrace();
-				return "main/list";
+				return "list/pet";
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "main/list";
+				return "list/pet";
 			}
 
 		}

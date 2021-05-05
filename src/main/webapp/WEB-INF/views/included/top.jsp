@@ -111,7 +111,7 @@ Preloader Start -->
 																code="pet.registration.title" /></a></li>
 													<c:if test="${not empty sessionScope.login}">
 														<li><a
-															href="${pageContext.request.contextPath}/main/list"><spring:message
+															href="${pageContext.request.contextPath}/pet/list"><spring:message
 																	code="pet.list.title" /></a></li>
 													</c:if>
 													<li><a href="#"><spring:message
