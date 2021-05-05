@@ -10,6 +10,10 @@
 작    성    일 : 2021.01.05
 작  성  내  용 : kindcode update, delete 메서드 작성
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.05
+수  정  내  용 : findKindcode 메서드 작성
+========================================================================
 */
 package petProject.dao;
 
@@ -34,5 +38,5 @@ public interface KindcodeDAO {
 
 	int deleteKindcode(String petKindcode) throws Exception;
 
-	String findCode(@Param("petKind") String petKind) throws Exception;
+	String findKindcode(@Param("petKind") String petKind) throws Exception;
 }

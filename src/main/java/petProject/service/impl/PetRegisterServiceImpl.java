@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : petDAO의 insertPet메서드를 이용하는 서비스
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.05
+수  정  내  용 : findKindcode 메소드 추가
+========================================================================
 */
 package petProject.service.impl;
 
@@ -31,7 +35,7 @@ public class PetRegisterServiceImpl implements PetRegisterService {
 
 	@Override
 	public int insertPet(PetRegisterRequest petRegisterRequest) throws Exception {
-		String petKindcode = this.findCode(petRegisterRequest.getPetKind());
+		String petKindcode = KindcodeDAO.findKindcode(petRegisterRequest.getPetKind());
 		petRegisterRequest.setPetKindcode(petKindcode);
 
 		int result = petDAO.insertPet(petRegisterRequest);
@@ -39,13 +43,6 @@ public class PetRegisterServiceImpl implements PetRegisterService {
 			throw new PetRegisterException("petRegisterException");
 		}
 		return result;
-	}
-
-	@Override
-	public String findCode(String petKind) throws Exception {
-		String petKindcode = KindcodeDAO.findCode(petKind);
-
-		return petKindcode;
 	}
 
 }

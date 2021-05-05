@@ -26,6 +26,10 @@
 수    정    일 : 2020.11.23
 수  정  내  용 : 견종 선택 시 요청 파라미터에 status 값이 아닌 견종 코드가 들어가도록 수정
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.05
+수  정  내  용 : 품종 선택 시 팝업창을 통해 처리
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -285,8 +289,8 @@
 		}
 	});
 	function dogmapPopup() {
-		parentObj = window.open("${pageContext.request.contextPath}/popup/2",
-			"popup02", "width=1100, height=800, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
+		parentObj = window.open("${pageContext.request.contextPath}/popup/petKind",
+			"petKind_parent", "width=1100, height=800, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
 	}
 </script>
 </html>

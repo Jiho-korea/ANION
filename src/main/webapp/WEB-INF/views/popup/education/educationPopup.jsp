@@ -1,21 +1,23 @@
 <!-- 
 ========================================================================
-파    일    명 : popup3.jsp	/	이미지맵 사용
+파    일    명 : popup1.jsp
 ========================================================================
-작    성    자 : 송찬영
-작    성    일 : 2021.05.03
-작  성  내  용 : 대동견지도
+작    성    자 : 임원석
+작    성    일 : 2021.04.30
+작  성  내  용 : 교육 대상자를 위한 팝업페이지
+========================================================================
+수    정    자 : 임원석,정세진
+수    정    일 : 2021.05.03
+수  정  내  용 : 팝업창 하루동안 보지않기 기능 추가
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ANION popup2</title>
+<title>ANION popup1</title>
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -57,51 +59,37 @@ body {
 	opacity: 0.8;
 }
 </style>
-<body>
-	<img src="${pageContext.request.contextPath}/img/popupBack/world_map.png"
-		width="100%" height="100%" usemap="#dogmap">
 
-	<!-- 지도에 위치할 마크 -->
-	<map name="dogmap">
-		<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-			<area shape="rect" coords="600,300,700,200"
-				href="${pageContext.request.contextPath}/popup/2/click/${kindcode.petKindcode}">
-		</c:forEach>
-	</map>
 
-	<!-- 선택한 후의 리스트 -->
+<body
+	background="${pageContext.request.contextPath}/img/popupBack/pop_back.png">
+	<Br>
+	<div
+		style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; position: absolute; left: 50px; top: 35px; width: 400px">
+		교육 이벤트 및 참석 제목</div>
+	<div
+		style="text-align: center; color: white; position: absolute; left: 50px; top: 70px; width: 400px">
+		교육 및 설명</div>
+	<br>
+	<div class="jumbotron d-flex justify-content-center align-items-center"
+		style="height: 300px; width: 400px; position: absolute; left: 50px; top: 120px">
+		참고 이미지, 그림 등</div>
+
 	<div class="container d-flex justify-content-center mt-5">
-		<select style="display: none;" id="childKindcode" name="childKindcode">
-			<c:if test="${empty kindcode}">
-				<option value=""></option>
-			</c:if>
-			<c:if test="${not empty kindcode}">
-				<option value="${kindcode.petKindcode }"></option>
-			</c:if>
-			<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-				<option value="${kindcode.petKindcode}">${kindcode.petKind}</option>
-			</c:forEach>
-		</select>
-		<div class="nice-select" tabindex="0">
-			<c:if test="${empty kindcode}">
-				<span class="current">견종 / Dog breed</span>
-			</c:if>
-			<c:if test="${not empty kindcode}">
-				<span class="current">${kindcode.petKind }</span>
-			</c:if>
-			<ul class="list">
-				<li data-value="견종 / Dog breed" class="option selected focus"
-					hidden="">견종 / Dog breed</li>
-				<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-					<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
-				</c:forEach>
-			</ul>
-		</div>
-
-		&nbsp;&nbsp;
-		<button type="button"
+		<a
+			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/education/click';window.close();"
 			class="btn header-btn d-flex justify-content-center"
-			onclick="dogSelect();">Select</button>
+			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
+	</div>
+	<div style="position: fixed; right: 5px; bottom: 4px;">
+		<form name="frm" class="d-flex align-items-center">
+			<input id="closeCheck" type="checkbox" name="Notice" onclick="check()"> <a
+				style="font-size: 13px">하루동안 열지 않음</a> &nbsp;<input type=button
+				value="닫기" onclick="closeWin()"
+				style="width: 30pt; height: 20pt; font-size: 13px"
+				class="d-flex align-items-center">
+
+		</form>
 	</div>
 	<!-- JS here -->
 
@@ -169,21 +157,30 @@ body {
 	var width = window.outerWidth;
 	var height = window.outerHeight;
 	function popResizer() {
+
 		window.resizeTo(width, height);
 	};
 
 	popResizer();
 	$(window).resize(popResizer);
 
-	function dogSelect() {
-		if ($("[name=childKindcode] > option:selected").val() == '') {
-			alert("견종을 선택해주세요.");
-			return false;
-		}
-
-		$("#petKindcode", opener.document).val(
-				document.getElementById("childKindcode").value);
-		window.close();
+	function setCookie(name, value, expiredays) {
+		var todayDate = new Date();
+		todayDate.setDate(todayDate.getDate() + expiredays);
+		document.cookie = name + "=" + escape(value) + "; path=/; expires="
+				+ todayDate.toGMTString() + ";"
 	}
+
+	function closeWin() {
+		self.close();
+	}
+	
+	function check() {
+		setCookie("Notice", "done", 1);
+		self.close();
+	}
+
 </script>
+
+
 </html>

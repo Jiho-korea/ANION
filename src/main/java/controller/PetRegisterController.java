@@ -85,8 +85,10 @@ public class PetRegisterController {
 			String today = simpleDateFormat.format(new Date());
 			model.addAttribute("today", today);
 
-			kindcodeList = kindcodeListService.selectKindcodeList();
-			model.addAttribute("kindcodeList", kindcodeList);
+			/*
+			 * kindcodeList = kindcodeListService.selectKindcodeList();
+			 * model.addAttribute("kindcodeList", kindcodeList);
+			 */
 			// System.out.print(kindcodeList.get(0).getPetKind());
 			return "register/registerStep1";
 		} catch (Exception e) {
@@ -116,8 +118,10 @@ public class PetRegisterController {
 				String today = simpleDateFormat.format(new Date());
 				model.addAttribute("today", today);
 
-				kindcodeList = kindcodeListService.selectKindcodeList();
-				model.addAttribute("kindcodeList", kindcodeList);
+				/*
+				 * kindcodeList = kindcodeListService.selectKindcodeList();
+				 * model.addAttribute("kindcodeList", kindcodeList);
+				 */
 				return "register/registerStep1";
 			} catch (Exception e) {
 				e.printStackTrace();

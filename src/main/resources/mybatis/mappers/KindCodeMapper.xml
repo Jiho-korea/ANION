@@ -14,7 +14,7 @@
 		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" where "PET_KIND_CODE" = #{petKindcode}
 	</select>
 
-	<select id="findCode" parameterType="String" resultType="String">
+	<select id="findKindcode" parameterType="String" resultType="String">
 		select "PET_KIND_CODE" from "kindcode" where "PET_KIND" = #{petKind}
 	</select>
 	

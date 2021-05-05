@@ -15,6 +15,4 @@ import petProject.vo.PetRegisterRequest;
 
 public interface PetRegisterService {
 	int insertPet(@Param("petRegisterRequest") PetRegisterRequest petRegisterRequest) throws Exception;
-
-	String findCode(@Param("petKind") String petKind) throws Exception;
 }

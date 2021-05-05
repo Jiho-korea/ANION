@@ -10,6 +10,10 @@
 수    정    일 : 2021.05.01
 수  정  내  용 : 교육 대상자들을 위한 회원가입-반려견등록 연속 수행 로직 추가
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.05
+수  정  내  용 : petKind를 띄우는 팝업창 추가
+========================================================================
 */
 package controller;
 
@@ -36,13 +40,13 @@ public class PopupController {
 	@Resource(name = "kindcodeListService")
 	KindcodeService kindcodeService;
 
-	@GetMapping("/1")
+	@GetMapping("/education")
 	public String popup1(HttpServletRequest request) {
-		return "popup/popup1";
+		return "popup/education/educationPopup";
 	}
 
 	// 교육 대상자 팝업의 처리 메소드
-	@GetMapping("/1/click")
+	@GetMapping("/education/click")
 	public String popup1_click(HttpServletResponse response) throws Exception {
 		Cookie cookie_popup01 = new Cookie("popup01", "true");
 		cookie_popup01.setPath("/");
@@ -53,7 +57,8 @@ public class PopupController {
 		return "redirect:/register/step1";
 	}
 
-	@GetMapping(value = {"/2/{petKindcode}", "/2"})
+	//대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
+	@GetMapping(value = {"/petKind/{petKindcode}", "/petKind"})
 	public String popup2(Model model, @PathVariable(name = "petKindcode", required = false) String petKindcode)
 			throws Exception {
 
@@ -65,12 +70,13 @@ public class PopupController {
 			model.addAttribute("kindcode", kindcode);
 		}
 
-		return "popup/popup2";
+		return "popup/petKind/petKindPopup";
 	}
 
-	@GetMapping("/2/click/{petKindcode}")
+	//대동견지도에서 품종 클릭시 petKindcode를 넘겨주면서 redirect
+	@GetMapping("/petKind/click/{petKindcode}")
 	public String popup2_click(@PathVariable("petKindcode") String petKindcode) throws Exception {
 		
-		return "redirect:/popup/2/" + petKindcode;
+		return "redirect:/popup/petKind/" + petKindcode;
 	}
 }
