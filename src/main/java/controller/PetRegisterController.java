@@ -45,7 +45,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import petProject.exception.PetRegisterException;
 import petProject.service.GetCurrvalService;
 import petProject.service.ImageUploadService;
-import petProject.service.KindcodeListService;
+import petProject.service.KindcodeService;
 import petProject.service.PetRegisterService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Kindcode;
@@ -67,7 +67,7 @@ public class PetRegisterController {
 	ImageUploadService imageUploadService;
 
 	@Resource(name = "kindcodeListService")
-	KindcodeListService kindcodeListService;
+	KindcodeService kindcodeListService;
 
 	List<Kindcode> kindcodeList = null;
 
@@ -85,8 +85,10 @@ public class PetRegisterController {
 			String today = simpleDateFormat.format(new Date());
 			model.addAttribute("today", today);
 
-			kindcodeList = kindcodeListService.selectKindcodeList();
-			model.addAttribute("kindcodeList", kindcodeList);
+			/*
+			 * kindcodeList = kindcodeListService.selectKindcodeList();
+			 * model.addAttribute("kindcodeList", kindcodeList);
+			 */
 			// System.out.print(kindcodeList.get(0).getPetKind());
 			return "register/registerStep1";
 		} catch (Exception e) {
@@ -116,8 +118,10 @@ public class PetRegisterController {
 				String today = simpleDateFormat.format(new Date());
 				model.addAttribute("today", today);
 
-				kindcodeList = kindcodeListService.selectKindcodeList();
-				model.addAttribute("kindcodeList", kindcodeList);
+				/*
+				 * kindcodeList = kindcodeListService.selectKindcodeList();
+				 * model.addAttribute("kindcodeList", kindcodeList);
+				 */
 				return "register/registerStep1";
 			} catch (Exception e) {
 				e.printStackTrace();

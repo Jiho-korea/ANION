@@ -6,18 +6,22 @@
 <mapper namespace="petProject.dao.KindcodeDAO">
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND",
-		"PET_KIND_CODE" from "kindcode"
+		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode"
 	</select>
 
-	<select id="selectKindcode" resultType="kindcode">
+	<select id="selectKindcode" parameterType="String" resultType="kindcode">
 		select "PET_KIND",
-		"PET_KIND_CODE" from "kindcode" where "PET_KIND_CODE" = #{petKindcode}
+		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" where "PET_KIND_CODE" = #{petKindcode}
 	</select>
 
+	<select id="findKindcode" parameterType="String" resultType="String">
+		select "PET_KIND_CODE" from "kindcode" where "PET_KIND" = #{petKind}
+	</select>
+	
 	<insert id="insertKindcode" parameterType="kindcode">
 		INSERT INTO
-		public.kindcode("PET_KIND", "PET_KIND_CODE") VALUES(#{petKind},
-		#{petKindcode});
+		public.kindcode("PET_KIND", "PET_KIND_CODE", "PET_KIND_HABITAT") VALUES(#{petKind},
+		#{petKindcode}, #{petKindHabitat});
 	</insert>
 
 	<insert id="updateKindcode" parameterType="kindcode">
@@ -35,5 +39,6 @@
 	<resultMap type="kindcode" id="kindcodeResultMap">
 		<id column="PET_KIND_CODE" property="petKindcode" />
 		<result column="PET_KIND" property="petKind" />
+		<result column="PET_KIND_HABITAT" property="petKindHabitat" />
 	</resultMap>
 </mapper>

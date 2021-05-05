@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : PopupController.java
+파    일    명 : EventPopupController.java
 ========================================================================
 작    성    자 : 임원석
 작    성    일 : 2021.04.30
@@ -10,9 +10,14 @@
 수    정    일 : 2021.05.01
 수  정  내  용 : 교육 대상자들을 위한 회원가입-반려견등록 연속 수행 로직 추가
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.05
+수  정  내  용 : 경로 수정 1 -> event
+========================================================================
 */
 package controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,17 +26,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import petProject.service.KindcodeService;
+
 @Controller
 @RequestMapping("/popup")
-public class PopupController {
+public class EventPopupController {
 
-	@GetMapping("/1")
+	@Resource(name = "kindcodeListService")
+	KindcodeService kindcodeService;
+
+	@GetMapping("/event")
 	public String popup1(HttpServletRequest request) {
-		return "popup/popup1";
+		return "popup/event/popup1";
 	}
 
 	// 교육 대상자 팝업의 처리 메소드
-	@GetMapping("/1/click")
+	@GetMapping("/event/click")
 	public String popup1_click(HttpServletResponse response) throws Exception {
 		Cookie cookie_popup01 = new Cookie("popup01", "true");
 		cookie_popup01.setPath("/");
@@ -41,4 +51,5 @@ public class PopupController {
 
 		return "redirect:/register/step1";
 	}
+
 }
