@@ -63,8 +63,10 @@
 	</c:import>
 	<div class="container" style="margin-top: 60px">
 		<div class="row-col">
-			<form method="post"
-				action="${pageContext.request.contextPath}/posting/img">
+
+			<form:form action="${pageContext.request.contextPath}/posting/img"
+				method="post" cssClass="form-signin"
+				modelAttribute="imagePostingRequest">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
@@ -76,21 +78,24 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" class="form-control"
-								style="font-size: 13px"
-								placeholder="<spring:message code="posting.page.img.title" />"
-								name="title" maxlength="1024" required autofocus></td>
+							<td><form:input path="imgpostTitle" cssClass="form-control"
+									cssStyle="font-size: 13px" placeholder="제목 / Title"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '제목 / Title'"
+									maxlength="1024"/></td>
 						</tr>
 						<tr>
-							<td><textarea class="form-control"
-									placeholder="<spring:message code="posting.page.img.content" />"
-									name="content" maxlength="2048"
-									style="height: 350px; font-size: 13px" required></textarea></td>
+							<td><form:textarea path="imgpostContent"
+									cssClass="form-control" placeholder="내용 / Content"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '내용 / Content'" maxlength="2048"
+									cssStyle="height: 350px; font-size: 13px"/></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="col-md-4">
-									<img alt="" width="100px" src="${pageContext.request.contextPath}/upload/${image.imagePath}">
+									<img alt="" width="100px"
+										src="${pageContext.request.contextPath}/upload/${image.imagePath}">
 								</div>
 							</td>
 						</tr>
@@ -99,7 +104,7 @@
 				<input type="submit" class="btn btn-primary pull-right mr-5"
 					style="margin-left: 91%"
 					value="<spring:message code="posting.page.img.post" />" />
-			</form>
+			</form:form>
 
 		</div>
 	</div>
