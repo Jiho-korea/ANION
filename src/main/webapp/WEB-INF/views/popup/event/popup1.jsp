@@ -77,7 +77,7 @@ body {
 
 	<div class="container d-flex justify-content-center mt-5">
 		<a
-			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/education/click';window.close();"
+			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/event/click';window.close();"
 			class="btn header-btn d-flex justify-content-center"
 			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
 	</div>
