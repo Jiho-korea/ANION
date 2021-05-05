@@ -16,13 +16,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import petProject.exception.PetNotFoundException;
 import petProject.service.PetInfoService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Pet;
 import petProject.vo.ScriptWriter;
 
 public class InfoAuthCheckInterceptor implements HandlerInterceptor {
-	
+
 	@Resource(name = "petInfoService")
 	PetInfoService petInfoService;
 
@@ -32,8 +33,15 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession(false);
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		if (request.getParameter("petRegistrationNumber") != null) {
-			Pet pet = petInfoService.selectPet(Integer.parseInt(request.getParameter("petRegistrationNumber")));
-
+			Pet pet = null;
+			try {
+				pet = petInfoService.selectPet(Integer.parseInt(request.getParameter("petRegistrationNumber")));
+			} catch (PetNotFoundException e) {
+				e.printStackTrace();
+				return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			} catch (NumberFormatException e) {
+				return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			}
 			if (!"0".equals(authInfo.getMemberlevel().getMemberLevelCode())
 					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
 				return ScriptWriter.write("권한이 없습니다", "home", request, response);
@@ -44,8 +52,7 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 			}
 			return true;
 		} else {
-			response.sendRedirect(request.getContextPath() + "/");
-			return false;
+			return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
 		}
 
 	}

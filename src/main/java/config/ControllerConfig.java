@@ -6,6 +6,10 @@
 작    성    일 : 2020.xx.xx
 작  성  내  용 : Controller 빈 등록
 ========================================================================
+수    정    자 : 강지호
+수    정    일 : 2021.05.05
+수  정  내  용 : MainController -> PetListController 로 이름 변경
+========================================================================
 */
 package config;
 
@@ -15,11 +19,12 @@ import org.springframework.context.annotation.Configuration;
 import controller.EmailValidController;
 import controller.ImageDeleteController;
 import controller.ImageListController;
+import controller.ImagePostingController;
 import controller.LoginController;
 import controller.LogoutController;
-import controller.MainController;
 import controller.MemberRegisterController;
 import controller.PetInfoController;
+import controller.PetListController;
 import controller.PetRegisterController;
 import controller.PopupController;
 import controller.ProfileEditController;
@@ -29,7 +34,7 @@ import controller.admin.KindcodeInsertController;
 import controller.admin.KindcodeListController;
 import controller.admin.KindcodeUpdateController;
 import controller.admin.MemberListController;
-import controller.admin.PetListController;
+import controller.admin.PetListAdminController;
 
 @Configuration
 public class ControllerConfig {
@@ -48,11 +53,6 @@ public class ControllerConfig {
 	public PetRegisterController petRegisterController() {
 		PetRegisterController petRegisterController = new PetRegisterController();
 		return petRegisterController;
-	}
-
-	@Bean
-	public MainController mainController() {
-		return new MainController();
 	}
 
 	@Bean
@@ -106,6 +106,11 @@ public class ControllerConfig {
 	}
 
 	@Bean
+	public PetListAdminController petListAdminController() {
+		return new PetListAdminController();
+	}
+
+	@Bean
 	public ProfileEditController editController() {
 		return new ProfileEditController();
 	}
@@ -118,6 +123,11 @@ public class ControllerConfig {
 	@Bean
 	public ImageDownloadController imageDownloadController() {
 		return new ImageDownloadController();
+	}
+
+	@Bean
+	public ImagePostingController imagePostingController() {
+		return new ImagePostingController();
 	}
 
 	@Bean
