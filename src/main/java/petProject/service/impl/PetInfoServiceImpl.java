@@ -32,7 +32,6 @@ public class PetInfoServiceImpl implements PetInfoService {
 		if (pet == null) {
 			throw new PetNotFoundException("not found");
 		}
-		// TODO Auto-generated method stub
 		return pet;
 	}
 }

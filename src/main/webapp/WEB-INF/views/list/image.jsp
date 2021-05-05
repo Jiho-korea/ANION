@@ -157,7 +157,11 @@
 												alt="btnImages" class="btnImages">
 										</button>
 										--%>
-										<button class="btn_share mt-2 mr-3" id="btn_share" type="button"><img src="${pageContext.request.contextPath}/img/button/share1.png"></button>
+										<a href="${pageContext.request.contextPath}/posting/img?petRegistrationNumber=${petRegistrationNumber}&imageNumber=${image.imageNumber}"><button class="btn_share mt-2 mr-3" id="btn_share"
+												type="button">
+												<img
+													src="${pageContext.request.contextPath}/img/button/share1.png">
+											</button></a>
 									</div>
 								</c:forEach>
 							</div>
