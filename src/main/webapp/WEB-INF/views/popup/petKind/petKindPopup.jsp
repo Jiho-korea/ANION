@@ -7,15 +7,6 @@
 작  성  내  용 : 대동견지도
 ========================================================================
 -->
-<!-- 
-Copyright (c) 2021 by Marco Biedermann (https://codepen.io/marcobiedermann/pen/qEjQNz)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -78,65 +69,74 @@ a:hover {
 	<div>
 		<div class="map">
 			<ul class="map__markers">
-				<li class="map__marker map__marker--america"><a href="#">Chicago</a>
-					<div class="map__marker-info">
+				<li class="map__marker map__marker--america"><img width="30"
+					height="30"
+					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+					href="#"></a>
+					<div class="map__marker-info" style="width: 15em">
 						<div class="map__marker-info-inner animate animate--bounce-in">
 							<header class="map__marker-info-header">
 								<span class="current">미국 / United States of America</span>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									<c:forEach var="kindcode" items="${kindcodeList}"
-										varStatus="status">
-										<c:if test="${kindcode.petKindHabitat eq 'US' }">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
-										</c:if>
-									</c:forEach>
-								</p>
+							<p>
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'US' }">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+									</c:if>
+								</c:forEach>
+							</p>
 							</main>
 						</div>
 					</div></li>
 
-				<li class="map__marker map__marker--korea"><a href="#">Florida</a>
+				<li class="map__marker map__marker--korea"><img width="30"
+					height="30" 
+					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+					href="#"></a>
 					<div class="map__marker-info">
 						<div class="map__marker-info-inner animate animate--bounce-in">
 							<header class="map__marker-info-header">
 								<span class="current">한국 / Korea</span>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									<c:forEach var="kindcode" items="${kindcodeList}"
-										varStatus="status">
-										<c:if test="${kindcode.petKindHabitat eq 'KR' }">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
-										</c:if>
-									</c:forEach>
-								</p>
+							<p>
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'KR' }">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+									</c:if>
+								</c:forEach>
+							</p>
 							</main>
 						</div>
 					</div></li>
-					
-				<li class="map__marker map__marker--japan"><a href="#">Florida</a>
+
+				<li class="map__marker map__marker--japan"><img width="30"
+					height="30"
+					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+					href="#"></a>
 					<div class="map__marker-info">
 						<div class="map__marker-info-inner animate animate--bounce-in">
 							<header class="map__marker-info-header">
 								<span class="current">일본 / Japan</span>
 							</header>
 							<main class="map__marker-info-main">
-								<p>
-									<c:forEach var="kindcode" items="${kindcodeList}"
-										varStatus="status">
-										<c:if test="${kindcode.petKindHabitat eq 'JP' }">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
-										</c:if>
-									</c:forEach>
-								</p>
+							<p>
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'JP' }">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+									</c:if>
+								</c:forEach>
+							</p>
 							</main>
 						</div>
 					</div></li>
@@ -1789,3 +1789,15 @@ a:hover {
 	}
 </script>
 </html>
+<!-- 
+Copyright (c) 2021 by Marco Biedermann (https://codepen.io/marcobiedermann/pen/qEjQNz)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ -->
+<!-- 
+Copyright Dogtown Central, LLC. 
+-->

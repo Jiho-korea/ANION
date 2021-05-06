@@ -24,28 +24,6 @@ a {
 	color: #06d587;
 }
 
-h1, h2, h3 {
-	color: #fff;
-	font-weight: 600;
-}
-
-h1, .h1 {
-	font-size: 2.5em;
-	margin-bottom: 0.25em;
-	margin-top: 0;
-}
-
-h2, .h2 {
-	font-size: 1.5em;
-	margin-bottom: 0.33em;
-	margin-top: 0;
-}
-
-h3, .h3 {
-	font-size: 1.25em;
-	margin: 0 0 0.5em;
-}
-
 p {
 	margin: 0.5em 0;
 }
@@ -89,12 +67,13 @@ p {
 }
 
 .map__marker>a {
-	background-color: #ce606f;
 	border-radius: 50%;
 	height: 0.7em;
 	display: block;
 	text-indent: -9999px;
 	width: 0.7em;
+	position:absolute; 
+	bottom:0.05px;"
 }
 
 .map__marker--america {
@@ -103,13 +82,13 @@ p {
 }
 
 .map__marker--korea {
-	left: 97%;
-	top: 38%;
+	left: 95.5%;
+	top: 35%;
 }
 
 .map__marker--japan {
-	left: 98%;
-	top: 40%;
+	left: 97%;
+	top: 37.5%;
 }
 
 .map__marker-info {
@@ -118,7 +97,7 @@ p {
 	position: absolute;
 	bottom: 0;
 	transform: translate(-50%, -2em);
-	width: 15em;
+	width: 10em;
 	z-index: 999;
 }
 
