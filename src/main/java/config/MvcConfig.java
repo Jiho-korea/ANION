@@ -84,7 +84,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
-				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**");
+				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**", "/posting/**");

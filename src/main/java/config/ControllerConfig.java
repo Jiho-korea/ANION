@@ -23,9 +23,10 @@ import controller.LoginController;
 import controller.LogoutController;
 import controller.MemberRegisterController;
 import controller.PetInfoController;
+import controller.PetKindPopupController;
 import controller.PetListController;
 import controller.PetRegisterController;
-import controller.PopupController;
+import controller.EventPopupController;
 import controller.ProfileEditController;
 import controller.admin.ImageDownloadController;
 import controller.admin.KindcodeDeleteController;
@@ -131,7 +132,12 @@ public class ControllerConfig {
 	}
 
 	@Bean
-	public PopupController popupController() {
-		return new PopupController();
+	public EventPopupController eventPopupController() {
+		return new EventPopupController();
+	}
+	
+	@Bean
+	public PetKindPopupController petKindPopupController() {
+		return new PetKindPopupController();
 	}
 }

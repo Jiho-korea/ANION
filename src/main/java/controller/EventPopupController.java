@@ -1,6 +1,6 @@
 /*
 ========================================================================
-파    일    명 : PopupController.java
+파    일    명 : EventPopupController.java
 ========================================================================
 작    성    자 : 임원석
 작    성    일 : 2021.04.30
@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/popup")
-public class PopupController {
+public class EventPopupController {
 
 	@GetMapping("/1")
 	public String popup1(HttpServletRequest request) {
-		return "popup/popup1";
+		return "popup/event/popup1";
 	}
 
 	// 교육 대상자 팝업의 처리 메소드
@@ -41,4 +41,5 @@ public class PopupController {
 
 		return "redirect:/register/step1";
 	}
+
 }
