@@ -24,6 +24,7 @@
 		<typeAlias type="petProject.vo.dto.Imgpost" alias="imgpost" />
 		<typeAlias type="petProject.vo.request.ImagePostingRequest" alias="imagePostingRequest" />
 		<typeAlias type="petProject.vo.dto.ImgpostAndImage" alias="imgpostAndImage" />
+		<typeAlias type="petProject.vo.request.ImageBoardRequest" alias="imageBoardRequest" />
 	</typeAliases>
    
 </configuration>

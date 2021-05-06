@@ -1,26 +1,23 @@
 /*
 ========================================================================
-파    일    명 : ImgpostDAO.java
+파    일    명 : ImgpostListService.java
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2021.05.06
-작  성  내  용 : DB imgpost 테이블에 접근하여 CRUD 실행하는 매퍼 클래스
+작  성  내  용 : 반려견 사진 자랑 게시판 목록 서비스 인터페이스
 ========================================================================
 */
-package petProject.dao;
+package petProject.service.bbs.image;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.dto.Imgpost;
 import petProject.vo.request.ImageBoardRequest;
-import petProject.vo.request.ImagePostingRequest;
 
-@Mapper
-public interface ImgpostDAO {
-	int insertImgpost(@Param("imagePostingRequest") ImagePostingRequest imagePostingRequest) throws Exception;
-
+public interface ImgpostListService {
 	List<Imgpost> listImgpost(@Param("imageBoardRequest") ImageBoardRequest imageBoardRequest) throws Exception;
+
+	Boolean nextPage(Integer pageNumber) throws Exception;
 }

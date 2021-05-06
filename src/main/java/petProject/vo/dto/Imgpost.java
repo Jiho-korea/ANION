@@ -9,6 +9,8 @@
 */
 package petProject.vo.dto;
 
+import petProject.vo.Member;
+
 public class Imgpost {
 
 	private static final long serialVersionUID = 1L;
@@ -18,9 +20,10 @@ public class Imgpost {
 	private String imgpostContent;
 	private int imgpostAvailable;
 	private String imgpostPostingtime;
+	private Member member;
 
 	public Imgpost(int imgpostNo, String imgpostTitle, int memberNumber, String imgpostContent, int imgpostAvailable,
-			String imgpostPostingtime) {
+			String imgpostPostingtime, Member member) {
 		super();
 		this.imgpostNo = imgpostNo;
 		this.imgpostTitle = imgpostTitle;
@@ -28,6 +31,7 @@ public class Imgpost {
 		this.imgpostContent = imgpostContent;
 		this.imgpostAvailable = imgpostAvailable;
 		this.imgpostPostingtime = imgpostPostingtime;
+		this.member = member;
 	}
 
 	public Imgpost() {
@@ -80,6 +84,14 @@ public class Imgpost {
 
 	public void setImgpostPostingtime(String imgpostPostingtime) {
 		this.imgpostPostingtime = imgpostPostingtime;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public static long getSerialversionuid() {

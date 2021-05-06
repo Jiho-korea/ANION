@@ -5,14 +5,75 @@
 
 <mapper namespace="petProject.dao.ImgpostDAO">
 	<insert id="insertImgpost" parameterType="imagePostingRequest"
-		useGeneratedKeys="true" keyProperty="imagePostingRequest.imgpostNo" keyColumn="IMGPOST_NO">
+		useGeneratedKeys="true" keyProperty="imagePostingRequest.imgpostNo"
+		keyColumn="IMGPOST_NO">
 		INSERT INTO
 		"public"."imgpost"
-		("IMGPOST_TITLE", "MEMBER_NUMBER",
+		("IMGPOST_TITLE",
+		"MEMBER_NUMBER",
 		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE",
 		"IMGPOST_POSTINGTIME")
 		VALUES(#{imagePostingRequest.imgpostTitle},
 		#{imagePostingRequest.memberNumber},
 		#{imagePostingRequest.imgpostContent}, 1, now());
 	</insert>
+
+	<select id="listImgpost" parameterType="imageBoardRequest"
+		resultMap="imgpostListResultMap">
+		SELECT "IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME"
+
+		<choose>
+			<when test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
+				FROM (select * from "public"."imgpost" where
+				"IMGPOST_AVAILABLE" = 1 ORDER BY
+				"IMGPOST_NO" DESC LIMIT
+				10 OFFSET
+				#{imageBoardRequest.pageNumber}) as T
+			</when>
+			<otherwise>
+				FROM "public"."imgpost"
+			</otherwise>
+		</choose>
+
+		<where>
+			<choose>
+				<when test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
+					AND "IMGPOST_TITLE" LIKE
+					CONCAT('%',#{imageBoardRequest.imgpostTitle},'%') ORDER BY
+					"IMGPOST_NO" DESC
+				</when>
+				<otherwise>
+					AND "IMGPOST_AVAILABLE" = 1 ORDER BY "IMGPOST_NO" DESC
+					LIMIT 10 OFFSET
+					#{imageBoardRequest.pageNumber}
+				</otherwise>
+			</choose>
+		</where>
+
+
+	</select>
+	<resultMap type="imgpost" id="imgpostListResultMap">
+		<id column="IMGPOST_NO" property="imgpostNo" />
+		<result column="IMGPOST_TITLE" property="imgpostTitle" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="IMGPOST_CONTENT" property="imgpostContent" />
+		<result column="IMGPOST_POSTINGTIME"
+			property="imgpostPostingtime" />
+		<result column="IMGPOST_AVAILABLE" property="imgpostAvailable" />
+		<association select="selectMember" property="member"
+			column="{memberNumber=MEMBER_NUMBER}" />
+	</resultMap>
+
+	<select id="selectMember" parameterType="member"
+		resultType="member">
+		SELECT
+		"MEMBER_ID",
+		"MEMBER_NAME",
+		"MEMBER_LEVEL_CODE",
+		"MEMBER_NUMBER"
+		FROM
+		"public"."member"
+		WHERE "MEMBER_NUMBER" = #{memberNumber}
+	</select>
 </mapper>

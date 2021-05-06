@@ -1,6 +1,6 @@
 <%--
 ========================================================================
-파    일    명 : bbs_img.jsp
+파    일    명 : board.jsp
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2021.05.05
@@ -54,12 +54,45 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+.linkImgpost, .linkImgpost:hover {
+	color: #000000;
+	text-decoration: none;
+	'
+}
+
+#btn_search {
+	height:26px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-right-radius: 5px; border-bottom-right-radius : 5px;
+	border: 1px solid #61CE89;
+	background-color: rgba(0, 0, 0, 0);
+	color: #61CE89;
+	padding: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#btn_search:hover {
+	color: white;
+	background-color: #61CE89;
+}
+
+
+#button_arrow_group{
+	border: none;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	background-color: transparent;
+}
+
 </style>
 <title><spring:message code="home.title" /></title>
 
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container" style="margin-top: 60px">
@@ -69,26 +102,30 @@
 				<thead>
 					<tr>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 15%">글번호</th>
+							style="background-color: #eeeeee; text-align: center; width: 15%">번호</th>
 						<th
 							style="background-color: #eeeeee; text-align: center; width: 55%">제목</th>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 10%">작성자</th>
+							style="background-color: #eeeeee; text-align: center; width: 10%">글쓴이</th>
 						<th
 							style="background-color: #eeeeee; text-align: center; width: 20%">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
 
-					<c:forEach var="post" items="${postList}">
+					<c:forEach var="imgpost" items="${imgpostList}">
 						<tr>
-							<td>${post.postNo}</td>
-							<td><a href="../from/post?postNo=${post.postNo}">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(post.title, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}
+							<td>${imgpost.imgpostNo}</td>
+							<%-- ../from/post?postNo=${imgpost.imgpostNo} --%>
+							<td><a href="#" class="linkImgpost">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostTitle, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}
 							</a></td>
-							<td>${post.student.name}</td>
-							<td>${fn:split(fn:substring(post.postingdate, 0, 10),'-')[0]}년
-								${fn:split(fn:substring(post.postingdate, 0, 10),'-')[1]}월
-								${fn:split(fn:substring(post.postingdate, 0, 10),'-')[2]}일</td>
+							<td>${imgpost.member.memberName}</td>
+							<%--
+							<td>${fn:split(fn:substring(imgpost.imgpostPostingtime, 0, 10),'-')[0]}년
+								${fn:split(fn:substring(imgpost.imgpostPostingtime, 0, 10),'-')[1]}월
+								${fn:split(fn:substring(imgpost.imgpostPostingtime, 0, 10),'-')[2]}일</td>
+							 --%>
+							<td>${fn:split(fn:substring(imgpost.imgpostPostingtime, 0, 10),'-')[1]}.${fn:split(fn:substring(imgpost.imgpostPostingtime, 0, 10),'-')[2]}</td>
 						</tr>
 					</c:forEach>
 
@@ -98,36 +135,41 @@
 
 
 		</div>
-		<div style="float: left">
+		<div style="float: left" id="button_arrow_group">
 
 			<c:choose>
 				<c:when test="${pageNumber ne 1}">
-					<a
-						href="${pageContext.request.contextPath}/from/board?pageNumber=${pageNumber - 1}"
-						class="btn btn-secondary" style="margin-left: 20px">◀</a>
+				<a href="${pageContext.request.contextPath}/board/img?pageNumber=${pageNumber - 1}">
+					<button class="btn_left_arrow mt-2" id="btn_left_arrow"
+												type="button">
+												<img
+													src="${pageContext.request.contextPath}/img/button/left_arrow1.png">
+											</button></a>
 				</c:when>
 				<c:when test="${nextPage}">
-					<a
-						href="${pageContext.request.contextPath}/from/board?pageNumber=${pageNumber + 1}"
-						class="btn btn-secondary" style="margin-left: 20px">▶</a>
+					<a href="${pageContext.request.contextPath}/board/img?pageNumber=${pageNumber + 1}">
+					<button class="btn_right_arrow mt-2" id="btn_right_arrow"
+												type="button">
+												<img
+													src="${pageContext.request.contextPath}/img/button/right_arrow1.png">
+											</button></a>
 				</c:when>
 			</c:choose>
 
 		</div>
 
 		<div style="float: right">
-			<a href="${pageContext.request.contextPath}/from/postingpage"
-				class="btn btn-primary pull-right">글쓰기</a>
+			<a href="#" class="btn btn-primary pull-right">글쓰기</a>
 		</div>
 
-		<div style="float: right" align="center">
-			<form action="${pageContext.request.contextPath}/from/board"
-				class="form-inline">
+		<div align="center"
+			class="d-flex justify-content-center align-items-center mt-5">
+			<form action="#" class="form-inline">
 				<div class="form-group mx-sm-3 mb-2">
 					<label for="title" class="sr-only">제목</label> <input type="text"
 						name="title" id="title" class="form-control" placeholder="제목">
 					<input type="hidden" name="pageNumber" value="${pageNumber}">
-					<button type="submit" class="btn btn-primary pull-right">검색</button>
+					<button type="submit" id="btn_search" class="d-flex justify-content-center align-items-center">검색</button>
 				</div>
 
 			</form>
@@ -135,7 +177,7 @@
 		</div>
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

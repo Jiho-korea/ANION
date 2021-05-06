@@ -77,7 +77,7 @@
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
-	background-color: white;
+	background-color: transparent;
 }
 </style>
 
