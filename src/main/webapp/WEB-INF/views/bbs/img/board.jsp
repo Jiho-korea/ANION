@@ -79,7 +79,7 @@
 }
 
 
-#button_arrow_group{
+#btn_left_arrow, #btn_right_arrow{
 	border: none;
 	width: 32px;
 	height: 32px;
@@ -135,12 +135,12 @@
 
 
 		</div>
-		<div style="float: left" id="button_arrow_group">
+		<div style="float: left">
 
 			<c:choose>
 				<c:when test="${pageNumber ne 1}">
 				<a href="${pageContext.request.contextPath}/board/img?pageNumber=${pageNumber - 1}">
-					<button class="btn_left_arrow mt-2" id="btn_left_arrow"
+					<button class="btn_left_arrow mt-3" id="btn_left_arrow"
 												type="button">
 												<img
 													src="${pageContext.request.contextPath}/img/button/left_arrow1.png">
@@ -148,7 +148,7 @@
 				</c:when>
 				<c:when test="${nextPage}">
 					<a href="${pageContext.request.contextPath}/board/img?pageNumber=${pageNumber + 1}">
-					<button class="btn_right_arrow mt-2" id="btn_right_arrow"
+					<button class="btn_right_arrow mt-3" id="btn_right_arrow"
 												type="button">
 												<img
 													src="${pageContext.request.contextPath}/img/button/right_arrow1.png">
@@ -159,9 +159,9 @@
 		</div>
 
 		<div style="float: right">
-			<a href="#" class="btn btn-primary pull-right">글쓰기</a>
+			<a href="#" class="btn btn-primary pull-right mt-2">글쓰기</a>
 		</div>
-
+		<%--  검색창 + 검색버튼
 		<div align="center"
 			class="d-flex justify-content-center align-items-center mt-5">
 			<form action="#" class="form-inline">
@@ -173,10 +173,11 @@
 				</div>
 
 			</form>
-
 		</div>
+		--%>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
-
+	
 	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
