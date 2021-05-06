@@ -27,7 +27,7 @@
 수  정  내  용 : 견종 선택 시 요청 파라미터에 status 값이 아닌 견종 코드가 들어가도록 수정
 ========================================================================
 수    정    자 : 송찬영
-수    정    일 : 2021.05.05
+수    정    일 : 2021.05.06
 수  정  내  용 : 품종 선택 시 팝업창을 통해 처리
 ========================================================================
 --%>
@@ -77,6 +77,12 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+button.relative {
+	position: relative;
+	top: -40px;
+	right: -98px
+}
 </style>
 
 <title><spring:message code="home.title" /></title>
@@ -108,13 +114,16 @@
 					</div>
 
 					<div class="default-select" id="default-select"
-						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block">
+						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block;">
 
 						<form:input path="petKind" cssClass="single-input"
 							placeholder="견종 / Kind" name="petKind" id="petKind"
 							readonly="true" />
-						<button type="button" onclick="dogmapPopup();"
-							class="btn btn-info">Select</button>
+						<button type="button" onclick="dogmapPopup();" class="relative"
+							style="border: 0; cursor: pointer; background-color: #F9F9FF;">
+							<img width="38" height="38"
+								src="${pageContext.request.contextPath}/img/button/dog_marker2.png" />
+						</button>
 
 						<!-- 
 						<select style="display: none;" name="petKindcode">
@@ -140,12 +149,12 @@
 							</ul>
 						</div>
 						 -->
-						 
+
 						<br>
 						<form:errors path="petKind" />
 					</div>
-
 				</div>
+
 				<br class="mb-4" />
 				<div class="row">
 					<div class="col-md-6 mb-1">
@@ -174,7 +183,6 @@
 						code="pet.male" />&nbsp;&nbsp;&nbsp;&nbsp;<form:radiobutton
 						path="petSex" value="암컷" /> <spring:message code="pet.female" />
 					<br class="mb-4" /> <form:errors path="petSex" /></label>
-
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
@@ -294,3 +302,6 @@
 	}
 </script>
 </html>
+<!-- 
+Copyright Dogtown Central, LLC. 
+-->

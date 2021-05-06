@@ -13,8 +13,6 @@ import java.util.List;
 
 import petProject.vo.Kindcode;
 
-public interface KindcodeService {
+public interface KindcodeListService {
 	List<Kindcode> selectKindcodeList() throws Exception;
-
-	Kindcode selectKindcode(String petKindcode) throws Exception;
 }

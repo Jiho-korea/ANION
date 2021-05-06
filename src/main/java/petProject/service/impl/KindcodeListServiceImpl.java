@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.KindcodeDAO;
-import petProject.service.KindcodeService;
+import petProject.service.KindcodeListService;
 import petProject.vo.Kindcode;
 
 @Service("kindcodeListService")
 @Transactional
-public class KindcodeServiceImpl implements KindcodeService {
+public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Autowired
 	private KindcodeDAO kindcodeDAO;
@@ -32,10 +32,4 @@ public class KindcodeServiceImpl implements KindcodeService {
 		return kindcodeList;
 	}
 
-	@Override
-	public Kindcode selectKindcode(String petKindcode) throws Exception {
-		Kindcode kindcode = kindcodeDAO.selectKindcode(petKindcode);
-		
-		return kindcode;
-	}
 }

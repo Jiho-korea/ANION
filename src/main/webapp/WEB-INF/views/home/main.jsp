@@ -536,7 +536,7 @@ function getCookie( name ) {
    
 if ( getCookie( "Notice" ) != "done" ) {
    function doPopupopen() {
-      window.open("${pageContext.request.contextPath}/popup/event",
+      window.open("${pageContext.request.contextPath}/popup/1",
             "popup1_parent", "width=500, height=565, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
    }}
 </script>

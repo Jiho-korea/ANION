@@ -45,7 +45,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import petProject.exception.PetRegisterException;
 import petProject.service.GetCurrvalService;
 import petProject.service.ImageUploadService;
-import petProject.service.KindcodeService;
 import petProject.service.PetRegisterService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Kindcode;
@@ -65,9 +64,6 @@ public class PetRegisterController {
 
 	@Resource(name = "imageUploadService")
 	ImageUploadService imageUploadService;
-
-	@Resource(name = "kindcodeListService")
-	KindcodeService kindcodeListService;
 
 	List<Kindcode> kindcodeList = null;
 
