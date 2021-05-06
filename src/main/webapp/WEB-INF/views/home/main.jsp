@@ -61,7 +61,80 @@
    href="${pageContext.request.contextPath}/css/style.css">
 </head>
 
+   <script src="https://code.jquery.com/jquery-latest.js"></script> 
+ 
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
+ 
+</style>
+
+
 <body onload="doPopupopen();">
+ <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content" style="background-image: URL(${pageContext.request.contextPath}/img/popupBack/pop_back.png); ">
+   
+      	<div
+		style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; position: absolute; left: -15px; top: 35px; width: 400px">
+		교육 이벤트 및 참석 제목</div>
+                <p style="text-align: center; line-height: 200%;"><br/></p>
+                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt; color:white;">교육 및 설명</span></p>
+
+        <div class="jumbotron d-flex justify-content-center align-items-center"
+		style="height: 300px; width: 400px; position: absolute; left: -15px; top: 120px">
+		참고 이미지, 그림 등</div>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p style="text-align: center; line-height: 1.5;"><br /></p>
+                <p><br /></p>
+                
+    <div class="container d-flex justify-content-center mt-5">
+		<a
+			href="${pageContext.request.contextPath}/popup/1/click"
+			class="btn header-btn d-flex justify-content-center"
+			style="position: fixed; left: 140px; top: 480px; border: none; padding: 5px 15px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 10px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">등록하러가기</a>
+	</div>
+    <div style="position: fixed; right: 10px; bottom: 110px;">
+		<form name="frm" class="d-flex align-items-center">
+			<input id="closeCheck" type="checkbox" name="Notice" onclick="check()"> <a
+				style="font-size: 13px; ">하루동안 열지 않음</a> &nbsp;<input type=button
+				value="닫기" onclick="closeWin()"
+				style="width: 30pt; height: 20pt; font-size: 13px"
+				class="d-flex align-items-center">
+
+		</form>
+	</div>
+            </div>
+      </div>
+ 		
+    </div>
+	
    <c:import url="../included/top.jsp">
       <c:param value="main" name="type" />
    </c:import>
@@ -517,6 +590,12 @@
 
 </body>
 <script defer type="text/javascript">
+function setCookie(name, value, expiredays) {
+	var todayDate = new Date();
+	todayDate.setDate(todayDate.getDate() + expiredays);
+	document.cookie = name + "=" + escape(value) + "; path=/; expires="
+			+ todayDate.toGMTString() + ";"
+}
 function getCookie( name ) {
     var nameOfCookie = name + "=";
     var x = 0;
@@ -533,11 +612,35 @@ function getCookie( name ) {
     }
     return "";
 }
-   
-if ( getCookie( "Notice" ) != "done" ) {
-   function doPopupopen() {
-      window.open("${pageContext.request.contextPath}/popup/1",
-            "popup1_parent", "width=500, height=565, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
-   }}
+var ratio = window.devicePixelRatio;
+
+	if (getCookie("Notice") != "done") {
+		if(ratio>=2){
+		jQuery(document).ready(function() {
+            $('#myModal').show();
+    });
+
+		}else {
+		function doPopupopen() {
+			window
+					.open(
+							"${pageContext.request.contextPath}/popup/1",
+							"popup1_parent",
+							"width=500, height=565, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
+		}
+		
+	}
+	}
+	
+function closeWin() {
+	$('#myModal').hide();
+}
+
+function check() {
+	setCookie("Notice", "done", 1);
+	$('#myModal').hide();
+}
+
+
 </script>
 </html>
