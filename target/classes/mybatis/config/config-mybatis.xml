@@ -21,7 +21,9 @@
 		<typeAlias type="petProject.vo.ChangeIdCommand" alias="changeIdCommand" />
 		<typeAlias type="petProject.vo.Emailcode" alias="emailcode" />
 		<typeAlias type="petProject.vo.petInfo.PetNameUpdateRequest" alias="petNameUpdateRequest" />
-		
+		<typeAlias type="petProject.vo.dto.Imgpost" alias="imgpost" />
+		<typeAlias type="petProject.vo.request.ImagePostingRequest" alias="imagePostingRequest" />
+		<typeAlias type="petProject.vo.dto.ImgpostAndImage" alias="imgpostAndImage" />
 	</typeAliases>
    
 </configuration>

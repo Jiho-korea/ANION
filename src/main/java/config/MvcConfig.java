@@ -25,6 +25,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import interceptor.AdminCheckInterceptor;
 import interceptor.EmailcodeCheckInterceptor;
+import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
 
@@ -45,6 +46,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public InfoAuthCheckInterceptor infoAuthCheckInterceptor() {
 		return new InfoAuthCheckInterceptor();
+	}
+
+	@Bean
+	public ImageAuthCheckInterceptor imageAuthCheckInterceptor() {
+		return new ImageAuthCheckInterceptor();
 	}
 
 	@Bean
@@ -87,7 +93,8 @@ public class MvcConfig implements WebMvcConfigurer {
 				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
-		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**", "/posting/**");
+		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
+		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
 		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
 	}
 

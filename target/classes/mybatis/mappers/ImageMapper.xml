@@ -7,29 +7,79 @@
 	<insert id="insertImage" parameterType="imageUploadRequest">
 		INSERT INTO public.image
 		("PET_REGISTRATION_NUMBER", "IMAGE_PATH", "MEMBER_NUMBER")
-		VALUES(#{imageUploadRequest.petRegistrationNumber}, #{imageUploadRequest.imagePath}, #{imageUploadRequest.memberNumber});
+		VALUES(#{imageUploadRequest.petRegistrationNumber},
+		#{imageUploadRequest.imagePath}, #{imageUploadRequest.memberNumber});
 	</insert>
-	
-	
+
+
 	<delete id="deleteImage">
-	   delete from public.image where "IMAGE_PATH" = #{imagePath}
+		delete from public.image where "IMAGE_PATH" = #{imagePath}
 	</delete>
-	
-	<select id="selectImageList" parameterType="int" resultMap="imageResultMap">
-    	select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER", "IMAGE_PATH" from "public"."image" where "PET_REGISTRATION_NUMBER"= #{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
-    </select>
-    
-    <select id="selectImage" parameterType="int" resultType="image">
-    	select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER", "IMAGE_PATH" from "public"."image" where "IMAGE_NUMBER"= #{imageNumber}
-    </select>
-    
-    <select id="selectImageCount" resultType="int">
-		SELECT count(*) FROM image
+
+	<select id="selectImageList" parameterType="int"
+		resultMap="imageListResultMap">
+		select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER",
+		"IMAGE_PATH" from "public"."image" where "PET_REGISTRATION_NUMBER"=
+		#{petRegistrationNumber} ORDER BY "IMAGE_NUMBER" DESC
 	</select>
-    
-    <resultMap type="image" id="imageResultMap">
-		<id column="PET_REGISTRATION_NUMBER" property="petRegistrationNumber" />
+
+	<select id="selectImageCount" resultType="int">
+		SELECT count(*) FROM
+		image
+	</select>
+
+	<select id="selectImage" parameterType="int"
+		resultMap="imageResultMap">
+		select "PET_REGISTRATION_NUMBER", "IMAGE_NUMBER", "MEMBER_NUMBER",
+		"IMAGE_PATH" from "public"."image" where "IMAGE_NUMBER"=
+		#{imageNumber}
+	</select>
+
+
+	<resultMap type="image" id="imageResultMap">
 		<id column="IMAGE_NUMBER" property="imageNumber" />
+		<result column="IMAGE_PATH" property="imagePath" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
+		<association select="selectPet" property="pet"
+			column="{petRegistrationNumber=PET_REGISTRATION_NUMBER}" />
+		<association select="selectMember" property="member"
+			column="{memberNumber=MEMBER_NUMBER}" />
+	</resultMap>
+
+
+	<select id="selectPet" parameterType="pet" resultType="pet">
+		select
+		"pet"."PET_REGISTRATION_NUMBER",
+		"pet"."MEMBER_NUMBER",
+		"pet"."PET_NAME", "pet"."PET_KIND_CODE",
+		"pet"."PET_BIRTHDAY",
+		"pet"."PET_REGISTRATION_DATE",
+		"pet"."PET_MICROCHIP",
+		"pet"."PET_MOTHERNAME", "pet"."PET_FATHERNAME",
+		"pet"."PET_SEX"
+		from "public"."pet" as "pet" where
+		"PET_REGISTRATION_NUMBER"=
+		#{petRegistrationNumber}
+	</select>
+
+	<select id="selectMember" parameterType="member"
+		resultType="member">
+		select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER",
+		"MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS",
+		"MEMBER_NUMBER"
+		from "public"."member"
+		WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
+	</select>
+
+
+
+	<resultMap type="image" id="imageListResultMap">
+		<id column="IMAGE_NUMBER" property="imageNumber" />
+		<result column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
 		<result column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="IMAGE_PATH" property="imagePath" />
 	</resultMap>

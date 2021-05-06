@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petProject.dao.ImgpostDAO">
+	<insert id="insertImgpost" parameterType="imagePostingRequest"
+		useGeneratedKeys="true" keyProperty="imagePostingRequest.imgpostNo" keyColumn="IMGPOST_NO">
+		INSERT INTO
+		"public"."imgpost"
+		("IMGPOST_TITLE", "MEMBER_NUMBER",
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE",
+		"IMGPOST_POSTINGTIME")
+		VALUES(#{imagePostingRequest.imgpostTitle},
+		#{imagePostingRequest.memberNumber},
+		#{imagePostingRequest.imgpostContent}, 1, now());
+	</insert>
+</mapper>

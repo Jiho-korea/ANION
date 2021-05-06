@@ -157,7 +157,7 @@
 												alt="btnImages" class="btnImages">
 										</button>
 										--%>
-										<a href="${pageContext.request.contextPath}/posting/img?petRegistrationNumber=${petRegistrationNumber}&imageNumber=${image.imageNumber}"><button class="btn_share mt-2 mr-3" id="btn_share"
+										<a href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button class="btn_share mt-2 mr-3" id="btn_share"
 												type="button">
 												<img
 													src="${pageContext.request.contextPath}/img/button/share1.png">

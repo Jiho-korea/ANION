@@ -1,40 +1,36 @@
 /*
 ========================================================================
-파    일    명 : ImagePostingRequest.java
+파    일    명 : Imgpost.java
 ========================================================================
 작    성    자 : 강지호
-작    성    일 : 2020.05.05
-작  성  내  용 : 반려견 사진 자랑 게시물 업로드 시 필요한 정보를 담는 Request객체
+작    성    일 : 2021.05.06
+작  성  내  용 : Imgpost DTO 객체
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.dto;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-public class ImagePostingRequest {
+public class Imgpost {
 
 	private static final long serialVersionUID = 1L;
-
 	private int imgpostNo;
-	@NotBlank
 	private String imgpostTitle;
 	private int memberNumber;
-	@NotBlank
 	private String imgpostContent;
-	@NotBlank
-	private int imageNumber;
+	private int imgpostAvailable;
+	private String imgpostPostingtime;
 
-	public ImagePostingRequest(int imgpostNo, String imgpostTitle, int memberNumber, String imgpostContent,
-			int imageNumber) {
+	public Imgpost(int imgpostNo, String imgpostTitle, int memberNumber, String imgpostContent, int imgpostAvailable,
+			String imgpostPostingtime) {
 		super();
 		this.imgpostNo = imgpostNo;
 		this.imgpostTitle = imgpostTitle;
 		this.memberNumber = memberNumber;
 		this.imgpostContent = imgpostContent;
-		this.imageNumber = imageNumber;
+		this.imgpostAvailable = imgpostAvailable;
+		this.imgpostPostingtime = imgpostPostingtime;
 	}
 
-	public ImagePostingRequest() {
+	public Imgpost() {
 		super();
 	}
 
@@ -70,16 +66,23 @@ public class ImagePostingRequest {
 		this.imgpostContent = imgpostContent;
 	}
 
-	public int getImageNumber() {
-		return imageNumber;
+	public int getImgpostAvailable() {
+		return imgpostAvailable;
 	}
 
-	public void setImageNumber(int imageNumber) {
-		this.imageNumber = imageNumber;
+	public void setImgpostAvailable(int imgpostAvailable) {
+		this.imgpostAvailable = imgpostAvailable;
+	}
+
+	public String getImgpostPostingtime() {
+		return imgpostPostingtime;
+	}
+
+	public void setImgpostPostingtime(String imgpostPostingtime) {
+		this.imgpostPostingtime = imgpostPostingtime;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }
