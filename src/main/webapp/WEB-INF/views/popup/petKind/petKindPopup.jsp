@@ -49,6 +49,10 @@
 	href="${pageContext.request.contextPath}/css/dogmap.css">
 </head>
 <style>
+html {
+	overflow:hidden;
+}
+
 body {
 	background-repeat: no-repeat;
 	background-position: left top;
@@ -56,8 +60,15 @@ body {
 	padding-bottom: -1000px;
 }
 
-.jumbotron {
-	opacity: 0.8;
+.fixed {
+	width: 100%;
+	position: relative;
+	margin-left: 280px;
+	align-items: center;
+	margin-bottom: 3rem;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
 }
 
 a:hover {
@@ -72,63 +83,60 @@ a:hover {
 </style>
 <body>
 
-	<div>
-		<div
-			class="container d-flex justify-content-center align-items-center mb-5">
-			<select style="display: none;" id="childKind" name="childKind">
-				<c:if test="${empty kindcode}">
-					<option value=""></option>
-				</c:if>
-				<c:if test="${not empty kindcode}">
-					<option value="${kindcode.petKind }"></option>
-				</c:if>
+	<div class="fixed">
+		<select style="display: none;" id="childKind" name="childKind">
+			<c:if test="${empty kindcode}">
+				<option value=""></option>
+			</c:if>
+			<c:if test="${not empty kindcode}">
+				<option value="${kindcode.petKind }"></option>
+			</c:if>
+			<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
+				<option value="${kindcode.petKind}">${kindcode.petKind}</option>
+			</c:forEach>
+		</select>
+		<div class="nice-select" tabindex="0">
+			<c:if test="${empty kindcode}">
+				<span class="current">견종 / Dog breed</span>
+			</c:if>
+			<c:if test="${not empty kindcode}">
+				<span class="current">${kindcode.petKind }</span>
+			</c:if>
+			<ul class="list">
+				<li data-value="견종 / Dog breed" class="option selected focus"
+					hidden="">견종 / Dog breed</li>
 				<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-					<option value="${kindcode.petKind}">${kindcode.petKind}</option>
+					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
 				</c:forEach>
-			</select>
-			<div class="nice-select" tabindex="0">
-				<c:if test="${empty kindcode}">
-					<span class="current">견종 / Dog breed</span>
-				</c:if>
-				<c:if test="${not empty kindcode}">
-					<span class="current">${kindcode.petKind }</span>
-				</c:if>
-				<ul class="list">
-					<li data-value="견종 / Dog breed" class="option selected focus"
-						hidden="">견종 / Dog breed</li>
-					<c:forEach var="kindcode" items="${kindcodeList}"
-						varStatus="status">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:forEach>
-				</ul>
-			</div>
-
-			&nbsp;&nbsp;
-			<button type="button"
-				class="btn header-btn d-flex justify-content-center"
-				onclick="dogSelect();">Select</button>
+			</ul>
 		</div>
 
-		<div class="map">
+		&nbsp;&nbsp;
+		<button type="button"
+			class="btn header-btn d-flex justify-content-center"
+			onclick="dogSelect();">Select</button>
+	</div>
+
+	<div class="map">
 
 
-			<!-- svg 파일 코드 583x393-->
-			<object type="image/svg+xml"
-				data="${pageContext.request.contextPath}/img/popupBack/world_map2.svg"
-				id="img_world_map"></object>
+		<!-- svg 파일 코드 583x393-->
+		<object type="image/svg+xml"
+			data="${pageContext.request.contextPath}/img/popupBack/world_map3.svg"
+			id="img_world_map"></object>
 
 
-			<ul class="map__markers">
-				<li class="map__marker map__marker--america"><img width="30"
-					height="30"
-					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
-					href="#"></a>
-					<div class="map__marker-info" style="width: 15em">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<span class="current">미국 / United States of America</span>
-							</header>
-							<main class="map__marker-info-main">
+		<ul class="map__markers">
+			<li class="map__marker map__marker--america"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info" style="width: 15em">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">미국 / United States of America</span>
+						</header>
+						<main class="map__marker-info-main">
 							<p>
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
@@ -139,20 +147,20 @@ a:hover {
 									</c:if>
 								</c:forEach>
 							</p>
-							</main>
-						</div>
-					</div></li>
+						</main>
+					</div>
+				</div></li>
 
-				<li class="map__marker map__marker--korea"><img width="30"
-					height="30"
-					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
-					href="#"></a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<span class="current">한국 / Korea</span>
-							</header>
-							<main class="map__marker-info-main">
+			<li class="map__marker map__marker--korea"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">한국 / Korea</span>
+						</header>
+						<main class="map__marker-info-main">
 							<p>
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
@@ -163,20 +171,20 @@ a:hover {
 									</c:if>
 								</c:forEach>
 							</p>
-							</main>
-						</div>
-					</div></li>
+						</main>
+					</div>
+				</div></li>
 
-				<li class="map__marker map__marker--japan"><img width="30"
-					height="30"
-					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
-					href="#"></a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<span class="current">일본 / Japan</span>
-							</header>
-							<main class="map__marker-info-main">
+			<li class="map__marker map__marker--japan"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">일본 / Japan</span>
+						</header>
+						<main class="map__marker-info-main">
 							<p>
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
@@ -187,13 +195,10 @@ a:hover {
 									</c:if>
 								</c:forEach>
 							</p>
-							</main>
-						</div>
-					</div></li>
-			</ul>
-		</div>
-
-
+						</main>
+					</div>
+				</div></li>
+		</ul>
 	</div>
 
 	<!-- JS here -->

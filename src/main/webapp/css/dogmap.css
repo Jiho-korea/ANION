@@ -76,22 +76,22 @@ p {
 	text-indent: -9999px;
 	width: 0.7em;
 	position:absolute; 
-	bottom:0.05px;"
+	bottom:0.05px;
 }
 
 .map__marker--america {
 	left: 20%;
-	top: 18%;
+	top: 20%;
 }
 
 .map__marker--korea {
-	left: 78%;
-	top: 25%;
+	left: 80.5%;
+	top: 32%;
 }
 
 .map__marker--japan {
-	left: 81%;
-	top: 25%;
+	left: 83%;
+	top: 32%;
 }
 
 .map__marker-info {
