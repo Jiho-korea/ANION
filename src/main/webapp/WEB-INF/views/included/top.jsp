@@ -105,11 +105,10 @@ Preloader Start -->
 												</ul></li>
 											<li><a href="#">어울림마당</a>
 												<ul class="submenu">
+													<li><a href="#">공지사항</a></li>
+													<li><a href="#">이벤트</a></li>
 													<li><a
-														href="#">공지사항</a></li>
-													<li><a
-														href="#">이벤트</a></li>
-													<li><a href="${pageContext.request.contextPath}/register/step1">갤러리</a></li>
+														href="${pageContext.request.contextPath}/board/img">갤러리</a></li>
 												</ul></li>
 											<li><a href="#"><spring:message
 														code="pet.certification.title" /></a>
