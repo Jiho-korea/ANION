@@ -36,7 +36,7 @@ p {
 }
 
 .map {
-	position: relative;
+	position: absolute;
 }
 
 .map__markers {
@@ -80,18 +80,18 @@ p {
 }
 
 .map__marker--america {
-	left: 22%;
-	top: 25%;
+	left: 20%;
+	top: 18%;
 }
 
 .map__marker--korea {
-	left: 95.5%;
-	top: 35%;
+	left: 78%;
+	top: 25%;
 }
 
 .map__marker--japan {
-	left: 97%;
-	top: 37.5%;
+	left: 81%;
+	top: 25%;
 }
 
 .map__marker-info {
