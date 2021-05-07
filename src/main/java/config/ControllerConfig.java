@@ -17,15 +17,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import controller.EmailValidController;
+import controller.EventPopupController;
 import controller.ImageDeleteController;
 import controller.ImageListController;
 import controller.LoginController;
 import controller.LogoutController;
 import controller.MemberRegisterController;
 import controller.PetInfoController;
+import controller.PetKindPopupController;
 import controller.PetListController;
 import controller.PetRegisterController;
-import controller.PopupController;
 import controller.ProfileEditController;
 import controller.admin.ImageDownloadController;
 import controller.admin.KindcodeDeleteController;
@@ -131,13 +132,16 @@ public class ControllerConfig {
 		return new ImagePostingController();
 	}
 
-	@Bean
 	public ImageBoardController imageBoardController() {
 		return new ImageBoardController();
 	}
 
+	public EventPopupController eventPopupController() {
+		return new EventPopupController();
+	}
+
 	@Bean
-	public PopupController popupController() {
-		return new PopupController();
+	public PetKindPopupController petKindPopupController() {
+		return new PetKindPopupController();
 	}
 }

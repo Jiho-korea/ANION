@@ -52,21 +52,31 @@
 				<div id="error_area"></div>
 				<form:form name="delivery" id="myForm" method="POST"
 					action="${pageContext.request.contextPath}/admin/code/kindcode/insert"
-					cssClass="delivery" cssStyle="display: inline;" modelAttribute="kindcode">
+					cssClass="delivery" cssStyle="display: inline;"
+					modelAttribute="kindcode">
 					<!--  
 					<input type="hidden" name="act" id="act" value="insert"> <input
 						type="hidden" name="reg_mem_no" id="reg_mem_no" value="1"> -->
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="15%">견종코드</th>
-								<td width="30%"><form:input type="text" path="petKindcode"
-										cssClass="txt_box w200" title="견종코드" />
-									<form:errors path="petKindcode" /></td>
-								<th width="15%">견종명</th>
-								<td width="30%"><form:input type="text" path="petKind"
-										cssClass="txt_box w200" maxlength="15" title="견종명" />
-									<form:errors path="petKind" /></td>
+								<th width="13%">견종코드</th>
+								<td width="17%"><form:input type="text" path="petKindcode"
+										cssClass="txt_box w200" title="견종코드" /> <form:errors
+										path="petKindcode" /></td>
+
+								<th width="13%">서식지</th>
+								<td width="17%"><form:select path="petKindHabitat">
+										<form:option cssClass="form-control" value="">국가코드</form:option>
+										<form:option cssClass="form-control" value="KR" />
+										<form:option cssClass="form-control" value="US" />
+										<form:option cssClass="form-control" value="JP" />
+									</form:select> <br><form:errors path="petKindHabitat" /></td>
+
+								<th width="13%">견종명</th>
+								<td width="17%"><form:input type="text" path="petKind"
+										cssClass="txt_box w200" maxlength="15" title="견종명" /> <form:errors
+										path="petKind" /></td>
 							</tr>
 
 						</tbody>
