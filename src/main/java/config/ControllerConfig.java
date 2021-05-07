@@ -132,10 +132,12 @@ public class ControllerConfig {
 		return new ImagePostingController();
 	}
 
+	@Bean
 	public ImageBoardController imageBoardController() {
 		return new ImageBoardController();
 	}
 
+	@Bean
 	public EventPopupController eventPopupController() {
 		return new EventPopupController();
 	}

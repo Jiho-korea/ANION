@@ -16,8 +16,11 @@ body {
 	font-family: Source Sans Pro, sans-serif;
 	line-height: 1.5;
 	margin: 0;
-	min-height: 100vh;
-	padding: 10vmin;
+	min-height: 100px;
+	padding-top: 3vmin;
+	padding-right: 10vmin;
+	padding-left: 10vmin;
+	padding-bottom: 0vmin;
 }
 
 a {
@@ -172,6 +175,6 @@ p {
   }
 }
 .animate--bounce-in {
-	animation-duration: 0.75s;
+	animation-duration: 0.5s;
 	animation-name: bounce-in;
 }
