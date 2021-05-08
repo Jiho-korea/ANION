@@ -78,10 +78,25 @@
 	margin-top: 50px;
 }
 
-button.relative {
+.div-map {
 	position: relative;
-	top: -40px;
-	right: -98px
+	align-items: center;
+	margin-bottom: 3rem;
+	display: inline-block;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+}
+
+.input-map {
+	margin-left: 8.5%;
+	width: 66.5%;
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #f9f9ff;
+	padding: 0 20px;
 }
 </style>
 
@@ -113,16 +128,14 @@ button.relative {
 						</label>
 					</div>
 
-					<div class="default-select" id="default-select"
-						style="max-width: 100%; height: auto; margin-left: auto; margin-right: auto; display: block;">
-
-						<form:input path="petKind" cssClass="single-input"
-							placeholder="견종 / Kind" name="petKind" id="petKind"
+					<div class="div-map" id="default-select">
+						<form:input path="petKind" cssClass="input-map"
+							placeholder="견종 / Kind" name="petKindq" id="petKind"
 							readonly="true" />
-						<button type="button" onclick="dogmapPopup();" class="relative"
-							style="border: 0; cursor: pointer; background-color: #F9F9FF;">
+						<button type="button" onclick="dogmapPopup();"
+							style="border: 0; cursor: pointer; background-color: #f9f9ff;">
 							<img width="38" height="38"
-								src="${pageContext.request.contextPath}/img/button/dog_marker2.png" />
+								src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
 						</button>
 
 						<!-- 
