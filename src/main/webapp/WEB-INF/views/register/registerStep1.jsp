@@ -298,7 +298,7 @@ button.relative {
 	});
 	function dogmapPopup() {
 		parentObj = window.open("${pageContext.request.contextPath}/popup/petKind",
-			"petKind_parent", "width=920, height=600, scrollbars=no, toolbar=no, location=no, resizable=no, directories=no, status=no, menubar=no");
+			"petKind_parent", "width=920, height=600, toolbar=no, location=no, resizable=no, directories=no, status=no, menubar=no");
 	};
 </script>
 </html>

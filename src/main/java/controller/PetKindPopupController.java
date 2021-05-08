@@ -30,20 +30,20 @@ public class PetKindPopupController {
 
 	@Resource(name = "kindcodeListService")
 	KindcodeListService kindcodeListService;
-	
+
 	@Autowired
 	private KindcodeDAO kindcodeDAO;
 
-	//대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
-	@GetMapping(value = {"/petKind/{petKindcode}", "/petKind"})
+	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
+	@GetMapping(value = { "/petKind/{petKindcode}", "/petKind" })
 	public String popup2(Model model, @PathVariable(name = "petKindcode", required = false) String petKindcode)
 			throws Exception {
 
 		List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
 		model.addAttribute("kindcodeList", kindcodeList);
-		
-		//redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
-		if(petKindcode != null) {
+
+		// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
+		if (petKindcode != null) {
 			Kindcode kindcode = kindcodeDAO.selectKindcode(petKindcode);
 			model.addAttribute("kindcode", kindcode);
 		}
@@ -51,10 +51,10 @@ public class PetKindPopupController {
 		return "popup/petKind/petKindPopup";
 	}
 
-	//대동견지도에서 품종 클릭시 petKindcode를 넘겨주면서 redirect
+	// 대동견지도에서 품종 클릭시 petKindcode를 넘겨주면서 redirect
 	@GetMapping("/petKind/click/{petKindcode}")
 	public String popup2_click(@PathVariable("petKindcode") String petKindcode) throws Exception {
-		
+
 		return "redirect:/popup/petKind/" + petKindcode;
 	}
 }

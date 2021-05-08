@@ -6,7 +6,8 @@
 <mapper namespace="petProject.dao.KindcodeDAO">
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND",
-		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode"
+		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
+		order by "PET_KIND_CODE" 
 	</select>
 
 	<select id="selectKindcode" parameterType="String" resultType="kindcode">
