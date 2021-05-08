@@ -90,7 +90,7 @@ a:hover {
 			<c:if test="${!empty kindcode}">
 				<option value="${kindcode.petKind }"></option>
 			</c:if>
-			<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
+			<c:forEach var="kindcode" items="${kindcodeListPage}" varStatus="status">
 				<option value="${kindcode.petKind}">${kindcode.petKind}</option>
 			</c:forEach>
 		</select>
@@ -104,11 +104,31 @@ a:hover {
 			<ul class="list">
 				<li data-value="견종 / Dog breed" class="option selected focus"
 					hidden="">견종 / Dog breed</li>
-				<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-					<c:if test="${true }">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:if>
+				<c:forEach var="kindcode" items="${kindcodeListPage}" varStatus="status">
+					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
 				</c:forEach>
+				<c:choose>
+					<c:when test="${pageNumber ne 1}">
+						<a
+							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber - 1}">
+							<button id="btn_left_arrow" type="button"
+								style="border: 0; background-color: #FFFFFF; margin-left:30%;">
+								<img width="38" height="20"
+									src="${pageContext.request.contextPath}/img/button/left-arrow.png">
+							</button>
+						</a>
+					</c:when>
+					<c:when test="${nextPage}">
+						<a
+							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber + 1}">
+							<button id="btn_right_arrow" type="button"
+								style="border: 0; background-color: #FFFFFF; margin-left:30%;">
+								<img width="38" height="20"
+									src="${pageContext.request.contextPath}/img/button/right-arrow.png">
+							</button>
+						</a>
+					</c:when>
+				</c:choose>
 			</ul>
 		</div>
 		&nbsp;&nbsp;
@@ -120,7 +140,7 @@ a:hover {
 	<div class="map">
 
 
-		<!-- svg 파일 코드 583x393-->
+		<!-- svg 파일 코드 -->
 		<object type="image/svg+xml"
 			data="${pageContext.request.contextPath}/img/popupBack/world_map3.svg"
 			id="img_world_map"></object>

@@ -7,7 +7,13 @@
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND",
 		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
-		order by "PET_KIND_CODE" 
+		order by "PET_KIND_CODE" ASC 
+	</select>
+	
+	<select id="selectKindcodeListPage" parameterType="Integer" resultMap="kindcodeResultMap">
+		select "PET_KIND",
+		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
+		order by "PET_KIND_CODE" ASC LIMIT 8 OFFSET #{pageNumber}
 	</select>
 
 	<select id="selectKindcode" parameterType="String" resultType="kindcode">

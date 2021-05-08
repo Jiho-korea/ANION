@@ -32,4 +32,21 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 		return kindcodeList;
 	}
 
+	@Override
+	public List<Kindcode> selectKindcodeListPage(Integer pageNumber) throws Exception {
+		List<Kindcode> kindcodeList = kindcodeDAO.selectKindcodeListPage((pageNumber-1)*8);
+		return kindcodeList;
+	}
+
+	@Override
+	public boolean nextPage(Integer pageNumber) throws Exception {
+		List<Kindcode> kindcodeList = null;
+		kindcodeList = kindcodeDAO.selectKindcodeListPage(pageNumber * 8);
+		if (!kindcodeList.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

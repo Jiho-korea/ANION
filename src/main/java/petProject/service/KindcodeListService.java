@@ -14,5 +14,10 @@ import java.util.List;
 import petProject.vo.Kindcode;
 
 public interface KindcodeListService {
+
 	List<Kindcode> selectKindcodeList() throws Exception;
+
+	List<Kindcode> selectKindcodeListPage(Integer pageNumber) throws Exception;
+
+	boolean nextPage(Integer pageNuber) throws Exception;
 }
