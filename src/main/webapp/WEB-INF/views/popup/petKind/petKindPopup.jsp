@@ -83,17 +83,35 @@ a:hover {
 <body style="overflow-y: auto; overflow-x: hidden;">
 
 	<div class="fixed">
-		<select size=5 id="childKind" name="childKind">
+		<select style="display: none;" id="childKind" name="childKind">
 			<c:if test="${empty kindcode}">
-				<option selected value="">견종 / Dog Breed</option>
+				<option value=""></option>
 			</c:if>
 			<c:if test="${!empty kindcode}">
-				<option selected value="${kindcode.petKind }">${kindcode.petKind }</option>
+				<option value="${kindcode.petKind }"></option>
 			</c:if>
 			<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
 				<option value="${kindcode.petKind}">${kindcode.petKind}</option>
 			</c:forEach>
-		</select> &nbsp;&nbsp;
+		</select>
+		<div class="nice-select" tabindex="0">
+			<c:if test="${empty kindcode}">
+				<span class="current">견종 / Dog breed</span>
+			</c:if>
+			<c:if test="${not empty kindcode}">
+				<span class="current">${kindcode.petKind }</span>
+			</c:if>
+			<ul class="list">
+				<li data-value="견종 / Dog breed" class="option selected focus"
+					hidden="">견종 / Dog breed</li>
+				<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
+					<c:if test="${true }">
+						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					</c:if>
+				</c:forEach>
+			</ul>
+		</div>
+		&nbsp;&nbsp;
 		<button type="button"
 			class="btn header-btn d-flex justify-content-center"
 			onclick="dogSelect();">Select</button>
