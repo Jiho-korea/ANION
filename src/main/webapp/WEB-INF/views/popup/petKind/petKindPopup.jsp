@@ -6,6 +6,10 @@
 작    성    일 : 2021.05.03
 작  성  내  용 : 대동견지도
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.09
+수  정  내  용 : Select박스 List Page 기능 추가
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -90,7 +94,8 @@ a:hover {
 			<c:if test="${!empty kindcode}">
 				<option value="${kindcode.petKind }"></option>
 			</c:if>
-			<c:forEach var="kindcode" items="${kindcodeListPage}" varStatus="status">
+			<c:forEach var="kindcode" items="${kindcodeListPage}"
+				varStatus="status">
 				<option value="${kindcode.petKind}">${kindcode.petKind}</option>
 			</c:forEach>
 		</select>
@@ -104,31 +109,33 @@ a:hover {
 			<ul class="list">
 				<li data-value="견종 / Dog breed" class="option selected focus"
 					hidden="">견종 / Dog breed</li>
-				<c:forEach var="kindcode" items="${kindcodeListPage}" varStatus="status">
+				<c:forEach var="kindcode" items="${kindcodeListPage}"
+					varStatus="status">
 					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
 				</c:forEach>
-				<c:choose>
-					<c:when test="${pageNumber ne 1}">
+
+				<div class="container d-flex justify-content-center">
+					<c:if test="${pageNumber ne 1}">
 						<a
 							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber - 1}">
 							<button id="btn_left_arrow" type="button"
-								style="border: 0; background-color: #FFFFFF; margin-left:30%;">
-								<img width="38" height="20"
-									src="${pageContext.request.contextPath}/img/button/left-arrow.png">
+								style="border: 0; background-color: #FFFFFF;">
+								<img style="cursor: pointer;"
+									src="${pageContext.request.contextPath}/img/button/left-icon.png">
 							</button>
 						</a>
-					</c:when>
-					<c:when test="${nextPage}">
+					</c:if>
+					<c:if test="${nextPage}">
 						<a
 							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber + 1}">
 							<button id="btn_right_arrow" type="button"
-								style="border: 0; background-color: #FFFFFF; margin-left:30%;">
-								<img width="38" height="20"
-									src="${pageContext.request.contextPath}/img/button/right-arrow.png">
+								style="border: 0; background-color: #FFFFFF;">
+								<img style="cursor: pointer;"
+									src="${pageContext.request.contextPath}/img/button/right-icon.png">
 							</button>
 						</a>
-					</c:when>
-				</c:choose>
+					</c:if>
+				</div>
 			</ul>
 		</div>
 		&nbsp;&nbsp;

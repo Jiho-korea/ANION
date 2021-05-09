@@ -39,6 +39,4 @@ public interface KindcodeDAO {
 	int updateKindcode(Kindcode kindcode) throws Exception;
 
 	int deleteKindcode(String petKindcode) throws Exception;
-
-	String findKindcode(@Param("petKind") String petKind) throws Exception;
 }

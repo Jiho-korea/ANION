@@ -6,6 +6,10 @@
 작    성    일 : 2020.11.13
 작  성  내  용 : kindcode select메서드 작성
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.09
+수  정  내  용 : Select박스 페이징 메소드, 다음 페이지 있는지 확인하는 메소드 추가
+========================================================================
 */
 package petProject.service.impl;
 
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.KindcodeDAO;
+import petProject.exception.NonExistentPageException;
 import petProject.service.KindcodeListService;
 import petProject.vo.Kindcode;
 
@@ -34,6 +39,14 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Override
 	public List<Kindcode> selectKindcodeListPage(Integer pageNumber) throws Exception {
+		if (pageNumber == 0) {
+			throw new NonExistentPageException("non-existent page of list" + pageNumber);
+		}
+		if (pageNumber != 1 && nextPage(pageNumber - 1) == false) {
+			// 존재 하지 않는 페이지 일때 Exception 발생
+			throw new NonExistentPageException("non-existent page of list" + pageNumber);
+		}
+		
 		List<Kindcode> kindcodeList = kindcodeDAO.selectKindcodeListPage((pageNumber-1)*8);
 		return kindcodeList;
 	}
