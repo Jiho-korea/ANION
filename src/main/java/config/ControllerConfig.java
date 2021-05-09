@@ -37,6 +37,7 @@ import controller.admin.MemberListController;
 import controller.admin.PetListAdminController;
 import controller.bbs.image.ImageBoardController;
 import controller.bbs.image.ImagePostingController;
+import controller.bbs.image.ViewImagePostController;
 
 @Configuration
 public class ControllerConfig {
@@ -135,6 +136,11 @@ public class ControllerConfig {
 	@Bean
 	public ImageBoardController imageBoardController() {
 		return new ImageBoardController();
+	}
+
+	@Bean
+	public ViewImagePostController viewImagePostController() {
+		return new ViewImagePostController();
 	}
 
 	@Bean

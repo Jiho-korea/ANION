@@ -35,18 +35,15 @@ public class ImageBoardController {
 
 	// 반려견 자랑 게시물을 작성하는 페이지로 이동시키는 메소드
 	@RequestMapping("/board/img")
-	public String getImagePosting(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
+	public String getImagePosting(
+			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
 			@RequestParam(value = "imgpostTitle", required = false) String imgpostTitle, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session, Model model) throws Exception {
 
-		if (pageNumber == null) {
-			pageNumber = 1;
-		}
-
 		boolean nextPage = false;
-
-		nextPage = imgpostListService.nextPage(pageNumber);
 		try {
+			nextPage = imgpostListService.nextPage(pageNumber);
+
 			ImageBoardRequest imageBoardRequest = new ImageBoardRequest(pageNumber, imgpostTitle);
 			List<Imgpost> imgpostList = imgpostListService.listImgpost(imageBoardRequest);
 			request.setAttribute("pageNumber", pageNumber);

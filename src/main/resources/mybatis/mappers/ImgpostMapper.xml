@@ -21,10 +21,11 @@
 	<select id="listImgpost" parameterType="imageBoardRequest"
 		resultMap="imgpostListResultMap">
 		SELECT "IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
-		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME"
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME", "IMGPOST_VIEWCNT"
 
 		<choose>
-			<when test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
+			<when
+				test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
 				FROM (select * from "public"."imgpost" where
 				"IMGPOST_AVAILABLE" = 1 ORDER BY
 				"IMGPOST_NO" DESC LIMIT
@@ -38,7 +39,8 @@
 
 		<where>
 			<choose>
-				<when test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
+				<when
+					test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
 					AND "IMGPOST_TITLE" LIKE
 					CONCAT('%',#{imageBoardRequest.imgpostTitle},'%') ORDER BY
 					"IMGPOST_NO" DESC
@@ -61,6 +63,38 @@
 		<result column="IMGPOST_POSTINGTIME"
 			property="imgpostPostingtime" />
 		<result column="IMGPOST_AVAILABLE" property="imgpostAvailable" />
+		<result column="IMGPOST_VIEWCNT" property="imgpostViewcnt" />
+		<association select="selectMember" property="member"
+			column="{memberNumber=MEMBER_NUMBER}" />
+	</resultMap>
+
+	<update id="updateImgpostViewcnt" parameterType="int">
+		UPDATE
+		public.imgpost
+		SET "IMGPOST_VIEWCNT"= "IMGPOST_VIEWCNT" + 1
+		WHERE
+		"IMGPOST_NO"=#{imgpostNo}
+	</update>
+
+	<select id="selectImgpost" parameterType="int"
+		resultMap="selectImgpostResultMap">
+		SELECT "IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME",
+		"IMGPOST_VIEWCNT"
+		FROM "public"."imgpost"
+		WHERE "IMGPOST_NO" =
+		#{imgpostNo};
+	</select>
+
+	<resultMap type="imgpost" id="selectImgpostResultMap">
+		<id column="IMGPOST_NO" property="imgpostNo" />
+		<result column="IMGPOST_TITLE" property="imgpostTitle" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="IMGPOST_CONTENT" property="imgpostContent" />
+		<result column="IMGPOST_POSTINGTIME"
+			property="imgpostPostingtime" />
+		<result column="IMGPOST_AVAILABLE" property="imgpostAvailable" />
+		<result column="IMGPOST_VIEWCNT" property="imgpostViewcnt" />
 		<association select="selectMember" property="member"
 			column="{memberNumber=MEMBER_NUMBER}" />
 	</resultMap>
@@ -74,6 +108,7 @@
 		"MEMBER_NUMBER"
 		FROM
 		"public"."member"
-		WHERE "MEMBER_NUMBER" = #{memberNumber}
+		WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
 	</select>
 </mapper>

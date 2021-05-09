@@ -20,10 +20,11 @@ public class Imgpost {
 	private String imgpostContent;
 	private int imgpostAvailable;
 	private String imgpostPostingtime;
+	private int imgpostViewcnt;
 	private Member member;
 
 	public Imgpost(int imgpostNo, String imgpostTitle, int memberNumber, String imgpostContent, int imgpostAvailable,
-			String imgpostPostingtime, Member member) {
+			String imgpostPostingtime, int imgpostViewcnt, Member member) {
 		super();
 		this.imgpostNo = imgpostNo;
 		this.imgpostTitle = imgpostTitle;
@@ -31,6 +32,7 @@ public class Imgpost {
 		this.imgpostContent = imgpostContent;
 		this.imgpostAvailable = imgpostAvailable;
 		this.imgpostPostingtime = imgpostPostingtime;
+		this.imgpostViewcnt = imgpostViewcnt;
 		this.member = member;
 	}
 
@@ -84,6 +86,14 @@ public class Imgpost {
 
 	public void setImgpostPostingtime(String imgpostPostingtime) {
 		this.imgpostPostingtime = imgpostPostingtime;
+	}
+
+	public int getImgpostViewcnt() {
+		return imgpostViewcnt;
+	}
+
+	public void setImgpostViewcnt(int imgpostViewcnt) {
+		this.imgpostViewcnt = imgpostViewcnt;
 	}
 
 	public Member getMember() {
