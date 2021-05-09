@@ -71,12 +71,13 @@
 										<form:option cssClass="form-control" value="KR" />
 										<form:option cssClass="form-control" value="US" />
 										<form:option cssClass="form-control" value="JP" />
-									</form:select> <br><form:errors path="petKindHabitat" /></td>
+									</form:select> <br>
+								<form:errors path="petKindHabitat" /></td>
 
 								<th width="13%">견종명</th>
 								<td width="17%"><form:input type="text" path="petKind"
-										cssClass="txt_box w200" maxlength="15" title="견종명" /> <form:errors
-										path="petKind" /></td>
+										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
+								<form:errors path="petKind" /></td>
 							</tr>
 
 						</tbody>

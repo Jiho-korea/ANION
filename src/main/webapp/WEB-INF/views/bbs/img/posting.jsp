@@ -1,16 +1,15 @@
 <%--
 ========================================================================
-파    일    명 : bbs_img.jsp
+파    일    명 : posting.jsp
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2021.05.05
-작  성  내  용 : 다른 사람들의 반려견 사진 게시글 목록을 볼 수 있는 게시판
+작  성  내  용 : 사진 자랑 게시물 작성 페이지
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -59,83 +58,61 @@
 
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container" style="margin-top: 60px">
-		<div class="row">
-			<table class="table table-striped"
-				style="text-align: center; border: 1px solid #dddddd">
-				<thead>
-					<tr>
-						<th
-							style="background-color: #eeeeee; text-align: center; width: 15%">글번호</th>
-						<th
-							style="background-color: #eeeeee; text-align: center; width: 55%">제목</th>
-						<th
-							style="background-color: #eeeeee; text-align: center; width: 10%">작성자</th>
-						<th
-							style="background-color: #eeeeee; text-align: center; width: 20%">작성일</th>
-					</tr>
-				</thead>
-				<tbody>
+		<div class="row-col">
 
-					<c:forEach var="post" items="${postList}">
+			<form:form action="${pageContext.request.contextPath}/posting/img"
+				method="post" cssClass="form-signin"
+				modelAttribute="imagePostingRequest">
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd">
+					<thead>
 						<tr>
-							<td>${post.postNo}</td>
-							<td><a href="../from/post?postNo=${post.postNo}">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(post.title, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}
-							</a></td>
-							<td>${post.student.name}</td>
-							<td>${fn:split(fn:substring(post.postingdate, 0, 10),'-')[0]}년
-								${fn:split(fn:substring(post.postingdate, 0, 10),'-')[1]}월
-								${fn:split(fn:substring(post.postingdate, 0, 10),'-')[2]}일</td>
+							<th colspan="2"
+								style="background-color: #eeeeee; text-align: center;"><spring:message
+									code="posting.page.img.head" /> <form:errors /></th>
 						</tr>
-					</c:forEach>
-
-				</tbody>
-			</table>
-
-
-
-		</div>
-		<div style="float: left">
-
-			<c:choose>
-				<c:when test="${pageNumber ne 1}">
-					<a
-						href="${pageContext.request.contextPath}/from/board?pageNumber=${pageNumber - 1}"
-						class="btn btn-secondary" style="margin-left: 20px">◀</a>
-				</c:when>
-				<c:when test="${nextPage}">
-					<a
-						href="${pageContext.request.contextPath}/from/board?pageNumber=${pageNumber + 1}"
-						class="btn btn-secondary" style="margin-left: 20px">▶</a>
-				</c:when>
-			</c:choose>
-
-		</div>
-
-		<div style="float: right">
-			<a href="${pageContext.request.contextPath}/from/postingpage"
-				class="btn btn-primary pull-right">글쓰기</a>
-		</div>
-
-		<div style="float: right" align="center">
-			<form action="${pageContext.request.contextPath}/from/board"
-				class="form-inline">
-				<div class="form-group mx-sm-3 mb-2">
-					<label for="title" class="sr-only">제목</label> <input type="text"
-						name="title" id="title" class="form-control" placeholder="제목">
-					<input type="hidden" name="pageNumber" value="${pageNumber}">
-					<button type="submit" class="btn btn-primary pull-right">검색</button>
-				</div>
-
-			</form>
-
-		</div>
+					</thead>
+					<tbody>
+						<tr>
+							<td><form:input path="imgpostTitle" cssClass="form-control"
+									cssStyle="font-size: 13px" placeholder="제목 / Title"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '제목 / Title'" maxlength="1024" /> <form:errors
+									path="imgpostTitle" /></td>
+						</tr>
+						<tr>
+							<td><form:textarea path="imgpostContent"
+									cssClass="form-control" placeholder="내용 / Content"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '내용 / Content'" maxlength="2048"
+									cssStyle="height: 350px; font-size: 13px" /> <form:errors
+									path="imgpostContent" /></td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-md-4">
+									<img alt="" width="100px"
+										src="${pageContext.request.contextPath}/upload/${image.imagePath}">
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<form:hidden path="imageNumber" value="${image.imageNumber}" />
+				<%-- 
+				<form:hidden path="petRegistrationNumber"
+					value="${petRegistrationNumber}" /> --%>
+				<input type="submit" class="btn btn-primary pull-right mr-5"
+					style="margin-left: 91%"
+					value="<spring:message code="posting.page.img.post" />" />
+			</form:form>
+		</div> 
 	</div>
-
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
