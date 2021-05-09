@@ -1,6 +1,6 @@
 <%--
 ========================================================================
-파    일    명 : posting_img.jsp
+파    일    명 : posting.jsp
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2021.05.05
@@ -58,52 +58,61 @@
 
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container" style="margin-top: 60px">
 		<div class="row-col">
-			<form method="post"
-				action="${pageContext.request.contextPath}/posting/img">
+
+			<form:form action="${pageContext.request.contextPath}/posting/img"
+				method="post" cssClass="form-signin"
+				modelAttribute="imagePostingRequest">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
 							<th colspan="2"
 								style="background-color: #eeeeee; text-align: center;"><spring:message
-									code="posting.page.img.head" /></th>
+									code="posting.page.img.head" /> <form:errors /></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><input type="text" class="form-control"
-								style="font-size: 13px"
-								placeholder="<spring:message code="posting.page.img.title" />"
-								name="title" maxlength="1024" required autofocus></td>
+							<td><form:input path="imgpostTitle" cssClass="form-control"
+									cssStyle="font-size: 13px" placeholder="제목 / Title"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '제목 / Title'" maxlength="1024" /> <form:errors
+									path="imgpostTitle" /></td>
 						</tr>
 						<tr>
-							<td><textarea class="form-control"
-									placeholder="<spring:message code="posting.page.img.content" />"
-									name="content" maxlength="2048"
-									style="height: 350px; font-size: 13px" required></textarea></td>
+							<td><form:textarea path="imgpostContent"
+									cssClass="form-control" placeholder="내용 / Content"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '내용 / Content'" maxlength="2048"
+									cssStyle="height: 350px; font-size: 13px" /> <form:errors
+									path="imgpostContent" /></td>
 						</tr>
 						<tr>
 							<td>
 								<div class="col-md-4">
-									<img alt="" width="100px" src="${pageContext.request.contextPath}/upload/${image.imagePath}">
+									<img alt="" width="100px"
+										src="${pageContext.request.contextPath}/upload/${image.imagePath}">
 								</div>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<form:hidden path="imageNumber" value="${image.imageNumber}" />
+				<%-- 
+				<form:hidden path="petRegistrationNumber"
+					value="${petRegistrationNumber}" /> --%>
 				<input type="submit" class="btn btn-primary pull-right mr-5"
 					style="margin-left: 91%"
 					value="<spring:message code="posting.page.img.post" />" />
-			</form>
-
-		</div>
+			</form:form>
+		</div> 
 	</div>
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

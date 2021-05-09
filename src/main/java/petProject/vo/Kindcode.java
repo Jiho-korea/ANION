@@ -25,9 +25,18 @@ public class Kindcode implements Serializable {
 	private String petKindcode;
 	@NotBlank
 	private String petKind;
+	@NotBlank
+	private String petKindHabitat;
 
 	public Kindcode() {
 		super();
+	}
+
+	public Kindcode(String petKindcode, String petKind, String petKindHabitat) {
+		super();
+		this.petKindcode = petKindcode;
+		this.petKind = petKind;
+		this.petKindHabitat = petKindHabitat;
 	}
 
 	public String getPetKindcode() {
@@ -46,10 +55,12 @@ public class Kindcode implements Serializable {
 		this.petKind = petKind;
 	}
 
-	public Kindcode(String petKindcode, String petKind) {
-		super();
-		this.petKind = petKind;
-		this.petKindcode = petKindcode;
+	public String getPetKindHabitat() {
+		return petKindHabitat;
+	}
+
+	public void setPetKindHabitat(String petKindHabitat) {
+		this.petKindHabitat = petKindHabitat;
 	}
 
 	public static long getSerialversionuid() {

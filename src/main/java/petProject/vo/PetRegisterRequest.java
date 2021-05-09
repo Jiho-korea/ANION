@@ -19,6 +19,7 @@ public class PetRegisterRequest {
 	@NotBlank
 	private String petName;
 	@NotBlank
+	private String petKind;
 	private String petKindcode;
 	@NotBlank
 	private String petBirthday;
@@ -31,11 +32,12 @@ public class PetRegisterRequest {
 	@NotBlank
 	private String petSex;
 
-	public PetRegisterRequest(int memberNumber, String petName, String petKindcode, String petBirthday,
+	public PetRegisterRequest(int memberNumber, String petName, String petKind, String petKindcode, String petBirthday,
 			String petMothername, String petFathername, String petMicrochip, String petSex) {
 		super();
 		this.memberNumber = memberNumber;
 		this.petName = petName;
+		this.petKind = petKind;
 		this.petKindcode = petKindcode;
 		this.petBirthday = petBirthday;
 		this.petMothername = petMothername;
@@ -62,6 +64,14 @@ public class PetRegisterRequest {
 
 	public void setPetName(String petName) {
 		this.petName = petName;
+	}
+
+	public String getPetKind() {
+		return petKind;
+	}
+
+	public void setPetKind(String petKind) {
+		this.petKind = petKind;
 	}
 
 	public String getPetKindcode() {

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import petProject.dao.KindcodeDAO;
 import petProject.service.KindcodeListService;
 import petProject.vo.Kindcode;
 
@@ -23,11 +24,12 @@ import petProject.vo.Kindcode;
 public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Autowired
-	private petProject.dao.KindcodeDAO KindcodeDAO;
+	private KindcodeDAO kindcodeDAO;
 
 	@Override
 	public List<Kindcode> selectKindcodeList() throws Exception {
-		List<Kindcode> kindcodeList = KindcodeDAO.selectKindcodeList();
+		List<Kindcode> kindcodeList = kindcodeDAO.selectKindcodeList();
 		return kindcodeList;
 	}
+
 }
