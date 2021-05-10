@@ -30,7 +30,7 @@
 수    정    일 : 2021.05.06
 수  정  내  용 : 품종 선택 시 팝업창을 통해 처리
 ========================================================================
-수    정    자 : 송찬영
+수    정    자 : 정세진
 수    정    일 : 2021.05.10
 수  정  내  용 : 특수문자 입력방지 추가
 ========================================================================
@@ -91,7 +91,7 @@ button.relative {
 
 <title><spring:message code="home.title" /></title>
 </head>
-<body onload="return clickEvent()">
+<body onload="check()">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -103,14 +103,14 @@ button.relative {
 			<br>
 			<form:form action="${pageContext.request.contextPath}/register/step2"
 				method="post" cssClass="form-signin"
-				modelAttribute="petRegisterRequest" onsubmit="return clickEvent()"
+				modelAttribute="petRegisterRequest" onsubmit="return submitCheck()"
 				enctype="multipart/form-data">
 				<div class="row" style="display: none;">
 					<label><input type="file" name="file"></label>
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <form:input path="petName" onkeyup="check(this)" onkeydown="check(this)" cssClass="single-input" 
+						<label> <form:input path="petName" cssClass="single-input" 
 								placeholder="견명 / Name" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '견명 / Name'" /> <form:errors
 								path="petName" />
@@ -163,7 +163,7 @@ button.relative {
 				<div class="row">
 					<div class="col-md-6 mb-1">
 
-						<label> <!--<spring:message code="pet.mothername" />--> <form:input onkeyup="check(this)" onkeydown="check(this)"
+						<label> <!--<spring:message code="pet.mothername" />--> <form:input
 								path="petMothername" cssClass="single-input"
 								placeholder="모견명 / dog's mother" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '모견명 / Mother dog's name'" /> <form:errors
@@ -173,7 +173,7 @@ button.relative {
 						</label>
 					</div>
 					<div class="col-md-6 mb-1">
-						<label> <!--<spring:message code="pet.father" />--> <form:input onkeyup="check(this)" onkeydown="check(this)"
+						<label> <!--<spring:message code="pet.father" />--> <form:input
 								path="petFathername" cssClass="single-input"
 								placeholder="부견명 / dog's father" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '부견명 / Dad Dog's Name'" /> <form:errors
@@ -292,16 +292,13 @@ button.relative {
 		} else if ($(':radio[name="petSex"]:checked').length < 1) {
 			alert("성별을 선택해주세요.");
 			return false;
-		} else if ($("#petMicrochip").val() == "") {
-			alert("마이크로칩 번호를 입력해주세요.");
-			return false;
 		} else if ($('#petBirthday').val() == "") {
 			alert("생년월일을 입력해주세요.");
 			return false;
 		} 
 	});
 	
-	function clickEvent(){
+	function check(){
 		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
 		
 		if (regExp.test($("#petName").val())){
@@ -330,16 +327,23 @@ button.relative {
 		  }
 	}
 	
-	//특수문자 입력 방지
-	function check(obj){
-        //정규식으로 특수문자 판별
-        var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
-        
-        //배열에서 하나씩 값을 비교
-        if( regExp.test(obj.value) ){
-           alert("특수문자는 입력할 수 없습니다.");
-           obj.value = obj.value.substring( 0 , obj.value.length - 1 ); 
-        }        
+	function submitCheck(){
+		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
+		
+		if (regExp.test($("#petName").val())){
+			alert("특수문자는 입력할 수 없습니다.");
+			return false;
+		}else if(regExp.test($("#petMothername").val())){
+			alert("특수문자는 입력할 수 없습니다.");
+			return false;
+		}else if(regExp.test($("#petFathername").val())){
+			alert("특수문자는 입력할 수 없습니다.");
+			return false;
+		}else if($("#petMicrochip").val().length < 15 && $("#petMicrochip").val()!=""){
+			alert("마이크로칩 번호는 15자리입니다.");
+			return false;
+		}
+		return true;
 	}
 	
 </script>

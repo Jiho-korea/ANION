@@ -27,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -144,9 +146,11 @@ public class PetRegisterController {
 			 */
 //			String absPath = rootPath + "\\" + savedName;
 //			System.out.println("abs" + absPath);
-			String regex = "^[a-zA-Z0-9`~!@#$%^&*()-=_+\\[\\]{}:;',./<>?\\\\|]*$";			
-			if(petRegisterRequest.getPetName().matches(regex)|petRegisterRequest.getPetMothername().matches(regex)|
-					petRegisterRequest.getPetFathername().matches(regex)|petRegisterRequest.getPetMicrochip().matches(regex)) {
+			String regex = "[\"'\\{\\}\\[\\]/?.,;:|\\(\\)`~!@#$%^&*-+\\\\=]";
+			Pattern pattern = Pattern.compile(regex);
+			if(pattern.matcher(petRegisterRequest.getPetName()).find()|
+					pattern.matcher(petRegisterRequest.getPetMothername()).find()|
+					pattern.matcher(petRegisterRequest.getPetFathername()).find()) {
 				return "register/registerStep1";
 			}
 			petRegisterService.insertPet(petRegisterRequest);
