@@ -84,6 +84,11 @@ p {
 	top: 20%;
 }
 
+.map__marker--africa {
+	left: 50%;
+	top: 40%;
+}
+
 .map__marker--korea {
 	left: 80.5%;
 	top: 32%;
@@ -100,7 +105,7 @@ p {
 	position: absolute;
 	bottom: 0;
 	transform: translate(-50%, -2em);
-	width: 10em;
+	width: 15em;
 	z-index: 999;
 }
 
