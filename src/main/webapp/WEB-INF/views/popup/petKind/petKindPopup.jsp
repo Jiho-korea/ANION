@@ -98,7 +98,7 @@ a:hover {
 						hidden="">견종 / Dog breed</li>
 					<c:forEach var="kindcode" items="${kindcodeList}"
 						varStatus="status">
-						<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
+						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -108,7 +108,7 @@ a:hover {
 				class="btn header-btn d-flex justify-content-center"
 				onclick="dogSelect();">Select</button>
 		</div>
-		
+
 		<div class="map">
 
 
@@ -135,7 +135,7 @@ a:hover {
 									<c:if test="${kindcode.petKindHabitat eq 'US' }">
 										<a
 											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
 									</c:if>
 								</c:forEach>
 							</p>
@@ -159,7 +159,7 @@ a:hover {
 									<c:if test="${kindcode.petKindHabitat eq 'KR' }">
 										<a
 											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
 									</c:if>
 								</c:forEach>
 							</p>
@@ -183,7 +183,7 @@ a:hover {
 									<c:if test="${kindcode.petKindHabitat eq 'JP' }">
 										<a
 											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li></a>
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
 									</c:if>
 								</c:forEach>
 							</p>
@@ -259,17 +259,8 @@ a:hover {
 
 </body>
 <script defer type="text/javascript">
-	var width = window.outerWidth;
-	var height = window.outerHeight;
-	function popResizer() {
-		window.resizeTo(width, height);
-	};
-
-	popResizer();
-	$(window).resize(popResizer);
-
 	function dogSelect() {
-		if ($("[name=childKindcode] > option:selected").val() == '') {
+		if ($("[name=childKind] > option:selected").val() == '') {
 			alert("견종을 선택해주세요.");
 			return false;
 		}
