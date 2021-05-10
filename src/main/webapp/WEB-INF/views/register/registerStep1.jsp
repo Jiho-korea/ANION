@@ -30,6 +30,10 @@
 수    정    일 : 2021.05.06
 수  정  내  용 : 품종 선택 시 팝업창을 통해 처리
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.10
+수  정  내  용 : 특수문자 입력방지 추가
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -87,7 +91,7 @@ button.relative {
 
 <title><spring:message code="home.title" /></title>
 </head>
-<body>
+<body onload="return clickEvent()">
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -106,7 +110,7 @@ button.relative {
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <form:input path="petName" cssClass="single-input"
+						<label> <form:input path="petName" onkeyup="check(this)" onkeydown="check(this)" cssClass="single-input" 
 								placeholder="견명 / Name" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '견명 / Name'" /> <form:errors
 								path="petName" />
@@ -159,7 +163,7 @@ button.relative {
 				<div class="row">
 					<div class="col-md-6 mb-1">
 
-						<label> <!--<spring:message code="pet.mothername" />--> <form:input
+						<label> <!--<spring:message code="pet.mothername" />--> <form:input onkeyup="check(this)" onkeydown="check(this)"
 								path="petMothername" cssClass="single-input"
 								placeholder="모견명 / dog's mother" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '모견명 / Mother dog's name'" /> <form:errors
@@ -169,7 +173,7 @@ button.relative {
 						</label>
 					</div>
 					<div class="col-md-6 mb-1">
-						<label> <!--<spring:message code="pet.father" />--> <form:input
+						<label> <!--<spring:message code="pet.father" />--> <form:input onkeyup="check(this)" onkeydown="check(this)"
 								path="petFathername" cssClass="single-input"
 								placeholder="부견명 / dog's father" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '부견명 / Dad Dog's Name'" /> <form:errors
@@ -186,9 +190,9 @@ button.relative {
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
-						path="petMicrochip" cssClass="single-input" cssStyle="width:350px"
-						placeholder="마이크로칩 번호 / Microchip number"
-						onfocus="this.placeholder = ''"
+						path="petMicrochip" cssClass="single-input" cssStyle="width:350px" oninput='numberMaxLength(this, 15)'
+						placeholder="마이크로칩 번호 / Microchip number" type="number" 
+						onfocus="this.placeholder = ''" 
 						onblur="this.placeholder = '마이크로칩 번호 / Microchip number'" /> <form:errors
 						path="petMicrochip" />
 				</label>
@@ -294,12 +298,50 @@ button.relative {
 		} else if ($('#petBirthday').val() == "") {
 			alert("생년월일을 입력해주세요.");
 			return false;
-		}
+		} 
 	});
+	
+	function clickEvent(){
+		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
+		
+		if (regExp.test($("#petName").val())){
+			alert("특수문자는 입력할 수 없습니다.");
+			return false;
+		}else if(regExp.test($("#petMothername").val())){
+			alert("특수문자는 입력할 수 없습니다.");
+			return false;
+		}else if(regExp.test($("#petFathername").val())){
+			alert("특수문자는 입력할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
 	function dogmapPopup() {
 		parentObj = window.open("${pageContext.request.contextPath}/popup/petKind",
-			"petKind_parent", "width=700, height=600, scrollbars=no, toolbar=no, location=no, resizable=no, directories=no, status=no, menubar=no");
-	};
+			"petKind_parent", "width=700, height=550, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
+	}
+	
+	//최대길이 지정
+	function numberMaxLength(el, maxlength) {
+		  if(el.value.length > maxlength)  {
+		    el.value 
+		      = el.value.substr(0, maxlength);
+		  }
+	}
+	
+	//특수문자 입력 방지
+	function check(obj){
+        //정규식으로 특수문자 판별
+        var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
+        
+        //배열에서 하나씩 값을 비교
+        if( regExp.test(obj.value) ){
+           alert("특수문자는 입력할 수 없습니다.");
+           obj.value = obj.value.substring( 0 , obj.value.length - 1 ); 
+        }        
+	}
+	
 </script>
 </html>
 <!-- 
