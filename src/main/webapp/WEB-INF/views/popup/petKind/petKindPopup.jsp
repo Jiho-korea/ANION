@@ -143,9 +143,8 @@ a:hover {
 			class="btn header-btn d-flex justify-content-center"
 			onclick="dogSelect();">Select</button>
 	</div>
-
+	
 	<div class="map">
-
 
 		<!-- svg 파일 코드 -->
 		<object type="image/svg+xml"
