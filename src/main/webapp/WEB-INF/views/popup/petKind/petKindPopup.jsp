@@ -76,7 +76,7 @@ body {
 
 a:hover {
 	color: #06d587;
-	font-size: 1.3em;
+	font-size: 1.1em;
 }
 
 #img_world_map {
@@ -163,16 +163,18 @@ a:hover {
 							<span class="current">미국 / United States of America</span>
 						</header>
 						<main class="map__marker-info-main">
-							<p>
+							<div class="row">
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<c:if test="${kindcode.petKindHabitat eq 'US' }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
 									</c:if>
 								</c:forEach>
-							</p>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -187,22 +189,19 @@ a:hover {
 							<span class="current">아프리카 / Africa</span>
 						</header>
 						<main class="map__marker-info-main">
-							<c:forEach var="kindcode" items="${kindcodeList}"
-								varStatus="status">
-								<c:if test="${kindcode.petKindHabitat eq 'AF'}">
-									<c:set var="count" value="${count + 1 }" />
-									<c:if test="${count < 5 }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+							<div class="row">
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'AF'}">
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
+										<br>
 									</c:if>
-									<c:if test="${count >= 5 && count < 9}">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}${count }</li></a>
-									</c:if>
-								</c:if>
-							</c:forEach>
+								</c:forEach>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -217,16 +216,18 @@ a:hover {
 							<span class="current">한국 / Korea</span>
 						</header>
 						<main class="map__marker-info-main">
-							<p>
+							<div class="row">
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<c:if test="${kindcode.petKindHabitat eq 'KR' }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
 									</c:if>
 								</c:forEach>
-							</p>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -241,16 +242,18 @@ a:hover {
 							<span class="current">일본 / Japan</span>
 						</header>
 						<main class="map__marker-info-main">
-							<p>
+							<div class="row">
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<c:if test="${kindcode.petKindHabitat eq 'JP' }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
 									</c:if>
 								</c:forEach>
-							</p>
+							</div>
 						</main>
 					</div>
 				</div></li>
