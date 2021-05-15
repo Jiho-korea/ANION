@@ -23,11 +23,8 @@ public class PetRegisterRequest {
 	private String petKindcode;
 	@NotBlank
 	private String petBirthday;
-
 	private String petMothername;
-
 	private String petFathername;
-	@NotBlank
 	private String petMicrochip;
 	@NotBlank
 	private String petSex;
