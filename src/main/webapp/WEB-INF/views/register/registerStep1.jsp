@@ -163,7 +163,7 @@
 						</div>
 						 -->
 
-						<br>
+						<br><br>
 						<form:errors path="petKind" />
 					</div>
 				</div>

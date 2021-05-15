@@ -75,7 +75,7 @@ body {
 }
 
 a:hover {
-	color: #06d587;
+	color: #000000;
 	font-size: 1.1em;
 }
 
@@ -141,7 +141,7 @@ a:hover {
 		&nbsp;&nbsp;
 		<button type="button"
 			class="btn header-btn d-flex justify-content-center"
-			onclick="dogSelect();">Select</button>
+			onclick="dogSelect();">OK</button>
 	</div>
 
 	<div class="map">
