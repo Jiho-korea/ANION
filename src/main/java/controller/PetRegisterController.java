@@ -13,6 +13,10 @@
 수    정    자 : 정세진
 수    정    일 : 2020.11.20
 수  정  내  용 : 애완동물 유효성 생일 추가
+========================================================================
+수    정    자 : 정세진
+수    정    일 : 2021.05.10
+수  정  내  용 : 특수문자 입력방지 추가
 =============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
 */
@@ -23,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -140,7 +146,13 @@ public class PetRegisterController {
 			 */
 //			String absPath = rootPath + "\\" + savedName;
 //			System.out.println("abs" + absPath);
-
+			String regex = "[\"'\\{\\}\\[\\]/?.,;:|\\(\\)`~!@#$%^&*-+\\\\=]";
+			Pattern pattern = Pattern.compile(regex);
+			if(pattern.matcher(petRegisterRequest.getPetName()).find()|
+					pattern.matcher(petRegisterRequest.getPetMothername()).find()|
+					pattern.matcher(petRegisterRequest.getPetFathername()).find()) {
+				return "register/registerStep1";
+			}
 			petRegisterService.insertPet(petRegisterRequest);
 
 			int currval = getCurrvalService.selectCurrval();
