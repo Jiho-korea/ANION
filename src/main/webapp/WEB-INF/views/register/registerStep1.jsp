@@ -321,10 +321,13 @@ button.relative {
 		if ($("#petName").val() == "") {
 			alert("견명을 입력해주세요.");
 			return false;
-		} else if ($(':radio[name="petSex"]:checked').length < 1) {
+		}else if ($('#petKind').val() == "") {
+			alert("견종을 선택해주세요.");
+			return false;
+		}else if ($(':radio[name="petSex"]:checked').length < 1) {
 			alert("성별을 선택해주세요.");
 			return false;
-		} else if ($('#petBirthday').val() == "") {
+		}else if ($('#petBirthday').val() == "") {
 			alert("생년월일을 입력해주세요.");
 			return false;
 		}else if (regExp.test($("#petName").val())){
