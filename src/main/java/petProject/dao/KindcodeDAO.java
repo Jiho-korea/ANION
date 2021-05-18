@@ -33,6 +33,8 @@ public interface KindcodeDAO {
 	List<Kindcode> selectKindcodeListPage(@Param("pageNumber") Integer pageNumber) throws Exception;
 
 	int insertKindcode(Kindcode kindcode) throws Exception;
+	
+	String findKindcode(@Param("petKind") String petKind) throws Exception;
 
 	Kindcode selectKindcode(@Param("petKindcode") String petKindcode) throws Exception;
 

@@ -10,6 +10,10 @@
 수    정    일 : 2020.11.18
 수  정  내  용 : 관리자 페이지, 반려견 세부정보 페이지에도 Interceptor가 동작하도록 설정
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.15
+수  정  내  용 : 품종 선택 팝업창 Interceptor 동작
+========================================================================
 */
 package config;
 
@@ -28,6 +32,8 @@ import interceptor.EmailcodeCheckInterceptor;
 import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
+import interceptor.PopupCookieCheckInterceptor;
+import interceptor.PopupCookieDeleteInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -56,6 +62,16 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public EmailcodeCheckInterceptor emailcodeCheckInterceptor() {
 		return new EmailcodeCheckInterceptor();
+	}
+	
+	@Bean
+	public PopupCookieCheckInterceptor popupCookieCheckInterceptor() {
+		return new PopupCookieCheckInterceptor();
+	}
+	
+	@Bean
+	public PopupCookieDeleteInterceptor popupCookieDeleteInterceptor() {
+		return new PopupCookieDeleteInterceptor();
 	}
 
 	@Bean
@@ -96,6 +112,8 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
 		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
+		registry.addInterceptor(popupCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
+		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1", "/popup/petKind/**");
 	}
 
 }

@@ -13,6 +13,10 @@
 수    정    자 : 정세진
 수    정    일 : 2020.11.20
 수  정  내  용 : 애완동물 유효성 생일 추가
+========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.15
+수  정  내  용 : 팝업창용 쿠키 생성
 =============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
 */
@@ -26,6 +30,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -68,12 +73,17 @@ public class PetRegisterController {
 	List<Kindcode> kindcodeList = null;
 
 	@RequestMapping("/step1")
-	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model, HttpServletResponse response) {
+	public String registerStep1(PetRegisterRequest petRegisterRequest, Model model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Cookie cookie_popup01 = new Cookie("popup01", "true");
 			cookie_popup01.setPath("/");
 			cookie_popup01.setMaxAge(0);
 			response.addCookie(cookie_popup01);
+
+			Cookie petKind = new Cookie("petKind", "true");
+			petKind.setPath(request.getContextPath() + "/popup/petKind");
+			petKind.setMaxAge(60 * 60 * 24 * 1);
+			response.addCookie(petKind);
 
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -102,7 +112,8 @@ public class PetRegisterController {
 
 	@PostMapping("/step2")
 	public String registerStep2(@Valid @ModelAttribute("petRegisterRequest") PetRegisterRequest petRegisterRequest,
-			Errors errors, HttpSession session, MultipartHttpServletRequest request, Model model) {
+			Errors errors, HttpSession session, MultipartHttpServletRequest request, HttpServletResponse response,
+			Model model) {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		petRegisterRequest.setMemberNumber(authInfo.getMemberNumber());
 
@@ -148,6 +159,7 @@ public class PetRegisterController {
 			// ImageUploadRequest imageUploadRequest = new
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);
+
 			return "register/registerStep2";
 		} catch (PetRegisterException e) {
 			e.printStackTrace();

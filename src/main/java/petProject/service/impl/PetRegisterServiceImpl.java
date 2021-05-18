@@ -35,6 +35,7 @@ public class PetRegisterServiceImpl implements PetRegisterService {
 
 	@Override
 	public int insertPet(PetRegisterRequest petRegisterRequest) throws Exception {
+		//petKindcode를 찾기위한 메소드
 		String petKindcode = KindcodeDAO.findKindcode(petRegisterRequest.getPetKind());
 		petRegisterRequest.setPetKindcode(petKindcode);
 

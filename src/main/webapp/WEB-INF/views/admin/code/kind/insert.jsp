@@ -71,6 +71,7 @@
 										<form:option cssClass="form-control" value="KR" />
 										<form:option cssClass="form-control" value="US" />
 										<form:option cssClass="form-control" value="JP" />
+										<form:option cssClass="form-control" value="AF" />
 									</form:select> <br>
 								<form:errors path="petKindHabitat" /></td>
 
