@@ -298,18 +298,6 @@
 
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	 $("#btn_register").click(function() {
-		if ($("#petName").val() == "") {
-			alert("견명을 입력해주세요.");
-			return false;
-		} else if ($(':radio[name="petSex"]:checked').length < 1) {
-			alert("성별을 선택해주세요.");
-			return false;
-		} else if ($('#petBirthday').val() == "") {
-			alert("생년월일을 입력해주세요.");
-			return false;
-		} 
-	});
 	
 	function check(){
 		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
@@ -343,7 +331,19 @@
 	function submitCheck(){
 		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
 		
-		if (regExp.test($("#petName").val())){
+		if ($("#petName").val() == "") {
+			alert("견명을 입력해주세요.");
+			return false;
+		}else if ($('#petKind').val() == "") {
+			alert("견종을 선택해주세요.");
+			return false;
+		}else if ($(':radio[name="petSex"]:checked').length < 1) {
+			alert("성별을 선택해주세요.");
+			return false;
+		}else if ($('#petBirthday').val() == "") {
+			alert("생년월일을 입력해주세요.");
+			return false;
+		}else if (regExp.test($("#petName").val())){
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
 		}else if(regExp.test($("#petMothername").val())){
