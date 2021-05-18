@@ -45,7 +45,6 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 			throw new WrongIdPasswordException("not Matching");
 
 		member.setMemberPassword(passwordEncoder.encode(newPassword));
-
 		memberDAO.updatePassword(member);
 	}
 

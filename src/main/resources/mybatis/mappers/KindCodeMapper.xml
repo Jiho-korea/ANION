@@ -6,14 +6,21 @@
 <mapper namespace="petProject.dao.KindcodeDAO">
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND",
-		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode"
+		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
+		order by "PET_KIND_CODE" ASC 
+	</select>
+	
+	<select id="selectKindcodeListPage" parameterType="Integer" resultMap="kindcodeResultMap">
+		select "PET_KIND",
+		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
+		order by "PET_KIND_CODE" ASC LIMIT 8 OFFSET #{pageNumber}
 	</select>
 
 	<select id="selectKindcode" parameterType="String" resultType="kindcode">
 		select "PET_KIND",
 		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" where "PET_KIND_CODE" = #{petKindcode}
 	</select>
-
+	
 	<select id="findKindcode" parameterType="String" resultType="String">
 		select "PET_KIND_CODE" from "kindcode" where "PET_KIND" = #{petKind}
 	</select>
