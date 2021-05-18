@@ -6,6 +6,10 @@
 작    성    일 : 2021.05.03
 작  성  내  용 : 대동견지도
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.09
+수  정  내  용 : Select박스 List Page 기능 추가
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -49,6 +53,10 @@
 	href="${pageContext.request.contextPath}/css/dogmap.css">
 </head>
 <style>
+html {
+	overflow: hidden;
+}
+
 body {
 	background-repeat: no-repeat;
 	background-position: left top;
@@ -56,13 +64,19 @@ body {
 	padding-bottom: -1000px;
 }
 
-.jumbotron {
-	opacity: 0.8;
+.fixed {
+	width: 100%;
+	position: relative;
+	margin-left: 300px;
+	align-items: center;
+	margin-bottom: 3rem;
+	display: -ms-flexbox;
+	display: flex;
 }
 
 a:hover {
-	color: #06d587;
-	font-size: 1.3em;
+	color: #000000;
+	font-size: 1.1em;
 }
 
 #img_world_map {
@@ -70,130 +84,180 @@ a:hover {
 		brightness(121%) contrast(100%);
 }
 </style>
-<body>
+<body style="overflow-y: auto; overflow-x: hidden;">
 
-	<div>
-		<div
-			class="container d-flex justify-content-center align-items-center mb-5">
-			<select style="display: none;" id="childKind" name="childKind">
-				<c:if test="${empty kindcode}">
-					<option value=""></option>
-				</c:if>
-				<c:if test="${not empty kindcode}">
-					<option value="${kindcode.petKind }"></option>
-				</c:if>
-				<c:forEach var="kindcode" items="${kindcodeList}" varStatus="status">
-					<option value="${kindcode.petKind}">${kindcode.petKind}</option>
+	<div class="fixed">
+		<select style="display: none;" id="childKind" name="childKind">
+			<c:if test="${empty kindcode}">
+				<option value=""></option>
+			</c:if>
+			<c:if test="${!empty kindcode}">
+				<option value="${kindcode.petKind }"></option>
+			</c:if>
+			<c:forEach var="kindcode" items="${kindcodeListPage}"
+				varStatus="status">
+				<option value="${kindcode.petKind}">${kindcode.petKind}</option>
+			</c:forEach>
+		</select>
+		<div class="nice-select" tabindex="0">
+			<c:if test="${empty kindcode}">
+				<span class="current">견종 / Dog breed</span>
+			</c:if>
+			<c:if test="${not empty kindcode}">
+				<span class="current">${kindcode.petKind }</span>
+			</c:if>
+			<ul class="list">
+				<li data-value="견종 / Dog breed" class="option selected focus"
+					hidden="">견종 / Dog breed</li>
+				<c:forEach var="kindcode" items="${kindcodeListPage}"
+					varStatus="status">
+					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
 				</c:forEach>
-			</select>
-			<div class="nice-select" tabindex="0">
-				<c:if test="${empty kindcode}">
-					<span class="current">견종 / Dog breed</span>
-				</c:if>
-				<c:if test="${not empty kindcode}">
-					<span class="current">${kindcode.petKind }</span>
-				</c:if>
-				<ul class="list">
-					<li data-value="견종 / Dog breed" class="option selected focus"
-						hidden="">견종 / Dog breed</li>
-					<c:forEach var="kindcode" items="${kindcodeList}"
-						varStatus="status">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:forEach>
-				</ul>
-			</div>
 
-			&nbsp;&nbsp;
-			<button type="button"
-				class="btn header-btn d-flex justify-content-center"
-				onclick="dogSelect();">Select</button>
+				<div class="container d-flex justify-content-center">
+					<c:if test="${pageNumber ne 1}">
+						<a
+							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber - 1}">
+							<button id="btn_left_arrow" type="button"
+								style="border: 0; background-color: #FFFFFF;">
+								<img style="cursor: pointer;"
+									src="${pageContext.request.contextPath}/img/button/left-icon.png">
+							</button>
+						</a>
+					</c:if>
+					<c:if test="${nextPage}">
+						<a
+							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber + 1}">
+							<button id="btn_right_arrow" type="button"
+								style="border: 0; background-color: #FFFFFF;">
+								<img style="cursor: pointer;"
+									src="${pageContext.request.contextPath}/img/button/right-icon.png">
+							</button>
+						</a>
+					</c:if>
+				</div>
+			</ul>
 		</div>
+		&nbsp;&nbsp;
+		<button type="button"
+			class="btn header-btn d-flex justify-content-center"
+			onclick="dogSelect();">OK</button>
+	</div>
 
-		<div class="map">
+	<div class="map">
+
+		<!-- svg 파일 코드 -->
+		<object type="image/svg+xml"
+			data="${pageContext.request.contextPath}/img/popupBack/world_map3.svg"
+			id="img_world_map"></object>
 
 
-			<!-- svg 파일 코드 583x393-->
-			<object type="image/svg+xml"
-				data="${pageContext.request.contextPath}/img/popupBack/world_map2.svg"
-				id="img_world_map"></object>
-
-
-			<ul class="map__markers">
-				<li class="map__marker map__marker--america"><img width="30"
-					height="30"
-					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
-					href="#"></a>
-					<div class="map__marker-info" style="width: 15em">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<span class="current">미국 / United States of America</span>
-							</header>
-							<main class="map__marker-info-main">
-							<p>
+		<ul class="map__markers">
+			<li class="map__marker map__marker--america"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">미국 / United States of America</span>
+						</header>
+						<main class="map__marker-info-main">
+							<div class="row">
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<c:if test="${kindcode.petKindHabitat eq 'US' }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
 									</c:if>
 								</c:forEach>
-							</p>
-							</main>
-						</div>
-					</div></li>
+							</div>
+						</main>
+					</div>
+				</div></li>
 
-				<li class="map__marker map__marker--korea"><img width="30"
-					height="30"
-					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
-					href="#"></a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<span class="current">한국 / Korea</span>
-							</header>
-							<main class="map__marker-info-main">
-							<p>
+			<li class="map__marker map__marker--africa"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">아프리카 / Africa</span>
+						</header>
+						<main class="map__marker-info-main">
+							<div class="row">
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'AF'}">
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
+										<br>
+									</c:if>
+								</c:forEach>
+							</div>
+						</main>
+					</div>
+				</div></li>
+
+			<li class="map__marker map__marker--korea"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">한국 / Korea</span>
+						</header>
+						<main class="map__marker-info-main">
+							<div class="row">
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<c:if test="${kindcode.petKindHabitat eq 'KR' }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
 									</c:if>
 								</c:forEach>
-							</p>
-							</main>
-						</div>
-					</div></li>
+							</div>
+						</main>
+					</div>
+				</div></li>
 
-				<li class="map__marker map__marker--japan"><img width="30"
-					height="30"
-					src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
-					href="#"></a>
-					<div class="map__marker-info">
-						<div class="map__marker-info-inner animate animate--bounce-in">
-							<header class="map__marker-info-header">
-								<span class="current">일본 / Japan</span>
-							</header>
-							<main class="map__marker-info-main">
-							<p>
+			<li class="map__marker map__marker--japan"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">일본 / Japan</span>
+						</header>
+						<main class="map__marker-info-main">
+							<div class="row">
 								<c:forEach var="kindcode" items="${kindcodeList}"
 									varStatus="status">
 									<c:if test="${kindcode.petKindHabitat eq 'JP' }">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
 									</c:if>
 								</c:forEach>
-							</p>
-							</main>
-						</div>
-					</div></li>
-			</ul>
-		</div>
-
-
+							</div>
+						</main>
+					</div>
+				</div></li>
+		</ul>
 	</div>
 
 	<!-- JS here -->

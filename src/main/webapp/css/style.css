@@ -1952,8 +1952,7 @@ hr {
 	-o-animation-timing-function: linear
 }
 
-@
--webkit-keyframes float-bob { 0%{
+@-webkit-keyframes float-bob { 0%{
 	-webkit-transform: translateY(-20px);
 	transform: translateY(-20px)
 }
@@ -1975,8 +1974,7 @@ hr {
 	animation: heartbeat 1s infinite alternate
 }
 
-@
--webkit-keyframes heartbeat {
+@-webkit-keyframes heartbeat {
 	to {-webkit-transform: scale(1.03);
 	transform: scale(1.03)
 }
@@ -1993,8 +1991,7 @@ hr {
 	animation-timing-function: linear
 }
 
-@
-keyframes rotateme {
+@keyframes rotateme {
 	from {-webkit-transform: rotate(0deg);
 	transform: rotate(0deg)
 }
@@ -2005,8 +2002,7 @@ to {
 }
 
 }
-@
--webkit-keyframes rotateme {
+@-webkit-keyframes rotateme {
 	from {-webkit-transform: rotate(0deg)
 }
 
@@ -2085,8 +2081,7 @@ to {
 	text-transform: uppercase
 }
 
-@
--webkit-keyframes zoom { 0%{
+@-webkit-keyframes zoom { 0%{
 	-webkit-transform: rotate(0deg);
 	transform: rotate(0deg);
 	-webkit-transition: .6s;
@@ -2110,8 +2105,7 @@ to {
 .6s
 }
 }
-@
-keyframes zoom { 0%{
+@keyframes zoom { 0%{
 	-webkit-transform: rotate(0deg);
 	transform: rotate(0deg);
 	-webkit-transition: .6s;
@@ -3126,8 +3120,7 @@ keyframes zoom { 0%{
 	animation: btnIconRipple 2s cubic-bezier(0.23, 1, 0.32, 1) both infinite
 }
 
-@
--webkit-keyframes btnIconRipple { 0%{
+@-webkit-keyframes btnIconRipple { 0%{
 	border-width: 4px;
 	-webkit-transform: scale(1);
 	transform: scale(1)
