@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 	href="${pageContext.request.contextPath}/img/favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
-<title>게시글 페이지</title>
+<title><spring:message code="home.title" /></title>
 </head>
 <body>
 	<c:import url="../../included/top.jsp">
@@ -26,31 +27,33 @@
 				<thead>
 					<tr>
 						<th colspan="3"
-							style="background-color: #dddddd; text-align: center; font-weight: normal ">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostTitle, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}</th>
+							style="background-color: #dddddd; text-align: center; font-weight: normal">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostTitle, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td style="width: 20%">작성자</td>
+						<td style="width: 20%"><spring:message
+								code="bbs.img.board.writer" /></td>
 						<td colspan="2">${imgpost.member.memberName}</td>
 					</tr>
 					<tr>
-						<td>작성일자</td>
+						<td><spring:message code="bbs.img.board.reportingdate" /></td>
 						<td colspan="2">${fn:substring(imgpost.imgpostPostingtime, 0, 10)}
 							${fn:substring(imgpost.imgpostPostingtime, 11, 13)}:${fn:substring(imgpost.imgpostPostingtime, 14, 16)}</td>
 					</tr>
 					<tr style="background-color: #ffffff">
-						<td>내용</td>
-						<td colspan="2" style="height: 200px; text-align: left">
-							<c:forEach var="imgpostAndImage" items="${imgpost.imgpostAndImages}" varStatus="status">
+						<td><spring:message code="bbs.img.board.content" /></td>
+						<td colspan="2" style="height: 200px; text-align: left"><c:forEach
+								var="imgpostAndImage" items="${imgpost.imgpostAndImages}"
+								varStatus="status">
 								<img alt=""
-										src="${pageContext.request.contextPath}/upload/${imgpostAndImage.image.imagePath}">
-							</c:forEach>
-							<br><br><br>
+									src="${pageContext.request.contextPath}/upload/${imgpostAndImage.image.imagePath}">
+							</c:forEach> <br>
+						<br>
+						<br>
 							<div>
 								${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostContent, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}
-							</div>
-						</td>
+							</div></td>
 					</tr>
 				</tbody>
 			</table>
@@ -59,12 +62,15 @@
 
 			<c:if
 				test="${sessionScope.login.memberNumber eq imgpost.memberNumber}">
-				<a href="#" class="btn btn-primary">수정</a>
+				<a href="#" class="btn btn-primary"><spring:message code="edit" /></a>
 				<a href="#" class="btn btn-primary"
-					onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+					onclick="return confirm('<spring:message
+						code="bbs.img.board.delete.confirm" />')"><spring:message
+						code="delete.button" /></a>
 			</c:if>
 
-			<a href="${pageContext.request.contextPath}/board/img" class="btn btn-primary">목록</a>
+			<a href="${pageContext.request.contextPath}/board/img"
+				class="btn btn-primary"><spring:message code="go.list" /></a>
 		</div>
 
 		<br> <br>

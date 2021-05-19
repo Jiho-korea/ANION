@@ -101,15 +101,20 @@
 				<thead>
 					<tr>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 15%">번호</th>
+							style="background-color: #eeeeee; text-align: center; width: 15%"><spring:message
+								code="bbs.img.board.no" /></th>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 55%">제목</th>
+							style="background-color: #eeeeee; text-align: center; width: 55%"><spring:message
+								code="bbs.img.board.title" /></th>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 10%">글쓴이</th>
+							style="background-color: #eeeeee; text-align: center; width: 10%"><spring:message
+								code="bbs.img.board.writer" /></th>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 10%">작성일</th>
+							style="background-color: #eeeeee; text-align: center; width: 10%"><spring:message
+								code="bbs.img.board.reportingdate" /></th>
 						<th
-							style="background-color: #eeeeee; text-align: center; width: 10%">조회수</th>
+							style="background-color: #eeeeee; text-align: center; width: 10%"><spring:message
+								code="bbs.img.board.hits" /></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -166,7 +171,8 @@
 		</div>
 
 		<div style="float: right">
-			<a href="#" class="btn btn-primary pull-right mt-2">글쓰기</a>
+			<a href="#" class="btn btn-primary pull-right mt-2"><spring:message
+					code="bbs.img.board.posting" /></a>
 		</div>
 		<%--  검색창 + 검색버튼
 		<div align="center"
