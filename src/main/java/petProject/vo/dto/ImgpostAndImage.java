@@ -20,14 +20,17 @@ public class ImgpostAndImage {
 	private int imgpostNo;
 	private int imageNumber;
 	private Imgpost imgpost;
+	private Image image;
 	private List<Image> Images;
 
-	public ImgpostAndImage(int imgpostAndImageId, int imgpostNo, int imageNumber, Imgpost imgpost, List<Image> images) {
+	public ImgpostAndImage(int imgpostAndImageId, int imgpostNo, int imageNumber, Imgpost imgpost, Image image,
+			List<Image> images) {
 		super();
 		this.imgpostAndImageId = imgpostAndImageId;
 		this.imgpostNo = imgpostNo;
 		this.imageNumber = imageNumber;
 		this.imgpost = imgpost;
+		this.image = image;
 		Images = images;
 	}
 
@@ -65,6 +68,14 @@ public class ImgpostAndImage {
 
 	public void setImgpost(Imgpost imgpost) {
 		this.imgpost = imgpost;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	public List<Image> getImages() {

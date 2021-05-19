@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <title>게시글 페이지</title>
@@ -24,7 +26,7 @@
 				<thead>
 					<tr>
 						<th colspan="3"
-							style="background-color: #dddddd; text-align: center">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostTitle, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}</th>
+							style="background-color: #dddddd; text-align: center; font-weight: normal ">${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostTitle, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,12 +37,16 @@
 					<tr>
 						<td>작성일자</td>
 						<td colspan="2">${fn:substring(imgpost.imgpostPostingtime, 0, 10)}
-							${fn:substring(imgpost.imgpostPostingtime, 11, 13)}시
-							${fn:substring(imgpost.imgpostPostingtime, 14, 16)}분</td>
+							${fn:substring(imgpost.imgpostPostingtime, 11, 13)}:${fn:substring(imgpost.imgpostPostingtime, 14, 16)}</td>
 					</tr>
-					<tr>
+					<tr style="background-color: #ffffff">
 						<td>내용</td>
 						<td colspan="2" style="height: 200px; text-align: left">
+							<c:forEach var="imgpostAndImage" items="${imgpost.imgpostAndImages}" varStatus="status">
+								<img alt=""
+										src="${pageContext.request.contextPath}/upload/${imgpostAndImage.image.imagePath}">
+							</c:forEach>
+							<br><br><br>
 							<div>
 								${fn:replace(fn:replace(fn:replace(fn:replace(fn:replace(imgpost.imgpostContent, ' ', '&nbsp;'), '<', '&lt;'), '>', '&gt;'), '\\n', ''), '\"', '&quot;')}
 							</div>
@@ -58,7 +64,7 @@
 					onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
 			</c:if>
 
-			<a href="../from/board" class="btn btn-primary">목록</a>
+			<a href="${pageContext.request.contextPath}/board/img" class="btn btn-primary">목록</a>
 		</div>
 
 		<br> <br>
@@ -67,8 +73,6 @@
 		<form
 			action="${pageContext.request.contextPath}/from/comment?postNo=${imgpost.imgpostNo}"
 			method="post">
-
-
 
 			<div class="form-group">
 				<div class="input-group mb-3">

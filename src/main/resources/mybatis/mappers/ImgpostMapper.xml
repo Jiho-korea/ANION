@@ -21,7 +21,8 @@
 	<select id="listImgpost" parameterType="imageBoardRequest"
 		resultMap="imgpostListResultMap">
 		SELECT "IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
-		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME", "IMGPOST_VIEWCNT"
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME",
+		"IMGPOST_VIEWCNT"
 
 		<choose>
 			<when
@@ -78,12 +79,16 @@
 
 	<select id="selectImgpost" parameterType="int"
 		resultMap="selectImgpostResultMap">
-		SELECT "IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
+		SELECT i."IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
 		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME",
-		"IMGPOST_VIEWCNT"
-		FROM "public"."imgpost"
-		WHERE "IMGPOST_NO" =
-		#{imgpostNo};
+		"IMGPOST_VIEWCNT", iai."IMGPOST_AND_IMAGE_ID", iai."IMAGE_NUMBER"
+		FROM
+		"public"."imgpost" i LEFT OUTER JOIN "public"."imgpost_and_image" iai
+		ON i."IMGPOST_NO" = iai."IMGPOST_NO"
+		where "IMGPOST_AVAILABLE" = 1 AND
+		i."IMGPOST_NO" = #{imgpostNo}
+		ORDER
+		BY iai."IMGPOST_AND_IMAGE_ID" ASC
 	</select>
 
 	<resultMap type="imgpost" id="selectImgpostResultMap">
@@ -97,6 +102,9 @@
 		<result column="IMGPOST_VIEWCNT" property="imgpostViewcnt" />
 		<association select="selectMember" property="member"
 			column="{memberNumber=MEMBER_NUMBER}" />
+		<collection property="imgpostAndImages"
+			javaType="java.util.ArrayList" ofType="imgpostAndImage"
+			resultMap="imgpostAndImageListResultMap"></collection>
 	</resultMap>
 
 	<select id="selectMember" parameterType="member"
@@ -110,5 +118,26 @@
 		"public"."member"
 		WHERE "MEMBER_NUMBER" =
 		#{memberNumber}
+	</select>
+
+	<resultMap type="imgpostAndImage"
+		id="imgpostAndImageListResultMap">
+		<id column="IMGPOST_AND_IMAGE_ID" property="imgpostAndImageId" />
+		<result column="IMGPOST_NO" property="imgpostNo" />
+		<result column="IMAGE_NUMBER" property="imageNumber" />
+		<association select="selectImage" property="image"
+			column="{imageNumber=IMAGE_NUMBER}" />
+	</resultMap>
+
+	<select id="selectImage" parameterType="image"
+		resultType="image">
+		SELECT
+		"IMAGE_NUMBER",
+		"IMAGE_PATH"
+		FROM
+		"public"."image"
+		WHERE
+		"IMAGE_NUMBER" = #{imageNumber}
+		
 	</select>
 </mapper>
