@@ -66,19 +66,23 @@
 										path="petKindcode" /></td>
 
 								<th width="13%">서식지</th>
-								<td width="17%"><form:select path="petKindHabitat">
-										<form:option cssClass="form-control" value="">국가코드</form:option>
-										<form:option cssClass="form-control" value="KR" />
-										<form:option cssClass="form-control" value="US" />
-										<form:option cssClass="form-control" value="JP" />
-										<form:option cssClass="form-control" value="AF" />
-									</form:select> <br>
-								<form:errors path="petKindHabitat" /></td>
+								<td width="17%"><span><input type="text"
+										name="petKindHabitat" id="textBox" style="width: 50px;"
+										onfocus="inInput(this)" onblur="outInput(this)" disabled>
+										<select onfocus="inInput(this)" onblur="outInput(this)"
+										onChange="select(this.value)">
+											<option class="form-control" value="">국가코드</option>
+											<option class="form-control" value="KR">한국(KR)</option>
+											<option class="form-control" value="US">미국(US)</option>
+											<option class="form-control" value="JP">일본(JP)</option>
+											<option class="form-control" value="AF">아프리카(AF)</option>
+											<option class="form-control" onselect="focus">직접입력</option>
+									</select> </span><br> <form:errors path="petKindHabitat" /></td>
 
 								<th width="13%">견종명</th>
 								<td width="17%"><form:input type="text" path="petKind"
 										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
-								<form:errors path="petKind" /></td>
+									<form:errors path="petKind" /></td>
 							</tr>
 
 						</tbody>
@@ -103,4 +107,17 @@
 	</div>
 	<!-- wapper 끝-->
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	function select(value) {
+		if (value != "직접입력") {
+			document.getElementById("textBox").value = value;
+			document.getElementById("textBox").disabled = true;
+			document.getElementById("textBox").focus();
+		} else {
+			document.getElementById("textBox").value = "";
+			document.getElementById("textBox").disabled = false;
+			document.getElementById("textBox").focus();
+		}
+	}
+</script>
 </html>
