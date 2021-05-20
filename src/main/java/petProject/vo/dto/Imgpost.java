@@ -9,6 +9,8 @@
 */
 package petProject.vo.dto;
 
+import java.util.List;
+
 import petProject.vo.Member;
 
 public class Imgpost {
@@ -20,10 +22,12 @@ public class Imgpost {
 	private String imgpostContent;
 	private int imgpostAvailable;
 	private String imgpostPostingtime;
+	private int imgpostViewcnt;
 	private Member member;
+	private List<ImgpostAndImage> imgpostAndImages;
 
 	public Imgpost(int imgpostNo, String imgpostTitle, int memberNumber, String imgpostContent, int imgpostAvailable,
-			String imgpostPostingtime, Member member) {
+			String imgpostPostingtime, int imgpostViewcnt, Member member, List<ImgpostAndImage> imgpostAndImages) {
 		super();
 		this.imgpostNo = imgpostNo;
 		this.imgpostTitle = imgpostTitle;
@@ -31,7 +35,9 @@ public class Imgpost {
 		this.imgpostContent = imgpostContent;
 		this.imgpostAvailable = imgpostAvailable;
 		this.imgpostPostingtime = imgpostPostingtime;
+		this.imgpostViewcnt = imgpostViewcnt;
 		this.member = member;
+		this.imgpostAndImages = imgpostAndImages;
 	}
 
 	public Imgpost() {
@@ -86,6 +92,14 @@ public class Imgpost {
 		this.imgpostPostingtime = imgpostPostingtime;
 	}
 
+	public int getImgpostViewcnt() {
+		return imgpostViewcnt;
+	}
+
+	public void setImgpostViewcnt(int imgpostViewcnt) {
+		this.imgpostViewcnt = imgpostViewcnt;
+	}
+
 	public Member getMember() {
 		return member;
 	}
@@ -94,7 +108,16 @@ public class Imgpost {
 		this.member = member;
 	}
 
+	public List<ImgpostAndImage> getImgpostAndImages() {
+		return imgpostAndImages;
+	}
+
+	public void setImgpostAndImages(List<ImgpostAndImage> imgpostAndImages) {
+		this.imgpostAndImages = imgpostAndImages;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 }

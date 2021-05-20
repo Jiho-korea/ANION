@@ -66,7 +66,8 @@
 
 			<form:form action="${pageContext.request.contextPath}/posting/img"
 				method="post" cssClass="form-signin"
-				modelAttribute="imagePostingRequest">
+				modelAttribute="imagePostingRequest"
+				onsubmit="return submitPosting()">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
@@ -110,7 +111,7 @@
 					style="margin-left: 91%"
 					value="<spring:message code="posting.page.img.post" />" />
 			</form:form>
-		</div> 
+		</div>
 	</div>
 	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
@@ -183,4 +184,16 @@
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	function submitPosting() {
+		if ($("#imgpostTitle").val() == "") {
+			alert("제목을 입력해주세요.");
+			return false;
+		} else if ($("#imgpostContent").val().length < 2) {
+			alert("내용은 최소 2자 이상 입력해 주십시오.");
+			return false;
+		}
+		return true;
+	}
+</script>
 </html>

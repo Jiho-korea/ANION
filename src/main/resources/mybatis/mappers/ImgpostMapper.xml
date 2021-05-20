@@ -21,10 +21,12 @@
 	<select id="listImgpost" parameterType="imageBoardRequest"
 		resultMap="imgpostListResultMap">
 		SELECT "IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
-		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME"
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME",
+		"IMGPOST_VIEWCNT"
 
 		<choose>
-			<when test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
+			<when
+				test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
 				FROM (select * from "public"."imgpost" where
 				"IMGPOST_AVAILABLE" = 1 ORDER BY
 				"IMGPOST_NO" DESC LIMIT
@@ -38,7 +40,8 @@
 
 		<where>
 			<choose>
-				<when test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
+				<when
+					test='imageBoardRequest.imgpostTitle neq null and imageBoardRequest.imgpostTitle neq ""'>
 					AND "IMGPOST_TITLE" LIKE
 					CONCAT('%',#{imageBoardRequest.imgpostTitle},'%') ORDER BY
 					"IMGPOST_NO" DESC
@@ -61,8 +64,47 @@
 		<result column="IMGPOST_POSTINGTIME"
 			property="imgpostPostingtime" />
 		<result column="IMGPOST_AVAILABLE" property="imgpostAvailable" />
+		<result column="IMGPOST_VIEWCNT" property="imgpostViewcnt" />
 		<association select="selectMember" property="member"
 			column="{memberNumber=MEMBER_NUMBER}" />
+	</resultMap>
+
+	<update id="updateImgpostViewcnt" parameterType="int">
+		UPDATE
+		public.imgpost
+		SET "IMGPOST_VIEWCNT"= "IMGPOST_VIEWCNT" + 1
+		WHERE
+		"IMGPOST_NO"=#{imgpostNo}
+	</update>
+
+	<select id="selectImgpost" parameterType="int"
+		resultMap="selectImgpostResultMap">
+		SELECT i."IMGPOST_NO", "IMGPOST_TITLE", "MEMBER_NUMBER",
+		"IMGPOST_CONTENT", "IMGPOST_AVAILABLE", "IMGPOST_POSTINGTIME",
+		"IMGPOST_VIEWCNT", iai."IMGPOST_AND_IMAGE_ID", iai."IMAGE_NUMBER"
+		FROM
+		"public"."imgpost" i LEFT OUTER JOIN "public"."imgpost_and_image" iai
+		ON i."IMGPOST_NO" = iai."IMGPOST_NO"
+		where "IMGPOST_AVAILABLE" = 1 AND
+		i."IMGPOST_NO" = #{imgpostNo}
+		ORDER
+		BY iai."IMGPOST_AND_IMAGE_ID" ASC
+	</select>
+
+	<resultMap type="imgpost" id="selectImgpostResultMap">
+		<id column="IMGPOST_NO" property="imgpostNo" />
+		<result column="IMGPOST_TITLE" property="imgpostTitle" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="IMGPOST_CONTENT" property="imgpostContent" />
+		<result column="IMGPOST_POSTINGTIME"
+			property="imgpostPostingtime" />
+		<result column="IMGPOST_AVAILABLE" property="imgpostAvailable" />
+		<result column="IMGPOST_VIEWCNT" property="imgpostViewcnt" />
+		<association select="selectMember" property="member"
+			column="{memberNumber=MEMBER_NUMBER}" />
+		<collection property="imgpostAndImages"
+			javaType="java.util.ArrayList" ofType="imgpostAndImage"
+			resultMap="imgpostAndImageListResultMap"></collection>
 	</resultMap>
 
 	<select id="selectMember" parameterType="member"
@@ -74,6 +116,28 @@
 		"MEMBER_NUMBER"
 		FROM
 		"public"."member"
-		WHERE "MEMBER_NUMBER" = #{memberNumber}
+		WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
+	</select>
+
+	<resultMap type="imgpostAndImage"
+		id="imgpostAndImageListResultMap">
+		<id column="IMGPOST_AND_IMAGE_ID" property="imgpostAndImageId" />
+		<result column="IMGPOST_NO" property="imgpostNo" />
+		<result column="IMAGE_NUMBER" property="imageNumber" />
+		<association select="selectImage" property="image"
+			column="{imageNumber=IMAGE_NUMBER}" />
+	</resultMap>
+
+	<select id="selectImage" parameterType="image"
+		resultType="image">
+		SELECT
+		"IMAGE_NUMBER",
+		"IMAGE_PATH"
+		FROM
+		"public"."image"
+		WHERE
+		"IMAGE_NUMBER" = #{imageNumber}
+		
 	</select>
 </mapper>

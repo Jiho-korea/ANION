@@ -23,4 +23,8 @@ public interface ImgpostDAO {
 	int insertImgpost(@Param("imagePostingRequest") ImagePostingRequest imagePostingRequest) throws Exception;
 
 	List<Imgpost> listImgpost(@Param("imageBoardRequest") ImageBoardRequest imageBoardRequest) throws Exception;
+
+	int updateImgpostViewcnt(@Param("imgpostNo") int imgpostNo) throws Exception;
+
+	Imgpost selectImgpost(@Param("imgpostNo") int imgpostNo) throws Exception;
 }
