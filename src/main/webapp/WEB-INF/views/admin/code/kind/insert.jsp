@@ -60,16 +60,17 @@
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="13%">견종코드</th>
-								<td width="17%"><form:input type="text" path="petKindcode"
+								<th width="12%">견종코드</th>
+								<td width="18%"><form:input type="text" path="petKindcode"
 										cssClass="txt_box w200" title="견종코드" /> <form:errors
 										path="petKindcode" /></td>
 
-								<th width="13%">서식지</th>
-								<td width="17%"><span><input type="text"
-										name="petKindHabitat" id="textBox" style="width: 50px;"
-										onfocus="inInput(this)" onblur="outInput(this)" disabled>
-										<select onfocus="inInput(this)" onblur="outInput(this)"
+								<th width="12%">서식지</th>
+								<td width="28%"><span><input type="text"
+										class="form-control" name="petKindHabitat" id="textBox"
+										style="width: 100px;" onfocus="inInput(this)"
+										onblur="outInput(this)" disabled> <select
+										onfocus="inInput(this)" onblur="outInput(this)"
 										onChange="select(this.value)">
 											<option class="form-control" value="">국가코드</option>
 											<option class="form-control" value="KR">한국(KR)</option>
@@ -79,8 +80,8 @@
 											<option class="form-control" onselect="focus">직접입력</option>
 									</select> </span><br> <form:errors path="petKindHabitat" /></td>
 
-								<th width="13%">견종명</th>
-								<td width="17%"><form:input type="text" path="petKind"
+								<th width="12%">견종명</th>
+								<td width="18%"><form:input type="text" path="petKind"
 										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
 									<form:errors path="petKind" /></td>
 							</tr>
