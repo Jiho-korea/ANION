@@ -60,25 +60,28 @@
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="13%">견종코드</th>
-								<td width="17%"><form:input type="text" path="petKindcode"
+								<th width="12%">견종코드</th>
+								<td width="18%"><form:input type="text" path="petKindcode"
 										cssClass="txt_box w200" title="견종코드" /> <form:errors
 										path="petKindcode" /></td>
 
-								<th width="13%">서식지</th>
-								<td width="17%"><form:select path="petKindHabitat">
-										<form:option cssClass="form-control" value="">국가코드</form:option>
-										<form:option cssClass="form-control" value="KR" />
-										<form:option cssClass="form-control" value="US" />
-										<form:option cssClass="form-control" value="JP" />
-										<form:option cssClass="form-control" value="AF" />
-									</form:select> <br>
-								<form:errors path="petKindHabitat" /></td>
+								<th width="12%">서식지</th>
+								<td width="28%"><input type="text" class="form-control"
+									name="petKindHabitat" id="textBox" style="width: 100px;"
+									onfocus="inInput(this)" onblur="outInput(this)" disabled>
+									<select onfocus="inInput(this)" onblur="outInput(this)"
+									onChange="select(this.value)">
+										<option class="form-control" value="">국가코드</option>
+										<option class="form-control" value="KR">한국(KR)</option>
+										<option class="form-control" value="US">미국(US)</option>
+										<option class="form-control" value="JP">일본(JP)</option>
+										<option class="form-control" onselect="focus">직접입력</option>
+								</select> <br> <form:errors path="petKindHabitat" /></td>
 
-								<th width="13%">견종명</th>
-								<td width="17%"><form:input type="text" path="petKind"
+								<th width="12%">견종명</th>
+								<td width="18%"><form:input type="text" path="petKind"
 										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
-								<form:errors path="petKind" /></td>
+									<form:errors path="petKind" /></td>
 							</tr>
 
 						</tbody>
@@ -88,10 +91,11 @@
 						<input type="image"
 							src="${pageContext.request.contextPath}/img/admin/button/bt_save.gif"
 							name="btn_save" id="btn_save" width="31" height="19" title="저장"
-							class="btn" border="0">&nbsp; <img
+							class="btn" border="0">&nbsp; <a
+							href="${pageContext.request.contextPath}/admin/code/kindcode/list"><img
 							src="${pageContext.request.contextPath}/img/admin/button/bt_cancel.gif"
 							name="btn_cancel" id="btn_cancel" width="31" height="19" alt="취소"
-							class="btn" border="0">
+							class="btn" border="0"></a>
 					</p>
 				</form:form>
 			</div>
@@ -103,4 +107,17 @@
 	</div>
 	<!-- wapper 끝-->
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	function select(value) {
+		if (value != "직접입력") {
+			document.getElementById("textBox").value = value;
+			document.getElementById("textBox").disabled = true;
+			document.getElementById("textBox").focus();
+		} else {
+			document.getElementById("textBox").value = "";
+			document.getElementById("textBox").disabled = false;
+			document.getElementById("textBox").focus();
+		}
+	}
+</script>
 </html>
