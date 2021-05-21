@@ -68,7 +68,7 @@
 								<th width="13%">서식지</th>
 								<td width="25%"><input type="text" class="form-control"
 									name="petKindHabitat" id="textBox"
-									style="width: 100px; background-color: #E7E7E7; border-radius: 4px;"
+									style="width: 100px; background-color: #E7E7E7; border-width:1px; border-radius: 4px;"
 									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
 									<select onfocus="inInput(this)" onblur="outInput(this)"
 									onChange="select(this.value)">
