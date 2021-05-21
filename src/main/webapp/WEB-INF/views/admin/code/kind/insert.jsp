@@ -28,6 +28,19 @@
 	
 </script>
 </head>
+<style>
+input {
+	padding-left: 3px;
+}
+.textBox {
+	width: 100px;
+	background-color: #E7E7E7;
+	border-width: 1px;
+	border-radius: 4px;
+	border-width: 1px;
+	outline: none;
+}
+</style>
 <body>
 	<!-- wrapper 시작 -->
 	<div id="wrapper">
@@ -66,9 +79,8 @@
 										path="petKindcode" /></td>
 
 								<th width="13%">서식지</th>
-								<td width="25%"><input type="text" class="form-control"
-									name="petKindHabitat" id="textBox"
-									style="width: 100px; background-color: #E7E7E7; border-width:1px; border-radius: 4px;"
+								<td width="25%"><input type="text"
+									class="form-control textBox" name="petKindHabitat" id="textBox"
 									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
 									<select onfocus="inInput(this)" onblur="outInput(this)"
 									onChange="select(this.value)">
@@ -115,7 +127,7 @@
 			document.getElementById("textBox").readOnly = true;
 			document.getElementById("textBox").style.backgroundColor = "#E7E7E7";
 			document.getElementById("textBox").focus();
-		} else if (value != "직접입력") { 
+		} else if (value != "직접입력") {
 			document.getElementById("textBox").value = value;
 			document.getElementById("textBox").readOnly = true;
 			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
