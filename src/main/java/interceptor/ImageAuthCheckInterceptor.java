@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.exception.ImageNotExistException;
-import petProject.service.ImageSelectService;
+import petProject.service.image.ImageSelectService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Image;
 import petProject.vo.ScriptWriter;

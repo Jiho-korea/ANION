@@ -24,8 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.ImageNotExistException;
 import petProject.exception.ImagePostingException;
-import petProject.service.ImageSelectService;
 import petProject.service.bbs.image.ImagePostingService;
+import petProject.service.image.ImageSelectService;
+import petProject.vo.AuthInfo;
 import petProject.vo.Image;
 import petProject.vo.request.ImagePostingRequest;
 
@@ -72,6 +73,8 @@ public class ImagePostingController {
 				model.addAttribute("petRegistrationNumber", imagePostingRequest.getPetRegistrationNumber());
 				return "bbs/img/posting";
 			}
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+			imagePostingRequest.setMemberNumber(authInfo.getMemberNumber());
 			imagePostingService.postingImage(imagePostingRequest);
 
 			return "redirect:/pet/list";

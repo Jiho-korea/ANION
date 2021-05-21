@@ -16,28 +16,28 @@ package config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import controller.EmailValidController;
-import controller.EventPopupController;
-import controller.ImageDeleteController;
-import controller.ImageListController;
-import controller.LoginController;
-import controller.LogoutController;
-import controller.MemberRegisterController;
-import controller.PetInfoController;
-import controller.PetKindPopupController;
-import controller.PetListController;
-import controller.PetRegisterController;
-import controller.ProfileEditController;
-import controller.admin.ImageDownloadController;
-import controller.admin.KindcodeDeleteController;
-import controller.admin.KindcodeInsertController;
-import controller.admin.KindcodeListController;
-import controller.admin.KindcodeUpdateController;
-import controller.admin.MemberListController;
-import controller.admin.PetListAdminController;
+import controller.admin.code.kind.KindcodeDeleteController;
+import controller.admin.code.kind.KindcodeInsertController;
+import controller.admin.code.kind.KindcodeListController;
+import controller.admin.code.kind.KindcodeUpdateController;
+import controller.admin.image.ImageDownloadController;
+import controller.admin.member.MemberListController;
+import controller.admin.pet.PetListAdminController;
 import controller.bbs.image.ImageBoardController;
 import controller.bbs.image.ImagePostingController;
 import controller.bbs.image.ViewImagePostController;
+import controller.event.EventPopupController;
+import controller.image.ImageDeleteController;
+import controller.image.ImageListController;
+import controller.member.EmailValidController;
+import controller.member.LoginController;
+import controller.member.LogoutController;
+import controller.member.MemberRegisterController;
+import controller.member.ProfileEditController;
+import controller.pet.PetInfoController;
+import controller.pet.PetKindPopupController;
+import controller.pet.PetListController;
+import controller.pet.PetRegisterController;
 
 @Configuration
 public class ControllerConfig {
