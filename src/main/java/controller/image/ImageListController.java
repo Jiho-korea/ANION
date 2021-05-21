@@ -46,8 +46,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import petProject.service.image.ImageListService;
 import petProject.service.image.ImageUploadService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Image;
-import petProject.vo.ImageUploadRequest;
+import petProject.vo.dto.Image;
+import petProject.vo.request.ImageUploadRequest;
 
 @Controller
 @RequestMapping("/info/list")

@@ -8,7 +8,7 @@
 ========================================================================
 */
 
-package petProject.vo;
+package petProject.vo.request;
 
 import org.hibernate.validator.constraints.NotBlank;
 

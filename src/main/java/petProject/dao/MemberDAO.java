@@ -27,9 +27,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.Member;
-import petProject.vo.MemberRegisterRequest;
+import petProject.vo.dto.Member;
+import petProject.vo.request.ChangeIdCommand;
+import petProject.vo.request.MemberRegisterRequest;
 
 //member 테이블에 접근하는 DAO
 @Mapper

@@ -21,7 +21,7 @@ import petProject.dao.KindcodeDAO;
 import petProject.dao.PetDAO;
 import petProject.exception.PetRegisterException;
 import petProject.service.pet.PetRegisterService;
-import petProject.vo.PetRegisterRequest;
+import petProject.vo.request.PetRegisterRequest;
 
 @Service("petRegisterService")
 @Transactional

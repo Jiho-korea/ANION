@@ -15,7 +15,7 @@ package petProject.service.pet;
 
 import java.util.List;
 
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 public interface KindcodeListService {
 

@@ -22,7 +22,7 @@ import petProject.dao.MemberDAO;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
 import petProject.service.member.ChangePasswordService;
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 @Service("changePasswordService")
 @Component

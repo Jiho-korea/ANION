@@ -12,7 +12,7 @@
 ========================================================================
 */
 
-package petProject.vo;
+package petProject.vo.dto;
 
 import java.io.Serializable;
 

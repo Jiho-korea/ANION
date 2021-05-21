@@ -11,7 +11,7 @@ package petProject.service.image;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.ImageUploadRequest;
+import petProject.vo.request.ImageUploadRequest;
 
 public interface ImageUploadService {
 	int insertImage(@Param("imageUploadRequest") ImageUploadRequest imageUploadRequest) throws Exception;

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.EmailcodeDAO;
 import petProject.exception.EmailcodeDeleteException;
 import petProject.service.member.EmailcodeDeleteService;
-import petProject.vo.Emailcode;
+import petProject.vo.dto.Emailcode;
 
 @Service("emailcodeDeleteService")
 @Transactional

@@ -22,7 +22,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 // DB Kindcode 테이블에 접근하는  DAO
 @Mapper
@@ -33,7 +33,7 @@ public interface KindcodeDAO {
 	List<Kindcode> selectKindcodeListPage(@Param("pageNumber") Integer pageNumber) throws Exception;
 
 	int insertKindcode(Kindcode kindcode) throws Exception;
-	
+
 	String findKindcode(@Param("petKind") String petKind) throws Exception;
 
 	Kindcode selectKindcode(@Param("petKindcode") String petKindcode) throws Exception;

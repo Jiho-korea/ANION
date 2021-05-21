@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.ImgpostNotExistException;
+import petProject.service.ScriptWriter;
 import petProject.service.bbs.image.ViewImgpostService;
-import petProject.vo.ScriptWriter;
 
 @Controller
 public class ViewImagePostController {

@@ -11,7 +11,7 @@ package petProject.service.pet;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.petInfo.PetNameUpdateRequest;
+import petProject.vo.request.PetNameUpdateRequest;
 
 public interface PetInfoUpdateService {
 	int updatePetName(@Param("petNameUpdateRequest") PetNameUpdateRequest petNameUpdateRequest) throws Exception;

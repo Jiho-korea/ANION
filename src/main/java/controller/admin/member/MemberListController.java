@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.service.admin.MemberListService;
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 @Controller
 @RequestMapping("/admin/member")

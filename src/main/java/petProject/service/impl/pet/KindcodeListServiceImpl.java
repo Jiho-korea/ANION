@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.KindcodeDAO;
 import petProject.exception.NonExistentPageException;
 import petProject.service.pet.KindcodeListService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Service("kindcodeListService")
 @Transactional

@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.ImageDAO;
 import petProject.service.image.ImageListService;
-import petProject.vo.Image;
+import petProject.vo.dto.Image;
 
 @Service("imageListService")
 @Transactional

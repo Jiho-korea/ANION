@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.service.pet.PetListService;
-import petProject.vo.Pet;
+import petProject.vo.dto.Pet;
 
 @Controller
 @RequestMapping("/admin/pet")

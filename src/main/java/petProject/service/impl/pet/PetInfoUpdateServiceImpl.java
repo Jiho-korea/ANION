@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.PetDAO;
 import petProject.exception.PetInfoUpdateException;
 import petProject.service.pet.PetInfoUpdateService;
-import petProject.vo.petInfo.PetNameUpdateRequest;
+import petProject.vo.request.PetNameUpdateRequest;
 
 @Service("petInfoUpdateService")
 @Transactional

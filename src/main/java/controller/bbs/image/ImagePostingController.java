@@ -27,7 +27,7 @@ import petProject.exception.ImagePostingException;
 import petProject.service.bbs.image.ImagePostingService;
 import petProject.service.image.ImageSelectService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Image;
+import petProject.vo.dto.Image;
 import petProject.vo.request.ImagePostingRequest;
 
 @Controller
@@ -77,14 +77,15 @@ public class ImagePostingController {
 			imagePostingRequest.setMemberNumber(authInfo.getMemberNumber());
 			imagePostingService.postingImage(imagePostingRequest);
 
-			return "redirect:/pet/list";
+			return "redirect:/board/img";
 		} catch (ImagePostingException e) {
 			e.printStackTrace();
 			errors.reject("failed.posting.img");
-			return "redirect:/pet/list";
+			return "bbs/img/posting";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/pet/list";
+			errors.reject("failed.posting.img");
+			return "bbs/img/posting";
 		}
 
 	}

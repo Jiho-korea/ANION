@@ -12,7 +12,7 @@ package petProject.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Emailcode;
+import petProject.vo.dto.Emailcode;
 
 @Mapper
 public interface EmailcodeDAO {

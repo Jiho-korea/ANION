@@ -7,7 +7,7 @@
 작  성  내  용 : 반려견 이름 변경 vo 클래스
 ========================================================================
 */
-package petProject.vo.petInfo;
+package petProject.vo.request;
 
 import org.hibernate.validator.constraints.NotBlank;
 

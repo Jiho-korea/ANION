@@ -29,11 +29,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.PetInfoUpdateException;
 import petProject.exception.PetNotFoundException;
+import petProject.service.ScriptWriter;
 import petProject.service.pet.PetInfoService;
 import petProject.service.pet.PetInfoUpdateService;
-import petProject.vo.Pet;
-import petProject.vo.ScriptWriter;
-import petProject.vo.petInfo.PetNameUpdateRequest;
+import petProject.vo.dto.Pet;
+import petProject.vo.request.PetNameUpdateRequest;
 
 @Controller
 @RequestMapping("/info/pet")

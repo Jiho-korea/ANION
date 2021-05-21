@@ -23,7 +23,7 @@ import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.member.LoginService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 @Service("loginService")
 @Transactional

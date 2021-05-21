@@ -45,7 +45,7 @@ import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.member.MailSendService;
 import petProject.service.member.MemberRegisterService;
-import petProject.vo.MemberRegisterRequest;
+import petProject.vo.request.MemberRegisterRequest;
 
 @Controller
 @PropertySource("classpath:/mail/config/mail.properties")

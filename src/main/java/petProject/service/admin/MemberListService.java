@@ -11,7 +11,7 @@ package petProject.service.admin;
 
 import java.util.List;
 
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 public interface MemberListService {
 	List<Member> selectMemberList() throws Exception;
