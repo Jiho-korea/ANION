@@ -60,15 +60,16 @@
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="12%">견종코드</th>
+								<th width="13%">견종코드</th>
 								<td width="18%"><form:input type="text" path="petKindcode"
 										cssClass="txt_box w200" title="견종코드" /> <form:errors
 										path="petKindcode" /></td>
 
-								<th width="12%">서식지</th>
-								<td width="28%"><input type="text" class="form-control"
-									name="petKindHabitat" id="textBox" style="width: 100px;"
-									onfocus="inInput(this)" onblur="outInput(this)" disabled>
+								<th width="13%">서식지</th>
+								<td width="25%"><input type="text" class="form-control"
+									name="petKindHabitat" id="textBox"
+									style="width: 100px; background-color: #E7E7E7; border-radius: 4px;"
+									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
 									<select onfocus="inInput(this)" onblur="outInput(this)"
 									onChange="select(this.value)">
 										<option class="form-control" value="">국가코드</option>
@@ -78,7 +79,7 @@
 										<option class="form-control" onselect="focus">직접입력</option>
 								</select> <br> <form:errors path="petKindHabitat" /></td>
 
-								<th width="12%">견종명</th>
+								<th width="13%">견종명</th>
 								<td width="18%"><form:input type="text" path="petKind"
 										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
 									<form:errors path="petKind" /></td>
@@ -109,13 +110,20 @@
 </body>
 <script defer type="text/javascript" charset="utf-8">
 	function select(value) {
-		if (value != "직접입력") {
+		if (value == "") {
 			document.getElementById("textBox").value = value;
-			document.getElementById("textBox").disabled = true;
+			document.getElementById("textBox").readOnly = true;
+			document.getElementById("textBox").style.backgroundColor = "#E7E7E7";
+			document.getElementById("textBox").focus();
+		} else if (value != "직접입력") { 
+			document.getElementById("textBox").value = value;
+			document.getElementById("textBox").readOnly = true;
+			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
 			document.getElementById("textBox").focus();
 		} else {
 			document.getElementById("textBox").value = "";
-			document.getElementById("textBox").disabled = false;
+			document.getElementById("textBox").readOnly = false;
+			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
 			document.getElementById("textBox").focus();
 		}
 	}
