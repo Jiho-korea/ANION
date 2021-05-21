@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.exception.PetNotFoundException;
-import petProject.service.PetInfoService;
+import petProject.service.pet.PetInfoService;
 import petProject.vo.AuthInfo;
 import petProject.vo.Pet;
 import petProject.vo.ScriptWriter;
