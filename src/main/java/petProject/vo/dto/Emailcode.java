@@ -1,4 +1,4 @@
-package petProject.vo;
+package petProject.vo.dto;
 
 import java.util.Random;
 
@@ -31,7 +31,7 @@ public class Emailcode {
 	public void setNewMemberId(String newMemberId) {
 		this.newMemberId = newMemberId;
 	}
-	
+
 	public String random() {
 		Random rand = new Random();
 		String numStr = "";

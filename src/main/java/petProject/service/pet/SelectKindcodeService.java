@@ -1,6 +1,6 @@
 package petProject.service.pet;
 
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 public interface SelectKindcodeService {
 

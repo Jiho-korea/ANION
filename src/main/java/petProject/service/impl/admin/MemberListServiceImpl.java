@@ -19,7 +19,7 @@ import petProject.dao.ImageDAO;
 import petProject.dao.MemberDAO;
 import petProject.dao.PetDAO;
 import petProject.service.admin.MemberListService;
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 @Service("memberListService")
 @Transactional

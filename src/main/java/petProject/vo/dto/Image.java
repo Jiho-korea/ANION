@@ -11,7 +11,7 @@
 수  정  내  용 : Pet과 Member를 연관조회 할 수 있도록 VO 필드 추가
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.dto;
 
 public class Image {
 	private static final long serialVersionUID = 1L;

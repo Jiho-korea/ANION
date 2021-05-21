@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import petProject.dao.KindcodeDAO;
 import petProject.exception.NonExistentKindcodeException;
 import petProject.service.pet.SelectKindcodeService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Service("selectKindcodeService")
 @Component

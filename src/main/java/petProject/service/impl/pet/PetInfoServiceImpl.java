@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.PetDAO;
 import petProject.exception.PetNotFoundException;
 import petProject.service.pet.PetInfoService;
-import petProject.vo.Pet;
+import petProject.vo.dto.Pet;
 
 @Service("petInfoService")
 @Transactional

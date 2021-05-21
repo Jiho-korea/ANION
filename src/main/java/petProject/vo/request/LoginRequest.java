@@ -7,7 +7,7 @@
 작  성  내  용 : 사용자로부터 입력받은 Login정보
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.request;
 
 import org.hibernate.validator.constraints.NotBlank;
 

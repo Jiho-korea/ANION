@@ -17,7 +17,7 @@ import petProject.dao.KindcodeDAO;
 import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.KindcodeUpdateException;
 import petProject.service.admin.KindcodeUpdateService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Service("kindcodeUpdateService")
 @Transactional

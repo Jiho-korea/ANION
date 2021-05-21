@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 import petProject.exception.MailException;
 import petProject.service.member.MailSendService;
 import petProject.vo.MailStatus;
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 @Service("mailSendService")
 public class MailSendServiceImpl implements MailSendService {

@@ -18,9 +18,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Pet;
-import petProject.vo.PetRegisterRequest;
-import petProject.vo.petInfo.PetNameUpdateRequest;
+import petProject.vo.dto.Pet;
+import petProject.vo.request.PetNameUpdateRequest;
+import petProject.vo.request.PetRegisterRequest;
 
 // DB PET 테이블에 접근하는  DAO
 @Mapper

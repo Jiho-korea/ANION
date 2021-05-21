@@ -11,8 +11,6 @@ package petProject.vo.dto;
 
 import java.util.List;
 
-import petProject.vo.Member;
-
 public class Imgpost {
 
 	private static final long serialVersionUID = 1L;

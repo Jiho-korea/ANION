@@ -11,7 +11,7 @@ package petProject.service.member;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Emailcode;
+import petProject.vo.dto.Emailcode;
 
 public interface EmailValidService {
 

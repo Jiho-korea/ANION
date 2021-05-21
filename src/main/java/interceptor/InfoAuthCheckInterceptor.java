@@ -17,10 +17,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.exception.PetNotFoundException;
+import petProject.service.ScriptWriter;
 import petProject.service.pet.PetInfoService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Pet;
-import petProject.vo.ScriptWriter;
+import petProject.vo.dto.Pet;
 
 public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 

@@ -15,12 +15,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import petProject.service.ScriptWriter;
 import petProject.vo.AuthInfo;
-import petProject.vo.Memberlevel;
-import petProject.vo.ScriptWriter;
+import petProject.vo.dto.Memberlevel;
 
 public class AdminCheckInterceptor implements HandlerInterceptor {
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

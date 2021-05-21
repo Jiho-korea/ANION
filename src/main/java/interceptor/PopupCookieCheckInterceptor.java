@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import petProject.vo.ScriptWriter;
+import petProject.service.ScriptWriter;
 
 public class PopupCookieCheckInterceptor implements HandlerInterceptor {
 

@@ -7,7 +7,7 @@
 작  성  내  용 : 사용자로부터 입력받은 정보를 담은 vo 클래스
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.request;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -76,7 +76,7 @@ public class MemberRegisterRequest {
 	public void setMemberPhoneNumber(String memberPhoneNumber) {
 		this.memberPhoneNumber = memberPhoneNumber;
 	}
-	
+
 	public boolean isPasswordEqualToCheckPassword() {
 		return memberPassword.equals(checkPassword);
 	}

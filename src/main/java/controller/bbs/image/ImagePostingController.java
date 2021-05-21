@@ -27,7 +27,7 @@ import petProject.exception.ImagePostingException;
 import petProject.service.bbs.image.ImagePostingService;
 import petProject.service.image.ImageSelectService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Image;
+import petProject.vo.dto.Image;
 import petProject.vo.request.ImagePostingRequest;
 
 @Controller

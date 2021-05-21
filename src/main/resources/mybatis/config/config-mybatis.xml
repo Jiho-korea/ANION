@@ -8,19 +8,19 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	<typeAliases>
-		<typeAlias type="petProject.vo.LoginRequest" alias="loginRequest"/>
-		<typeAlias type="petProject.vo.Member" alias="member"/>
-		<typeAlias type="petProject.vo.PetRegisterRequest" alias="petRegisterRequest" />
-		<typeAlias type="petProject.vo.Pet" alias="pet" />
-		<typeAlias type="petProject.vo.ImageUploadRequest" alias="imageUploadRequest" />
-		<typeAlias type="petProject.vo.Image" alias="image" />
-		<typeAlias type="petProject.vo.MemberRegisterRequest" alias="memberRegisterRequest" />
-		<typeAlias type="petProject.vo.Kindcode" alias="kindcode" />
-		<typeAlias type="petProject.vo.Memberlevel" alias="memberlevel" />
-		<typeAlias type="petProject.vo.Memberauth" alias="memberauth" />
-		<typeAlias type="petProject.vo.ChangeIdCommand" alias="changeIdCommand" />
-		<typeAlias type="petProject.vo.Emailcode" alias="emailcode" />
-		<typeAlias type="petProject.vo.petInfo.PetNameUpdateRequest" alias="petNameUpdateRequest" />
+		<typeAlias type="petProject.vo.request.LoginRequest" alias="loginRequest"/>
+		<typeAlias type="petProject.vo.dto.Member" alias="member"/>
+		<typeAlias type="petProject.vo.request.PetRegisterRequest" alias="petRegisterRequest" />
+		<typeAlias type="petProject.vo.dto.Pet" alias="pet" />
+		<typeAlias type="petProject.vo.request.ImageUploadRequest" alias="imageUploadRequest" />
+		<typeAlias type="petProject.vo.dto.Image" alias="image" />
+		<typeAlias type="petProject.vo.request.MemberRegisterRequest" alias="memberRegisterRequest" />
+		<typeAlias type="petProject.vo.dto.Kindcode" alias="kindcode" />
+		<typeAlias type="petProject.vo.dto.Memberlevel" alias="memberlevel" />
+		<typeAlias type="petProject.vo.dto.Memberauth" alias="memberauth" />
+		<typeAlias type="petProject.vo.request.ChangeIdCommand" alias="changeIdCommand" />
+		<typeAlias type="petProject.vo.dto.Emailcode" alias="emailcode" />
+		<typeAlias type="petProject.vo.request.PetNameUpdateRequest" alias="petNameUpdateRequest" />
 		<typeAlias type="petProject.vo.dto.Imgpost" alias="imgpost" />
 		<typeAlias type="petProject.vo.request.ImagePostingRequest" alias="imagePostingRequest" />
 		<typeAlias type="petProject.vo.dto.ImgpostAndImage" alias="imgpostAndImage" />

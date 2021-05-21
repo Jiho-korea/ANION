@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.NonExistentPageException;
+import petProject.service.ScriptWriter;
 import petProject.service.bbs.image.ImgpostListService;
-import petProject.vo.ScriptWriter;
 import petProject.vo.dto.Imgpost;
 import petProject.vo.request.ImageBoardRequest;
 

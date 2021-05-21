@@ -20,9 +20,9 @@ import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.service.member.EmailValidService;
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.Emailcode;
-import petProject.vo.Member;
+import petProject.vo.dto.Emailcode;
+import petProject.vo.dto.Member;
+import petProject.vo.request.ChangeIdCommand;
 
 @Service("emailValidService")
 @Transactional

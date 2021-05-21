@@ -37,8 +37,8 @@ import petProject.exception.PetNotFoundException;
 import petProject.service.image.ImageListService;
 import petProject.service.pet.PetInfoService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Image;
-import petProject.vo.Pet;
+import petProject.vo.dto.Image;
+import petProject.vo.dto.Pet;
 
 @Controller
 @RequestMapping("/info/list")

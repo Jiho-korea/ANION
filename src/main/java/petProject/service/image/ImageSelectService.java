@@ -11,7 +11,7 @@ package petProject.service.image;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Image;
+import petProject.vo.dto.Image;
 
 public interface ImageSelectService {
 	Image selectImage(@Param("imageNumber") int imageNumber) throws Exception;

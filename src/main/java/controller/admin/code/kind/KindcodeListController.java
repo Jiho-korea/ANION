@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.service.pet.KindcodeListService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Controller
 @RequestMapping("/admin/code/kindcode")

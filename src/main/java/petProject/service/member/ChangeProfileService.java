@@ -13,8 +13,8 @@ package petProject.service.member;
 import javax.servlet.http.HttpServletRequest;
 
 import petProject.vo.AuthInfo;
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.ChangeNameCommand;
+import petProject.vo.request.ChangeIdCommand;
+import petProject.vo.request.ChangeNameCommand;
 
 public interface ChangeProfileService {
 

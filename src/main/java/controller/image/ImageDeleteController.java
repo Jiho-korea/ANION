@@ -31,11 +31,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import petProject.service.ScriptWriter;
 import petProject.service.image.ImageDeleteService;
 import petProject.service.image.ImageListService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Image;
-import petProject.vo.ScriptWriter;
+import petProject.vo.dto.Image;
 
 @Controller
 @RequestMapping("/info/list")

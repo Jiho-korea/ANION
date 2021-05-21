@@ -39,10 +39,10 @@ import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
+import petProject.service.ScriptWriter;
 import petProject.service.member.EmailValidService;
 import petProject.service.member.EmailcodeDeleteService;
-import petProject.vo.Emailcode;
-import petProject.vo.ScriptWriter;
+import petProject.vo.dto.Emailcode;
 
 @Controller
 @RequestMapping("/email")
