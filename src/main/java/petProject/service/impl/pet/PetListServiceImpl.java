@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.PetDAO;
 import petProject.service.pet.PetListService;
-import petProject.vo.Pet;
+import petProject.vo.dto.Pet;
 
 @Service("petNameListService")
 @Transactional

@@ -37,9 +37,9 @@ import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.member.MailSendService;
 import petProject.service.member.MemberRegisterService;
-import petProject.vo.Emailcode;
-import petProject.vo.Member;
-import petProject.vo.MemberRegisterRequest;
+import petProject.vo.dto.Emailcode;
+import petProject.vo.dto.Member;
+import petProject.vo.request.MemberRegisterRequest;
 
 @Service("memberRegisterService")
 @Transactional

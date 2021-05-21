@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.ImageDAO;
 import petProject.exception.ImageUploadException;
 import petProject.service.image.ImageUploadService;
-import petProject.vo.ImageUploadRequest;
+import petProject.vo.request.ImageUploadRequest;
 
 @Service("imageUploadService")
 @Transactional

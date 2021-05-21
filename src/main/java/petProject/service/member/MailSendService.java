@@ -12,7 +12,7 @@ package petProject.service.member;
 import javax.servlet.http.HttpServletRequest;
 
 import petProject.exception.MailException;
-import petProject.vo.Member;
+import petProject.vo.dto.Member;
 
 public interface MailSendService {
 

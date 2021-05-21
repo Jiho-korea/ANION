@@ -7,7 +7,7 @@
 작  성  내  용 : 사용자로부터 입력받은 Image의 vo객체
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.request;
 
 public class ImageUploadRequest {
 

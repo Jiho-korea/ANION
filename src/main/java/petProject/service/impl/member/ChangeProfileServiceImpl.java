@@ -30,10 +30,10 @@ import petProject.exception.MemberNameUpdateException;
 import petProject.service.member.ChangeProfileService;
 import petProject.service.member.MailSendService;
 import petProject.vo.AuthInfo;
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.ChangeNameCommand;
-import petProject.vo.Emailcode;
-import petProject.vo.Member;
+import petProject.vo.dto.Emailcode;
+import petProject.vo.dto.Member;
+import petProject.vo.request.ChangeIdCommand;
+import petProject.vo.request.ChangeNameCommand;
 
 @Service("changeProfileService")
 @Component

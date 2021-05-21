@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.KindcodeInsertException;
 import petProject.service.admin.KindcodeInsertService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Controller
 @RequestMapping("/admin/code/kindcode")

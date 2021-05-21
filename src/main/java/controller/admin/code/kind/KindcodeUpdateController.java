@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.KindcodeUpdateException;
 import petProject.service.admin.KindcodeUpdateService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Controller
 @RequestMapping("/admin/code/kindcode")

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import petProject.dao.KindcodeDAO;
 import petProject.exception.KindcodeInsertException;
 import petProject.service.admin.KindcodeInsertService;
-import petProject.vo.Kindcode;
+import petProject.vo.dto.Kindcode;
 
 @Service("kindcodeInsertService")
 public class KindcodeInsertServiceImpl implements KindcodeInsertService {

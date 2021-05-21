@@ -9,7 +9,7 @@
 */
 package petProject.service.member;
 
-import petProject.vo.Emailcode;
+import petProject.vo.dto.Emailcode;
 
 public interface EmailcodeDeleteService {
 

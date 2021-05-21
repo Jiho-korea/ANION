@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.ImageDAO;
 import petProject.exception.ImageNotExistException;
 import petProject.service.image.ImageSelectService;
-import petProject.vo.Image;
+import petProject.vo.dto.Image;
 
 @Service("imageSelectService")
 @Transactional

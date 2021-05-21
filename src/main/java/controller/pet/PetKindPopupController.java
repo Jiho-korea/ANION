@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.NonExistentKindcodeException;
 import petProject.exception.NonExistentPageException;
+import petProject.service.ScriptWriter;
 import petProject.service.pet.KindcodeListService;
 import petProject.service.pet.SelectKindcodeService;
-import petProject.vo.Kindcode;
-import petProject.vo.ScriptWriter;
+import petProject.vo.dto.Kindcode;
 
 @Controller
 @RequestMapping("/popup")

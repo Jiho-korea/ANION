@@ -7,25 +7,27 @@
 작  성  내  용 : memberlevel 테이블의 vo객체
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.dto;
 
 public class Memberlevel {
-	
+
 	private String memberLevelCode;
 	private String memberLevelDescription;
-	
+
 	public String getMemberLevelCode() {
 		return memberLevelCode;
 	}
+
 	public void setMemberLevelCode(String memberLevelCode) {
 		this.memberLevelCode = memberLevelCode;
 	}
+
 	public String getMemberLevelDescription() {
 		return memberLevelDescription;
 	}
+
 	public void setMemberLevelDescription(String memberLevelDescription) {
 		this.memberLevelDescription = memberLevelDescription;
 	}
-	
 
 }

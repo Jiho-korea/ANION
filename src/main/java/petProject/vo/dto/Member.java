@@ -19,7 +19,7 @@
 수  정  내  용 : 등록 반려견 수, 사진 수 프로퍼티 추가
 ========================================================================
 */
-package petProject.vo;
+package petProject.vo.dto;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -15,6 +15,9 @@ package petProject.vo;
 
 import java.util.Date;
 
+import petProject.vo.dto.Memberauth;
+import petProject.vo.dto.Memberlevel;
+
 public class AuthInfo {
 	private static final long serialVersionUID = 1L;
 	private String memberId;
@@ -24,7 +27,7 @@ public class AuthInfo {
 	private Date memberRegisterDate;
 	private Memberlevel memberlevel;
 	private Memberauth memberauth;
-	
+
 	public AuthInfo() {
 		super();
 	}
@@ -96,5 +99,5 @@ public class AuthInfo {
 	public void setMemberauth(Memberauth memberauth) {
 		this.memberauth = memberauth;
 	}
-	
+
 }

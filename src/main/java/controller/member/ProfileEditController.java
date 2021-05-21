@@ -37,9 +37,9 @@ import petProject.service.member.ChangePasswordService;
 import petProject.service.member.ChangeProfileService;
 import petProject.service.member.LoginService;
 import petProject.vo.AuthInfo;
-import petProject.vo.ChangeIdCommand;
-import petProject.vo.ChangeNameCommand;
-import petProject.vo.ChangePasswordCommand;
+import petProject.vo.request.ChangeIdCommand;
+import petProject.vo.request.ChangeNameCommand;
+import petProject.vo.request.ChangePasswordCommand;
 
 @Controller
 @RequestMapping("/edit")

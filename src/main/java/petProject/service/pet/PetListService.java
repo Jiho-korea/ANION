@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Pet;
+import petProject.vo.dto.Pet;
 
 public interface PetListService {
 	List<Pet> selectPetList(@Param("memberNumber") int memberNumber) throws Exception;

@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.Emailcode;
-import petProject.vo.MemberRegisterRequest;
+import petProject.vo.dto.Emailcode;
+import petProject.vo.request.MemberRegisterRequest;
 
 public interface MemberRegisterService {
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;

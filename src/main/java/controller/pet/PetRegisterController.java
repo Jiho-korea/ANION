@@ -52,8 +52,8 @@ import petProject.service.image.ImageUploadService;
 import petProject.service.pet.GetCurrvalService;
 import petProject.service.pet.PetRegisterService;
 import petProject.vo.AuthInfo;
-import petProject.vo.Kindcode;
-import petProject.vo.PetRegisterRequest;
+import petProject.vo.dto.Kindcode;
+import petProject.vo.request.PetRegisterRequest;
 
 @Controller
 @RequestMapping("/register")
