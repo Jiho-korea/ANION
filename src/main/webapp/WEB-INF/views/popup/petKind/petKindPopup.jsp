@@ -1,6 +1,6 @@
 <!-- 
 ========================================================================
-파    일    명 : popup2.jsp	/	svg
+파    일    명 : petKindPopup.jsp
 ========================================================================
 작    성    자 : 송찬영
 작    성    일 : 2021.05.03
@@ -9,6 +9,10 @@
 수    정    자 : 송찬영
 수    정    일 : 2021.05.09
 수  정  내  용 : Select박스 List Page 기능 추가
+========================================================================
+수    정    자 : 강지호
+수    정    일 : 2021.05.23
+수  정  내  용 : Select박스 다음 견종 목록을 AJAX 요청하는 스크립트 추가
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -294,7 +298,6 @@ a:hover {
 			processData : false,
 			cache : false
 		}).done(function(result) {
-			console.log("결과확인");
 			var html = jQuery('<div>').html(result);
 			var contents = html.find("div#kindcodeListAjax").html();
 			$("#kindcodeListSelect").html(contents);

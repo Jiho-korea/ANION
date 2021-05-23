@@ -83,8 +83,8 @@ public class PetKindPopupController {
 		}
 	}
 
-	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
-	@PostMapping(value = { "/petKind/{petKindcode}", "/petKind" })
+	// 페이지 넘길 때
+	@PostMapping("/petKind")
 	public String kindPopup2(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
@@ -107,7 +107,7 @@ public class PetKindPopupController {
 				model.addAttribute("kindcode", kindcode);
 			}
 
-			return "popup/petKind/petKindPopup";
+			return "popup/petKind/kindcodeListAjax";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
