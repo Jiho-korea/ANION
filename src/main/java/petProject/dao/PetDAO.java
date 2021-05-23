@@ -37,4 +37,6 @@ public interface PetDAO {
 
 	int updatePetName(@Param("petNameUpdateRequest") PetNameUpdateRequest petNameUpdateRequest) throws Exception;
 
+	int deletePet(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+
 }

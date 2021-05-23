@@ -36,6 +36,22 @@
 }
 </style>
 <title><spring:message code="home.title" /></title>
+
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#deleteButton").click(function() {
+			if (!confirm("등록된 반려견을 삭제하시겠습니까?")) {
+				return false;
+	        } else {
+	        	document.getElementById("form").submit();
+	        }
+		})
+	})
+</script>
+
 </head>
 <body class="text-center">
 	<c:import url="../included/top.jsp">
@@ -163,6 +179,17 @@
 					<spring:argument value="${pet.imageCount}" />
 				</spring:message>
 			</h4>
+		</div>
+
+		<div class="text-right mb-10">
+			<form action="${pageContext.request.contextPath}/info/pet" id="form"
+				method="post" class="form-signin">
+				<input type="hidden" name=petRegistrationNumber id="prn"
+					value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
+					<input type="submit" class="btn btn-info pull-right"
+					value="<spring:message code="delete.button" />" id="deleteButton">
+				</a>
+			</form>
 		</div>
 
 	</div>

@@ -56,6 +56,7 @@ public class PetInfoController {
 
 			Pet pet = petInfoService.selectPet(petRegistrationNumber);
 			model.addAttribute("pet", pet);
+			model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 
 			return "info/pet";
 		} catch (PetNotFoundException e) {
@@ -67,6 +68,12 @@ public class PetInfoController {
 			return "list/pet";
 		}
 
+	}
+
+	@PostMapping
+	public String petDelete(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber) {
+
+		return "redirect:/pet/list";
 	}
 
 	@GetMapping("/updatePname")
