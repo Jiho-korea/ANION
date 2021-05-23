@@ -10,6 +10,10 @@
 수    정    일 : 2021.01.25
 수  정  내  용 : 견명 변경 폼 이동 기능 구현
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.23
+수  정  내  용 : 반려견 삭제 기능 추가
+========================================================================
 */
 
 package controller.pet;
@@ -27,9 +31,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.exception.PetDeleteException;
 import petProject.exception.PetInfoUpdateException;
 import petProject.exception.PetNotFoundException;
 import petProject.service.ScriptWriter;
+import petProject.service.pet.PetDeleteService;
 import petProject.service.pet.PetInfoService;
 import petProject.service.pet.PetInfoUpdateService;
 import petProject.vo.dto.Pet;
@@ -44,6 +50,9 @@ public class PetInfoController {
 
 	@Resource(name = "petInfoUpdateService")
 	PetInfoUpdateService petInfoUpdateService;
+
+	@Resource(name = "petDeleteService")
+	PetDeleteService petDeleteService;
 
 	public PetInfoController() {
 		super();
@@ -71,9 +80,21 @@ public class PetInfoController {
 	}
 
 	@PostMapping
-	public String petDelete(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber) {
+	public String petDelete(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		return "redirect:/pet/list";
+		try {
+			petDeleteService.deletePet(petRegistrationNumber);
+
+			return "redirect:/pet/list";
+		} catch (PetDeleteException e) {
+			e.printStackTrace();
+			ScriptWriter.write("목록을 다시 확인해주세요.", "pet/list", request, response);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/info/pet?petRegistrationNumber=" + petRegistrationNumber;
+		}
 	}
 
 	@GetMapping("/updatePname")

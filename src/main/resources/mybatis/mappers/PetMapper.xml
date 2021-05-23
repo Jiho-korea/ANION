@@ -57,6 +57,11 @@
 		SELECT count(*) FROM pet
 	</select>
 
+	<delete id="deletePet" parameterType="int">
+    	DELETE FROM pet
+    	WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
+    </delete>
+    
 	<resultMap type="pet" id="petResultMap">
 		<id column="PET_REGISTRATION_NUMBER"
 			property="petRegistrationNumber" />
