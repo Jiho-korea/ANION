@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>애니온</title>
+<title><spring:message code="home.title" /></title>
 </head>
 <body>
 	<script defer>

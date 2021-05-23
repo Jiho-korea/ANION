@@ -46,9 +46,9 @@ public class ImageBoardController {
 
 			ImageBoardRequest imageBoardRequest = new ImageBoardRequest(pageNumber, imgpostTitle);
 			List<Imgpost> imgpostList = imgpostListService.listImgpost(imageBoardRequest);
-			request.setAttribute("pageNumber", pageNumber);
-			request.setAttribute("nextPage", nextPage);
-			request.setAttribute("imgpostList", imgpostList);
+			model.addAttribute("pageNumber", pageNumber);
+			model.addAttribute("nextPage", nextPage);
+			model.addAttribute("imgpostList", imgpostList);
 			return "bbs/img/board";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
