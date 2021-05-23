@@ -49,9 +49,9 @@
 		$("#deleteButton").click(function() {
 			if (!confirm("등록된 반려견을 삭제하시겠습니까?")) {
 				return false;
-	        } else {
-	        	document.getElementById("form").submit();
-	        }
+			} else {
+				document.getElementById("form").submit();
+			}
 		})
 	})
 </script>
@@ -185,16 +185,18 @@
 			</h4>
 		</div>
 
-		<div class="text-right mb-10">
-			<form action="${pageContext.request.contextPath}/info/pet" id="form"
-				method="post" class="form-signin">
-				<input type="hidden" name=petRegistrationNumber id="prn"
-					value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
-					<input type="submit" class="btn btn-info pull-right"
-					value="<spring:message code="delete.button" />" id="deleteButton">
-				</a>
-			</form>
-		</div>
+		<c:if test="${delete eq true}">
+			<div class="text-right mb-10">
+				<form action="${pageContext.request.contextPath}/info/pet" id="form"
+					method="post" class="form-signin">
+					<input type="hidden" name=petRegistrationNumber id="prn"
+						value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
+						<input type="submit" class="btn btn-info pull-right"
+						value="<spring:message code="delete.button" />" id="deleteButton">
+					</a>
+				</form>
+			</div>
+		</c:if>
 
 	</div>
 

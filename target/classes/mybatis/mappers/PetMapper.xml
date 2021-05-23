@@ -52,6 +52,11 @@
 		"IMAGE_COUNT" from "public"."pet" as "pet" where
 		"PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
 	</select>
+	
+	<select id="selectMemberNumber" parameterType="int" resultType="int">
+		SELECT "MEMBER_NUMBER" FROM pet 
+		WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
+	</select>
 
 	<select id="selectPetCount" resultType="int">
 		SELECT count(*) FROM pet
