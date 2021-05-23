@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ANION popup2</title>
+<title><spring:message code="home.title" /></title>
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -86,62 +86,10 @@ a:hover {
 </style>
 <body style="overflow-y: auto; overflow-x: hidden;">
 
-	<div class="fixed">
-		<select style="display: none;" id="childKind" name="childKind">
-			<c:if test="${empty kindcode}">
-				<option value=""></option>
-			</c:if>
-			<c:if test="${!empty kindcode}">
-				<option value="${kindcode.petKind }"></option>
-			</c:if>
-			<c:forEach var="kindcode" items="${kindcodeListPage}"
-				varStatus="status">
-				<option value="${kindcode.petKind}">${kindcode.petKind}</option>
-			</c:forEach>
-		</select>
-		<div class="nice-select" tabindex="0">
-			<c:if test="${empty kindcode}">
-				<span class="current">견종 / Dog breed</span>
-			</c:if>
-			<c:if test="${not empty kindcode}">
-				<span class="current">${kindcode.petKind }</span>
-			</c:if>
-			<ul class="list">
-				<li data-value="견종 / Dog breed" class="option selected focus"
-					hidden="">견종 / Dog breed</li>
-				<c:forEach var="kindcode" items="${kindcodeListPage}"
-					varStatus="status">
-					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-				</c:forEach>
+	<div class="fixed" id="kindcodeListSelect">
+		<c:import url="kindcodeListAjax.jsp">
 
-				<div class="container d-flex justify-content-center">
-					<c:if test="${pageNumber ne 1}">
-						<a
-							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber - 1}">
-							<button id="btn_left_arrow" type="button"
-								style="border: 0; background-color: #FFFFFF;">
-								<img style="cursor: pointer;"
-									src="${pageContext.request.contextPath}/img/button/left-icon.png">
-							</button>
-						</a>
-					</c:if>
-					<c:if test="${nextPage}">
-						<a
-							href="${pageContext.request.contextPath}/popup/petKind?pageNumber=${pageNumber + 1}">
-							<button id="btn_right_arrow" type="button"
-								style="border: 0; background-color: #FFFFFF;">
-								<img style="cursor: pointer;"
-									src="${pageContext.request.contextPath}/img/button/right-icon.png">
-							</button>
-						</a>
-					</c:if>
-				</div>
-			</ul>
-		</div>
-		&nbsp;&nbsp;
-		<button type="button"
-			class="btn header-btn d-flex justify-content-center"
-			onclick="dogSelect();">OK</button>
+		</c:import>
 	</div>
 
 	<div class="map">
@@ -163,18 +111,18 @@ a:hover {
 							<span class="current">미국 / United States of America</span>
 						</header>
 						<main class="map__marker-info-main">
-							<div class="row">
-								<c:forEach var="kindcode" items="${kindcodeList}"
-									varStatus="status">
-									<c:if test="${kindcode.petKindHabitat eq 'US' }">
-										<div class="col-md-6">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-										</div>
-									</c:if>
-								</c:forEach>
-							</div>
+						<div class="row">
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'US' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
 						</main>
 					</div>
 				</div></li>
@@ -189,19 +137,19 @@ a:hover {
 							<span class="current">아프리카 / Africa</span>
 						</header>
 						<main class="map__marker-info-main">
-							<div class="row">
-								<c:forEach var="kindcode" items="${kindcodeList}"
-									varStatus="status">
-									<c:if test="${kindcode.petKindHabitat eq 'AF'}">
-										<div class="col-md-6">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-										</div>
-										<br>
-									</c:if>
-								</c:forEach>
-							</div>
+						<div class="row">
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'AF'}">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+									<br>
+								</c:if>
+							</c:forEach>
+						</div>
 						</main>
 					</div>
 				</div></li>
@@ -216,18 +164,18 @@ a:hover {
 							<span class="current">한국 / Korea</span>
 						</header>
 						<main class="map__marker-info-main">
-							<div class="row">
-								<c:forEach var="kindcode" items="${kindcodeList}"
-									varStatus="status">
-									<c:if test="${kindcode.petKindHabitat eq 'KR' }">
-										<div class="col-md-6">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-										</div>
-									</c:if>
-								</c:forEach>
-							</div>
+						<div class="row">
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'KR' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
 						</main>
 					</div>
 				</div></li>
@@ -242,18 +190,18 @@ a:hover {
 							<span class="current">일본 / Japan</span>
 						</header>
 						<main class="map__marker-info-main">
-							<div class="row">
-								<c:forEach var="kindcode" items="${kindcodeList}"
-									varStatus="status">
-									<c:if test="${kindcode.petKindHabitat eq 'JP' }">
-										<div class="col-md-6">
-											<a
-												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-										</div>
-									</c:if>
-								</c:forEach>
-							</div>
+						<div class="row">
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'JP' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
 						</main>
 					</div>
 				</div></li>
@@ -333,6 +281,31 @@ a:hover {
 				document.getElementById("childKind").value);
 		window.close();
 	}
+
+	function pagingFunction(pageNumber) {
+		var formData = new FormData(); //formData 객체 생성
+		formData.append("pageNumber", pageNumber);
+		$.ajax({
+			url : "${pageContext.request.contextPath}/popup/petKind",
+			type : "post",
+			dataType : "text",
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false
+		}).done(function(result) {
+			console.log("결과확인");
+			var html = jQuery('<div>').html(result);
+			var contents = html.find("div#kindcodeListAjax").html();
+			$("#kindcodeListSelect").html(contents);
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log("에러");
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		});
+	}
+
 </script>
 </html>
 <!-- 
