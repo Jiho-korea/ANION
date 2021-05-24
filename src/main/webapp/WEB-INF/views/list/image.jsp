@@ -107,10 +107,8 @@
 	})
 </script>
 
-
 </head>
 <body>
-
 
 	<c:import url="../included/top.jsp" />
 	<div class="container text-center">
@@ -157,8 +155,9 @@
 												alt="btnImages" class="btnImages">
 										</button>
 										--%>
-										<a href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button class="btn_share mt-2 mr-3" id="btn_share"
-												type="button">
+										<a
+											href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button
+												class="btn_share mt-2 mr-3" id="btn_share" type="button">
 												<img
 													src="${pageContext.request.contextPath}/img/button/share1.png">
 											</button></a>
@@ -177,10 +176,10 @@
 						<input type="checkbox" id="allCheck" />
 						<spring:message code="check.all" />
 						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="<spring:message code="delete.button" /> "
-							id="deleteButton">&nbsp; <a
+							value="<spring:message code="delete.button" />" id="deleteButton">
+						&nbsp; <a
 							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
-							class="btn btn-info pull-right" id="cancleButton"
+							class="btn btn-info pull-right" id="cancelButton"
 							style="color: #ffffff"><spring:message code="cancel" /></a> <input
 							type="hidden" name=petRegistrationNumber id="prn"
 							value="${petRegistrationNumber}" />
