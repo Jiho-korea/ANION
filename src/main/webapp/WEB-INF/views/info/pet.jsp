@@ -14,6 +14,10 @@
 수    정    일 : 2021.01.25
 수  정  내  용 : 견명 변경 폼 완성
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.05.23
+수  정  내  용 : 반려견 삭제 기능 추가
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -36,6 +40,22 @@
 }
 </style>
 <title><spring:message code="home.title" /></title>
+
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#deleteButton").click(function() {
+			if (!confirm("등록된 반려견을 삭제하시겠습니까?")) {
+				return false;
+			} else {
+				document.getElementById("form").submit();
+			}
+		})
+	})
+</script>
+
 </head>
 <body class="text-center">
 	<c:import url="../included/top.jsp">
@@ -164,6 +184,19 @@
 				</spring:message>
 			</h4>
 		</div>
+
+		<c:if test="${delete eq true}">
+			<div class="text-right mb-10">
+				<form action="${pageContext.request.contextPath}/info/pet" id="form"
+					method="post" class="form-signin">
+					<input type="hidden" name=petRegistrationNumber id="prn"
+						value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
+						<input type="submit" class="btn btn-info pull-right"
+						value="<spring:message code="delete.button" />" id="deleteButton">
+					</a>
+				</form>
+			</div>
+		</c:if>
 
 	</div>
 
