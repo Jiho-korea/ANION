@@ -61,11 +61,11 @@
 	charset="utf-8"></script>
 <title><spring:message code="home.title" /></title>
 </head>
-<body class="text-center">
+<body>
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container" id="main">
+	<div class="container text-center" id="main">
 		<div class="jumbotron">
 			<h4 class="mb-4">
 				<spring:message code="valid.email" />

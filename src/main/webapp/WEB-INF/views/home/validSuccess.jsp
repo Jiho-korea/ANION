@@ -60,7 +60,7 @@
 </style>
 </head>
 
-<body class="text-center">
+<body>
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>

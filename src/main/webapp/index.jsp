@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="home.title" /></title>
+<title></title>
 </head>
 <body>
 	<script defer>
