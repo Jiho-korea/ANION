@@ -89,9 +89,9 @@ public class PetKindPopupController {
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
-		boolean nextPage = kindcodeListService.nextPage(pageNumber);
-
 		try {
+			boolean nextPage = kindcodeListService.nextPage(pageNumber);
+			
 			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
 

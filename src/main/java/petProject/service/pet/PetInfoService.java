@@ -16,4 +16,5 @@ import petProject.vo.dto.Pet;
 
 public interface PetInfoService {
 	Pet selectPet(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+
 }

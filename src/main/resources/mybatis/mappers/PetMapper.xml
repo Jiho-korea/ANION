@@ -52,11 +52,21 @@
 		"IMAGE_COUNT" from "public"."pet" as "pet" where
 		"PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
 	</select>
+	
+	<select id="selectMemberNumber" parameterType="int" resultType="int">
+		SELECT "MEMBER_NUMBER" FROM pet 
+		WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
+	</select>
 
 	<select id="selectPetCount" resultType="int">
 		SELECT count(*) FROM pet
 	</select>
 
+	<delete id="deletePet" parameterType="int">
+    	DELETE FROM pet
+    	WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
+    </delete>
+    
 	<resultMap type="pet" id="petResultMap">
 		<id column="PET_REGISTRATION_NUMBER"
 			property="petRegistrationNumber" />
