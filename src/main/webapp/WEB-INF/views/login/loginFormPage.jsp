@@ -133,13 +133,15 @@
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
 	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
@@ -153,14 +155,17 @@
 	<!-- Nice-select, sticky -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 	<script defer
@@ -168,28 +173,30 @@
 
 	<!-- contact js -->
 	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
- $("#btn_login").click(function() {
-	if ($("#memberId").val() == "") {
-		alert("이메일을 입력해주세요.");
-		return false;
-	} else if ($("#memberPassword").val() == "") {
-		alert("비밀번호을 입력해주세요.");
-		return false;
-	}
-});
-
+	 $("#btn_login").click(function() {
+		if ($("#memberId").val() == "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		} else if ($("#memberPassword").val() == "") {
+			alert("비밀번호을 입력해주세요.");
+			return false;
+		}
+	});
 </script>
 
 </html>
