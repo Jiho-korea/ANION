@@ -31,7 +31,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +42,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import petProject.exception.MailException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
-import petProject.service.member.MailSendService;
 import petProject.service.member.MemberRegisterService;
 import petProject.vo.request.MemberRegisterRequest;
 
@@ -54,13 +52,6 @@ public class MemberRegisterController {
 
 	@Resource(name = "memberRegisterService")
 	MemberRegisterService memberRegisterService;
-	@Resource(name = "mailSendService")
-	MailSendService mailSendService;
-
-	@Value("${mail.smtp.from_addr}")
-	private String from_addr;
-	@Value("${mail.smtp.from_name}")
-	private String from_name;
 
 	public MemberRegisterController() {
 		super();
@@ -91,7 +82,7 @@ public class MemberRegisterController {
 		}
 
 		try {
-			memberRegisterService.memberRegister(memberRegisterRequest, from_addr, from_name, request, true);
+			memberRegisterService.memberRegister(memberRegisterRequest, request, true);
 
 			model.addAttribute("register", true);
 			return "register/signupSucess";

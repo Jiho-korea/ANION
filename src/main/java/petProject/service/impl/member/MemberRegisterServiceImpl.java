@@ -22,6 +22,7 @@
 
 package petProject.service.impl.member;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ import petProject.exception.EmailcodeInsertException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
-import petProject.service.member.MailSendService;
+import petProject.service.email.MemberRegisterEmailService;
 import petProject.service.member.MemberRegisterService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
@@ -51,11 +52,11 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
 
-	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+	@Resource(name = "memberRegisterEmailService")
+	MemberRegisterEmailService memberRegisterEmailService;
 
 	@Autowired
-	MailSendService mailSendService;
+	BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception {
@@ -105,14 +106,13 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Override
 	@Transactional
-	public void memberRegister(MemberRegisterRequest memberRegisterRequest, String from_addr, String from_name,
-			HttpServletRequest request, boolean isHtml) throws Exception {
+	public void memberRegister(MemberRegisterRequest memberRegisterRequest, HttpServletRequest request, boolean isHtml)
+			throws Exception {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
 		Emailcode emailcode = this.insertCode(memberRegisterRequest.getMemberId());
 
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
-		mailSendService.sendMail(from_addr, from_name, memberRegisterRequest.getMemberId(), member, request, isHtml,
-				emailcode.getEmailCode());
+		memberRegisterEmailService.createMemberRegisterEmail(member, request, isHtml, emailcode.getEmailCode());
 	}
 }
