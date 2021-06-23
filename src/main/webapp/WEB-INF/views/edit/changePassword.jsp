@@ -74,6 +74,7 @@
 
 
 			<p>
+				<spring:message code="edit.member.password.done.login" /><br>
 				<a href="<c:url value='/home' />" style="color: black;"> [<spring:message
 						code="go.home" />]
 				</a>

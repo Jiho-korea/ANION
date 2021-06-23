@@ -10,13 +10,10 @@
 
 package petProject.service.impl.member;
 
-import java.sql.SQLException;
-
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +24,8 @@ import petProject.exception.MailException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNameUpdateException;
+import petProject.service.email.ChangeProfileEmailService;
 import petProject.service.member.ChangeProfileService;
-import petProject.service.member.MailSendService;
 import petProject.vo.AuthInfo;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
@@ -36,13 +33,7 @@ import petProject.vo.request.ChangeIdCommand;
 import petProject.vo.request.ChangeNameCommand;
 
 @Service("changeProfileService")
-@Component
 public class ChangeProfileServiceImpl implements ChangeProfileService {
-
-	@Value("${mail.smtp.from_addr}")
-	private String from_addr;
-	@Value("${mail.smtp.from_name}")
-	private String from_name;
 
 	@Autowired
 	private MemberDAO memberDAO;
@@ -50,8 +41,8 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
 
-	@Autowired
-	MailSendService mailSendService;
+	@Resource(name = "changeProfileEmailService")
+	ChangeProfileEmailService changeProfileEmailService;
 
 	@Override
 	public int selectById(String memberId) throws Exception {
@@ -62,7 +53,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		return cnt;
 	}
 
-	@Transactional(rollbackFor = SQLException.class)
+	@Transactional
 	public void updateName(ChangeNameCommand changeNameCommand, AuthInfo authInfo) throws Exception {
 		Member member = memberDAO.selectByMemberNumber(changeNameCommand.getMemberNumber());
 
@@ -75,7 +66,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		}
 	}
 
-	@Transactional(rollbackFor = SQLException.class)
+	@Transactional
 	public Emailcode updateEmailcode(String memberId, ChangeIdCommand changeIdCommand) throws Exception {
 		Emailcode emailcode = new Emailcode();
 
@@ -91,7 +82,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		return emailcode;
 	}
 
-	@Transactional(rollbackFor = SQLException.class)
+	@Transactional
 	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request)
 			throws MailException, Exception {
 		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
@@ -103,8 +94,8 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 			throw new MemberAuthUpdateException("change auth error");
 		}
 
-		mailSendService.sendMail(from_addr, from_name, changeIdCommand.getMemberId(), member, request, true,
-				emailcode.getEmailCode());
+		changeProfileEmailService.createChangeProfileEmail(changeIdCommand.getMemberId(), member.getMemberName(),
+				request, true, emailcode.getEmailCode());
 	}
 
 }

@@ -35,7 +35,7 @@ public interface MemberRegisterService {
 
 	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
 
-	void memberRegister(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest, String from_addr,
-			String from_name, HttpServletRequest request, boolean isHtml) throws Exception;
+	void memberRegister(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest,
+			HttpServletRequest request, boolean isHtml) throws Exception;
 
 }

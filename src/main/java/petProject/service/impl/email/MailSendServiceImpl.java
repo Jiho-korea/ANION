@@ -2,16 +2,12 @@
 ========================================================================
 파    일    명 : MailSendServiceImpl.java
 ========================================================================
-작    성    자 : 송찬영, 임원석
-작    성    일 : 2020.11.17
-작  성  내  용 : 메일 인증 링크 보내는 클래스
-========================================================================
 작    성    자 : 강지호
-작    성    일 : 2020.11.21
-작  성  내  용 : 서버에 올릴 때 사용될 mailContent 추가 (서버에 올릴 때만 사용함)
+작    성    일 : 2021.06.23
+작  성  내  용 : 이메일 발송 서비스 구현 클래스
 ========================================================================
 */
-package petProject.service.impl.member;
+package petProject.service.impl.email;
 
 import java.io.UnsupportedEncodingException;
 
@@ -26,12 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import petProject.exception.MailException;
-import petProject.service.member.MailSendService;
-import petProject.vo.MailStatus;
-import petProject.vo.dto.Member;
+import petProject.service.email.MailSendService;
+import petProject.vo.MailStatus;;
 
+@Service("mailSendService")
 public class MailSendServiceImpl implements MailSendService {
 
 	@Autowired
@@ -43,8 +40,8 @@ public class MailSendServiceImpl implements MailSendService {
 	private String from_name;
 
 	@Override
-	public boolean sendMail(String from_addr, String from_name, String to_addr, Member member,
-			HttpServletRequest request, boolean isHtml, String emailcode) throws MailException {
+	public boolean sendMail(String to_addr, String to_name, String mailHead, String mailContent,
+			HttpServletRequest request, boolean isHtml) throws Exception {
 
 		boolean result = false;
 
@@ -59,25 +56,9 @@ public class MailSendServiceImpl implements MailSendService {
 			message.setFrom(new InternetAddress(from_addr, from_name));
 			// message.setRecipients(Message.RecipientType.TO,
 			// InternetAddress.parse(to_address));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to_addr, member.getMemberName()));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to_addr, to_name));
 
-			message.setSubject("[애니온]");//
-
-			String mailHead = null;
-			String mailContent = null;
-
-			if (member.getMemberauth().getMemberAuthStatus() == 0) {
-				mailHead = "<h1>[ANION] 회원가입 인증메일</h1><br><p>로그인 후 인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p><br>";
-
-			} else {
-				mailHead = "<h1>[ANION] 이메일 변경 인증</h1><br><p>프로필에서 인증버튼을 클릭 후 인증번호 6자리를 입력하시면 이메일 변경이 완료됩니다.</p><br>";
-			}
-//			서버
-			mailContent = emailcode + "<br><a href='http://anionbio.com:8119" + request.getContextPath() + "/login"
-					+ "'target='_blank'>[ANION]</a>";
-//			로컬
-//			mailContent = emailcode + "<br><a href='http://localhost:8080" + request.getContextPath() + "/login"
-//					+ "'target='_blank'>[ANION]</a>";
+			message.setSubject("[" + from_name + "]");//
 
 			if (isHtml) {
 				message.setContent(mailHead + mailContent, "text/html;charset=UTF-8");
