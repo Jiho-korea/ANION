@@ -153,7 +153,7 @@ public class ProfileEditController {
 
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
-
+			session.invalidate();
 			return "edit/changePassword";
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
