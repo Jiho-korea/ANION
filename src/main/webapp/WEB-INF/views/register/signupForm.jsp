@@ -98,8 +98,8 @@
 				<br>
 
 				<label> <form:password path="memberPassword"
-						cssClass="single-input mt-2" placeholder="비밀번호 / Password" id="memberPassword"
-						onfocus="this.placeholder = ''"
+						cssClass="single-input mt-2" placeholder="비밀번호 / Password"
+						id="memberPassword" onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '비밀번호 / Password'"
 						cssStyle="width:350px" />
 
@@ -140,7 +140,7 @@
 				<br>
 
 				<input type="submit" id="btn_register"
-					class="btn btn-info pull-right mt-5" onclick="btn_submit()"
+					class="btn btn-info pull-right mt-5"
 					value=<spring:message code="go.register" /> />
 				<br>
 			</form:form>
@@ -158,7 +158,7 @@
 	</div>
 
 	<!-- JS here -->
-	<script defer>
+	<script defer type="text/javascript">
 		function inputPhoneNumber(obj) {
 
 			var number = obj.value.replace(/[^0-9]/g, "");
@@ -201,13 +201,15 @@
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
 	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
@@ -221,14 +223,17 @@
 	<!-- Nice-select, sticky -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 	<script defer
@@ -236,19 +241,23 @@
 
 	<!-- contact js -->
 	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	 $("#btn_register").click(function() {
+   
+	$("#btn_register").click(function() {
 		const target = document.getElementById('btn_register');
 		const checkPassword = document.getElementById('checkPassword');
 		const memberPassword = document.getElementById('memberPassword');
