@@ -62,7 +62,7 @@
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container text-center" id="main">
@@ -95,7 +95,7 @@
 
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

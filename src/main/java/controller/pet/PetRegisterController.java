@@ -103,7 +103,7 @@ public class PetRegisterController {
 			 * model.addAttribute("kindcodeList", kindcodeList);
 			 */
 			// System.out.print(kindcodeList.get(0).getPetKind());
-			return "register/registerStep1";
+			return "pet/register/registerStep1";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,7 +129,7 @@ public class PetRegisterController {
 		response.addCookie(cookie_delete_success_pet_registration);
 
 		model.addAttribute("petName", cookie_success_pet_registration.getValue());
-		return "register/registerStep2";
+		return "pet/register/registerStep2";
 	}
 
 	@PostMapping("/step2")
@@ -151,7 +151,7 @@ public class PetRegisterController {
 				 * kindcodeList = kindcodeListService.selectKindcodeList();
 				 * model.addAttribute("kindcodeList", kindcodeList);
 				 */
-				return "register/registerStep1";
+				return "pet/register/registerStep1";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "redirect:/home";
@@ -191,10 +191,10 @@ public class PetRegisterController {
 			return "redirect:/register/step2";
 		} catch (PetRegisterException e) {
 			e.printStackTrace();
-			return "register/registerStep1";
+			return "pet/register/registerStep1";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "register/registerStep1";
+			return "pet/register/registerStep1";
 		}
 	}
 
