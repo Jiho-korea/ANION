@@ -110,7 +110,7 @@
 </head>
 <body>
 
-	<c:import url="../included/top.jsp" />
+	<c:import url="../../included/top.jsp" />
 	<div class="container text-center">
 		<div id="main">
 			<h1 class="display-4">
@@ -207,7 +207,7 @@
 		</div>
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

@@ -63,7 +63,7 @@ public class ImageDeleteController {
 			e.printStackTrace();
 		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
-		return "/list/image";
+		return "pet/image/imageList";
 	}
 
 	@PostMapping("/imageDelete")

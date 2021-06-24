@@ -75,7 +75,7 @@ public class ImageListController {
 			e.printStackTrace();
 		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
-		return "/list/image";
+		return "pet/image/imageList";
 	}
 
 	@PostMapping("/image")
