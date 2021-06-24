@@ -43,7 +43,7 @@ public class PetListAdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "list/pet";
+		return "pet/list/petList";
 	}
 
 }
