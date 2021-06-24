@@ -31,6 +31,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.context.annotation.PropertySource;
@@ -47,6 +48,7 @@ import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.ScriptWriter;
 import petProject.service.member.MemberRegisterService;
+import petProject.vo.AuthInfo;
 import petProject.vo.request.MemberRegisterRequest;
 
 @Controller
@@ -62,14 +64,35 @@ public class MemberRegisterController {
 	}
 
 	@RequestMapping("/step1")
-	public String signStep1(MemberRegisterRequest memberRegisterRequest) {
+	public String signStep1(MemberRegisterRequest memberRegisterRequest, HttpServletResponse response,
+			HttpServletRequest request, HttpSession session) throws Exception {
+
+		if (session != null) {
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+			// 로그인 한 상태에서 회원가입 페이지에는 못가도록 함
+			if (authInfo != null) {
+				ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+				return null;
+			}
+		}
+
 		return "register/signupForm";
 	}
 
 	@GetMapping("/step2")
 	public String signupStep2(
 			@CookieValue(value = "successMemberRegistration", required = false) Cookie cookie_success_member_registration,
-			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+			Model model, HttpServletResponse response, HttpServletRequest request, HttpSession session)
+			throws Exception {
+
+		if (session != null) {
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+			// 로그인 한 상태에서 회원가입 페이지에는 못가도록 함
+			if (authInfo != null) {
+				ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+				return null;
+			}
+		}
 
 		// 반려견 등록과정 step1을 안거치고 get방식으로 요청 한경우 (= 반려견 등록 완료 페이지에서 새로고침 한 경우)
 		if (cookie_success_member_registration == null) {
@@ -130,9 +153,8 @@ public class MemberRegisterController {
 			return "register/signupForm";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "register/signupForm";//
+			return "register/signupForm";
 		}
 
 	}
-
 }
