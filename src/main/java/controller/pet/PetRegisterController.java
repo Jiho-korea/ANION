@@ -18,6 +18,10 @@
 수    정    일 : 2021.05.15
 수  정  내  용 : 팝업창용 쿠키 생성
 =============================== 함  수  설  명  ===============================
+수    정    자 : 강지호
+수    정    일 : 2021.06.24
+수  정  내  용 : double submit 방지 코드 추가
+=============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
 */
 package controller.pet;
@@ -118,14 +122,14 @@ public class PetRegisterController {
 			return null;
 		}
 
-		Cookie cookie_delete_success_pet_registration = new Cookie("successPetRegistration", "true");
+		Cookie cookie_delete_success_pet_registration = new Cookie("successPetRegistration",
+				cookie_success_pet_registration.getValue());
 		cookie_delete_success_pet_registration.setPath("/");
 		cookie_delete_success_pet_registration.setMaxAge(0);
 		response.addCookie(cookie_delete_success_pet_registration);
 
 		model.addAttribute("petName", cookie_success_pet_registration.getValue());
 		return "register/registerStep2";
-		// return "redirect:/register/step1";
 	}
 
 	@PostMapping("/step2")
@@ -184,7 +188,6 @@ public class PetRegisterController {
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);
 
-//			return "register/registerStep2";
 			return "redirect:/register/step2";
 		} catch (PetRegisterException e) {
 			e.printStackTrace();

@@ -28,13 +28,16 @@ package controller.member;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import petProject.exception.MailException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
+import petProject.service.ScriptWriter;
 import petProject.service.member.MemberRegisterService;
 import petProject.vo.request.MemberRegisterRequest;
 
@@ -63,13 +67,30 @@ public class MemberRegisterController {
 	}
 
 	@GetMapping("/step2")
-	public String signupStep2Get() {
-		return "redirect:/register/signupForm";
+	public String signupStep2(
+			@CookieValue(value = "successMemberRegistration", required = false) Cookie cookie_success_member_registration,
+			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+		// 반려견 등록과정 step1을 안거치고 get방식으로 요청 한경우 (= 반려견 등록 완료 페이지에서 새로고침 한 경우)
+		if (cookie_success_member_registration == null) {
+			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			return null;
+		}
+
+		Cookie cookie_delete_success_pet_registration = new Cookie("successMemberRegistration",
+				cookie_success_member_registration.getValue());
+		cookie_delete_success_pet_registration.setPath("/");
+		cookie_delete_success_pet_registration.setMaxAge(0);
+		response.addCookie(cookie_delete_success_pet_registration);
+
+		model.addAttribute("memberId", cookie_success_member_registration.getValue());
+		return "register/signupSucess";
+		// return "redirect:/register/signupForm";
 	}
 
 	@PostMapping("/step2")
-	public String signStep2(@Valid MemberRegisterRequest memberRegisterRequest, Errors errors, Model model,
-			HttpServletRequest request) throws Exception {
+	public String signupStep2(@Valid MemberRegisterRequest memberRegisterRequest, Errors errors, Model model,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (memberRegisterRequest.getMemberPhoneNumber().length() < 13
 				&& !Pattern.matches("^[0-9]+$", memberRegisterRequest.getMemberPhoneNumber())) {
 			errors.reject("no.number.check.memberRegisterRequest");
@@ -84,8 +105,17 @@ public class MemberRegisterController {
 		try {
 			memberRegisterService.memberRegister(memberRegisterRequest, request, true);
 
-			model.addAttribute("register", true);
-			return "register/signupSucess";
+			Cookie cookie_success_member_registration = new Cookie("successMemberRegistration",
+					memberRegisterRequest.getMemberId());
+			cookie_success_member_registration.setPath("/");
+			cookie_success_member_registration.setMaxAge(60 * 60 * 24 * 1);
+
+			response.addCookie(cookie_success_member_registration);
+
+			// model.addAttribute("register", true);
+
+			// return "register/signupSucess";
+			return "redirect:/signup/step2";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
 			errors.reject("failed.signup");
