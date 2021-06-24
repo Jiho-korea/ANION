@@ -41,6 +41,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import petProject.exception.PetRegisterException;
+import petProject.service.ScriptWriter;
 import petProject.service.image.ImageUploadService;
 import petProject.service.pet.GetCurrvalService;
 import petProject.service.pet.PetRegisterService;
@@ -107,8 +109,23 @@ public class PetRegisterController {
 	}
 
 	@GetMapping("/step2")
-	public String registerStep2Get() {
-		return "redirect:/register/step1";
+	public String registerStep2(
+			@CookieValue(value = "successPetRegistration", required = false) Cookie cookie_success_pet_registration,
+			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		// 반려견 등록과정 step1을 안거치고 get방식으로 요청 한경우 (= 반려견 등록 완료 페이지에서 새로고침 한 경우)
+		if (cookie_success_pet_registration == null) {
+			ScriptWriter.write("잘못된 접근입니다.", "pet/list", request, response);
+			return null;
+		}
+
+		Cookie cookie_delete_success_pet_registration = new Cookie("successPetRegistration", "true");
+		cookie_delete_success_pet_registration.setPath("/");
+		cookie_delete_success_pet_registration.setMaxAge(0);
+		response.addCookie(cookie_delete_success_pet_registration);
+
+		model.addAttribute("petName", cookie_success_pet_registration.getValue());
+		return "register/registerStep2";
+		// return "redirect:/register/step1";
 	}
 
 	@PostMapping("/step2")
@@ -155,13 +172,20 @@ public class PetRegisterController {
 
 			petRegisterService.insertPet(petRegisterRequest);
 
-			int currval = getCurrvalService.selectCurrval();
+			Cookie cookie_success_pet_registration = new Cookie("successPetRegistration",
+					petRegisterRequest.getPetName());
+			cookie_success_pet_registration.setPath("/");
+			cookie_success_pet_registration.setMaxAge(60 * 60 * 24 * 1);
+
+			response.addCookie(cookie_success_pet_registration);
+			// int currval = getCurrvalService.selectCurrval();
 
 			// ImageUploadRequest imageUploadRequest = new
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);
 
-			return "register/registerStep2";
+//			return "register/registerStep2";
+			return "redirect:/register/step2";
 		} catch (PetRegisterException e) {
 			e.printStackTrace();
 			return "register/registerStep1";

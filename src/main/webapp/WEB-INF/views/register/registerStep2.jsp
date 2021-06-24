@@ -72,7 +72,7 @@
 			</h4>
 			<p>
 				<spring:message code="register.pet.done">
-					<spring:argument value="${petRegisterRequest.petName}" />
+					<spring:argument value="${petName}" />
 				</spring:message>
 				<br>
 			</p>
