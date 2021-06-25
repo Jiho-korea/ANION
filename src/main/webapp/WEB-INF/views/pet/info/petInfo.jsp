@@ -58,7 +58,7 @@
 
 </head>
 <body class="text-center">
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -200,7 +200,7 @@
 
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

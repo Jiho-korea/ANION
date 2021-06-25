@@ -83,7 +83,7 @@ public class PetInfoController {
 			model.addAttribute("pet", pet);
 			model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 
-			return "info/pet";
+			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
@@ -125,14 +125,14 @@ public class PetInfoController {
 			model.addAttribute("pet", pet);
 			model.addAttribute("updatePname", true);
 
-			return "info/pet";
+			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "info/pet";
+			return "pet/info/petInfo";
 		}
 
 	}
@@ -145,7 +145,7 @@ public class PetInfoController {
 				Pet pet = petInfoService.selectPet(petNameUpdateRequest.getPetRegistrationNumber());
 				model.addAttribute("pet", pet);
 				model.addAttribute("updatePname", true);
-				return "info/pet";
+				return "pet/info/petInfo";
 			} catch (PetNotFoundException e) {
 				e.printStackTrace();
 				return "pet/list/petList";
@@ -160,10 +160,10 @@ public class PetInfoController {
 			return "redirect:/info/pet?" + "petRegistrationNumber=" + petNameUpdateRequest.getPetRegistrationNumber();
 		} catch (PetInfoUpdateException e) {
 			e.printStackTrace();
-			return "info/pet";
+			return "pet/info/petInfo";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "info/pet";
+			return "pet/info/petInfo";
 		}
 
 	}
