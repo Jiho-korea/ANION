@@ -80,7 +80,7 @@ public class MemberRegisterController {
 			}
 		}
 
-		return "register/signupForm";
+		return "member/signup/signupForm";
 	}
 
 	@GetMapping("/step2")
@@ -112,7 +112,6 @@ public class MemberRegisterController {
 
 		model.addAttribute("memberId", cookie_success_member_registration.getValue());
 		return "register/signupSucess";
-		// return "redirect:/register/signupForm";
 	}
 
 	@PostMapping("/step2")
@@ -126,7 +125,7 @@ public class MemberRegisterController {
 			errors.rejectValue("checkPassword", "notmatch.password");
 		}
 		if (errors.hasErrors()) {
-			return "register/signupForm";
+			return "member/signup/signupForm";
 		}
 
 		try {
@@ -146,18 +145,18 @@ public class MemberRegisterController {
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
 			errors.reject("failed.signup");
-			return "register/signupForm";
+			return "member/signup/signupForm";
 		} catch (MemberDuplicateException e) {
 			e.printStackTrace();
 			errors.rejectValue("memberId", "duplicate.memberId");
-			return "register/signupForm";
+			return "member/signup/signupForm";
 		} catch (MailException e) {
 			e.printStackTrace();
 			errors.reject("failed.mail");
-			return "register/signupForm";
+			return "member/signup/signupForm";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "register/signupForm";
+			return "member/signup/signupForm";
 		}
 
 	}

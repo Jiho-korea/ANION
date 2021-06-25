@@ -79,7 +79,7 @@ a, a:hover {
 </head>
 
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -208,7 +208,7 @@ a, a:hover {
 	</div>
 
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

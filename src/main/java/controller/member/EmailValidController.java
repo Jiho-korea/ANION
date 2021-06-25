@@ -109,11 +109,11 @@ public class EmailValidController {
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
 			errors.rejectValue("memberId", "memberId.edit");
-			return "info/profile";
+			return "member/profile/memberProfile";
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다", "profile", request, response);
-			return "info/profile";
+			return "member/profile/memberProfile";
 		}
 
 	}
