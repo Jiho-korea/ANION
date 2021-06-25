@@ -58,7 +58,7 @@ public class ProfileEditController {
 	public String updateId(ChangeIdCommand changeIdCommand, Model model) {
 		model.addAttribute("updateId", true);
 
-		return "info/profile";
+		return "member/profile/memberProfile";
 	}
 
 	@PostMapping("/updateId")
@@ -69,7 +69,7 @@ public class ProfileEditController {
 		if (errors.hasErrors()) {
 			model.addAttribute("updateId", true);
 
-			return "info/profile";
+			return "member/profile/memberProfile";
 		}
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
@@ -83,15 +83,15 @@ public class ProfileEditController {
 			e.printStackTrace();
 			model.addAttribute("updateId", true);
 			errors.rejectValue("memberId", "duplicate.memberId");
-			return "info/profile";
+			return "member/profile/memberProfile";
 		} catch (MailException e) {
 			e.printStackTrace();
 			model.addAttribute("updateId", true);
 			errors.rejectValue("memberId", "emailerror");
-			return "info/profile";
+			return "member/profile/memberProfile";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "info/profile";
+			return "member/profile/memberProfile";
 		}
 	}
 
@@ -99,7 +99,7 @@ public class ProfileEditController {
 	public String updateName(ChangeNameCommand changeNameCommand, Model model) {
 		model.addAttribute("updateName", true);
 
-		return "info/profile";
+		return "member/profile/memberProfile";
 	}
 
 	@PostMapping("/updateName")
@@ -110,16 +110,16 @@ public class ProfileEditController {
 		if (errors.hasErrors()) {
 			model.addAttribute("updateName", true);
 
-			return "info/profile";
+			return "member/profile/memberProfile";
 		}
 
 		try {
 			changeProfileService.updateName(changeNameCommand, authInfo);
 
-			return "info/profile";
+			return "member/profile/memberProfile";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "info/profile";
+			return "member/profile/memberProfile";
 		}
 
 	}
@@ -127,7 +127,7 @@ public class ProfileEditController {
 	// 비밀번호 변경 버튼 클릭시
 	@GetMapping
 	public String check(ChangePasswordCommand changePasswordCommand) {
-		return "edit/changePasswordForm";
+		return "member/profile/changePasswordForm";
 	}
 
 	// 비밀번호 변경 완료시
@@ -137,32 +137,32 @@ public class ProfileEditController {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
 		if (errors.hasErrors()) {
-			return "edit/changePasswordForm";
+			return "member/profile/changePasswordForm";
 		}
 
 		try {
 			if (changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
 				errors.reject("password.equal");
 
-				return "edit/changePasswordForm";
+				return "member/profile/changePasswordForm";
 			} else if (!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
 				errors.reject("checkNewPassword.notMatch");
 
-				return "edit/changePasswordForm";
+				return "member/profile/changePasswordForm";
 			}
 
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
 			session.invalidate();
-			return "edit/changePassword";
+			return "member/profile/changePasswordSuccess";
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
-			return "edit/changePasswordForm";
+			return "member/profile/changePasswordForm";
 		} catch (WrongIdPasswordException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
 
-			return "edit/changePasswordForm";
+			return "member/profile/changePasswordForm";
 		}
 	}
 

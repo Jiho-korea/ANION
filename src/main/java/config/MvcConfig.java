@@ -63,12 +63,12 @@ public class MvcConfig implements WebMvcConfigurer {
 	public EmailcodeCheckInterceptor emailcodeCheckInterceptor() {
 		return new EmailcodeCheckInterceptor();
 	}
-	
+
 	@Bean
 	public PopupCookieCheckInterceptor popupCookieCheckInterceptor() {
 		return new PopupCookieCheckInterceptor();
 	}
-	
+
 	@Bean
 	public PopupCookieDeleteInterceptor popupCookieDeleteInterceptor() {
 		return new PopupCookieDeleteInterceptor();
@@ -93,14 +93,13 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/list").setViewName("list/petList");
 		registry.addViewController("/home").setViewName("home/main");
 		registry.addViewController("/about").setViewName("company/about");
 		registry.addViewController("/vision").setViewName("company/vision");
 		registry.addViewController("/preservation").setViewName("company/preservation");
 		registry.addViewController("/directions").setViewName("company/directions");
 		registry.addViewController("/petFood").setViewName("company/petFood");
-		registry.addViewController("/profile").setViewName("info/profile");
+		registry.addViewController("/profile").setViewName("member/profile/memberProfile");
 	}
 
 	@Override
@@ -113,7 +112,8 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
 		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
 		registry.addInterceptor(popupCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
-		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1", "/popup/petKind/**");
+		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1",
+				"/popup/petKind/**");
 	}
 
 }
