@@ -107,7 +107,7 @@
 <title><spring:message code="home.title" /></title>
 </head>
 <body onload="check()">
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container text-center" id="main">
@@ -125,7 +125,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <form:input path="petName" cssClass="single-input" 
+						<label> <form:input path="petName" cssClass="single-input"
 								placeholder="견명 / Name" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '견명 / Name'" /> <form:errors
 								path="petName" />
@@ -142,7 +142,7 @@
 								src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
 						</button>
 
-						<!-- 
+						<%-- 
 						<select style="display: none;" name="petKindcode">
 							<option value="">견종 / Dog breed</option>
 							<c:forEach var="kindcode" items="${kindcodeList}"
@@ -159,15 +159,13 @@
 									varStatus="status">
 									<li data-value="${kindcode.petKindcode}" class="option">${kindcode.petKind}</li>
 								</c:forEach>
-								<%-- 
+								<!-- 
 								<li data-value="1" class="option">동경이</li>
 								<li data-value="2" class="option">진돗개</li>
-								--%>
+								--!>
 							</ul>
 						</div>
-						 -->
-
-						<br><br>
+						 --%>
 						<form:errors path="petKind" />
 					</div>
 				</div>
@@ -203,9 +201,10 @@
 				<br class="mb-4" />
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
-						path="petMicrochip" cssClass="single-input" cssStyle="width:350px" oninput='numberMaxLength(this, 15)'
-						placeholder="마이크로칩 번호 / Microchip number" type="number" 
-						onfocus="this.placeholder = ''" 
+						path="petMicrochip" cssClass="single-input" cssStyle="width:350px"
+						oninput='numberMaxLength(this, 15)'
+						placeholder="마이크로칩 번호 / Microchip number" type="number"
+						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '마이크로칩 번호 / Microchip number'" /> <form:errors
 						path="petMicrochip" />
 				</label>
@@ -226,7 +225,7 @@
 		</div>
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 

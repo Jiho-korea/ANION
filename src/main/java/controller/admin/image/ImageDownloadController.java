@@ -119,11 +119,13 @@ public class ImageDownloadController {
 				fis.close();
 
 		} catch (PetNotFoundException e) {
-			return "list/pet";
+			return "pet/list/petList";
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "pet/list/petList";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "pet/list/petList";
 		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 		return null;

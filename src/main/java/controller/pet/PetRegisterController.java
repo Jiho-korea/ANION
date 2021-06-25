@@ -18,6 +18,10 @@
 수    정    일 : 2021.05.15
 수  정  내  용 : 팝업창용 쿠키 생성
 =============================== 함  수  설  명  ===============================
+수    정    자 : 강지호
+수    정    일 : 2021.06.24
+수  정  내  용 : double submit 방지 코드 추가
+=============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
 */
 package controller.pet;
@@ -41,6 +45,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +53,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import petProject.exception.PetRegisterException;
+import petProject.service.ScriptWriter;
 import petProject.service.image.ImageUploadService;
 import petProject.service.pet.GetCurrvalService;
 import petProject.service.pet.PetRegisterService;
@@ -97,7 +103,7 @@ public class PetRegisterController {
 			 * model.addAttribute("kindcodeList", kindcodeList);
 			 */
 			// System.out.print(kindcodeList.get(0).getPetKind());
-			return "register/registerStep1";
+			return "pet/register/registerStep1";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,8 +113,23 @@ public class PetRegisterController {
 	}
 
 	@GetMapping("/step2")
-	public String registerStep2Get() {
-		return "redirect:/register/step1";
+	public String registerStep2(
+			@CookieValue(value = "successPetRegistration", required = false) Cookie cookie_success_pet_registration,
+			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		// 반려견 등록과정 step1을 안거치고 get방식으로 요청 한경우 (= 반려견 등록 완료 페이지에서 새로고침 한 경우)
+		if (cookie_success_pet_registration == null) {
+			ScriptWriter.write("잘못된 접근입니다.", "pet/list", request, response);
+			return null;
+		}
+
+		Cookie cookie_delete_success_pet_registration = new Cookie("successPetRegistration",
+				cookie_success_pet_registration.getValue());
+		cookie_delete_success_pet_registration.setPath("/");
+		cookie_delete_success_pet_registration.setMaxAge(0);
+		response.addCookie(cookie_delete_success_pet_registration);
+
+		model.addAttribute("petName", cookie_success_pet_registration.getValue());
+		return "pet/register/registerStep2";
 	}
 
 	@PostMapping("/step2")
@@ -130,7 +151,7 @@ public class PetRegisterController {
 				 * kindcodeList = kindcodeListService.selectKindcodeList();
 				 * model.addAttribute("kindcodeList", kindcodeList);
 				 */
-				return "register/registerStep1";
+				return "pet/register/registerStep1";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "redirect:/home";
@@ -155,19 +176,25 @@ public class PetRegisterController {
 
 			petRegisterService.insertPet(petRegisterRequest);
 
-			int currval = getCurrvalService.selectCurrval();
+			Cookie cookie_success_pet_registration = new Cookie("successPetRegistration",
+					petRegisterRequest.getPetName());
+			cookie_success_pet_registration.setPath("/");
+			cookie_success_pet_registration.setMaxAge(60 * 60 * 24 * 1);
+
+			response.addCookie(cookie_success_pet_registration);
+			// int currval = getCurrvalService.selectCurrval();
 
 			// ImageUploadRequest imageUploadRequest = new
 			// ImageUploadRequest(member.getMemberId(), currval, savedName);
 			// imageUploadService.insertImage(imageUploadRequest);
 
-			return "register/registerStep2";
+			return "redirect:/register/step2";
 		} catch (PetRegisterException e) {
 			e.printStackTrace();
-			return "register/registerStep1";
+			return "pet/register/registerStep1";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "register/registerStep1";
+			return "pet/register/registerStep1";
 		}
 	}
 

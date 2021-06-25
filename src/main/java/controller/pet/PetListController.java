@@ -47,7 +47,7 @@ public class PetListController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/list/pet";
+		return "pet/list/petList";
 	}
 
 }

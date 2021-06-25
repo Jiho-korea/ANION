@@ -71,8 +71,8 @@ public class PetInfoController {
 			throws Exception {
 
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		
-		//관리자 페이지에서 회원 반려견 삭제 불가 
+
+		// 관리자 페이지에서 회원 반려견 삭제 불가
 		if (petDAO.selectMemberNumber(petRegistrationNumber) == authInfo.getMemberNumber()) {
 			model.addAttribute("delete", true);
 		}
@@ -83,19 +83,19 @@ public class PetInfoController {
 			model.addAttribute("pet", pet);
 			model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 
-			return "info/pet";
+			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "list/pet";
+			return "pet/list/petList";
 		}
 
 	}
 
-	//pet페이지에서 petRegistrationNumber받아서 삭제하는 메소드
+	// pet페이지에서 petRegistrationNumber받아서 삭제하는 메소드
 	@PostMapping
 	public String petDelete(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -104,11 +104,11 @@ public class PetInfoController {
 			petDeleteService.deletePet(petRegistrationNumber);
 
 			return "redirect:/pet/list";
-		} catch (PetDeleteException e) {	//DB에 없는 pet일경우 DeleteException발생
+		} catch (PetDeleteException e) { // DB에 없는 pet일경우 DeleteException발생
 			e.printStackTrace();
 			ScriptWriter.write("목록을 다시 확인해주세요.", "pet/list", request, response);
 			return null;
-		} catch (Exception e) {				//예외발생시 다시 pet페이지로 이동
+		} catch (Exception e) { // 예외발생시 다시 pet페이지로 이동
 			e.printStackTrace();
 			return "redirect:/info/pet?petRegistrationNumber=" + petRegistrationNumber;
 		}
@@ -125,14 +125,14 @@ public class PetInfoController {
 			model.addAttribute("pet", pet);
 			model.addAttribute("updatePname", true);
 
-			return "info/pet";
+			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "info/pet";
+			return "pet/info/petInfo";
 		}
 
 	}
@@ -145,13 +145,13 @@ public class PetInfoController {
 				Pet pet = petInfoService.selectPet(petNameUpdateRequest.getPetRegistrationNumber());
 				model.addAttribute("pet", pet);
 				model.addAttribute("updatePname", true);
-				return "info/pet";
+				return "pet/info/petInfo";
 			} catch (PetNotFoundException e) {
 				e.printStackTrace();
-				return "list/pet";
+				return "pet/list/petList";
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "list/pet";
+				return "pet/list/petList";
 			}
 
 		}
@@ -160,10 +160,10 @@ public class PetInfoController {
 			return "redirect:/info/pet?" + "petRegistrationNumber=" + petNameUpdateRequest.getPetRegistrationNumber();
 		} catch (PetInfoUpdateException e) {
 			e.printStackTrace();
-			return "info/pet";
+			return "pet/info/petInfo";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "info/pet";
+			return "pet/info/petInfo";
 		}
 
 	}

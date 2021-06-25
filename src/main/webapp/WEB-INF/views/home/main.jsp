@@ -130,6 +130,7 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
+	<br><br><br><br><br><br><br><br>
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/register/step1"
 			class="btn header-btn"><spring:message
@@ -140,7 +141,7 @@
 		<a href="${pageContext.request.contextPath}/pet/list"
 			class="btn header-btn"><spring:message code="pet.list.title" /></a>
 	</div>
-
+	<br><br><br><br><br><br><br><br>
 	<%-- 대문짝
     <!-- slider Area Start-->
    <div class="slider-area position-relative">

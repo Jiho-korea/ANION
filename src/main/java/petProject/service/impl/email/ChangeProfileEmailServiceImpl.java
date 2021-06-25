@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : ChangeProfileEmailServiceImpl.java
+========================================================================
+작    성    자 : 강지호
+작    성    일 : 2021.06.23
+작  성  내  용 : 비밀번호 변경 확인 이메일 서비스 인터페이스 구현 클래스
+========================================================================
+*/
 package petProject.service.impl.email;
 
 import javax.annotation.Resource;
@@ -12,7 +21,7 @@ import petProject.service.email.MailSendService;
 @Service("changeProfileEmailService")
 public class ChangeProfileEmailServiceImpl implements ChangeProfileEmailService {
 
-	@Value("${mail.smtp.url.local}")
+	@Value("${mail.smtp.url.server}")
 	private String url;
 
 	@Resource(name = "mailSendService")
