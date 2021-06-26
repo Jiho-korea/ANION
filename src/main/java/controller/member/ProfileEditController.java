@@ -78,7 +78,10 @@ public class ProfileEditController {
 
 			session.setAttribute("tempAuth", true);
 			model.addAttribute("update", true);
-			return "register/signupSucess";
+
+			model.addAttribute("memberId", changeIdCommand.getMemberId());
+
+			return "member/email/emailSentSuccess";
 		} catch (MemberDuplicateException e) {
 			e.printStackTrace();
 			model.addAttribute("updateId", true);

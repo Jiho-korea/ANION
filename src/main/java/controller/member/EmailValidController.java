@@ -61,7 +61,7 @@ public class EmailValidController {
 		}
 
 		model.addAttribute("memberId", emailcode.getMemberId());
-		return "register/valid";
+		return "member/email/emailAuthenticationForm";
 	}
 
 	@PostMapping("/valid")
@@ -70,42 +70,44 @@ public class EmailValidController {
 		if (errors.hasErrors()) {
 			errors.reject("error");
 			model.addAttribute("memberId", emailcode.getMemberId());
-			return "register/valid";
+			return "member/email/emailAuthenticationForm";
 		}
 
 		try {
 			String result = emailValidService.valid(emailcode);
+
 			// 이메일 변경시 result != null
 			if (result != null) {
 				emailcodeDeleteService.deleteEmailcode(result);
 				session.invalidate();
 				model.addAttribute("memberId", result);
-				return "home/validSuccess";
+
+				return "member/email/emailAuthenticationSuccess";
 			}
 			// 회원 가입시 result = null
 			emailcodeDeleteService.deleteEmailcode(emailcode);
 			model.addAttribute("memberId", emailcode.getMemberId());
 			session.removeAttribute("tempAuth");
-			return "home/validSuccess";
+			return "member/email/emailAuthenticationSuccess";
 		} catch (EmailcodeNotMatchException e) {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "notvalid");
 			model.addAttribute("memberId", emailcode.getMemberId());
-			return "register/valid";
+			return "member/email/emailAuthenticationForm";
 		} catch (EmailcodeNullException e) {
 			e.printStackTrace();
 			errors.rejectValue("emailCode", "NotNull");
 			model.addAttribute("memberId", emailcode.getMemberId());
-			return "register/valid";
+			return "member/email/emailAuthenticationForm";
 		} catch (MemberIdUpdateException e) {
 			e.printStackTrace();
 			errors.reject("newId");
 			model.addAttribute("memberId", emailcode.getMemberId());
-			return "register/valid";
+			return "member/email/emailAuthenticationForm";
 		} catch (EmailcodeDeleteException e) {
 			e.printStackTrace();
 			errors.reject("emailCode.deleteError");
-			return "register/valid";
+			return "member/email/emailAuthenticationForm";
 		} catch (MemberAuthUpdateException e) {
 			e.printStackTrace();
 			errors.rejectValue("memberId", "memberId.edit");
