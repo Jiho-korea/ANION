@@ -111,7 +111,7 @@ public class MemberRegisterController {
 		response.addCookie(cookie_delete_success_pet_registration);
 
 		model.addAttribute("memberId", cookie_success_member_registration.getValue());
-		return "register/signupSucess";
+		return "member/email/emailSentSuccess";
 	}
 
 	@PostMapping("/step2")
@@ -140,7 +140,6 @@ public class MemberRegisterController {
 
 			// model.addAttribute("register", true);
 
-			// return "register/signupSucess";
 			return "redirect:/signup/step2";
 		} catch (MemberInsertException e) {
 			e.printStackTrace();
