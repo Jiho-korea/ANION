@@ -18,7 +18,9 @@
 package controller.member;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -63,7 +65,7 @@ public class ProfileEditController {
 
 	@PostMapping("/updateId")
 	public String updateId(@Valid ChangeIdCommand changeIdCommand, Errors errors, HttpSession session,
-			HttpServletRequest request, Model model) throws Exception {
+			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
 		if (errors.hasErrors()) {
@@ -74,14 +76,19 @@ public class ProfileEditController {
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
 
-			authInfo.getMemberauth().setMemberAuthStatus(2);
+			authInfo.getMemberauth().setMemberAuthStatus(2); // what is this?
 
-			session.setAttribute("tempAuth", true);
-			model.addAttribute("update", true);
+			session.setAttribute("tempAuth", true); // what is this?
+			// model.addAttribute("update", true); // what is this?
 
-			model.addAttribute("memberId", changeIdCommand.getMemberId());
+			Cookie cookie_success_update_member_id = new Cookie("successUpdateMemberId", changeIdCommand.getMemberId());
+			cookie_success_update_member_id.setPath("/");
+			cookie_success_update_member_id.setMaxAge(60 * 60 * 24 * 1);
 
-			return "member/email/emailSentSuccess";
+			response.addCookie(cookie_success_update_member_id);
+
+			return "redirect:/email/sent";
+
 		} catch (MemberDuplicateException e) {
 			e.printStackTrace();
 			model.addAttribute("updateId", true);
