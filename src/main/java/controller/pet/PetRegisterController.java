@@ -147,6 +147,10 @@ public class PetRegisterController {
 				String today = simpleDateFormat.format(new Date());
 				model.addAttribute("today", today);
 
+				Cookie petKind = new Cookie("petKind", "true");
+				petKind.setPath(request.getContextPath() + "/popup/petKind");
+				petKind.setMaxAge(60 * 60 * 24 * 1);
+				response.addCookie(petKind);
 				/*
 				 * kindcodeList = kindcodeListService.selectKindcodeList();
 				 * model.addAttribute("kindcodeList", kindcodeList);

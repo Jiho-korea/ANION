@@ -12,7 +12,7 @@
 ========================================================================
 수    정    자 : 송찬영
 수    정    일 : 2021.03.20
-수  정  내  용 : 에러 처리 및 이메일 변경시 검증할 세션(tempAuth) 생성
+수  정  내  용 : 에러 처리 및 이메일 변경시 생성되는 조건부 세션(tempAuth) 생성
 ========================================================================
 */
 package controller.member;
@@ -73,11 +73,9 @@ public class ProfileEditController {
 		}
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
-
 			authInfo.getMemberauth().setMemberAuthStatus(2);
 
 			session.setAttribute("tempAuth", true);
-			model.addAttribute("update", true);
 
 			model.addAttribute("memberId", changeIdCommand.getMemberId());
 

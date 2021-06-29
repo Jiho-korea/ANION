@@ -25,15 +25,11 @@ public class EmailcodeCheckInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession(false);
 
 		try {
-			if (session != null) {
-				boolean tempAuth = (Boolean) session.getAttribute("tempAuth");
-			}
+			boolean tempAuth = (Boolean) session.getAttribute("tempAuth");
 		} catch (NullPointerException e) {
 			return ScriptWriter.write("잘못된 접근입니다", "home", request, response);
 		}
-
 		return true;
-
 	}
 
 }

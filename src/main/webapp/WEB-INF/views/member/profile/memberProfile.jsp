@@ -133,7 +133,7 @@ a, a:hover {
 								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
-								type="button" name="btn_modify_cancel" id="btn_modify_cancel"
+								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
 								value=<spring:message code="cancel" /> /> </a>
 
 							<form:errors path="memberId" />
@@ -220,9 +220,12 @@ a, a:hover {
 	<!-- JS here -->
 	<script defer>
 		function btn_submit() {
+			document.getElementById('btn_modify_cancle').style.visibility = 'hidden';
 			const target = document.getElementById('btn_modify');
+			
 			target.disabled = true;
 			target.value = 'Loading';
+			
 			target.form.submit();
 		}
 	</script>
