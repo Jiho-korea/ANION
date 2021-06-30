@@ -44,6 +44,11 @@
 	<select id="selectMemberCount" resultType="int">
 		SELECT count(*) FROM member
 	</select>
+	
+    <select id="selectMemberauth" parameterType="emailcode" resultType="memberauth">
+    	SELECT "MEMBER_AUTH_STATUS"
+    	FROM "member" WHERE "MEMBER_ID" = #{emailcode.memberId}
+    </select>
 
 	<insert id="insertMember" parameterType="memberRegisterRequest">
 		INSERT INTO

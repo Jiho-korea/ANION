@@ -28,7 +28,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import interceptor.AdminCheckInterceptor;
-import interceptor.EmailcodeCheckInterceptor;
 import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
@@ -57,11 +56,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public ImageAuthCheckInterceptor imageAuthCheckInterceptor() {
 		return new ImageAuthCheckInterceptor();
-	}
-
-	@Bean
-	public EmailcodeCheckInterceptor emailcodeCheckInterceptor() {
-		return new EmailcodeCheckInterceptor();
 	}
 
 	@Bean
@@ -110,7 +104,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
-		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
 		registry.addInterceptor(popupCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
 		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1",
 				"/popup/petKind/**");

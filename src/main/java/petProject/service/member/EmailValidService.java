@@ -15,6 +15,8 @@ import petProject.vo.dto.Emailcode;
 
 public interface EmailValidService {
 
+	void checkMemberAuthStatus(@Param("emailcode") Emailcode emailcode) throws Exception;
+	
 	String valid(@Param("emailcode") Emailcode emailcode) throws Exception;
 
 	Emailcode validCode(@Param("emailcode") Emailcode emailcode) throws Exception;

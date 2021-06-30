@@ -29,7 +29,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,7 +83,7 @@ public class LoginController {
 	}
 
 	@PostMapping()
-	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session, Model model,
+	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			@CookieValue(value = "popup01", required = false) Cookie cookie_popup01) {
 		if (errors.hasErrors()) {
@@ -94,15 +93,11 @@ public class LoginController {
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
-
-			if (authInfo.getMemberauth().getMemberAuthStatus() == 2) {
-				session.setAttribute("tempAuth", true);
-			}
-
 			session.setAttribute("login", authInfo);
 
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
 			memoryCookie.setPath("/");
+
 			if (loginRequest.isMemory()) {
 				memoryCookie.setMaxAge(60 * 60 * 24 * 30);
 			} else {
@@ -128,7 +123,6 @@ public class LoginController {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
-			session.setAttribute("tempAuth", true);
 			return "redirect:/email/valid?memberId=" + loginRequest.getMemberId();
 		} catch (Exception e) {
 			e.printStackTrace();

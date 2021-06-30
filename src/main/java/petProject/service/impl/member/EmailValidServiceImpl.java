@@ -17,11 +17,14 @@ import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
+import petProject.exception.MemberNotFoundException;
 import petProject.service.member.EmailValidService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
+import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
 
 @Service("emailValidService")
@@ -33,6 +36,19 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+
+	// Email인증 페이지에서 memberAuthStatus를 확인하는 메소드
+	@Override
+	public void checkMemberAuthStatus(Emailcode emailcode) throws Exception {
+		Memberauth memberauth = memberDAO.selectMemberauth(emailcode);
+
+		if (memberauth == null) {
+			throw new MemberNotFoundException("memberId is not valid");
+		}
+		if (memberauth.getMemberAuthStatus() == 1) {
+			throw new MemberAuthStatusException("authstatus is valid");
+		}
+	}
 
 	// Emailcode의 필드(memberId, emailCode)를 사용하는 메소드
 	@Override
@@ -82,4 +98,5 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 		return result;
 	}
+
 }

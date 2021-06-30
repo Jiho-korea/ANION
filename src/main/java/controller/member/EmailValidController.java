@@ -37,8 +37,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import petProject.exception.EmailcodeDeleteException;
 import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
+import petProject.exception.MemberNotFoundException;
 import petProject.service.ScriptWriter;
 import petProject.service.member.EmailValidService;
 import petProject.service.member.EmailcodeDeleteService;
@@ -55,13 +57,29 @@ public class EmailValidController {
 	EmailcodeDeleteService emailcodeDeleteService;
 
 	@GetMapping("/valid")
-	public String validForm(@Valid Emailcode emailcode, Errors errors, Model model) {
+	public String validForm(@Valid Emailcode emailcode, Errors errors, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		if (errors.hasErrors()) {
 			errors.reject("error");
 		}
 
-		model.addAttribute("memberId", emailcode.getMemberId());
-		return "member/email/emailAuthenticationForm";
+		try {
+			emailValidService.checkMemberAuthStatus(emailcode);
+
+			model.addAttribute("memberId", emailcode.getMemberId());
+			return "member/email/emailAuthenticationForm";
+		} catch (MemberNotFoundException e) {
+			ScriptWriter.write("아이디를 다시 확인해주세요", "home", request, response);
+			return null;
+		} catch (MemberAuthStatusException e) {
+			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+			return null;
+		}
+
 	}
 
 	@PostMapping("/valid")
@@ -115,7 +133,7 @@ public class EmailValidController {
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			ScriptWriter.write("잘못된 접근입니다", "profile", request, response);
-			return "member/profile/memberProfile";
+			return null;
 		}
 
 	}
