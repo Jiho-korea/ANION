@@ -40,7 +40,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 	// Email인증 페이지에서 memberAuthStatus를 확인하는 메소드
 	@Override
 	public void checkMemberAuthStatus(Emailcode emailcode) throws Exception {
-		Memberauth memberauth = memberDAO.selectMemberauth(emailcode);
+		Memberauth memberauth = memberDAO.checkMemberAuthStatus(emailcode);
 
 		if (memberauth == null) {
 			throw new MemberNotFoundException("memberId is not valid");

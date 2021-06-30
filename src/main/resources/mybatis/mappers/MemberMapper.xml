@@ -45,7 +45,7 @@
 		SELECT count(*) FROM member
 	</select>
 	
-    <select id="selectMemberauth" parameterType="emailcode" resultType="memberauth">
+    <select id="checkMemberAuthStatus" parameterType="emailcode" resultType="memberauth">
     	SELECT "MEMBER_AUTH_STATUS"
     	FROM "member" WHERE "MEMBER_ID" = #{emailcode.memberId}
     </select>

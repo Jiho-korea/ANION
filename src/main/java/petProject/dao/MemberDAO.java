@@ -56,6 +56,6 @@ public interface MemberDAO {
 
 	int selectMemberCount() throws Exception;
 	
-	Memberauth selectMemberauth(@Param("emailcode") Emailcode emailCode);
+	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode);
 
 }
