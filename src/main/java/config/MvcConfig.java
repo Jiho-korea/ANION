@@ -31,6 +31,7 @@ import interceptor.AdminCheckInterceptor;
 import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
+import interceptor.MemberFindCheckInterceptor;
 import interceptor.PopupCookieCheckInterceptor;
 import interceptor.PopupCookieDeleteInterceptor;
 
@@ -66,6 +67,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public PopupCookieDeleteInterceptor popupCookieDeleteInterceptor() {
 		return new PopupCookieDeleteInterceptor();
+	}
+
+	@Bean
+	public MemberFindCheckInterceptor memberFindCheckInterceptor() {
+		return new MemberFindCheckInterceptor();
 	}
 
 	@Bean
@@ -105,6 +111,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
 		registry.addInterceptor(popupCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
+		registry.addInterceptor(memberFindCheckInterceptor()).addPathPatterns("/member/find/**");
 		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1",
 				"/popup/petKind/**");
 	}

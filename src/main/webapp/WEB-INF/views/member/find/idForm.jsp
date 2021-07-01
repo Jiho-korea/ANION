@@ -1,18 +1,10 @@
 <!-- 
 ========================================================================
-파    일    명 : loginFormPage.jsp
+파    일    명 : emailSentSuccess.jsp
 ========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.xx.xx
-작  성  내  용 : 사용자로부터 login 입력받는 폼 페이지
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.11.17
-수  정  내  용 : 디자인 수정
-========================================================================
-수    정    자 : 정세진, 송찬영
-수    정    일 : 2020.11.19
-수  정  내  용 : 자바스크립트 유효성 검증 추가
+작    성    자 : 송찬영
+작    성    일 : 2020.11.17
+작  성  내  용 : 이메일 발송 안내 페이지
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
@@ -62,68 +54,68 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="js/bootstrap.js"></script>
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
+	charset="utf-8"></script>
+<script defer
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+	charset="utf-8"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 	<div class="container text-center" id="main">
-		<div class="jumbotron border">
-			<form:form action="${pageContext.request.contextPath}/login"
-				method="post" cssClass="form-signin" modelAttribute="loginRequest">
+		<div class="jumbotron">
+			<h1 class="display-4">아이디 찾기</h1>
 
-				<h1 class="display-4">
-					<spring:message code="go.login" />
-				</h1>
+			<br>
 
-				<form:errors />
-				<br>
+			<form:form action="${pageContext.request.contextPath}/member/find/id"
+				method="post" cssClass="form-signin"
+				modelAttribute="memberFindIdRequest">
 
-				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:input path="memberId" cssClass="single-input"
-						placeholder="ID" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'ID'" /> <form:errors path="memberId" />
+				<label style="margin-top: 20px"> <form:input
+						path="memberName" cssClass="single-input mt-2"
+						placeholder="이름 / Name" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이름 / Name'" cssStyle="width:350px" />
+					<form:errors path="memberName" />
 				</label>
 				<br>
-				<label> <!--<spring:message code="password" />--> <form:password
-						path="memberPassword" cssClass="single-input"
-						placeholder="Password" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Password'" /> <form:errors
-						path="memberPassword" />
+				<label> <form:input path="memberPhoneNumber"
+						cssClass="single-input mt-2" placeholder="전화번호 / Phone Number"
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '전화번호 / Phone Number'"
+						onKeyup="inputPhoneNumber(this);" maxlength="13"
+						pattern=".{13,13}" cssStyle="width:350px" /> <form:errors
+						path="memberPhoneNumber" />
 				</label>
-				<br>
-				<br>
-				<div class="checkbox mb-3">
-					<form:checkbox path="memory" />
-					<spring:message code="login.memory" />
-				</div>
 
-				<button id="btn_login" class="btn btn-info pull-right" type="submit">
-					<spring:message code="go.login" />
-				</button>
+				<br>
+				<br>
+				<button id="btn_find" class="btn btn-info pull-right" type="submit">
+					찾기</button>
+
 				<br>
 				<br>
 				<p>
-					<a href="${pageContext.request.contextPath}/member/find/id"
-						style="color: blue;">아이디 찾기</a> | <a
+					<a
 						href="${pageContext.request.contextPath}/member/find/password"
-						style="color: blue;">비밀번호 찾기</a>
-				</p>
-				<!-- 
-				<a href="${pageContext.request.contextPath}/register/step1"><spring:message
-						code="go.member.register" /></a>  -->
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
+						style="color: blue;">비밀번호 찾기</a> | <a
+						href="${pageContext.request.contextPath}/signup/step1"
+						style="color: blue;">회원가입</a>
 				</p>
 			</form:form>
 
+			<br class="mb-4" />
+			<hr class="mb-4" />
+			<div class="row"></div>
+
 		</div>
+
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -131,12 +123,40 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
-
-
 	<!-- JS here -->
 
+	<script defer type="text/javascript">
+		function inputPhoneNumber(obj) {
+
+			var number = obj.value.replace(/[^0-9]/g, "");
+			var phone = "";
+
+			if (number.length < 4) {
+				return number;
+			} else if (number.length < 7) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3);
+			} else if (number.length < 11) {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 3);
+				phone += "-";
+				phone += number.substr(6);
+			} else {
+				phone += number.substr(0, 3);
+				phone += "-";
+				phone += number.substr(3, 4);
+				phone += "-";
+				phone += number.substr(7);
+			}
+			obj.value = phone;
+		}
+	</script>
 	<script defer
-		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
+		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js">
+		
+	</script>
 	<!-- Jquery, Popper, Bootstrap -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
@@ -193,18 +213,16 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	 $("#btn_login").click(function() {
-		if ($("#memberId").val() == "") {
-			alert("이메일을 입력해주세요.");
+	 $("#btn_find").click(function() {
+		if ($("#memberName").val() == "") {
+			alert("이름을 입력해주세요.");
 			return false;
-		} else if ($("#memberPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
+		} else if ($("#memberPhoneNumber").val() == "") {
+			alert("전화번호를 입력해주세요.");
 			return false;
 		}
 	});
 </script>
-
 </html>

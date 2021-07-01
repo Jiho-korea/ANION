@@ -29,8 +29,10 @@ import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
+import petProject.vo.dto.MemberIdProfile;
 import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
+import petProject.vo.request.MemberFindIdRequest;
 import petProject.vo.request.MemberRegisterRequest;
 
 //member 테이블에 접근하는 DAO
@@ -55,7 +57,11 @@ public interface MemberDAO {
 	int updateId(@Param("changeIdCommand") ChangeIdCommand changeIdCommand) throws Exception;
 
 	int selectMemberCount() throws Exception;
-	
+
 	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode);
+
+	MemberIdProfile findProfile(@Param("memberFindIdRequest") MemberFindIdRequest memberFindIdRequest);
+
+	String checkId(@Param("memberId") String memberId);
 
 }
