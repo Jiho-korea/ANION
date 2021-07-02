@@ -34,12 +34,13 @@ public class Pet implements Serializable {
 	private String petFathername;
 	private String petSex;
 	private int imageCount;
+	private int noseprintImageCount;
 	private Kindcode kindcode;
 	private Member member;
 
 	public Pet(int memberNumber, String petName, String petKindcode, String petBirthday, int petRegistrationNumber,
 			String petRegistrationDate, String petMicrochip, String petMothername, String petFathername, String petSex,
-			int imageCount, Kindcode kindcode, Member member) {
+			int imageCount, int noseprintImageCount, Kindcode kindcode, Member member) {
 		super();
 		this.memberNumber = memberNumber;
 		this.petName = petName;
@@ -52,6 +53,7 @@ public class Pet implements Serializable {
 		this.petFathername = petFathername;
 		this.petSex = petSex;
 		this.imageCount = imageCount;
+		this.noseprintImageCount = noseprintImageCount;
 		this.kindcode = kindcode;
 		this.member = member;
 	}
@@ -146,6 +148,14 @@ public class Pet implements Serializable {
 
 	public void setImageCount(int imageCount) {
 		this.imageCount = imageCount;
+	}
+
+	public int getNoseprintImageCount() {
+		return noseprintImageCount;
+	}
+
+	public void setNoseprintImageCount(int noseprintImageCount) {
+		this.noseprintImageCount = noseprintImageCount;
 	}
 
 	public Kindcode getKindcode() {

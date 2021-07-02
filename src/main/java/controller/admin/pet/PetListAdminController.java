@@ -31,7 +31,7 @@ public class PetListAdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PetListAdminController.class);
 
-	@Resource(name = "petNameListService")
+	@Resource(name = "petListService")
 	PetListService petListService;
 
 	@GetMapping("/{memberNumber}")

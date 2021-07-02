@@ -101,6 +101,7 @@ public class ProfileEditController {
 			return "member/profile/memberProfile";
 		} catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("updateId", true);
 			return "member/profile/memberProfile";
 		}
 	}
