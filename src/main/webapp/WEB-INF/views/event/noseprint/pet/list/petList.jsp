@@ -138,7 +138,7 @@
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 									id="btn_photo" class="btn btn-info pull-right"><spring:message
 											code="go.right" /></a> --> <a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+									href="${pageContext.request.contextPath}/guidance/npevent">
 										<button class="btn_gallery" id="btn_gallery"
 											type="button">
 											<img
@@ -162,11 +162,11 @@
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
 								<td>${pet.imageCount}건</td>
 								<td><a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+									href="${pageContext.request.contextPath}/guidance/npevent">
 										<button class="btn_gallery" id="btn_gallery"
 											type="button">
 											<img
-												src="${pageContext.request.contextPath}/img/button/gallery1.png">
+												src="${pageContext.request.contextPath}/img/button/dog_nose.png">
 										</button>
 								</a></td>
 

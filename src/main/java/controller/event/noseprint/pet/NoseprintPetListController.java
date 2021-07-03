@@ -7,7 +7,7 @@
 작  성  내  용 : 비문 등록 이벤트 반려견 목록 Controller
 ========================================================================
 */
-package controller.event.noseprint;
+package controller.event.noseprint.pet;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class NoseprintPetListController {
 	@Resource(name = "petListService")
 	PetListService petListService;
 
-	@GetMapping("/list/event1")
+	@GetMapping("/list/npevent")
 	public String listPet(HttpSession session, Model model) {
 
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");

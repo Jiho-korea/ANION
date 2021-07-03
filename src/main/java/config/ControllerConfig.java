@@ -26,7 +26,7 @@ import controller.admin.pet.PetListAdminController;
 import controller.bbs.image.ImageBoardController;
 import controller.bbs.image.ImagePostingController;
 import controller.bbs.image.ViewImagePostController;
-import controller.event.noseprint.NoseprintPetListController;
+import controller.event.noseprint.pet.NoseprintPetListController;
 import controller.event.popup.EventPopupController;
 import controller.image.ImageDeleteController;
 import controller.image.ImageListController;
