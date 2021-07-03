@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : MemberFindController.java
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2020.07.03
+작  성  내  용 : 비밀번호 찾기 컨트롤러
+========================================================================
+*/
 package controller.member;
 
 import javax.annotation.Resource;
@@ -48,7 +57,7 @@ public class MemberFindController {
 
 		try {
 			String tempPassword = Emailcode.random();
-			MemberIdProfile result = memberFindService.checkId(memberIdProfile.getMemberId());
+			MemberIdProfile result = memberFindService.selectProfileById(memberIdProfile.getMemberId());
 
 			changePasswordService.updateTempPassword(memberIdProfile.getMemberId(), tempPassword);
 

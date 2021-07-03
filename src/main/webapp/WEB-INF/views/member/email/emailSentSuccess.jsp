@@ -65,6 +65,7 @@
 	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
+	
 	<div class="container text-center" id="main">
 		<div class="jumbotron">
 			<h4 class="mb-4">

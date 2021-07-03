@@ -1,10 +1,10 @@
 <!-- 
 ========================================================================
-파    일    명 : emailSentSuccess.jsp
+파    일    명 : sendTempPasswordSuccess
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2020.11.17
-작  성  내  용 : 이메일 발송 안내 페이지
+작    성    일 : 2020.07.03
+작  성  내  용 : 임시 비밀번호를 발급 완료하였을때 보여지는 뷰
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -69,17 +69,19 @@
 	<div class="container text-center" id="main">
 		<div class="jumbotron">
 			<h4 class="mb-4">
-				<b>비밀번호 초기화 완료</b>
+				<b><spring:message code="edit.member.password.refresh.done" /></b>
 			</h4>
 			<br> <br>
 
 			<p>
-				입력하신 ${memberId }로 임시 비밀번호가 발급되었습니다! <br>메일을 확인해주세요
+				<spring:message code="temp.send.email.password.done">
+					<spring:argument value="${memberId}" />
+				</spring:message>
 			</p>
 			<br> <a href="${pageContext.request.contextPath}/login"
-				style="color: blue;">로그인</a> | <a
+				style="color: blue;"><spring:message code="go.login" /></a> | <a
 				href="${pageContext.request.contextPath}/signup/step1"
-				style="color: blue;">회원가입</a>
+				style="color: blue;"><spring:message code="go.register" /></a>
 		</div>
 	</div>
 

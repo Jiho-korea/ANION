@@ -5,9 +5,13 @@
 작    성    자 : 송찬영
 작    성    일 : 2021.03.20
 작  성  내  용 : emailcode 확인기능 및 email 변경기능
+=========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.03
+수  정  내  용 : checkMemberAuthStatus 메소드 추가
 ========================================================================
 */
-package petProject.service.impl.member;
+package petProject.service.impl.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +25,7 @@ import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.exception.MemberNotFoundException;
-import petProject.service.member.EmailValidService;
+import petProject.service.email.EmailValidService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 import petProject.vo.dto.Memberauth;

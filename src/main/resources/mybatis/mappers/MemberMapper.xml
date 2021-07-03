@@ -50,8 +50,8 @@
     	FROM "member" WHERE "MEMBER_ID" = #{emailcode.memberId}
     </select>
     
-    <select id="checkId" parameterType="String" resultType="memberIdProfile">
-    	SELECT "MEMBER_ID", "MEMBER_NAME"
+    <select id="selectProfileById" parameterType="String" resultType="memberIdProfile">
+    	SELECT "MEMBER_ID", "MEMBER_NAME", "MEMBER_REGISTRATION_DATE"
     	FROM "member" 
     	WHERE "MEMBER_ID" = #{memberId }
     </select>

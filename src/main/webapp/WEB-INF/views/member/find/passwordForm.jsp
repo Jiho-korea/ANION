@@ -1,10 +1,10 @@
 <!-- 
 ========================================================================
-파    일    명 : emailSentSuccess.jsp
+파    일    명 : passwordForm.jsp
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2020.11.17
-작  성  내  용 : 이메일 발송 안내 페이지
+작    성    일 : 2020.07.03
+작  성  내  용 : 비밀번호 찾기위한 ID 입력 폼
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -86,12 +86,14 @@
 	</c:import>
 
 	<div class="container text-center" id="main" style="width: 70%">
-		<h1 class="display-4">비밀번호 초기화</h1>
+		<h1 class="display-4">
+			<spring:message code="edit.member.password.refresh" />
+		</h1>
 		<br>
 		<div style="background: transparent !important"
 			class="jumbotron border">
 			<h2 style="text-align: left">
-				<b>가입하신 Email로 임시 비밀번호를 발송합니다!</b>
+				<b><spring:message code="temp.send.email.password" /></b>
 			</h2>
 			<br> <br>
 
@@ -107,16 +109,18 @@
 					<form:input path="memberId" cssClass="input-map" type="email"
 						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '이메일 / Email'" style="width:350px" />
-					<button id="btn_send" class="btn btn-info pull-right" type="submit">발송</button>
+					<button id="btn_send" class="btn btn-info pull-right" type="submit">
+						<spring:message code="send" />
+					</button>
 				</div>
 				<form:errors path="memberId" />
-				
+
 				<hr class="my-4">
 				<h4 style="text-align: left">
 					<a href="${pageContext.request.contextPath}/login"
-						style="color: blue;">로그인</a> | <a
+						style="color: blue;"><spring:message code="go.login" /></a> | <a
 						href="${pageContext.request.contextPath}/signup/step1"
-						style="color: blue;">회원가입</a>
+						style="color: blue;"><spring:message code="go.register" /></a>
 				</h4>
 			</form:form>
 		</div>
@@ -130,7 +134,18 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
+
 	<!-- JS here -->
+	<script defer type="text/javascript">
+		function CheckEmail(str) {
+			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			if (!reg_email.test(str)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	</script>
 
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js">
@@ -192,11 +207,15 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_send").click(function() {
 		if ($("#memberId").val() == "") {
 			alert("이메일을 입력해주세요.");
+			return false;
+		} else if (!CheckEmail($("#memberId").val())) {
+			alert("이메일의 형식이 아닙니다.");
 			return false;
 		}
 	});

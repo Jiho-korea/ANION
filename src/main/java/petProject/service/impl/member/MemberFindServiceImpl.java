@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : MemberFindServiceImpl.java
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2020.07.03
+작  성  내  용 : id를 통해 MemberIdProfile vo를 리턴
+========================================================================
+*/
 package petProject.service.impl.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +26,8 @@ public class MemberFindServiceImpl implements MemberFindService {
 	MemberDAO memberDAO;
 	
 	@Override
-	public MemberIdProfile checkId(String memberId) throws Exception {
-		MemberIdProfile memberIdProfile = memberDAO.checkId(memberId);
+	public MemberIdProfile selectProfileById(String memberId) throws Exception {
+		MemberIdProfile memberIdProfile = memberDAO.selectProfileById(memberId);
 
 		if (memberIdProfile == null) {
 			throw new MemberNotFoundException("Invalid memberId");

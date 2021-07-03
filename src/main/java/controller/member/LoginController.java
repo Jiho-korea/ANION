@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
-import petProject.service.member.EmailValidService;
+import petProject.service.email.EmailValidService;
 import petProject.service.member.LoginService;
 import petProject.vo.AuthInfo;
 import petProject.vo.request.LoginRequest;

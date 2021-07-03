@@ -59,6 +59,6 @@ public interface MemberDAO {
 
 	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode);
 
-	MemberIdProfile checkId(@Param("memberId") String memberId);
+	MemberIdProfile selectProfileById(@Param("memberId") String memberId);
 
 }

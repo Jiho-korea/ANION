@@ -42,7 +42,7 @@ import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.ScriptWriter;
-import petProject.service.member.EmailValidService;
+import petProject.service.email.EmailValidService;
 import petProject.service.member.EmailcodeDeleteService;
 import petProject.vo.dto.Emailcode;
 
