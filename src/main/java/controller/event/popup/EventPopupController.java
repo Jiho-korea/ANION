@@ -11,7 +11,7 @@
 수  정  내  용 : 교육 대상자들을 위한 회원가입-반려견등록 연속 수행 로직 추가
 ========================================================================
 */
-package controller.event;
+package controller.event.popup;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

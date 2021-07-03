@@ -1,6 +1,6 @@
 <%--
 ========================================================================
-파    일    명 : pet.jsp
+파    일    명 : petInfo.jsp
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2020.11.09
@@ -184,7 +184,7 @@
 				</spring:message>
 			</h4>
 		</div>
-
+		<%--
 		<c:if test="${delete eq true}">
 			<div class="text-right mb-10">
 				<form action="${pageContext.request.contextPath}/info/pet" id="form"
@@ -197,7 +197,7 @@
 				</form>
 			</div>
 		</c:if>
-
+		 --%>
 	</div>
 
 	<c:import url="../../included/bottom.jsp">

@@ -52,9 +52,10 @@
 		"IMAGE_COUNT" from "public"."pet" as "pet" where
 		"PET_REGISTRATION_NUMBER"= #{petRegistrationNumber}
 	</select>
-	
-	<select id="selectMemberNumber" parameterType="int" resultType="int">
-		SELECT "MEMBER_NUMBER" FROM pet 
+
+	<select id="selectMemberNumber" parameterType="int"
+		resultType="int">
+		SELECT "MEMBER_NUMBER" FROM pet
 		WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
 	</select>
 
@@ -63,10 +64,10 @@
 	</select>
 
 	<delete id="deletePet" parameterType="int">
-    	DELETE FROM pet
-    	WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
-    </delete>
-    
+		DELETE FROM pet
+		WHERE "PET_REGISTRATION_NUMBER" = #{petRegistrationNumber}
+	</delete>
+
 	<resultMap type="pet" id="petResultMap">
 		<id column="PET_REGISTRATION_NUMBER"
 			property="petRegistrationNumber" />
@@ -126,4 +127,25 @@
 		WHERE
 		"PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
 	</update>
+
+	<select id="selectNoseprintPetList" parameterType="int"
+		resultMap="noseprintPetListResultMap">
+		select "PET_REGISTRATION_NUMBER", "MEMBER_NUMBER",
+		"PET_NAME", "PET_REGISTRATION_DATE",
+		(select count(*) from "public"."noseprint_image" as "noseprint_image" where
+		"noseprint_image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as
+		"NOSEPRINT_IMAGE_COUNT" from "public"."pet" as "pet" where "MEMBER_NUMBER"=
+		#{memberNumber} ORDER BY "PET_REGISTRATION_DATE" DESC,
+		"PET_REGISTRATION_NUMBER" DESC
+	</select>
+	<resultMap type="pet" id="noseprintPetListResultMap">
+		<id column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="PET_NAME" property="petName" />
+		<result column="PET_REGISTRATION_DATE"
+			property="petRegistrationDate" />
+		<result column="NOSEPRINT_IMAGE_COUNT" property="noseprintImageCount" />
+	</resultMap>
+
 </mapper>

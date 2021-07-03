@@ -1,16 +1,13 @@
 /*
 ========================================================================
-파    일    명 : PetListController.java
+파    일    명 : NoseprintPetListController.java
 ========================================================================
 작    성    자 : 강지호
-작    성    일 : 2020.xx.xx
-작  성  내  용 : 반려견 목록 Controller
-========================================================================
-=============================== 함  수  설  명  ===============================
-listPet : 세션에 저장되어있는 회원의 펫 목록 출력하는 함수
+작    성    일 : 2021.07.02
+작  성  내  용 : 비문 등록 이벤트 반려견 목록 Controller
 ========================================================================
 */
-package controller.pet;
+package controller.event.noseprint;
 
 import java.util.List;
 
@@ -24,30 +21,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import controller.pet.PetListController;
 import petProject.service.pet.PetListService;
 import petProject.vo.AuthInfo;
 import petProject.vo.dto.Pet;
 
 @Controller
 @RequestMapping("/pet")
-public class PetListController {
+public class NoseprintPetListController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PetListController.class);
 
 	@Resource(name = "petListService")
 	PetListService petListService;
 
-	@GetMapping("/list")
+	@GetMapping("/list/event1")
 	public String listPet(HttpSession session, Model model) {
 
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
-			List<Pet> petList = petListService.selectPetList(authInfo.getMemberNumber());
-			model.addAttribute("petList", petList);
+			List<Pet> noseprintPetList = petListService.selectNoseprintPetList(authInfo.getMemberNumber());
+			model.addAttribute("petList", noseprintPetList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "pet/list/petList";
+		return "event/noseprint/pet/list/petList";
 	}
 
 }

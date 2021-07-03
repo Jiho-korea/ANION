@@ -26,7 +26,8 @@ import controller.admin.pet.PetListAdminController;
 import controller.bbs.image.ImageBoardController;
 import controller.bbs.image.ImagePostingController;
 import controller.bbs.image.ViewImagePostController;
-import controller.event.EventPopupController;
+import controller.event.noseprint.NoseprintPetListController;
+import controller.event.popup.EventPopupController;
 import controller.image.ImageDeleteController;
 import controller.image.ImageListController;
 import controller.member.EmailValidController;
@@ -157,5 +158,10 @@ public class ControllerConfig {
 	@Bean
 	public MemberFindController memberFindController() {
 		return new MemberFindController();
+	}
+	
+	@Bean
+	public NoseprintPetListController noseprintPetListController() {
+		return new NoseprintPetListController();
 	}
 }

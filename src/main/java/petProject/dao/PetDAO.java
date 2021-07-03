@@ -33,6 +33,8 @@ public interface PetDAO {
 
 	List<Pet> selectPetList(@Param("memberNumber") int memberNumber) throws Exception;
 
+	List<Pet> selectNoseprintPetList(@Param("memberNumber") int memberNumber) throws Exception;
+
 	Pet selectPet(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
 
 	int selectMemberNumber(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;

@@ -3,20 +3,8 @@
 파    일    명 : petList.jsp
 ========================================================================
 작    성    자 : 강지호
-작    성    일 : 2020.10.10
-작  성  내  용 : 견명목록
-========================================================================
-수    정    자 : 배준철
-수    정    일 : 2020.10.19
-수  정  내  용 : 목록 레이아웃 재구성
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.10.22
-수  정  내  용 : 반려견 이름을 VO에서 꺼내도록 수정, 스프링 메세지 사용(리터럴 제거)
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.11.17
-수  정  내  용 : 디자인 수정
+작    성    일 : 2021.07.02
+작  성  내  용 : 반려견 목록 (비문 등록 이벤트)
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -28,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 기존의 폰트 사용해라 -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
@@ -83,7 +71,7 @@
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
-	<c:import url="../../included/top.jsp">
+	<c:import url="../../../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -94,23 +82,14 @@
 				<spring:message code="list.pet" />
 			</h1>
 		</div>
-		<div class="text-right mb-10">
+		<div class="text-left mb-10">
 		
 			<!-- 비문 이벤트 -->
-			<a href="${pageContext.request.contextPath}/pet/list/event1"
+			<a href="${pageContext.request.contextPath}/pet/list"
 					class="mb-30"><button type="submit"
 						class="btn btn-info pull-right">
-						비문 등록 이벤트
+						뒤로
 					</button></a> 
-		
-			<c:if test="${empty admin}">
-				<a href="${pageContext.request.contextPath}/register/step1"
-					class="mb-30"><button type="submit"
-						class="btn btn-info pull-right ml-5">
-						<spring:message code="register.pet" />
-					</button></a>
-			</c:if>
-			
 			
 		</div>
 
@@ -129,16 +108,16 @@
 							<!-- table row -->
 							<th width="10%"><spring:message code="list.num" /></th>
 							<th width="35%"><spring:message code="list.pet.name" /></th>
-							<th width="30%"><spring:message code="list.image.count" /></th>
-							<th width="15%"><spring:message code="image.gallery" /></th>
+							<th width="30%">등록 비문 수</th>
+							<th width="15%">비문 등록</th>
 							<th width="10%"><spring:message code="go.zip.image" /></th>
 						</c:when>
 						<c:otherwise>
 							<!-- table row -->
 							<th width="15%"><spring:message code="list.num" /></th>
 							<th width="40%"><spring:message code="list.pet.name" /></th>
-							<th width="30%"><spring:message code="list.image.count" /></th>
-							<th width="15%"><spring:message code="image.gallery" /></th>
+							<th width="30%">등록 비문 수</th>
+							<th width="15%">비문 등록</th>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -163,7 +142,7 @@
 										<button class="btn_gallery" id="btn_gallery"
 											type="button">
 											<img
-												src="${pageContext.request.contextPath}/img/button/gallery1.png">
+												src="${pageContext.request.contextPath}/img/button/dog_nose.png">
 										</button>
 								</a>
 								</td>
@@ -199,7 +178,7 @@
 		</table>
 	</div>
 
-	<c:import url="../../included/bottom.jsp">
+	<c:import url="../../../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
