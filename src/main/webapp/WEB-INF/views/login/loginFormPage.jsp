@@ -107,10 +107,8 @@
 				<br>
 				<br>
 				<p>
-					<a href="${pageContext.request.contextPath}/member/find/id"
-						style="color: blue;">아이디 찾기</a> | <a
-						href="${pageContext.request.contextPath}/member/find/password"
-						style="color: blue;">비밀번호 찾기</a>
+					<a href="${pageContext.request.contextPath}/member/find/password"
+						style="color: blue;">암호를 잊으셨나요?</a>
 				</p>
 				<!-- 
 				<a href="${pageContext.request.contextPath}/register/step1"><spring:message

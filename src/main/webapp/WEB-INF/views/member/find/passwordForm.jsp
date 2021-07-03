@@ -53,6 +53,25 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+.div-map {
+	position: relative;
+	align-items: center;
+	margin-bottom: 3rem;
+	display: inline-block;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+}
+
+.input-map {
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #f9f9ff;
+	padding: 0 20px;
+}
 </style>
 <script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
 	charset="utf-8"></script>
@@ -67,12 +86,12 @@
 	</c:import>
 
 	<div class="container text-center" id="main" style="width: 70%">
-		<h1 class="display-4">비밀번호 찾기</h1>
+		<h1 class="display-4">비밀번호 초기화</h1>
 		<br>
 		<div style="background: transparent !important"
 			class="jumbotron border">
 			<h2 style="text-align: left">
-				<b>입력하신 ID로 임시 비밀번호를 발송합니다.!</b>
+				<b>가입하신 Email로 임시 비밀번호를 발송합니다!</b>
 			</h2>
 			<br> <br>
 
@@ -80,22 +99,22 @@
 
 			<form:form
 				action="${pageContext.request.contextPath}/member/find/password"
-				method="post" cssClass="form-signin" modelAttribute="memberIdProfile">
+				method="post" cssClass="form-signin" style="display:inline;"
+				modelAttribute="memberIdProfile">
 
-				<h4 style="text-align: left">
-					<label> <form:input path="memberId"
-						cssClass="single-input" type="email" placeholder="이메일 / Email"
-						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '이메일 / Email'" style="width: 350px;" />
-						<button id="btn_find" class="btn btn-info pull-right"
-							type="submit">발송</button>
-					</label>
-				</h4>
 
+				<div class="div-map">
+					<form:input path="memberId" cssClass="input-map" type="email"
+						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이메일 / Email'" style="width:350px" />
+					<button id="btn_send" class="btn btn-info pull-right" type="submit">발송</button>
+				</div>
+				<form:errors path="memberId" />
+				
 				<hr class="my-4">
 				<h4 style="text-align: left">
-					<a href="${pageContext.request.contextPath}/member/find/id"
-						style="color: blue;">아이디 찾기</a> | <a
+					<a href="${pageContext.request.contextPath}/login"
+						style="color: blue;">로그인</a> | <a
 						href="${pageContext.request.contextPath}/signup/step1"
 						style="color: blue;">회원가입</a>
 				</h4>
@@ -175,9 +194,9 @@
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	 $("#btn_find").click(function() {
+	 $("#btn_send").click(function() {
 		if ($("#memberId").val() == "") {
-			alert("이름을 입력해주세요.");
+			alert("이메일을 입력해주세요.");
 			return false;
 		}
 	});

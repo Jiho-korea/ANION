@@ -65,54 +65,22 @@
 	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
+
 	<div class="container text-center" id="main">
 		<div class="jumbotron">
-			<h1 class="display-4">아이디 찾기</h1>
+			<h4 class="mb-4">
+				<b>비밀번호 초기화 완료</b>
+			</h4>
+			<br> <br>
 
-			<br>
-
-			<form:form action="${pageContext.request.contextPath}/member/find/id"
-				method="post" cssClass="form-signin"
-				modelAttribute="memberFindIdRequest">
-
-				<label style="margin-top: 20px"> <form:input
-						path="memberName" cssClass="single-input mt-2"
-						placeholder="이름 / Name" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '이름 / Name'" cssStyle="width:350px" />
-					<form:errors path="memberName" />
-				</label>
-				<br>
-				<label> <form:input path="memberPhoneNumber"
-						cssClass="single-input mt-2" placeholder="전화번호 / Phone Number"
-						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '전화번호 / Phone Number'"
-						onKeyup="inputPhoneNumber(this);" maxlength="13"
-						pattern=".{13,13}" cssStyle="width:350px" /> <form:errors
-						path="memberPhoneNumber" />
-				</label>
-
-				<br>
-				<br>
-				<button id="btn_find" class="btn btn-info pull-right" type="submit">
-					찾기</button>
-
-				<br>
-				<br>
-				<p>
-					<a
-						href="${pageContext.request.contextPath}/member/find/password"
-						style="color: blue;">비밀번호 찾기</a> | <a
-						href="${pageContext.request.contextPath}/signup/step1"
-						style="color: blue;">회원가입</a>
-				</p>
-			</form:form>
-
-			<br class="mb-4" />
-			<hr class="mb-4" />
-			<div class="row"></div>
-
+			<p>
+				입력하신 ${memberId }로 임시 비밀번호가 발급되었습니다! <br>메일을 확인해주세요
+			</p>
+			<br> <a href="${pageContext.request.contextPath}/login"
+				style="color: blue;">로그인</a> | <a
+				href="${pageContext.request.contextPath}/signup/step1"
+				style="color: blue;">회원가입</a>
 		</div>
-
 	</div>
 
 	<c:import url="../../included/bottom.jsp">
@@ -124,35 +92,6 @@
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
 	<!-- JS here -->
-
-	<script defer type="text/javascript">
-		function inputPhoneNumber(obj) {
-
-			var number = obj.value.replace(/[^0-9]/g, "");
-			var phone = "";
-
-			if (number.length < 4) {
-				return number;
-			} else if (number.length < 7) {
-				phone += number.substr(0, 3);
-				phone += "-";
-				phone += number.substr(3);
-			} else if (number.length < 11) {
-				phone += number.substr(0, 3);
-				phone += "-";
-				phone += number.substr(3, 3);
-				phone += "-";
-				phone += number.substr(6);
-			} else {
-				phone += number.substr(0, 3);
-				phone += "-";
-				phone += number.substr(3, 4);
-				phone += "-";
-				phone += number.substr(7);
-			}
-			obj.value = phone;
-		}
-	</script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js">
 		
@@ -214,15 +153,4 @@
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
-<script defer type="text/javascript" charset="utf-8">
-	 $("#btn_find").click(function() {
-		if ($("#memberName").val() == "") {
-			alert("이름을 입력해주세요.");
-			return false;
-		} else if ($("#memberPhoneNumber").val() == "") {
-			alert("전화번호를 입력해주세요.");
-			return false;
-		}
-	});
-</script>
 </html>

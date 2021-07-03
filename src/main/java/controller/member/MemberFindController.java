@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberNotFoundException;
+import petProject.exception.MemberPasswordUpdateException;
 import petProject.service.ScriptWriter;
+import petProject.service.member.ChangePasswordService;
 import petProject.service.member.MemberFindService;
+import petProject.service.email.MemberPasswordEmailSendService;
+import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.MemberIdProfile;
-import petProject.vo.request.MemberFindIdRequest;
 
 @Controller
 @RequestMapping("/member/find")
@@ -25,32 +28,11 @@ public class MemberFindController {
 	@Resource(name = "memberFindService")
 	MemberFindService memberFindService;
 
-	@GetMapping("/id")
-	public String findIdForm(MemberFindIdRequest memberFindRequest) {
-		return "member/find/idForm";
-	}
+	@Resource(name = "changePasswordService")
+	ChangePasswordService changePasswordService;
 
-	@PostMapping("/id")
-	public String findId(@Valid MemberFindIdRequest memberFindRequest, Errors error, Model model,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (error.hasErrors()) {
-			return "member/find/idForm";
-		}
-		try {
-			MemberIdProfile memberIdProfile = memberFindService.findId(memberFindRequest);
-			model.addAttribute("memberIdProfile", memberIdProfile);
-
-			return "member/find/findIdSuccess";
-		} catch (MemberNotFoundException e) {
-			e.printStackTrace();
-			ScriptWriter.write("이름 혹은 전화번호를 다시 확인해주세요", "member/find/id", request, response);
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
-			return null;
-		}
-	}
+	@Resource(name = "memberPasswordEmailSendService")
+	MemberPasswordEmailSendService memberPasswordEmailSendService;
 
 	@GetMapping("/password")
 	public String findPasswordForm(MemberIdProfile memberIdProfile) {
@@ -65,16 +47,26 @@ public class MemberFindController {
 		}
 
 		try {
-			String memberId = memberFindService.checkId(memberIdProfile.getMemberId());
-			
-			model.addAttribute("memberId", memberId);
+			String tempPassword = Emailcode.random();
+			MemberIdProfile result = memberFindService.checkId(memberIdProfile.getMemberId());
+
+			changePasswordService.updateTempPassword(memberIdProfile.getMemberId(), tempPassword);
+
+			memberPasswordEmailSendService.sendPassword(result, tempPassword, request, true);
+
+			model.addAttribute("memberId", result.getMemberId());
 		} catch (MemberNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("이름 혹은 전화번호를 다시 확인해주세요", "member/find/passwordForm", request, response);
+			ScriptWriter.write("ID를 다시 확인해주세요", "member/find/passwordForm", request, response);
 			return null;
-		}catch (Exception e) {
+		} catch (MemberPasswordUpdateException e) {
 			e.printStackTrace();
+			ScriptWriter.write("임시 비밀번호 발급에 실패했습니다. 다시 시도해주세요!", "member/find/passwordForm", request, response);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "member/find/passwordForm";
 		}
-		return "member/find/password";
+		return "member/find/sendTempPasswordSuccess";
 	}
 }

@@ -13,15 +13,17 @@ public class MemberIdProfile implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@NotBlank
 	private String memberId;
+	private String memberName;
 	private Date memberRegistrationDate;
 
 	public MemberIdProfile() {
 		super();
 	}
 
-	public MemberIdProfile(String memberId, Date memberRegistrationDate) {
+	public MemberIdProfile(String memberId, String memberName, Date memberRegistrationDate) {
 		super();
 		this.memberId = memberId;
+		this.memberName = memberName;
 		this.memberRegistrationDate = memberRegistrationDate;
 	}
 
@@ -31,6 +33,14 @@ public class MemberIdProfile implements Serializable {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public Date getMemberRegistrationDate() {

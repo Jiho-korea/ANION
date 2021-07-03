@@ -13,4 +13,6 @@ package petProject.service.member;
 public interface ChangePasswordService {
 
 	void changePassword(String memberId, String oldPassword, String newPassword) throws Exception;
+	
+	void updateTempPassword(String memberId, String tempPassword) throws Exception;
 }

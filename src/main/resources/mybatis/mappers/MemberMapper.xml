@@ -50,14 +50,8 @@
     	FROM "member" WHERE "MEMBER_ID" = #{emailcode.memberId}
     </select>
     
-    <select id="findProfile" parameterType="memberFindIdRequest" resultType="memberIdProfile">
-    	SELECT "MEMBER_ID", "MEMBER_REGISTRATION_DATE"
-    	FROM "member" 
-    	WHERE "MEMBER_NAME" = #{memberFindIdRequest.memberName } and "MEMBER_PHONE_NUMBER" = #{memberFindIdRequest.memberPhoneNumber }
-    </select>
-    
-    <select id="checkId" parameterType="String">
-    	SELECT "MEMBER_ID"
+    <select id="checkId" parameterType="String" resultType="memberIdProfile">
+    	SELECT "MEMBER_ID", "MEMBER_NAME"
     	FROM "member" 
     	WHERE "MEMBER_ID" = #{memberId }
     </select>

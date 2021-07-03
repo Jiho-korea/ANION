@@ -7,7 +7,6 @@
 작  성  내  용 : encode화 된 비밀번호를 매칭하여 변경
 ========================================================================
 */
-
 package petProject.service.impl.member;
 
 import java.sql.SQLException;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
 import petProject.exception.MemberNotFoundException;
+import petProject.exception.MemberPasswordUpdateException;
 import petProject.exception.WrongIdPasswordException;
 import petProject.service.member.ChangePasswordService;
 import petProject.vo.dto.Member;
@@ -41,11 +41,26 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 			throw new MemberNotFoundException("NOT FOUND");
 		}
 
-		if (!passwordEncoder.matches(oldPassword, member.getMemberPassword()))
+		if (!passwordEncoder.matches(oldPassword, member.getMemberPassword())) {
 			throw new WrongIdPasswordException("not Matching");
+		}
 
 		member.setMemberPassword(passwordEncoder.encode(newPassword));
-		memberDAO.updatePassword(member);
+		int cnt = memberDAO.updatePassword(member);
+		if (cnt == 0) {
+			throw new MemberPasswordUpdateException("password update error");
+		}
+	}
+
+	@Transactional(rollbackFor = SQLException.class)
+	public void updateTempPassword(String memberId, String tempPassword) throws Exception {
+		Member member = memberDAO.selectMemberById(memberId);
+
+		member.setMemberPassword(passwordEncoder.encode(tempPassword));
+		int cnt = memberDAO.updatePassword(member);
+		if (cnt == 0) {
+			throw new MemberPasswordUpdateException("password update error");
+		}
 	}
 
 }
