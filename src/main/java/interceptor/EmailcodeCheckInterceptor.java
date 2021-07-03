@@ -29,6 +29,8 @@ public class EmailcodeCheckInterceptor implements HandlerInterceptor {
 				boolean tempAuth = (Boolean) session.getAttribute("tempAuth");
 			}
 		} catch (NullPointerException e) {
+			System.out.println("여기서 걸림"); // 여기서 걸리네
+			// 근데 크롬 쿠키로 tempAuth 삭제하면 어떻게 되냐? 이걸로 url 방지 하는 건 좀 아닌 것 같은데?
 			return ScriptWriter.write("잘못된 접근입니다", "home", request, response);
 		}
 
