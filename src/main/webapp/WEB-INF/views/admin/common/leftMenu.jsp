@@ -39,6 +39,16 @@
 										code="admin.member.banner" /></a></li>
 						</ul></li>
 				</c:when>
+				
+				<c:when test="${param.type eq 'list_event'}">
+					<li><a href="#" class="more"><spring:message
+								code="admin.event.banner" /></a>
+						<ul>
+							<li><a
+								href="${pageContext.request.contextPath}/admin/event/list"><spring:message
+										code="admin.event.banner" /></a></li>
+						</ul></li>
+				</c:when>
 			</c:choose>
 
 		</ul>

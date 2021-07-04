@@ -34,6 +34,7 @@
 				<th><a href="${pageContext.request.contextPath}/admin/member/list">회원관리</a></th>
 				<th><a href="#">반려견관리</a></th>
 				<th><a href="#">게시판관리</a></th>
+				<th><a href="${pageContext.request.contextPath}/admin/event/list">이벤트관리</a></th>
 			</tr>
 		</table>
 	</div>

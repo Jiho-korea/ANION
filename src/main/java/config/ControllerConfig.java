@@ -20,6 +20,7 @@ import controller.admin.code.kind.KindcodeDeleteController;
 import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
 import controller.admin.code.kind.KindcodeUpdateController;
+import controller.admin.event.EventListController;
 import controller.admin.event.noseprint.NoseprintImageDownloadController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.member.MemberListController;
@@ -175,5 +176,10 @@ public class ControllerConfig {
 	@Bean
 	public NoseprintImageDownloadController noseprintImageDownloadController() {
 		return new NoseprintImageDownloadController();
+	}
+
+	@Bean
+	public EventListController eventListController() {
+		return new EventListController();
 	}
 }
