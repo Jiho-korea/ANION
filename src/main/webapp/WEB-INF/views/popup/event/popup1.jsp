@@ -58,34 +58,59 @@ body {
 .jumbotron {
 	opacity: 0.8;
 }
+
+.image-box {
+	text-align: center;
+	border-bottom: 2px solid lightgray;
+}
+
+.main_title {
+	width: 100%;
+	height: 40px;
+	background-color: #7bb47b;
+	border-bottom-width: thin;
+	font-weight: bold;
+}
 </style>
 
-
+<!-- 
 <body
 	background="${pageContext.request.contextPath}/img/popupBack/pop_back.png">
-	<Br>
+-->
+<body>
+	<div class="main_title pt-4 pl-4 mb-3 d-flex align-items-center">
+	<p style="color: white;">비문 등록 이벤트</p></div>
+	<!-- 
 	<div
 		style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; position: absolute; left: 50px; top: 35px; width: 400px">
 		교육 이벤트 및 참석 제목</div>
 	<div
 		style="text-align: center; color: white; position: absolute; left: 50px; top: 70px; width: 400px">
 		교육 및 설명</div>
-	<br>
-	<div class="jumbotron d-flex justify-content-center align-items-center"
-		style="height: 300px; width: 400px; position: absolute; left: 50px; top: 120px">
-		참고 이미지, 그림 등</div>
+	 -->
+	<div class="image-box">
+		<a
+			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();">
+			<img
+			src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
+			style="height: 500px; width: 400px; margin-bottom: 5px;">
+		</a>
 
+	</div>
+	<!--  
 	<div class="container d-flex justify-content-center mt-5">
 		<a
 			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();"
 			class="btn header-btn d-flex justify-content-center"
 			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
 	</div>
+	-->
+
 	<div style="position: fixed; right: 5px; bottom: 4px;">
 		<form name="frm" class="d-flex align-items-center">
-			<input id="closeCheck" type="checkbox" name="Notice" onclick="check()"> <a
-				style="font-size: 13px">하루동안 열지 않음</a> &nbsp;<input type=button
-				value="닫기" onclick="closeWin()"
+			<input id="closeCheck" type="checkbox" name="Notice"
+				onclick="check()"> <a style="font-size: 13px">하루동안 열지 않음</a>
+			&nbsp;<input type=button value="닫기" onclick="closeWin()"
 				style="width: 30pt; height: 20pt; font-size: 13px"
 				class="d-flex align-items-center">
 
@@ -174,12 +199,11 @@ body {
 	function closeWin() {
 		self.close();
 	}
-	
+
 	function check() {
 		setCookie("Notice", "done", 1);
 		self.close();
 	}
-
 </script>
 
 
