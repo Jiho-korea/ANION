@@ -25,9 +25,6 @@ import controller.admin.event.noseprint.NoseprintImageDownloadController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.member.MemberListController;
 import controller.admin.pet.PetListAdminController;
-import controller.bbs.image.ImageBoardController;
-import controller.bbs.image.ImagePostingController;
-import controller.bbs.image.ViewImagePostController;
 import controller.event.noseprint.image.NoseprintImageDeleteController;
 import controller.event.noseprint.image.NoseprintImageListController;
 import controller.event.noseprint.pet.NoseprintPetListController;
@@ -133,20 +130,24 @@ public class ControllerConfig {
 		return new ImageDownloadController();
 	}
 
-	@Bean
-	public ImagePostingController imagePostingController() {
-		return new ImagePostingController();
-	}
+	// 반려견 자랑 관련 컨트롤러 임시 삭제
+	// 반려견 자랑 게시글 쓰기 컨트롤러
+//	@Bean
+//	public ImagePostingController imagePostingController() {
+//		return new ImagePostingController();
+//	}
 
-	@Bean
-	public ImageBoardController imageBoardController() {
-		return new ImageBoardController();
-	}
+	// 반려견 자랑 게시판 컨트롤러
+//	@Bean
+//	public ImageBoardController imageBoardController() {
+//		return new ImageBoardController();
+//	}
 
-	@Bean
-	public ViewImagePostController viewImagePostController() {
-		return new ViewImagePostController();
-	}
+	// 반려견 자랑 게시물 보기 컨트롤러
+//	@Bean
+//	public ViewImagePostController viewImagePostController() {
+//		return new ViewImagePostController();
+//	}
 
 	@Bean
 	public EventPopupController eventPopupController() {
