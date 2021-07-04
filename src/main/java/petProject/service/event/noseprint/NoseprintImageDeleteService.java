@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
 
 public interface NoseprintImageDeleteService {
 
-	int deleteNoseprintImage(@Param("noseprintImagePath") String noseprintImagePath) throws Exception;
+	void deleteNoseprintImage(@Param("noseprintImagePath") String[] paths_id, String rootPath) throws Exception;
 }

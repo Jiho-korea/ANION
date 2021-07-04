@@ -9,7 +9,6 @@
 */
 package controller.event.noseprint.image;
 
-import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -28,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import controller.image.ImageListController;
+import petProject.exception.ImageDeleteException;
 import petProject.service.ScriptWriter;
 import petProject.service.event.noseprint.NoseprintImageDeleteService;
 import petProject.service.event.noseprint.NoseprintImageListService;
@@ -71,11 +71,9 @@ public class NoseprintImageDeleteController {
 			throws Exception {
 		String rootPath = request.getSession().getServletContext().getRealPath("/upload/noseprint");
 		try {
-			for (int i = 0; i < paths_id.length; i++) {
-				noseprintImageDeleteService.deleteNoseprintImage(paths_id[i]);
-				File deleteFile = new File(rootPath + "/" + paths_id[i]);
-				deleteFile.delete();
-			}
+
+			noseprintImageDeleteService.deleteNoseprintImage(paths_id, rootPath);
+
 			return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 
 		} catch (NullPointerException e) {
@@ -83,10 +81,15 @@ public class NoseprintImageDeleteController {
 			ScriptWriter.write("삭제할 사진을 선택해 주세요.", "info/list/npimage?petRegistrationNumber=" + petRegistrationNumber,
 					request, response);
 			return null;
-		} catch (Exception e) {
+		} catch (ImageDeleteException e) {
 			e.printStackTrace();
-
-			return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
+			ScriptWriter.write("이미지 삭제에 실패하였습니다.", "info/list/npimage?petRegistrationNumber=" + petRegistrationNumber,
+					request, response);
+			return null;
+		} catch (Exception e) {
+			ScriptWriter.write("이미지 파일 삭제에 실패하였습니다.",
+					"info/list/npimage?petRegistrationNumber=" + petRegistrationNumber, request, response);
+			return null;
 		}
 	}
 

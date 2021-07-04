@@ -9,19 +9,17 @@
 */
 package controller.event.noseprint.image;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +29,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import controller.image.ImageListController;
+import petProject.service.ScriptWriter;
 import petProject.service.event.noseprint.NoseprintImageListService;
 import petProject.service.event.noseprint.NoseprintImageUploadService;
 import petProject.vo.AuthInfo;
 import petProject.vo.dto.NoseprintImage;
-import petProject.vo.request.NoseprintImageUploadRequest;
 
 @Controller
 @RequestMapping("/info/list")
@@ -70,7 +68,8 @@ public class NoseprintImageListController {
 	public String listNoseprintImageInsert(
 			@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			@RequestParam(value = "delete", required = false) String deleteButton, HttpSession session,
-			RedirectAttributes redirect, MultipartHttpServletRequest request) {
+			RedirectAttributes redirect, MultipartHttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
 		if (deleteButton != null) {
 			redirect.addFlashAttribute("delete", 1);
@@ -86,43 +85,21 @@ public class NoseprintImageListController {
 
 				String rootPath = request.getSession().getServletContext().getRealPath("/upload/noseprint");
 
-				String savedName;
-				for (MultipartFile mf : file) {
-					savedName = uploadFile(mf.getOriginalFilename(), mf.getBytes(), rootPath);
+				noseprintImageUploadService.uploadNoseprintImage(authInfo, file, rootPath, petRegistrationNumber);
 
-					// model.addAttribute("savedName", savedName);
-					String absPath = rootPath + "\\" + savedName;
-					System.out.println("absPath = " + absPath);
-
-					NoseprintImageUploadRequest noseprintImageUploadRequest = new NoseprintImageUploadRequest(
-							authInfo.getMemberNumber(), petRegistrationNumber, savedName);
-					noseprintImageUploadService.insertNoseprintImage(noseprintImageUploadRequest);
-				}
 				return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-
-				return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
+				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+						"info/list/npimage?petRegistrationNumber=" + petRegistrationNumber, request, response);
+				return null;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-
-				return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
+				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+						"info/list/npimage?petRegistrationNumber=" + petRegistrationNumber, request, response);
+				return null;
 			}
 		}
-
-	}
-
-	private String uploadFile(String originalName, byte[] fileData, String rootPath) throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String rndName = sdf.format(new java.util.Date()) + System.currentTimeMillis();
-		// UUID uid = UUID.randomUUID(); // uid.toString()
-		String savedName = rndName + "." + originalName.substring(originalName.lastIndexOf(".") + 1);
-		File target = new File(rootPath, savedName);
-		// System.out.println(rootPath);
-		FileCopyUtils.copy(fileData, target);
-		return savedName;
 	}
 }

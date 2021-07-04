@@ -13,7 +13,6 @@
 */
 package controller.image;
 
-import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import petProject.exception.ImageDeleteException;
 import petProject.service.ScriptWriter;
 import petProject.service.image.ImageDeleteService;
 import petProject.service.image.ImageListService;
@@ -74,22 +74,22 @@ public class ImageDeleteController {
 			throws Exception {
 		String rootPath = request.getSession().getServletContext().getRealPath("/upload");
 		try {
-			for (int i = 0; i < paths_id.length; i++) {
-				imageDeleteService.deleteImage(paths_id[i]);
-				File deleteFile = new File(rootPath + "/" + paths_id[i]);
-				deleteFile.delete();
-			}
+			imageDeleteService.deleteImage(paths_id, rootPath);
 			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 
 		} catch (NullPointerException e) {
-			// e.printStackTrace();
 			ScriptWriter.write("삭제할 사진을 선택해 주세요.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
 					request, response);
 			return null;
-		} catch (Exception e) {
+		} catch (ImageDeleteException e) {
 			e.printStackTrace();
-
-			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			ScriptWriter.write("이미지 삭제에 실패하였습니다.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
+					request, response);
+			return null;
+		} catch (Exception e) {
+			ScriptWriter.write("이미지 파일 삭제에 실패하였습니다.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
+					request, response);
+			return null;
 		}
 	}
 

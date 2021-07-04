@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.event.noseprint;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +25,15 @@ public class NoseprintImageDeleteServiceImpl implements NoseprintImageDeleteServ
 	@Autowired
 	private NoseprintImageDAO noseprintImageDAO;
 
-	public int deleteNoseprintImage(String noseprintImagePath) throws Exception {
-		int result = noseprintImageDAO.deleteNoseprintImage(noseprintImagePath);
-		if (result < 0) {
-			throw new ImageDeleteException("noseprintImageDeleteException");
+	@Override
+	public void deleteNoseprintImage(String[] paths_id, String rootPath) throws Exception {
+		for (int i = 0; i < paths_id.length; i++) {
+			int result = noseprintImageDAO.deleteNoseprintImage(paths_id[i]);
+			if (result < 0) {
+				throw new ImageDeleteException("noseprintImageDeleteException");
+			}
+			File deleteFile = new File(rootPath + "/" + paths_id[i]);
+			deleteFile.delete();
 		}
-		return result;
 	}
-
 }

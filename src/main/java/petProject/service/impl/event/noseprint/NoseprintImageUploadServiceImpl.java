@@ -9,13 +9,20 @@
 */
 package petProject.service.impl.event.noseprint;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import petProject.dao.NoseprintImageDAO;
 import petProject.exception.ImageUploadException;
 import petProject.service.event.noseprint.NoseprintImageUploadService;
+import petProject.vo.AuthInfo;
 import petProject.vo.request.NoseprintImageUploadRequest;
 
 @Service("noseprintImageUploadService")
@@ -25,6 +32,25 @@ public class NoseprintImageUploadServiceImpl implements NoseprintImageUploadServ
 	private NoseprintImageDAO noseprintImageDAO;
 
 	@Override
+	@Transactional
+	public void uploadNoseprintImage(AuthInfo authInfo, List<MultipartFile> file, String rootPath,
+			int petRegistrationNumber) throws Exception {
+		String savedName;
+		for (MultipartFile mf : file) {
+			savedName = uploadFile(mf.getOriginalFilename(), mf.getBytes(), rootPath);
+
+			// model.addAttribute("savedName", savedName);
+			String absPath = rootPath + "\\" + savedName;
+			System.out.println("absPath = " + absPath);
+
+			NoseprintImageUploadRequest noseprintImageUploadRequest = new NoseprintImageUploadRequest(
+					authInfo.getMemberNumber(), petRegistrationNumber, savedName);
+			insertNoseprintImage(noseprintImageUploadRequest);
+		}
+
+	}
+
+	@Override
 	public int insertNoseprintImage(NoseprintImageUploadRequest noseprintImageUploadRequest) throws Exception {
 		int result = noseprintImageDAO.insertNoseprintImage(noseprintImageUploadRequest);
 		if (result != 1) {
@@ -32,4 +58,16 @@ public class NoseprintImageUploadServiceImpl implements NoseprintImageUploadServ
 		}
 		return result;
 	}
+
+	private String uploadFile(String originalName, byte[] fileData, String rootPath) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String rndName = sdf.format(new java.util.Date()) + System.currentTimeMillis();
+		// UUID uid = UUID.randomUUID(); // uid.toString()
+		String savedName = rndName + "." + originalName.substring(originalName.lastIndexOf(".") + 1);
+		File target = new File(rootPath, savedName);
+		// System.out.println(rootPath);
+		FileCopyUtils.copy(fileData, target);
+		return savedName;
+	}
+
 }

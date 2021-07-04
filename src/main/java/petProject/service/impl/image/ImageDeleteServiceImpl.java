@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.image;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,12 +25,19 @@ public class ImageDeleteServiceImpl implements ImageDeleteService {
 	@Autowired
 	private ImageDAO imageDAO;
 
-	public int deleteImage(String imagePath) throws Exception {
-		int result = imageDAO.deleteImage(imagePath);
-		if (result < 0) {
-			throw new ImageDeleteException("imageDeleteException");
+	@Override
+	@Transactional
+	public void deleteImage(String[] paths_id, String rootPath) throws Exception {
+		for (int i = 0; i < paths_id.length; i++) {
+			int result = imageDAO.deleteImage(paths_id[i]);
+			if (result < 0) {
+				throw new ImageDeleteException("imageDeleteException");
+			}
+
+			File deleteFile = new File(rootPath + "/" + paths_id[i]);
+			deleteFile.delete();
 		}
-		return result;
+
 	}
 
 }
