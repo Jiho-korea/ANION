@@ -20,12 +20,15 @@ import controller.admin.code.kind.KindcodeDeleteController;
 import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
 import controller.admin.code.kind.KindcodeUpdateController;
+import controller.admin.event.noseprint.NoseprintImageDownloadController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.member.MemberListController;
 import controller.admin.pet.PetListAdminController;
 import controller.bbs.image.ImageBoardController;
 import controller.bbs.image.ImagePostingController;
 import controller.bbs.image.ViewImagePostController;
+import controller.event.noseprint.image.NoseprintImageDeleteController;
+import controller.event.noseprint.image.NoseprintImageListController;
 import controller.event.noseprint.pet.NoseprintPetListController;
 import controller.event.popup.EventPopupController;
 import controller.image.ImageDeleteController;
@@ -157,5 +160,20 @@ public class ControllerConfig {
 	@Bean
 	public NoseprintPetListController noseprintPetListController() {
 		return new NoseprintPetListController();
+	}
+
+	@Bean
+	public NoseprintImageListController noseprintImageListController() {
+		return new NoseprintImageListController();
+	}
+
+	@Bean
+	public NoseprintImageDeleteController noseprintImageDeleteController() {
+		return new NoseprintImageDeleteController();
+	}
+
+	@Bean
+	public NoseprintImageDownloadController noseprintImageDownloadController() {
+		return new NoseprintImageDownloadController();
 	}
 }

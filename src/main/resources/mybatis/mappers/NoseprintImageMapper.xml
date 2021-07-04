@@ -6,7 +6,7 @@
 <mapper namespace="petProject.dao.NoseprintImageDAO">
 	<insert id="insertNoseprintImage"
 		parameterType="noseprintImageUploadRequest">
-		INSERT INTO public.public.noseprint_image
+		INSERT INTO public.noseprint_image
 		("PET_REGISTRATION_NUMBER", "NOSEPRINT_IMAGE_PATH", "MEMBER_NUMBER",
 		"NOSEPRINT_IMAGE_AUTH_STATUS")
 		VALUES(#{noseprintImageUploadRequest.petRegistrationNumber},

@@ -53,9 +53,7 @@ public class NoseprintImageListController {
 	public String listNoseprintImage(
 			@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpSession session, Model model) {
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		// System.out.println("memberId = " + authInfo.getMemberId() +
-		// "\npetRegistrationNumber = " + petRegistrationNumber);
+
 		try {
 			List<NoseprintImage> noseprintImageList = noseprintImageListService
 					.selectNoseprintImageList(petRegistrationNumber);
@@ -65,7 +63,7 @@ public class NoseprintImageListController {
 			e.printStackTrace();
 		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
-		return "pet/image/imageList"; // 변경
+		return "event/noseprint/pet/image/noseprintImageList"; // 변경
 	}
 
 	@PostMapping("/npimage")
@@ -76,7 +74,7 @@ public class NoseprintImageListController {
 
 		if (deleteButton != null) {
 			redirect.addFlashAttribute("delete", 1);
-			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 		} else {
 			try {
 				AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
@@ -86,7 +84,7 @@ public class NoseprintImageListController {
 				// logger.info("size: " + file.getSize());
 				// logger.info("contentType: " + file.getContentType());
 
-				String rootPath = request.getSession().getServletContext().getRealPath("/upload");
+				String rootPath = request.getSession().getServletContext().getRealPath("/upload/noseprint");
 
 				String savedName;
 				for (MultipartFile mf : file) {
@@ -100,18 +98,18 @@ public class NoseprintImageListController {
 							authInfo.getMemberNumber(), petRegistrationNumber, savedName);
 					noseprintImageUploadService.insertNoseprintImage(noseprintImageUploadRequest);
 				}
-				return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+				return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 
-				return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+				return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 
-				return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+				return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 			}
 		}
 

@@ -60,7 +60,7 @@ public class NoseprintImageDeleteController {
 			e.printStackTrace();
 		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
-		return "pet/image/imageList";
+		return "event/noseprint/pet/image/noseprintImageList";
 	}
 
 	@PostMapping("/npimageDelete")
@@ -69,24 +69,24 @@ public class NoseprintImageDeleteController {
 			@RequestParam(value = "chBox", required = false) String[] paths_id, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirect, Model model)
 			throws Exception {
-		String rootPath = request.getSession().getServletContext().getRealPath("/upload");
+		String rootPath = request.getSession().getServletContext().getRealPath("/upload/noseprint");
 		try {
 			for (int i = 0; i < paths_id.length; i++) {
 				noseprintImageDeleteService.deleteNoseprintImage(paths_id[i]);
 				File deleteFile = new File(rootPath + "/" + paths_id[i]);
 				deleteFile.delete();
 			}
-			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 
 		} catch (NullPointerException e) {
 			// e.printStackTrace();
-			ScriptWriter.write("삭제할 사진을 선택해 주세요.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
+			ScriptWriter.write("삭제할 사진을 선택해 주세요.", "info/list/npimage?petRegistrationNumber=" + petRegistrationNumber,
 					request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
+			return "redirect:/info/list/npimage?petRegistrationNumber=" + petRegistrationNumber;
 		}
 	}
 

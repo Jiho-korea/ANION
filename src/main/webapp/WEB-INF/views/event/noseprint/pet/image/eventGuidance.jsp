@@ -77,12 +77,12 @@
 
 	<div class="container text-center">
 		<div id="main">
-			<h1 class="display-4">비문 등록 안내</h1>
+			<h1 class="display-4">비문 사진 예시</h1>
 		</div>
 		<div class="text-left mb-10">
-
+			
 			<!-- 비문 이벤트 -->
-			<a href="${pageContext.request.contextPath}/pet/list/npevent"
+			<a href="javascript:history.back();"
 				class="mb-30"><button type="submit"
 					class="btn btn-info pull-right">뒤로</button></a>
 		</div>
@@ -91,7 +91,7 @@
 				<!--Section: Content-->
 				<section class="text-center">
 					<h4 class="mb-5">
-						<strong style="color: #DF6464">잘못된 비문 사진 예</strong>
+						<strong style="color: #DF6464">예1) 잘못된 비문 사진</strong>
 					</h4>
 
 					<div class="row">
@@ -311,7 +311,7 @@
 				<!--Section: Content-->
 				<section class="text-center">
 					<h4 class="mb-5">
-						<strong style="color: #6495DF">올바른 비문 사진 예</strong>
+						<strong style="color: #6495DF">예2) 올바른 비문 사진</strong>
 					</h4>
 
 					<div class="row">

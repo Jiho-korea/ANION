@@ -58,14 +58,6 @@
 	width: 100%;
 	margin-top: 50px;
 }
-
-.btn_share {
-	border: none;
-	width: 32px;
-	height: 32px;
-	cursor: pointer;
-	background-color: transparent;
-}
 </style>
 
 <script src="/resources/jquery/jquery-3.3.1.min.js"></script>
@@ -100,54 +92,45 @@
 	<c:import url="../../../../included/top.jsp" />
 	<div class="container text-center">
 		<div id="main">
-			<h1 class="display-4">
-				<spring:message code="image.gallery" />
-			</h1>
+			<h1 class="display-4">비문 리스트</h1>
 		</div>
 		<div class="text-right mb-10">
 
 			<c:choose>
 				<c:when test="${delete ne 1}">
 					<div class="filebox">
-						<form action="${pageContext.request.contextPath}/info/list/npimage"
+						<form
+							action="${pageContext.request.contextPath}/info/list/npimage"
 							id="form" method="post" class="form-signin"
 							enctype="multipart/form-data">
-
-							<label for="ex_file"><a class="btn btn-info"
-								style="color: white;"><spring:message
-										code="list.image.upload" /></a></label> <input type="file"
+							<a href="${pageContext.request.contextPath}/pet/list/npevent">
+								<button type="button" value="true"
+									class="btn btn-info pull-left" style="float: left;">
+									<spring:message code="go.list" />
+								</button>
+							</a> <label for="ex_file"><a class="btn btn-info"
+								style="color: white;">비문 사진 등록</a></label> <input type="file"
 								multiple="multiple" name="file" id="ex_file"
 								style="display: none" accept="image/*"
 								onchange="checkFile(this)" /> <input type="hidden"
 								name=petRegistrationNumber id="prn"
 								value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
 								<button type="submit" name="delete" value="true"
-									class="btn btn-info pull-right">
-									<spring:message code="list.image.delete" />
-								</button>
+									class="btn btn-info pull-right">비문 사진 삭제</button>
+							</a> <br> <a
+								href="${pageContext.request.contextPath}/guidance/npevent" style="color: #DF6464; font-weight: bold;">
+								잠깐! 이곳을 클릭하여 비문 사진 예시를 확인하세요.
 							</a>
 							<div class="row gallery-item">
-								<c:forEach var="noseprintImage" items="${noseprintImageList}" varStatus="status">
+								<c:forEach var="noseprintImage" items="${noseprintImageList}"
+									varStatus="status">
 									<div class="col-md-4">
 										<a
-											href="${pageContext.request.contextPath}/upload/${noseprintImage.noseprintImagePath}"
+											href="${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath}"
 											class="img-pop-up">
 											<div class="single-gallery-image"
-												style="background: url(${pageContext.request.contextPath}/upload/${noseprintImage.noseprintImagePath});"></div>
+												style="background: url(${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath});"></div>
 										</a>
-										<%-- 버튼안 텍스트 옆에 이미지를 넣는 방법
-										<button type="button" id="" class="btn btnEvent">
-											<img
-												src="https://img.icons8.com/flat-round/64/000000/share--v1.png"
-												alt="btnImages" class="btnImages">
-										</button>
-										--%>
-										<a
-											href="${pageContext.request.contextPath}/posting/img?imageNumber=${noseprintImage.noseprintImageNumber}"><button
-												class="btn_share mt-2 mr-3" id="btn_share" type="button">
-												<img
-													src="${pageContext.request.contextPath}/img/button/share1.png">
-											</button></a>
 									</div>
 								</c:forEach>
 							</div>
@@ -157,7 +140,7 @@
 
 				<c:otherwise>
 					<form
-						action="${pageContext.request.contextPath}/info/list/imageDelete"
+						action="${pageContext.request.contextPath}/info/list/npimageDelete"
 						id="form" method="post" class="form-signin"
 						enctype="multipart/form-data">
 						<input type="checkbox" id="allCheck" />
@@ -165,19 +148,20 @@
 						&nbsp; <input type="submit" class="btn btn-info pull-right"
 							value="<spring:message code="delete.button" />" id="deleteButton">
 						&nbsp; <a
-							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
+							href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${petRegistrationNumber}"
 							class="btn btn-info pull-right" id="cancelButton"
 							style="color: #ffffff"><spring:message code="cancel" /></a> <input
 							type="hidden" name=petRegistrationNumber id="prn"
 							value="${petRegistrationNumber}" />
 						<div class="row gallery-item">
-							<c:forEach var="noseprintImage" items="${noseprintImageList}" varStatus="status">
+							<c:forEach var="noseprintImage" items="${noseprintImageList}"
+								varStatus="status">
 								<div class="col-md-4">
 									<a
-										href="${pageContext.request.contextPath}/upload/${noseprintImage.noseprintImagePath}"
+										href="${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath}"
 										class="img-pop-up">
 										<div class="single-gallery-image"
-											style="background: url(${pageContext.request.contextPath}/upload/${noseprintImage.noseprintImagePath});"></div>
+											style="background: url(${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath});"></div>
 									</a> <br>
 									<div
 										class="checkBox d-flex justify-content-center align-items-center">

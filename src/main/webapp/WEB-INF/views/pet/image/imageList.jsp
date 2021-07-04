@@ -122,11 +122,16 @@
 			<c:choose>
 				<c:when test="${delete ne 1}">
 					<div class="filebox">
+
 						<form action="${pageContext.request.contextPath}/info/list/image"
 							id="form" method="post" class="form-signin"
 							enctype="multipart/form-data">
-
-							<label for="ex_file"><a class="btn btn-info"
+							<a href="${pageContext.request.contextPath}/pet/list">
+								<button type="button" value="true"
+									class="btn btn-info pull-left" style="float: left;">
+									<spring:message code="go.list" />
+								</button>
+							</a> <label for="ex_file"><a class="btn btn-info"
 								style="color: white;"><spring:message
 										code="list.image.upload" /></a></label> <input type="file"
 								multiple="multiple" name="file" id="ex_file"
