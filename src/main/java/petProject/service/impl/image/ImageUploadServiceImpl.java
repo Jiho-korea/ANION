@@ -9,13 +9,20 @@
 */
 package petProject.service.impl.image;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import petProject.dao.ImageDAO;
 import petProject.exception.ImageUploadException;
 import petProject.service.image.ImageUploadService;
+import petProject.vo.AuthInfo;
 import petProject.vo.request.ImageUploadRequest;
 
 @Service("imageUploadService")
@@ -23,6 +30,24 @@ import petProject.vo.request.ImageUploadRequest;
 public class ImageUploadServiceImpl implements ImageUploadService {
 	@Autowired
 	private ImageDAO imageDAO;
+
+	@Override
+	@Transactional
+	public void uploadImage(AuthInfo authInfo, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
+			throws Exception {
+		String savedName;
+		for (MultipartFile mf : file) {
+			savedName = uploadFile(mf.getOriginalFilename(), mf.getBytes(), rootPath);
+
+			// model.addAttribute("savedName", savedName);
+			String absPath = rootPath + "\\" + savedName;
+			System.out.println("absPath = " + absPath);
+
+			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberNumber(),
+					petRegistrationNumber, savedName);
+			insertImage(imageUploadRequest);
+		}
+	}
 
 	@Override
 	public int insertImage(ImageUploadRequest imageUploadRequest) throws Exception {
@@ -33,4 +58,14 @@ public class ImageUploadServiceImpl implements ImageUploadService {
 		return result;
 	}
 
+	private String uploadFile(String originalName, byte[] fileData, String rootPath) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String rndName = sdf.format(new java.util.Date()) + System.currentTimeMillis();
+		// UUID uid = UUID.randomUUID(); // uid.toString()
+		String savedName = rndName + "." + originalName.substring(originalName.lastIndexOf(".") + 1);
+		File target = new File(rootPath, savedName);
+		// System.out.println(rootPath);
+		FileCopyUtils.copy(fileData, target);
+		return savedName;
+	}
 }

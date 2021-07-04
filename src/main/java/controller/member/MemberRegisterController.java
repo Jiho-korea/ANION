@@ -29,8 +29,6 @@
 */
 package controller.member;
 
-import java.util.regex.Pattern;
-
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -95,10 +93,11 @@ public class MemberRegisterController {
 	@PostMapping("/step2")
 	public String signupStep2(@Valid MemberRegisterRequest memberRegisterRequest, Errors errors, Model model,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		if (memberRegisterRequest.getMemberPhoneNumber().length() < 13
-				&& !Pattern.matches("^[0-9]+$", memberRegisterRequest.getMemberPhoneNumber())) {
-			errors.reject("no.number.check.memberRegisterRequest");
-		}
+		/*
+		 * if (memberRegisterRequest.getMemberPhoneNumber().length() < 13 &&
+		 * !Pattern.matches("^[0-9]+$", memberRegisterRequest.getMemberPhoneNumber())) {
+		 * errors.reject("no.number.check.memberRegisterRequest"); }
+		 */
 		if (!memberRegisterRequest.isPasswordEqualToCheckPassword()) {
 			errors.rejectValue("checkPassword", "notmatch.password");
 		}

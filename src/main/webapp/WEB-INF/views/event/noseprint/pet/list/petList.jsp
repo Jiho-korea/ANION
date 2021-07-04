@@ -132,13 +132,13 @@
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
-								<td>${pet.imageCount}건</td>
+								<td>${pet.noseprintImageCount}건</td>
 								<td>
 									<!-- <a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 									id="btn_photo" class="btn btn-info pull-right"><spring:message
 											code="go.right" /></a> --> <a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+									href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}">
 										<button class="btn_gallery" id="btn_gallery"
 											type="button">
 											<img
@@ -147,7 +147,7 @@
 								</a>
 								</td>
 								<td><a
-									href="${pageContext.request.contextPath}/info/list/image/download?petRegistrationNumber=${pet.petRegistrationNumber}">
+									href="${pageContext.request.contextPath}/info/list/npimage/download?petRegistrationNumber=${pet.petRegistrationNumber}">
 										<button class="btn_download" id="btn_download"
 											type="button">
 											<img
@@ -160,13 +160,13 @@
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
-								<td>${pet.imageCount}건</td>
+								<td>${pet.noseprintImageCount}건</td>
 								<td><a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+									href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}">
 										<button class="btn_gallery" id="btn_gallery"
 											type="button">
 											<img
-												src="${pageContext.request.contextPath}/img/button/gallery1.png">
+												src="${pageContext.request.contextPath}/img/button/dog_nose.png">
 										</button>
 								</a></td>
 

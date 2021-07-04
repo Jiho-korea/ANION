@@ -1,10 +1,10 @@
 /*
 ========================================================================
-파    일    명 : ImageListService.java
+파    일    명 : ImageDeleteService.java
 ========================================================================
 작    성    자 : 강지호
 작    성    일 : 2020.xx.xx
-작  성  내  용 : 이미지 리스트를 불러오는 메서드 선언 인터페이스
+작  성  내  용 : 이미지리스트를 삭제하는 메서드 인터페이스
 ========================================================================
 */
 package petProject.service.image;
@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ImageDeleteService {
 
-	int deleteImage(@Param("imagePath") String paths_id) throws Exception;
+	void deleteImage(@Param("imagePath") String[] paths_id, String rootPath) throws Exception;
 }

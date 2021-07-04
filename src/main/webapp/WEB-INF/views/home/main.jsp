@@ -114,33 +114,41 @@
 					style="border: none; padding: 5px 15px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 10px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">등록하러가기</a>
 			</div>
 			 -->
-			<div class ="d-flex justify-content-center ml-5 mt-5">
+		<div class="d-flex justify-content-center ml-5 mt-5">
 			<!--  <a href="${pageContext.request.contextPath}/popup/1/click">-->
-			<a href="#">
-			<img src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg" style = "width:90%;" >
+			<a href="#"> <img
+				src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
+				style="width: 90%;">
 			</a>
-			</div>
-  
-			<div class="container d-flex justify-content-end mt-5"
-				style="margin-right: -10px">
-				<form name="frm" class="d-flex align-items-center">
-					<input id="closeCheck" type="checkbox" name="Notice"
-						onclick="check()"> <a style="font-size: 13px;">하루동안 열지
-						않음</a> &nbsp;<input type=button value="닫기" onclick="closeWin()"
-						style="width: 30pt; height: 20pt; font-size: 13px"
-						class="d-flex align-items-center">
-
-				</form>
-			</div>
-			
 		</div>
+
+		<div class="container d-flex justify-content-end mt-5"
+			style="margin-right: -10px">
+			<form name="frm" class="d-flex align-items-center">
+				<input id="closeCheck" type="checkbox" name="Notice"
+					onclick="check()"> <a style="font-size: 13px;">하루동안 열지
+					않음</a> &nbsp;<input type=button value="닫기" onclick="closeWin()"
+					style="width: 30pt; height: 20pt; font-size: 13px"
+					class="d-flex align-items-center">
+
+			</form>
+		</div>
+
 	</div>
+
 
 
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<br><br><br><br><br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/register/step1"
 			class="btn header-btn"><spring:message
@@ -151,7 +159,14 @@
 		<a href="${pageContext.request.contextPath}/pet/list"
 			class="btn header-btn"><spring:message code="pet.list.title" /></a>
 	</div>
-	<br><br><br><br><br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<%-- 대문짝
     <!-- slider Area Start-->
    <div class="slider-area position-relative">

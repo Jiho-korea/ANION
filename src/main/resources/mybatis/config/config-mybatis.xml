@@ -25,6 +25,8 @@
 		<typeAlias type="petProject.vo.request.ImagePostingRequest" alias="imagePostingRequest" />
 		<typeAlias type="petProject.vo.dto.ImgpostAndImage" alias="imgpostAndImage" />
 		<typeAlias type="petProject.vo.request.ImageBoardRequest" alias="imageBoardRequest" />
+		<typeAlias type="petProject.vo.dto.NoseprintImage" alias="noseprintImage" />
+		<typeAlias type="petProject.vo.request.NoseprintImageUploadRequest" alias="noseprintImageUploadRequest" />
 	</typeAliases>
    
 </configuration>

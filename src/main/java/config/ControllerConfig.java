@@ -21,13 +21,14 @@ import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
 import controller.admin.code.kind.KindcodeUpdateController;
 import controller.admin.event.EventListController;
+import controller.admin.event.noseprint.NoseprintImageDownloadController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.member.MemberListController;
 import controller.admin.pet.PetListAdminController;
-import controller.bbs.image.ImageBoardController;
-import controller.bbs.image.ImagePostingController;
-import controller.bbs.image.ViewImagePostController;
-import controller.event.noseprint.NoseprintPetListController;
+import controller.event.noseprint.image.NoseprintImageDeleteController;
+import controller.event.noseprint.image.NoseprintImageEventGuidanceController;
+import controller.event.noseprint.image.NoseprintImageListController;
+import controller.event.noseprint.pet.NoseprintPetListController;
 import controller.event.popup.EventPopupController;
 import controller.image.ImageDeleteController;
 import controller.image.ImageListController;
@@ -130,20 +131,24 @@ public class ControllerConfig {
 		return new ImageDownloadController();
 	}
 
-	@Bean
-	public ImagePostingController imagePostingController() {
-		return new ImagePostingController();
-	}
+	// 반려견 자랑 관련 컨트롤러 임시 삭제
+	// 반려견 자랑 게시글 쓰기 컨트롤러
+//	@Bean
+//	public ImagePostingController imagePostingController() {
+//		return new ImagePostingController();
+//	}
 
-	@Bean
-	public ImageBoardController imageBoardController() {
-		return new ImageBoardController();
-	}
+	// 반려견 자랑 게시판 컨트롤러
+//	@Bean
+//	public ImageBoardController imageBoardController() {
+//		return new ImageBoardController();
+//	}
 
-	@Bean
-	public ViewImagePostController viewImagePostController() {
-		return new ViewImagePostController();
-	}
+	// 반려견 자랑 게시물 보기 컨트롤러
+//	@Bean
+//	public ViewImagePostController viewImagePostController() {
+//		return new ViewImagePostController();
+//	}
 
 	@Bean
 	public EventPopupController eventPopupController() {
@@ -156,8 +161,28 @@ public class ControllerConfig {
 	}
 
 	@Bean
+	public NoseprintImageEventGuidanceController noseprintImageEventGuidanceController() {
+		return new NoseprintImageEventGuidanceController();
+	}
+
+	@Bean
 	public NoseprintPetListController noseprintPetListController() {
 		return new NoseprintPetListController();
+	}
+
+	@Bean
+	public NoseprintImageListController noseprintImageListController() {
+		return new NoseprintImageListController();
+	}
+
+	@Bean
+	public NoseprintImageDeleteController noseprintImageDeleteController() {
+		return new NoseprintImageDeleteController();
+	}
+
+	@Bean
+	public NoseprintImageDownloadController noseprintImageDownloadController() {
+		return new NoseprintImageDownloadController();
 	}
 
 	@Bean

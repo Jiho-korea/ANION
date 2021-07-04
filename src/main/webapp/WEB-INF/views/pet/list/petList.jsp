@@ -97,7 +97,7 @@
 		<div class="text-right mb-10">
 		
 			<!-- 비문 이벤트 -->
-			<a href="${pageContext.request.contextPath}/pet/list/event1"
+			<a href="${pageContext.request.contextPath}/pet/list/npevent"
 					class="mb-30"><button type="submit"
 						class="btn btn-info pull-right">
 						비문 등록 이벤트

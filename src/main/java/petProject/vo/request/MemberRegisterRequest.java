@@ -20,8 +20,12 @@ public class MemberRegisterRequest {
 	private String checkPassword;
 	@NotBlank
 	private String memberName;
-	@NotBlank
+
 	private String memberPhoneNumber;
+
+	public MemberRegisterRequest() {
+		super();
+	}
 
 	public MemberRegisterRequest(String memberId, String memberPassword, String checkPassword, String memberName,
 			String memberPhoneNumber) {
@@ -31,10 +35,6 @@ public class MemberRegisterRequest {
 		this.checkPassword = checkPassword;
 		this.memberName = memberName;
 		this.memberPhoneNumber = memberPhoneNumber;
-	}
-
-	public MemberRegisterRequest() {
-		super();
 	}
 
 	public String getMemberId() {

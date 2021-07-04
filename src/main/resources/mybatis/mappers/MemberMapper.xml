@@ -44,7 +44,16 @@
 	<select id="selectMemberCount" resultType="int">
 		SELECT count(*) FROM member
 	</select>
-
+    <!-- 
+    <insert id="insertMember" parameterType="memberRegisterRequest">
+		INSERT INTO
+		"public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME",
+		"MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
+		VALUES
+		(#{memberRegisterRequest.memberId},
+		#{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
+	</insert>
+     -->
 	<insert id="insertMember" parameterType="memberRegisterRequest">
 		INSERT INTO
 		"public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME",
@@ -53,6 +62,8 @@
 		(#{memberRegisterRequest.memberId},
 		#{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
 	</insert>
+	
+	
 
 	<update id="updateAuthStatus" parameterType="String">
 		update "member"

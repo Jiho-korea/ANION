@@ -127,6 +127,7 @@
 				<label> <form:errors path="memberName" />
 				</label>
 				<br>
+				<%--
 				<label> <form:input path="memberPhoneNumber"
 						cssClass="single-input mt-2" placeholder="전화번호 / Phone Number"
 						onfocus="this.placeholder = ''"
@@ -136,7 +137,7 @@
 
 				</label>
 				<label> <form:errors path="memberPhoneNumber" />
-				</label>
+				</label> --%>
 				<br>
 
 				<input type="submit" id="btn_register"
@@ -256,7 +257,6 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-   
 	$("#btn_register").click(function() {
 		const target = document.getElementById('btn_register');
 		const checkPassword = document.getElementById('checkPassword');
@@ -301,7 +301,9 @@
 				target.value = '<spring:message code="go.register" />';
 			}, 100);
 			return false;
-		} else if ($("#memberPhoneNumber").val() == "") {
+		}
+		/*
+		else if ($("#memberPhoneNumber").val() == "") {
 			setTimeout(function() {
 				alert("전화번호를 입력해주세요.");
 				target.disabled = false;
@@ -309,7 +311,7 @@
 			}, 100);
 			return false;
 		}
-
+		 */
 		target.form.submit();
 	});
 </script>

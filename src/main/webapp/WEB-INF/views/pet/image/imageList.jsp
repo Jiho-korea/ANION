@@ -122,11 +122,16 @@
 			<c:choose>
 				<c:when test="${delete ne 1}">
 					<div class="filebox">
+
 						<form action="${pageContext.request.contextPath}/info/list/image"
 							id="form" method="post" class="form-signin"
 							enctype="multipart/form-data">
-
-							<label for="ex_file"><a class="btn btn-info"
+							<a href="${pageContext.request.contextPath}/pet/list">
+								<button type="button" value="true"
+									class="btn btn-info pull-left" style="float: left;">
+									<spring:message code="go.list" />
+								</button>
+							</a> <label for="ex_file"><a class="btn btn-info"
 								style="color: white;"><spring:message
 										code="list.image.upload" /></a></label> <input type="file"
 								multiple="multiple" name="file" id="ex_file"
@@ -155,12 +160,14 @@
 												alt="btnImages" class="btnImages">
 										</button>
 										--%>
+										
+										<%-- 공유하기 버튼!! 임시 삭제
 										<a
 											href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button
 												class="btn_share mt-2 mr-3" id="btn_share" type="button">
 												<img
 													src="${pageContext.request.contextPath}/img/button/share1.png">
-											</button></a>
+											</button></a>  --%>
 									</div>
 								</c:forEach>
 							</div>
