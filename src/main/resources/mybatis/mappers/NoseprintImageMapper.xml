@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petProject.dao.NoseprintImageDAO">
+	<insert id="insertNoseprintImage"
+		parameterType="noseprintImageUploadRequest">
+		INSERT INTO public.public.noseprint_image
+		("PET_REGISTRATION_NUMBER", "NOSEPRINT_IMAGE_PATH", "MEMBER_NUMBER",
+		"NOSEPRINT_IMAGE_AUTH_STATUS")
+		VALUES(#{noseprintImageUploadRequest.petRegistrationNumber},
+		#{noseprintImageUploadRequest.noseprintImagePath},
+		#{noseprintImageUploadRequest.memberNumber}, 0);
+	</insert>
+
+
+	<delete id="deleteNoseprintImage">
+		delete from public.noseprint_image where
+		"NOSEPRINT_IMAGE_PATH" = #{noseprintImagePath}
+	</delete>
+
+	<select id="selectNoseprintImageList" parameterType="int"
+		resultMap="noseprintImageListResultMap">
+		select "PET_REGISTRATION_NUMBER", "NOSEPRINT_IMAGE_NUMBER",
+		"MEMBER_NUMBER",
+		"NOSEPRINT_IMAGE_PATH", "NOSEPRINT_IMAGE_AUTH_STATUS"
+		from "public"."noseprint_image" where
+		"PET_REGISTRATION_NUMBER"=
+		#{petRegistrationNumber} ORDER BY
+		"NOSEPRINT_IMAGE_NUMBER" DESC
+	</select>
+
+	<resultMap type="noseprintImage"
+		id="noseprintImageListResultMap">
+		<id column="NOSEPRINT_IMAGE_NUMBER" property="noseprintImageNumber" />
+		<result column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="NOSEPRINT_IMAGE_PATH"
+			property="noseprintImagePath" />
+		<result column="NOSEPRINT_IMAGE_AUTH_STATUS"
+			property="noseprintImageAuthStatus" />
+	</resultMap>
+
+	<select id="selectNoseprintImageCount" resultType="int">
+		SELECT
+		count(*) FROM
+		public.noseprint_image
+	</select>
+
+	<select id="selectNoseprintImage" parameterType="int"
+		resultMap="noseprintImageResultMap">
+		select "PET_REGISTRATION_NUMBER", "NOSEPRINT_IMAGE_NUMBER",
+		"MEMBER_NUMBER",
+		"NOSEPRINT_IMAGE_PATH", "NOSEPRINT_IMAGE_AUTH_STATUS"
+		from "public"."noseprint_image" where "NOSEPRINT_IMAGE_NUMBER"=
+		#{noseprintImageNumber}
+	</select>
+
+
+	<resultMap type="noseprintImage" id="noseprintImageResultMap">
+		<id column="NOSEPRINT_IMAGE_NUMBER" property="noseprintImageNumber" />
+		<result column="NOSEPRINT_IMAGE_PATH"
+			property="noseprintImagePath" />
+		<result column="NOSEPRINT_IMAGE_AUTH_STATUS"
+			property="noseprintImageAuthStatus" />
+		<result column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="PET_REGISTRATION_NUMBER"
+			property="petRegistrationNumber" />
+		<association select="selectPet" property="pet"
+			column="{petRegistrationNumber=PET_REGISTRATION_NUMBER}" />
+		<association select="selectMember" property="member"
+			column="{memberNumber=MEMBER_NUMBER}" />
+	</resultMap>
+
+
+	<select id="selectPet" parameterType="pet" resultType="pet">
+		select
+		"pet"."PET_REGISTRATION_NUMBER",
+		"pet"."MEMBER_NUMBER",
+		"pet"."PET_NAME", "pet"."PET_KIND_CODE",
+		"pet"."PET_BIRTHDAY",
+		"pet"."PET_REGISTRATION_DATE",
+		"pet"."PET_MICROCHIP",
+		"pet"."PET_MOTHERNAME", "pet"."PET_FATHERNAME",
+		"pet"."PET_SEX"
+		from
+		"public"."pet" as "pet" where
+		"PET_REGISTRATION_NUMBER"=
+		#{petRegistrationNumber}
+	</select>
+
+	<select id="selectMember" parameterType="member"
+		resultType="member">
+		select "MEMBER_ID", "MEMBER_NAME", "MEMBER_PHONE_NUMBER",
+		"MEMBER_REGISTRATION_DATE", "MEMBER_LEVEL_CODE", "MEMBER_AUTH_STATUS",
+		"MEMBER_NUMBER"
+		from "public"."member"
+		WHERE "MEMBER_NUMBER" =
+		#{memberNumber}
+	</select>
+</mapper>

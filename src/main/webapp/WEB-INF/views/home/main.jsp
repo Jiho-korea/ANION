@@ -16,7 +16,7 @@
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
@@ -28,121 +28,130 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/img/favicon.ico">
+   href="${pageContext.request.contextPath}/img/favicon.ico">
 
 <!-- CSS here -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+   href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+   href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slicknav.css">
+   href="${pageContext.request.contextPath}/css/slicknav.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/flaticon.css">
+   href="${pageContext.request.contextPath}/css/flaticon.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/progressbar_barfiller.css">
+   href="${pageContext.request.contextPath}/css/progressbar_barfiller.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/gijgo.css">
+   href="${pageContext.request.contextPath}/css/gijgo.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/animate.min.css">
+   href="${pageContext.request.contextPath}/css/animate.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/animated-headline.css">
+   href="${pageContext.request.contextPath}/css/animated-headline.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/magnific-popup.css">
+   href="${pageContext.request.contextPath}/css/magnific-popup.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/fontawesome-all.min.css">
+   href="${pageContext.request.contextPath}/css/fontawesome-all.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/themify-icons.css">
+   href="${pageContext.request.contextPath}/css/themify-icons.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/slick.css">
+   href="${pageContext.request.contextPath}/css/slick.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/nice-select.css">
+   href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css">
+   href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <style>
 /* The Modal (background) */
 .modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0, 0, 0); /* Fallback color */
+   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 30%; /* Could be more or less, depending on screen size */
+   background-color: #fefefe;
+   margin: 15% auto; /* 15% from the top and centered */
+   padding: 20px;
+   border: 1px solid #888;
+   width: 30%; /* Could be more or less, depending on screen size */
 }
 </style>
 
 
 <body onload="doPopupopen();">
-	<div id="myModal" class="modal">
-		<!-- Modal content -->
-		<div
-			class="modal-content d-flex justify-content-center align-items-center"
-			style="background-image: URL(${pageContext.request.contextPath}/img/popupBack/pop_back.png); height: 550px">
+   <div id="myModal" class="modal">
+      <!--
+   
+      <div
+         class="modal-content d-flex justify-content-center align-items-center"
+         style="background-image: URL(${pageContext.request.contextPath}/img/popupBack/pop_back.png); height: 550px">
 
-			<div
-				style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; width: 300px"
-				class="d-flex justify-content-center mt-3">교육 이벤트 및 참석 제목</div>
-			<p style="text-align: center; line-height: 1.5;">
-				<span style="font-size: 14pt; color: white;">교육 및 설명</span>
-			</p>
+         <div
+            style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; width: 300px"
+            class="d-flex justify-content-center mt-3">교육 이벤트 및 참석 제목</div>
+         <p style="text-align: center; line-height: 1.5;">
+            <span style="font-size: 14pt; color: white;">교육 및 설명</span>
+         </p>
 
-			<div
-				class="jumbotron d-flex justify-content-center align-items-center"
-				style="height: 300px; width: 300px; opacity: 0.8;">참고 이미지, 그림
-				등</div>
+         <div
+            class="jumbotron d-flex justify-content-center align-items-center"
+            style="height: 300px; width: 300px; opacity: 0.8;">참고 이미지, 그림
+            등</div>
 
-			<div class="container d-flex justify-content-center mt-3">
-				<a href="${pageContext.request.contextPath}/popup/1/click"
-					class="btn header-btn d-flex justify-content-center"
-					style="border: none; padding: 5px 15px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 10px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">등록하러가기</a>
-			</div>
-			<div class="container d-flex justify-content-end mt-5"
-				style="margin-right: -20px">
-				<form name="frm" class="d-flex align-items-center">
-					<input id="closeCheck" type="checkbox" name="Notice"
-						onclick="check()"> <a style="font-size: 13px;">하루동안 열지
-						않음</a> &nbsp;<input type=button value="닫기" onclick="closeWin()"
-						style="width: 30pt; height: 20pt; font-size: 13px"
-						class="d-flex align-items-center">
+         <div class="container d-flex justify-content-center mt-3">
+            <a href="${pageContext.request.contextPath}/popup/1/click"
+               class="btn header-btn d-flex justify-content-center"
+               style="border: none; padding: 5px 15px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 10px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">등록하러가기</a>
+         </div>
+          -->
+         <div class ="d-flex justify-content-center mt-3">
+         <a href="${pageContext.request.contextPath}/popup/1/click">
+         <img src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg" style = "width:90%;" >
+         </a>
+         </div>
+  
+         <div class="container d-flex justify-content-end mt-5"
+            style="margin-right: -10px">
+            <form name="frm" class="d-flex align-items-center">
+               <input id="closeCheck" type="checkbox" name="Notice"
+                  onclick="check()"> <a style="font-size: 13px;">하루동안 열지
+                  않음</a> &nbsp;<input type=button value="닫기" onclick="closeWin()"
+                  style="width: 30pt; height: 20pt; font-size: 13px"
+                  class="d-flex align-items-center">
 
-				</form>
-			</div>
-		</div>
-	</div>
+            </form>
+         </div>
+         
+      </div>
+   </div>
 
 
-	<c:import url="../included/top.jsp">
-		<c:param value="main" name="type" />
-	</c:import>
-	<br><br><br><br><br><br><br><br>
-	<div class="container d-flex justify-content-center mt-5">
-		<a href="${pageContext.request.contextPath}/register/step1"
-			class="btn header-btn"><spring:message
-				code="pet.registration.title" /></a>
+   <c:import url="../included/top.jsp">
+      <c:param value="main" name="type" />
+   </c:import>
+   <br><br><br><br><br><br><br><br>
+   <div class="container d-flex justify-content-center mt-5">
+      <a href="${pageContext.request.contextPath}/register/step1"
+         class="btn header-btn"><spring:message
+            code="pet.registration.title" /></a>
 
-	</div>
-	<div class="container d-flex justify-content-center mt-5">
-		<a href="${pageContext.request.contextPath}/pet/list"
-			class="btn header-btn"><spring:message code="pet.list.title" /></a>
-	</div>
-	<br><br><br><br><br><br><br><br>
-	<%-- 대문짝
+   </div>
+   <div class="container d-flex justify-content-center mt-5">
+      <a href="${pageContext.request.contextPath}/pet/list"
+         class="btn header-btn"><spring:message code="pet.list.title" /></a>
+   </div>
+   <br><br><br><br><br><br><br><br>
+   <%-- 대문짝
     <!-- slider Area Start-->
    <div class="slider-area position-relative">
       <div class="slider-active dot-style">
@@ -226,7 +235,7 @@
    </div>
     --%>
 
-	<%--
+   <%--
    <!-- slider Area End--> <!--? Visit Our Tailor Start -->
    <div class="visit-tailor-area fix">
       <!--Right Contents  -->
@@ -264,7 +273,7 @@
       </div>
    </div>
     --%>
-	<%-- 
+   <%-- 
    <!-- Visit Our Tailor End --> <!--? Services Area Start -->
    <div class="service-area section-padding30">
       <div class="container">
@@ -306,7 +315,7 @@
    </div>
    <!-- Services Area End -->
    --%>
-	<%--
+   <%--
    <!--? About Area Start -->
    <section class="support-company-area fix pt-10">
       <div class="support-wrapper align-items-center">
@@ -518,130 +527,130 @@
    <!-- Blog Area End -->
    </main>
 --%>
-	<c:import url="../included/bottom.jsp">
-		<c:param value="main" name="type" />
-	</c:import>
+   <c:import url="../included/bottom.jsp">
+      <c:param value="main" name="type" />
+   </c:import>
 
-	<!-- Scroll Up -->
-	<div id="back-top">
-		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-	</div>
+   <!-- Scroll Up -->
+   <div id="back-top">
+      <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+   </div>
 
-	<!-- JS here -->
+   <!-- JS here -->
 
-	<script defer
-		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
-	<!-- Jquery, Popper, Bootstrap -->
-	<script defer
-		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<!-- Jquery Mobile Menu -->
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
+   <!-- Jquery, Popper, Bootstrap -->
+   <script defer
+      src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
+   <script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+   <!-- Jquery Mobile Menu -->
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
-	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer
-		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
-	<!-- One Page, Animated-HeadLin -->
-	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/animated.headline.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
+   <!-- Jquery Slick , Owl-Carousel Plugins -->
+   <script defer
+      src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+   <script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
+   <!-- One Page, Animated-HeadLin -->
+   <script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/animated.headline.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
 
-	<!-- Date Picker -->
-	<script defer src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
-	<!-- Nice-select, sticky -->
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
-	<!-- Progress -->
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+   <!-- Date Picker -->
+   <script defer src="${pageContext.request.contextPath}/js/gijgo.min.js"></script>
+   <!-- Nice-select, sticky -->
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+   <!-- Progress -->
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
-	<!-- counter , waypoint,Hover Direction -->
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/hover-direction-snake.min.js"></script>
+   <!-- counter , waypoint,Hover Direction -->
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/hover-direction-snake.min.js"></script>
 
-	<!-- contact js -->
-	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
-	<script defer
-		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
+   <!-- contact js -->
+   <script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+   <script defer
+      src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
-	<!-- Jquery Plugins, main Jquery -->
-	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+   <!-- Jquery Plugins, main Jquery -->
+   <script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
+   <script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 </body>
 <script defer type="text/javascript">
-	function setCookie(name, value, expiredays) {
-		var todayDate = new Date();
-		todayDate.setDate(todayDate.getDate() + expiredays);
-		document.cookie = name + "=" + escape(value) + "; path=/; expires="
-				+ todayDate.toGMTString() + ";"
-	}
+   function setCookie(name, value, expiredays) {
+      var todayDate = new Date();
+      todayDate.setDate(todayDate.getDate() + expiredays);
+      document.cookie = name + "=" + escape(value) + "; path=/; expires="
+            + todayDate.toGMTString() + ";"
+   }
 
-	function getCookie(name) {
-		var nameOfCookie = name + "=";
-		var x = 0;
-		while (x <= document.cookie.length) {
-			var y = (x + nameOfCookie.length);
-			if (document.cookie.substring(x, y) == nameOfCookie) {
-				if ((endOfCookie = document.cookie.indexOf(";", y)) == -1)
-					endOfCookie = document.cookie.length;
-				return unescape(document.cookie.substring(y, endOfCookie));
-			}
-			x = document.cookie.indexOf(" ", x) + 1;
-			if (x == 0)
-				break;
-		}
-		return "";
-	}
+   function getCookie(name) {
+      var nameOfCookie = name + "=";
+      var x = 0;
+      while (x <= document.cookie.length) {
+         var y = (x + nameOfCookie.length);
+         if (document.cookie.substring(x, y) == nameOfCookie) {
+            if ((endOfCookie = document.cookie.indexOf(";", y)) == -1)
+               endOfCookie = document.cookie.length;
+            return unescape(document.cookie.substring(y, endOfCookie));
+         }
+         x = document.cookie.indexOf(" ", x) + 1;
+         if (x == 0)
+            break;
+      }
+      return "";
+   }
 
-	var ratio = window.devicePixelRatio;
+   var ratio = window.devicePixelRatio;
 
-	if (getCookie("Notice") != "done") {
-		if (ratio >= 2) {
-			jQuery(document).ready(function() {
-				$('#myModal').show();
-			});
+   if (getCookie("Notice") != "done") {
+      if (ratio >= 2) {
+         jQuery(document).ready(function() {
+            $('#myModal').show();
+         });
 
-		} else {
-			function doPopupopen() {
-				window
-						.open(
-								"${pageContext.request.contextPath}/popup/1",
-								"popup1_parent",
-								"width=500, height=565, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
-			}
+      } else {
+         function doPopupopen() {
+            window
+                  .open(
+                        "${pageContext.request.contextPath}/popup/1",
+                        "popup1_parent",
+                        "width=430, height=580, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
+         }
 
-		}
-	}
+      }
+   }
 
-	function closeWin() {
-		$('#myModal').hide();
-	}
+   function closeWin() {
+      $('#myModal').hide();
+   }
 
-	function check() {
-		setCookie("Notice", "done", 1);
-		$('#myModal').hide();
-	}
+   function check() {
+      setCookie("Notice", "done", 1);
+      $('#myModal').hide();
+   }
 </script>
 </html>
