@@ -22,9 +22,6 @@
 
 package controller.pet;
 
-import java.io.File;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,7 +47,6 @@ import petProject.service.pet.PetDeleteService;
 import petProject.service.pet.PetInfoService;
 import petProject.service.pet.PetInfoUpdateService;
 import petProject.vo.AuthInfo;
-import petProject.vo.dto.Image;
 import petProject.vo.dto.Pet;
 import petProject.vo.request.PetNameUpdateRequest;
 
@@ -111,17 +107,9 @@ public class PetInfoController {
 	@PostMapping
 	public String petDelete(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String rootPath = request.getSession().getServletContext().getRealPath("/upload");
 		try {
-			List<Image> petImageList = imageDAO.selectImageList(petRegistrationNumber);
-			petDeleteService.deletePet(petRegistrationNumber);
-
-			if (petImageList != null) {
-				for (Image image : petImageList) {
-					File deleteFile = new File(rootPath + "/" + image.getImagePath());
-					deleteFile.delete();
-				}
-			}
+			petDeleteService.deletePet(petRegistrationNumber, request);
+			
 			return "redirect:/pet/list";
 		} catch (PetDeleteException e) { // DB에 없는 pet일경우 DeleteException발생
 			e.printStackTrace();

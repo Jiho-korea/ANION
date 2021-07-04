@@ -15,6 +15,8 @@ package petProject.service.impl.member;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -25,8 +27,10 @@ import petProject.dao.MemberDAO;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.MemberPasswordUpdateException;
 import petProject.exception.WrongIdPasswordException;
+import petProject.service.email.MemberPasswordEmailSendService;
 import petProject.service.member.ChangePasswordService;
 import petProject.vo.dto.Member;
+import petProject.vo.dto.MemberIdProfile;
 
 @Service("changePasswordService")
 @Component
@@ -37,6 +41,9 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+
+	@Autowired
+	MemberPasswordEmailSendService memberPasswordEmailSendService;
 
 	@Transactional(rollbackFor = SQLException.class)
 	public void changePassword(String memberId, String oldPassword, String newPassword) throws Exception {
@@ -57,14 +64,17 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 	}
 
 	@Transactional(rollbackFor = SQLException.class)
-	public void updateTempPassword(String memberId, String tempPassword) throws Exception {
-		Member member = memberDAO.selectMemberById(memberId);
+	public void updateTempPassword(MemberIdProfile memberIdProfile, String tempPassword, HttpServletRequest request,
+			boolean isHtml) throws Exception {
+		Member member = memberDAO.selectMemberById(memberIdProfile.getMemberId());
 
 		member.setMemberPassword(passwordEncoder.encode(tempPassword));
 		int cnt = memberDAO.updatePassword(member);
 		if (cnt == 0) {
 			throw new MemberPasswordUpdateException("password update error");
 		}
+		
+		memberPasswordEmailSendService.sendPassword(memberIdProfile, tempPassword, request, isHtml);
 	}
 
 }

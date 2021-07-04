@@ -107,7 +107,7 @@
 				<br>
 				<br>
 				<p>
-					<a href="${pageContext.request.contextPath}/member/find/password"
+					<a href="${pageContext.request.contextPath}/member/find/passwordForm"
 						style="color: blue;">암호를 잊으셨나요?</a>
 				</p>
 				<!-- 

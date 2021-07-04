@@ -14,9 +14,14 @@
 
 package petProject.service.member;
 
+import javax.servlet.http.HttpServletRequest;
+
+import petProject.vo.dto.MemberIdProfile;
+
 public interface ChangePasswordService {
 
 	void changePassword(String memberId, String oldPassword, String newPassword) throws Exception;
-	
-	void updateTempPassword(String memberId, String tempPassword) throws Exception;
+
+	void updateTempPassword(MemberIdProfile memberIdProfile, String tempPassword, HttpServletRequest request,
+			boolean isHtml) throws Exception;
 }

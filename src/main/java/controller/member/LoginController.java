@@ -123,7 +123,7 @@ public class LoginController {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
-			return "redirect:/email/valid?memberId=" + loginRequest.getMemberId();
+			return "redirect:/email/validForm?memberId=" + loginRequest.getMemberId();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "login/loginFormPage";
