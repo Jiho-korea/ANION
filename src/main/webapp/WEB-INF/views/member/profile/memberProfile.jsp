@@ -109,7 +109,7 @@ a, a:hover {
 
 						<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
 							<a
-								href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
+								href="${pageContext.request.contextPath}/email/validForm?memberId=${sessionScope.login.memberId}"><input
 								type="button" value=<spring:message code="valid" /> /> </a>
 						</c:if>
 					</c:when>
