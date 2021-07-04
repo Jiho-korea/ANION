@@ -26,6 +26,7 @@ import controller.admin.image.ImageDownloadController;
 import controller.admin.member.MemberListController;
 import controller.admin.pet.PetListAdminController;
 import controller.event.noseprint.image.NoseprintImageDeleteController;
+import controller.event.noseprint.image.NoseprintImageEventGuidanceController;
 import controller.event.noseprint.image.NoseprintImageListController;
 import controller.event.noseprint.pet.NoseprintPetListController;
 import controller.event.popup.EventPopupController;
@@ -157,6 +158,11 @@ public class ControllerConfig {
 	@Bean
 	public PetKindPopupController petKindPopupController() {
 		return new PetKindPopupController();
+	}
+
+	@Bean
+	public NoseprintImageEventGuidanceController noseprintImageEventGuidanceController() {
+		return new NoseprintImageEventGuidanceController();
 	}
 
 	@Bean

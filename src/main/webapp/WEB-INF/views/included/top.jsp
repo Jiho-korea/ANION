@@ -109,8 +109,7 @@ Preloader Start -->
 													<li><a href="#">이벤트</a></li>
 													<%--<li><a
 														href="${pageContext.request.contextPath}/board/img">갤러리</a></li> --%>
-													<li><a
-														href="#">갤러리</a></li>
+													<li><a href="#">갤러리</a></li>
 												</ul></li>
 											<li><a href="#"><spring:message
 														code="pet.certification.title" /></a>
@@ -118,11 +117,11 @@ Preloader Start -->
 													<li><a
 														href="${pageContext.request.contextPath}/register/step1"><spring:message
 																code="pet.registration.title" /></a></li>
-													<c:if test="${not empty sessionScope.login}">
-														<li><a
-															href="${pageContext.request.contextPath}/pet/list"><spring:message
-																	code="pet.list.title" /></a></li>
-													</c:if>
+
+													<li><a
+														href="${pageContext.request.contextPath}/pet/list"><spring:message
+																code="pet.list.title" /></a></li>
+
 													<li><a href="#"><spring:message
 																code="pet.facial.registration" /></a></li>
 													<li><a href="#"><spring:message

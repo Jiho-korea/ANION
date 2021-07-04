@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -61,18 +62,23 @@ public class ImageListController {
 
 	@GetMapping("/image")
 	public String listImage(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
-			HttpSession session, Model model) {
+			HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		// System.out.println("memberId = " + authInfo.getMemberId() +
 		// "\npetRegistrationNumber = " + petRegistrationNumber);
 		try {
 			List<Image> imageList = imageListService.selectImageList(petRegistrationNumber);
 			// System.out.println(imageList.isEmpty());
 			model.addAttribute("imageList", imageList);
+
+			model.addAttribute("petRegistrationNumber", petRegistrationNumber);
+			return "pet/image/imageList";
 		} catch (Exception e) {
 			e.printStackTrace();
+			ScriptWriter.write("오류가 발생하였습니다.", "home", request, response);
+			return null;
 		}
-		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
-		return "pet/image/imageList";
+
 	}
 
 	@PostMapping("/image")

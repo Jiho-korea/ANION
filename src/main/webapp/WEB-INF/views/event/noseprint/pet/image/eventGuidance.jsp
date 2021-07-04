@@ -79,12 +79,22 @@
 		<div id="main">
 			<h1 class="display-4">비문 사진 예시</h1>
 		</div>
-		<div class="text-left mb-10">
-			
+		<div class="text-left">
 			<!-- 비문 이벤트 -->
-			<a href="javascript:history.back();"
-				class="mb-30"><button type="submit"
-					class="btn btn-info pull-right">뒤로</button></a>
+			<c:choose>
+				<c:when test="${empty first}">
+					<a href="javascript:history.back();"><button type="button"
+							class="btn btn-info pull-left mb-5" style="float: left;">뒤로</button></a>
+				</c:when>
+				<c:otherwise>
+					<a
+						href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${first}"><button
+							type="button" class="btn btn-info pull-right mb-5"
+							style="float: right;">
+							<spring:message code="go.agree" />
+						</button></a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="row" id="main">
 			<div class="col-lg-5 col-md-12 mb-5">
@@ -99,7 +109,9 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_1.jpg" target="_blank"> <img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_1.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_1.jpg"
 										class="img-fluid" /> <a href="#!">
 											<div class="mask"
@@ -118,12 +130,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_2.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_2.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_2.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -141,12 +154,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_3.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_3.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_3.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -161,12 +175,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_4.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_4.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_4.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -182,12 +197,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_5.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_5.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_5.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -202,12 +218,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_6.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_6.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_6.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -223,12 +240,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_7.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_7.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_7.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -244,12 +262,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_8.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_8.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_8.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -266,12 +285,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_9.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_9.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_9.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -286,12 +306,13 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_10.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_10.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/bad/Bad_10.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
@@ -319,17 +340,18 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_1.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_1.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_1.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_1</h5>
-								
+
 								</div>
 							</div>
 						</div>
@@ -338,17 +360,18 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_2.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_2.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_2.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_2</h5>
-								
+
 								</div>
 							</div>
 						</div>
@@ -359,17 +382,18 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_3.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_3.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_3.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_3</h5>
-									
+
 
 								</div>
 							</div>
@@ -379,38 +403,40 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_4.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_4.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_4.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_4</h5>
-									
+
 								</div>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<div class="col-lg-6 mb-4">
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_5.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_5.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_5.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_5</h5>
-									
+
 								</div>
 							</div>
 						</div>
@@ -419,38 +445,40 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_6.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_6.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_6.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_6</h5>
-									
+
 								</div>
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<div class="col-lg-6 mb-4">
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_7.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_7.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_7.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_7</h5>
-									
+
 								</div>
 							</div>
 						</div>
@@ -459,17 +487,18 @@
 							<div class="card">
 								<div class="bg-image hover-overlay ripple"
 									data-mdb-ripple-color="light">
-									<a href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_8.jpg" target="_blank">
-									<img
+									<a
+										href="${pageContext.request.contextPath}/img/event/noseprint/good/Good_8.jpg"
+										target="_blank"> <img
 										src="${pageContext.request.contextPath}/img/event/noseprint/good/Good_8.jpg"
 										class="img-fluid" /> <a href="#!">
-										<div class="mask"
-											style="background-color: rgba(251, 251, 251, 0.15);"></div>
+											<div class="mask"
+												style="background-color: rgba(251, 251, 251, 0.15);"></div>
 									</a></a>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">Good_8</h5>
-								
+
 								</div>
 							</div>
 						</div>

@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,18 +53,37 @@ public class NoseprintImageListController {
 	@GetMapping("/npimage")
 	public String listNoseprintImage(
 			@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
-			HttpSession session, Model model) {
+			@CookieValue(value = "checkEventGuidance", required = false) Cookie cookie_check_event_guidance,
+			RedirectAttributes redirect, HttpSession session, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		try {
 			List<NoseprintImage> noseprintImageList = noseprintImageListService
 					.selectNoseprintImageList(petRegistrationNumber);
 			// System.out.println(imageList.isEmpty());
+
+			if (noseprintImageList.isEmpty()) {
+				if (cookie_check_event_guidance == null) {
+					redirect.addFlashAttribute("first", petRegistrationNumber);
+					return "redirect:/guidance/npevent";
+				} else {
+					Cookie cookie_delete_check_event_guidance = new Cookie("checkEventGuidance",
+							cookie_check_event_guidance.getValue());
+					cookie_delete_check_event_guidance.setPath("/");
+					cookie_delete_check_event_guidance.setMaxAge(0);
+					response.addCookie(cookie_delete_check_event_guidance);
+				}
+
+			}
 			model.addAttribute("noseprintImageList", noseprintImageList);
+			model.addAttribute("petRegistrationNumber", petRegistrationNumber);
+			return "event/noseprint/pet/image/noseprintImageList";
 		} catch (Exception e) {
 			e.printStackTrace();
+			ScriptWriter.write("오류가 발생하였습니다.", "home", request, response);
+			return null;
 		}
-		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
-		return "event/noseprint/pet/image/noseprintImageList"; // 변경
+
 	}
 
 	@PostMapping("/npimage")
