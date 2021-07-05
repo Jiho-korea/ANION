@@ -91,9 +91,7 @@ body {
 	<div class="image-box">
 		<a
 			href="javascript:opener.document.location.href='https://www.facebook.com/groups/3017696248465936';window.close();">
-			<img
-			src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
-			style="height: 500px; width: 400px; margin-bottom: 5px;">
+			<img src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg" style="height: 500px; width: 400px; margin-bottom: 5px;">
 		</a>
 
 	</div>
