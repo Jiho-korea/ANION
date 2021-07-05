@@ -131,7 +131,9 @@ public class EmailValidController {
 					cookie_success_update_id.getValue());
 			cookie_delete_success_update_id.setPath("/");
 			cookie_delete_success_update_id.setMaxAge(0);
+			
 			response.addCookie(cookie_delete_success_update_id);
+			
 			model.addAttribute("memberId", cookie_success_update_id.getValue());
 		} else if (cookie_success_valid_member != null) {
 			Cookie cookie_delete_success_valid_member = new Cookie("successValidMember",
@@ -142,7 +144,7 @@ public class EmailValidController {
 			model.addAttribute("memberId", cookie_success_valid_member.getValue());
 		}
 
-		return "member/email/emailSentSuccess";
+		return "member/email/emailAuthenticationSuccess";
 	}
 
 	@PostMapping("/valid")

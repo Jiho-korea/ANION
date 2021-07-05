@@ -48,9 +48,10 @@ public class MemberFindController {
 
 	@GetMapping("/password")
 	public String findPassword(
-			@CookieValue(value = "cookie_success_find_password", required = false) Cookie cookie_success_find_password,
+			@CookieValue(value = "successFindPassword", required = false) Cookie cookie_success_find_password,
 			Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (cookie_success_find_password == null) {
+			System.out.println("hi");
 			ScriptWriter.write("잘못된 접근입니다.", "login", request, response);
 			return null;
 		}
@@ -59,6 +60,7 @@ public class MemberFindController {
 				cookie_success_find_password.getValue());
 		cookie_delete_success_find_password.setPath("/");
 		cookie_delete_success_find_password.setMaxAge(0);
+		
 		response.addCookie(cookie_delete_success_find_password);
 
 		model.addAttribute("memberId", cookie_success_find_password.getValue());
