@@ -28,10 +28,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import interceptor.AdminCheckInterceptor;
-import interceptor.EmailcodeCheckInterceptor;
 import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
+import interceptor.LogoutCheckInterceptor;
 import interceptor.PopupCookieCheckInterceptor;
 import interceptor.PopupCookieDeleteInterceptor;
 
@@ -60,11 +60,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public EmailcodeCheckInterceptor emailcodeCheckInterceptor() {
-		return new EmailcodeCheckInterceptor();
-	}
-
-	@Bean
 	public PopupCookieCheckInterceptor popupCookieCheckInterceptor() {
 		return new PopupCookieCheckInterceptor();
 	}
@@ -79,6 +74,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
 		interceptor.setParamName("lang");
 		return interceptor;
+	}
+
+	@Bean
+	public LogoutCheckInterceptor logoutCheckInterceptor() {
+		return new LogoutCheckInterceptor();
 	}
 
 	@Override
@@ -106,11 +106,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
 				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**");
+		registry.addInterceptor(logoutCheckInterceptor()).addPathPatterns("/member/find/**");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
-		registry.addInterceptor(emailcodeCheckInterceptor()).addPathPatterns("/email/**");
 		registry.addInterceptor(popupCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
 		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1",
 				"/popup/petKind/**");

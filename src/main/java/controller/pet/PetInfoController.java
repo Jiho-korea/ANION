@@ -14,6 +14,10 @@
 수    정    일 : 2021.05.23
 수  정  내  용 : 반려견 삭제 기능 추가
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.03
+수  정  내  용 : 업로드 폴더의 사진 삭제기능 추가
+========================================================================
 */
 
 package controller.pet;
@@ -33,6 +37,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import petProject.dao.ImageDAO;
 import petProject.dao.PetDAO;
 import petProject.exception.PetDeleteException;
 import petProject.exception.PetInfoUpdateException;
@@ -60,6 +65,9 @@ public class PetInfoController {
 
 	@Autowired
 	PetDAO petDAO;
+
+	@Autowired
+	ImageDAO imageDAO;
 
 	public PetInfoController() {
 		super();
@@ -99,10 +107,9 @@ public class PetInfoController {
 	@PostMapping
 	public String petDelete(@RequestParam(value = "petRegistrationNumber", required = true) int petRegistrationNumber,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		try {
-			petDeleteService.deletePet(petRegistrationNumber);
-
+			petDeleteService.deletePet(petRegistrationNumber, request);
+			
 			return "redirect:/pet/list";
 		} catch (PetDeleteException e) { // DB에 없는 pet일경우 DeleteException발생
 			e.printStackTrace();

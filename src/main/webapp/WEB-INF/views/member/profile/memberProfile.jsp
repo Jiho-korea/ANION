@@ -16,7 +16,7 @@
 ========================================================================
 수    정    자 : 송찬영
 수    정    일 : 2021.05.05
-수  정  내  용 : Loaindg 폼 추가
+수  정  내  용 : Loading 폼 추가
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -109,7 +109,7 @@ a, a:hover {
 
 						<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
 							<a
-								href="${pageContext.request.contextPath}/email/valid?memberId=${sessionScope.login.memberId}"><input
+								href="${pageContext.request.contextPath}/email/validForm?memberId=${sessionScope.login.memberId}"><input
 								type="button" value=<spring:message code="valid" /> /> </a>
 						</c:if>
 					</c:when>
@@ -174,7 +174,7 @@ a, a:hover {
 								value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
-								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
+								type="button" name="btn_modify_cancel" id="btn_modify_cancel"
 								value=<spring:message code="cancel" /> /> </a>
 
 							<form:errors path="memberName" />
@@ -220,6 +220,7 @@ a, a:hover {
 	<!-- JS here -->
 	<script defer>
 		function btn_submit() {
+			document.getElementById('btn_modify_cancle').style.visibility = 'hidden';
 			const target = document.getElementById('btn_modify');
 			target.disabled = true;
 			target.value = 'Loading';

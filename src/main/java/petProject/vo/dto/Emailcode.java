@@ -32,7 +32,7 @@ public class Emailcode {
 		this.newMemberId = newMemberId;
 	}
 
-	public String random() {
+	public static String random() {
 		Random rand = new Random();
 		String numStr = "";
 

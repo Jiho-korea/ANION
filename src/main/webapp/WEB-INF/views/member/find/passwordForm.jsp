@@ -1,18 +1,10 @@
 <!-- 
 ========================================================================
-파    일    명 : loginFormPage.jsp
+파    일    명 : passwordForm.jsp
 ========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.xx.xx
-작  성  내  용 : 사용자로부터 login 입력받는 폼 페이지
-========================================================================
-수    정    자 : 강지호
-수    정    일 : 2020.11.17
-수  정  내  용 : 디자인 수정
-========================================================================
-수    정    자 : 정세진, 송찬영
-수    정    일 : 2020.11.19
-수  정  내  용 : 자바스크립트 유효성 검증 추가
+작    성    자 : 송찬영
+작    성    일 : 2021.07.3
+작  성  내  용 : 비밀번호를 찾기 위한 ID 입력폼
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
@@ -61,70 +53,80 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+.div-map {
+	position: relative;
+	align-items: center;
+	margin-bottom: 3rem;
+	display: inline-block;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+}
+
+.input-map {
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #f9f9ff;
+	padding: 0 20px;
+}
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="js/bootstrap.js"></script>
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
+	charset="utf-8"></script>
+<script defer
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+	charset="utf-8"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container text-center" id="main">
-		<div class="jumbotron border">
-			<form:form action="${pageContext.request.contextPath}/login"
-				method="post" cssClass="form-signin" modelAttribute="loginRequest">
 
-				<h1 class="display-4">
-					<spring:message code="go.login" />
-				</h1>
+	<div class="container text-center" id="main" style="width: 70%">
+		<h1 class="display-4">
+			<spring:message code="edit.member.password.refresh" />
+		</h1>
 
-				<form:errors />
-				<br>
+		<br>
+		<div style="background: transparent !important"
+			class="jumbotron border">
+			<h2 style="text-align: left">
+				<b><spring:message code="temp.send.email.password" /></b>
+			</h2>
+			<br> <br>
 
-				<label style="margin-top: 20px"> <!--<spring:message code="id" /> -->
-					<form:input path="memberId" cssClass="single-input"
-						placeholder="ID" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'ID'" /> <form:errors path="memberId" />
-				</label>
-				<br>
-				<label> <!--<spring:message code="password" />--> <form:password
-						path="memberPassword" cssClass="single-input"
-						placeholder="Password" onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Password'" /> <form:errors
-						path="memberPassword" />
-				</label>
-				<br>
-				<br>
-				<div class="checkbox mb-3">
-					<form:checkbox path="memory" />
-					<spring:message code="login.memory" />
+			<form:errors />
+
+			<form:form
+				action="${pageContext.request.contextPath}/member/find/password"
+				method="post" cssClass="form-signin" style="display:inline;"
+				modelAttribute="memberIdProfile">
+
+				<div class="div-map">
+					<form:input path="memberId" cssClass="input-map" type="email"
+						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이메일 / Email'" style="width:350px" />
+					<button id="btn_send" class="btn btn-info pull-right" type="submit">
+						<spring:message code="send" />
+					</button>
 				</div>
+				<form:errors path="memberId" />
 
-				<button id="btn_login" class="btn btn-info pull-right" type="submit">
-					<spring:message code="go.login" />
-				</button>
-
-				<br>
-				<br>
-				<p>
-					<a
-						href="${pageContext.request.contextPath}/member/find/passwordForm"
-						style="color: blue;"><spring:message code="password.forgot" /></a>
-				</p>
-
-				<!-- 
-				<a href="${pageContext.request.contextPath}/register/step1"><spring:message
-						code="go.member.register" /></a>  -->
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
-				</p>
+				<hr class="my-4">
+				<h4 style="text-align: left">
+					<a href="${pageContext.request.contextPath}/login"
+						style="color: blue;"><spring:message code="go.login" /></a> | <a
+						href="${pageContext.request.contextPath}/signup/step1"
+						style="color: blue;"><spring:message code="go.register" /></a>
+				</h4>
 			</form:form>
-
 		</div>
 	</div>
 
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -133,11 +135,22 @@
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
 
-
 	<!-- JS here -->
+	<script defer type="text/javascript">
+		function CheckEmail(str) {
+			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			if (!reg_email.test(str)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	</script>
 
 	<script defer
-		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
+		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js">
+		
+	</script>
 	<!-- Jquery, Popper, Bootstrap -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
@@ -197,15 +210,14 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	 $("#btn_login").click(function() {
+	 $("#btn_send").click(function() {
 		if ($("#memberId").val() == "") {
-			alert("이메일을 입력해주세요.");
+			alert("이메일을 입력해주세요.");
 			return false;
-		} else if ($("#memberPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
+		} else if (!CheckEmail($("#memberId").val())) {
+			alert("이메일의 형식이 아닙니다.");
 			return false;
 		}
 	});
 </script>
-
 </html>

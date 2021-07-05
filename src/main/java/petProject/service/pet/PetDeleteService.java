@@ -10,8 +10,14 @@
 
 package petProject.service.pet;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PetDeleteService {
-	int deletePet(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+	int deletePet(@Param("petRegistrationNumber") int petRegistrationNumber, HttpServletRequest request)
+			throws Exception;
+
+	void deleteImageList(@Param("petRegistrationNumber") int petRegistrationNumber, HttpServletRequest request)
+			throws Exception;
 }

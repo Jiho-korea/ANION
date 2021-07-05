@@ -6,8 +6,12 @@
 작    성    일 : 2021.03.20
 작  성  내  용 : emailcode 확인기능 및 email 변경기능
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.03
+수  정  내  용 : checkMemberAuthStatus 메소드 추가
+========================================================================
 */
-package petProject.service.impl.member;
+package petProject.service.impl.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +21,14 @@ import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
-import petProject.service.member.EmailValidService;
+import petProject.exception.MemberNotFoundException;
+import petProject.service.email.EmailValidService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
+import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
 
 @Service("emailValidService")
@@ -33,6 +40,19 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+
+	//DB의 authStatus를 통해 접근 불가 검증 메소드
+	@Override
+	public void checkMemberAuthStatus(Emailcode emailcode) throws Exception {
+		Memberauth memberauth = memberDAO.checkMemberAuthStatus(emailcode);
+
+		if (memberauth == null) {
+			throw new MemberNotFoundException("memberId is not valid");
+		}
+		if (memberauth.getMemberAuthStatus() == 1) {
+			throw new MemberAuthStatusException("authstatus is valid");
+		}
+	}
 
 	// Emailcode의 필드(memberId, emailCode)를 사용하는 메소드
 	@Override

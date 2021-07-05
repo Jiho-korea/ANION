@@ -95,7 +95,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 		Emailcode emailcode = new Emailcode();
 		emailcode.setMemberId(member.getMemberId());
-		emailcode.setEmailCode(emailcode.random());
+		emailcode.setEmailCode(Emailcode.random());
 
 		int cnt = emailcodeDAO.insertEmailcode(emailcode);
 		if (cnt == 0) {

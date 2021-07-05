@@ -35,6 +35,7 @@ import controller.image.ImageListController;
 import controller.member.EmailValidController;
 import controller.member.LoginController;
 import controller.member.LogoutController;
+import controller.member.MemberFindController;
 import controller.member.MemberRegisterController;
 import controller.member.ProfileEditController;
 import controller.pet.PetInfoController;
@@ -188,5 +189,10 @@ public class ControllerConfig {
 	@Bean
 	public EventListController eventListController() {
 		return new EventListController();
+	}
+
+	@Bean
+	public MemberFindController memberFindController() {
+		return new MemberFindController();
 	}
 }

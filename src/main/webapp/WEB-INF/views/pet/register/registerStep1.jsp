@@ -134,7 +134,7 @@
 
 					<div class="div-map" id="default-select">
 						<form:input path="petKind" cssClass="input-map"
-							placeholder="견종 / Kind" name="petKindq" id="petKind"
+							placeholder="견종 / Kind" name="petKind" id="petKind"
 							readonly="true" />
 						<button type="button" onclick="dogmapPopup();"
 							style="border: 0; cursor: pointer; background-color: #f9f9ff;">

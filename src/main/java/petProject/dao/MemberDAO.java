@@ -10,7 +10,6 @@
 수    정    일 : 2020.11.09
 수  정  내  용 : 회원가입 메소드 추가
 ========================================================================
-========================================================================
 수    정    자 : 정세진, 송찬영
 수    정    일 : 2020.11.11
 수  정  내  용 : 아이디 중복확인 메소드 추가
@@ -18,6 +17,10 @@
 수    정    자 : 송찬영
 수    정    일 : 2020.11.17
 수  정  내  용 : 이메일 인증 메소드 추가
+========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.05
+수  정  내  용 : 
 ========================================================================
 */
 package petProject.dao;
@@ -27,7 +30,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
+import petProject.vo.dto.MemberIdProfile;
+import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
 import petProject.vo.request.MemberRegisterRequest;
 
@@ -54,4 +60,7 @@ public interface MemberDAO {
 
 	int selectMemberCount() throws Exception;
 
+	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode) throws Exception;
+
+	MemberIdProfile selectProfileById(@Param("memberId") String memberId) throws Exception;
 }
