@@ -45,7 +45,7 @@ public class PetKindPopupController {
 	SelectKindcodeService selectKindcodeService;
 
 	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
-	@GetMapping(value = { "/petKind/{petKindcode}", "/petKind" })
+	@GetMapping(value = { "/petKind", "/petKind/{petKindcode}" })
 	public String kindPopup1(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
@@ -53,6 +53,7 @@ public class PetKindPopupController {
 		boolean nextPage = kindcodeListService.nextPage(pageNumber);
 
 		try {
+			//kindcodeListPage = PageNumber에 따른 kindcodeList목록
 			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
 
