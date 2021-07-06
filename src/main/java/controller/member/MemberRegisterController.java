@@ -48,9 +48,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import petProject.exception.MailException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
-import petProject.service.ScriptWriter;
 import petProject.service.member.MemberRegisterService;
-import petProject.vo.AuthInfo;
 import petProject.vo.request.MemberRegisterRequest;
 
 @Controller
@@ -68,15 +66,6 @@ public class MemberRegisterController {
 	@RequestMapping("/step1")
 	public String signStep1(MemberRegisterRequest memberRegisterRequest, HttpServletResponse response,
 			HttpServletRequest request, HttpSession session) throws Exception {
-
-		if (session != null) {
-			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-			// 로그인 한 상태에서 회원가입 페이지에는 못가도록 함
-			if (authInfo != null) {
-				ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
-				return null;
-			}
-		}
 
 		return "member/signup/signupForm";
 	}
