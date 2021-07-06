@@ -79,7 +79,8 @@ body {
 -->
 <body>
 	<div class="main_title pt-4 pl-4 mb-3 d-flex align-items-center">
-	<p style="color: white;">비문 등록 이벤트</p></div>
+		<p style="color: white;">비문 등록 이벤트</p>
+	</div>
 	<!-- 
 	<div
 		style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; position: absolute; left: 50px; top: 35px; width: 400px">
@@ -89,7 +90,7 @@ body {
 		교육 및 설명</div>
 	 -->
 	<div class="image-box">
-	<%-- 
+		<%-- 
 	<a
 			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();">
 			<img
@@ -97,8 +98,8 @@ body {
 			style="height: 500px; width: 400px; margin-bottom: 5px;">
 		</a>
 	--%>
-		<a
-			href="#">
+		<a href="javascript:window.close();"
+			onclick="window.open('https://www.facebook.com/groups/3017696248465936')">
 			<img
 			src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
 			style="height: 500px; width: 400px; margin-bottom: 5px;">
