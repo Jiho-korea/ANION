@@ -104,6 +104,15 @@
 				<button id="btn_login" class="btn btn-info pull-right" type="submit">
 					<spring:message code="go.login" />
 				</button>
+
+				<br>
+				<br>
+				<p>
+					<a
+						href="${pageContext.request.contextPath}/member/find/passwordForm"
+						style="color: blue;"><spring:message code="password.forgot" /></a>
+				</p>
+
 				<!-- 
 				<a href="${pageContext.request.contextPath}/register/step1"><spring:message
 						code="go.member.register" /></a>  -->

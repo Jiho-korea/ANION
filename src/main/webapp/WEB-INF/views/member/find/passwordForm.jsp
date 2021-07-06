@@ -1,23 +1,24 @@
 <!-- 
 ========================================================================
-파    일    명 : popup1.jsp
+파    일    명 : passwordForm.jsp
 ========================================================================
-작    성    자 : 임원석
-작    성    일 : 2021.04.30
-작  성  내  용 : 교육 대상자를 위한 팝업페이지
-========================================================================
-수    정    자 : 임원석,정세진
-수    정    일 : 2021.05.03
-수  정  내  용 : 팝업창 하루동안 보지않기 기능 추가
+작    성    자 : 송찬영
+작    성    일 : 2021.07.3
+작  성  내  용 : 비밀번호를 찾기 위한 ID 입력폼
 ========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ANION popup1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width , initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="${pageContext.request.contextPath}/img/favicon.ico">
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -47,90 +48,109 @@
 	href="${pageContext.request.contextPath}/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css">
-</head>
 <style>
-body {
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-attachment: fixed;
-}
-
-.jumbotron {
-	opacity: 0.8;
-}
-
-.image-box {
-	text-align: center;
-	border-bottom: 2px solid lightgray;
-}
-
-.main_title {
+#main {
 	width: 100%;
-	height: 40px;
-	background-color: #7bb47b;
-	border-bottom-width: thin;
-	font-weight: bold;
+	margin-top: 50px;
+}
+
+.div-map {
+	position: relative;
+	align-items: center;
+	margin-bottom: 3rem;
+	display: inline-block;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 100%;
+}
+
+.input-map {
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #f9f9ff;
+	padding: 0 20px;
 }
 </style>
-
-<!-- 
-<body
-	background="${pageContext.request.contextPath}/img/popupBack/pop_back.png">
--->
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
+	charset="utf-8"></script>
+<script defer
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+	charset="utf-8"></script>
+<title><spring:message code="home.title" /></title>
+</head>
 <body>
-	<div class="main_title pt-4 pl-4 mb-3 d-flex align-items-center">
-		<p style="color: white;">비문 등록 이벤트</p>
+	<c:import url="../../included/top.jsp">
+		<c:param value="main" name="type" />
+	</c:import>
+
+	<div class="container text-center" id="main" style="width: 70%">
+		<h1 class="display-4">
+			<spring:message code="edit.member.password.refresh" />
+		</h1>
+
+		<br>
+		<div style="background: transparent !important"
+			class="jumbotron border">
+			<h2 style="text-align: left">
+				<b><spring:message code="temp.send.email.password" /></b>
+			</h2>
+			<br> <br>
+
+			<form:errors />
+
+			<form:form
+				action="${pageContext.request.contextPath}/member/find/password"
+				method="post" cssClass="form-signin" style="display:inline;"
+				modelAttribute="memberProfileRequest">
+
+				<div class="div-map">
+					<form:input path="memberId" cssClass="input-map" type="email"
+						placeholder="이메일 / Email" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '이메일 / Email'" style="width:350px" />
+					<button id="btn_send" class="btn btn-info pull-right" type="submit">
+						<spring:message code="send" />
+					</button>
+				</div>
+				<form:errors path="memberId" />
+
+				<hr class="my-4">
+				<h4 style="text-align: left">
+					<a href="${pageContext.request.contextPath}/login"
+						style="color: blue;"><spring:message code="go.login" /></a> | <a
+						href="${pageContext.request.contextPath}/signup/step1"
+						style="color: blue;"><spring:message code="go.register" /></a>
+				</h4>
+			</form:form>
+		</div>
 	</div>
-	<!-- 
-	<div
-		style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; position: absolute; left: 50px; top: 35px; width: 400px">
-		교육 이벤트 및 참석 제목</div>
-	<div
-		style="text-align: center; color: white; position: absolute; left: 50px; top: 70px; width: 400px">
-		교육 및 설명</div>
-	 -->
-	<div class="image-box">
 
-		<%-- 
-	<a
-			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();">
-			<img
-			src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
-			style="height: 500px; width: 400px; margin-bottom: 5px;">
+	<c:import url="../../included/bottom.jsp">
+		<c:param value="main" name="type" />
+	</c:import>
 
-		</a>
-	--%>
-		<a href="javascript:window.close();"
-			onclick="window.open('https://www.facebook.com/groups/3017696248465936')">
-			<img
-			src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
-			style="height: 500px; width: 400px; margin-bottom: 5px;">
-		</a>
-
+	<!-- Scroll Up -->
+	<div id="back-top">
+		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
-	<!--  
-	<div class="container d-flex justify-content-center mt-5">
-		<a
-			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();"
-			class="btn header-btn d-flex justify-content-center"
-			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
-	</div>
-	-->
 
-	<div style="position: fixed; right: 5px; bottom: 4px;">
-		<form name="frm" class="d-flex align-items-center">
-			<input id="closeCheck" type="checkbox" name="Notice"
-				onclick="check()"> <a style="font-size: 13px">하루동안 열지 않음</a>
-			&nbsp;<input type=button value="닫기" onclick="closeWin()"
-				style="width: 30pt; height: 20pt; font-size: 13px"
-				class="d-flex align-items-center">
-
-		</form>
-	</div>
 	<!-- JS here -->
+	<script defer type="text/javascript">
+		function CheckEmail(str) {
+			var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			if (!reg_email.test(str)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	</script>
 
 	<script defer
-		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
+		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js">
+		
+	</script>
 	<!-- Jquery, Popper, Bootstrap -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
@@ -187,35 +207,17 @@ body {
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
-
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
-<script defer type="text/javascript">
-	var width = window.outerWidth;
-	var height = window.outerHeight;
-	function popResizer() {
-
-		window.resizeTo(width, height);
-	};
-
-	popResizer();
-	$(window).resize(popResizer);
-
-	function setCookie(name, value, expiredays) {
-		var todayDate = new Date();
-		todayDate.setDate(todayDate.getDate() + expiredays);
-		document.cookie = name + "=" + escape(value) + "; path=/; expires="
-				+ todayDate.toGMTString() + ";"
-	}
-
-	function closeWin() {
-		self.close();
-	}
-
-	function check() {
-		setCookie("Notice", "done", 1);
-		self.close();
-	}
+<script defer type="text/javascript" charset="utf-8">
+	 $("#btn_send").click(function() {
+		if ($("#memberId").val() == "") {
+			alert("이메일을 입력해주세요.");
+			return false;
+		} else if (!CheckEmail($("#memberId").val())) {
+			alert("이메일의 형식이 아닙니다.");
+			return false;
+		}
+	});
 </script>
-
-
 </html>
