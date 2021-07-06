@@ -60,7 +60,7 @@
 	</insert>
      -->
      
-    <select id="selectProfileById" parameterType="String" resultType="memberIdProfile">
+    <select id="selectProfileById" parameterType="String" resultType="member">
        SELECT "MEMBER_ID", "MEMBER_NAME", "MEMBER_REGISTRATION_DATE"
        FROM "member" 
        WHERE "MEMBER_ID" = #{memberId }
@@ -75,8 +75,6 @@
 		#{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
 	</insert>
 	
-	
-
 	<update id="updateAuthStatus" parameterType="String">
 		update "member"
 		set

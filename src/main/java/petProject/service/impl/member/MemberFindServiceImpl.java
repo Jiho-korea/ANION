@@ -16,23 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.MemberDAO;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.member.MemberFindService;
-import petProject.vo.dto.MemberIdProfile;
+import petProject.vo.dto.Member;
 
 @Service("memberFindService")
 @Transactional
 public class MemberFindServiceImpl implements MemberFindService {
 
-   @Autowired
-   MemberDAO memberDAO;
+	@Autowired
+	MemberDAO memberDAO;
 
-   @Override
-   public MemberIdProfile selectProfileById(String memberId) throws Exception {
-	      MemberIdProfile memberIdProfile = memberDAO.selectProfileById(memberId);
+	@Override
+	public Member selectProfileById(String memberId) throws Exception {
+		Member member = memberDAO.selectProfileById(memberId);
 
-      if (memberIdProfile == null) {
-         throw new MemberNotFoundException("Invalid memberId");
-      }
-      return memberIdProfile;
-   }
+		if (member == null) {
+			throw new MemberNotFoundException("Invalid memberId");
+		}
+		return member;
+	}
 
 }

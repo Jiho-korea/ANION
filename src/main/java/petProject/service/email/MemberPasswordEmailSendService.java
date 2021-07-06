@@ -11,11 +11,11 @@ package petProject.service.email;
 
 import javax.servlet.http.HttpServletRequest;
 
-import petProject.vo.dto.MemberIdProfile;
+import petProject.vo.dto.Member;
 
 public interface MemberPasswordEmailSendService {
 
-   boolean sendPassword(MemberIdProfile memberIdProfile, String tempPassword, HttpServletRequest request,
+   boolean sendPassword(Member member, String tempPassword, HttpServletRequest request,
          boolean isHtml) throws Exception;
 
 }

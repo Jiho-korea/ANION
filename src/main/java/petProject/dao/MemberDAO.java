@@ -32,7 +32,6 @@ import org.apache.ibatis.annotations.Param;
 
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
-import petProject.vo.dto.MemberIdProfile;
 import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
 import petProject.vo.request.MemberRegisterRequest;
@@ -62,5 +61,5 @@ public interface MemberDAO {
 
 	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode) throws Exception;
 
-	MemberIdProfile selectProfileById(@Param("memberId") String memberId) throws Exception;
+	Member selectProfileById(@Param("memberId") String memberId) throws Exception;
 }

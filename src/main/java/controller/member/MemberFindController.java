@@ -29,7 +29,8 @@ import petProject.service.ScriptWriter;
 import petProject.service.member.ChangePasswordService;
 import petProject.service.member.MemberFindService;
 import petProject.vo.dto.Emailcode;
-import petProject.vo.dto.MemberIdProfile;
+import petProject.vo.dto.Member;
+import petProject.vo.request.MemberProfileRequest;
 
 @Controller
 @RequestMapping("/member/find")
@@ -42,7 +43,7 @@ public class MemberFindController {
 	ChangePasswordService changePasswordService;
 
 	@GetMapping("/passwordForm")
-	public String findPasswordForm(MemberIdProfile memberIdProfile) {
+	public String findPasswordForm(MemberProfileRequest memberProfileRequest) {
 		return "member/find/passwordForm";
 	}
 
@@ -66,15 +67,15 @@ public class MemberFindController {
 	}
 
 	@PostMapping("/password")
-	public String findPassword(@Valid MemberIdProfile memberIdProfile, Errors error, Model model,
+	public String findPassword(@Valid MemberProfileRequest memberProfileRequest, Errors error, Model model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String tempPassword = Emailcode.random();
 		if (error.hasErrors()) {
 			return "member/find/passwordForm";
 		}
 
 		try {
-			String tempPassword = Emailcode.random();
-			MemberIdProfile result = memberFindService.selectProfileById(memberIdProfile.getMemberId());
+			Member result = memberFindService.selectProfileById(memberProfileRequest.getMemberId());
 
 			changePasswordService.updateTempPassword(result, tempPassword, request, true);
 

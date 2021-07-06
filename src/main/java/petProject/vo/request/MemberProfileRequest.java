@@ -1,20 +1,20 @@
 /*
 ========================================================================
-파    일    명 : MemberIdProfile.java
+파    일    명 : MemberProfileRequest.java
 ========================================================================
 작    성    자 : 송찬영
 작    성    일 : 2021.07.03
 작  성  내  용 : id, name, registrationDate의 필드를 갖는 클래스
 ========================================================================
 */
-package petProject.vo.dto;
+package petProject.vo.request;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class MemberIdProfile implements Serializable {
+public class MemberProfileRequest implements Serializable {
 
 	/**
 	* 
@@ -25,11 +25,11 @@ public class MemberIdProfile implements Serializable {
 	private String memberName;
 	private Date memberRegistrationDate;
 
-	public MemberIdProfile() {
+	public MemberProfileRequest() {
 		super();
 	}
 
-	public MemberIdProfile(String memberId, String memberName, Date memberRegistrationDate) {
+	public MemberProfileRequest(String memberId, String memberName, Date memberRegistrationDate) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;

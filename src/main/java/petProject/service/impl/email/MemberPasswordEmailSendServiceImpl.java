@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.service.email.MailSendService;
 import petProject.service.email.MemberPasswordEmailSendService;
-import petProject.vo.dto.MemberIdProfile;
+import petProject.vo.dto.Member;
 
 @Service("memberPasswordEmailSendService")
 @Transactional
@@ -30,7 +30,7 @@ public class MemberPasswordEmailSendServiceImpl implements MemberPasswordEmailSe
    MailSendService mailSendService;
 
    @Override
-   public boolean sendPassword(MemberIdProfile memberIdProfile, String tempPassword, HttpServletRequest request,
+   public boolean sendPassword(Member member, String tempPassword, HttpServletRequest request,
          boolean isHtml) throws Exception {
       String mailHead = null;
       String mailContent = null;
@@ -39,7 +39,7 @@ public class MemberPasswordEmailSendServiceImpl implements MemberPasswordEmailSe
       mailContent = tempPassword + "<br><a href='" + url + request.getContextPath() + "/login"
             + "'target='_blank'>[ANION]</a>";
 
-      mailSendService.sendMail(memberIdProfile.getMemberId(), memberIdProfile.getMemberName(), mailHead, mailContent,
+      mailSendService.sendMail(member.getMemberId(), member.getMemberName(), mailHead, mailContent,
             request, isHtml);
       return true;
    }

@@ -103,7 +103,7 @@
 			<form:form
 				action="${pageContext.request.contextPath}/member/find/password"
 				method="post" cssClass="form-signin" style="display:inline;"
-				modelAttribute="memberIdProfile">
+				modelAttribute="memberProfileRequest">
 
 				<div class="div-map">
 					<form:input path="memberId" cssClass="input-map" type="email"

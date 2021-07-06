@@ -11,9 +11,9 @@ package petProject.service.member;
 
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.dto.MemberIdProfile;
+import petProject.vo.dto.Member;
 
 public interface MemberFindService {
 	
-	MemberIdProfile selectProfileById(@Param("memberId") String memberId) throws Exception;
+	Member selectProfileById(@Param("memberId") String memberId) throws Exception;
 }
