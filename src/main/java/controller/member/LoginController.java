@@ -10,10 +10,6 @@
 수    정    일 : 2020.11.17
 수  정  내  용 : 이메일 검증 예외처리 추가
 ========================================================================
-수    정    자 : 송찬영
-수    정    일 : 2021.03.20
-수  정  내  용 : 인증되지 않은 사용자를 구분하기위해 임시 세션(tempAuth) 사용
-========================================================================
 =============================== 함  수  설  명  ===============================
 loginForm : 아이디 기억하기 구현하는 함수
 login : 로그인 할 때 세션 생성후 로그인
@@ -29,7 +25,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
-import petProject.service.member.EmailValidService;
+import petProject.service.email.EmailValidService;
 import petProject.service.member.LoginService;
 import petProject.vo.AuthInfo;
 import petProject.vo.request.LoginRequest;
@@ -84,7 +79,7 @@ public class LoginController {
 	}
 
 	@PostMapping()
-	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session, Model model,
+	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			@CookieValue(value = "popup01", required = false) Cookie cookie_popup01) {
 		if (errors.hasErrors()) {
@@ -94,10 +89,6 @@ public class LoginController {
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
-
-			if (authInfo.getMemberauth().getMemberAuthStatus() == 2) {
-				session.setAttribute("tempAuth", true);
-			}
 
 			session.setAttribute("login", authInfo);
 
@@ -128,8 +119,7 @@ public class LoginController {
 			e.printStackTrace();
 			return "login/loginFormPage";
 		} catch (MemberAuthStatusException e) {
-			session.setAttribute("tempAuth", true);
-			return "redirect:/email/valid?memberId=" + loginRequest.getMemberId();
+			return "redirect:/email/validForm?memberId=" + loginRequest.getMemberId();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "login/loginFormPage";

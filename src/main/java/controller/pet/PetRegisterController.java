@@ -17,12 +17,17 @@
 수    정    자 : 송찬영
 수    정    일 : 2021.05.15
 수  정  내  용 : 팝업창용 쿠키 생성
-=============================== 함  수  설  명  ===============================
+=========================================================================
 수    정    자 : 강지호
 수    정    일 : 2021.06.24
 수  정  내  용 : double submit 방지 코드 추가
+=========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.03
+수  정  내  용 : 서버 검증시 팝업창의 허용 쿠키 사라짐 해결
 =============================== 함  수  설  명  ===============================
 uploadFile : 파일 업로드 방식 설정하는 함수
+=============================== 함  수  설  명  ===============================
 */
 package controller.pet;
 
@@ -146,6 +151,11 @@ public class PetRegisterController {
 
 				String today = simpleDateFormat.format(new Date());
 				model.addAttribute("today", today);
+
+				Cookie petKind = new Cookie("petKind", "true");
+				petKind.setPath(request.getContextPath() + "/popup/petKind");
+				petKind.setMaxAge(60 * 60 * 24 * 1);
+				response.addCookie(petKind);
 
 				/*
 				 * kindcodeList = kindcodeListService.selectKindcodeList();
