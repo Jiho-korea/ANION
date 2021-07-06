@@ -58,16 +58,6 @@ public class LoginController {
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
 
-		String memberId = (String) session.getAttribute("memberId");
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-
-		if (memberId != null) {
-			session.removeAttribute("memberId");
-			if (authInfo != null) {
-				session.removeAttribute("login");
-			}
-		}
-
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
