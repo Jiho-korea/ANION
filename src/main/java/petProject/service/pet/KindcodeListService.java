@@ -21,6 +21,8 @@ public interface KindcodeListService {
 
 	List<Kindcode> selectKindcodeList() throws Exception;
 
+	List<String> searchPetKindList(String petKindWord) throws Exception;
+
 	List<Kindcode> selectKindcodeListPage(Integer pageNumber) throws Exception;
 
 	boolean nextPage(Integer pageNuber) throws Exception;

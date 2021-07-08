@@ -95,6 +95,10 @@ a:hover {
 
 		</c:import>
 	</div>
+	
+	<div class="fixed" id="petKindSearchList">
+		<c:import url="petKindSearchAjax.jsp" />
+	</div>
 
 	<div class="map">
 
@@ -301,6 +305,30 @@ a:hover {
 			var html = jQuery('<div>').html(result);
 			var contents = html.find("div#kindcodeListAjax").html();
 			$("#kindcodeListSelect").html(contents);
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log("에러");
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+		});
+	}
+	
+	function searchFunction() {
+		var formData = new FormData();
+		const petKindWord = document.getElementById('petKindSearch');
+		formData.append("petKindWord", petKindWord.value);
+		$.ajax({
+			url : "${pageContext.request.contextPath}/popup/petKind",
+			type : "post",
+			dataType : "text",
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false
+		}).done(function(result) {
+			var html = jQuery('<div>').html(result);
+			var contents = html.find("div#petKindSearchAjax").html();
+			$("#petKindSearchList").html(contents);
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log("에러");
 			console.log(jqXHR);

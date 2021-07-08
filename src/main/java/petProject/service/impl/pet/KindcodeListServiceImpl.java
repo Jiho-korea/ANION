@@ -38,6 +38,12 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 	}
 
 	@Override
+	public List<String> searchPetKindList(String petKindWord) throws Exception {
+		List<String> kindcodeList = kindcodeDAO.searchPetKindList(petKindWord);
+		return kindcodeList;
+	}
+	
+	@Override
 	public List<Kindcode> selectKindcodeListPage(Integer pageNumber) throws Exception {
 		if (pageNumber == 0) {
 			throw new NonExistentPageException("non-existent page of list" + pageNumber);

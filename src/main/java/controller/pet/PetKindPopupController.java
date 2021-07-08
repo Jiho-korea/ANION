@@ -53,7 +53,7 @@ public class PetKindPopupController {
 		boolean nextPage = kindcodeListService.nextPage(pageNumber);
 
 		try {
-			//kindcodeListPage = PageNumber에 따른 kindcodeList목록
+			// kindcodeListPage = PageNumber에 따른 kindcodeList목록
 			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
 
@@ -88,11 +88,21 @@ public class PetKindPopupController {
 	@PostMapping("/petKind")
 	public String kindPopup2(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+			@RequestParam(value = "petKindWord", required = false) String petKindWord, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
 
 		try {
 			boolean nextPage = kindcodeListService.nextPage(pageNumber);
-			
+
+			if(petKindWord != null) {
+				List<String> searchKindcodeList = kindcodeListService.searchPetKindList(petKindWord);
+				
+				model.addAttribute("searchKindcodeList", searchKindcodeList);
+				
+				for(String petKind : searchKindcodeList) {
+					System.out.println(petKind);
+				}
+			}
 			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
 
