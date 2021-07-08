@@ -44,26 +44,29 @@ public class PetKindPopupController {
 
 	@Resource(name = "selectKindcodeService")
 	SelectKindcodeService selectKindcodeService;
-	
+
 	static PetSearchRequest petSearchRequest = new PetSearchRequest();
 
 	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
 	@GetMapping(value = { "/petKind", "/petKind/{petKindcode}" })
 	public String kindPopup1(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+			@RequestParam(value = "petKindWord", required = false, defaultValue = "") String petKindWord, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws Exception {
 
 		boolean nextPage = kindcodeListService.nextPage(pageNumber);
 
+		petSearchRequest.setPageNumber(pageNumber);
+		petSearchRequest.setPetKindWord(petKindWord);
 		try {
 			// kindcodeListPage = PageNumber에 따른 kindcodeList목록
-			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
+			List<Kindcode> searchKindcodeList = kindcodeListService.searchPetKindList(petSearchRequest);
 
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("nextPage", nextPage);
 			model.addAttribute("kindcodeList", kindcodeList);
-			model.addAttribute("kindcodeListPage", kindcodeListPage);
+			model.addAttribute("searchKindcodeList", searchKindcodeList);
 
 			// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
 			if (petKindcode != null) {
@@ -91,26 +94,21 @@ public class PetKindPopupController {
 	@PostMapping("/petKind")
 	public String kindPopup2(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-			@RequestParam(value = "petKindWord", required = false) String petKindWord, HttpServletRequest request,
-			HttpServletResponse response, Model model) throws Exception {
+			@RequestParam(value = "petKindWord", required = false, defaultValue = "") String petKindWord,
+			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		petSearchRequest.setPageNumber(pageNumber);
+		petSearchRequest.setPetKindWord(petKindWord);
+
 		try {
 			boolean nextPage = kindcodeListService.nextPage(pageNumber);
 
-			petSearchRequest.setPageNumber(pageNumber);
-			petSearchRequest.setPetKindWord(petKindWord);
-			
-			if(petKindWord != null) {
-				List<Kindcode> searchKindcodeList = kindcodeListService.searchPetKindList(petSearchRequest);
-				
-				model.addAttribute("searchKindcodeList", searchKindcodeList);
-			}
-			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
+			List<Kindcode> searchKindcodeList = kindcodeListService.searchPetKindList(petSearchRequest);
 
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("nextPage", nextPage);
 			model.addAttribute("kindcodeList", kindcodeList);
-			model.addAttribute("kindcodeListPage", kindcodeListPage);
+			model.addAttribute("searchKindcodeList", searchKindcodeList);
 			model.addAttribute("selectOpen", true);
 
 			// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐

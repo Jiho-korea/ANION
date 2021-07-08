@@ -14,7 +14,7 @@
 		select "PET_KIND"
 		from "kindcode"
 		where "PET_KIND" like CONCAT('%',#{petSearchRequest.petKindWord},'%')
-		order by "PET_KIND_CODE" ASC LIMIT 8 OFFSET #{petSearchRequest.pageNumber}
+		order by "PET_KIND_CODE" ASC LIMIT 8 OFFSET (#{petSearchRequest.pageNumber}-1)*8
 	</select>
 	
 	<select id="selectKindcodeListPage" parameterType="Integer" resultMap="kindcodeResultMap">

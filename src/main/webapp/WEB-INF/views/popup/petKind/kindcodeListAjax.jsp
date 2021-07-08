@@ -29,7 +29,7 @@
 		<c:if test="${!empty petKind}">
 			<option value="${petKind }"></option>
 		</c:if>
-		<c:forEach var="kindcode" items="${kindcodeListPage}"
+		<c:forEach var="kindcode" items="${searchKindcodeList}"
 			varStatus="status">
 			<option value="${kindcode.petKind}">${kindcode.petKind}</option>
 		</c:forEach>
@@ -46,18 +46,10 @@
 			<ul class="list">
 				<li data-value="견종 / Dog breed" class="option selected focus"
 					hidden="">견종 / Dog breed</li>
-				<c:if test="${empty searchKindcodeList }">
-					<c:forEach var="kindcode" items="${kindcodeListPage}"
-						varStatus="status">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:forEach>
-				</c:if>
-				<c:if test="${!empty searchKindcodeList }">
-					<c:forEach var="kindcode" items="${searchKindcodeList}"
-						varStatus="status">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:forEach>
-				</c:if>
+				<c:forEach var="kindcode" items="${searchKindcodeList}"
+					varStatus="status">
+					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+				</c:forEach>
 
 				<div class="d-flex justify-content-center">
 					<c:if test="${pageNumber ne 1}">
@@ -93,18 +85,10 @@
 			<ul class="list">
 				<li data-value="견종 / Dog breed" class="option selected focus"
 					hidden="">견종 / Dog breed</li>
-				<c:if test="${empty searchKindcodeList }">
-					<c:forEach var="kindcode" items="${kindcodeListPage}"
-						varStatus="status">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:forEach>
-				</c:if>
-				<c:if test="${!empty searchKindcodeList }">
-					<c:forEach var="kindcode" items="${searchKindcodeList}"
-						varStatus="status">
-						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-					</c:forEach>
-				</c:if>
+				<c:forEach var="kindcode" items="${searchKindcodeList}"
+					varStatus="status">
+					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+				</c:forEach>
 
 				<div class="container d-flex justify-content-center">
 					<c:if test="${pageNumber ne 1}">
