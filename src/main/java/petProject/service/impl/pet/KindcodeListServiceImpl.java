@@ -23,6 +23,7 @@ import petProject.dao.KindcodeDAO;
 import petProject.exception.NonExistentPageException;
 import petProject.service.pet.KindcodeListService;
 import petProject.vo.dto.Kindcode;
+import petProject.vo.request.PetSearchRequest;
 
 @Service("kindcodeListService")
 @Transactional
@@ -38,8 +39,8 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 	}
 
 	@Override
-	public List<String> searchPetKindList(String petKindWord) throws Exception {
-		List<String> kindcodeList = kindcodeDAO.searchPetKindList(petKindWord);
+	public List<Kindcode> searchPetKindList(PetSearchRequest petSearchRequest) throws Exception {
+		List<Kindcode> kindcodeList = kindcodeDAO.searchPetKindList(petSearchRequest);
 		return kindcodeList;
 	}
 	

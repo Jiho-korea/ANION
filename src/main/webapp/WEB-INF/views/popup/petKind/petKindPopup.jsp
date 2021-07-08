@@ -91,13 +91,7 @@ a:hover {
 <body style="overflow-y: auto; overflow-x: hidden;">
 
 	<div class="fixed" id="kindcodeListSelect">
-		<c:import url="kindcodeListAjax.jsp">
-
-		</c:import>
-	</div>
-	
-	<div class="fixed" id="petKindSearchList">
-		<c:import url="petKindSearchAjax.jsp" />
+		<c:import url="kindcodeListAjax.jsp" />
 	</div>
 
 	<div class="map">
@@ -119,18 +113,18 @@ a:hover {
 							<span class="current">미국 / United States of America</span>
 						</header>
 						<main class="map__marker-info-main">
-						<div class="row">
-							<c:forEach var="kindcode" items="${kindcodeList}"
-								varStatus="status">
-								<c:if test="${kindcode.petKindHabitat eq 'US' }">
-									<div class="col-md-6">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-									</div>
-								</c:if>
-							</c:forEach>
-						</div>
+							<div class="row">
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'US' }">
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -145,19 +139,19 @@ a:hover {
 							<span class="current">아프리카 / Africa</span>
 						</header>
 						<main class="map__marker-info-main">
-						<div class="row">
-							<c:forEach var="kindcode" items="${kindcodeList}"
-								varStatus="status">
-								<c:if test="${kindcode.petKindHabitat eq 'AF'}">
-									<div class="col-md-6">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-									</div>
-									<br>
-								</c:if>
-							</c:forEach>
-						</div>
+							<div class="row">
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'AF'}">
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
+										<br>
+									</c:if>
+								</c:forEach>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -172,18 +166,18 @@ a:hover {
 							<span class="current">한국 / Korea</span>
 						</header>
 						<main class="map__marker-info-main">
-						<div class="row">
-							<c:forEach var="kindcode" items="${kindcodeList}"
-								varStatus="status">
-								<c:if test="${kindcode.petKindHabitat eq 'KR' }">
-									<div class="col-md-6">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-									</div>
-								</c:if>
-							</c:forEach>
-						</div>
+							<div class="row">
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'KR' }">
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -198,18 +192,18 @@ a:hover {
 							<span class="current">일본 / Japan</span>
 						</header>
 						<main class="map__marker-info-main">
-						<div class="row">
-							<c:forEach var="kindcode" items="${kindcodeList}"
-								varStatus="status">
-								<c:if test="${kindcode.petKindHabitat eq 'JP' }">
-									<div class="col-md-6">
-										<a
-											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
-											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
-									</div>
-								</c:if>
-							</c:forEach>
-						</div>
+							<div class="row">
+								<c:forEach var="kindcode" items="${kindcodeList}"
+									varStatus="status">
+									<c:if test="${kindcode.petKindHabitat eq 'JP' }">
+										<div class="col-md-6">
+											<a
+												href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+												data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</main>
 					</div>
 				</div></li>
@@ -312,31 +306,32 @@ a:hover {
 			console.log(errorThrown);
 		});
 	}
-	
+
 	function searchFunction() {
 		var formData = new FormData();
 		const petKindWord = document.getElementById('petKindSearch');
 		formData.append("petKindWord", petKindWord.value);
-		$.ajax({
-			url : "${pageContext.request.contextPath}/popup/petKind",
-			type : "post",
-			dataType : "text",
-			data : formData,
-			contentType : false,
-			processData : false,
-			cache : false
-		}).done(function(result) {
-			var html = jQuery('<div>').html(result);
-			var contents = html.find("div#petKindSearchAjax").html();
-			$("#petKindSearchList").html(contents);
-		}).fail(function(jqXHR, textStatus, errorThrown) {
-			console.log("에러");
-			console.log(jqXHR);
-			console.log(textStatus);
-			console.log(errorThrown);
-		});
+		setTimeout(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/popup/petKind",
+				type : "post",
+				dataType : "text",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false
+			}).done(function(result) {
+				var html = jQuery('<div>').html(result);
+				var contents = html.find("div#kindcodeListAjax").html();
+				$("#kindcodeListSelect").html(contents);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				console.log("에러");
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(errorThrown);
+			});
+		}, 500);
 	}
-
 </script>
 </html>
 <!-- 

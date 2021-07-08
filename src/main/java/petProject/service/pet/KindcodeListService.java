@@ -16,12 +16,13 @@ package petProject.service.pet;
 import java.util.List;
 
 import petProject.vo.dto.Kindcode;
+import petProject.vo.request.PetSearchRequest;
 
 public interface KindcodeListService {
 
 	List<Kindcode> selectKindcodeList() throws Exception;
 
-	List<String> searchPetKindList(String petKindWord) throws Exception;
+	List<Kindcode> searchPetKindList(PetSearchRequest petSearchRequest) throws Exception;
 
 	List<Kindcode> selectKindcodeListPage(Integer pageNumber) throws Exception;
 

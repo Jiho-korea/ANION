@@ -20,33 +20,44 @@
 }
 </style>
 <div id="kindcodeListAjax">
-	<select style="display: none;" id="childKind" name="childKind">
-		<c:if test="${empty kindcode}">
+
+	<input id="petKindSearch" type="text" onKeyup="searchFunction()" /> <select
+		style="display: none;" id="childKind" name="childKind">
+		<c:if test="${empty petKind}">
 			<option value=""></option>
 		</c:if>
-		<c:if test="${!empty kindcode}">
-			<option value="${kindcode.petKind }"></option>
+		<c:if test="${!empty petKind}">
+			<option value="${petKind }"></option>
 		</c:if>
 		<c:forEach var="kindcode" items="${kindcodeListPage}"
 			varStatus="status">
 			<option value="${kindcode.petKind}">${kindcode.petKind}</option>
 		</c:forEach>
 	</select>
+
 	<c:if test="${empty selectOpen}">
 		<div class="nice-select" tabindex="0">
-			<c:if test="${empty kindcode}">
+			<c:if test="${empty petKind}">
 				<span class="current">견종 / Dog breed</span>
 			</c:if>
-			<c:if test="${not empty kindcode}">
-				<span class="current">${kindcode.petKind }</span>
+			<c:if test="${not empty petKind}">
+				<span class="current">${petKind }</span>
 			</c:if>
 			<ul class="list">
 				<li data-value="견종 / Dog breed" class="option selected focus"
 					hidden="">견종 / Dog breed</li>
-				<c:forEach var="kindcode" items="${kindcodeListPage}"
-					varStatus="status">
-					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-				</c:forEach>
+				<c:if test="${empty searchKindcodeList }">
+					<c:forEach var="kindcode" items="${kindcodeListPage}"
+						varStatus="status">
+						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					</c:forEach>
+				</c:if>
+				<c:if test="${!empty searchKindcodeList }">
+					<c:forEach var="kindcode" items="${searchKindcodeList}"
+						varStatus="status">
+						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					</c:forEach>
+				</c:if>
 
 				<div class="d-flex justify-content-center">
 					<c:if test="${pageNumber ne 1}">
@@ -73,19 +84,27 @@
 
 	<c:if test="${!empty selectOpen}">
 		<div class="nice-select open" tabindex="0">
-			<c:if test="${empty kindcode}">
+			<c:if test="${empty petKind}">
 				<span class="current">견종 / Dog breed</span>
 			</c:if>
-			<c:if test="${not empty kindcode}">
+			<c:if test="${not empty petKind}">
 				<span class="current">${kindcode.petKind }</span>
 			</c:if>
 			<ul class="list">
 				<li data-value="견종 / Dog breed" class="option selected focus"
 					hidden="">견종 / Dog breed</li>
-				<c:forEach var="kindcode" items="${kindcodeListPage}"
-					varStatus="status">
-					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
-				</c:forEach>
+				<c:if test="${empty searchKindcodeList }">
+					<c:forEach var="kindcode" items="${kindcodeListPage}"
+						varStatus="status">
+						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					</c:forEach>
+				</c:if>
+				<c:if test="${!empty searchKindcodeList }">
+					<c:forEach var="kindcode" items="${searchKindcodeList}"
+						varStatus="status">
+						<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					</c:forEach>
+				</c:if>
 
 				<div class="container d-flex justify-content-center">
 					<c:if test="${pageNumber ne 1}">
@@ -109,7 +128,6 @@
 			</ul>
 		</div>
 	</c:if>
-
 
 	&nbsp;&nbsp;
 	<button type="button"
