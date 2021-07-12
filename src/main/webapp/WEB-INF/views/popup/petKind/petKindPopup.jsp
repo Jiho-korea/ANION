@@ -71,7 +71,7 @@ body {
 .fixed {
 	width: 100%;
 	position: relative;
-	margin-left: 300px;
+	margin-left: 180px;
 	align-items: center;
 	margin-bottom: 3rem;
 	display: -ms-flexbox;
@@ -91,9 +91,7 @@ a:hover {
 <body style="overflow-y: auto; overflow-x: hidden;">
 
 	<div class="fixed" id="kindcodeListSelect">
-		<c:import url="kindcodeListAjax.jsp">
-
-		</c:import>
+		<c:import url="kindcodeListAjax.jsp" />
 	</div>
 
 	<div class="map">
@@ -288,7 +286,11 @@ a:hover {
 
 	function pagingFunction(pageNumber) {
 		var formData = new FormData(); //formData 객체 생성
+		const petKindWord = document.getElementById('petKindSearch').value;
+
 		formData.append("pageNumber", pageNumber);
+		formData.append("petKindWord", petKindWord);
+
 		$.ajax({
 			url : "${pageContext.request.contextPath}/popup/petKind",
 			type : "post",
@@ -309,6 +311,35 @@ a:hover {
 		});
 	}
 
+	function searchFunction() {
+		var formData = new FormData();
+		const petKindWord = document.getElementById('petKindSearch').value;
+
+		formData.append("petKindWord", petKindWord);
+
+		if (petKindWord.length > 1) {
+			setTimeout(function() {
+				$.ajax({
+					url : "${pageContext.request.contextPath}/popup/petKind",
+					type : "post",
+					dataType : "text",
+					data : formData,
+					contentType : false,
+					processData : false,
+					cache : false
+				}).done(function(result) {
+					var html = jQuery('<div>').html(result);
+					var contents = html.find("div#kindcodeListAjax").html();
+					$("#kindcodeListSelect").html(contents);
+				}).fail(function(jqXHR, textStatus, errorThrown) {
+					console.log("에러");
+					console.log(jqXHR);
+					console.log(textStatus);
+					console.log(errorThrown);
+				});
+			}, 1250);
+		}
+	}
 </script>
 </html>
 <!-- 
