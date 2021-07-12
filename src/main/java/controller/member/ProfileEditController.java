@@ -78,10 +78,7 @@ public class ProfileEditController {
 		try {
 			changeProfileService.changeId(changeIdCommand, authInfo, request);
 
-			authInfo.getMemberauth().setMemberAuthStatus(2); // what is this?
-
-			session.setAttribute("tempAuth", true); // what is this?
-			// model.addAttribute("update", true); // what is this?
+			authInfo.getMemberauth().setMemberAuthStatus(2);
 
 			Cookie cookie_success_update_member_id = new Cookie("successUpdateMemberId", changeIdCommand.getMemberId());
 			cookie_success_update_member_id.setPath("/");

@@ -72,20 +72,13 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	}
 
 	@Override
-	public int selectById(String memberId) throws Exception {
-		int result = 0;
-		
+	public void selectById(String memberId) throws Exception {
 		int member_cnt = memberDAO.selectByIdFromMember(memberId);
 		int emailcode_cnt = memberDAO.selectByIdFromEmailcode(memberId);
 		
 		if (member_cnt != 0 || emailcode_cnt != 0) {
-			result = 1;
-		}
-		
-		if (result != 0) {
 			throw new MemberDuplicateException("duplicate memberId");
 		}
-		return result;
 	}
 
 	@Override
