@@ -31,8 +31,10 @@ public interface KindcodeDAO {
 
 	List<Kindcode> selectKindcodeList() throws Exception;
 
+	List<Kindcode> nextPage(@Param("petSearchRequest") PetSearchRequest petSearchRequest) throws Exception;
+
 	List<Kindcode> searchPetKindList(@Param("petSearchRequest") PetSearchRequest petSearchRequest) throws Exception;
-	
+
 	Kindcode selectKindcode(@Param("kindcode") String petKindcode) throws Exception;
 
 	int insertKindcode(Kindcode kindcode) throws Exception;
@@ -44,4 +46,5 @@ public interface KindcodeDAO {
 	int updateKindcode(Kindcode kindcode) throws Exception;
 
 	int deleteKindcode(String petKindcode) throws Exception;
+
 }
