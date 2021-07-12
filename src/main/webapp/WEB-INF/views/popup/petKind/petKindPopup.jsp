@@ -71,7 +71,7 @@ body {
 .fixed {
 	width: 100%;
 	position: relative;
-	margin-left: 300px;
+	margin-left: 180px;
 	align-items: center;
 	margin-bottom: 3rem;
 	display: -ms-flexbox;
@@ -286,7 +286,6 @@ a:hover {
 
 	function pagingFunction(pageNumber) {
 		var formData = new FormData(); //formData 객체 생성
-
 		const petKindWord = document.getElementById('petKindSearch').value;
 
 		formData.append("pageNumber", pageNumber);
@@ -314,7 +313,6 @@ a:hover {
 
 	function searchFunction() {
 		var formData = new FormData();
-
 		const petKindWord = document.getElementById('petKindSearch').value;
 
 		formData.append("petKindWord", petKindWord);
@@ -339,7 +337,7 @@ a:hover {
 					console.log(textStatus);
 					console.log(errorThrown);
 				});
-			}, 1500);
+			}, 1250);
 		}
 	}
 </script>

@@ -22,7 +22,8 @@
 <div id="kindcodeListAjax">
 
 	<input id="petKindSearch" type="text" onKeyup="searchFunction()"
-		value="${petKindWord }" /> <select style="display: none;"
+		class="single-input" style="width: 200px;" value="${petKindWord }"
+		placeholder="Search..." /> &nbsp;<select style="display: none;"
 		id="childKind" name="childKind">
 		<c:if test="${empty petKind}">
 			<option value=""></option>
