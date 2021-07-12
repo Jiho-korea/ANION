@@ -24,5 +24,5 @@ public interface KindcodeListService {
 
 	List<Kindcode> searchPetKindList(PetSearchRequest petSearchRequest) throws Exception;
 
-	boolean nextPage(Integer pageNuber) throws Exception;
+	boolean nextPage(PetSearchRequest petSearchRequest) throws Exception;
 }
