@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import petProject.dao.KindcodeDAO;
 import petProject.exception.NonExistentKindcodeException;
 import petProject.service.pet.SelectKindcodeService;
-import petProject.vo.dto.Kindcode;
 
 @Service("selectKindcodeService")
 @Component
@@ -17,12 +16,14 @@ public class SelectKindcodeServiceImpl implements SelectKindcodeService {
 	KindcodeDAO KindcodeDAO;
 
 	@Override
-	public Kindcode selectKindcode(String petKindcode) throws Exception {
-		Kindcode kindcode = KindcodeDAO.selectKindcode(petKindcode);
-		if (kindcode == null) {
+	public String selectPetKind(String petKindcode) throws Exception {
+		System.out.println(petKindcode);
+		String petKind = KindcodeDAO.selectPetKind(petKindcode);
+		if (petKind == null) {
 			throw new NonExistentKindcodeException("non-existent petKindcode" + petKindcode);
 		}
-		return kindcode;
+		System.out.println(petKind);
+		return petKind;
 	}
 
 }

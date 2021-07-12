@@ -33,6 +33,7 @@ import petProject.service.ScriptWriter;
 import petProject.service.pet.KindcodeListService;
 import petProject.service.pet.SelectKindcodeService;
 import petProject.vo.dto.Kindcode;
+import petProject.vo.request.PetSearchRequest;
 
 @Controller
 @RequestMapping("/popup")
@@ -44,27 +45,32 @@ public class PetKindPopupController {
 	@Resource(name = "selectKindcodeService")
 	SelectKindcodeService selectKindcodeService;
 
+	static PetSearchRequest petSearchRequest = new PetSearchRequest();
+
 	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
-	@GetMapping(value = { "/petKind/{petKindcode}", "/petKind" })
+	@GetMapping(value = { "/petKind", "/petKind/{petKindcode}" })
 	public String kindPopup1(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+			@RequestParam(value = "petKindWord", required = false, defaultValue = "") String petKindWord,
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-		boolean nextPage = kindcodeListService.nextPage(pageNumber);
-
+		petSearchRequest.setPageNumber(pageNumber);
+		petSearchRequest.setPetKindWord(petKindWord);
+		
+		boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
 		try {
-			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
+			// kindcodeListPage = PageNumber에 따른 kindcodeList목록
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
+			List<Kindcode> searchKindcodeList = kindcodeListService.searchPetKindList(petSearchRequest);
 
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("nextPage", nextPage);
 			model.addAttribute("kindcodeList", kindcodeList);
-			model.addAttribute("kindcodeListPage", kindcodeListPage);
+			model.addAttribute("searchKindcodeList", searchKindcodeList);
 
 			// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
 			if (petKindcode != null) {
-				Kindcode kindcode = selectKindcodeService.selectKindcode(petKindcode);
-				model.addAttribute("kindcode", kindcode);
+				String petKind = selectKindcodeService.selectPetKind(petKindcode);
+				model.addAttribute("petKind", petKind);
 			}
 
 			return "popup/petKind/petKindPopup";
@@ -87,24 +93,28 @@ public class PetKindPopupController {
 	@PostMapping("/petKind")
 	public String kindPopup2(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+			@RequestParam(value = "petKindWord", required = false, defaultValue = "") String petKindWord,
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		petSearchRequest.setPageNumber(pageNumber);
+		petSearchRequest.setPetKindWord(petKindWord);
 
 		try {
-			boolean nextPage = kindcodeListService.nextPage(pageNumber);
-			
-			List<Kindcode> kindcodeListPage = kindcodeListService.selectKindcodeListPage(pageNumber);
+			boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
+
 			List<Kindcode> kindcodeList = kindcodeListService.selectKindcodeList();
+			List<Kindcode> searchKindcodeList = kindcodeListService.searchPetKindList(petSearchRequest);
 
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("nextPage", nextPage);
 			model.addAttribute("kindcodeList", kindcodeList);
-			model.addAttribute("kindcodeListPage", kindcodeListPage);
+			model.addAttribute("searchKindcodeList", searchKindcodeList);
 			model.addAttribute("selectOpen", true);
+			model.addAttribute("petKindWord", petKindWord);
 
 			// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
 			if (petKindcode != null) {
-				Kindcode kindcode = selectKindcodeService.selectKindcode(petKindcode);
-				model.addAttribute("kindcode", kindcode);
+				String petKind = selectKindcodeService.selectPetKind(petKindcode);
+				model.addAttribute("petKind", petKind);
 			}
 
 			return "popup/petKind/kindcodeListAjax";
