@@ -43,6 +43,10 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 		if (petSearchRequest.getPageNumber() == 0) {
 			throw new NonExistentPageException("non-existent page of list" + petSearchRequest.getPageNumber());
 		}
+		if (petSearchRequest.getPageNumber() != 1 && nextPage(petSearchRequest) == false) {
+			// 존재 하지 않는 페이지 일때 Exception 발생
+			throw new NonExistentPageException("non-existent page of list" + petSearchRequest.getPageNumber());
+		}
 		List<Kindcode> kindcodeList = kindcodeDAO.searchPetKindList(petSearchRequest);
 		return kindcodeList;
 	}

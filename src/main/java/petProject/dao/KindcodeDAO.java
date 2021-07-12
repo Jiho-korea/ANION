@@ -32,8 +32,6 @@ public interface KindcodeDAO {
 	List<Kindcode> selectKindcodeList() throws Exception;
 
 	List<Kindcode> searchPetKindList(@Param("petSearchRequest") PetSearchRequest petSearchRequest) throws Exception;
-
-	List<Kindcode> selectKindcodeListPage(@Param("pageNumber") Integer pageNumber) throws Exception;
 	
 	Kindcode selectKindcode(@Param("kindcode") String petKindcode) throws Exception;
 
