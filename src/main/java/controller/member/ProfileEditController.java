@@ -27,6 +27,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ import petProject.exception.MailException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.exception.WrongIdPasswordException;
+import petProject.service.ScriptWriter;
 import petProject.service.member.ChangePasswordService;
 import petProject.service.member.ChangeProfileService;
 import petProject.service.member.LoginService;
@@ -136,15 +138,36 @@ public class ProfileEditController {
 	}
 
 	// 비밀번호 변경 버튼 클릭시
-	@GetMapping
+	@GetMapping("/updatePassword")
 	public String check(ChangePasswordCommand changePasswordCommand) {
 		return "member/profile/changePasswordForm";
 	}
 
+	@GetMapping("/passwordChange")
+	public String passwordChange(
+			@CookieValue(value = "successPasswordChange", required = false) Cookie cookie_success_password_change,
+			Model model, HttpSession session, HttpServletResponse response, HttpServletRequest request)
+			throws Exception {
+
+		if (cookie_success_password_change == null) {
+			ScriptWriter.write("잘못된 접근입니다.", "profile", request, response);
+			return null;
+		}
+
+		Cookie cookie_delete_success_password_change = new Cookie("successPasswordChange",
+				cookie_success_password_change.getValue());
+		cookie_delete_success_password_change.setPath("/");
+		cookie_delete_success_password_change.setMaxAge(0);
+		response.addCookie(cookie_delete_success_password_change);
+
+		session.invalidate();
+		return "member/profile/changePasswordSuccess";
+	}
+
 	// 비밀번호 변경 완료시
 	@PostMapping("/passwordChange")
-	public String form(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session)
-			throws Exception {
+	public String form(@Valid ChangePasswordCommand changePasswordCommand, Errors errors, HttpSession session,
+			HttpServletResponse response) throws Exception {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 
 		if (errors.hasErrors()) {
@@ -154,25 +177,25 @@ public class ProfileEditController {
 		try {
 			if (changePasswordCommand.getCurrentPassword().equals(changePasswordCommand.getNewPassword())) {
 				errors.reject("password.equal");
-
 				return "member/profile/changePasswordForm";
 			} else if (!changePasswordCommand.getNewPassword().equals(changePasswordCommand.getCheckNewPassword())) {
 				errors.reject("checkNewPassword.notMatch");
-
 				return "member/profile/changePasswordForm";
 			}
-
 			changePasswordService.changePassword(authInfo.getMemberId(), changePasswordCommand.getCurrentPassword(),
 					changePasswordCommand.getNewPassword());
-			session.invalidate();
-			return "member/profile/changePasswordSuccess";
+
+			Cookie cookie_success_password_change = new Cookie("successPasswordChange", null);
+			cookie_success_password_change.setPath("/");
+			cookie_success_password_change.setMaxAge(60 * 60 * 24 * 1);
+
+			response.addCookie(cookie_success_password_change);
+			return "redirect:/edit/passwordChange";
 		} catch (MemberNotFoundException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
-
 			return "member/profile/changePasswordForm";
 		} catch (WrongIdPasswordException e) {
 			errors.rejectValue("currentPassword", "password.notMatch");
-
 			return "member/profile/changePasswordForm";
 		}
 	}

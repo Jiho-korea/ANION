@@ -26,8 +26,12 @@
 		WHERE "MEMBER_NUMBER" = #{memberNumber}
 	</select>
 
-	<select id="selectById" parameterType="String" resultType="int">
+	<select id="selectByIdFromMember" parameterType="String" resultType="int">
 		SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
+	</select>
+	
+	<select id="selectByIdFromEmailcode" parameterType="String" resultType="int">
+		SELECT count(*) FROM "emailcode" WHERE "NEW_MEMBER_ID" = #{memberId}
 	</select>
 
 	<select id="selectMemberList" resultMap="memberListResultMap">

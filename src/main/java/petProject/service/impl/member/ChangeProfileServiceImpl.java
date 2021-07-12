@@ -46,7 +46,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 	@Override
 	public int selectById(String memberId) throws Exception {
-		int cnt = memberDAO.selectById(memberId);
+		int cnt = memberDAO.selectByIdFromMember(memberId);
 		if (cnt != 0) {
 			throw new MemberDuplicateException("duplicate memberId");
 		}
