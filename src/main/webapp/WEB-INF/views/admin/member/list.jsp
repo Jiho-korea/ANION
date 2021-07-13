@@ -58,8 +58,15 @@
 				</p>
 			</div>
 			<div class="boardTable">
-				<div><spring:message code="admin.member.total.member" />:&nbsp;${memberCount},&nbsp;&nbsp;<spring:message code="admin.member.total.pet" />:&nbsp;${petCount},&nbsp;&nbsp;<spring:message code="admin.member.total.image" />:&nbsp;${imageCount}</div>
-				<br/>
+				<div>
+					<spring:message code="admin.member.total.member" />
+					:&nbsp;${memberCount},&nbsp;&nbsp;
+					<spring:message code="admin.member.total.pet" />
+					:&nbsp;${petCount},&nbsp;&nbsp;
+					<spring:message code="admin.member.total.image" />
+					:&nbsp;${imageCount}
+				</div>
+				<br />
 				<div id="serach_area" style="padding-bottom: 10px;">
 					<form name="delivery" id="myForm" method="get">
 						<input type="hidden" name="find_key" id="find_key"
@@ -67,7 +74,8 @@
 						<spring:message code="admin.search" />
 						&nbsp;<input type="text" name="find_keyword" id="find_keyword"
 							class="" /> <input type="submit" name="btn_search"
-							id="btn_search" class="btn_search" value="조회" />
+							id="btn_search" class="btn_search"
+							value="<spring:message code="view" />" />
 					</form>
 				</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -88,13 +96,14 @@
 									code="admin.member.number.image" /></th>
 							<th width="6%"><spring:message code="admin.member.petInfo" /></th>
 							<th width="10%"><a href="#"><input type="button"
-									name="btn_plus" id="btn_plus" class="btn_plus" value="신규등록" /></a></th>
+									name="btn_plus" id="btn_plus" class="btn_plus"
+									value="<spring:message code="new.register" />" /></a></th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:if test="${empty memberList}">
 							<tr>
-								<td colspan="8" height="30" align="center">저장된 내용이 없습니다.</td>
+								<td colspan="8" height="30" align="center"><spring:message code="admin.empty.list" /></td>
 							</tr>
 							<tr>
 								<td colspan="8" height="1" bgcolor="#EEEEEE"></td>
@@ -102,7 +111,7 @@
 						</c:if>
 						<c:forEach var="member" items="${memberList}" varStatus="status">
 							<tr>
-								<%-- <td width="5%" align="center">${member.memberNumber}</td>--%>								
+								<%-- <td width="5%" align="center">${member.memberNumber}</td>--%>
 								<td width="5%" align="center">${status.index + 1}</td>
 								<td width="8%" align="center">${member.memberlevel.memberLevelDescription }</td>
 								<td width="6%" align="center">${member.memberName }</td>
@@ -127,7 +136,7 @@
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
 											value="수정" /></a> <a href="#"><input type="button"
 											name="btn_delete" id="btn_delete"
-											class="btn_delete {delivery_no: 4}" value="삭제" /> </a>
+											class="btn_delete {delivery_no: 4}" value="delete.button" /> </a>
 									</div></td>
 							</tr>
 							<!-- 
