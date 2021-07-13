@@ -77,14 +77,14 @@
 
 	<div class="container text-center">
 		<div id="main">
-			<h1 class="display-4">비문 사진 예시</h1>
+			<h1 class="display-4"><spring:message code="event.nose.example" /></h1>
 		</div>
 		<div class="text-left">
 			<!-- 비문 이벤트 -->
 			<c:choose>
 				<c:when test="${empty first}">
 					<a href="javascript:history.back();"><button type="button"
-							class="btn btn-info pull-left mb-5" style="float: left;">뒤로</button></a>
+							class="btn btn-info pull-left mb-5" style="float: left;"><spring:message code="go.back" /></button></a>
 				</c:when>
 				<c:otherwise>
 					<a
@@ -101,7 +101,7 @@
 				<!--Section: Content-->
 				<section class="text-center">
 					<h4 class="mb-5">
-						<strong style="color: #DF6464">예1) 잘못된 비문 사진</strong>
+						<strong style="color: #DF6464"><spring:message code="event.nose.bad" /></strong>
 					</h4>
 
 					<div class="row">
@@ -120,8 +120,8 @@
 								</div>
 								<div class="card-body">
 									<%-- --%>
-									<h5 class="card-title">Bad_1</h5>
-									<p class="card-text">코가 안 보임</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad1" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail" /></p>
 								</div>
 							</div>
 						</div>
@@ -140,9 +140,8 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Bad_2</h5>
-									<p class="card-text">좌·우측 균등하지 않은 조명, 이미지가 흐려서 비문이 정확히 보이지
-										않음</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad2" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail2" /></p>
 
 								</div>
 							</div>
@@ -164,8 +163,8 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Bad_3</h5>
-									<p class="card-text">코 양쪽이 다 보이지 않음</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad3" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail3" /></p>
 
 								</div>
 							</div>
@@ -185,8 +184,8 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Bad_4</h5>
-									<p class="card-text">좌·우측 균등하지 않은 조명</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad4" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail4" /></p>
 
 								</div>
 							</div>
@@ -208,8 +207,8 @@
 								</div>
 								<div class="card-body">
 									<%-- --%>
-									<h5 class="card-title">Bad_5</h5>
-									<p class="card-text">코의 아랫부분이 잘림</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad5" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail5" /></p>
 								</div>
 							</div>
 						</div>
@@ -228,8 +227,8 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Bad_6</h5>
-									<p class="card-text">이미지가 흐려서 비문이 정확히 보이지 않음</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad6" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail6" /></p>
 
 								</div>
 							</div>
@@ -251,9 +250,8 @@
 								</div>
 								<div class="card-body">
 									<%-- --%>
-									<h5 class="card-title">Bad_7</h5>
-									<p class="card-text">좌·우측 균등하지 않은 조명, 이미지가 흐려서 비문이 정확히 보이지
-										않음</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad7" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail7" /></p>
 								</div>
 							</div>
 						</div>
@@ -272,8 +270,8 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Bad_8</h5>
-									<p class="card-text">코의 상단 부분만 촬영</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad8" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail8" /></p>
 
 								</div>
 							</div>
@@ -296,8 +294,8 @@
 								</div>
 								<div class="card-body">
 									<%-- --%>
-									<h5 class="card-title">Bad_9</h5>
-									<p class="card-text">이미지가 흐려서 비문이 정확히 보이지 않음</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad9" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail9" /></p>
 								</div>
 							</div>
 						</div>
@@ -316,8 +314,8 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Bad_10</h5>
-									<p class="card-text">코에 이물질, 코 양쪽이 다 보이지 않음</p>
+									<h5 class="card-title"><spring:message code="event.nose.bad10" /></h5>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail10" /></p>
 
 								</div>
 							</div>
@@ -332,7 +330,7 @@
 				<!--Section: Content-->
 				<section class="text-center">
 					<h4 class="mb-5">
-						<strong style="color: #6495DF">예2) 올바른 비문 사진</strong>
+						<strong style="color: #6495DF"><spring:message code="event.nose.good" /></strong>
 					</h4>
 
 					<div class="row">
@@ -350,7 +348,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_1</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good1" /></h5>
 
 								</div>
 							</div>
@@ -370,7 +368,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_2</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good2" /></h5>
 
 								</div>
 							</div>
@@ -392,7 +390,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_3</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good3" /></h5>
 
 
 								</div>
@@ -413,7 +411,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_4</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good4" /></h5>
 
 								</div>
 							</div>
@@ -435,7 +433,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_5</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good5" /></h5>
 
 								</div>
 							</div>
@@ -455,7 +453,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_6</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good6" /></h5>
 
 								</div>
 							</div>
@@ -477,7 +475,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_7</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good7" /></h5>
 
 								</div>
 							</div>
@@ -497,7 +495,7 @@
 									</a></a>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Good_8</h5>
+									<h5 class="card-title"><spring:message code="event.nose.good8" /></h5>
 
 								</div>
 							</div>
