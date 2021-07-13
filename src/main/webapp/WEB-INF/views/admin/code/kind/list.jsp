@@ -72,10 +72,10 @@
 					<thead>
 						<tr>
 							<th width="5%"><spring:message code="list.num" /></th>
-							<th width="8%"><spring:message code="pet.kindCode" /></th>
+							<th width="6%"><spring:message code="pet.kindCode" /></th>
 							<th width="8%"><spring:message code="pet.name" /></th>
 							<th width="6%"><spring:message code="available" /></th>
-							<th width="6%"><spring:message code="pet.kindHabitat" />(<spring:message code="countryCode" />)</th>
+							<th width="10%"><spring:message code="pet.kindHabitat" />(<spring:message code="countryCode" />)</th>
 							<th width="6%"><a
 								href="${pageContext.request.contextPath}/admin/code/kindcode/insert"><input
 									type="button" name="btn_plus" id="btn_plus" class="btn_plus"

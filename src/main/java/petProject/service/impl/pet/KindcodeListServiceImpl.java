@@ -34,8 +34,7 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Override
 	public List<Kindcode> selectKindcodeList() throws Exception {
-		List<Kindcode> kindcodeList = kindcodeDAO.selectKindcodeList();
-		return kindcodeList;
+		return kindcodeDAO.selectKindcodeList();
 	}
 
 	@Override

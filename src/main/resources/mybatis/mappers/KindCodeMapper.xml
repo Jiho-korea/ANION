@@ -7,7 +7,7 @@
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND",
 		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
-		order by "PET_KIND_CODE" ASC 
+		order by "PET_KIND" ASC 
 	</select>
 	
 	<select id="nextPage" parameterType="petSearchRequest" resultType="kindcode">

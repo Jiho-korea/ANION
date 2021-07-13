@@ -88,7 +88,7 @@
 								<td width="25%"><input type="text"
 									placeholder="<spring:message code="select" />"
 									class="form-control textBox" name="petKindHabitat" id="textBox"
-									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
+									onfocus="inInput(this)" onblur="outInput(this)" value="${kindcode.petKindHabitat }" readOnly>
 									<select onfocus="inInput(this)" onblur="outInput(this)"
 									onChange="select(this.value)">
 										<option class="form-control" value=""><spring:message
