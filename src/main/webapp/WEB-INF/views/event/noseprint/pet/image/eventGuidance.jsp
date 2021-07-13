@@ -121,7 +121,7 @@
 								<div class="card-body">
 									<%-- --%>
 									<h5 class="card-title"><spring:message code="event.nose.bad1" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad1.detail1" /></p>
 								</div>
 							</div>
 						</div>
@@ -141,7 +141,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><spring:message code="event.nose.bad2" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail2" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad2.detail2" /></p>
 
 								</div>
 							</div>
@@ -164,7 +164,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><spring:message code="event.nose.bad3" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail3" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad3.detail3" /></p>
 
 								</div>
 							</div>
@@ -185,7 +185,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><spring:message code="event.nose.bad4" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail4" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad4.detail4" /></p>
 
 								</div>
 							</div>
@@ -208,7 +208,7 @@
 								<div class="card-body">
 									<%-- --%>
 									<h5 class="card-title"><spring:message code="event.nose.bad5" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail5" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad5.detail5" /></p>
 								</div>
 							</div>
 						</div>
@@ -228,7 +228,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><spring:message code="event.nose.bad6" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail6" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad6.detail6" /></p>
 
 								</div>
 							</div>
@@ -251,7 +251,7 @@
 								<div class="card-body">
 									<%-- --%>
 									<h5 class="card-title"><spring:message code="event.nose.bad7" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail7" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad7.detail7" /></p>
 								</div>
 							</div>
 						</div>
@@ -271,7 +271,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><spring:message code="event.nose.bad8" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail8" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad8.detail8" /></p>
 
 								</div>
 							</div>
@@ -295,7 +295,7 @@
 								<div class="card-body">
 									<%-- --%>
 									<h5 class="card-title"><spring:message code="event.nose.bad9" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail9" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad9.detail9" /></p>
 								</div>
 							</div>
 						</div>
@@ -315,7 +315,7 @@
 								</div>
 								<div class="card-body">
 									<h5 class="card-title"><spring:message code="event.nose.bad10" /></h5>
-									<p class="card-text"><spring:message code="event.nose.bad1.detail10" /></p>
+									<p class="card-text"><spring:message code="event.nose.bad10.detail10" /></p>
 
 								</div>
 							</div>
