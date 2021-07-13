@@ -58,8 +58,14 @@ input {
 		<!-- rightcolumn 시작 -->
 		<div id="rightcolumn">
 			<div class="title_nav">
-				<h1>견종관리</h1>
-				<p class="location">홈 &gt; 코드관리 &gt; 견종관리</p>
+				<h1><spring:message code="admin.manage.petKind" /></h1>
+				<p class="location">
+					<spring:message code="admin.home" /> 
+					&gt; 
+					<spring:message code="admin.manage.kindcode" /> 
+					&gt; 
+					<spring:message code="admin.manage.petKind" />
+				</p>
 			</div>
 
 			<div class="input_tt_style">
@@ -74,28 +80,28 @@ input {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="12%">견종코드</th>
+								<th width="12%"><spring:message code="pet.kindCode" /></th>
 								<td width="20%"><form:input type="text" path="petKindcode"
-										cssClass="txt_box w200" title="견종코드" /> <form:errors
+										cssClass="txt_box w200"/> <form:errors
 										path="petKindcode" /></td>
 
-								<th width="11%">서식지</th>
-								<td width="25%"><input type="text"
+								<th width="11%"><spring:message code="pet.kindHabitat" /></th>
+								<td width="25%"><input type="text" placeholder="<spring:message code="select" />"
 									class="form-control textBox" name="petKindHabitat" id="textBox"
 									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
 									<select onfocus="inInput(this)" onblur="outInput(this)"
 									onChange="select(this.value)">
-										<option class="form-control" value="">국가코드</option>
-										<option class="form-control" onselect="focus">직접입력</option>
+										<option class="form-control" value=""><spring:message code="countryCode" /></option>
+										<option class="form-control" onselect="focus"><spring:message code="directInput" /></option>
 										<c:forEach var="countryCode" items="${countryCodeList}"
 											varStatus="status">
 											<option class="form-control" value="${countryCode}">${countryCode}</option>
 										</c:forEach>
 								</select> <br> <form:errors path="petKindHabitat" /></td>
 
-								<th width="12%">견종명</th>
+								<th width="12%"><spring:message code="pet.name" /></th>
 								<td width="20%"><form:input type="text" path="petKind"
-										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
+										cssClass="txt_box w200" maxlength="15" /> <br>
 									<form:errors path="petKind" /></td>
 							</tr>
 
@@ -105,11 +111,11 @@ input {
 					<p class="btn_center_area">
 						<input type="image"
 							src="${pageContext.request.contextPath}/img/admin/button/bt_save.gif"
-							name="btn_save" id="btn_save" width="31" height="19" alt="저장"
+							name="btn_save" id="btn_save" width="31" height="19" alt="Save"
 							class="btn" border="0">&nbsp; <a
 							href="${pageContext.request.contextPath}/admin/code/kindcode/list"><img
 							src="${pageContext.request.contextPath}/img/admin/button/bt_cancel.gif"
-							name="btn_cancel" id="btn_cancel" width="31" height="19" alt="취소"
+							name="btn_cancel" id="btn_cancel" width="31" height="19" alt="Cancel"
 							class="btn" border="0"></a>
 					</p>
 				</form:form>
@@ -127,9 +133,10 @@ input {
 		if (value == "") {
 			document.getElementById("textBox").value = value;
 			document.getElementById("textBox").readOnly = true;
+			document.getElementById("textBox").placeholder = "<spring:message code="select" />";
 			document.getElementById("textBox").style.backgroundColor = "#E7E7E7";
 			document.getElementById("textBox").focus();
-		} else if (value != "직접입력") {
+		} else if (value != "<spring:message code="directInput" />") {
 			document.getElementById("textBox").value = value;
 			document.getElementById("textBox").readOnly = true;
 			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
@@ -137,6 +144,7 @@ input {
 		} else {
 			document.getElementById("textBox").value = "";
 			document.getElementById("textBox").readOnly = false;
+			document.getElementById("textBox").placeholder = "";
 			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
 			document.getElementById("textBox").focus();
 		}
