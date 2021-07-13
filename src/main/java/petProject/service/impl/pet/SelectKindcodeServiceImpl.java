@@ -17,7 +17,6 @@ public class SelectKindcodeServiceImpl implements SelectKindcodeService {
 
 	@Override
 	public String selectPetKind(String petKindcode) throws Exception {
-		System.out.println(petKindcode);
 		String petKind = KindcodeDAO.selectPetKind(petKindcode);
 		if (petKind == null) {
 			throw new NonExistentKindcodeException("non-existent petKindcode" + petKindcode);

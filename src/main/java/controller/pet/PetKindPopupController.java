@@ -10,6 +10,10 @@
 수    정    일 : 2021.05.09
 수  정  내  용 : Select박스 페이징 기능 추가
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.12
+수  정  내  용 : 검색 기능 추가
+========================================================================
 */
 package controller.pet;
 
@@ -55,7 +59,7 @@ public class PetKindPopupController {
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		petSearchRequest.setPageNumber(pageNumber);
 		petSearchRequest.setPetKindWord(petKindWord);
-		
+
 		boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
 		try {
 			// kindcodeListPage = PageNumber에 따른 kindcodeList목록
@@ -97,7 +101,8 @@ public class PetKindPopupController {
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		petSearchRequest.setPageNumber(pageNumber);
 		petSearchRequest.setPetKindWord(petKindWord);
-
+		
+		System.out.println(pageNumber);
 		try {
 			boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
 

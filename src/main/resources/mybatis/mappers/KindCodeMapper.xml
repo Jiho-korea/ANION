@@ -10,11 +10,17 @@
 		order by "PET_KIND_CODE" ASC 
 	</select>
 	
+	<select id="nextPage" parameterType="petSearchRequest" resultType="kindcode">
+		select "PET_KIND", "PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode"
+		where "PET_KIND" like CONCAT('%',#{petSearchRequest.petKindWord},'%')
+		order by "PET_KIND" ASC LIMIT 8 OFFSET (#{petSearchRequest.pageNumber})*8
+	</select>
+	
 	<select id="searchPetKindList" parameterType="petSearchRequest" resultType="kindcode">
 		select "PET_KIND"
 		from "kindcode"
 		where "PET_KIND" like CONCAT('%',#{petSearchRequest.petKindWord},'%')
-		order by "PET_KIND_CODE" ASC LIMIT 8 OFFSET (#{petSearchRequest.pageNumber}-1)*8
+		order by "PET_KIND" ASC LIMIT 8 OFFSET (#{petSearchRequest.pageNumber}-1)*8
 	</select>
 
 	<select id="selectKindcode" parameterType="String" resultType="kindcode">
