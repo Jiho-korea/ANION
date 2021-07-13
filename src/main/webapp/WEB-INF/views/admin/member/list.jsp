@@ -103,7 +103,8 @@
 					<tbody>
 						<c:if test="${empty memberList}">
 							<tr>
-								<td colspan="8" height="30" align="center"><spring:message code="admin.empty.list" /></td>
+								<td colspan="8" height="30" align="center"><spring:message
+										code="admin.empty.list" /></td>
 							</tr>
 							<tr>
 								<td colspan="8" height="1" bgcolor="#EEEEEE"></td>
@@ -128,15 +129,16 @@
 											href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}"
 											target="_blank"> <input type="button" name="btn_modify"
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="확인" /></a>
+											value="<spring:message code="go.agree"/>" /></a>
 									</div></td>
 
 								<td width="10%" align="center"><div align="center">
 										<a href="#"> <input type="button" name="btn_modify"
 											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="수정" /></a> <a href="#"><input type="button"
-											name="btn_delete" id="btn_delete"
-											class="btn_delete {delivery_no: 4}" value="delete.button" /> </a>
+											value="<spring:message code="edit" />" /></a> <a href="#"><input
+											type="button" name="btn_delete" id="btn_delete"
+											class="btn_delete {delivery_no: 4}"
+											value="<spring:message code="delete.button"/>" /> </a>
 									</div></td>
 							</tr>
 							<!-- 
@@ -152,9 +154,9 @@
 					style="text-align: center; padding-bottom: 20px;">
 					<img
 						src="${pageContext.request.contextPath}/img/admin/common/btn_l.gif"
-						alt="왼쪽이동" border="0" /><strong>1</strong>&nbsp;<img
+						alt="<" border="0" /><strong>1</strong>&nbsp;<img
 						src="${pageContext.request.contextPath}/img/admin/common/btn_r.gif"
-						alt="오른쪽이동" border="0" />
+						alt=">" border="0" />
 				</div>
 			</div>
 		</div>
