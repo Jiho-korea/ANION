@@ -32,6 +32,7 @@
 input {
 	padding-left: 3px;
 }
+
 .textBox {
 	width: 100px;
 	background-color: #E7E7E7;
@@ -73,26 +74,27 @@ input {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="13%">견종코드</th>
-								<td width="18%"><form:input type="text" path="petKindcode"
+								<th width="12%">견종코드</th>
+								<td width="20%"><form:input type="text" path="petKindcode"
 										cssClass="txt_box w200" title="견종코드" /> <form:errors
 										path="petKindcode" /></td>
 
-								<th width="13%">서식지</th>
+								<th width="11%">서식지</th>
 								<td width="25%"><input type="text"
 									class="form-control textBox" name="petKindHabitat" id="textBox"
 									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
 									<select onfocus="inInput(this)" onblur="outInput(this)"
 									onChange="select(this.value)">
 										<option class="form-control" value="">국가코드</option>
-										<option class="form-control" value="KR">한국(KR)</option>
-										<option class="form-control" value="US">미국(US)</option>
-										<option class="form-control" value="JP">일본(JP)</option>
 										<option class="form-control" onselect="focus">직접입력</option>
+										<c:forEach var="countryCode" items="${countryCodeList}"
+											varStatus="status">
+											<option class="form-control" value="${countryCode}">${countryCode}</option>
+										</c:forEach>
 								</select> <br> <form:errors path="petKindHabitat" /></td>
 
-								<th width="13%">견종명</th>
-								<td width="18%"><form:input type="text" path="petKind"
+								<th width="12%">견종명</th>
+								<td width="20%"><form:input type="text" path="petKind"
 										cssClass="txt_box w200" maxlength="15" title="견종명" /> <br>
 									<form:errors path="petKind" /></td>
 							</tr>
@@ -103,7 +105,7 @@ input {
 					<p class="btn_center_area">
 						<input type="image"
 							src="${pageContext.request.contextPath}/img/admin/button/bt_save.gif"
-							name="btn_save" id="btn_save" width="31" height="19" title="저장"
+							name="btn_save" id="btn_save" width="31" height="19" alt="저장"
 							class="btn" border="0">&nbsp; <a
 							href="${pageContext.request.contextPath}/admin/code/kindcode/list"><img
 							src="${pageContext.request.contextPath}/img/admin/button/bt_cancel.gif"

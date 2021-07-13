@@ -62,4 +62,9 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 		}
 	}
 
+	@Override
+	public List<String> selectCountryCodeList() throws Exception {
+		return kindcodeDAO.selectCountryCodeList();
+	}
+
 }

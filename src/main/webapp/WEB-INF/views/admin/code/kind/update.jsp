@@ -28,6 +28,16 @@
 	
 </script>
 </head>
+<style>
+.textBox {
+	width: 100px;
+	background-color: #E7E7E7;
+	border-width: 1px;
+	border-radius: 4px;
+	border-width: 1px;
+	outline: none;
+}
+</style>
 <body>
 	<!-- wrapper 시작 -->
 	<div id="wrapper">
@@ -52,21 +62,37 @@
 				<div id="error_area"></div>
 				<form:form name="delivery" id="myForm" method="POST"
 					action="${pageContext.request.contextPath}/admin/code/kindcode/update"
-					cssClass="delivery" cssStyle="display: inline;" modelAttribute="kindcode">
+					cssClass="delivery" cssStyle="display: inline;"
+					modelAttribute="kindcode">
 					<!--  
 					<input type="hidden" name="act" id="act" value="insert"> <input
 						type="hidden" name="reg_mem_no" id="reg_mem_no" value="1"> -->
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tbody>
 							<tr>
-								<th width="15%">견종코드</th>
-								<td width="30%"><form:input type="text" path="petKindcode"
-										cssClass="txt_box w200" title="견종코드" readonly="true"/>
-									<form:errors path="petKindcode" /></td>
-								<th width="15%">견종명</th>
-								<td width="30%"><form:input type="text" path="petKind"
-										cssClass="txt_box w200" maxlength="15" title="견종명" />
-									<form:errors path="petKind" /></td>
+								<th width="12%">견종코드</th>
+								<td width="20%"><form:input type="text" path="petKindcode"
+										cssClass="txt_box w200" title="견종코드" readonly="true" /> <form:errors
+										path="petKindcode" /></td>
+
+								<th width="11%">서식지</th>
+								<td width="25%"><input type="text"
+									class="form-control textBox" name="petKindHabitat" id="textBox"
+									onfocus="inInput(this)" onblur="outInput(this)" readOnly>
+									<select onfocus="inInput(this)" onblur="outInput(this)"
+									onChange="select(this.value)">
+										<option class="form-control" value="">국가코드</option>
+										<option class="form-control" onselect="focus">직접입력</option>
+										<c:forEach var="countryCode" items="${countryCodeList}"
+											varStatus="status">
+											<option class="form-control" value="${countryCode}">${countryCode}</option>
+										</c:forEach>
+								</select> <br> <form:errors path="petKindHabitat" /></td>
+
+								<th width="12%">견종명</th>
+								<td width="20%"><form:input type="text" path="petKind"
+										cssClass="txt_box w200" maxlength="15" title="견종명" /> <form:errors
+										path="petKind" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -74,7 +100,7 @@
 					<p class="btn_center_area">
 						<input type="image"
 							src="${pageContext.request.contextPath}/img/admin/button/bt_save.gif"
-							name="btn_save" id="btn_save" width="31" height="19" title="저장"
+							name="btn_save" id="btn_save" width="31" height="19" alt="저장"
 							class="btn" border="0">&nbsp; <img
 							src="${pageContext.request.contextPath}/img/admin/button/bt_cancel.gif"
 							name="btn_cancel" id="btn_cancel" width="31" height="19" alt="취소"
@@ -90,4 +116,24 @@
 	</div>
 	<!-- wapper 끝-->
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	function select(value) {
+		if (value == "") {
+			document.getElementById("textBox").value = value;
+			document.getElementById("textBox").readOnly = true;
+			document.getElementById("textBox").style.backgroundColor = "#E7E7E7";
+			document.getElementById("textBox").focus();
+		} else if (value != "직접입력") {
+			document.getElementById("textBox").value = value;
+			document.getElementById("textBox").readOnly = true;
+			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
+			document.getElementById("textBox").focus();
+		} else {
+			document.getElementById("textBox").value = "";
+			document.getElementById("textBox").readOnly = false;
+			document.getElementById("textBox").style.backgroundColor = "#FFFFFF";
+			document.getElementById("textBox").focus();
+		}
+	}
+</script>
 </html>
