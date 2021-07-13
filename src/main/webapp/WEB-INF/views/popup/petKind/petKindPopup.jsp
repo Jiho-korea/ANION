@@ -314,7 +314,9 @@ a:hover {
 			console.log(errorThrown);
 		});
 	}
+	let search = setTimeout(function() {
 
+	}, 0);
 	function searchFunction() {
 		var formData = new FormData();
 		const petKindWord = document.getElementById('petKindSearch').value;
@@ -322,7 +324,8 @@ a:hover {
 		formData.append("petKindWord", petKindWord);
 
 		if (petKindWord.length > 1) {
-			setTimeout(function() {
+			clearTimeout(search);
+			search = setTimeout(function() {
 				$.ajax({
 					url : "${pageContext.request.contextPath}/popup/petKind",
 					type : "post",
@@ -335,13 +338,19 @@ a:hover {
 					var html = jQuery('<div>').html(result);
 					var contents = html.find("div#kindcodeListAjax").html();
 					$("#kindcodeListSelect").html(contents);
+					let len = $('#petKindSearch').val().length;
+					$('#petKindSearch').focus();
+					$('#petKindSearch')[0].setSelectionRange(len, len);
+					<!--
+					document.getElementById('petKindSearch').focus();
+					-->
 				}).fail(function(jqXHR, textStatus, errorThrown) {
 					console.log("에러");
 					console.log(jqXHR);
 					console.log(textStatus);
 					console.log(errorThrown);
 				});
-			}, 1250);
+			}, 1000);
 		}
 	}
 </script>

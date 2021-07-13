@@ -102,7 +102,6 @@ public class PetKindPopupController {
 		petSearchRequest.setPageNumber(pageNumber);
 		petSearchRequest.setPetKindWord(petKindWord);
 		
-		System.out.println(pageNumber);
 		try {
 			boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
 
