@@ -47,7 +47,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#deleteButton").click(function() {
-			if (!confirm("등록된 반려견을 삭제하시겠습니까?")) {
+			if (!confirm("<spring:message code="info.pet.delete.confirm" />")) {
 				return false;
 			} else {
 				document.getElementById("form").submit();
@@ -101,12 +101,12 @@
 
 							<input type="hidden" name="petRegistrationNumber"
 								value="${pet.petRegistrationNumber}" />
-							<input type="submit" name="btn_modify" id="btn_modify" value="수정" />
+							<input type="submit" name="btn_modify" id="btn_modify" value="<spring:message code="edit" />" />
 
 							<a
 								href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"><input
 								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
-								value="취소" /> </a>
+								value="<spring:message code="cancel" />" /> </a>
 							<form:errors path="petName" />
 						</form:form>
 					</c:when>

@@ -103,13 +103,13 @@ Preloader Start -->
 														href="${pageContext.request.contextPath}/directions"><spring:message
 																code="company.directions.title" /></a></li>
 												</ul></li>
-											<li><a href="#">어울림마당</a>
+											<li><a href="#"><spring:message code="comunity.title" /></a>
 												<ul class="submenu">
-													<li><a href="#">공지사항</a></li>
-													<li><a href="#">이벤트</a></li>
+													<li><a href="#"><spring:message code="comunity.notice" /></a></li>
+													<li><a href="#"><spring:message code="comunity.event" /></a></li>
 													<%--<li><a
 														href="${pageContext.request.contextPath}/board/img">갤러리</a></li> --%>
-													<li><a href="#">갤러리</a></li>
+													<li><a href="#"><spring:message code="comunity.gallery" /></a></li>
 												</ul></li>
 											<li><a href="#"><spring:message
 														code="pet.certification.title" /></a>

@@ -177,19 +177,19 @@
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_login").click(function() {
 		if ($("#currentPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
+			alert("<spring:message code="signup.enter.password" />");
 			return false;
 		} else if ($("#newPassword").val() == "") {
-			alert("새 비밀번호를 입력해주세요");
+			alert("<spring:message code="change.password.enter" />");
 			return false;
 		} else if ($("#checkNewPassword").val() == "") {
-			alert("새 비밀번호를 다시 입력해주세요");
+			alert("<spring:message code="change.password.enter.re" />");
 			return false;
 		} else if ($("#currentPassword").val() == $("#newPassword").val()) {
-			alert("현재 비밀번호와 새 비밀번호가 같습니다.");
+			alert("<spring:message code="change.password.same" />");
 			return false;
 		} else if ($("#newPassword").val() != $("#checkNewPassword").val()) {
-			alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+			alert("<spring:message code="signup.same.password" />");
 			return false;
 		}
 	});

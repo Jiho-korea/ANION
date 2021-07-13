@@ -98,7 +98,7 @@
 	$(function() {
 		$("#deleteButton").click(function() {
 			if ($("input:checkbox[type=checkbox]:checked").length == 0) {
-				alert("삭제할 사진을 선택해 주세요.");
+				alert("<spring:message code="list.image.delete.select" />");
 				return false;
 			} else {
 				return true

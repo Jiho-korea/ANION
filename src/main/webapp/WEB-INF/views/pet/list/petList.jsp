@@ -100,7 +100,8 @@
 			<a href="${pageContext.request.contextPath}/pet/list/npevent"
 					class="mb-30"><button type="submit"
 						class="btn btn-info pull-right">
-						비문 등록 이벤트
+						<spring:message code="event.nose" />
+
 					</button></a> 
 		
 			<c:if test="${empty admin}">
@@ -153,7 +154,7 @@
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
-								<td>${pet.imageCount}건</td>
+								<td>${pet.imageCount}<spring:message code="list.few" /></td>
 								<td>
 									<!-- <a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"

@@ -199,10 +199,10 @@
 <script defer type="text/javascript" charset="utf-8">
 	 $("#btn_login").click(function() {
 		if ($("#memberId").val() == "") {
-			alert("이메일을 입력해주세요.");
+			alert("<spring:message code="이메일을 입력해주세요." />");
 			return false;
 		} else if ($("#memberPassword").val() == "") {
-			alert("비밀번호을 입력해주세요.");
+			alert("<spring:message code="signin.enter.password" />");
 			return false;
 		}
 	});
