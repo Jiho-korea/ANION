@@ -41,11 +41,7 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 	@Override
 	public List<Kindcode> searchPetKindList(PetSearchRequest petSearchRequest) throws Exception {
 		if (petSearchRequest.getPageNumber() == 0) {
-			throw new NonExistentPageException("non-existent page of list" + petSearchRequest.getPageNumber());
-		}
-		if (petSearchRequest.getPageNumber() != 1 && nextPage(petSearchRequest) == false) {
-			// 존재 하지 않는 페이지 일때 Exception 발생
-			throw new NonExistentPageException("non-existent page of list" + petSearchRequest.getPageNumber());
+			throw new NonExistentPageException("non-existent page of list : " + petSearchRequest.getPageNumber());
 		}
 		List<Kindcode> kindcodeList = kindcodeDAO.searchPetKindList(petSearchRequest);
 		return kindcodeList;
@@ -53,8 +49,7 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Override
 	public boolean nextPage(PetSearchRequest petSearchRequest) throws Exception {
-		List<Kindcode> kindcodeList = null;
-		kindcodeList = kindcodeDAO.searchPetKindList(petSearchRequest);
+		List<Kindcode> kindcodeList = kindcodeDAO.nextPage(petSearchRequest);
 		if (!kindcodeList.isEmpty()) {
 			return true;
 		} else {

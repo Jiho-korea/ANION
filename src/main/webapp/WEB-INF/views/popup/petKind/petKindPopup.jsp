@@ -14,6 +14,10 @@
 수    정    일 : 2021.05.23
 수  정  내  용 : Select박스 다음 견종 목록을 AJAX 요청하는 스크립트 추가
 ========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.07.12
+작  성  내  용 : 검색 단어로 견종 목록을 AJAX 요청하는 스크립트 추가
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -310,7 +314,9 @@ a:hover {
 			console.log(errorThrown);
 		});
 	}
+	let search = setTimeout(function() {
 
+	}, 0);
 	function searchFunction() {
 		var formData = new FormData();
 		const petKindWord = document.getElementById('petKindSearch').value;
@@ -318,7 +324,8 @@ a:hover {
 		formData.append("petKindWord", petKindWord);
 
 		if (petKindWord.length > 1) {
-			setTimeout(function() {
+			clearTimeout(search);
+			search = setTimeout(function() {
 				$.ajax({
 					url : "${pageContext.request.contextPath}/popup/petKind",
 					type : "post",
@@ -331,13 +338,19 @@ a:hover {
 					var html = jQuery('<div>').html(result);
 					var contents = html.find("div#kindcodeListAjax").html();
 					$("#kindcodeListSelect").html(contents);
+					let len = $('#petKindSearch').val().length;
+					$('#petKindSearch').focus();
+					$('#petKindSearch')[0].setSelectionRange(len, len);
+					<!--
+					document.getElementById('petKindSearch').focus();
+					-->
 				}).fail(function(jqXHR, textStatus, errorThrown) {
 					console.log("에러");
 					console.log(jqXHR);
 					console.log(textStatus);
 					console.log(errorThrown);
 				});
-			}, 1250);
+			}, 1000);
 		}
 	}
 </script>

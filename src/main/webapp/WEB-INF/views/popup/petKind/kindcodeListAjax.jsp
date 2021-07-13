@@ -6,6 +6,10 @@
 작    성    일 : 2021.05.23
 작  성  내  용 : 견종 선택 지도 팝업에서 변하는 부분만을 나타내는 jsp
 ========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.07.12
+작  성  내  용 : 검색 기능 추가
+========================================================================
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -23,7 +27,7 @@
 
 	<input id="petKindSearch" type="text" onKeyup="searchFunction()"
 		class="single-input" style="width: 200px;" value="${petKindWord }"
-		placeholder="Search..." /> &nbsp;<select style="display: none;"
+		placeholder="Search..." autofocus/> &nbsp;<select style="display: none;"
 		id="childKind" name="childKind">
 		<c:if test="${empty petKind}">
 			<option value=""></option>
