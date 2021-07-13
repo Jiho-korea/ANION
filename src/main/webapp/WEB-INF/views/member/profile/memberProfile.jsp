@@ -218,9 +218,9 @@ a, a:hover {
 	</div>
 
 	<!-- JS here -->
-	<script defer>
+	<script defer type="text/javascript">
 		function btn_submit() {
-			document.getElementById('btn_modify_cancle').style.visibility = 'hidden';
+			document.getElementById('btn_modify_cancel').style.visibility = 'hidden';
 			const target = document.getElementById('btn_modify');
 			target.disabled = true;
 			target.value = 'Loading';
