@@ -200,7 +200,7 @@ a, a:hover {
 			<!-- css 수정해야할 부분 -->
 			<hr class="my-4">
 			<h4 style="text-align: left">
-				<a href="${pageContext.request.contextPath}/edit"
+				<a href="${pageContext.request.contextPath}/edit/updatePassword"
 					style="color: blue;"><spring:message
 						code="edit.member.password.change" /></a>
 			</h4>
@@ -218,9 +218,9 @@ a, a:hover {
 	</div>
 
 	<!-- JS here -->
-	<script defer>
+	<script defer type="text/javascript">
 		function btn_submit() {
-			document.getElementById('btn_modify_cancle').style.visibility = 'hidden';
+			document.getElementById('btn_modify_cancel').style.visibility = 'hidden';
 			const target = document.getElementById('btn_modify');
 			target.disabled = true;
 			target.value = 'Loading';

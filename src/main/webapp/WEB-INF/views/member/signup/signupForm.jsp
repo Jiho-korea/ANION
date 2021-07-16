@@ -63,6 +63,10 @@
 	width: 100%;
 	margin-top: 50px;
 }
+
+.narrowLineHeight {
+	line-height: 0.15;
+}
 </style>
 
 <title><spring:message code="home.title" /></title>
@@ -92,10 +96,10 @@
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '이메일 / Email'" cssStyle="width:350px" />
 				</label>
-				<label> <form:errors path="memberId" />
-				</label>
-
-				<br>
+				<div class="narrowLineHeight">
+					<br> <label> <form:errors path="memberId" />
+					</label> <br>
+				</div>
 
 				<label> <form:password path="memberPassword"
 						cssClass="single-input mt-2" placeholder="비밀번호 / Password"
@@ -104,10 +108,11 @@
 						cssStyle="width:350px" />
 
 				</label>
-				<label> <form:errors path="memberPassword" />
-				</label>
+				<div class="narrowLineHeight">
+					<br> <label> <form:errors path="memberPassword" />
+					</label><br>
+				</div>
 
-				<br>
 				<label> <form:password path="checkPassword"
 						cssClass="single-input mt-2"
 						placeholder="비밀번호 확인 / Confirm Password" id="checkPassword"
@@ -115,19 +120,22 @@
 						onblur="this.placeholder = '비밀번호 확인 / Confirm Password'"
 						cssStyle="width:350px" />
 				</label>
-				<label> <form:errors path="checkPassword" />
-				</label>
+				<div class="narrowLineHeight">
+					<br> <label> <form:errors path="checkPassword" />
+					</label> <br>
+				</div>
 
-				<br>
 				<label> <form:input path="memberName"
 						cssClass="single-input mt-2" placeholder="이름 / Name"
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = '이름 / Name'" cssStyle="width:350px" />
 				</label>
-				<label> <form:errors path="memberName" />
-				</label>
-				<br>
-				<%--
+				<div class="narrowLineHeight">
+					<br> <label> <form:errors path="memberName" />
+					</label><br>
+				</div>
+				
+				<!-- 
 				<label> <form:input path="memberPhoneNumber"
 						cssClass="single-input mt-2" placeholder="전화번호 / Phone Number"
 						onfocus="this.placeholder = ''"
@@ -136,9 +144,11 @@
 						pattern=".{13,13}" cssStyle="width:350px" />
 
 				</label>
-				<label> <form:errors path="memberPhoneNumber" />
-				</label> --%>
-				<br>
+				<div class="narrowLineHeight">
+					<br> <label> <form:errors path="memberPhoneNumber" />
+					</label> <br>
+				</div>
+				 -->
 
 				<input type="submit" id="btn_register"
 					class="btn btn-info pull-right mt-5"

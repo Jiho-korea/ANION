@@ -9,6 +9,8 @@
 */
 package controller.admin.code.kind;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.KindcodeUpdateException;
 import petProject.service.admin.KindcodeUpdateService;
+import petProject.service.pet.KindcodeListService;
 import petProject.vo.dto.Kindcode;
 
 @Controller
@@ -34,6 +37,9 @@ public class KindcodeUpdateController {
 
 	private static final Logger logger = LoggerFactory.getLogger(KindcodeUpdateController.class);
 
+	@Resource(name = "kindcodeListService")
+	KindcodeListService kindcodeListService;
+	
 	@Resource(name = "kindcodeUpdateService")
 	KindcodeUpdateService kindcodeUpdateService;
 
@@ -41,7 +47,10 @@ public class KindcodeUpdateController {
 	public String getKindCodeSelect(@RequestParam(value = "petKindcode") String petKindcode, HttpSession session,
 			Model model) {
 		try {
+			List<String> countryCodeList = kindcodeListService.selectCountryCodeList();
 			Kindcode kindcode = kindcodeUpdateService.selectKindcode(petKindcode);
+			
+			model.addAttribute("countryCodeList", countryCodeList);
 			model.addAttribute("kindcode", kindcode);
 
 			return "admin/code/kind/update";

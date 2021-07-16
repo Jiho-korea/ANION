@@ -45,7 +45,9 @@ public interface MemberDAO {
 
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 
-	int selectById(@Param("memberId") String memberId) throws Exception;
+	int selectByIdFromMember(@Param("memberId") String memberId) throws Exception;
+
+	int selectByIdFromEmailcode(@Param("memberId") String memberId) throws Exception;
 
 	List<Member> selectMemberList() throws Exception;
 

@@ -31,7 +31,7 @@ public interface MemberRegisterService {
 
 	Emailcode insertCode(@Param("memberId") String memberId) throws Exception;
 
-	int selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
+	void selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
 
 	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
 

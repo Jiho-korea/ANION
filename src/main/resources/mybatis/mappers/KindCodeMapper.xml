@@ -7,7 +7,7 @@
 	<select id="selectKindcodeList" resultMap="kindcodeResultMap">
 		select "PET_KIND",
 		"PET_KIND_CODE", "PET_KIND_HABITAT" from "kindcode" 
-		order by "PET_KIND_CODE" ASC 
+		order by "PET_KIND" ASC 
 	</select>
 	
 	<select id="nextPage" parameterType="petSearchRequest" resultType="kindcode">
@@ -37,17 +37,20 @@
 		select "PET_KIND_CODE" from "kindcode" where "PET_KIND" = #{petKind}
 	</select>
 	
-	<insert id="insertKindcode" parameterType="kindcode">
-		INSERT INTO
-		public.kindcode("PET_KIND", "PET_KIND_CODE", "PET_KIND_HABITAT") VALUES(#{petKind},
-		#{petKindcode}, #{petKindHabitat});
+	<select id="selectCountryCodeList" resultType="String">
+		SELECT distinct("PET_KIND_HABITAT") from "kindcode" order by "PET_KIND_HABITAT" ASC
+	</select>
+	
+	<insert id="insertKindcode" parameterType="kindCode">
+		INSERT INTO "kindcode"("PET_KIND", "PET_KIND_CODE", "PET_KIND_HABITAT") 
+		VALUES(#{kindCode.petKind}, #{kindCode.petKindcode}, #{kindCode.petKindHabitat});
 	</insert>
 
-	<insert id="updateKindcode" parameterType="kindcode">
-		UPDATE public.kindcode
-		SET "PET_KIND"= #{petKind}
-		WHERE "PET_KIND_CODE"=#{petKindcode};
-	</insert>
+	<update id="updateKindcode" parameterType="kindCode">
+		UPDATE "kindcode"
+		SET "PET_KIND" = #{kindCode.petKind} , "PET_KIND_HABITAT" = #{kindCode.petKindHabitat}
+		WHERE "PET_KIND_CODE"= #{kindCode.petKindcode};
+	</update>
 
 	<insert id="deleteKindcode" parameterType="kindcode">
 		DELETE FROM

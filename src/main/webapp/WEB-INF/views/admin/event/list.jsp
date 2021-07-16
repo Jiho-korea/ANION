@@ -75,41 +75,46 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-							<th height="32" width="5%"><spring:message code="admin.member.number" /></th>
+							<th height="32" width="5%"><spring:message
+									code="admin.member.number" /></th>
 							<th width="15%"><spring:message code="admin.event.status" /></th>
 							<th width="40%"><spring:message code="admin.event.title" /></th>
 							<th width="40%"><spring:message code="admin.event.date" /></th>
-							<th><input type ="button" value= "신규등록"/></th>
-							
+							<th><input type="button"
+								value="<spring:message code="new.register" />" /></th>
+
 						</tr>
 					</thead>
 					<tbody>
-						
-							<tr onclick="location.href='${pageContext.request.contextPath}/admin/event/event'" style="cursor:pointer;">
-												
-								<td width="5%" align="center">${status.index + 1}</td>
-								<td width="15%" align="center">진행중</td>
-								<td width="40%" align="center">강아지 비문 등록이벤트</td>
-								<td width="40%" align="center"><fmt:formatDate value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" />2021-07-04 ~ 0000-00-00</td>
 
-								<td width="6%" align="center">
-									<div align="center">
-										<a href="#" target="_blank"> 
-										<input type="button" name="btn_modify" id="btn_modify" class="btn_modify {delivery_no: 4}" value="수정" /></a>
-									</div>
-									
-									<div align="center">
-										<a href="#"> 
-										<input type="button" name="btn_modify"id="btn_modify" class="btn_modify {delivery_no: 4}"value="종료" /></a>
-									</div>
-									</td>
-										
+						<tr
+							onclick="location.href='${pageContext.request.contextPath}/admin/event/event'"
+							style="cursor: pointer;">
 
-		
-								
-							</tr>
-									
-							<!-- 
+							<td width="8%" align="center">${status.index + 1}</td>
+							<td width="12%" align="center"><spring:message
+									code="proceeding" /></td>
+							<td width="20%" align="center"><spring:message
+									code="admin.event.dog.nosePrints.register" /></td>
+							<td width="20%" align="center"><fmt:formatDate
+									value="${member.memberRegisterDate}" pattern="yyyy-MM-dd" />2021-07-04
+								~ 0000-00-00</td>
+
+							<td><div align="center">
+									<a href="#"> <input type="button" name="btn_modify"
+										id="btn_modify" class="btn_modify {delivery_no: 4}"
+										value="<spring:message code="edit" />" />
+									</a> <a href="#"> <input type="button" name="btn_modify"
+										id="btn_modify" class="btn_modify {delivery_no: 4}"
+										value="<spring:message code="end" />" /></a>
+								</div></td>
+
+
+
+
+						</tr>
+
+						<!-- 
 							<tr>
 								<td colspan="8" height="1" bgcolor="#EEEEEE"></td>
 							</tr>
@@ -121,9 +126,9 @@
 					style="text-align: center; padding-bottom: 20px;">
 					<img
 						src="${pageContext.request.contextPath}/img/admin/common/btn_l.gif"
-						alt="왼쪽이동" border="0" /><strong>1</strong>&nbsp;<img
+						alt="<" border=" 0" /><strong>1</strong>&nbsp;<img
 						src="${pageContext.request.contextPath}/img/admin/common/btn_r.gif"
-						alt="오른쪽이동" border="0" />
+						alt=">" border="0" />
 				</div>
 			</div>
 		</div>

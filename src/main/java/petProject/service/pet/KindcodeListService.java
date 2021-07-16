@@ -25,4 +25,6 @@ public interface KindcodeListService {
 	List<Kindcode> searchPetKindList(PetSearchRequest petSearchRequest) throws Exception;
 
 	boolean nextPage(PetSearchRequest petSearchRequest) throws Exception;
+
+	List<String> selectCountryCodeList() throws Exception;
 }

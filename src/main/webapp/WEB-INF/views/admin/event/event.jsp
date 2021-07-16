@@ -47,9 +47,9 @@
 		<div id="rightcolumn">
 			<div class="title_nav">
 				<h1>
-					비문 등록 이벤트
+					<spring:message code="admin.event.dog.nosePrints.register" />
 				</h1>
-			
+
 			</div>
 			<div class="boardTable">
 				<!--  
@@ -69,42 +69,46 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-							<th height="32" width="5%"><spring:message code="admin.member.number" /></th>
+							<th height="32" width="5%"><spring:message
+									code="admin.member.number" /></th>
 							<th width="10%"><spring:message code="admin.member.name" /></th>
 							<th width="10%"><spring:message code="admin.member.id" /></th>
-							<th width="10%">반련견 수</th>
-							<th width="10%">등록 사진수</th>
-							<th width="10%">승인 사진</th>
-							<th width="10%">목록</th>
-							
-							
+							<th width="10%"><spring:message
+									code="admin.member.total.pet" /></th>
+							<th width="10%"><spring:message
+									code="admin.member.total.image" /></th>
+							<th width="10%"><spring:message code="admission.image" /></th>
+							<th width="10%"><spring:message code="list.pet" /></th>
+
+
 						</tr>
 					</thead>
 					<tbody>
-						
-							<tr>
-												
-								<td width="5%" align="center">${status.index + 1}</td>
-								<td width="10%" align="center">김덕배</td>
-								<td width="10%" align="center">abc1234</td>
-								<td width="10%" align="center">10</td>
-								<td width="10%" align="center">10</td>
-								<td width="10%" align="center">10</td>
-								
-								<td width="6%" align="center">
-									<div align="center">
-										<a href="#" target="_blank"> 
-										<input type="button" name="list" class="btn_modify {delivery_no: 4}" value="목록" /></a>
-									</div>
-									
-									</td>
-										
 
-		
-								
-							</tr>
-									
-							<!-- 
+						<tr>
+
+							<td width="5%" align="center">${status.index + 1}</td>
+							<td width="10%" align="center">김덕배</td>
+							<td width="10%" align="center">abc1234</td>
+							<td width="10%" align="center">10</td>
+							<td width="10%" align="center">10</td>
+							<td width="10%" align="center">10</td>
+
+							<td width="6%" align="center">
+								<div align="center">
+									<a href="#" target="_blank"> <input type="button"
+										name="list" class="btn_modify {delivery_no: 4}"
+										value="<spring:message code="go.list" />" /></a>
+								</div>
+
+							</td>
+
+
+
+
+						</tr>
+
+						<!-- 
 							<tr>
 								<td colspan="8" height="1" bgcolor="#EEEEEE"></td>
 							</tr>
@@ -116,9 +120,9 @@
 					style="text-align: center; padding-bottom: 20px;">
 					<img
 						src="${pageContext.request.contextPath}/img/admin/common/btn_l.gif"
-						alt="왼쪽이동" border="0" /><strong>1</strong>&nbsp;<img
+						alt="<" border="0" /><strong>1</strong>&nbsp;<img
 						src="${pageContext.request.contextPath}/img/admin/common/btn_r.gif"
-						alt="오른쪽이동" border="0" />
+						alt=">" border="0" />
 				</div>
 			</div>
 		</div>
