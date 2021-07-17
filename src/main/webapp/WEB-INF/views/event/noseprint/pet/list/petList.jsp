@@ -56,9 +56,8 @@
 	margin-top: 50px;
 }
 
-
 #petName:hover {
-   font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 .btn_download, .btn_gallery {
@@ -79,18 +78,37 @@
 	<div class="container text-center">
 		<div id="main">
 			<h1 class="display-4">
-				<spring:message code="list.pet" />
+				<c:choose>
+					<c:when test="${empty admin}">
+						<spring:message code="list.pet" />
+					</c:when>
+					<c:otherwise>
+						<spring:message code="list.pet.admin">
+							<spring:argument value="${member.memberName}" />
+						</spring:message>
+					</c:otherwise>
+				</c:choose>
 			</h1>
 		</div>
 		<div class="text-left mb-10">
-		
-			<!-- 비문 이벤트 -->
-			<a href="${pageContext.request.contextPath}/pet/list"
-					class="mb-30"><button type="submit"
-						class="btn btn-info pull-right">
-						뒤로
-					</button></a> 
-			
+			<c:choose>
+				<c:when test="${empty admin}">
+					<%-- 회원의  뒤로가기 버튼 --%>
+					<a href="${pageContext.request.contextPath}/pet/list" class="mb-30"><button
+							type="submit" class="btn btn-info pull-right">
+							<spring:message code="go.back" />
+						</button></a>
+				</c:when>
+				<c:otherwise>
+					<%-- 관리자의 뒤로가기 버튼 --%>
+					<a href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}" class="mb-30"><button
+							type="submit" class="btn btn-info pull-right">
+							<spring:message code="go.back" />
+						</button></a>
+				</c:otherwise>
+			</c:choose>
+
+
 		</div>
 
 
@@ -139,8 +157,7 @@
 									id="btn_photo" class="btn btn-info pull-right"><spring:message
 											code="go.right" /></a> --> <a
 									href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_gallery" id="btn_gallery"
-											type="button">
+										<button class="btn_gallery" id="btn_gallery" type="button">
 											<img
 												src="${pageContext.request.contextPath}/img/button/dog_nose.png">
 										</button>
@@ -148,8 +165,7 @@
 								</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/npimage/download?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_download" id="btn_download"
-											type="button">
+										<button class="btn_download" id="btn_download" type="button">
 											<img
 												src="${pageContext.request.contextPath}/img/button/download1.png">
 										</button>
@@ -163,8 +179,7 @@
 								<td>${pet.noseprintImageCount}건</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_gallery" id="btn_gallery"
-											type="button">
+										<button class="btn_gallery" id="btn_gallery" type="button">
 											<img
 												src="${pageContext.request.contextPath}/img/button/dog_nose.png">
 										</button>

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.KindcodeDeleteException;
-import petProject.service.admin.KindcodeDeleteService;
+import petProject.service.admin.code.kind.KindcodeDeleteService;
 
 @Controller
 @RequestMapping("/admin/code/kindcode")

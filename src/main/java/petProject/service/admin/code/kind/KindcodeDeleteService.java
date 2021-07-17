@@ -7,7 +7,7 @@
 작  성  내  용 : kindcode delete 서비스
 ========================================================================
 */
-package petProject.service.admin;
+package petProject.service.admin.code.kind;
 
 import org.apache.ibatis.annotations.Param;
 

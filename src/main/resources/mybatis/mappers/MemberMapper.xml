@@ -4,6 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="petProject.dao.MemberDAO">
+	<!-- LoginService, 에서 사용 -->
 	<select id="selectMemberById" parameterType="String"
 		resultMap="memberResultMap">
 		SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME",
@@ -14,10 +15,10 @@
 		FROM "member"
 		WHERE "MEMBER_ID" = #{memberId}
 	</select>
-
-	<select id="selectByMemberNumber" parameterType="int"
+	<!-- MemberSelectService, 에서 사용 -->
+	<select id="selectMemberByMemberNumber" parameterType="int"
 		resultMap="memberResultMap">
-		SELECT "MEMBER_ID", "MEMBER_PASSWORD", "MEMBER_NAME",
+		SELECT "MEMBER_ID", "MEMBER_NAME",
 		"MEMBER_PHONE_NUMBER",
 		"MEMBER_REGISTRATION_DATE",
 		"MEMBER_AUTH_STATUS", "MEMBER_LEVEL_CODE",
@@ -26,12 +27,29 @@
 		WHERE "MEMBER_NUMBER" = #{memberNumber}
 	</select>
 
-	<select id="selectByIdFromMember" parameterType="String" resultType="int">
-		SELECT count(*) FROM "member" WHERE "MEMBER_ID" = #{memberId}
+	<resultMap type="member" id="memberResultMap">
+		<id column="MEMBER_NUMBER" property="memberNumber" />
+		<result column="MEMBER_ID" property="memberId" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_PHONE_NUMBER"
+			property="memberPhoneNumber" />
+		<result column="MEMBER_REGISTRATION_DATE"
+			property="memberRegisterDate" />
+		<association select="selectMemberlevel"
+			property="memberlevel" column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
+		<association select="selectMemberauth"
+			property="memberauth" column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
+	</resultMap>
+	<select id="selectByIdFromMember" parameterType="String"
+		resultType="int">
+		SELECT count(*) FROM "member" WHERE "MEMBER_ID" =
+		#{memberId}
 	</select>
-	
-	<select id="selectByIdFromEmailcode" parameterType="String" resultType="int">
-		SELECT count(*) FROM "emailcode" WHERE "NEW_MEMBER_ID" = #{memberId}
+
+	<select id="selectByIdFromEmailcode" parameterType="String"
+		resultType="int">
+		SELECT count(*) FROM "emailcode" WHERE "NEW_MEMBER_ID" =
+		#{memberId}
 	</select>
 
 	<select id="selectMemberList" resultMap="memberListResultMap">
@@ -46,30 +64,29 @@
 	</select>
 
 	<select id="selectMemberCount" resultType="int">
-		SELECT count(*) FROM member
+		SELECT count(*) FROM
+		member
 	</select>
-	
-	<select id="checkMemberAuthStatus" parameterType="emailcode" resultType="memberauth">
-       SELECT "MEMBER_AUTH_STATUS"
-       FROM "member" WHERE "MEMBER_ID" = #{emailcode.memberId}
-    </select>
-    <!-- 
-    <insert id="insertMember" parameterType="memberRegisterRequest">
-		INSERT INTO
-		"public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME",
-		"MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE")
-		VALUES
-		(#{memberRegisterRequest.memberId},
-		#{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
-	</insert>
-     -->
-     
-    <select id="selectProfileById" parameterType="String" resultType="member">
-       SELECT "MEMBER_ID", "MEMBER_NAME", "MEMBER_REGISTRATION_DATE"
-       FROM "member" 
-       WHERE "MEMBER_ID" = #{memberId }
-    </select>
-    
+
+	<select id="checkMemberAuthStatus" parameterType="emailcode"
+		resultType="memberauth">
+		SELECT "MEMBER_AUTH_STATUS"
+		FROM "member" WHERE "MEMBER_ID"
+		= #{emailcode.memberId}
+	</select>
+	<!-- <insert id="insertMember" parameterType="memberRegisterRequest"> INSERT 
+		INTO "public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME", "MEMBER_PHONE_NUMBER","MEMBER_REGISTRATION_DATE") 
+		VALUES (#{memberRegisterRequest.memberId}, #{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now()); 
+		</insert> -->
+
+	<select id="selectProfileById" parameterType="String"
+		resultType="member">
+		SELECT "MEMBER_ID", "MEMBER_NAME",
+		"MEMBER_REGISTRATION_DATE"
+		FROM "member"
+		WHERE "MEMBER_ID" = #{memberId}
+	</select>
+
 	<insert id="insertMember" parameterType="memberRegisterRequest">
 		INSERT INTO
 		"public"."member" ("MEMBER_ID", "MEMBER_PASSWORD","MEMBER_NAME",
@@ -78,7 +95,7 @@
 		(#{memberRegisterRequest.memberId},
 		#{memberRegisterRequest.memberPassword},#{memberRegisterRequest.memberName},#{memberRegisterRequest.memberPhoneNumber},now());
 	</insert>
-	
+
 	<update id="updateAuthStatus" parameterType="String">
 		update "member"
 		set
@@ -152,19 +169,6 @@
 		#{memberNumber}
 	</select>
 
-	<resultMap type="member" id="memberResultMap">
-		<id column="MEMBER_NUMBER" property="memberNumber" />
-		<result column="MEMBER_ID" property="memberId" />
-		<result column="MEMBER_PASSWORD" property="memberPassword" />
-		<result column="MEMBER_NAME" property="memberName" />
-		<result column="MEMBER_PHONE_NUMBER"
-			property="memberPhoneNumber" />
-		<result column="MEMBER_REGISTRATION_DATE"
-			property="memberRegisterDate" />
-		<association select="selectMemberlevel"
-			property="memberlevel" column="{memberLevelCode=MEMBER_LEVEL_CODE}" />
-		<association select="selectMemberauth"
-			property="memberauth" column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
-	</resultMap>
+
 
 </mapper>

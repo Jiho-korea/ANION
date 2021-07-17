@@ -19,16 +19,16 @@
 <title><spring:message code="admin.title" /></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/img/favicon.ico">
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/css/admin/common.css" />
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/css/admin/left.css" />
-	<script defer type="text/javascript">
-	<!--
-		
-	//-->
-	</script>
+	href="${pageContext.request.contextPath}/img/favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/admin/common.css" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/admin/left.css" />
+<script defer type="text/javascript">
+<!--
+	
+//-->
+</script>
 </head>
 <body>
 	<!-- wrapper 시작 -->

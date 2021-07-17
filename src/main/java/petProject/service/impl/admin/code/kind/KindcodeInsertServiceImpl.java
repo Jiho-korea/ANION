@@ -8,14 +8,14 @@
 ========================================================================
 */
 
-package petProject.service.impl.admin;
+package petProject.service.impl.admin.code.kind;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import petProject.dao.KindcodeDAO;
 import petProject.exception.KindcodeInsertException;
-import petProject.service.admin.KindcodeInsertService;
+import petProject.service.admin.code.kind.KindcodeInsertService;
 import petProject.vo.dto.Kindcode;
 
 @Service("kindcodeInsertService")

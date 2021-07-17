@@ -7,7 +7,7 @@
 작  성  내  용 : Member 리스트를 가져오는 서비스 인터페이스
 ========================================================================
 */
-package petProject.service.admin;
+package petProject.service.admin.member;
 
 import java.util.List;
 

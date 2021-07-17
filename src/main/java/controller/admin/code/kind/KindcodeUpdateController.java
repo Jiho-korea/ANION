@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.KindcodeUpdateException;
-import petProject.service.admin.KindcodeUpdateService;
+import petProject.service.admin.code.kind.KindcodeUpdateService;
 import petProject.service.pet.KindcodeListService;
 import petProject.vo.dto.Kindcode;
 
@@ -39,7 +39,7 @@ public class KindcodeUpdateController {
 
 	@Resource(name = "kindcodeListService")
 	KindcodeListService kindcodeListService;
-	
+
 	@Resource(name = "kindcodeUpdateService")
 	KindcodeUpdateService kindcodeUpdateService;
 
@@ -49,7 +49,7 @@ public class KindcodeUpdateController {
 		try {
 			List<String> countryCodeList = kindcodeListService.selectCountryCodeList();
 			Kindcode kindcode = kindcodeUpdateService.selectKindcode(petKindcode);
-			
+
 			model.addAttribute("countryCodeList", countryCodeList);
 			model.addAttribute("kindcode", kindcode);
 
