@@ -101,12 +101,13 @@
 
 							<input type="hidden" name="petRegistrationNumber"
 								value="${pet.petRegistrationNumber}" />
-							<input type="submit" name="btn_modify" id="btn_modify" value="<spring:message code="edit" />" />
+							<input type="submit" name="btn_modify" id="btn_modify"
+								value=<spring:message code="edit" /> />
 
 							<a
 								href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"><input
-								type="button" name="btn_modify_cancle" id="btn_modify_cancle"
-								value="<spring:message code="cancel" />" /> </a>
+								type="button" name="btn_modify_cancel" id="btn_modify_cancel"
+								value=<spring:message code="cancel" /> /> </a>
 							<form:errors path="petName" />
 						</form:form>
 					</c:when>
@@ -184,7 +185,7 @@
 				</spring:message>
 			</h4>
 		</div>
-		
+
 		<c:if test="${delete eq true}">
 			<div class="text-right mb-10">
 				<form action="${pageContext.request.contextPath}/info/pet" id="form"
@@ -197,7 +198,7 @@
 				</form>
 			</div>
 		</c:if>
-		
+
 	</div>
 
 	<c:import url="../../included/bottom.jsp">
@@ -282,4 +283,22 @@
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	$("#btn_modify").click(function() {
+		const target = document.getElementById('btn_modify');
+		target.disabled = true;
+		target.value = 'Loading';
+
+		if ($("#petName").val() == "") {
+			setTimeout(function() {
+				alert("변경할 이름을 입력해주세요.");
+				target.disabled = false;
+				target.value = '<spring:message code="edit" />';
+			}, 100);
+			return false;
+		}
+		document.getElementById('btn_modify_cancel').style.visibility = 'hidden';
+		target.form.submit();
+	});
+</script>
 </html>

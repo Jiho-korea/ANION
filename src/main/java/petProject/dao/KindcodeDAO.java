@@ -35,16 +35,18 @@ public interface KindcodeDAO {
 
 	List<Kindcode> searchPetKindList(@Param("petSearchRequest") PetSearchRequest petSearchRequest) throws Exception;
 
-	Kindcode selectKindcode(@Param("kindcode") String petKindcode) throws Exception;
+	Kindcode selectKindcode(@Param("petKindcode") String petKindcode) throws Exception;
 
-	int insertKindcode(Kindcode kindcode) throws Exception;
+	int insertKindcode(@Param("kindCode") Kindcode kindcode) throws Exception;
 
 	String findKindcode(@Param("petKind") String petKind) throws Exception;
 
 	String selectPetKind(@Param("petKindcode") String petKindcode) throws Exception;
 
-	int updateKindcode(Kindcode kindcode) throws Exception;
+	int updateKindcode(@Param("kindCode") Kindcode kindcode) throws Exception;
 
 	int deleteKindcode(String petKindcode) throws Exception;
+
+	List<String> selectCountryCodeList() throws Exception;
 
 }

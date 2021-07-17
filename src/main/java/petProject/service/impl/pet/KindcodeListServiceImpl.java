@@ -34,8 +34,7 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Override
 	public List<Kindcode> selectKindcodeList() throws Exception {
-		List<Kindcode> kindcodeList = kindcodeDAO.selectKindcodeList();
-		return kindcodeList;
+		return kindcodeDAO.selectKindcodeList();
 	}
 
 	@Override
@@ -55,6 +54,11 @@ public class KindcodeListServiceImpl implements KindcodeListService {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<String> selectCountryCodeList() throws Exception {
+		return kindcodeDAO.selectCountryCodeList();
 	}
 
 }

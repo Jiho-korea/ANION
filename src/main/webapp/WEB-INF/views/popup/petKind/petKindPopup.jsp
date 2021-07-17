@@ -210,7 +210,374 @@ a:hover {
 						</div>
 						</main>
 					</div>
-				</div></li>
+				</div>
+		 	</li>
+		 	
+		 	
+		 	
+		 	<li class="map__marker map__marker--spain"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">스페인 / Spain</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+						 
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'ES' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+							
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	
+		 	
+		 	<li class="map__marker map__marker--portugal"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">포르투칼 / Portugal</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'PT' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 		
+		 	<li class="map__marker map__marker--russia"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">러시아 / Russia</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'RU' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+					
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	<li class="map__marker map__marker--france"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">프랑스 / France</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					  
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'FR' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	<li class="map__marker map__marker--italia"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">이탈리아 / Italia</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					  
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'IT' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	
+		 	 	<li class="map__marker map__marker--swiss"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">스위스 / Swiss</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					 
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'CH' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	<li class="map__marker map__marker--austria"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">오스트리아 / Austria</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'AT' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+					
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	
+		 	
+		<li class="map__marker map__marker--england"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">영국 / England</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+						
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'GB' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	<li class="map__marker map__marker--ireland"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">아일랜드 /Ireland</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					 
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'IE' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 		<li class="map__marker map__marker--germany"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">독일 / Germany</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					 
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'DE' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	
+		 	<li class="map__marker map__marker--island"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">아이슬란드 / Island</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					 
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'IS' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 		
+		 	<li class="map__marker map__marker--belgie"><img width="30"
+				height="30"
+				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
+				href="#"></a>
+				<div class="map__marker-info">
+					<div class="map__marker-info-inner animate animate--bounce-in">
+						<header class="map__marker-info-header">
+							<span class="current">벨기에 / Belgie</span>
+						</header>
+						<main class="map__marker-info-main">
+						<div class="row">
+					 
+							<c:forEach var="kindcode" items="${kindcodeList}"
+								varStatus="status">
+								<c:if test="${kindcode.petKindHabitat eq 'BE' }">
+									<div class="col-md-6">
+										<a
+											href="${pageContext.request.contextPath}/popup/petKind/click/${kindcode.petKindcode}"><li
+											data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li></a>
+									</div>
+								</c:if>
+							</c:forEach>
+						
+						</div>
+						</main>
+					</div>
+				</div>
+		 	</li>
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
+		 	
 		</ul>
 	</div>
 

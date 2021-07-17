@@ -9,8 +9,9 @@
 */
 package controller.admin.code.kind;
 
+import java.util.List;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.KindcodeInsertException;
 import petProject.service.admin.KindcodeInsertService;
+import petProject.service.pet.KindcodeListService;
 import petProject.vo.dto.Kindcode;
 
 @Controller
@@ -37,14 +39,20 @@ public class KindcodeInsertController {
 	@Resource(name = "kindcodeInsertService")
 	KindcodeInsertService kindcodeInsertService;
 
+	@Resource(name = "kindcodeListService")
+	KindcodeListService kindcodeListService;
+
 	@GetMapping("/insert")
-	public String getKindCodeInsert(@ModelAttribute(value = "kindcode") Kindcode kindcode, HttpSession session,
-			Model model) {
+	public String getKindCodeInsert(@ModelAttribute(value = "kindcode") Kindcode kindcode, Model model)
+			throws Exception {
+		List<String> countryCodeList = kindcodeListService.selectCountryCodeList();
+
+		model.addAttribute("countryCodeList", countryCodeList);
 		return "admin/code/kind/insert";
 	}
 
 	@PostMapping("/insert")
-	public String postKindCodeInsert(@Valid Kindcode kindcode, Errors errors, HttpSession session, Model model) {
+	public String postKindCodeInsert(@Valid Kindcode kindcode, Errors errors) {
 		if (errors.hasErrors()) {
 			return "admin/code/kind/insert";
 		}

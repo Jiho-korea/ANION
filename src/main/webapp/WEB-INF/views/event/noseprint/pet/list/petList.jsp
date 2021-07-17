@@ -108,16 +108,16 @@
 							<!-- table row -->
 							<th width="10%"><spring:message code="list.num" /></th>
 							<th width="35%"><spring:message code="list.pet.name" /></th>
-							<th width="30%">등록 비문 수</th>
-							<th width="15%">비문 등록</th>
+							<th width="30%"><spring:message code="event.nose.num" /></th>
+							<th width="15%"><spring:message code="event.nose.enroll" /></th>
 							<th width="10%"><spring:message code="go.zip.image" /></th>
 						</c:when>
 						<c:otherwise>
 							<!-- table row -->
 							<th width="15%"><spring:message code="list.num" /></th>
 							<th width="40%"><spring:message code="list.pet.name" /></th>
-							<th width="30%">등록 비문 수</th>
-							<th width="15%">비문 등록</th>
+							<th width="30%"><spring:message code="event.nose.num" /></th>
+							<th width="15%"><spring:message code="event.nose.enroll" /></th>
 						</c:otherwise>
 					</c:choose>
 				</tr>

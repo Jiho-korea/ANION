@@ -92,7 +92,7 @@
 	<c:import url="../../../../included/top.jsp" />
 	<div class="container text-center">
 		<div id="main">
-			<h1 class="display-4">비문 리스트</h1>
+			<h1 class="display-4"><spring:message code="event.nose.list" /></h1>
 		</div>
 		<div class="text-right mb-10">
 
@@ -109,17 +109,17 @@
 									<spring:message code="go.list" />
 								</button>
 							</a> <label for="ex_file"><a class="btn btn-info"
-								style="color: white;">비문 사진 등록</a></label> <input type="file"
+								style="color: white;"><spring:message code="event.nose.insert" /></a></label> <input type="file"
 								multiple="multiple" name="file" id="ex_file"
 								style="display: none" accept="image/*"
 								onchange="checkFile(this)" /> <input type="hidden"
 								name=petRegistrationNumber id="prn"
 								value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
 								<button type="submit" name="delete" value="true"
-									class="btn btn-info pull-right">비문 사진 삭제</button>
+									class="btn btn-info pull-right"><spring:message code="event.nose.delete" /></button>
 							</a> <br> <a
 								href="${pageContext.request.contextPath}/guidance/npevent" style="color: #DF6464; font-weight: bold;">
-								잠깐! 이곳을 클릭하여 비문 사진 예시를 확인하세요.
+								<spring:message code="event.nose.warming" />
 							</a>
 							<div class="row gallery-item">
 								<c:forEach var="noseprintImage" items="${noseprintImageList}"
