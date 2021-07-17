@@ -44,14 +44,14 @@
 	<c:if test="${empty selectOpen}">
 		<div class="nice-select" tabindex="0">
 			<c:if test="${empty petKind}">
-				<span class="current">견종 / Dog breed</span>
+				<span class="current"><spring:message code="pet.kind" /> / Dog breed</span>
 			</c:if>
 			<c:if test="${not empty petKind}">
 				<span class="current">${petKind }</span>
 			</c:if>
 			<ul class="list">
-				<li data-value="견종 / Dog breed" class="option selected focus"
-					hidden="">견종 / Dog breed</li>
+				<li data-value="<spring:message code="pet.kind" /> / Dog breed" class="option selected focus"
+					hidden=""><spring:message code="pet.kind" /> / Dog breed</li>
 				<c:forEach var="kindcode" items="${searchKindcodeList}"
 					varStatus="status">
 					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
@@ -83,14 +83,14 @@
 	<c:if test="${!empty selectOpen}">
 		<div class="nice-select open" tabindex="0">
 			<c:if test="${empty petKind}">
-				<span class="current">견종 / Dog breed</span>
+				<span class="current"><spring:message code="pet.kind" /> / Dog breed</span>
 			</c:if>
 			<c:if test="${not empty petKind}">
 				<span class="current">${kindcode.petKind }</span>
 			</c:if>
 			<ul class="list">
-				<li data-value="견종 / Dog breed" class="option selected focus"
-					hidden="">견종 / Dog breed</li>
+				<li data-value="<spring:message code="pet.kind" /> / Dog breed" class="option selected focus"
+					hidden=""><spring:message code="pet.kind" /> / Dog breed</li>
 				<c:forEach var="kindcode" items="${searchKindcodeList}"
 					varStatus="status">
 					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>

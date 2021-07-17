@@ -277,28 +277,28 @@
 
 		if ($("#memberId").val() == "") {
 			setTimeout(function() {
-				alert("이메일을 입력해주세요.");
+				alert("<spring:message code="이메일을 입력해주세요." />");
 				target.disabled = false;
 				target.value = '<spring:message code="go.register" />';
 			}, 100);
 			return false;
 		} else if (!CheckEmail($("#memberId").val())) {
 			setTimeout(function() {
-				alert("이메일의 형식이 아닙니다.");
+				alert("<spring:message code="이메일의 형식이 아닙니다." />");
 				target.disabled = false;
 				target.value = '<spring:message code="go.register" />';
 			}, 100);
 			return false;
 		} else if ($("#memberPassword").val() == "") {
 			setTimeout(function() {
-				alert("비밀번호을 입력해주세요.");
+				alert("<spring:message code="비밀번호를 입력해주세요." />");
 				target.disabled = false;
 				target.value = '<spring:message code="go.register" />';
 			}, 100);
 			return false;
 		} else if ($("#memberPassword").val() != $("#checkPassword").val()) {
 			setTimeout(function() {
-				alert("비밀번호와 비밀번호 확인란이 동일하지 않습니다.");
+				alert("<spring:message code="비밀번호와 비밀번호 확인란이 동일하지 않습니다." />");
 				memberPassword.value = checkPassword.value = "";
 				target.disabled = false;
 				target.value = '<spring:message code="go.register" />';
@@ -306,7 +306,7 @@
 			return false;
 		} else if ($("#memberName").val() == "") {
 			setTimeout(function() {
-				alert("이름을 입력해주세요.");
+				alert("<spring:message code="이름을 입력해주세요." />");
 				target.disabled = false;
 				target.value = '<spring:message code="go.register" />';
 			}, 100);

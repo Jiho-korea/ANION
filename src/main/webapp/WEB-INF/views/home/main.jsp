@@ -128,7 +128,9 @@
 			style="margin-right: -10px">
 			<form name="frm" class="d-flex align-items-center">
 				<input id="closeCheck" type="checkbox" name="Notice"
-					onclick="check()"> <a style="font-size: 13px;"><spring:message code="event.popup.decide" /></a> &nbsp;<input type=button value="닫기" onclick="closeWin()"
+					onclick="check()"> <a style="font-size: 13px;"><spring:message
+						code="event.popup.decide" /></a> &nbsp;<input type=button
+					value="<spring:message code="close" />" onclick="closeWin()"
 					style="width: 30pt; height: 20pt; font-size: 13px"
 					class="d-flex align-items-center">
 

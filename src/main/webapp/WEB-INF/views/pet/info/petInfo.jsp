@@ -47,7 +47,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#deleteButton").click(function() {
-			if (!confirm("등록된 반려견을 삭제하시겠습니까?")) {
+			if (!confirm("<spring:message code="info.pet.delete.confirm" />")) {
 				return false;
 			} else {
 				document.getElementById("form").submit();

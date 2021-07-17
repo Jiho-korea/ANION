@@ -196,7 +196,7 @@
 
 		if ($("#emailCode").val() == "") {
 			setTimeout(function() {
-				alert("인증코드를 입력해주세요.");
+				alert("<spring:message code="valid.email.authentication.code" />");
 
 			}, 100);
 			return false;

@@ -13,6 +13,8 @@
 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +81,7 @@ body {
 -->
 <body>
 	<div class="main_title pt-4 pl-4 mb-3 d-flex align-items-center">
-		<p style="color: white;">비문 등록 이벤트</p>
+		<p style="color: white;"><spring:message code="event.nose" /></p>
 	</div>
 	<!-- 
 	<div
