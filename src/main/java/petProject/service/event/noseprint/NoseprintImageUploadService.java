@@ -14,7 +14,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
-import petProject.vo.AuthInfo;
 import petProject.vo.request.NoseprintImageUploadRequest;
 
 public interface NoseprintImageUploadService {
@@ -22,6 +21,6 @@ public interface NoseprintImageUploadService {
 			@Param("noseprintImageUploadRequest") NoseprintImageUploadRequest noseprintImageUploadRequest)
 			throws Exception;
 
-	void uploadNoseprintImage(AuthInfo authInfo, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
+	void uploadNoseprintImage(int memberNumber, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
 			throws Exception;
 }
