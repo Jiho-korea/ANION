@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import petProject.dao.ImageDAO;
 import petProject.exception.ImageUploadException;
 import petProject.service.image.ImageUploadService;
-import petProject.vo.AuthInfo;
 import petProject.vo.request.ImageUploadRequest;
 
 @Service("imageUploadService")
@@ -33,7 +32,7 @@ public class ImageUploadServiceImpl implements ImageUploadService {
 
 	@Override
 	@Transactional
-	public void uploadImage(AuthInfo authInfo, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
+	public void uploadImage(int memberNumber, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
 			throws Exception {
 		String savedName;
 		for (MultipartFile mf : file) {
@@ -43,8 +42,8 @@ public class ImageUploadServiceImpl implements ImageUploadService {
 			String absPath = rootPath + "\\" + savedName;
 			System.out.println("absPath = " + absPath);
 
-			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(authInfo.getMemberNumber(),
-					petRegistrationNumber, savedName);
+			ImageUploadRequest imageUploadRequest = new ImageUploadRequest(memberNumber, petRegistrationNumber,
+					savedName);
 			insertImage(imageUploadRequest);
 		}
 	}

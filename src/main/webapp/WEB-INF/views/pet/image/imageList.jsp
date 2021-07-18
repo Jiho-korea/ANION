@@ -114,7 +114,19 @@
 	<div class="container text-center">
 		<div id="main">
 			<h1 class="display-4">
-				<spring:message code="image.gallery" />
+				<c:choose>
+					<c:when test="${empty admin}">
+						<spring:message code="image.gallery.pet">
+							<spring:argument value="${pet.petName}" />
+						</spring:message>
+					</c:when>
+					<c:otherwise>
+						<spring:message code="image.gallery.admin">
+							<spring:argument value="${member.memberName}" />
+							<spring:argument value="${pet.petName}" />
+						</spring:message>
+					</c:otherwise>
+				</c:choose>
 			</h1>
 		</div>
 		<div class="text-right mb-10">
@@ -122,31 +134,140 @@
 			<c:choose>
 				<c:when test="${delete ne 1}">
 					<div class="filebox">
+						<c:choose>
+							<c:when test="${empty admin}">
+								<form
+									action="${pageContext.request.contextPath}/info/list/image"
+									id="form" method="post" class="form-signin"
+									enctype="multipart/form-data">
 
-						<form action="${pageContext.request.contextPath}/info/list/image"
+
+									<a href="${pageContext.request.contextPath}/pet/list">
+										<button type="button" value="true"
+											class="btn btn-info pull-left" style="float: left;">
+											<spring:message code="go.list" />
+										</button>
+									</a> <label for="ex_file"><a class="btn btn-info"
+										style="color: white;"><spring:message
+												code="list.image.upload" /></a></label> <input type="file"
+										multiple="multiple" name="file" id="ex_file"
+										style="display: none" accept="image/*"
+										onchange="checkFile(this)" /> <input type="hidden"
+										name=petRegistrationNumber id="prn"
+										value="${pet.petRegistrationNumber}" /> <a href="#"
+										class="mb-30">
+										<button type="submit" name="delete" value="true"
+											class="btn btn-info pull-right">
+											<spring:message code="list.image.delete" />
+										</button>
+									</a>
+									<div class="row gallery-item">
+										<c:forEach var="image" items="${imageList}" varStatus="status">
+											<div class="col-md-4">
+												<a
+													href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+													class="img-pop-up">
+													<div class="single-gallery-image"
+														style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+												</a>
+												<%-- 버튼안 텍스트 옆에 이미지를 넣는 방법
+										<button type="button" id="" class="btn btnEvent">
+											<img
+												src="https://img.icons8.com/flat-round/64/000000/share--v1.png"
+												alt="btnImages" class="btnImages">
+										</button>
+										--%>
+
+												<%-- 공유하기 버튼!! 임시 삭제
+										<a
+											href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button
+												class="btn_share mt-2 mr-3" id="btn_share" type="button">
+												<img
+													src="${pageContext.request.contextPath}/img/button/share1.png">
+											</button></a>  --%>
+											</div>
+										</c:forEach>
+									</div>
+								</form>
+							</c:when>
+							<c:otherwise>
+								<form
+									action="${pageContext.request.contextPath}/admin/pet/image/${member.memberNumber}"
+									id="form" method="post" class="form-signin"
+									enctype="multipart/form-data">
+
+									<a
+										href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}">
+										<button type="button" value="true"
+											class="btn btn-info pull-left" style="float: left;">
+											<spring:message code="go.list" />
+										</button>
+									</a> <label for="ex_file"><a class="btn btn-info"
+										style="color: white;"><spring:message
+												code="list.image.upload" /></a></label> <input type="file"
+										multiple="multiple" name="file" id="ex_file"
+										style="display: none" accept="image/*"
+										onchange="checkFile(this)" /> <input type="hidden"
+										name=petRegistrationNumber id="prn"
+										value="${pet.petRegistrationNumber}" /> <a href="#"
+										class="mb-30"> <c:if test="${empty admin}">
+											<button type="submit" name="delete" value="true"
+												class="btn btn-info pull-right">
+												<spring:message code="list.image.delete" />
+											</button>
+										</c:if>
+
+									</a>
+									<div class="row gallery-item">
+										<c:forEach var="image" items="${imageList}" varStatus="status">
+											<div class="col-md-4">
+												<a
+													href="${pageContext.request.contextPath}/upload/${image.imagePath}"
+													class="img-pop-up">
+													<div class="single-gallery-image"
+														style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
+												</a>
+												<%-- 버튼안 텍스트 옆에 이미지를 넣는 방법
+										<button type="button" id="" class="btn btnEvent">
+											<img
+												src="https://img.icons8.com/flat-round/64/000000/share--v1.png"
+												alt="btnImages" class="btnImages">
+										</button>
+										--%>
+
+												<%-- 공유하기 버튼!! 임시 삭제
+										<a
+											href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button
+												class="btn_share mt-2 mr-3" id="btn_share" type="button">
+												<img
+													src="${pageContext.request.contextPath}/img/button/share1.png">
+											</button></a>  --%>
+											</div>
+										</c:forEach>
+									</div>
+								</form>
+							</c:otherwise>
+						</c:choose>
+
+					</div>
+				</c:when>
+
+				<c:otherwise>
+					<c:if test="${empty admin}">
+						<form
+							action="${pageContext.request.contextPath}/info/list/imageDelete"
 							id="form" method="post" class="form-signin"
 							enctype="multipart/form-data">
-							
-							<a href="${pageContext.request.contextPath}/pet/list">
-								<button type="button" value="true"
-									class="btn btn-info pull-left" style="float: left;">
-									<spring:message code="go.list" />
-								</button>
-							</a> 
-							
-							<label for="ex_file"><a class="btn btn-info"
-								style="color: white;"><spring:message
-										code="list.image.upload" /></a></label> <input type="file"
-								multiple="multiple" name="file" id="ex_file"
-								style="display: none" accept="image/*"
-								onchange="checkFile(this)" /> <input type="hidden"
-								name=petRegistrationNumber id="prn"
-								value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
-								<button type="submit" name="delete" value="true"
-									class="btn btn-info pull-right">
-									<spring:message code="list.image.delete" />
-								</button>
-							</a>
+							<input type="checkbox" id="allCheck" />
+							<spring:message code="check.all" />
+							&nbsp; <input type="submit" class="btn btn-info pull-right"
+								value="<spring:message code="delete.button" />"
+								id="deleteButton"> &nbsp; <a
+								href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
+								class="btn btn-info pull-right" id="cancelButton"
+								style="color: #ffffff"><spring:message code="cancel" /></a> <input
+								type="hidden" name=petRegistrationNumber id="prn"
+								value="${pet.petRegistrationNumber}" />
 							<div class="row gallery-item">
 								<c:forEach var="image" items="${imageList}" varStatus="status">
 									<div class="col-md-4">
@@ -155,62 +276,17 @@
 											class="img-pop-up">
 											<div class="single-gallery-image"
 												style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
-										</a>
-										<%-- 버튼안 텍스트 옆에 이미지를 넣는 방법
-										<button type="button" id="" class="btn btnEvent">
-											<img
-												src="https://img.icons8.com/flat-round/64/000000/share--v1.png"
-												alt="btnImages" class="btnImages">
-										</button>
-										--%>
-										
-										<%-- 공유하기 버튼!! 임시 삭제
-										<a
-											href="${pageContext.request.contextPath}/posting/img?imageNumber=${image.imageNumber}"><button
-												class="btn_share mt-2 mr-3" id="btn_share" type="button">
-												<img
-													src="${pageContext.request.contextPath}/img/button/share1.png">
-											</button></a>  --%>
+										</a> <br>
+										<div
+											class="checkBox d-flex justify-content-center align-items-center">
+											<input type="checkbox" name="chBox" class="chBox"
+												value="${image.imagePath}" />
+										</div>
 									</div>
 								</c:forEach>
 							</div>
 						</form>
-					</div>
-				</c:when>
-
-				<c:otherwise>
-					<form
-						action="${pageContext.request.contextPath}/info/list/imageDelete"
-						id="form" method="post" class="form-signin"
-						enctype="multipart/form-data">
-						<input type="checkbox" id="allCheck" />
-						<spring:message code="check.all" />
-						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="<spring:message code="delete.button" />" id="deleteButton">
-						&nbsp; <a
-							href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${petRegistrationNumber}"
-							class="btn btn-info pull-right" id="cancelButton"
-							style="color: #ffffff"><spring:message code="cancel" /></a> <input
-							type="hidden" name=petRegistrationNumber id="prn"
-							value="${petRegistrationNumber}" />
-						<div class="row gallery-item">
-							<c:forEach var="image" items="${imageList}" varStatus="status">
-								<div class="col-md-4">
-									<a
-										href="${pageContext.request.contextPath}/upload/${image.imagePath}"
-										class="img-pop-up">
-										<div class="single-gallery-image"
-											style="background: url(${pageContext.request.contextPath}/upload/${image.imagePath});"></div>
-									</a> <br>
-									<div
-										class="checkBox d-flex justify-content-center align-items-center">
-										<input type="checkbox" name="chBox" class="chBox"
-											value="${image.imagePath}" />
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</form>
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 

@@ -14,12 +14,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
-import petProject.vo.AuthInfo;
 import petProject.vo.request.ImageUploadRequest;
 
 public interface ImageUploadService {
 	int insertImage(@Param("imageUploadRequest") ImageUploadRequest imageUploadRequest) throws Exception;
 
-	void uploadImage(AuthInfo authInfo, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
+	void uploadImage(int memberNumber, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
 			throws Exception;
 }

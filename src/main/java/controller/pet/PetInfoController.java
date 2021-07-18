@@ -94,7 +94,7 @@ public class PetInfoController {
 			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			ScriptWriter.write("잘못된 접근입니다.", "home", request, response); // url로 아무 펫번호나 입력했을 때 여기서 걸림
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,7 +109,7 @@ public class PetInfoController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
 			petDeleteService.deletePet(petRegistrationNumber, request);
-			
+
 			return "redirect:/pet/list";
 		} catch (PetDeleteException e) { // DB에 없는 pet일경우 DeleteException발생
 			e.printStackTrace();
