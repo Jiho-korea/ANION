@@ -41,7 +41,7 @@ import petProject.vo.request.MemberRegisterRequest;
 public interface MemberDAO {
 	Member selectMemberById(@Param("memberId") String memberId) throws Exception;
 
-	Member selectByMemberNumber(@Param("memberNumber") int memberNumber);
+	Member selectMemberByMemberNumber(@Param("memberNumber") int memberNumber);
 
 	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
 

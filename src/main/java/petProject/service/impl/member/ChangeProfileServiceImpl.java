@@ -24,6 +24,7 @@ import petProject.exception.MailException;
 import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNameUpdateException;
+import petProject.service.admin.member.MemberSelectService;
 import petProject.service.email.ChangeProfileEmailService;
 import petProject.service.member.ChangeProfileService;
 import petProject.vo.AuthInfo;
@@ -37,6 +38,9 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+
+	@Resource(name = "memberSelectService")
+	MemberSelectService memberSelectService;
 
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
@@ -56,7 +60,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 	@Transactional
 	public void updateName(ChangeNameCommand changeNameCommand, AuthInfo authInfo) throws Exception {
-		Member member = memberDAO.selectByMemberNumber(changeNameCommand.getMemberNumber());
+		Member member = memberSelectService.selectMemberByMemberNumber(changeNameCommand.getMemberNumber());
 
 		member.setMemberName(changeNameCommand.getMemberName());
 		authInfo.setMemberName(changeNameCommand.getMemberName());
@@ -86,7 +90,8 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	@Transactional
 	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request)
 			throws MailException, Exception {
-		Member member = memberDAO.selectByMemberNumber(changeIdCommand.getMemberNumber());
+		Member member = memberSelectService.selectMemberByMemberNumber(changeIdCommand.getMemberNumber());
+
 		this.selectById(changeIdCommand.getMemberId());
 		Emailcode emailcode = this.updateEmailcode(authInfo.getMemberId(), changeIdCommand);
 

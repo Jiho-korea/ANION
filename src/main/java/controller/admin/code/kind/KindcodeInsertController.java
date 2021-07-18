@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import petProject.exception.KindcodeInsertException;
-import petProject.service.admin.KindcodeInsertService;
+import petProject.service.admin.code.kind.KindcodeInsertService;
 import petProject.service.pet.KindcodeListService;
 import petProject.vo.dto.Kindcode;
 

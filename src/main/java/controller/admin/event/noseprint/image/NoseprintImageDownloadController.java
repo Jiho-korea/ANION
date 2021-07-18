@@ -7,7 +7,7 @@
 작  성  내  용 : 비문 이미지 다운로드 컨트롤러
 ========================================================================
 */
-package controller.admin.event.noseprint;
+package controller.admin.event.noseprint.image;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

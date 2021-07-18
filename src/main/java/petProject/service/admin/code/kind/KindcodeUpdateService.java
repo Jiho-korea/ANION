@@ -7,7 +7,7 @@
 작  성  내  용 : kindcode select메서드 작성
 ========================================================================
 */
-package petProject.service.admin;
+package petProject.service.admin.code.kind;
 
 import org.apache.ibatis.annotations.Param;
 

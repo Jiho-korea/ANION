@@ -21,8 +21,10 @@ import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
 import controller.admin.code.kind.KindcodeUpdateController;
 import controller.admin.event.EventListController;
-import controller.admin.event.noseprint.NoseprintImageDownloadController;
+import controller.admin.event.noseprint.image.NoseprintImageDownloadController;
+import controller.admin.event.noseprint.pet.NoseprintPetListAdminController;
 import controller.admin.image.ImageDownloadController;
+import controller.admin.image.ImageListAdminController;
 import controller.admin.member.MemberListController;
 import controller.admin.pet.PetListAdminController;
 import controller.event.noseprint.image.NoseprintImageDeleteController;
@@ -118,6 +120,11 @@ public class ControllerConfig {
 	}
 
 	@Bean
+	public ImageListAdminController imageListAdminController() {
+		return new ImageListAdminController();
+	}
+
+	@Bean
 	public ProfileEditController editController() {
 		return new ProfileEditController();
 	}
@@ -161,6 +168,7 @@ public class ControllerConfig {
 		return new PetKindPopupController();
 	}
 
+	// 비문 등록 이벤트 관련
 	@Bean
 	public NoseprintImageEventGuidanceController noseprintImageEventGuidanceController() {
 		return new NoseprintImageEventGuidanceController();
@@ -185,6 +193,12 @@ public class ControllerConfig {
 	public NoseprintImageDownloadController noseprintImageDownloadController() {
 		return new NoseprintImageDownloadController();
 	}
+
+	@Bean
+	public NoseprintPetListAdminController noseprintPetListAdminController() {
+		return new NoseprintPetListAdminController();
+	}
+	// 여기 까지
 
 	@Bean
 	public EventListController eventListController() {

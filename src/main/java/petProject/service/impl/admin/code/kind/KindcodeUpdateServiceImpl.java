@@ -7,7 +7,7 @@
 작  성  내  용 : kindcode select메서드 작성
 ========================================================================
 */
-package petProject.service.impl.admin;
+package petProject.service.impl.admin.code.kind;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.KindcodeDAO;
 import petProject.exception.KindcodeNotFoundException;
 import petProject.exception.KindcodeUpdateException;
-import petProject.service.admin.KindcodeUpdateService;
+import petProject.service.admin.code.kind.KindcodeUpdateService;
 import petProject.vo.dto.Kindcode;
 
 @Service("kindcodeUpdateService")

@@ -7,7 +7,7 @@
 작  성  내  용 : kindcode delete메서드 작성
 ========================================================================
 */
-package petProject.service.impl.admin;
+package petProject.service.impl.admin.code.kind;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.KindcodeDAO;
 import petProject.exception.KindcodeDeleteException;
-import petProject.service.admin.KindcodeDeleteService;
+import petProject.service.admin.code.kind.KindcodeDeleteService;
 
 @Service("kindcodeDeleteService")
 @Transactional

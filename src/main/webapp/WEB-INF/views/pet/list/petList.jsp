@@ -68,9 +68,8 @@
 	margin-top: 50px;
 }
 
-
 #petName:hover {
-   font-size: 1.2em;
+	font-size: 1.2em;
 }
 
 .btn_download, .btn_gallery {
@@ -91,19 +90,42 @@
 	<div class="container text-center">
 		<div id="main">
 			<h1 class="display-4">
-				<spring:message code="list.pet" />
+				<c:choose>
+					<c:when test="${empty admin}">
+						<spring:message code="list.pet" />
+					</c:when>
+					<c:otherwise>
+						<spring:message code="list.pet.admin">
+							<spring:argument value="${member.memberName}" />
+						</spring:message>
+					</c:otherwise>
+				</c:choose>
 			</h1>
 		</div>
 		<div class="text-right mb-10">
-		
-			<!-- 비문 이벤트 -->
-			<a href="${pageContext.request.contextPath}/pet/list/npevent"
-					class="mb-30"><button type="submit"
-						class="btn btn-info pull-right">
-						<spring:message code="event.nose" />
 
-					</button></a> 
-		
+			<c:choose>
+				<c:when test="${empty admin}">
+					<%-- 비문 이벤트 --%>
+					<a href="${pageContext.request.contextPath}/pet/list/npevent"
+						class="mb-30"><button type="submit"
+							class="btn btn-info pull-right">
+							<spring:message code="event.nose" />
+
+						</button></a>
+				</c:when>
+				<c:otherwise>
+					<%-- 관리자의 비문 이벤트 --%>
+					<a
+						href="${pageContext.request.contextPath}/admin/pet/npevent/${member.memberNumber}"
+						class="mb-30"><button type="submit"
+							class="btn btn-info pull-right">
+							<spring:message code="event.nose" />
+
+						</button></a>
+				</c:otherwise>
+			</c:choose>
+
 			<c:if test="${empty admin}">
 				<a href="${pageContext.request.contextPath}/register/step1"
 					class="mb-30"><button type="submit"
@@ -111,8 +133,8 @@
 						<spring:message code="register.pet" />
 					</button></a>
 			</c:if>
-			
-			
+
+
 		</div>
 
 
@@ -156,22 +178,33 @@
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
 								<td>${pet.imageCount}<spring:message code="list.few" /></td>
 								<td>
-									<!-- <a
+									<%-- <a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
 									id="btn_photo" class="btn btn-info pull-right"><spring:message
-											code="go.right" /></a> --> <a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_gallery" id="btn_gallery"
-											type="button">
-											<img
-												src="${pageContext.request.contextPath}/img/button/gallery1.png">
-										</button>
-								</a>
+											code="go.right" /></a> --%> <c:choose>
+										<c:when test="${empty admin}">
+											<a
+												href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
+												<button class="btn_gallery" id="btn_gallery" type="button">
+													<img
+														src="${pageContext.request.contextPath}/img/button/gallery1.png">
+												</button>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="${pageContext.request.contextPath}/admin/pet/image/${member.memberNumber}?petRegistrationNumber=${pet.petRegistrationNumber}">
+												<button class="btn_gallery" id="btn_gallery" type="button">
+													<img
+														src="${pageContext.request.contextPath}/img/button/gallery1.png">
+												</button>
+											</a>
+										</c:otherwise>
+									</c:choose>
 								</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/image/download?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_download" id="btn_download"
-											type="button">
+										<button class="btn_download" id="btn_download" type="button">
 											<img
 												src="${pageContext.request.contextPath}/img/button/download1.png">
 										</button>
@@ -185,8 +218,7 @@
 								<td>${pet.imageCount}건</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_gallery" id="btn_gallery"
-											type="button">
+										<button class="btn_gallery" id="btn_gallery" type="button">
 											<img
 												src="${pageContext.request.contextPath}/img/button/gallery1.png">
 										</button>

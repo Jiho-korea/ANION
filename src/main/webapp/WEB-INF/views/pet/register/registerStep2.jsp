@@ -81,7 +81,7 @@
 			<div class="row">
 				<div class="col-md-6 mb-1">
 					<a class="btn btn-info pull-right" href="<c:url value='step1'/>"
-						role="button"><spring:message code="go.back" /></a>
+						role="button"><spring:message code="go.back.re" /></a>
 
 				</div>
 				<div class="col-md-6 mb-1">

@@ -7,7 +7,7 @@
 작  성  내  용 : 멤버 리스트 갖고 오는 서비스 객체
 ========================================================================
 */
-package petProject.service.impl.admin;
+package petProject.service.impl.admin.member;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.ImageDAO;
 import petProject.dao.MemberDAO;
 import petProject.dao.PetDAO;
-import petProject.service.admin.MemberListService;
+import petProject.service.admin.member.MemberListService;
 import petProject.vo.dto.Member;
 
 @Service("memberListService")
