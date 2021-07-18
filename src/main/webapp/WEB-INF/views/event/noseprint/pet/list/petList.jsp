@@ -101,8 +101,10 @@
 				</c:when>
 				<c:otherwise>
 					<%-- 관리자의 뒤로가기 버튼 --%>
-					<a href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}" class="mb-30"><button
-							type="submit" class="btn btn-info pull-right">
+					<a
+						href="${pageContext.request.contextPath}/admin/pet/${member.memberNumber}"
+						class="mb-30"><button type="submit"
+							class="btn btn-info pull-right">
 							<spring:message code="go.back" />
 						</button></a>
 				</c:otherwise>
@@ -151,18 +153,26 @@
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
 								<td>${pet.noseprintImageCount}건</td>
-								<td>
-									<!-- <a
-									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}"
-									id="btn_photo" class="btn btn-info pull-right"><spring:message
-											code="go.right" /></a> --> <a
-									href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}">
-										<button class="btn_gallery" id="btn_gallery" type="button">
-											<img
-												src="${pageContext.request.contextPath}/img/button/dog_nose.png">
-										</button>
-								</a>
-								</td>
+								<td><c:choose>
+										<c:when test="${empty admin}">
+											<a
+												href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}">
+												<button class="btn_gallery" id="btn_gallery" type="button">
+													<img
+														src="${pageContext.request.contextPath}/img/button/dog_nose.png">
+												</button>
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="${pageContext.request.contextPath}/admin/pet/image/npevent/${member.memberNumber}?petRegistrationNumber=${pet.petRegistrationNumber}">
+												<button class="btn_gallery" id="btn_gallery" type="button">
+													<img
+														src="${pageContext.request.contextPath}/img/button/dog_nose.png">
+												</button>
+											</a>
+										</c:otherwise>
+									</c:choose></td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/npimage/download?petRegistrationNumber=${pet.petRegistrationNumber}">
 										<button class="btn_download" id="btn_download" type="button">

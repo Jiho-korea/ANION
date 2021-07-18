@@ -22,6 +22,7 @@ import controller.admin.code.kind.KindcodeListController;
 import controller.admin.code.kind.KindcodeUpdateController;
 import controller.admin.event.EventListController;
 import controller.admin.event.noseprint.image.NoseprintImageDownloadController;
+import controller.admin.event.noseprint.image.NoseprintImageListAdminController;
 import controller.admin.event.noseprint.pet.NoseprintPetListAdminController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.image.ImageListAdminController;
@@ -182,6 +183,11 @@ public class ControllerConfig {
 	@Bean
 	public NoseprintImageListController noseprintImageListController() {
 		return new NoseprintImageListController();
+	}
+
+	@Bean
+	public NoseprintImageListAdminController noseprintImageListAdminController() {
+		return new NoseprintImageListAdminController();
 	}
 
 	@Bean

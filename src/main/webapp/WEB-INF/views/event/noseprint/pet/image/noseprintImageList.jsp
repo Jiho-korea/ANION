@@ -93,7 +93,19 @@
 	<div class="container text-center">
 		<div id="main">
 			<h1 class="display-4">
-				<spring:message code="event.nose.list" />
+				<c:choose>
+					<c:when test="${empty admin}">
+						<spring:message code="event.nose.list">
+							<spring:argument value="${pet.petName}" />
+						</spring:message>
+					</c:when>
+					<c:otherwise>
+						<spring:message code="event.nose.list.admin">
+							<spring:argument value="${member.memberName}" />
+							<spring:argument value="${pet.petName}" />
+						</spring:message>
+					</c:otherwise>
+				</c:choose>
 			</h1>
 		</div>
 		<div class="text-right mb-10">
@@ -101,33 +113,117 @@
 			<c:choose>
 				<c:when test="${delete ne 1}">
 					<div class="filebox">
+						<c:choose>
+							<c:when test="${empty admin}">
+								<form
+									action="${pageContext.request.contextPath}/info/list/npimage"
+									id="form" method="post" class="form-signin"
+									enctype="multipart/form-data">
+
+									<a href="${pageContext.request.contextPath}/pet/list/npevent">
+										<button type="button" value="true"
+											class="btn btn-info pull-left" style="float: left;">
+											<spring:message code="go.list" />
+										</button>
+									</a> <label for="ex_file"><a class="btn btn-info"
+										style="color: white;"><spring:message
+												code="event.nose.insert" /></a></label> <input type="file"
+										multiple="multiple" name="file" id="ex_file"
+										style="display: none" accept="image/*"
+										onchange="checkFile(this)" /> <input type="hidden"
+										name=petRegistrationNumber id="prn"
+										value="${pet.petRegistrationNumber}" /> <a href="#" class="mb-30">
+										<button type="submit" name="delete" value="true"
+											class="btn btn-info pull-right">
+											<spring:message code="event.nose.delete" />
+										</button>
+									</a> <br> <a
+										href="${pageContext.request.contextPath}/guidance/npevent"
+										style="color: #DF6464; font-weight: bold;"> <spring:message
+											code="event.nose.warming" />
+									</a>
+									<div class="row gallery-item">
+										<c:forEach var="noseprintImage" items="${noseprintImageList}"
+											varStatus="status">
+											<div class="col-md-4">
+												<a
+													href="${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath}"
+													class="img-pop-up">
+													<div class="single-gallery-image"
+														style="background: url(${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath});"></div>
+												</a>
+											</div>
+										</c:forEach>
+									</div>
+								</form>
+							</c:when>
+							<c:otherwise>
+								<form
+									action="${pageContext.request.contextPath}/admin/pet/image/npevent/${member.memberNumber}"
+									id="form" method="post" class="form-signin"
+									enctype="multipart/form-data">
+
+									<a
+										href="${pageContext.request.contextPath}/admin/pet/npevent/${member.memberNumber}">
+										<button type="button" value="true"
+											class="btn btn-info pull-left" style="float: left;">
+											<spring:message code="go.list" />
+										</button>
+									</a> <label for="ex_file"><a class="btn btn-info"
+										style="color: white;"><spring:message
+												code="event.nose.insert" /></a></label> <input type="file"
+										multiple="multiple" name="file" id="ex_file"
+										style="display: none" accept="image/*"
+										onchange="checkFile(this)" /> <input type="hidden"
+										name=petRegistrationNumber id="prn"
+										value="${pet.petRegistrationNumber}" /> <a href="#" class="mb-30">
+
+										<c:if test="${empty admin}">
+											<button type="submit" name="delete" value="true"
+												class="btn btn-info pull-right">
+												<spring:message code="event.nose.delete" />
+											</button>
+										</c:if>
+									</a> <br> <a
+										href="${pageContext.request.contextPath}/guidance/npevent"
+										style="color: #DF6464; font-weight: bold;"> <spring:message
+											code="event.nose.warming" />
+									</a>
+									<div class="row gallery-item">
+										<c:forEach var="noseprintImage" items="${noseprintImageList}"
+											varStatus="status">
+											<div class="col-md-4">
+												<a
+													href="${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath}"
+													class="img-pop-up">
+													<div class="single-gallery-image"
+														style="background: url(${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath});"></div>
+												</a>
+											</div>
+										</c:forEach>
+									</div>
+								</form>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:when>
+
+				<c:otherwise>
+					<c:if test="${empty admin}">
 						<form
-							action="${pageContext.request.contextPath}/info/list/npimage"
+							action="${pageContext.request.contextPath}/info/list/npimageDelete"
 							id="form" method="post" class="form-signin"
 							enctype="multipart/form-data">
-
-							<a href="${pageContext.request.contextPath}/pet/list/npevent">
-								<button type="button" value="true"
-									class="btn btn-info pull-left" style="float: left;">
-									<spring:message code="go.list" />
-								</button>
-							</a> <label for="ex_file"><a class="btn btn-info"
-								style="color: white;"><spring:message
-										code="event.nose.insert" /></a></label> <input type="file"
-								multiple="multiple" name="file" id="ex_file"
-								style="display: none" accept="image/*"
-								onchange="checkFile(this)" /> <input type="hidden"
-								name=petRegistrationNumber id="prn"
-								value="${petRegistrationNumber}" /> <a href="#" class="mb-30">
-								<button type="submit" name="delete" value="true"
-									class="btn btn-info pull-right">
-									<spring:message code="event.nose.delete" />
-								</button>
-							</a> <br> <a
-								href="${pageContext.request.contextPath}/guidance/npevent"
-								style="color: #DF6464; font-weight: bold;"> <spring:message
-									code="event.nose.warming" />
-							</a>
+							<input type="checkbox" id="allCheck" />
+							<spring:message code="check.all" />
+							&nbsp; <input type="submit" class="btn btn-info pull-right"
+								value="<spring:message code="delete.button" />"
+								id="deleteButton"> &nbsp; <a
+								href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${pet.petRegistrationNumber}"
+								class="btn btn-info pull-right" id="cancelButton"
+								style="color: #ffffff"><spring:message code="cancel" /></a> <input
+								type="hidden" name=petRegistrationNumber id="prn"
+								value="${pet.petRegistrationNumber}" />
 							<div class="row gallery-item">
 								<c:forEach var="noseprintImage" items="${noseprintImageList}"
 									varStatus="status">
@@ -137,48 +233,17 @@
 											class="img-pop-up">
 											<div class="single-gallery-image"
 												style="background: url(${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath});"></div>
-										</a>
+										</a> <br>
+										<div
+											class="checkBox d-flex justify-content-center align-items-center">
+											<input type="checkbox" name="chBox" class="chBox"
+												value="${noseprintImage.noseprintImagePath}" />
+										</div>
 									</div>
 								</c:forEach>
 							</div>
 						</form>
-					</div>
-				</c:when>
-
-				<c:otherwise>
-					<form
-						action="${pageContext.request.contextPath}/info/list/npimageDelete"
-						id="form" method="post" class="form-signin"
-						enctype="multipart/form-data">
-						<input type="checkbox" id="allCheck" />
-						<spring:message code="check.all" />
-						&nbsp; <input type="submit" class="btn btn-info pull-right"
-							value="<spring:message code="delete.button" />" id="deleteButton">
-						&nbsp; <a
-							href="${pageContext.request.contextPath}/info/list/npimage?petRegistrationNumber=${petRegistrationNumber}"
-							class="btn btn-info pull-right" id="cancelButton"
-							style="color: #ffffff"><spring:message code="cancel" /></a> <input
-							type="hidden" name=petRegistrationNumber id="prn"
-							value="${petRegistrationNumber}" />
-						<div class="row gallery-item">
-							<c:forEach var="noseprintImage" items="${noseprintImageList}"
-								varStatus="status">
-								<div class="col-md-4">
-									<a
-										href="${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath}"
-										class="img-pop-up">
-										<div class="single-gallery-image"
-											style="background: url(${pageContext.request.contextPath}/upload/noseprint/${noseprintImage.noseprintImagePath});"></div>
-									</a> <br>
-									<div
-										class="checkBox d-flex justify-content-center align-items-center">
-										<input type="checkbox" name="chBox" class="chBox"
-											value="${noseprintImage.noseprintImagePath}" />
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					</form>
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 

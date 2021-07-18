@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import petProject.dao.NoseprintImageDAO;
 import petProject.exception.ImageUploadException;
 import petProject.service.event.noseprint.NoseprintImageUploadService;
-import petProject.vo.AuthInfo;
 import petProject.vo.request.NoseprintImageUploadRequest;
 
 @Service("noseprintImageUploadService")
@@ -33,7 +32,7 @@ public class NoseprintImageUploadServiceImpl implements NoseprintImageUploadServ
 
 	@Override
 	@Transactional
-	public void uploadNoseprintImage(AuthInfo authInfo, List<MultipartFile> file, String rootPath,
+	public void uploadNoseprintImage(int memberNumber, List<MultipartFile> file, String rootPath,
 			int petRegistrationNumber) throws Exception {
 		String savedName;
 		for (MultipartFile mf : file) {
@@ -43,8 +42,8 @@ public class NoseprintImageUploadServiceImpl implements NoseprintImageUploadServ
 			String absPath = rootPath + "\\" + savedName;
 			System.out.println("absPath = " + absPath);
 
-			NoseprintImageUploadRequest noseprintImageUploadRequest = new NoseprintImageUploadRequest(
-					authInfo.getMemberNumber(), petRegistrationNumber, savedName);
+			NoseprintImageUploadRequest noseprintImageUploadRequest = new NoseprintImageUploadRequest(memberNumber,
+					petRegistrationNumber, savedName);
 			insertNoseprintImage(noseprintImageUploadRequest);
 		}
 
