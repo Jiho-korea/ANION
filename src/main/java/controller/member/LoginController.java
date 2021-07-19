@@ -57,7 +57,7 @@ public class LoginController {
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpSession session) {
-
+		
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
@@ -72,10 +72,10 @@ public class LoginController {
 	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			@CookieValue(value = "popup01", required = false) Cookie cookie_popup01) {
+		
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
-
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());
