@@ -9,10 +9,11 @@
 */
 package petProject.service.pet;
 
-import org.apache.ibatis.annotations.Param;
-
+import petProject.vo.dto.Pet;
 import petProject.vo.request.PetNameUpdateRequest;
 
 public interface PetInfoUpdateService {
-	int updatePetName(@Param("petNameUpdateRequest") PetNameUpdateRequest petNameUpdateRequest) throws Exception;
+	int updatePetName(PetNameUpdateRequest petNameUpdateRequest) throws Exception;
+
+	int updateLocation(Pet pet) throws Exception;
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ANION popup1</title>
+<title>ANION locationPopup</title>
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -71,6 +71,7 @@ a:hover {
 
 .fAddr {
 	position: absolute;
+	width: 300px;
 	left: 50%;
 	bottom: 15%;
 	border-radius: 2px;
@@ -79,6 +80,7 @@ a:hover {
 	z-index: 1;
 	padding: 5px;
 	transform: translate(-50%, -5%);
+	left: 50%;
 }
 
 #centerAddr {
@@ -100,18 +102,17 @@ a:hover {
 
 	<div class="map_wrap">
 		<div id="map"
-			style="width: 100%; height: 700px; position: relative; overflow: hidden;"></div>
+			style="width: 100%; height: 720px; position: relative; overflow: hidden;"></div>
 		<div class="hAddr">
 			<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
 		</div>
-		<div class="fAddr">
-			<c:if test="${!empty address }">
-				<span class="title">${address } <span id="centerAddr"
-					style="position: absolute; left: 50%; transform: translate(-50%, 5%);"><button
-							type="button" class="btn header-btn" onclick="locationSelect();">OK</button></span></span>
-			</c:if>
-		</div>
-		<div id="clickLatlng"></div>
+
+		<c:if test="${!empty address }">
+			<div class="fAddr" id="petLocationSelect"
+				style="position: absolute; left: 50%; transform: translate(-50%, 10%);">
+				<c:import url="petLocationSelectAjax.jsp" />
+			</div>
+		</c:if>
 	</div>
 
 	<!-- JS here -->
@@ -179,6 +180,28 @@ a:hover {
 
 </body>
 <script defer type="text/javascript">
+	function popupClose(petRegistrationNumber) {
+		var formData = new FormData(); //formData 객체 생성
+
+		formData.append("petRegistrationNumber", "${petRegistrationNumber}");
+		formData.append("address", "${address}");
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/pet/location/register",
+			type : "post",
+			dataType : "text",
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				window.close();
+			}, error : function(jqXHR, textStatus, errorThrown) {
+				alert("등록오류");
+			}
+		});
+	}
+
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -220,44 +243,40 @@ a:hover {
 		marker.setClickable(true);
 		marker.setMap(map);
 
-		var message = '위도 : ' + locPosition.getLat() + ', ';
-		message += '경도 : ' + locPosition.getLng();
-
-		var resultDiv = document.getElementById('clickLatlng');
-		resultDiv.innerHTML = message;
-
 		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
-		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-			searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-				if (status === kakao.maps.services.Status.OK) {
-					var detailAddr = '<div>지번 주소 : '
-						+ '<a href="${pageContext.request.contextPath}/pet/location/' 
+		kakao.maps.event
+				.addListener(
+						map,
+						'click',
+						function(mouseEvent) {
+							searchDetailAddrFromCoords(
+									mouseEvent.latLng,
+									function(result, status) {
+										if (status === kakao.maps.services.Status.OK) {
+											var detailAddr = '<div>지번 주소 : '
+													+ '<a href="${pageContext.request.contextPath}/pet/location/' 
 						+ ${petRegistrationNumber} + '/' + result[0].address.address_name + '">'
-						+ result[0].address.address_name
-						+ '</a></div>';
-					var content = '<div class="bAddr">'
-						+ '<span class="title">법정동 주소정보</span>'
-						+ detailAddr + '</div>';
-					// 마커를 클릭한 위치에 표시합니다 
-					marker.setPosition(mouseEvent.latLng);
-					marker.setMap(map);
-					// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-					infowindow.setContent(content);
-					infowindow.open(map, marker);
-
-					var message = '위도 : ' + mouseEvent.latLng.getLat() + ', ';
-						message += '경도 : ' + mouseEvent.latLng.getLng();
-						
-					var resultDiv = document.getElementById('clickLatlng');
-					resultDiv.innerHTML = message;
-				}
-			});
-		});
+													+ result[0].address.address_name
+													+ '</a></div>';
+											var content = '<div class="bAddr">'
+													+ '<span class="title">법정동 주소정보</span>'
+													+ detailAddr + '</div>';
+											// 마커를 클릭한 위치에 표시합니다 
+											marker
+													.setPosition(mouseEvent.latLng);
+											marker.setMap(map);
+											// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+											infowindow.setContent(content);
+											infowindow.open(map, marker);
+										}
+									});
+						});
 
 		kakao.maps.event.addListener(map, 'idle', function() {
 			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 		});
+
 	}
 	function searchAddrFromCoords(coords, callback) {
 		// 좌표로 행정동 주소 정보를 요청합니다
@@ -279,10 +298,6 @@ a:hover {
 				}
 			}
 		}
-	}
-	
-	function locationSelect() {
-		
 	}
 </script>
 </html>

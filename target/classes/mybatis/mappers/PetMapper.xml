@@ -102,6 +102,22 @@
 		WHERE "MEMBER_NUMBER" =
 		#{memberNumber}
 	</select>
+	
+	<update id="updatePetName" parameterType="petNameUpdateRequest">
+		UPDATE public.pet
+		SET
+		"PET_NAME"=#{petNameUpdateRequest.petName}
+		WHERE
+		"PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
+	</update>
+	
+	<update id="updateLocation" parameterType="pet">
+		UPDATE public.pet
+		SET
+		"PET_ADDRESS"=#{pet.petAddress}
+		WHERE
+		"PET_REGISTRATION_NUMBER"=#{pet.petRegistrationNumber};
+	</update>
 
 	<resultMap type="pet" id="petListResultMap">
 		<id column="PET_REGISTRATION_NUMBER"
@@ -120,15 +136,6 @@
 		<result column="IMAGE_COUNT" property="imageCount" />
 	</resultMap>
 
-
-	<update id="updatePetName" parameterType="petNameUpdateRequest">
-		UPDATE public.pet
-		SET
-		"PET_NAME"=#{petNameUpdateRequest.petName}
-		WHERE
-		"PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
-	</update>
-
 	<select id="selectNoseprintPetList" parameterType="int"
 		resultMap="noseprintPetListResultMap">
 		select "PET_REGISTRATION_NUMBER", "MEMBER_NUMBER",
@@ -139,6 +146,7 @@
 		#{memberNumber} ORDER BY "PET_REGISTRATION_DATE" DESC,
 		"PET_REGISTRATION_NUMBER" DESC
 	</select>
+	
 	<resultMap type="pet" id="noseprintPetListResultMap">
 		<id column="PET_REGISTRATION_NUMBER"
 			property="petRegistrationNumber" />

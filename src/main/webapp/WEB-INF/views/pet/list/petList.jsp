@@ -219,11 +219,17 @@
 								<td><c:if test="${pet.petAddress eq null }">
 										등록 필요<a
 											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
-											onclick="window.open(this.href, '_blank', 'width=800px, height=800px'); return false;"><img
+											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
 											width="38" height="38"
 											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
 										</a>
-									</c:if> <c:if test="${pet.petAddress ne null}">등록 완료</c:if></td>
+									</c:if> <c:if test="${pet.petAddress ne null}">등록 완료<a
+											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
+											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
+											width="38" height="38"
+											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
+										</a>
+									</c:if></td>
 								<td>${pet.imageCount}건</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">

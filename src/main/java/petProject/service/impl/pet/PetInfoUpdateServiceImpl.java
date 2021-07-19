@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.PetDAO;
 import petProject.exception.PetInfoUpdateException;
 import petProject.service.pet.PetInfoUpdateService;
+import petProject.vo.dto.Pet;
 import petProject.vo.request.PetNameUpdateRequest;
 
 @Service("petInfoUpdateService")
@@ -28,7 +29,16 @@ public class PetInfoUpdateServiceImpl implements PetInfoUpdateService {
 	public int updatePetName(PetNameUpdateRequest petNameUpdateRequest) throws Exception {
 		int result = petDAO.updatePetName(petNameUpdateRequest);
 		if (result != 1) {
-			throw new PetInfoUpdateException("pet infomation update faild");
+			throw new PetInfoUpdateException("pet information update faild");
+		}
+		return result;
+	}
+
+	@Override
+	public int updateLocation(Pet pet) throws Exception {
+		int result = petDAO.updateLocation(pet);
+		if (result != 1) {
+			throw new PetInfoUpdateException("pet information update faild");
 		}
 		return result;
 	}
