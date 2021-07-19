@@ -158,9 +158,10 @@
 						</c:when>
 						<c:otherwise>
 							<!-- table row -->
-							<th width="15%"><spring:message code="list.num" /></th>
-							<th width="40%"><spring:message code="list.pet.name" /></th>
-							<th width="30%"><spring:message code="list.image.count" /></th>
+							<th width="10%"><spring:message code="list.num" /></th>
+							<th width="35%"><spring:message code="list.pet.name" /></th>
+							<th>반려견 위치</th>
+							<th width="15%"><spring:message code="list.image.count" /></th>
 							<th width="15%"><spring:message code="image.gallery" /></th>
 						</c:otherwise>
 					</c:choose>
@@ -215,6 +216,14 @@
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
+								<td><c:if test="${pet.petAddress eq null }">
+										등록 필요<a
+											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
+											onclick="window.open(this.href, '_blank', 'width=800px, height=800px'); return false;"><img
+											width="38" height="38"
+											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
+										</a>
+									</c:if> <c:if test="${pet.petAddress ne null}">등록 완료</c:if></td>
 								<td>${pet.imageCount}건</td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
@@ -223,7 +232,6 @@
 												src="${pageContext.request.contextPath}/img/button/gallery1.png">
 										</button>
 								</a></td>
-
 							</c:otherwise>
 						</c:choose>
 					</tr>

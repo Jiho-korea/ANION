@@ -28,7 +28,7 @@
 		select "PET_REGISTRATION_NUMBER", "MEMBER_NUMBER",
 		"PET_NAME",
 		"PET_KIND_CODE", "PET_BIRTHDAY", "PET_REGISTRATION_DATE",
-		"PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX",
+		"PET_MICROCHIP", "PET_MOTHERNAME", "PET_FATHERNAME", "PET_SEX", "PET_ADDRESS",
 		(select count(*) from "public"."image" as "image" where
 		"image"."PET_REGISTRATION_NUMBER"="pet"."PET_REGISTRATION_NUMBER") as
 		"IMAGE_COUNT" from "public"."pet" as "pet" where "MEMBER_NUMBER"=
@@ -116,6 +116,7 @@
 		<result column="PET_MOTHERNAME" property="petMothername" />
 		<result column="PET_FATHERNAME" property="petFathername" />
 		<result column="PET_SEX" property="petSex" />
+		<result column="PET_ADDRESS" property="petAddress" />
 		<result column="IMAGE_COUNT" property="imageCount" />
 	</resultMap>
 

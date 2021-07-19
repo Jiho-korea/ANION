@@ -357,7 +357,6 @@
 		}
 		return true;
 	}
-	
 </script>
 </html>
 <!-- 
