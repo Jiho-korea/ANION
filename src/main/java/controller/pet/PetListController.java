@@ -15,6 +15,9 @@ package controller.pet;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -38,10 +41,15 @@ public class PetListController {
 	PetListService petListService;
 
 	@GetMapping("/list")
-	public String listPet(HttpSession session, Model model) {
+	public String listPet(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) {
 
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		try {
+			Cookie petLocation = new Cookie("petLocation", "true");
+			petLocation.setPath(request.getContextPath() + "/pet/location");
+			petLocation.setMaxAge(60 * 60 * 24 * 1);
+			response.addCookie(petLocation);
+
 			List<Pet> petList = petListService.selectPetList(authInfo.getMemberNumber());
 			model.addAttribute("petList", petList);
 		} catch (Exception e) {

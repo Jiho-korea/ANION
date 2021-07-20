@@ -17,7 +17,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
 
-public class PopupCookieCheckInterceptor implements HandlerInterceptor {
+public class PopupPetKindCookieCheckInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

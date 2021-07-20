@@ -71,7 +71,6 @@ a:hover {
 
 .fAddr {
 	position: absolute;
-	width: 300px;
 	left: 50%;
 	bottom: 15%;
 	border-radius: 2px;
@@ -91,7 +90,7 @@ a:hover {
 
 .bAddr {
 	padding: 5px;
-	padding-right: 10px;
+	padding-right: 12px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -108,9 +107,13 @@ a:hover {
 		</div>
 
 		<c:if test="${!empty address }">
-			<div class="fAddr" id="petLocationSelect"
-				style="position: absolute; left: 50%; transform: translate(-50%, 10%);">
-				<c:import url="petLocationSelectAjax.jsp" />
+			<div class="fAddr">
+				<span class="title" style="text-align: center;">${address } <span
+					id="centerAddr"
+					style="position: absolute; left: 50%; transform: translate(-50%, 0%);"><br>
+						<button type="button" class="btn header-btn"
+							onclick="popupClose()">OK</button></span>
+				</span>
 			</div>
 		</c:if>
 	</div>
@@ -180,28 +183,6 @@ a:hover {
 
 </body>
 <script defer type="text/javascript">
-	function popupClose(petRegistrationNumber) {
-		var formData = new FormData(); //formData 객체 생성
-
-		formData.append("petRegistrationNumber", "${petRegistrationNumber}");
-		formData.append("address", "${address}");
-
-		$.ajax({
-			url : "${pageContext.request.contextPath}/pet/location/register",
-			type : "post",
-			dataType : "text",
-			data : formData,
-			contentType : false,
-			processData : false,
-			cache : false,
-			success : function(data) {
-				window.close();
-			}, error : function(jqXHR, textStatus, errorThrown) {
-				alert("등록오류");
-			}
-		});
-	}
-
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -245,33 +226,24 @@ a:hover {
 
 		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
-		kakao.maps.event
-				.addListener(
-						map,
-						'click',
-						function(mouseEvent) {
-							searchDetailAddrFromCoords(
-									mouseEvent.latLng,
-									function(result, status) {
-										if (status === kakao.maps.services.Status.OK) {
-											var detailAddr = '<div>지번 주소 : '
-													+ '<a href="${pageContext.request.contextPath}/pet/location/' 
-						+ ${petRegistrationNumber} + '/' + result[0].address.address_name + '">'
-													+ result[0].address.address_name
-													+ '</a></div>';
-											var content = '<div class="bAddr">'
-													+ '<span class="title">법정동 주소정보</span>'
-													+ detailAddr + '</div>';
-											// 마커를 클릭한 위치에 표시합니다 
-											marker
-													.setPosition(mouseEvent.latLng);
-											marker.setMap(map);
-											// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-											infowindow.setContent(content);
-											infowindow.open(map, marker);
-										}
-									});
-						});
+		kakao.maps.event.addListener(map,'click',function(mouseEvent) {
+			searchDetailAddrFromCoords(mouseEvent.latLng,function(result, status) {
+				if (status === kakao.maps.services.Status.OK) {
+					var detailAddr = '<div>지번 주소 : '
+						+ '<a href="${pageContext.request.contextPath}/pet/location/' + ${petRegistrationNumber} + '/' + result[0].address.address_name + '">'
+						+ result[0].address.address_name + '</a></div>';
+					var content = '<div class="bAddr">'
+						+ '<span class="title">법정동 주소정보</span>'
+						+ detailAddr + '</div>';
+					// 마커를 클릭한 위치에 표시합니다 
+					marker.setPosition(mouseEvent.latLng);
+					marker.setMap(map);
+					// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+					infowindow.setContent(content);
+					infowindow.open(map, marker);
+				}
+			});
+		});
 
 		kakao.maps.event.addListener(map, 'idle', function() {
 			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -298,6 +270,30 @@ a:hover {
 				}
 			}
 		}
+	}
+
+	function popupClose(petRegistrationNumber) {
+		var formData = new FormData(); //formData 객체 생성
+
+		formData.append("petRegistrationNumber", "${petRegistrationNumber}");
+		formData.append("address", "${address}");
+
+		$.ajax({
+			url : "${pageContext.request.contextPath}/pet/location/register",
+			type : "post",
+			dataType : "text",
+			data : formData,
+			contentType : false,
+			processData : false,
+			cache : false,
+			success : function(data) {
+				opener.parent.location.reload();
+				window.close();
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("등록오류");
+			}
+		});
 	}
 </script>
 </html>

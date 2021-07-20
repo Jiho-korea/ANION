@@ -159,10 +159,10 @@
 						<c:otherwise>
 							<!-- table row -->
 							<th width="10%"><spring:message code="list.num" /></th>
-							<th width="35%"><spring:message code="list.pet.name" /></th>
+							<th width="30%"><spring:message code="list.pet.name" /></th>
 							<th>반려견 위치</th>
-							<th width="15%"><spring:message code="list.image.count" /></th>
-							<th width="15%"><spring:message code="image.gallery" /></th>
+							<th width="10%"><spring:message code="list.image.count" /></th>
+							<th width="10%"><spring:message code="image.gallery" /></th>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -220,13 +220,14 @@
 										등록 필요<a
 											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
 											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
-											width="38" height="38"
+											width="20" height="20"
 											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
 										</a>
-									</c:if> <c:if test="${pet.petAddress ne null}">등록 완료<a
+									</c:if> <c:if test="${pet.petAddress ne null}">${pet.petAddress }
+										<a
 											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
 											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
-											width="38" height="38"
+											width="20" height="20"
 											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
 										</a>
 									</c:if></td>
