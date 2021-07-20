@@ -210,12 +210,11 @@ a:hover {
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	
-		 	
-		 	<li class="map__marker map__marker--spain"><img width="30"
+				</div></li>
+
+
+
+			<li class="map__marker map__marker--spain"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -226,7 +225,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-						 
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'ES' }">
@@ -237,16 +236,15 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-							
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	
-		 	
-		 	<li class="map__marker map__marker--portugal"><img width="30"
+				</div></li>
+
+
+
+			<li class="map__marker map__marker--portugal"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -257,7 +255,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'PT' }">
@@ -268,15 +266,14 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 		
-		 	<li class="map__marker map__marker--russia"><img width="30"
+				</div></li>
+
+
+			<li class="map__marker map__marker--russia"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -287,7 +284,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'RU' }">
@@ -298,14 +295,13 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-					
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	<li class="map__marker map__marker--france"><img width="30"
+				</div></li>
+
+			<li class="map__marker map__marker--france"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -316,7 +312,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					  
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'FR' }">
@@ -327,14 +323,13 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	<li class="map__marker map__marker--italia"><img width="30"
+				</div></li>
+
+			<li class="map__marker map__marker--italia"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -345,7 +340,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					  
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'IT' }">
@@ -356,15 +351,14 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	
-		 	 	<li class="map__marker map__marker--swiss"><img width="30"
+				</div></li>
+
+
+			<li class="map__marker map__marker--swiss"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -375,7 +369,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					 
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'CH' }">
@@ -386,14 +380,13 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	<li class="map__marker map__marker--austria"><img width="30"
+				</div></li>
+
+			<li class="map__marker map__marker--austria"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -404,7 +397,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'AT' }">
@@ -415,16 +408,15 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-					
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	
-		 	
-		<li class="map__marker map__marker--england"><img width="30"
+				</div></li>
+
+
+
+			<li class="map__marker map__marker--england"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -435,7 +427,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-						
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'GB' }">
@@ -446,14 +438,13 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	<li class="map__marker map__marker--ireland"><img width="30"
+				</div></li>
+
+			<li class="map__marker map__marker--ireland"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -464,7 +455,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					 
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'IE' }">
@@ -475,14 +466,13 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 		<li class="map__marker map__marker--germany"><img width="30"
+				</div></li>
+
+			<li class="map__marker map__marker--germany"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -493,7 +483,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					 
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'DE' }">
@@ -504,15 +494,14 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	
-		 	<li class="map__marker map__marker--island"><img width="30"
+				</div></li>
+
+
+			<li class="map__marker map__marker--island"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -523,7 +512,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					 
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'IS' }">
@@ -534,15 +523,14 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 		
-		 	<li class="map__marker map__marker--belgie"><img width="30"
+				</div></li>
+
+
+			<li class="map__marker map__marker--belgie"><img width="30"
 				height="30"
 				src="${pageContext.request.contextPath}/img/button/dog_marker2.png" /><a
 				href="#"></a>
@@ -553,7 +541,7 @@ a:hover {
 						</header>
 						<main class="map__marker-info-main">
 						<div class="row">
-					 
+
 							<c:forEach var="kindcode" items="${kindcodeList}"
 								varStatus="status">
 								<c:if test="${kindcode.petKindHabitat eq 'BE' }">
@@ -564,20 +552,19 @@ a:hover {
 									</div>
 								</c:if>
 							</c:forEach>
-						
+
 						</div>
 						</main>
 					</div>
-				</div>
-		 	</li>
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	
-		 	
+				</div></li>
+
+
+
+
+
+
+
+
 		</ul>
 	</div>
 
@@ -690,35 +677,33 @@ a:hover {
 
 		formData.append("petKindWord", petKindWord);
 
-		if (petKindWord.length > 1) {
-			clearTimeout(search);
-			search = setTimeout(function() {
-				$.ajax({
-					url : "${pageContext.request.contextPath}/popup/petKind",
-					type : "post",
-					dataType : "text",
-					data : formData,
-					contentType : false,
-					processData : false,
-					cache : false
-				}).done(function(result) {
-					var html = jQuery('<div>').html(result);
-					var contents = html.find("div#kindcodeListAjax").html();
-					$("#kindcodeListSelect").html(contents);
-					let len = $('#petKindSearch').val().length;
-					$('#petKindSearch').focus();
-					$('#petKindSearch')[0].setSelectionRange(len, len);
-					<!--
-					document.getElementById('petKindSearch').focus();
-					-->
-				}).fail(function(jqXHR, textStatus, errorThrown) {
-					console.log("에러");
-					console.log(jqXHR);
-					console.log(textStatus);
-					console.log(errorThrown);
-				});
-			}, 1000);
-		}
+		clearTimeout(search);
+		search = setTimeout(function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/popup/petKind",
+				type : "post",
+				dataType : "text",
+				data : formData,
+				contentType : false,
+				processData : false,
+				cache : false
+			}).done(function(result) {
+				var html = jQuery('<div>').html(result);
+				var contents = html.find("div#kindcodeListAjax").html();
+				$("#kindcodeListSelect").html(contents);
+				let len = $('#petKindSearch').val().length;
+				$('#petKindSearch').focus();
+				$('#petKindSearch')[0].setSelectionRange(len, len);
+				<!--
+				document.getElementById('petKindSearch').focus();
+				-->
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				console.log("에러");
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(errorThrown);
+			});
+		}, 1000);
 	}
 </script>
 </html>

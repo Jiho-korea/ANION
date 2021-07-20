@@ -32,8 +32,10 @@ import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
 import interceptor.LogoutCheckInterceptor;
-import interceptor.PopupCookieCheckInterceptor;
-import interceptor.PopupCookieDeleteInterceptor;
+import interceptor.PopupPetKindCookieCheckInterceptor;
+import interceptor.PopupPetKindCookieDeleteInterceptor;
+import interceptor.PopupPetLocationCookieCheckInterceptor;
+import interceptor.PopupPetLocationCookieDeleteInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -60,15 +62,25 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public PopupCookieCheckInterceptor popupCookieCheckInterceptor() {
-		return new PopupCookieCheckInterceptor();
+	public PopupPetKindCookieCheckInterceptor popupPetKindCookieCheckInterceptor() {
+		return new PopupPetKindCookieCheckInterceptor();
 	}
 
 	@Bean
-	public PopupCookieDeleteInterceptor popupCookieDeleteInterceptor() {
-		return new PopupCookieDeleteInterceptor();
+	public PopupPetKindCookieDeleteInterceptor popupPetKindCookieDeleteInterceptor() {
+		return new PopupPetKindCookieDeleteInterceptor();
 	}
 
+	@Bean
+	public PopupPetLocationCookieCheckInterceptor popupPetLocationCookieCheckInterceptor() {
+		return new PopupPetLocationCookieCheckInterceptor();
+	}
+
+	@Bean
+	public PopupPetLocationCookieDeleteInterceptor popupPetLocationCookieDeleteInterceptor() {
+		return new PopupPetLocationCookieDeleteInterceptor();
+	}
+	
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
@@ -111,9 +123,12 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
 		registry.addInterceptor(infoAuthCheckInterceptor()).addPathPatterns("/info/**");
 		registry.addInterceptor(imageAuthCheckInterceptor()).addPathPatterns("/posting/img/**");
-		registry.addInterceptor(popupCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
-		registry.addInterceptor(popupCookieDeleteInterceptor()).excludePathPatterns("/register/step1",
+		registry.addInterceptor(popupPetKindCookieCheckInterceptor()).addPathPatterns("/popup/petKind/**");
+		registry.addInterceptor(popupPetKindCookieDeleteInterceptor()).excludePathPatterns("/register/step1",
 				"/popup/petKind/**");
+		registry.addInterceptor(popupPetLocationCookieCheckInterceptor()).addPathPatterns("/pet/location/**");
+		registry.addInterceptor(popupPetLocationCookieDeleteInterceptor()).excludePathPatterns("/pet/list",
+				"/pet/location/**");
 	}
 
 }

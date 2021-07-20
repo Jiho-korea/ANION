@@ -21,7 +21,6 @@ public class SelectKindcodeServiceImpl implements SelectKindcodeService {
 		if (petKind == null) {
 			throw new NonExistentKindcodeException("non-existent petKindcode" + petKindcode);
 		}
-		System.out.println(petKind);
 		return petKind;
 	}
 

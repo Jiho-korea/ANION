@@ -44,6 +44,7 @@ import controller.member.ProfileEditController;
 import controller.pet.PetInfoController;
 import controller.pet.PetKindPopupController;
 import controller.pet.PetListController;
+import controller.pet.PetLocationController;
 import controller.pet.PetRegisterController;
 
 @Configuration
@@ -214,5 +215,10 @@ public class ControllerConfig {
 	@Bean
 	public MemberFindController memberFindController() {
 		return new MemberFindController();
+	}
+	
+	@Bean
+	public PetLocationController petLocationController() {
+		return new PetLocationController();
 	}
 }

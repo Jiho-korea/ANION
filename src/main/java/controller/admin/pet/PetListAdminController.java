@@ -12,6 +12,9 @@ package controller.admin.pet;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -40,10 +43,17 @@ public class PetListAdminController {
 	MemberSelectService memberSelectService;
 
 	@GetMapping("/{memberNumber}")
-	public String listPet(@PathVariable("memberNumber") int memberNumber, HttpSession session, Model model) {
+	public String listPet(@PathVariable("memberNumber") int memberNumber, HttpSession session, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
 		try {
+			Cookie petLocation = new Cookie("petLocation", "true");
+			petLocation.setPath(request.getContextPath() + "/pet/location");
+			petLocation.setMaxAge(60 * 60 * 24 * 1);
+			response.addCookie(petLocation);
+
 			List<Pet> petList = petListService.selectPetList(memberNumber);
 			Member member = memberSelectService.selectMemberByMemberNumber(memberNumber);
+
 			model.addAttribute("petList", petList);
 			model.addAttribute("admin", true);
 			model.addAttribute("member", member);
