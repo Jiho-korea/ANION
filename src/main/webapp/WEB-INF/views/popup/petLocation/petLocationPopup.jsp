@@ -240,6 +240,21 @@ a:hover {
 		map.setCenter(locPosition);
 		marker.setClickable(true);
 		marker.setMap(map);
+		
+		searchDetailAddrFromCoords(locPosition,function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				var detailAddr = '<div><spring:message code="address.lot" />: '
+					+ '<a href="${pageContext.request.contextPath}/pet/location/' 
+					+ ${petRegistrationNumber} + '/' + result[0].address.address_name + '?lat=' + locPosition.getLat() + '&lon=' + locPosition.getLng() + '">'
+					+ result[0].address.address_name + '</a></div>';
+				var content = '<div class="bAddr">'
+					+ '<span class="title"><spring:message code="address.legal" /></span>'
+					+ detailAddr + '</div>';
+				// 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+				infowindow.setContent(content);
+				infowindow.open(map, marker);
+			}
+		});
 
 		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 
