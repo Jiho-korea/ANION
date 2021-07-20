@@ -105,18 +105,14 @@
 	
 	<update id="updatePetName" parameterType="petNameUpdateRequest">
 		UPDATE public.pet
-		SET
-		"PET_NAME"=#{petNameUpdateRequest.petName}
-		WHERE
-		"PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
+		SET "PET_NAME"=#{petNameUpdateRequest.petName}
+		WHERE "PET_REGISTRATION_NUMBER"=#{petNameUpdateRequest.petRegistrationNumber};
 	</update>
 	
 	<update id="updateLocation" parameterType="pet">
 		UPDATE public.pet
-		SET
-		"PET_ADDRESS"=#{pet.petAddress}
-		WHERE
-		"PET_REGISTRATION_NUMBER"=#{pet.petRegistrationNumber};
+		SET "PET_ADDRESS"=#{pet.petAddress}
+		WHERE "PET_REGISTRATION_NUMBER"=#{pet.petRegistrationNumber};
 	</update>
 
 	<resultMap type="pet" id="petListResultMap">

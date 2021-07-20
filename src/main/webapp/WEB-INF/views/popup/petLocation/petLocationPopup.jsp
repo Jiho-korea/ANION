@@ -1,3 +1,12 @@
+<!-- 
+========================================================================
+파    일    명 : petLocationPopup.jsp
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.07.20
+작  성  내  용 : 위치를 등록하는 지도(카카오맵) 팝업창
+========================================================================
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -103,7 +112,7 @@ a:hover {
 		<div id="map"
 			style="width: 100%; height: 720px; position: relative; overflow: hidden;"></div>
 		<div class="hAddr">
-			<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
+			<span class="title"><spring:message code="address.administrative.map.center"/></span> <span id="centerAddr"></span>
 		</div>
 
 		<c:if test="${!empty address }">
@@ -192,6 +201,9 @@ a:hover {
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
 
+	var latdata = "${lat}";
+	var londata = "${lon}";
+
 	//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {
 		// GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -199,6 +211,11 @@ a:hover {
 
 			var lat = position.coords.latitude, // 위도
 			lon = position.coords.longitude; // 경도
+			
+			if (latdata != "" & londata != "") {
+				lat = latdata;
+				lon = londata;
+			}
 
 			var locPosition = new kakao.maps.LatLng(lat, lon); // 인포윈도우에 표시될 내용입니다
 
@@ -229,11 +246,12 @@ a:hover {
 		kakao.maps.event.addListener(map,'click',function(mouseEvent) {
 			searchDetailAddrFromCoords(mouseEvent.latLng,function(result, status) {
 				if (status === kakao.maps.services.Status.OK) {
-					var detailAddr = '<div>지번 주소 : '
-						+ '<a href="${pageContext.request.contextPath}/pet/location/' + ${petRegistrationNumber} + '/' + result[0].address.address_name + '">'
+					var detailAddr = '<div><spring:message code="address.lot" />: '
+						+ '<a href="${pageContext.request.contextPath}/pet/location/' 
+						+ ${petRegistrationNumber} + '/' + result[0].address.address_name + '?lat=' + mouseEvent.latLng.getLat() + '&lon=' + mouseEvent.latLng.getLng() + '">'
 						+ result[0].address.address_name + '</a></div>';
 					var content = '<div class="bAddr">'
-						+ '<span class="title">법정동 주소정보</span>'
+						+ '<span class="title"><spring:message code="address.legal" /></span>'
 						+ detailAddr + '</div>';
 					// 마커를 클릭한 위치에 표시합니다 
 					marker.setPosition(mouseEvent.latLng);
@@ -291,7 +309,7 @@ a:hover {
 				window.close();
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
-				alert("등록오류");
+				alert("register error");
 			}
 		});
 	}

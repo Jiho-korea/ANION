@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : PetLocationController.java
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.07.20
+작  성  내  용 : 사용자의 위치를 입력하는 팝업창
+========================================================================
+*/
 package controller.pet;
 
 import javax.annotation.Resource;
@@ -31,12 +40,20 @@ public class PetLocationController {
 
 	@GetMapping(value = { "/{petRegistrationNumber}", "/{petRegistrationNumber}/{address}" })
 	public String petLocationPopup(@PathVariable Integer petRegistrationNumber,
-			@PathVariable(name = "address", required = false) String address, Model model) {
+			@PathVariable(name = "address", required = false) String address,
+			@RequestParam(name = "lat", required = false) String lat,
+			@RequestParam(name = "lon", required = false) String lon, Model model) {
+		
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 
 		if (address != null) {
 			model.addAttribute("address", address);
 		}
+		if(lat!=null & lon != null) {
+			model.addAttribute("lat", lat);
+			model.addAttribute("lon", lon);
+		}
+		
 		return "popup/petLocation/petLocationPopup";
 	}
 
