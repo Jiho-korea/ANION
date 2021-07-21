@@ -55,8 +55,12 @@
 	</c:import>
 	
 	<br>
-	<h1>서버에 문제가 발생했습니다.</h1>
-
+	<h1 id="errorMessage">&nbsp서버에 문제가 발생했습니다.</h1>
+	
+	<script>
+		document.getElementById('errorMessage').style.font = 'bold 30px Arial';
+	</script>
+	
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>

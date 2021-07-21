@@ -56,7 +56,11 @@
 	</c:import>
 
 	<br>
-	<h1>요청하신 경로를 찾을 수 없습니다.</h1>
+	<h1 id="errorMessage">&nbsp요청하신 경로를 찾을 수 없습니다.</h1>
+	
+	<script>
+		document.getElementById('errorMessage').style.font = 'bold 30px Arial';
+	</script>
 
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
