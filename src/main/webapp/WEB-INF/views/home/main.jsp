@@ -116,8 +116,7 @@
 			 -->
 		<div class="d-flex justify-content-center ml-5 mt-5">
 			<!--  <a href="${pageContext.request.contextPath}/popup/1/click">-->
-			<a href="javascript:window.close();"
-				onclick="window.open('https://www.facebook.com/groups/3017696248465936')">
+			<a href="https://www.facebook.com/groups/3017696248465936">
 				<img
 				src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
 				style="width: 90%;">

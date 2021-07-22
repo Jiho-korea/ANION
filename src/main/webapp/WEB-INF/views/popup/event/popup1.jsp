@@ -81,7 +81,9 @@ body {
 -->
 <body>
 	<div class="main_title pt-4 pl-4 mb-3 d-flex align-items-center">
-		<p style="color: white;"><spring:message code="event.nose" /></p>
+		<p style="color: white;">
+			<spring:message code="event.nose" />
+		</p>
 	</div>
 	<!-- 
 	<div
@@ -102,6 +104,7 @@ body {
 
 		</a>
 	--%>
+
 		<a href="javascript:window.close();"
 			onclick="window.open('https://www.facebook.com/groups/3017696248465936')">
 			<img
@@ -110,14 +113,14 @@ body {
 		</a>
 
 	</div>
-	<!--  
+	<%--  
 	<div class="container d-flex justify-content-center mt-5">
 		<a
 			href="javascript:opener.document.location.href='${pageContext.request.contextPath}/popup/1/click';window.close();"
 			class="btn header-btn d-flex justify-content-center"
 			style="position: fixed; left: 180px; top: 460px; width: 140px; text-align: center;">등록하러가기</a>
 	</div>
-	-->
+	--%>
 
 	<div style="position: fixed; right: 5px; bottom: 4px;">
 		<form name="frm" class="d-flex align-items-center">
