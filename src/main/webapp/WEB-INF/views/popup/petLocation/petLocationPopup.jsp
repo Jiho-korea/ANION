@@ -78,6 +78,24 @@ a:hover {
 	padding: 5px;
 }
 
+.hSearch {
+	position: absolute;
+	top: 2%;
+	right: 2%;
+	z-index: 1;
+	border-radius: 2px;
+	align-items: center;
+	display: flex;
+}
+
+.hSearch_input {
+	background: rgba(131, 216, 144, 0.7);
+	border: none;
+	font-size: 1.3em;
+	font-weight: bold;
+	padding: 5px;
+}
+
 .fAddr {
 	position: absolute;
 	left: 50%;
@@ -107,12 +125,21 @@ a:hover {
 }
 </style>
 <body>
-
+	<!-- Ctrl + Shift + F 사용하여 코드 정렬시 script구문의 function displayMarker(param)함수 정상작동 x -->
 	<div class="map_wrap">
 		<div id="map"
 			style="width: 100%; height: 720px; position: relative; overflow: hidden;"></div>
 		<div class="hAddr">
-			<span class="title"><spring:message code="address.administrative.map.center"/></span> <span id="centerAddr"></span>
+			<span class="title"><spring:message
+					code="address.administrative.map.center" /></span> <span id="centerAddr"></span>
+		</div>
+
+		<div class="hSearch">
+			<input type="text" class="hSearch_input" placeholder="Search..."
+				onkeyup="enterkey();" id="searchAddress" size="20"> &nbsp;
+			&nbsp;<input type="image"
+				src="${pageContext.request.contextPath}/img/button/search.jpg"
+				onclick="searchFunction()" width="41" height="41">
 		</div>
 
 		<c:if test="${!empty address }">
@@ -201,6 +228,9 @@ a:hover {
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
 
+	// 장소 검색 객체를 생성합니다
+	var ps = new kakao.maps.services.Places();
+
 	var latdata = "${lat}";
 	var londata = "${lon}";
 
@@ -211,7 +241,7 @@ a:hover {
 
 			var lat = position.coords.latitude, // 위도
 			lon = position.coords.longitude; // 경도
-			
+
 			if (latdata != "" & londata != "") {
 				lat = latdata;
 				lon = londata;
@@ -240,7 +270,7 @@ a:hover {
 		map.setCenter(locPosition);
 		marker.setClickable(true);
 		marker.setMap(map);
-		
+
 		searchDetailAddrFromCoords(locPosition,function(result, status) {
 			if (status === kakao.maps.services.Status.OK) {
 				var detailAddr = '<div><spring:message code="address.lot" />: '
@@ -327,6 +357,49 @@ a:hover {
 				alert("register error");
 			}
 		});
+	}
+	function enterkey() {
+		if (window.event.keyCode == 13) {
+			searchFunction();
+		}
+	}
+	function searchFunction() {
+		var searchAddress = document.getElementById('searchAddress').value;
+
+		if (!searchAddress.replace(/^\s+|\s+$/g, '')) {
+			alert("<spring:message code="search.address.empty" />");
+			return false;
+		}
+		ps.keywordSearch(searchAddress, placesSearchCB);
+	}
+
+	// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+	function placesSearchCB(data, status) {
+		if (status === kakao.maps.services.Status.OK) {
+
+			// 검색이 완료되면 지도를 재설정합니다
+			displayPlaces(data);
+		} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+			alert("<spring:message code="검색결과가 존재하지 않습니다." />");
+			return;
+		} else if (status === kakao.maps.services.Status.ERROR) {
+			alert("<spring:message code="검색 결과 중 오류가 발생했습니다." />");
+			return;
+		}
+	}
+
+	// 검색 결과 목록과 마커를 표출하는 함수입니다
+	function displayPlaces(places) {
+		var listEl, menuEl, fragment, bounds = new kakao.maps.LatLngBounds(), listStr = '';
+		for (var i = 0; i < places.length; i++) {
+			// 마커를 생성하고 지도에 표시합니다
+			var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x), marker, itemEl;
+			// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+			// LatLngBounds 객체에 좌표를 추가합니다
+			bounds.extend(placePosition);
+		}
+		// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		map.setBounds(bounds);
 	}
 </script>
 </html>
