@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.ImageDAO;
 import petProject.dao.MemberDAO;
+import petProject.dao.NoseprintImageDAO;
 import petProject.dao.PetDAO;
 import petProject.service.admin.member.MemberListService;
 import petProject.vo.dto.Member;
@@ -32,6 +33,9 @@ public class MemberListServiceImpl implements MemberListService {
 
 	@Autowired
 	private ImageDAO imageDAO;
+
+	@Autowired
+	private NoseprintImageDAO noseprintImageDAO;
 
 	@Override
 	public List<Member> selectMemberList() throws Exception {
@@ -54,4 +58,8 @@ public class MemberListServiceImpl implements MemberListService {
 		return imageDAO.selectImageCount();
 	}
 
+	@Override
+	public int selectNoseprintImageCount() throws Exception {
+		return noseprintImageDAO.selectNoseprintImageCount();
+	}
 }

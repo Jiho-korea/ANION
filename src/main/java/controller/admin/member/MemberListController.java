@@ -37,13 +37,29 @@ public class MemberListController {
 	MemberListService memberListService;
 
 	@GetMapping("/list")
-	public String listPet(HttpSession session, Model model) {
+	public String listMember(HttpSession session, Model model) {
 		try {
 			List<Member> memberList = memberListService.selectMemberList();
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("memberCount", memberListService.selectMemberCount());
 			model.addAttribute("petCount", memberListService.selectPetCount());
 			model.addAttribute("imageCount", memberListService.selectImageCount());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/home/main";
+		}
+		return "/admin/member/list";
+	}
+
+	@GetMapping("/list/npevent")
+	public String listMemberByNpevent(HttpSession session, Model model) {
+		try {
+			List<Member> memberList = memberListService.selectMemberList();
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("memberCount", memberListService.selectMemberCount());
+			model.addAttribute("petCount", memberListService.selectPetCount());
+			model.addAttribute("npevent", true);
+			model.addAttribute("noseprintImageCount", memberListService.selectNoseprintImageCount());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "/home/main";

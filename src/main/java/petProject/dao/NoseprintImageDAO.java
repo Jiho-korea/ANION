@@ -29,4 +29,6 @@ public interface NoseprintImageDAO {
 			throws Exception;
 
 	int deleteNoseprintImage(@Param("noseprintImagePath") String noseprintImagePath) throws Exception;
+
+	int selectNoseprintImageCount() throws Exception;
 }

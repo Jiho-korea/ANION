@@ -22,4 +22,6 @@ public interface MemberListService {
 
 	int selectImageCount() throws Exception;
 
+	int selectNoseprintImageCount() throws Exception;
+
 }

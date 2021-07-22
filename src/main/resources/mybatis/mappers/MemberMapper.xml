@@ -143,6 +143,9 @@
 			property="numberOfPets" column="{memberNumber=MEMBER_NUMBER}" />
 		<association select="selectCountOfImages"
 			property="numberOfImages" column="{memberNumber=MEMBER_NUMBER}" />
+		<association select="selectCountOfNoseprintImages"
+			property="numberOfNoseprintImages"
+			column="{memberNumber=MEMBER_NUMBER}" />
 	</resultMap>
 
 	<select id="selectMemberlevel" parameterType="memberlevel"
@@ -169,6 +172,11 @@
 		#{memberNumber}
 	</select>
 
-
+	<select id="selectCountOfNoseprintImages" parameterType="member"
+		resultType="int">
+		SELECT count(*) FROM public.noseprint_image WHERE
+		"MEMBER_NUMBER" =
+		#{memberNumber}
+	</select>
 
 </mapper>

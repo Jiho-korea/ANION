@@ -37,10 +37,11 @@ public class Member implements Serializable {
 	private Memberauth memberauth;
 	private Integer numberOfPets;
 	private Integer numberOfImages;
+	private Integer numberOfNoseprintImages;
 
 	public Member(String memberId, String memberPassword, String memberName, String memberPhoneNumber,
 			Date memberRegisterDate, Integer memberNumber, Memberlevel memberlevel, Memberauth memberauth,
-			Integer numberOfPets, Integer numberOfImages) {
+			Integer numberOfPets, Integer numberOfImages, Integer numberOfNoseprintImages) {
 		super();
 		this.memberId = memberId;
 		this.memberPassword = memberPassword;
@@ -52,6 +53,7 @@ public class Member implements Serializable {
 		this.memberauth = memberauth;
 		this.numberOfPets = numberOfPets;
 		this.numberOfImages = numberOfImages;
+		this.numberOfNoseprintImages = numberOfNoseprintImages;
 	}
 
 	public Member() {
@@ -136,6 +138,14 @@ public class Member implements Serializable {
 
 	public void setNumberOfImages(Integer numberOfImages) {
 		this.numberOfImages = numberOfImages;
+	}
+
+	public Integer getNumberOfNoseprintImages() {
+		return numberOfNoseprintImages;
+	}
+
+	public void setNumberOfNoseprintImages(Integer numberOfNoseprintImages) {
+		this.numberOfNoseprintImages = numberOfNoseprintImages;
 	}
 
 	public static long getSerialversionuid() {
