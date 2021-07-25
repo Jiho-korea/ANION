@@ -148,9 +148,7 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
+	
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/register/step1"
 			class="btn header-btn"><spring:message
@@ -160,6 +158,11 @@
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/pet/list"
 			class="btn header-btn"><spring:message code="pet.list.title" /></a>
+	</div>
+	
+	<div class="container d-flex justify-content-center mt-5">
+		<a href="${pageContext.request.contextPath}/pet/list/npevent"
+			class="btn header-btn"><spring:message code="event.nose" /></a>
 	</div>
 	<br>
 	<br>

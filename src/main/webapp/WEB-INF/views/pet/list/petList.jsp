@@ -111,29 +111,39 @@
 				<c:when test="${empty admin}">
 					<%-- 비문 이벤트 --%>
 					<a href="${pageContext.request.contextPath}/pet/list/npevent"
-						class="mb-30"><button type="submit"
-							class="btn btn-info pull-right">
-							<spring:message code="event.nose" />
+						class="btn2"
+						style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+						<spring:message code="event.nose" />
+					</a>
 
-						</button></a>
+
 				</c:when>
 				<c:otherwise>
 					<%-- 관리자의 비문 이벤트 --%>
 					<a
 						href="${pageContext.request.contextPath}/admin/pet/npevent/${member.memberNumber}"
-						class="mb-30"><button type="submit"
-							class="btn btn-info pull-right">
-							<spring:message code="event.nose" />
+						class="btn2"
+						style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+						<spring:message code="event.nose" />
+					</a>
 
-						</button></a>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${empty admin}">
+				<%--
 				<a href="${pageContext.request.contextPath}/register/step1"
 					class="mb-30"><button type="submit"
 						class="btn btn-info pull-right ml-5">
 						<spring:message code="register.pet" />
 					</button></a>
+					 --%>
+
+				<a
+					href="${pageContext.request.contextPath}/register/step1"
+					class="btn2"
+					style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+					<spring:message code="register.pet" />
+				</a>
 			</c:if>
 		</div>
 
@@ -231,7 +241,8 @@
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
 								<td><c:if test="${pet.petAddress eq null }">
-										<spring:message code="register.pet.location" /><a
+										<spring:message code="register.pet.location" />
+										<a
 											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
 											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
 											width="20" height="20"
