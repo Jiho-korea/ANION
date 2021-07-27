@@ -20,18 +20,21 @@ import petProject.vo.AuthInfo;
 
 public class LogoutCheckInterceptor implements HandlerInterceptor {
 
-   @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-         throws Exception {
-      HttpSession session = request.getSession(false);
-      if (session != null) {
-         AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-         if (authInfo != null) {
-            return ScriptWriter.write("로그인 상태입니다.", "home", request, response);
-         }
-      }
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+			if (authInfo != null) {
+				if(authInfo.getMemberauth().getMemberAuthStatus()==0) {
+					return true;
+				}
+				return ScriptWriter.write("로그인 상태입니다.", "home", request, response);
+			}
+		}
 
-      return true;
-   }
+		return true;
+	}
 
 }

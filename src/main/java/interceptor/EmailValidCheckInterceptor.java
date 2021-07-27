@@ -1,3 +1,12 @@
+/*
+========================================================================
+파    일    명 : EmailValidCheckInterceptor.java
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.07.27
+작  성  내  용 : 이메일 인증 완료하지 않은 사용자는 로그인, 프로필만 가능
+========================================================================
+*/
 package interceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +31,6 @@ public class EmailValidCheckInterceptor implements HandlerInterceptor {
 		if (memberauth.getMemberAuthStatus() == 0) {
 			return ScriptWriter.write("이메일 인증을 완료하세요!", "home", request, response);
 		}
-
 		return true;
 	}
 
