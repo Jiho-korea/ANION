@@ -155,29 +155,15 @@ public class EmailValidController {
 
 		try {
 			String result = emailValidService.valid(emailcode);
+			emailcodeDeleteService.deleteEmailcode(result);
 
-			// 이메일 변경시 result != null
-			if (result != null) {
-				emailcodeDeleteService.deleteEmailcode(result);
-				session.invalidate();
+			Cookie cookie_success_update_id = new Cookie("successUpdateId", result);
+			cookie_success_update_id.setPath("/");
+			cookie_success_update_id.setMaxAge(60 * 60 * 24 * 1);
 
-				Cookie cookie_success_update_id = new Cookie("successUpdateId", result);
-				cookie_success_update_id.setPath("/");
-				cookie_success_update_id.setMaxAge(60 * 60 * 24 * 1);
+			response.addCookie(cookie_success_update_id);
 
-				response.addCookie(cookie_success_update_id);
-
-				return "redirect:/email/valid";
-			}
-			// 회원 가입시 result = null
-			emailcodeDeleteService.deleteEmailcode(emailcode);
-
-			Cookie cookie_success_valid_member = new Cookie("successValidMember", emailcode.getMemberId());
-			cookie_success_valid_member.setPath("/");
-			cookie_success_valid_member.setMaxAge(60 * 60 * 24 * 1);
-
-			response.addCookie(cookie_success_valid_member);
-
+			session.invalidate();
 			return "redirect:/email/valid";
 		} catch (EmailcodeNotMatchException e) {
 			e.printStackTrace();

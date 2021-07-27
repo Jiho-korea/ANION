@@ -111,9 +111,8 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 			throws Exception {
 		this.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
-		Emailcode emailcode = this.insertCode(memberRegisterRequest.getMemberId());
 
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
-		memberRegisterEmailService.createMemberRegisterEmail(member, request, isHtml, emailcode.getEmailCode());
+		memberRegisterEmailService.createMemberRegisterEmail(member, request, isHtml);
 	}
 }

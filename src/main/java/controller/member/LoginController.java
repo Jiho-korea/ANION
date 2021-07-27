@@ -31,11 +31,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import petProject.exception.MemberAuthStatusException;
+import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberNotFoundException;
-import petProject.service.email.EmailValidService;
+import petProject.service.ScriptWriter;
 import petProject.service.member.LoginService;
+import petProject.service.member.MemberRegisterService;
 import petProject.vo.AuthInfo;
 import petProject.vo.request.LoginRequest;
 
@@ -45,9 +47,9 @@ public class LoginController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
-
-	@Resource(name = "emailValidService")
-	EmailValidService emailValidService;
+	
+	@Resource(name = "memberRegisterService")
+	MemberRegisterService memberRegisterService;
 
 	public LoginController() {
 		super();
@@ -55,9 +57,25 @@ public class LoginController {
 
 	@GetMapping
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
+			@RequestParam(value = "memberId", required = false) String memberId,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
-			HttpSession session) {
+			HttpServletResponse response, HttpSession session) throws Exception {
 
+		if (memberId != null) {
+			try {
+				memberRegisterService.updateAuthStatus(memberId);
+
+				ScriptWriter.write("인증이 완료되었습니다!", "login", request, response);
+				return null;
+			} catch (MemberAuthUpdateException e) {
+				e.printStackTrace();
+				ScriptWriter.write("회원가입을 다시 해주세요!", "home", request, response);
+				return null;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "login/loginFormPage";
+			}
+		}
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
@@ -108,8 +126,6 @@ public class LoginController {
 			errors.reject("notfound");
 			e.printStackTrace();
 			return "login/loginFormPage";
-		} catch (MemberAuthStatusException e) {
-			return "redirect:/email/validForm?memberId=" + loginRequest.getMemberId();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "login/loginFormPage";

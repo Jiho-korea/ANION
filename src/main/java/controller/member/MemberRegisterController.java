@@ -96,9 +96,7 @@ public class MemberRegisterController {
 
 		try {
 			memberRegisterService.memberRegister(memberRegisterRequest, request, true);
-
-			session.setAttribute("tempAuth", true);
-
+			
 			Cookie cookie_success_member_registration = new Cookie("successMemberRegistration",
 					memberRegisterRequest.getMemberId());
 			cookie_success_member_registration.setPath("/");

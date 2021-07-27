@@ -13,6 +13,8 @@
 */
 package petProject.service.impl.email;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +24,10 @@ import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthStatusException;
-import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.email.EmailValidService;
+import petProject.service.member.MemberRegisterService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 import petProject.vo.dto.Memberauth;
@@ -35,6 +37,9 @@ import petProject.vo.request.ChangeIdCommand;
 @Transactional
 public class EmailValidServiceImpl implements EmailValidService {
 
+	@Resource(name = "memberRegisterService")
+	MemberRegisterService memberRegisterService;
+	
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
 
@@ -53,7 +58,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 			throw new MemberAuthStatusException("authstatus is valid");
 		}
 	}
-
+	
 	// Emailcode의 필드(memberId, emailCode)를 사용하는 메소드
 	@Override
 	public Emailcode validCode(Emailcode emailcode) throws Exception {
@@ -64,10 +69,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 		// code를 통해서 관련행 추출
 		Emailcode data = emailcodeDAO.selectEmailcode(emailcode);
 		if (data != null) {
-			int cnt = memberDAO.updateAuthStatus(data.getMemberId());
-			if (cnt == 0) {
-				throw new MemberAuthUpdateException("Auth Update Exception");
-			}
+			memberRegisterService.updateAuthStatus(data.getMemberId());
 		} else {
 			throw new EmailcodeNotMatchException("emailcode not match");
 		}
@@ -102,4 +104,5 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 		return result;
 	}
+
 }
