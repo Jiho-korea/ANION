@@ -120,9 +120,13 @@
 				method="post" cssClass="form-signin"
 				modelAttribute="petRegisterRequest" onsubmit="return submitCheck()"
 				enctype="multipart/form-data">
+				
+				<%--
 				<div class="row" style="display: none;">
 					<label><input type="file" name="file"></label>
 				</div>
+				 --%>
+				
 				<div class="row">
 					<div class="col-md-6 mb-1">
 						<label> <form:input path="petName" cssClass="single-input"
@@ -173,11 +177,10 @@
 				<br class="mb-4" />
 				<div class="row">
 					<div class="col-md-6 mb-1">
-
-						<label> <!--<spring:message code="pet.mothername" />--> <form:input
-								path="petMothername" cssClass="single-input"
-								placeholder="모견명 / dog's mother" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '모견명 / Mother dog's name'" /> <form:errors
+						<label> <form:input path="petMothername"
+								cssClass="single-input" placeholder="모견명 / Dog`s mother"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '모견명 / Dog`s Mother'" /> <form:errors
 								path="petMothername" />
 
 
@@ -186,8 +189,8 @@
 					<div class="col-md-6 mb-1">
 						<label> <!--<spring:message code="pet.father" />--> <form:input
 								path="petFathername" cssClass="single-input"
-								placeholder="부견명 / dog's father" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '부견명 / Dad Dog's Name'" /> <form:errors
+								placeholder="부견명 / Dog`s father" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '부견명`s / Dog father'" /> <form:errors
 								path="petFathername" />
 						</label>
 					</div>
