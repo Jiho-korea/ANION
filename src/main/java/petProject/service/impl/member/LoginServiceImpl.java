@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.member.LoginService;
 import petProject.vo.AuthInfo;
@@ -49,4 +50,13 @@ public class LoginServiceImpl implements LoginService {
 				member.getMemberauth());
 	}
 
+	@Override
+	public void selectById(String memberId) throws Exception {
+		int member_cnt = memberDAO.selectByIdFromMember(memberId);
+		int emailcode_cnt = memberDAO.selectEmailcodeById(memberId);
+
+		if (member_cnt != 0 || emailcode_cnt != 0) {
+			throw new MemberDuplicateException("duplicate memberId");
+		}
+	}
 }

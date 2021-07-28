@@ -27,13 +27,12 @@ public class LogoutCheckInterceptor implements HandlerInterceptor {
 		if (session != null) {
 			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 			if (authInfo != null) {
-				if(authInfo.getMemberauth().getMemberAuthStatus()==0) {
+				if (authInfo.getMemberauth().getMemberAuthStatus() == 0) {
 					return true;
 				}
 				return ScriptWriter.write("로그인 상태입니다.", "home", request, response);
 			}
 		}
-
 		return true;
 	}
 

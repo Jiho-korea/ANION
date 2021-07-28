@@ -21,21 +21,16 @@ package petProject.service.member;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
-
-import petProject.vo.dto.Emailcode;
 import petProject.vo.request.MemberRegisterRequest;
 
 public interface MemberRegisterService {
-	int insertMember(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest) throws Exception;
+	int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception;
 
-	Emailcode insertCode(@Param("memberId") String memberId) throws Exception;
+	String insertCode(String memberId) throws Exception;
 
-	void selectById(@Param("memberRegisterRequest") String memberId) throws Exception;
+	int updateAuthStatus(String memberId) throws Exception;
 
-	int updateAuthStatus(@Param("memberId") String memberId) throws Exception;
-
-	void memberRegister(@Param("memberRegisterRequest") MemberRegisterRequest memberRegisterRequest,
-			HttpServletRequest request, boolean isHtml) throws Exception;
+	void memberRegister(MemberRegisterRequest memberRegisterRequest, HttpServletRequest request, boolean isHtml)
+			throws Exception;
 
 }

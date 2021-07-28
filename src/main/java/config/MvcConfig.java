@@ -125,7 +125,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
 				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**");
 		registry.addInterceptor(emailValidCheckInterceptor()).excludePathPatterns("/home", "/popup/**", "/login",
-				"/signup/**", "/email/sent", "/profile");
+				"/signup/**", "/logout", "/email/sent", "/profile");
 		registry.addInterceptor(logoutCheckInterceptor()).addPathPatterns("/member/find/**", "/login", "/signup/step1");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");

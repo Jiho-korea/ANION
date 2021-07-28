@@ -49,7 +49,7 @@ import petProject.exception.MemberIdUpdateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.ScriptWriter;
 import petProject.service.email.EmailValidService;
-import petProject.service.member.EmailcodeDeleteService;
+import petProject.service.email.EmailcodeDeleteService;
 import petProject.vo.dto.Emailcode;
 
 @Controller
