@@ -299,7 +299,7 @@
 <script defer type="text/javascript" charset="utf-8">
 	
 	function check(){
-		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
+		var regExp = /[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/;
 		
 		if (regExp.test($("#petName").val())){
 			alert("특수문자는 입력할 수 없습니다.");
@@ -328,7 +328,7 @@
 	}
 	
 	function submitCheck(){
-		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
+		var regExp = /[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/;
 		
 		if ($("#petName").val() == "") {
 			alert("견명을 입력해주세요.");
@@ -357,6 +357,7 @@
 		}
 		return true;
 	}
+	
 </script>
 </html>
 <!-- 
