@@ -40,6 +40,7 @@ import petProject.service.ScriptWriter;
 import petProject.service.member.LoginService;
 import petProject.service.member.MemberRegisterService;
 import petProject.vo.AuthInfo;
+import petProject.vo.dto.Emailcode;
 import petProject.vo.request.LoginRequest;
 
 @Controller
@@ -58,13 +59,18 @@ public class LoginController {
 
 	@GetMapping
 	public String loginForm(@ModelAttribute("loginRequest") LoginRequest loginRequest,
+			@RequestParam(value = "memberId", required = false) String memberId,
 			@RequestParam(value = "emailcode", required = false) String emailcode,
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws Exception {
 
-		if (emailcode != null) {
+		if (emailcode != null & memberId != null) {
 			try {
-				memberRegisterService.updateAuthStatus(emailcode);
+				Emailcode data = new Emailcode();
+				data.setMemberId(memberId);
+				data.setEmailCode(emailcode);
+
+				memberRegisterService.updateAuthStatus(data);
 
 				ScriptWriter.write("인증이 완료되었습니다!", "logout", request, response);
 				return null;
@@ -72,18 +78,17 @@ public class LoginController {
 				e.printStackTrace();
 				ScriptWriter.write("회원가입을 다시 해주세요!", "home", request, response);
 				return null;
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				ScriptWriter.write("이미 인증을 완료한 사용자입니다", "home", request, response);
-				return null;
 			} catch (EmailcodeDeleteException e) {
 				e.printStackTrace();
-				ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+				ScriptWriter.write("회원인증을 완료한 사용자입니다", "home", request, response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "login/loginFormPage";
 			}
+		} else if ((emailcode != null & memberId == null) || (emailcode == null & memberId != null)) {
+			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+			return null;
 		}
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());

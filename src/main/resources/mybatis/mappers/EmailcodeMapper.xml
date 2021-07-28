@@ -9,11 +9,6 @@
     	FROM "emailcode" WHERE "MEMBER_ID" = #{emailcode.memberId} AND "EMAIL_CODE" = #{emailcode.emailCode}
     </select>
     
-    <select id="selectEmailcodeByCode" parameterType="String" resultType="emailcode">
-    	SELECT "MEMBER_ID", "EMAIL_CODE"
-    	FROM "emailcode" WHERE "EMAIL_CODE" = #{emailcode}
-    </select>
-    
     <insert id="insertEmailcode" parameterType="emailcode">
     	INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE")
     	VALUES (#{emailcode.memberId}, #{emailcode.emailCode});

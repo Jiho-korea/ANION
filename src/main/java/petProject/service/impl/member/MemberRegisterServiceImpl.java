@@ -79,18 +79,17 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	}
 
 	@Transactional
-	public int updateAuthStatus(String emailcode) throws Exception {
-		Emailcode result = emailcodeDAO.selectEmailcodeByCode(emailcode);
-		emailcodeDeleteService.deleteEmailcode(emailcodeDAO.selectEmailcodeByCode(emailcode));
-		int cnt = memberDAO.updateAuthStatus(result.getMemberId());
+	public int updateAuthStatus(Emailcode emailcode) throws Exception {
+		int cnt = memberDAO.updateAuthStatus(emailcode.getMemberId());
 		if (cnt == 0) {
 			throw new MemberAuthUpdateException("auth update failed");
 		}
+		emailcodeDeleteService.deleteEmailcode(emailcode);
 		return cnt;
 	}
 
 	@Override
-	public String insertCode(String memberId) throws Exception {
+	public Emailcode insertCode(String memberId) throws Exception {
 		Member member = memberDAO.selectMemberById(memberId);
 
 		Emailcode emailcode = new Emailcode();
@@ -101,7 +100,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		if (cnt == 0) {
 			throw new EmailcodeInsertException("error");
 		}
-		return emailcode.getEmailCode();
+		return emailcode;
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 			throws Exception {
 		loginService.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
-		String emailcode = this.insertCode(memberRegisterRequest.getMemberId());
+		Emailcode emailcode = this.insertCode(memberRegisterRequest.getMemberId());
 
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
 		memberRegisterEmailService.createMemberRegisterEmail(emailcode, member, request, isHtml);

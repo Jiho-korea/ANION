@@ -21,14 +21,15 @@ package petProject.service.member;
 
 import javax.servlet.http.HttpServletRequest;
 
+import petProject.vo.dto.Emailcode;
 import petProject.vo.request.MemberRegisterRequest;
 
 public interface MemberRegisterService {
 	int insertMember(MemberRegisterRequest memberRegisterRequest) throws Exception;
 
-	String insertCode(String memberId) throws Exception;
+	Emailcode insertCode(String memberId) throws Exception;
 
-	int updateAuthStatus(String memberId) throws Exception;
+	int updateAuthStatus(Emailcode emailcode) throws Exception;
 
 	void memberRegister(MemberRegisterRequest memberRegisterRequest, HttpServletRequest request, boolean isHtml)
 			throws Exception;

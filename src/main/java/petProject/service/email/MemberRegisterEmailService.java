@@ -11,9 +11,10 @@ package petProject.service.email;
 
 import javax.servlet.http.HttpServletRequest;
 
+import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 
 public interface MemberRegisterEmailService {
-	public boolean createMemberRegisterEmail(String emailcode, Member member, HttpServletRequest request,
+	public boolean createMemberRegisterEmail(Emailcode emailcode, Member member, HttpServletRequest request,
 			boolean isHtml) throws Exception;
 }

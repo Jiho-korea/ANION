@@ -69,7 +69,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 		// code를 통해서 관련행 추출
 		Emailcode data = emailcodeDAO.selectEmailcode(emailcode);
 		if (data != null) {
-			memberRegisterService.updateAuthStatus(data.getMemberId());
+			memberRegisterService.updateAuthStatus(data);
 		} else {
 			throw new EmailcodeNotMatchException("emailcode not match");
 		}

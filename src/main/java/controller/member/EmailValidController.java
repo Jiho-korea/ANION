@@ -150,7 +150,6 @@ public class EmailValidController {
 
 		try {
 			String result = emailValidService.valid(emailcode);
-			emailcodeDeleteService.deleteEmailcode(result);
 
 			Cookie cookie_success_update_id = new Cookie("successUpdateId", result);
 			cookie_success_update_id.setPath("/");
