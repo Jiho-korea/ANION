@@ -1,10 +1,10 @@
 /*
 ========================================================================
-파    일    명 : PopupCookieCheckInterceptor.java
+파    일    명 : PopupPetLocationCookieCheckInterceptor.java
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2021.05.15
-작  성  내  용 : 쿠키가 있는경우에만 팝업창 생성 가능
+작    성    일 : 2021.07.20
+작  성  내  용 : 쿠키가 있는 경우에만 팝업창 생성 가능
 ========================================================================
 */
 package interceptor;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
 
-public class PopupCookieCheckInterceptor implements HandlerInterceptor {
+public class PopupPetLocationCookieCheckInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -28,11 +28,11 @@ public class PopupCookieCheckInterceptor implements HandlerInterceptor {
 
 		try {
 			for (int i = 0; i < cookieList.length; i++) {
-				if (cookieList[i].getName().equals("petKind")) {
+				if (cookieList[i].getName().equals("petLocation")) {
 					name = cookieList[i].getName();
 				}
 			}
-			if (name.equals("petKind")) {
+			if (name.equals("petLocation")) {
 				return true;
 			} else {
 				return false;

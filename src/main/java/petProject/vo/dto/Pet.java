@@ -33,6 +33,7 @@ public class Pet implements Serializable {
 	private String petMothername;
 	private String petFathername;
 	private String petSex;
+	private String petAddress;
 	private int imageCount;
 	private int noseprintImageCount;
 	private Kindcode kindcode;
@@ -40,7 +41,7 @@ public class Pet implements Serializable {
 
 	public Pet(int memberNumber, String petName, String petKindcode, String petBirthday, int petRegistrationNumber,
 			String petRegistrationDate, String petMicrochip, String petMothername, String petFathername, String petSex,
-			int imageCount, int noseprintImageCount, Kindcode kindcode, Member member) {
+			String petAddress, int imageCount, int noseprintImageCount, Kindcode kindcode, Member member) {
 		super();
 		this.memberNumber = memberNumber;
 		this.petName = petName;
@@ -52,6 +53,7 @@ public class Pet implements Serializable {
 		this.petMothername = petMothername;
 		this.petFathername = petFathername;
 		this.petSex = petSex;
+		this.petAddress = petAddress;
 		this.imageCount = imageCount;
 		this.noseprintImageCount = noseprintImageCount;
 		this.kindcode = kindcode;
@@ -140,6 +142,14 @@ public class Pet implements Serializable {
 
 	public void setPetSex(String petSex) {
 		this.petSex = petSex;
+	}
+
+	public String getPetAddress() {
+		return petAddress;
+	}
+
+	public void setPetAddress(String petAddress) {
+		this.petAddress = petAddress;
 	}
 
 	public int getImageCount() {

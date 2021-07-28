@@ -1,4 +1,4 @@
-<!-- 
+<%-- 
 ========================================================================
 파    일    명 : main.jsp
 ========================================================================
@@ -14,7 +14,7 @@
 수    정    일 : 2021.05.03
 수  정  내  용 : 팝업창 하루동안 보지않기 기능 추가
 ========================================================================
--->
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -116,8 +116,7 @@
 			 -->
 		<div class="d-flex justify-content-center ml-5 mt-5">
 			<!--  <a href="${pageContext.request.contextPath}/popup/1/click">-->
-			<a href="javascript:window.close();"
-				onclick="window.open('https://www.facebook.com/groups/3017696248465936')">
+			<a href="https://www.facebook.com/groups/3017696248465936">
 				<img
 				src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
 				style="width: 90%;">
@@ -149,9 +148,7 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
+	
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/register/step1"
 			class="btn header-btn"><spring:message
@@ -161,6 +158,11 @@
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/pet/list"
 			class="btn header-btn"><spring:message code="pet.list.title" /></a>
+	</div>
+	
+	<div class="container d-flex justify-content-center mt-5">
+		<a href="${pageContext.request.contextPath}/pet/list/npevent"
+			class="btn header-btn"><spring:message code="event.nose" /></a>
 	</div>
 	<br>
 	<br>

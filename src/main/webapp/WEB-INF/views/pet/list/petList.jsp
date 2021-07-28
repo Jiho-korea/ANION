@@ -18,6 +18,10 @@
 수    정    일 : 2020.11.17
 수  정  내  용 : 디자인 수정
 ========================================================================
+수    정    자 : 송찬영
+수    정    일 : 2021.07.20
+수  정  내  용 : 위치 등록서비스 추가
+========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -103,40 +107,45 @@
 			</h1>
 		</div>
 		<div class="text-right mb-10">
-
 			<c:choose>
 				<c:when test="${empty admin}">
 					<%-- 비문 이벤트 --%>
 					<a href="${pageContext.request.contextPath}/pet/list/npevent"
-						class="mb-30"><button type="submit"
-							class="btn btn-info pull-right">
-							<spring:message code="event.nose" />
+						class="btn2"
+						style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+						<spring:message code="event.nose" />
+					</a>
 
-						</button></a>
+
 				</c:when>
 				<c:otherwise>
 					<%-- 관리자의 비문 이벤트 --%>
 					<a
 						href="${pageContext.request.contextPath}/admin/pet/npevent/${member.memberNumber}"
-						class="mb-30"><button type="submit"
-							class="btn btn-info pull-right">
-							<spring:message code="event.nose" />
+						class="btn2"
+						style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+						<spring:message code="event.nose" />
+					</a>
 
-						</button></a>
 				</c:otherwise>
 			</c:choose>
-
 			<c:if test="${empty admin}">
+				<%--
 				<a href="${pageContext.request.contextPath}/register/step1"
 					class="mb-30"><button type="submit"
 						class="btn btn-info pull-right ml-5">
 						<spring:message code="register.pet" />
 					</button></a>
+					 --%>
+
+				<a
+					href="${pageContext.request.contextPath}/register/step1"
+					class="btn2"
+					style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+					<spring:message code="register.pet" />
+				</a>
 			</c:if>
-
-
 		</div>
-
 
 		<%--p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p--%>
 		<%-- table(기본) table-striped(스트라이프 무늬 추가), table-bordered(선) --%>
@@ -144,24 +153,24 @@
 			<thead>
 				<!-- table head -->
 				<tr>
-
-
 					<c:choose>
 						<c:when
 							test="${sessionScope.login.memberlevel.memberLevelCode eq 0}">
 							<!-- table row -->
-							<th width="10%"><spring:message code="list.num" /></th>
-							<th width="35%"><spring:message code="list.pet.name" /></th>
-							<th width="30%"><spring:message code="list.image.count" /></th>
-							<th width="15%"><spring:message code="image.gallery" /></th>
-							<th width="10%"><spring:message code="go.zip.image" /></th>
+							<th width="8%"><spring:message code="list.num" /></th>
+							<th width="30%"><spring:message code="list.pet.name" /></th>
+							<th><spring:message code="info.pet.location" /></th>
+							<th width="8%"><spring:message code="list.image.count" /></th>
+							<th width="8%"><spring:message code="image.gallery" /></th>
+							<th width="8%"><spring:message code="go.zip.image" /></th>
 						</c:when>
 						<c:otherwise>
 							<!-- table row -->
-							<th width="15%"><spring:message code="list.num" /></th>
-							<th width="40%"><spring:message code="list.pet.name" /></th>
-							<th width="30%"><spring:message code="list.image.count" /></th>
-							<th width="15%"><spring:message code="image.gallery" /></th>
+							<th width="10%"><spring:message code="list.num" /></th>
+							<th width="30%"><spring:message code="list.pet.name" /></th>
+							<th><spring:message code="info.pet.location" /></th>
+							<th width="10%"><spring:message code="list.image.count" /></th>
+							<th width="10%"><spring:message code="image.gallery" /></th>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -176,6 +185,22 @@
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
+								<td><c:if test="${pet.petAddress eq null }">
+										<spring:message code="register.pet.location" />
+										<a
+											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
+											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
+											width="20" height="20"
+											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
+										</a>
+									</c:if> <c:if test="${pet.petAddress ne null}">${pet.petAddress }
+										<a
+											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
+											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
+											width="20" height="20"
+											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
+										</a>
+									</c:if></td>
 								<td>${pet.imageCount}<spring:message code="list.few" /></td>
 								<td>
 									<%-- <a
@@ -215,7 +240,23 @@
 								<td><a
 									href="${pageContext.request.contextPath}/info/pet?petRegistrationNumber=${pet.petRegistrationNumber}"
 									style="color: #000000;" id="petName">${pet.petName}</a></td>
-								<td>${pet.imageCount}건</td>
+								<td><c:if test="${pet.petAddress eq null }">
+										<spring:message code="register.pet.location" />
+										<a
+											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
+											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
+											width="20" height="20"
+											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
+										</a>
+									</c:if> <c:if test="${pet.petAddress ne null}">${pet.petAddress }
+										<a
+											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
+											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
+											width="20" height="20"
+											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
+										</a>
+									</c:if></td>
+								<td>${pet.imageCount}<spring:message code="list.few" /></td>
 								<td><a
 									href="${pageContext.request.contextPath}/info/list/image?petRegistrationNumber=${pet.petRegistrationNumber}">
 										<button class="btn_gallery" id="btn_gallery" type="button">
@@ -223,7 +264,6 @@
 												src="${pageContext.request.contextPath}/img/button/gallery1.png">
 										</button>
 								</a></td>
-
 							</c:otherwise>
 						</c:choose>
 					</tr>

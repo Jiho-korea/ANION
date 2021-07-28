@@ -45,6 +45,7 @@ import controller.member.ProfileEditController;
 import controller.pet.PetInfoController;
 import controller.pet.PetKindPopupController;
 import controller.pet.PetListController;
+import controller.pet.PetLocationController;
 import controller.pet.PetRegisterController;
 
 @Configuration
@@ -220,5 +221,11 @@ public class ControllerConfig {
 	@Bean
 	public GlobalExceptionController globalExceptionController() {
 		return new GlobalExceptionController();
+	}
+
+	@Bean
+	public PetLocationController petLocationController() {
+		return new PetLocationController();
+
 	}
 }
