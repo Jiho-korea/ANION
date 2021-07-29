@@ -90,6 +90,10 @@ public class LoginController {
 				e.printStackTrace();
 				ScriptWriter.write("만료된 링크입니다", "home", request, response);
 				return null;
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+				ScriptWriter.write("탈퇴한 사용자입니다", "home", request, response);
+				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "login/loginFormPage";
