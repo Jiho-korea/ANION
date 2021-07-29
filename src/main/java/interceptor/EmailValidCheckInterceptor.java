@@ -25,11 +25,15 @@ public class EmailValidCheckInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession(false);
-		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-		
-		Memberauth memberauth = authInfo.getMemberauth();
-		if (memberauth.getMemberAuthStatus() == 0) {
-			return ScriptWriter.write("이메일 인증을 완료하세요!", "home", request, response);
+		try {
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+			Memberauth memberauth = authInfo.getMemberauth();
+			if (memberauth.getMemberAuthStatus() == 0) {
+				return ScriptWriter.write("이메일 인증을 완료하세요!", "home", request, response);
+			}
+		} catch (NullPointerException e) {
+			return ScriptWriter.write("로그인이 필요합니다", "home", request, response);
 		}
 		return true;
 	}
