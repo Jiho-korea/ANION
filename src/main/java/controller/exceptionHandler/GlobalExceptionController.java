@@ -22,16 +22,18 @@ public class GlobalExceptionController {
 	
 	//400
 	@ExceptionHandler(RuntimeException.class)
-	public String hnadle400(Model model){
-		model.addAttribute("400","400");
-		return "error/400error";
+	public String handle400(Model model, RuntimeException e){
+		e.printStackTrace();
+		model.addAttribute("errorCode","400");
+		return "error/errorPage";
 	}
 	
 	//500
 	@ExceptionHandler(Exception.class)
-	public String handleAll(Model model){
-		model.addAttribute("500","500");
-		return "error/500error";
+	public String handleAll(Model model, Exception e){
+		e.printStackTrace();
+		model.addAttribute("errorCode","500");
+		return "error/errorPage";
 	}
 
 }

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,7 +15,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"> 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/slicknav.css">
 <link rel="stylesheet"
@@ -53,14 +54,28 @@
 	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	
-	<br>
-	<h1 id="errorMessage">&nbsp서버에 문제가 발생했습니다.</h1>
-	
+
+	<c:choose>
+		<c:when test="${errorCode eq '400'}"> 
+			<br>
+			<h1 id="400error">&nbsp요청을 처리할 수 없습니다.</h1> 
+		</c:when>
+		<c:when test="${errorCode eq '500'}">
+			<br>
+			<h1 id="500error">&nbsp서버에 문제가 발생했습니다.</h1>
+		</c:when>
+		<c:otherwise>
+			<br>
+			<h1 id="404error">&nbsp요청하신 경로를 찾을 수 없습니다.</h1>
+		</c:otherwise>
+	</c:choose>
+
 	<script>
-		document.getElementById('errorMessage').style.font = 'bold 30px Arial';
+		document.getElementById('400error').style.font = 'bold 30px Arial';
+		document.getElementById('500error').style.font = 'bold 30px Arial';
+		document.getElementById('404error').style.font = 'bold 30px Arial';
 	</script>
-	
+
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
