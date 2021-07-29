@@ -1,4 +1,4 @@
-<!-- 
+<%-- 
 ========================================================================
 파    일    명 : petKindPopup.jsp
 ========================================================================
@@ -18,7 +18,7 @@
 작    성    일 : 2021.07.12
 작  성  내  용 : 검색 단어로 견종 목록을 AJAX 요청하는 스크립트 추가
 ========================================================================
--->
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -628,6 +628,7 @@ a:hover {
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 </body>
 <script defer type="text/javascript">

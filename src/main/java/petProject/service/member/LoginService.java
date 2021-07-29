@@ -9,11 +9,10 @@
 */
 package petProject.service.member;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.AuthInfo;
 
 public interface LoginService {
-	AuthInfo selectMemberById(@Param("memberId") String memberId, String memberPassword) throws Exception;
+	AuthInfo selectMemberById(String memberId, String memberPassword) throws Exception;
 
+	void selectById(String memberId) throws Exception;
 }

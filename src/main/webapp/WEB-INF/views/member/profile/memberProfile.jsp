@@ -91,7 +91,11 @@ a, a:hover {
 		<div style="background: transparent !important"
 			class="jumbotron border">
 			<h2 style="text-align: left">
-				<b><spring:message code="info.member.profile" /></b>
+				<b><spring:message code="info.member.profile" /></b> <b
+					style="font-size: smaller; color: red;"><c:if
+						test="${sessionScope.login.memberauth.memberAuthStatus==0}">
+					(<spring:message code="valid.email.request" />)
+				</c:if></b>
 			</h2>
 			<br> <br>
 
@@ -129,8 +133,7 @@ a, a:hover {
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
-								onclick="btn_submit()"
-								value=<spring:message code="edit" /> />
+								onclick="btn_submit()" value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
 								type="button" name="btn_modify_cancel" id="btn_modify_cancel"
@@ -170,8 +173,7 @@ a, a:hover {
 							<input type="hidden" name="memberNumber"
 								value="${sessionScope.login.memberNumber }" />
 							<input type="submit" name="btn_modify" id="btn_modify"
-								onclick="btn_submit()"
-								value=<spring:message code="edit" /> />
+								onclick="btn_submit()" value=<spring:message code="edit" /> />
 
 							<a href="${pageContext.request.contextPath}/profile"><input
 								type="button" name="btn_modify_cancel" id="btn_modify_cancel"
@@ -243,13 +245,15 @@ a, a:hover {
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
 	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
@@ -263,14 +267,17 @@ a, a:hover {
 	<!-- Nice-select, sticky -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 	<script defer
@@ -278,10 +285,12 @@ a, a:hover {
 
 	<!-- contact js -->
 	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 

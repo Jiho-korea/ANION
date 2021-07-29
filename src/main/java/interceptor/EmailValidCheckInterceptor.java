@@ -1,10 +1,10 @@
 /*
 ========================================================================
-파    일    명 : LogoutCheckInterceptor.java
+파    일    명 : EmailValidCheckInterceptor.java
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2021.07.03
-작  성  내  용 : 로그인한 사용자는 비밀번호 찾기 기능 접근 불가
+작    성    일 : 2021.07.27
+작  성  내  용 : 이메일 인증 완료하지 않은 사용자는 로그인, 프로필만 가능
 ========================================================================
 */
 package interceptor;
@@ -17,21 +17,23 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
 import petProject.vo.AuthInfo;
+import petProject.vo.dto.Memberauth;
 
-public class LogoutCheckInterceptor implements HandlerInterceptor {
+public class EmailValidCheckInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		try {
 			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
-			if (authInfo != null) {
-				if (authInfo.getMemberauth().getMemberAuthStatus() == 0) {
-					return true;
-				}
-				return ScriptWriter.write("로그인 상태입니다.", "home", request, response);
+
+			Memberauth memberauth = authInfo.getMemberauth();
+			if (memberauth.getMemberAuthStatus() == 0) {
+				return ScriptWriter.write("이메일 인증을 완료하세요!", "home", request, response);
 			}
+		} catch (NullPointerException e) {
+			return ScriptWriter.write("로그인이 필요합니다", "home", request, response);
 		}
 		return true;
 	}

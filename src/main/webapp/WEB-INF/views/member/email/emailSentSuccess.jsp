@@ -76,7 +76,8 @@
 			<p>
 				<spring:message code="valid.email.send">
 					<spring:argument value="${memberId}" />
-				</spring:message>
+				</spring:message><br>
+				<spring:message code="valid.email.request" />
 			</p>
 
 			<br class="mb-4" />
