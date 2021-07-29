@@ -19,9 +19,9 @@ public interface EmailcodeDAO {
 
 	Emailcode selectEmailcode(@Param("emailcode") Emailcode emailcode);
 
-	int insertEmailcode(@Param("emailcode") Emailcode emailcode) throws Exception;
+	Emailcode selectEmailcodeByCode(@Param("emailcode") String emailcode);
 
-	int updateEmailcode(@Param("emailcode") Emailcode emailcode);
+	int insertEmailcode(@Param("emailcode") Emailcode emailcode) throws Exception;
 
 	int requestEmailUpdate(@Param("memberId") String memberId);
 

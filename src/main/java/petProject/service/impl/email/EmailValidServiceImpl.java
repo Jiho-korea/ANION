@@ -13,6 +13,8 @@
 */
 package petProject.service.impl.email;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,10 +24,10 @@ import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeNotMatchException;
 import petProject.exception.EmailcodeNullException;
 import petProject.exception.MemberAuthStatusException;
-import petProject.exception.MemberAuthUpdateException;
 import petProject.exception.MemberIdUpdateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.email.EmailValidService;
+import petProject.service.member.MemberRegisterService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 import petProject.vo.dto.Memberauth;
@@ -35,13 +37,16 @@ import petProject.vo.request.ChangeIdCommand;
 @Transactional
 public class EmailValidServiceImpl implements EmailValidService {
 
+	@Resource(name = "memberRegisterService")
+	MemberRegisterService memberRegisterService;
+
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
 
 	@Autowired
 	private MemberDAO memberDAO;
 
-	//DB의 authStatus를 통해 접근 불가 검증 메소드
+	// DB의 authStatus를 통해 접근 불가 검증 메소드
 	@Override
 	public void checkMemberAuthStatus(Emailcode emailcode) throws Exception {
 		Memberauth memberauth = memberDAO.checkMemberAuthStatus(emailcode);
@@ -64,10 +69,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 		// code를 통해서 관련행 추출
 		Emailcode data = emailcodeDAO.selectEmailcode(emailcode);
 		if (data != null) {
-			int cnt = memberDAO.updateAuthStatus(data.getMemberId());
-			if (cnt == 0) {
-				throw new MemberAuthUpdateException("Auth Update Exception");
-			}
+			memberRegisterService.updateAuthStatus(data);
 		} else {
 			throw new EmailcodeNotMatchException("emailcode not match");
 		}
@@ -93,8 +95,9 @@ public class EmailValidServiceImpl implements EmailValidService {
 	@Override
 	public String valid(Emailcode emailcode) throws Exception {
 		String result = null;
+		this.checkMemberAuthStatus(emailcode);
 		Emailcode data = this.validCode(emailcode);
-
+		
 		if (data.getNewMemberId() != null) {
 			this.updateEmail(data);
 			result = data.getNewMemberId();
@@ -102,4 +105,5 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 		return result;
 	}
+
 }
