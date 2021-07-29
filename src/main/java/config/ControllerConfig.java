@@ -33,6 +33,7 @@ import controller.event.noseprint.image.NoseprintImageEventGuidanceController;
 import controller.event.noseprint.image.NoseprintImageListController;
 import controller.event.noseprint.pet.NoseprintPetListController;
 import controller.event.popup.EventPopupController;
+import controller.exceptionHandler.GlobalExceptionController;
 import controller.image.ImageDeleteController;
 import controller.image.ImageListController;
 import controller.member.EmailValidController;
@@ -219,8 +220,14 @@ public class ControllerConfig {
 	}
 	
 	@Bean
+	public GlobalExceptionController globalExceptionController() {
+		return new GlobalExceptionController();
+	}
+
+	@Bean
 	public PetLocationController petLocationController() {
 		return new PetLocationController();
+
 	}
 	
 	@Bean

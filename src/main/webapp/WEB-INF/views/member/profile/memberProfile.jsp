@@ -230,9 +230,19 @@ a, a:hover {
 		function btn_submit() {
 			document.getElementById('btn_modify_cancel').style.visibility = 'hidden';
 			const target = document.getElementById('btn_modify');
+			var regExp = /[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/;
+			
 			target.disabled = true;
 			target.value = 'Loading';
+			
+			if(regExp.test($("#memberName").val())){
+				alert("이름에 특수문자를 입력할 수 없습니다.");
+				location.reload();
+				
+				return false();
+			}
 			target.form.submit();
+			
 		}
 	</script>
 	<script defer
