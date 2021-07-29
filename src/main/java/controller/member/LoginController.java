@@ -92,7 +92,7 @@ public class LoginController {
 				return null;
 			} catch (NullPointerException e) {
 				e.printStackTrace();
-				ScriptWriter.write("탈퇴한 사용자입니다", "home", request, response);
+				ScriptWriter.write("로그인이 필요합니다", "home", request, response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
