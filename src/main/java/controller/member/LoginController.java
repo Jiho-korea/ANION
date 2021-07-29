@@ -33,10 +33,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import petProject.exception.EmailcodeDeleteException;
-import petProject.exception.MemberAuthUpdateException;
+import petProject.exception.EmailcodeNotMatchException;
+import petProject.exception.MemberAuthStatusException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.ScriptWriter;
+import petProject.service.email.EmailValidService;
 import petProject.service.member.LoginService;
 import petProject.service.member.MemberRegisterService;
 import petProject.vo.AuthInfo;
@@ -49,6 +50,9 @@ public class LoginController {
 
 	@Resource(name = "loginService")
 	LoginService loginService;
+
+	@Resource(name = "emailValidService")
+	EmailValidService emailValidService;
 
 	@Resource(name = "memberRegisterService")
 	MemberRegisterService memberRegisterService;
@@ -64,29 +68,33 @@ public class LoginController {
 			@CookieValue(value = "memory", required = false) Cookie cookie, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws Exception {
 
-		if (emailcode != null & memberId != null) {
+		if (emailcode != null && memberId != null) {
 			try {
 				Emailcode data = new Emailcode();
 				data.setMemberId(memberId);
 				data.setEmailCode(emailcode);
 
-				memberRegisterService.updateAuthStatus(data);
+				emailValidService.valid(data);
 
 				ScriptWriter.write("인증이 완료되었습니다!", "logout", request, response);
 				return null;
-			} catch (MemberAuthUpdateException e) {
+			} catch (MemberNotFoundException e) {
 				e.printStackTrace();
-				ScriptWriter.write("회원가입을 다시 해주세요!", "home", request, response);
+				ScriptWriter.write("잘못된 접근입니다", "home", request, response);
 				return null;
-			} catch (EmailcodeDeleteException e) {
+			} catch (MemberAuthStatusException e) {
 				e.printStackTrace();
 				ScriptWriter.write("회원인증을 완료한 사용자입니다", "home", request, response);
+				return null;
+			} catch (EmailcodeNotMatchException e) {
+				e.printStackTrace();
+				ScriptWriter.write("만료된 링크입니다", "home", request, response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "login/loginFormPage";
 			}
-		} else if ((emailcode != null & memberId == null) || (emailcode == null & memberId != null)) {
+		} else if ((emailcode != null && memberId == null) || (emailcode == null && memberId != null)) {
 			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
 			return null;
 		}

@@ -39,14 +39,14 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 	@Resource(name = "memberRegisterService")
 	MemberRegisterService memberRegisterService;
-	
+
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
 
 	@Autowired
 	private MemberDAO memberDAO;
 
-	//DB의 authStatus를 통해 접근 불가 검증 메소드
+	// DB의 authStatus를 통해 접근 불가 검증 메소드
 	@Override
 	public void checkMemberAuthStatus(Emailcode emailcode) throws Exception {
 		Memberauth memberauth = memberDAO.checkMemberAuthStatus(emailcode);
@@ -58,7 +58,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 			throw new MemberAuthStatusException("authstatus is valid");
 		}
 	}
-	
+
 	// Emailcode의 필드(memberId, emailCode)를 사용하는 메소드
 	@Override
 	public Emailcode validCode(Emailcode emailcode) throws Exception {
@@ -95,8 +95,9 @@ public class EmailValidServiceImpl implements EmailValidService {
 	@Override
 	public String valid(Emailcode emailcode) throws Exception {
 		String result = null;
+		this.checkMemberAuthStatus(emailcode);
 		Emailcode data = this.validCode(emailcode);
-
+		
 		if (data.getNewMemberId() != null) {
 			this.updateEmail(data);
 			result = data.getNewMemberId();

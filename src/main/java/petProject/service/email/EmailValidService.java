@@ -13,19 +13,16 @@
 */
 package petProject.service.email;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.Emailcode;
 
 public interface EmailValidService {
 
-	String valid(@Param("emailcode") Emailcode emailcode) throws Exception;
+	String valid(Emailcode emailcode) throws Exception;
 
-	Emailcode validCode(@Param("emailcode") Emailcode emailcode) throws Exception;
-	
-	void updateEmail(@Param("emailcode") Emailcode emailcode) throws Exception;
-	
-	void checkMemberAuthStatus(@Param("emailcode") Emailcode emailcode) throws Exception;
-	
-	
+	Emailcode validCode(Emailcode emailcode) throws Exception;
+
+	void updateEmail(Emailcode emailcode) throws Exception;
+
+	void checkMemberAuthStatus(Emailcode emailcode) throws Exception;
+
 }

@@ -79,7 +79,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		emailcode.setEmailCode(Emailcode.random());
 		emailcode.setNewMemberId(changeIdCommand.getMemberId());
 
-		int cnt = emailcodeDAO.updateEmailcode(emailcode);
+		int cnt = emailcodeDAO.insertEmailcode(emailcode);
 		if (cnt == 0) {
 			throw new EmailcodeInsertException("emailcode error");
 		}

@@ -10,14 +10,9 @@
     </select>
     
     <insert id="insertEmailcode" parameterType="emailcode">
-    	INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE")
-    	VALUES (#{emailcode.memberId}, #{emailcode.emailCode});
-    </insert>
-    
-    <insert id="updateEmailcode" parameterType="emailcode">
-		INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE", "NEW_MEMBER_ID")
+    	INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE", "NEW_MEMBER_ID")
     	VALUES (#{emailcode.memberId}, #{emailcode.emailCode}, #{emailcode.newMemberId});
-	</insert>
+    </insert>
     
     <update id="requestEmailUpdate" parameterType="String">
     	update "member"

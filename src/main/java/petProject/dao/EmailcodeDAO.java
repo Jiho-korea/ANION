@@ -23,8 +23,6 @@ public interface EmailcodeDAO {
 
 	int insertEmailcode(@Param("emailcode") Emailcode emailcode) throws Exception;
 
-	int updateEmailcode(@Param("emailcode") Emailcode emailcode);
-
 	int requestEmailUpdate(@Param("memberId") String memberId);
 
 	int deleteEmailcodeAfterMemberRegistration(@Param("emailCode") String emailCode);
