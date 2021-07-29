@@ -207,6 +207,12 @@ a, a:hover {
 						code="edit.member.password.change" /></a>
 			</h4>
 		</div>
+		<div class="text-right mb-10">
+			<a href="${pageContext.request.contextPath}/withdrawal"
+				class="btn2"
+				style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
+				회원탈퇴</a>
+		</div>
 	</div>
 
 

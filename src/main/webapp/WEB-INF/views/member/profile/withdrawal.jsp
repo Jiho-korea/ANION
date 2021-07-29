@@ -1,4 +1,4 @@
-<%-- 
+<!-- 
 ========================================================================
 파    일    명 : emailAuthenticationForm.jsp
 ========================================================================
@@ -10,7 +10,7 @@
 수    정    일 : 2021.03.20
 수  정  내  용 : 회원가입, 이메일 변경 후 emailcode 확인 페이지
 ========================================================================
---%>
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -58,62 +58,55 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
-	charset="utf-8"></script>
-<script defer
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-	charset="utf-8"></script>
+<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#withdrawal").click(function() {
+			if ($("input:checkbox[type=checkbox]:checked").length == 0) {
+				alert("안내사항에 동의해주세요!");
+				return false;
+			} else {
+				return true
+			}
+		})
+	})
+</script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
 	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
+
 	<div class="container text-center" id="main">
-		<div class="jumbotron">
-			<h1 class="display-4">
-				<spring:message code="valid.email" />
-			</h1>
+		<div class="jumbotron border">
 
-			<br> <br>
+			<h1 class="display-4">회원 탈퇴</h1>
 
-			<form:form action="${pageContext.request.contextPath}/email/valid"
-				method="post" cssClass="form-signin" modelAttribute="emailcode">
-
-
+			<form:form action="${pageContext.request.contextPath}/withdrawal"
+				method="post" modelAttribute="withdrawalRequest">
 				<br>
 				<br>
+				<br>
+				<br>
+				<div class="checkbox mb-3">
+					<input type="checkbox" name="check" value="true" /> 이에 동의합니다.
+				</div>
 
-				<input type="hidden" name="memberId" value="${memberId}" />
-				<label> <form:input path="emailCode" cssClass="single-input"
-						placeholder="Write Emailcode..." onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Write Emailcode...'" /> <form:errors
-						path="emailCode" /> <form:errors />
+				<label style="margin-top: 20px"> <form:input path="comment"
+						cssClass="single-input" placeholder="탈퇴하는 이유를 적어주세요..."
+						onfocus="this.placeholder = ''"
+						onblur="this.placeholder = '탈퇴하는 이유를 적어주세요...'" />
 				</label>
-
 				<br>
 				<br>
-
-				<button id="btn_submit" class="btn btn-info pull-right" type="submit">
-					<spring:message code="valid.email" />
-				</button>
-
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
-				</p>
+				<input type="hidden" name="memberNumber"
+					value="${sessionScope.login.memberNumber }" />
+				<input type="submit" id="withdrawal" class="btn btn-info pull-right"
+					value="회원탈퇴" />
 			</form:form>
-
-
-			<%-- <spring:message code="valid.email.confirm">
-					<c:choose>
-						<c:when test="${!empty register }">
-							<spring:argument value="${memberRegisterRequest.memberId}" />
-						</c:when>
-						<c:when test="${!empty update }">
-							<spring:argument value="${changeIdCommand.memberId}" />
-						</c:when>
-					</c:choose>
-				</spring:message> --%>
 		</div>
 	</div>
 
@@ -187,18 +180,4 @@
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
-<script defer type="text/javascript" charset="utf-8">
-	$("#btn_submit").click(function() {
-
-		if ($("#emailCode").val() == "") {
-			setTimeout(function() {
-				alert("<spring:message code="valid.email.authentication.code" />");
-
-			}, 100);
-			return false;
-		} 
-
-		target.form.submit();
-	});
-</script>
 </html>
