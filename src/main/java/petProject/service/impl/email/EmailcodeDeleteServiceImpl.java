@@ -7,7 +7,7 @@
 작  성  내  용 : emailcode 테이블 레코드 삭제
 ========================================================================
 */
-package petProject.service.impl.member;
+package petProject.service.impl.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.EmailcodeDAO;
 import petProject.exception.EmailcodeDeleteException;
-import petProject.service.member.EmailcodeDeleteService;
+import petProject.service.email.EmailcodeDeleteService;
 import petProject.vo.dto.Emailcode;
 
 @Service("emailcodeDeleteService")

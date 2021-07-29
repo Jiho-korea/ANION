@@ -17,25 +17,27 @@ import org.springframework.stereotype.Service;
 
 import petProject.service.email.MailSendService;
 import petProject.service.email.MemberRegisterEmailService;
+import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 
 @Service("memberRegisterEmailService")
 public class MemberRegisterEmailServiceImpl implements MemberRegisterEmailService {
-	@Value("${mail.smtp.url.server}")
+	@Value("${mail.smtp.url.local}")
+//	@Value("${mail.smtp.url.server}")
 	private String url;
 
 	@Resource(name = "mailSendService")
 	MailSendService mailSendService;
 
 	@Override
-	public boolean createMemberRegisterEmail(Member member, HttpServletRequest request, boolean isHtml,
-			String emailcode) throws Exception {
+	public boolean createMemberRegisterEmail(Emailcode emailcode, Member member, HttpServletRequest request,
+			boolean isHtml) throws Exception {
 		String mailHead = null;
 		String mailContent = null;
 
-		mailHead = "<h1>[ANION] 회원가입 인증메일</h1><br><p>로그인 후 인증번호 6자리를 입력하시면 이메일 인증이 완료됩니다.</p><br>";
-		mailContent = emailcode + "<br><a href='" + url + request.getContextPath() + "/login"
-				+ "'target='_blank'>[ANION]</a>";
+		mailHead = "<h1>[ANION] 회원가입 인증메일</h1><br><p>안녕하세요, " + member.getMemberName() + "님</p>";
+		mailContent = "<p>아래 버튼을 클릭하시면 이메일 인증이 완료됩니다!</p><br><a href='" + url + request.getContextPath()
+				+ "/login?memberId=" + emailcode.getMemberId() + "&emailcode=" + emailcode.getEmailCode() + "'target='_blank'>[ANION]</a>";
 
 		mailSendService.sendMail(member.getMemberId(), member.getMemberName(), mailHead, mailContent, request, isHtml);
 		return true;

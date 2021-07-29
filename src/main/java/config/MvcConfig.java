@@ -28,6 +28,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import interceptor.AdminCheckInterceptor;
+import interceptor.EmailValidCheckInterceptor;
 import interceptor.ImageAuthCheckInterceptor;
 import interceptor.InfoAuthCheckInterceptor;
 import interceptor.LoginCheckInterceptor;
@@ -80,7 +81,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public PopupPetLocationCookieDeleteInterceptor popupPetLocationCookieDeleteInterceptor() {
 		return new PopupPetLocationCookieDeleteInterceptor();
 	}
-	
+
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
@@ -91,6 +92,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public LogoutCheckInterceptor logoutCheckInterceptor() {
 		return new LogoutCheckInterceptor();
+	}
+
+	@Bean
+	public EmailValidCheckInterceptor emailValidCheckInterceptor() {
+		return new EmailValidCheckInterceptor();
 	}
 
 	@Override
@@ -118,6 +124,9 @@ public class MvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
 				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**");
+		registry.addInterceptor(emailValidCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
+				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
+				"/email/sent");
 		registry.addInterceptor(logoutCheckInterceptor()).addPathPatterns("/member/find/**", "/login", "/signup/step1");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
