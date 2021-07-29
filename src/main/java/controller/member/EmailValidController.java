@@ -50,6 +50,7 @@ import petProject.exception.MemberNotFoundException;
 import petProject.service.ScriptWriter;
 import petProject.service.email.EmailValidService;
 import petProject.service.email.EmailcodeDeleteService;
+import petProject.vo.AuthInfo;
 import petProject.vo.dto.Emailcode;
 
 @Controller
@@ -96,20 +97,25 @@ public class EmailValidController {
 
 	@GetMapping("/validForm")
 	public String validForm(@Valid Emailcode emailcode, Errors errors, Model model, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, HttpSession session) throws Exception {
 		if (errors.hasErrors()) {
 			errors.reject("error");
 		}
 		try {
+			AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+
+			if (authInfo.getMemberauth().getMemberAuthStatus() != 2) {
+				throw new MemberAuthStatusException("Email update done");
+			}
 			emailValidService.checkMemberAuthStatus(emailcode);
 
 			model.addAttribute("memberId", emailcode.getMemberId());
 			return "member/email/emailAuthenticationForm";
+		} catch (MemberAuthStatusException e) {
+			ScriptWriter.write("만료된 링크입니다.", "profile", request, response);
+			return null;
 		} catch (MemberNotFoundException e) {
 			ScriptWriter.write("아이디를 다시 확인해주세요", "home", request, response);
-			return null;
-		} catch (MemberAuthStatusException e) {
-			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
