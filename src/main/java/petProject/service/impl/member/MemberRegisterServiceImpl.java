@@ -34,9 +34,10 @@ import petProject.dao.EmailcodeDAO;
 import petProject.dao.MemberDAO;
 import petProject.exception.EmailcodeInsertException;
 import petProject.exception.MemberAuthUpdateException;
-import petProject.exception.MemberDuplicateException;
 import petProject.exception.MemberInsertException;
 import petProject.service.email.MemberRegisterEmailService;
+import petProject.service.email.EmailcodeDeleteService;
+import petProject.service.member.LoginService;
 import petProject.service.member.MemberRegisterService;
 import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
@@ -52,8 +53,14 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
 
+	@Resource(name = "loginService")
+	LoginService loginService;
+
 	@Resource(name = "memberRegisterEmailService")
 	MemberRegisterEmailService memberRegisterEmailService;
+
+	@Resource(name = "emailcodeDeleteService")
+	EmailcodeDeleteService emailcodeDeleteService;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -71,22 +78,13 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		return cnt;
 	}
 
-	@Override
-	public void selectById(String memberId) throws Exception {
-		int member_cnt = memberDAO.selectByIdFromMember(memberId);
-		int emailcode_cnt = memberDAO.selectByIdFromEmailcode(memberId);
-		
-		if (member_cnt != 0 || emailcode_cnt != 0) {
-			throw new MemberDuplicateException("duplicate memberId");
-		}
-	}
-
-	@Override
-	public int updateAuthStatus(String memberId) throws Exception {
-		int cnt = memberDAO.updateAuthStatus(memberId);
+	@Transactional
+	public int updateAuthStatus(Emailcode emailcode) throws Exception {
+		int cnt = memberDAO.updateAuthStatus(emailcode.getMemberId());
 		if (cnt == 0) {
 			throw new MemberAuthUpdateException("auth update failed");
 		}
+		emailcodeDeleteService.deleteEmailcode(emailcode);
 		return cnt;
 	}
 
@@ -109,11 +107,12 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	@Transactional
 	public void memberRegister(MemberRegisterRequest memberRegisterRequest, HttpServletRequest request, boolean isHtml)
 			throws Exception {
-		this.selectById(memberRegisterRequest.getMemberId());
+		loginService.selectById(memberRegisterRequest.getMemberId());
 		this.insertMember(memberRegisterRequest);
 		Emailcode emailcode = this.insertCode(memberRegisterRequest.getMemberId());
 
 		Member member = memberDAO.selectMemberById(memberRegisterRequest.getMemberId());
-		memberRegisterEmailService.createMemberRegisterEmail(member, request, isHtml, emailcode.getEmailCode());
+		memberRegisterEmailService.createMemberRegisterEmail(emailcode, member, request, isHtml);
 	}
+
 }

@@ -7,7 +7,7 @@
 작  성  내  용 : Emailcode 데이터 삭제 클래스
 ========================================================================
 */
-package petProject.service.member;
+package petProject.service.email;
 
 import petProject.vo.dto.Emailcode;
 

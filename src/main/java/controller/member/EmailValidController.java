@@ -49,7 +49,7 @@ import petProject.exception.MemberIdUpdateException;
 import petProject.exception.MemberNotFoundException;
 import petProject.service.ScriptWriter;
 import petProject.service.email.EmailValidService;
-import petProject.service.member.EmailcodeDeleteService;
+import petProject.service.email.EmailcodeDeleteService;
 import petProject.vo.dto.Emailcode;
 
 @Controller
@@ -120,9 +120,9 @@ public class EmailValidController {
 
 	@GetMapping("/valid")
 	public String valid(@CookieValue(value = "successUpdateId", required = false) Cookie cookie_success_update_id,
-			@CookieValue(value = "successValidMember", required = false) Cookie cookie_success_valid_member,
-			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
-		if (cookie_success_update_id == null && cookie_success_valid_member == null) {
+			Model model, HttpServletResponse response, HttpServletRequest request, HttpSession session)
+			throws Exception {
+		if (cookie_success_update_id == null) {
 			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
 			return null;
 		}
@@ -132,13 +132,8 @@ public class EmailValidController {
 			cookie_delete_success_update_id.setMaxAge(0);
 			response.addCookie(cookie_delete_success_update_id);
 			model.addAttribute("memberId", cookie_success_update_id.getValue());
-		} else if (cookie_success_valid_member != null) {
-			Cookie cookie_delete_success_valid_member = new Cookie("successValidMember",
-					cookie_success_valid_member.getValue());
-			cookie_delete_success_valid_member.setPath("/");
-			cookie_delete_success_valid_member.setMaxAge(0);
-			response.addCookie(cookie_delete_success_valid_member);
-			model.addAttribute("memberId", cookie_success_valid_member.getValue());
+
+			session.invalidate();
 		}
 
 		return "member/email/emailAuthenticationSuccess";
@@ -146,7 +141,7 @@ public class EmailValidController {
 
 	@PostMapping("/valid")
 	public String valid(@Valid Emailcode emailcode, Errors errors, Model model, HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws Exception {
+			HttpServletResponse response) throws Exception {
 		if (errors.hasErrors()) {
 			errors.reject("error");
 			model.addAttribute("memberId", emailcode.getMemberId());
@@ -156,28 +151,11 @@ public class EmailValidController {
 		try {
 			String result = emailValidService.valid(emailcode);
 
-			// 이메일 변경시 result != null
-			if (result != null) {
-				emailcodeDeleteService.deleteEmailcode(result);
-				session.invalidate();
+			Cookie cookie_success_update_id = new Cookie("successUpdateId", result);
+			cookie_success_update_id.setPath("/");
+			cookie_success_update_id.setMaxAge(60 * 60 * 24 * 1);
 
-				Cookie cookie_success_update_id = new Cookie("successUpdateId", result);
-				cookie_success_update_id.setPath("/");
-				cookie_success_update_id.setMaxAge(60 * 60 * 24 * 1);
-
-				response.addCookie(cookie_success_update_id);
-
-				return "redirect:/email/valid";
-			}
-			// 회원 가입시 result = null
-			emailcodeDeleteService.deleteEmailcode(emailcode);
-
-			Cookie cookie_success_valid_member = new Cookie("successValidMember", emailcode.getMemberId());
-			cookie_success_valid_member.setPath("/");
-			cookie_success_valid_member.setMaxAge(60 * 60 * 24 * 1);
-
-			response.addCookie(cookie_success_valid_member);
-
+			response.addCookie(cookie_success_update_id);
 			return "redirect:/email/valid";
 		} catch (EmailcodeNotMatchException e) {
 			e.printStackTrace();

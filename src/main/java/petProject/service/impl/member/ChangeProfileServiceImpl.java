@@ -39,11 +39,11 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	@Resource(name = "memberSelectService")
-	MemberSelectService memberSelectService;
-
 	@Autowired
 	private EmailcodeDAO emailcodeDAO;
+
+	@Resource(name = "memberSelectService")
+	MemberSelectService memberSelectService;
 
 	@Resource(name = "changeProfileEmailService")
 	ChangeProfileEmailService changeProfileEmailService;
@@ -51,7 +51,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 	@Override
 	public void selectById(String memberId) throws Exception {
 		int member_cnt = memberDAO.selectByIdFromMember(memberId);
-		int emailcode_cnt = memberDAO.selectByIdFromEmailcode(memberId);
+		int emailcode_cnt = memberDAO.selectEmailcodeById(memberId);
 
 		if (member_cnt != 0 || emailcode_cnt != 0) {
 			throw new MemberDuplicateException("duplicate memberId");
@@ -79,7 +79,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		emailcode.setEmailCode(Emailcode.random());
 		emailcode.setNewMemberId(changeIdCommand.getMemberId());
 
-		int cnt = emailcodeDAO.updateEmailcode(emailcode);
+		int cnt = emailcodeDAO.insertEmailcode(emailcode);
 		if (cnt == 0) {
 			throw new EmailcodeInsertException("emailcode error");
 		}

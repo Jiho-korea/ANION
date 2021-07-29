@@ -94,13 +94,24 @@
 }
 
 .input-map {
-	margin-left: 8.5%;
-	width: 66.5%;
+	margin-left: 7%;
+	width: 69%;
 	line-height: 40px;
 	border: none;
 	outline: none;
 	background: #f9f9ff;
-	padding: 0 20px;
+	padding: 0 20px 0 10px;
+}
+
+.single-input-necessary {
+	display: block;
+	margin-left: -2%;
+	width: 104.5%;
+	line-height: 40px;
+	border: none;
+	outline: none;
+	background: #f9f9ff;
+	padding: 0 20px 0 10px;
 }
 </style>
 
@@ -120,21 +131,26 @@
 				method="post" cssClass="form-signin"
 				modelAttribute="petRegisterRequest" onsubmit="return submitCheck()"
 				enctype="multipart/form-data">
+
+				<%--
 				<div class="row" style="display: none;">
 					<label><input type="file" name="file"></label>
 				</div>
+				 --%>
+
 				<div class="row">
 					<div class="col-md-6 mb-1">
-						<label> <form:input path="petName" cssClass="single-input"
-								placeholder="견명 / Name" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '견명 / Name'" /> <form:errors
+						<label> <form:input path="petName"
+								cssClass="single-input-necessary" placeholder="* 견명 / Name"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '* 견명 / Name'" /> <form:errors
 								path="petName" />
 						</label>
 					</div>
 
 					<div class="div-map" id="default-select">
 						<form:input path="petKind" cssClass="input-map"
-							placeholder="견종 / Kind" name="petKind" id="petKind"
+							placeholder="* 견종 / Kind" name="petKind" id="petKind"
 							readonly="true" />
 						<button type="button" onclick="dogmapPopup();"
 							style="border: 0; cursor: pointer; background-color: #f9f9ff;">
@@ -173,11 +189,10 @@
 				<br class="mb-4" />
 				<div class="row">
 					<div class="col-md-6 mb-1">
-
-						<label> <!--<spring:message code="pet.mothername" />--> <form:input
-								path="petMothername" cssClass="single-input"
-								placeholder="모견명 / dog's mother" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '모견명 / Mother dog's name'" /> <form:errors
+						<label> <form:input path="petMothername"
+								cssClass="single-input" placeholder="모견명 / Dog`s mother"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '모견명 / Dog`s Mother'" /> <form:errors
 								path="petMothername" />
 
 
@@ -186,8 +201,8 @@
 					<div class="col-md-6 mb-1">
 						<label> <!--<spring:message code="pet.father" />--> <form:input
 								path="petFathername" cssClass="single-input"
-								placeholder="부견명 / dog's father" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '부견명 / Dad Dog's Name'" /> <form:errors
+								placeholder="부견명 / Dog`s father" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '부견명`s / Dog father'" /> <form:errors
 								path="petFathername" />
 						</label>
 					</div>
@@ -297,61 +312,63 @@
 
 </body>
 <script defer type="text/javascript" charset="utf-8">
-	
-	function check(){
+	function check() {
 		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
-		
-		if (regExp.test($("#petName").val())){
+
+		if (regExp.test($("#petName").val())) {
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
-		}else if(regExp.test($("#petMothername").val())){
+		} else if (regExp.test($("#petMothername").val())) {
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
-		}else if(regExp.test($("#petFathername").val())){
+		} else if (regExp.test($("#petFathername").val())) {
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
 		}
 		return true;
 	}
-	
+
 	function dogmapPopup() {
-		window.open("${pageContext.request.contextPath}/popup/petKind",
-			"petKind_parent", "width=920, height=600, toolbar=no, location=no, resizable=no, directories=no, status=no, menubar=no");
+		window
+				.open(
+						"${pageContext.request.contextPath}/popup/petKind",
+						"petKind_parent",
+						"width=920, height=600, toolbar=no, location=no, resizable=no, directories=no, status=no, menubar=no");
 	};
-	
+
 	//최대길이 지정
 	function numberMaxLength(el, maxlength) {
-		  if(el.value.length > maxlength)  {
-		    el.value 
-		      = el.value.substr(0, maxlength);
-		  }
+		if (el.value.length > maxlength) {
+			el.value = el.value.substr(0, maxlength);
+		}
 	}
-	
-	function submitCheck(){
+
+	function submitCheck() {
 		var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/;
-		
+
 		if ($("#petName").val() == "") {
 			alert("견명을 입력해주세요.");
 			return false;
-		}else if ($('#petKind').val() == "") {
+		} else if ($('#petKind').val() == "") {
 			alert("견종을 선택해주세요.");
 			return false;
-		}else if ($(':radio[name="petSex"]:checked').length < 1) {
+		} else if ($(':radio[name="petSex"]:checked').length < 1) {
 			alert("성별을 선택해주세요.");
 			return false;
-		}else if ($('#petBirthday').val() == "") {
+		} else if ($('#petBirthday').val() == "") {
 			alert("생년월일을 입력해주세요.");
 			return false;
-		}else if (regExp.test($("#petName").val())){
+		} else if (regExp.test($("#petName").val())) {
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
-		}else if(regExp.test($("#petMothername").val())){
+		} else if (regExp.test($("#petMothername").val())) {
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
-		}else if(regExp.test($("#petFathername").val())){
+		} else if (regExp.test($("#petFathername").val())) {
 			alert("특수문자는 입력할 수 없습니다.");
 			return false;
-		}else if($("#petMicrochip").val().length < 15 && $("#petMicrochip").val()!=""){
+		} else if ($("#petMicrochip").val().length < 15
+				&& $("#petMicrochip").val() != "") {
 			alert("마이크로칩 번호는 15자리입니다.");
 			return false;
 		}
