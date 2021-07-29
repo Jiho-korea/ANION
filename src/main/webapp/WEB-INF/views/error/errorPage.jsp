@@ -15,7 +15,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/owl.carousel.min.css"> 
+	href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/slicknav.css">
 <link rel="stylesheet"
