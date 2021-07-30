@@ -11,7 +11,9 @@ package petProject.service.email;
 
 import javax.servlet.http.HttpServletRequest;
 
+import petProject.vo.dto.Emailcode;
+
 public interface ChangeProfileEmailService {
-	public boolean createChangeProfileEmail(String to_addr, String to_name, HttpServletRequest request, boolean isHtml,
-			String emailcode) throws Exception;
+	public boolean createChangeProfileEmail(Emailcode emailcode, String to_addr, String to_name,
+			HttpServletRequest request, boolean isHtml) throws Exception;
 }

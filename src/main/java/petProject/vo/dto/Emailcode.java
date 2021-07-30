@@ -4,9 +4,18 @@ import java.util.Random;
 
 public class Emailcode {
 
+	private int emailcodeNumber;
 	private String memberId;
 	private String emailCode;
 	private String newMemberId;
+
+	public int getEmailcodeNumber() {
+		return emailcodeNumber;
+	}
+
+	public void setEmailcodeNumber(int emailcodeNumber) {
+		this.emailcodeNumber = emailcodeNumber;
+	}
 
 	public String getMemberId() {
 		return memberId;

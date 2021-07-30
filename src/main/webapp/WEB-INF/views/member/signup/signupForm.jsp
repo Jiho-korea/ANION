@@ -274,7 +274,9 @@
 		opacity: 0.3;
 		target.disabled = true;
 		target.value = 'Loading';
-
+		
+		var regExp = /[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/;
+		
 		if ($("#memberId").val() == "") {
 			setTimeout(function() {
 				alert("<spring:message code="이메일을 입력해주세요." />");
@@ -307,6 +309,13 @@
 		} else if ($("#memberName").val() == "") {
 			setTimeout(function() {
 				alert("<spring:message code="이름을 입력해주세요." />");
+				target.disabled = false;
+				target.value = '<spring:message code="go.register" />';
+			}, 100);
+			return false;
+		} else if (regExp.test($("#memberName").val())) {
+			setTimeout(function() {
+				alert("<spring:message code="이름에 특수문자를 입력할 수 없습니다." />");
 				target.disabled = false;
 				target.value = '<spring:message code="go.register" />';
 			}, 100);

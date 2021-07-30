@@ -83,7 +83,6 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		if (cnt == 0) {
 			throw new EmailcodeInsertException("emailcode error");
 		}
-
 		return emailcode;
 	}
 
@@ -100,8 +99,8 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 			throw new MemberAuthUpdateException("change auth error");
 		}
 
-		changeProfileEmailService.createChangeProfileEmail(changeIdCommand.getMemberId(), member.getMemberName(),
-				request, true, emailcode.getEmailCode());
+		changeProfileEmailService.createChangeProfileEmail(emailcode, changeIdCommand.getMemberId(),
+				member.getMemberName(), request, true);
 	}
 
 }

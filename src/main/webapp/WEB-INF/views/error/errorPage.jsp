@@ -1,21 +1,13 @@
-<%-- 
-========================================================================
-파    일    명 : registerStep2.jsp
-========================================================================
-작    성    자 : 강지호
-작    성    일 : 2020.xx.xx
-작  성  내  용 : 등록 완료 후 출력 페이지
-========================================================================
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
@@ -54,48 +46,37 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
-	charset="utf-8"></script>
-<script defer
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-	charset="utf-8"></script>
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script defer src="js/bootstrap.js"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
-	<c:import url="../../included/top.jsp">
+	<c:import url="../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
-	<div class="container text-center" id="main">
-		<div class="jumbotron">
-			<h4 class="mb-4">
-				<spring:message code="register.pet.done.banner" />
-			</h4>
-			<p>
-				<spring:message code="register.pet.done">
-					<spring:argument value="${petName}" />
-				</spring:message>
-				<br>
-			</p>
-			<br class="mb-4" />
-			<hr class="mb-4" />
-			<div class="row">
-				<div class="col-md-6 mb-1">
-					<a class="btn btn-info pull-right" href="<c:url value='step1'/>"
-						role="button"><spring:message code="go.back.re" /></a>
 
-				</div>
-				<div class="col-md-6 mb-1">
-					<a class="btn btn-info pull-right"
-						href="<c:url value='/pet/list'/>" role="button"><spring:message
-							code="go.list" /></a>
-				</div>
-			</div>
+	<c:choose>
+		<c:when test="${errorCode eq '400'}"> 
+			<br>
+			<h1 id="400error">&nbsp요청을 처리할 수 없습니다.</h1> 
+		</c:when>
+		<c:when test="${errorCode eq '500'}">
+			<br>
+			<h1 id="500error">&nbsp서버에 문제가 발생했습니다.</h1>
+		</c:when>
+		<c:otherwise>
+			<br>
+			<h1 id="404error">&nbsp요청하신 경로를 찾을 수 없습니다.</h1>
+		</c:otherwise>
+	</c:choose>
 
-		</div>
+	<script>
+		document.getElementById('400error').style.font = 'bold 30px Arial';
+		document.getElementById('500error').style.font = 'bold 30px Arial';
+		document.getElementById('404error').style.font = 'bold 30px Arial';
+	</script>
 
-	</div>
-
-	<c:import url="../../included/bottom.jsp">
+	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -103,6 +84,8 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
+
+
 	<!-- JS here -->
 
 	<script defer
@@ -111,13 +94,15 @@
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.12.4.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<!-- Jquery Mobile Menu -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-	<script defer src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
 	<script defer src="${pageContext.request.contextPath}/js/wow.min.js"></script>
@@ -131,14 +116,17 @@
 	<!-- Nice-select, sticky -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.nice-select.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.sticky.js"></script>
 	<!-- Progress -->
-	<script defer src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.barfiller.js"></script>
 
 	<!-- counter , waypoint,Hover Direction -->
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.counterup.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.countdown.min.js"></script>
 	<script defer
@@ -146,15 +134,19 @@
 
 	<!-- contact js -->
 	<script defer src="${pageContext.request.contextPath}/js/contact.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
-	<script defer src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+	<script defer
+		src="${pageContext.request.contextPath}/js/mail-script.js"></script>
 	<script defer
 		src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
 	<script defer src="${pageContext.request.contextPath}/js/plugins.js"></script>
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
+
 </html>
