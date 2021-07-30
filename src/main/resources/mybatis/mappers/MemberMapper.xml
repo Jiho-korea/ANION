@@ -157,5 +157,12 @@
 		SELECT count(*) FROM image WHERE "MEMBER_NUMBER" =
 		#{memberNumber}
 	</select>
+	
+	<delete id="deleteMember" parameterType="member"> 
+		DELETE FROM "member"
+		WHERE "MEMBER_NUMBER" = #{memberNumber} 
+	</delete>
+
+	
 
 </mapper>

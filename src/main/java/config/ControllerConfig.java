@@ -26,6 +26,7 @@ import controller.admin.event.noseprint.image.NoseprintImageListAdminController;
 import controller.admin.event.noseprint.pet.NoseprintPetListAdminController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.image.ImageListAdminController;
+import controller.admin.member.MemberDeleteController;
 import controller.admin.member.MemberListController;
 import controller.admin.pet.PetListAdminController;
 import controller.event.noseprint.image.NoseprintImageDeleteController;
@@ -227,5 +228,10 @@ public class ControllerConfig {
 	public PetLocationController petLocationController() {
 		return new PetLocationController();
 
+	}
+	
+	@Bean
+	public MemberDeleteController memberDeleteController() {
+		return new MemberDeleteController();
 	}
 }

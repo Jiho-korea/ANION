@@ -64,4 +64,6 @@ public interface MemberDAO {
 	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode) throws Exception;
 
 	Member selectProfileById(@Param("memberId") String memberId) throws Exception;
+	
+	int deleteMember(@Param("memberNumber") int memberNumber);
 }
