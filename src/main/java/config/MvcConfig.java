@@ -133,10 +133,10 @@ public class MvcConfig implements WebMvcConfigurer {
 				"/memberWithdrawal/**");
 		registry.addInterceptor(emailValidCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
 				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
-				"/email/sent", "/memberWithdrawal/**");
+				"/email/sent", "/memberWithdrawal/**", "/member/find/**");
 		registry.addInterceptor(memberWithdrawalCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
 				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
-				"/email/sent", "/memberWithdrawal/**");
+				"/email/sent", "/memberWithdrawal/**", "/member/find/**");
 		registry.addInterceptor(logoutCheckInterceptor()).addPathPatterns("/member/find/**", "/login", "/signup/step1");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");
