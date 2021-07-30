@@ -23,6 +23,6 @@ public interface EmailValidService {
 
 	void updateEmail(Emailcode emailcode) throws Exception;
 
-	void checkMemberAuthStatus(Emailcode emailcode) throws Exception;
+	void checkMemberAuthStatus(String memberId) throws Exception;
 
 }

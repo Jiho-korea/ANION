@@ -21,8 +21,8 @@ import petProject.vo.dto.Emailcode;
 
 @Service("changeProfileEmailService")
 public class ChangeProfileEmailServiceImpl implements ChangeProfileEmailService {
-	@Value("${mail.smtp.url.local}")
-//	@Value("${mail.smtp.url.server}")
+//	@Value("${mail.smtp.url.local}")
+	@Value("${mail.smtp.url.server}")
 	private String url;
 
 	@Resource(name = "mailSendService")
@@ -35,8 +35,8 @@ public class ChangeProfileEmailServiceImpl implements ChangeProfileEmailService 
 		String mailContent = null;
 
 		mailHead = "<h1>[ANION] 이메일 변경 인증</h1><br><p>인증번호 6자리를 입력하시면 이메일 변경이 완료됩니다.</p>";
-		mailContent = emailcode.getEmailCode() + "<br><a href='" + url + request.getContextPath()
-				+ "/email/validForm?memberId=" + emailcode.getMemberId() + "'target='_blank'>[ANION]</a>";
+		mailContent = emailcode.getEmailCode() + "<br><a href='" + url + request.getContextPath() + "/email/validForm"
+				+ "'target='_blank'>[ANION]</a>";
 
 		mailSendService.sendMail(to_addr, to_name, mailHead, mailContent, request, isHtml);
 		return true;
