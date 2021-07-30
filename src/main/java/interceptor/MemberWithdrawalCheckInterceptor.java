@@ -30,7 +30,7 @@ public class MemberWithdrawalCheckInterceptor implements HandlerInterceptor {
 
 			Memberauth memberauth = authInfo.getMemberauth();
 			if (memberauth.getMemberAuthStatus() == 3) {
-				return ScriptWriter.write("회원탈퇴를 신청한 상태입니다!", "withdrawal", request, response);
+				return ScriptWriter.write("회원탈퇴를 신청한 상태입니다!", "memberWithdrawal", request, response);
 			}
 		} catch (NullPointerException e) {
 			return ScriptWriter.write("로그인이 필요합니다", "home", request, response);

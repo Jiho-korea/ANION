@@ -92,10 +92,16 @@ a, a:hover {
 			class="jumbotron border">
 			<h2 style="text-align: left">
 				<b><spring:message code="info.member.profile" /></b> <b
-					style="font-size: smaller; color: red;"><c:if
-						test="${sessionScope.login.memberauth.memberAuthStatus==0}">
+					style="font-size: smaller; color: red;"><c:choose>
+						<c:when
+							test="${sessionScope.login.memberauth.memberAuthStatus==0}">
 					(<spring:message code="valid.email.request" />)
-				</c:if></b>
+				</c:when>
+						<c:when
+							test="${sessionScope.login.memberauth.memberAuthStatus==3}">
+							(<spring:message code="memberWithdrawal.status" />)
+						</c:when>
+					</c:choose></b>
 			</h2>
 			<br> <br>
 

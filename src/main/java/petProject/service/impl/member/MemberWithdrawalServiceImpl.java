@@ -51,8 +51,8 @@ public class MemberWithdrawalServiceImpl implements MemberWithdrawalService {
 	// withdrawal 테이블 record를 삭제하는 메소드
 	@Override
 	public void deleteMemberWithdrawal(int memberNumber) {
-		int commentDelete_cnt = memberWithdrawalDAO.deleteMemberWithdrawal(memberNumber);
-		if (commentDelete_cnt == 0) {
+		int cnt = memberWithdrawalDAO.deleteMemberWithdrawal(memberNumber);
+		if (cnt == 0) {
 			throw new MemberWithdrawalException("Comment delete error");
 		}
 	}
@@ -60,8 +60,8 @@ public class MemberWithdrawalServiceImpl implements MemberWithdrawalService {
 	// member의 authStatus를 1로 변경
 	@Override
 	public void updateMemberWithdrawal(int memberNumber) {
-		int updateAuthstatus_cnt = memberDAO.cancelMemberWithdrawal(memberNumber);
-		if (updateAuthstatus_cnt == 0) {
+		int cnt = memberDAO.cancelMemberWithdrawal(memberNumber);
+		if (cnt == 0) {
 			throw new MemberWithdrawalException("Comment delete error");
 		}
 	}

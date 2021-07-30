@@ -42,7 +42,7 @@ public class MemberWithdrawalController {
 		if (authInfo.getMemberauth().getMemberAuthStatus() == 3) {
 			return "member/memberWithdrawal/memberWithdrawalCancel";
 		}
-		return "member/profile/memberWithdrawal";
+		return "member/memberWithdrawal/memberWithdrawalForm";
 	}
 
 	@GetMapping("/request")
@@ -125,7 +125,7 @@ public class MemberWithdrawalController {
 			return "redirect:/memberWithdrawal/cancel";
 		} catch (MemberWithdrawalException e) {
 			e.printStackTrace();
-			return "home/main";
+			return "redirect:/memberWithdrawal";
 		}
 	}
 }
