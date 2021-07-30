@@ -21,8 +21,8 @@ import petProject.vo.dto.Emailcode;
 
 @Service("changeProfileEmailService")
 public class ChangeProfileEmailServiceImpl implements ChangeProfileEmailService {
-	@Value("${mail.smtp.url.local}")
-//	@Value("${mail.smtp.url.server}")
+//	@Value("${mail.smtp.url.local}")
+	@Value("${mail.smtp.url.server}")
 	private String url;
 
 	@Resource(name = "mailSendService")
