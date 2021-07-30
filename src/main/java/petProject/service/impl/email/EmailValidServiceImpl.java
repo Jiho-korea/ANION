@@ -48,8 +48,8 @@ public class EmailValidServiceImpl implements EmailValidService {
 
 	// DB의 authStatus를 통해 접근 불가 검증 메소드
 	@Override
-	public void checkMemberAuthStatus(Emailcode emailcode) throws Exception {
-		Memberauth memberauth = memberDAO.checkMemberAuthStatus(emailcode);
+	public void checkMemberAuthStatus(String memberId) throws Exception {
+		Memberauth memberauth = memberDAO.checkMemberAuthStatus(memberId);
 
 		if (memberauth == null) {
 			throw new MemberNotFoundException("memberId is not valid");
@@ -95,7 +95,7 @@ public class EmailValidServiceImpl implements EmailValidService {
 	@Override
 	public String valid(Emailcode emailcode) throws Exception {
 		String result = null;
-		this.checkMemberAuthStatus(emailcode);
+		this.checkMemberAuthStatus(emailcode.getMemberId());
 		Emailcode data = this.validCode(emailcode);
 		
 		if (data.getNewMemberId() != null) {

@@ -107,9 +107,9 @@ public class EmailValidController {
 			if (authInfo.getMemberauth().getMemberAuthStatus() != 2) {
 				throw new MemberAuthStatusException("Email update done");
 			}
-			emailValidService.checkMemberAuthStatus(emailcode);
+			emailValidService.checkMemberAuthStatus(authInfo.getMemberId());
 
-			model.addAttribute("memberId", emailcode.getMemberId());
+			model.addAttribute("memberId", authInfo.getMemberId());
 			return "member/email/emailAuthenticationForm";
 		} catch (MemberAuthStatusException e) {
 			ScriptWriter.write("만료된 링크입니다.", "profile", request, response);
