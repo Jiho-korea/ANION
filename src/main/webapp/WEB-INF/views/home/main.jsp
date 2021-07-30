@@ -633,7 +633,13 @@
 		return "";
 	}
 	jQuery(document).ready(function() {
-		$('#myModal').show();
+		var cc = getCookie('Notice');
+		if(cc == 'done'){
+			$('#myModal').hide();
+		}
+		else{
+			$('#myModal').show();
+		}
 	});
 	
 	function closeWin() {
@@ -644,5 +650,7 @@
 		setCookie("Notice", "done", 1);
 		$('#myModal').hide();
 	}
+	
+
 </script>
 </html>
