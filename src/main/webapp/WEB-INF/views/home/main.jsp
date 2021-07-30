@@ -82,7 +82,6 @@
 	background-color: #fefefe;
 	border: 1px solid #888;
 	width: 30%; /* Could be more or less, depending on screen size */
-	border: 1px solid;
 	margin:0;
 }
 
@@ -92,7 +91,7 @@
 
 .title {
 	display: inline;
-	text-shadow: 1px 1px 2px gray;
+	padding: 10px;
 }
 </style>
 
@@ -100,23 +99,22 @@
 <body onload="doPopupopen();">
 
 	<div id="myModal" class="modal" style="max-width: 100%; width: auto;display: table;">
-		<div class="modal-content d-flex justify-content-center ml-5 mt-5">
+		<div class="modal-content d-flex justify-content-center ml-5 mt-5" style="border:2px solid gray; width:70%;">
 			<table>
-			<div class=title>
+			<div class="title" style="border-bottom:2px solid gray;">
 			비문등록 이벤트 설명
 			</div>
 			<a href="https://www.facebook.com/groups/3017696248465936"> <img
 				src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
-				style="max-width: 100%; height: auto; width:auto;">
+				style="max-width: 100%; height: auto; width:auto; border:1px solid; padding:5px;">
 			</a>
-			<div class="d-flex mr-5 mt-1">
-				<form name="frm" class="d-flex justify-content-center" >
+			<div class="d-flex align-items-center justify-content-end p-2" style="border-top:2px solid gray;">
+				<form name="frm">
 					<input id="closeCheck" type="checkbox" name="Notice"
 						onclick="check()"> <a style="font-size: 13px;"><spring:message
 							code="event.popup.decide" /></a> &nbsp;<input type=button
 						value="<spring:message code="close" />" onclick="closeWin()"
-						style="width: 30pt; height: 20pt; font-size: 13px"
-						class="d-flex align-items-center">
+						style="width: 30pt; height: 20pt; font-size: 13px">
 
 				</form>
 			</div>
