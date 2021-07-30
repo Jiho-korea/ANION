@@ -57,23 +57,21 @@
 
 	<c:choose>
 		<c:when test="${errorCode eq '400'}"> 
-			<br>
-			<h1 id="400error">&nbsp요청을 처리할 수 없습니다.</h1> 
+			<br><br>
+			<p id="error" style="text-align:center;"><spring:message code="error.badRequest" /></p> 
 		</c:when>
 		<c:when test="${errorCode eq '500'}">
-			<br>
-			<h1 id="500error">&nbsp서버에 문제가 발생했습니다.</h1>
+			<br><br>
+			<p id="error" style="text-align:center;"><spring:message code="error.server" /></p>
 		</c:when>
 		<c:otherwise>
-			<br>
-			<h1 id="404error">&nbsp요청하신 경로를 찾을 수 없습니다.</h1>
+			<br><br>
+			<p id="error" style="text-align:center;"><spring:message code="error.notFound" /></p>
 		</c:otherwise>
 	</c:choose>
 
 	<script>
-		document.getElementById('400error').style.font = 'bold 30px Arial';
-		document.getElementById('500error').style.font = 'bold 30px Arial';
-		document.getElementById('404error').style.font = 'bold 30px Arial';
+		document.getElementById('error').style.font = 'bold 35px Arial';
 	</script>
 
 	<c:import url="../included/bottom.jsp">
