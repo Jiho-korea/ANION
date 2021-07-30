@@ -96,7 +96,7 @@
 </style>
 
 
-<body onload="doPopupopen();">
+<body>
 
 	<div id="myModal" class="modal" style="max-width: 100%; width: auto;display: table;">
 		<div class="modal-content d-flex justify-content-center ml-5 mt-5" style="border:2px solid gray; width:70%;">
