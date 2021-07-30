@@ -24,4 +24,10 @@ public class WithdrawalServiceImpl implements WithdrawalService {
 		}
 	}
 
+	@Override
+	public void updateAuthStatus(WithdrawalRequest withdrawalRequest) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
