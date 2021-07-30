@@ -42,7 +42,7 @@ import controller.member.LogoutController;
 import controller.member.MemberFindController;
 import controller.member.MemberRegisterController;
 import controller.member.ProfileEditController;
-import controller.member.WithdrawalController;
+import controller.member.MemberWithdrawalController;
 import controller.pet.PetInfoController;
 import controller.pet.PetKindPopupController;
 import controller.pet.PetListController;
@@ -231,7 +231,7 @@ public class ControllerConfig {
 	}
 	
 	@Bean
-	public WithdrawalController withdrawalController() {
-		return new WithdrawalController();
+	public MemberWithdrawalController memberWithdrawalController() {
+		return new MemberWithdrawalController();
 	}
 }

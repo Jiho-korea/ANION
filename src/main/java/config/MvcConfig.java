@@ -37,6 +37,7 @@ import interceptor.PopupPetKindCookieCheckInterceptor;
 import interceptor.PopupPetKindCookieDeleteInterceptor;
 import interceptor.PopupPetLocationCookieCheckInterceptor;
 import interceptor.PopupPetLocationCookieDeleteInterceptor;
+import interceptor.MemberWithdrawalCheckInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -99,6 +100,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		return new EmailValidCheckInterceptor();
 	}
 
+	@Bean
+	public MemberWithdrawalCheckInterceptor memberWithdrawalCheckInterceptor() {
+		return new MemberWithdrawalCheckInterceptor();
+	}
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -123,10 +129,14 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
-				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**");
+				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**",
+				"/memberWithdrawal/**");
 		registry.addInterceptor(emailValidCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
 				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
-				"/email/sent");
+				"/email/sent", "/memberWithdrawal/**");
+		registry.addInterceptor(memberWithdrawalCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
+				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
+				"/email/sent", "/memberWithdrawal/**");
 		registry.addInterceptor(logoutCheckInterceptor()).addPathPatterns("/member/find/**", "/login", "/signup/step1");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");

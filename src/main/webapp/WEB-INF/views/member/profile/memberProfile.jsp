@@ -112,8 +112,7 @@ a, a:hover {
 							class="far fa-edit"></i></a>
 
 						<c:if test="${sessionScope.login.memberauth.memberAuthStatus==2}">
-							<a
-								href="${pageContext.request.contextPath}/email/validForm"><input
+							<a href="${pageContext.request.contextPath}/email/validForm"><input
 								type="button" value=<spring:message code="valid" /> /> </a>
 						</c:if>
 					</c:when>
@@ -208,10 +207,18 @@ a, a:hover {
 			</h4>
 		</div>
 		<div class="text-right mb-10">
-			<a href="${pageContext.request.contextPath}/withdrawal"
+			<a href="${pageContext.request.contextPath}/memberWithdrawal"
 				class="btn2"
 				style="border: none; padding: 7px 17px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 13px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">
-				회원탈퇴</a>
+				<c:choose>
+					<c:when test="${sessionScope.login.memberauth.memberAuthStatus!=3}">
+						<spring:message code="memberWithdrawal" />
+					</c:when>
+					<c:otherwise>
+						<spring:message code="memberWithdrawal.cancel" />
+					</c:otherwise>
+				</c:choose>
+			</a>
 		</div>
 	</div>
 
@@ -231,18 +238,18 @@ a, a:hover {
 			document.getElementById('btn_modify_cancel').style.visibility = 'hidden';
 			const target = document.getElementById('btn_modify');
 			var regExp = /[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/;
-			
+
 			target.disabled = true;
 			target.value = 'Loading';
-			
-			if(regExp.test($("#memberName").val())){
+
+			if (regExp.test($("#memberName").val())) {
 				alert("이름에 특수문자를 입력할 수 없습니다.");
 				location.reload();
-				
+
 				return false();
 			}
 			target.form.submit();
-			
+
 		}
 	</script>
 	<script defer

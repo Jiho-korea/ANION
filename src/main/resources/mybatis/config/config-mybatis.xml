@@ -28,7 +28,7 @@
 		<typeAlias type="petProject.vo.dto.NoseprintImage" alias="noseprintImage" />
 		<typeAlias type="petProject.vo.request.NoseprintImageUploadRequest" alias="noseprintImageUploadRequest" />
 		<typeAlias type="petProject.vo.request.PetSearchRequest" alias="petSearchRequest" />
-		<typeAlias type="petProject.vo.request.WithdrawalRequest" alias="withdrawalRequest" />
+		<typeAlias type="petProject.vo.request.MemberWithdrawalRequest" alias="memberWithdrawalRequest" />
 	</typeAliases>
    
 </configuration>

@@ -127,7 +127,7 @@ public class LoginController {
 					loginRequest.getMemberPassword());
 
 			session.setAttribute("login", authInfo);
-
+			
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
 			memoryCookie.setPath("/");
 			if (loginRequest.isMemory()) {

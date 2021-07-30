@@ -1,16 +1,12 @@
-<!-- 
+<%--
 ========================================================================
-파    일    명 : emailAuthenticationForm.jsp
+파    일    명 : memberWithdrawalCancel.jsp
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2020.11.17
-작  성  내  용 : 회원가입후 안내 페이지
+작    성    일 : 2021.07.30
+작  성  내  용 : 회원탈퇴를 취소하는 페이지
 ========================================================================
-수    정    자 : 송찬영
-수    정    일 : 2021.03.20
-수  정  내  용 : 회원가입, 이메일 변경 후 emailcode 확인 페이지
-========================================================================
--->
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -19,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
@@ -58,21 +54,8 @@
 	margin-top: 50px;
 }
 </style>
-<script src="/resources/jquery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$("#withdrawal").click(function() {
-			if ($("input:checkbox[type=checkbox]:checked").length == 0) {
-				alert("안내사항에 동의해주세요!");
-				return false;
-			} else {
-				return true
-			}
-		})
-	})
-</script>
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script defer src="js/bootstrap.js"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
@@ -83,30 +66,31 @@
 	<div class="container text-center" id="main">
 		<div class="jumbotron border">
 
-			<h1 class="display-4">회원 탈퇴</h1>
+			<h1 class="display-4">
+				<spring:message code="memberWithdrawal.cancel" />
+			</h1>
 
-			<form:form action="${pageContext.request.contextPath}/withdrawal"
-				method="post" modelAttribute="withdrawalRequest">
+			<form:form
+				action="${pageContext.request.contextPath}/memberWithdrawal/cancel"
+				method="post" modelAttribute="memberWithdrawalRequest">
 				<br>
 				<br>
 				<br>
 				<br>
-				<div class="checkbox mb-3">
-					<input type="checkbox" name="check" value="true" /> 이에 동의합니다.
-				</div>
 
+				<spring:message code="memberWithdrawal.cancel.write" />
+				<br>
 				<label style="margin-top: 20px"> <form:input path="comment"
-						cssClass="single-input" placeholder="탈퇴하는 이유를 적어주세요..."
-						onfocus="this.placeholder = ''"
-						onblur="this.placeholder = '탈퇴하는 이유를 적어주세요...'" />
+						cssClass="single-input" />
 				</label>
 				<br>
 				<br>
 				<input type="hidden" name="memberNumber"
 					value="${sessionScope.login.memberNumber }" />
-				<input type="submit" id="withdrawal" class="btn btn-info pull-right"
-					value="회원탈퇴" />
+				<input type="submit" id="memberWithdrawal" class="btn btn-info pull-right"
+					value="<spring:message code="memberWithdrawal.cancel"/>" />
 			</form:form>
+
 		</div>
 	</div>
 
@@ -118,6 +102,8 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
+
+
 	<!-- JS here -->
 
 	<script defer
@@ -180,4 +166,12 @@
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
+<script defer type="text/javascript" charset="utf-8">
+	 $("#memberWithdrawal").click(function() {
+		if ($("#comment").val() != "<spring:message code="memberWithdrawal.cancel.comment" />") {
+			alert("<spring:message code="memberWithdrawal.comment.error" />");
+			return false;
+		}
+	});
+</script>
 </html>
