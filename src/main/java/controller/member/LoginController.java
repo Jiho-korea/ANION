@@ -76,7 +76,8 @@ public class LoginController {
 
 				emailValidService.valid(data);
 
-				ScriptWriter.write("인증이 완료되었습니다!", "logout", request, response);
+				session.invalidate();
+				ScriptWriter.write("인증이 완료되었습니다!", "login", request, response);
 				return null;
 			} catch (MemberNotFoundException e) {
 				e.printStackTrace();
@@ -102,6 +103,7 @@ public class LoginController {
 			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
 			return null;
 		}
+
 		if (cookie != null) {
 			loginRequest.setMemberId(cookie.getValue());
 			loginRequest.setMemory(true);
@@ -116,10 +118,10 @@ public class LoginController {
 	public String login(@Valid LoginRequest loginRequest, Errors errors, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			@CookieValue(value = "popup01", required = false) Cookie cookie_popup01) {
+
 		if (errors.hasErrors()) {
 			return "login/loginFormPage";
 		}
-
 		try {
 			AuthInfo authInfo = loginService.selectMemberById(loginRequest.getMemberId(),
 					loginRequest.getMemberPassword());

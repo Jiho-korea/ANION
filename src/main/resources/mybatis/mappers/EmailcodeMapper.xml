@@ -9,9 +9,10 @@
     	FROM "emailcode" WHERE "MEMBER_ID" = #{emailcode.memberId} AND "EMAIL_CODE" = #{emailcode.emailCode}
     </select>
     
-    <insert id="insertEmailcode" parameterType="emailcode">
+    <insert id="insertEmailcode" parameterType="emailcode" useGeneratedKeys="true" 
+    	keyProperty="emailcode.emailcodeNumber" keyColumn="EMAILCODE_NUMBER">
     	INSERT INTO "public"."emailcode" ("MEMBER_ID", "EMAIL_CODE", "NEW_MEMBER_ID")
-    	VALUES (#{emailcode.memberId}, #{emailcode.emailCode}, #{emailcode.newMemberId});
+    	VALUES (#{emailcode.memberId}, #{emailcode.emailCode}, #{emailcode.newMemberId})
     </insert>
     
     <update id="requestEmailUpdate" parameterType="String">
