@@ -1,14 +1,10 @@
-<%-- 
+<%--
 ========================================================================
-파    일    명 : emailAuthenticationForm.jsp
+파    일    명 : memberWithdrawalSuccess.jsp
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2020.11.17
-작  성  내  용 : 회원가입후 안내 페이지
-========================================================================
-수    정    자 : 송찬영
-수    정    일 : 2021.03.20
-수  정  내  용 : 회원가입, 이메일 변경 후 emailcode 확인 페이지
+작    성    일 : 2021.07.30
+작  성  내  용 : 회원탈퇴 신청을 완료하였을때 나오는 페이지
 ========================================================================
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -19,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width , initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
@@ -58,62 +54,20 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"
-	charset="utf-8"></script>
-<script defer
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-	charset="utf-8"></script>
+<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script defer src="js/bootstrap.js"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
 	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
+
 	<div class="container text-center" id="main">
-		<div class="jumbotron">
-			<h1 class="display-4">
-				<spring:message code="valid.email" />
-			</h1>
-
-			<br> <br>
-
-			<form:form action="${pageContext.request.contextPath}/email/valid"
-				method="post" cssClass="form-signin" modelAttribute="emailcode">
-
-
-				<br>
-				<br>
-
-				<input type="hidden" name="memberId" value="${memberId}" />
-				<label> <form:input path="emailCode" cssClass="single-input"
-						placeholder="Write Emailcode..." onfocus="this.placeholder = ''"
-						onblur="this.placeholder = 'Write Emailcode...'" /> <form:errors
-						path="emailCode" /> <form:errors />
-				</label>
-
-				<br>
-				<br>
-
-				<button id="btn_submit" class="btn btn-info pull-right" type="submit">
-					<spring:message code="valid.email" />
-				</button>
-
-				<p class="mt-5 mb-3 text-muted">
-					<spring:message code="company.name" />
-				</p>
-			</form:form>
-
-
-			<%-- <spring:message code="valid.email.confirm">
-					<c:choose>
-						<c:when test="${!empty register }">
-							<spring:argument value="${memberRegisterRequest.memberId}" />
-						</c:when>
-						<c:when test="${!empty update }">
-							<spring:argument value="${changeIdCommand.memberId}" />
-						</c:when>
-					</c:choose>
-				</spring:message> --%>
+		<div class="jumbotron border">
+		<br><br><br><br>
+			<spring:message code="memberWithdrawal.request" />
+			<br><br><br><br>
 		</div>
 	</div>
 
@@ -125,6 +79,8 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
+
+
 	<!-- JS here -->
 
 	<script defer
@@ -187,18 +143,4 @@
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
-<script defer type="text/javascript" charset="utf-8">
-	$("#btn_submit").click(function() {
-
-		if ($("#emailCode").val() == "") {
-			setTimeout(function() {
-				alert("<spring:message code="valid.email.authentication.code" />");
-
-			}, 100);
-			return false;
-		} 
-
-		target.form.submit();
-	});
-</script>
 </html>

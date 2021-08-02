@@ -38,13 +38,15 @@
 		<association select="selectMemberauth"
 			property="memberauth" column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
 	</resultMap>
+	
 	<select id="selectByIdFromMember" parameterType="String" resultType="int">
-		SELECT count(*) FROM "member" WHERE "MEMBER_ID" =
-		#{memberId}
+		SELECT count(*) FROM "member" 
+		WHERE "MEMBER_ID" = #{memberId}
 	</select>
 
 	<select id="selectEmailcodeById" parameterType="String" resultType="int">
-		SELECT count(*) FROM "emailcode" WHERE "NEW_MEMBER_ID" = #{memberId}
+		SELECT count(*) FROM "emailcode" 
+		WHERE "NEW_MEMBER_ID" = #{memberId}
 	</select>
 
 	<select id="selectMemberList" resultMap="memberListResultMap">
@@ -117,6 +119,18 @@
 		"MEMBER_ID" = #{changeIdCommand.memberId}
 		where "MEMBER_NUMBER" =
 		#{changeIdCommand.memberNumber}
+	</update>
+
+	<update id="updateMemberWithdrawal" parameterType="int">
+		update "member"
+		set "MEMBER_AUTH_STATUS" = 3
+		where "MEMBER_NUMBER" = #{memberNumber}
+	</update>
+	
+	<update id="cancelMemberWithdrawal" parameterType="int">
+		update "member"
+		set "MEMBER_AUTH_STATUS" = 1
+		where "MEMBER_NUMBER" = #{memberNumber}
 	</update>
 
 	<resultMap type="member" id="memberListResultMap">
