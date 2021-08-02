@@ -30,7 +30,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
@@ -61,7 +60,7 @@ public interface MemberDAO {
 
 	int selectMemberCount() throws Exception;
 
-	Memberauth checkMemberAuthStatus(@Param("emailcode") Emailcode emailCode) throws Exception;
+	Memberauth checkMemberAuthStatus(@Param("memberId") String memberId) throws Exception;
 
 	Member selectProfileById(@Param("memberId") String memberId) throws Exception;
 	

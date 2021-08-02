@@ -73,70 +73,58 @@
 	width: 100%; /* Full width */
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	background: none;
+
 }
 
 /* Modal Content/Box */
 .modal-content {
 	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
 	border: 1px solid #888;
 	width: 30%; /* Could be more or less, depending on screen size */
+	margin:0;
+}
+
+.black {
+	
+}
+
+.title {
+	display: inline;
+	padding: 10px;
 }
 </style>
 
 
-<body onload="doPopupopen();">
-	<div id="myModal" class="modal">
-		<!--
-	
-		<div
-			class="modal-content d-flex justify-content-center align-items-center"
-			style="background-image: URL(${pageContext.request.contextPath}/img/popupBack/pop_back.png); height: 550px">
+<body>
 
-			<div
-				style="font-size: 1.5em; font-weight: bold; text-align: center; color: green; width: 300px"
-				class="d-flex justify-content-center mt-3">교육 이벤트 및 참석 제목</div>
-			<p style="text-align: center; line-height: 1.5;">
-				<span style="font-size: 14pt; color: white;">교육 및 설명</span>
-			</p>
-
-			<div
-				class="jumbotron d-flex justify-content-center align-items-center"
-				style="height: 300px; width: 300px; opacity: 0.8;">참고 이미지, 그림
-				등</div>
-
-			<div class="container d-flex justify-content-center mt-3">
-				<a href="${pageContext.request.contextPath}/popup/1/click"
-					class="btn header-btn d-flex justify-content-center"
-					style="border: none; padding: 5px 15px; text-transform: capitalize; border-radius: 10px; cursor: pointer; color: #fff; display: inline-block; font-size: 10px; transition: 0.6s; box-shadow: 0px 7px 21px 0px rgba(0, 0, 0, 0.12); background-image: linear-gradient(to left, #46C0BE, #6DD56F, #46C0BE); background-position: right; background-size: 200% margin-bottom:100px; margin-top: 12px;">등록하러가기</a>
+	<div id="myModal" class="modal" style="max-width: 100%; width: auto;display: table;">
+		<div class="modal-content d-flex justify-content-center ml-5 mt-5" style="border:2px solid gray; width:70%;">
+			<table>
+			<div class="title" style="border-bottom:2px solid gray;">
+			비문등록 이벤트 설명
 			</div>
-			 -->
-		<div class="d-flex justify-content-center ml-5 mt-5">
-			<!--  <a href="${pageContext.request.contextPath}/popup/1/click">-->
-			<a href="https://www.facebook.com/groups/3017696248465936">
-				<img
+			<a href="https://www.facebook.com/groups/3017696248465936"> <img
 				src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
-				style="width: 90%;">
+				style="max-width: 100%; height: auto; width:auto; border:1px solid; padding:5px;">
 			</a>
+			<div class="d-flex align-items-center justify-content-end p-2" style="border-top:2px solid gray;">
+				<form name="frm">
+					<input id="closeCheck" type="checkbox" name="Notice"
+						onclick="check()"> <a style="font-size: 13px;"><spring:message
+							code="event.popup.decide" /></a> &nbsp;<input type=button
+						value="<spring:message code="close" />" onclick="closeWin()"
+						style="width: 30pt; height: 20pt; font-size: 13px">
+
+				</form>
+			</div>
+			</table>
 		</div>
 
-		<div class="container d-flex justify-content-end mt-5"
-			style="margin-right: -10px">
-			<form name="frm" class="d-flex align-items-center">
-				<input id="closeCheck" type="checkbox" name="Notice"
-					onclick="check()"> <a style="font-size: 13px;"><spring:message
-						code="event.popup.decide" /></a> &nbsp;<input type=button
-					value="<spring:message code="close" />" onclick="closeWin()"
-					style="width: 30pt; height: 20pt; font-size: 13px"
-					class="d-flex align-items-center">
-
-			</form>
-		</div>
+		
 
 	</div>
+
 
 
 
@@ -644,27 +632,16 @@
 		}
 		return "";
 	}
-
-	var ratio = window.devicePixelRatio;
-
-	if (getCookie("Notice") != "done") {
-		if (ratio >= 2) {
-			jQuery(document).ready(function() {
-				$('#myModal').show();
-			});
-
-		} else {
-			function doPopupopen() {
-				window
-						.open(
-								"${pageContext.request.contextPath}/popup/1",
-								"popup1_parent",
-								"width=430, height=580, scrollbars=no, resizable=0, toolbar=no, location=no, directories=no, status=no, menubar=no");
-			}
-
+	jQuery(document).ready(function() {
+		var cc = getCookie('Notice');
+		if(cc == 'done'){
+			$('#myModal').hide();
 		}
-	}
-
+		else{
+			$('#myModal').show();
+		}
+	});
+	
 	function closeWin() {
 		$('#myModal').hide();
 	}
@@ -673,5 +650,7 @@
 		setCookie("Notice", "done", 1);
 		$('#myModal').hide();
 	}
+	
+
 </script>
 </html>

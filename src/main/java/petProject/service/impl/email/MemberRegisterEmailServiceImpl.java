@@ -22,8 +22,8 @@ import petProject.vo.dto.Member;
 
 @Service("memberRegisterEmailService")
 public class MemberRegisterEmailServiceImpl implements MemberRegisterEmailService {
-	@Value("${mail.smtp.url.local}")
-//	@Value("${mail.smtp.url.server}")
+//	@Value("${mail.smtp.url.local}")
+	@Value("${mail.smtp.url.server}")
 	private String url;
 
 	@Resource(name = "mailSendService")
