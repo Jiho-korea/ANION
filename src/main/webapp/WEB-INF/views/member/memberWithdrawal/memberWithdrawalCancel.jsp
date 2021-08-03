@@ -12,13 +12,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="zxx">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width , initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><spring:message code="home.title" /></title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="${pageContext.request.contextPath}/img/favicon.ico">
+
 <!-- CSS here -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/bootstrap.min.css">
@@ -54,9 +58,6 @@
 	margin-top: 50px;
 }
 </style>
-<script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="js/bootstrap.js"></script>
-<title><spring:message code="home.title" /></title>
 </head>
 <body>
 	<c:import url="../../included/top.jsp">
@@ -80,19 +81,22 @@
 
 				<spring:message code="memberWithdrawal.cancel.write" />
 				<br>
-				<label style="margin-top: 20px"> <form:input path="comment"
-						cssClass="single-input" />
+				<label style="margin-top: 20px"> <form:input
+						path="memberWithdrawalComment" cssClass="single-input" />
 				</label>
 				<br>
 				<br>
 				<input type="hidden" name="memberNumber"
 					value="${sessionScope.login.memberNumber }" />
-				<input type="submit" id="memberWithdrawal" class="btn btn-info pull-right"
-					value="<spring:message code="memberWithdrawal.cancel"/>" />
+				<button type="submit" id="memberWithdrawal"
+					class="btn btn-info pull-right">
+					<spring:message code="memberWithdrawal.cancel" />
+				</button>
 			</form:form>
 
 		</div>
 	</div>
+
 
 	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
@@ -103,9 +107,7 @@
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
 
-
 	<!-- JS here -->
-
 	<script defer
 		src="${pageContext.request.contextPath}/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
@@ -168,7 +170,7 @@
 </body>
 <script defer type="text/javascript" charset="utf-8">
 	 $("#memberWithdrawal").click(function() {
-		if ($("#comment").val() != "<spring:message code="memberWithdrawal.cancel.comment" />") {
+		if ($("#memberWithdrawalComment").val() != "<spring:message code="memberWithdrawal.cancel.comment" />") {
 			alert("<spring:message code="memberWithdrawal.comment.error" />");
 			return false;
 		}

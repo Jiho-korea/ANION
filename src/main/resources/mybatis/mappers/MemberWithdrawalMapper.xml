@@ -5,8 +5,8 @@
 
 <mapper namespace="petProject.dao.MemberWithdrawalDAO">
 	<insert id="insertComment" parameterType="memberWithdrawalRequest">
-		INSERT INTO "memberwithdrawal"("MEMBER_NUMBER", "COMMENT", "MEMBER_WITHDRAWAL_DATE")
-		VALUES (#{memberWithdrawalRequest.memberNumber}, #{memberWithdrawalRequest.comment}, now())
+		INSERT INTO "memberwithdrawal"("MEMBER_NUMBER", "MEMBER_WITHDRAWAL_COMMENT", "MEMBER_WITHDRAWAL_DATE")
+		VALUES (#{memberWithdrawalRequest.memberNumber}, #{memberWithdrawalRequest.memberWithdrawalComment}, now())
 	</insert>
 	
 	<delete id="deleteMemberWithdrawal" parameterType="int">
