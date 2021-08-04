@@ -67,4 +67,6 @@ public interface MemberDAO {
 	Memberauth checkMemberAuthStatus(@Param("memberId") String memberId) throws Exception;
 
 	Member selectProfileById(@Param("memberId") String memberId) throws Exception;
+
+	void memberAuthStatusValid();
 }

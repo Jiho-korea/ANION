@@ -133,6 +133,12 @@
 		where "MEMBER_NUMBER" = #{memberNumber}
 	</update>
 
+	<!-- 1일 이상 회원을 인증하지 않은 사용자를 삭제 -->
+	<delete id="memberAuthStatusValid">
+		delete from "member" 
+		where "MEMBER_AUTH_STATUS" = 0 and extract(day from now()::timestamp - "MEMBER_REGISTRATION_DATE"::timestamp) >= 1
+	</delete>
+	
 	<resultMap type="member" id="memberListResultMap">
 		<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />

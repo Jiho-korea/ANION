@@ -1,17 +1,15 @@
 /*
 ========================================================================
-파    일    명 : MemberFindService.java
+파    일    명 : MemberValidService.java
 ========================================================================
 작    성    자 : 송찬영
-작    성    일 : 2021.07.03
-작  성  내  용 : id를 통해 회원인지 확인 후 vo리턴
+작    성    일 : 2021.08.04
+작  성  내  용 : 회원 검증메소드 인터페이스
 ========================================================================
 */
 package petProject.service.member;
 
-import petProject.vo.dto.Member;
-
-public interface MemberFindService {
+public interface MemberValidService {
 	
-	Member selectProfileById(String memberId) throws Exception;
+	void memberAuthStatusValid();
 }

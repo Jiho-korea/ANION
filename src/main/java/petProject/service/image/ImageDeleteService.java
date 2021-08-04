@@ -9,9 +9,7 @@
 */
 package petProject.service.image;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface ImageDeleteService {
 
-	void deleteImage(@Param("imagePath") String[] paths_id, String rootPath) throws Exception;
+	void deleteImage(String[] paths_id, String rootPath) throws Exception;
 }
