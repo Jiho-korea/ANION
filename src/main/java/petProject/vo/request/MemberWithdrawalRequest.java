@@ -17,14 +17,14 @@ public class MemberWithdrawalRequest {
 
 	@NotBlank
 	private int memberNumber;
-	private String comment;
-	private Date withdrawalDate;
+	private String memberWithdrawalComment;
+	private Date memberWithdrawalDate;
 
-	public MemberWithdrawalRequest(int memberNumber, String comment, Date withdrawalDate) {
+	public MemberWithdrawalRequest(int memberNumber, String memberWithdrawalComment, Date memberWithdrawalDate) {
 		super();
 		this.memberNumber = memberNumber;
-		this.comment = comment;
-		this.withdrawalDate = withdrawalDate;
+		this.memberWithdrawalComment = memberWithdrawalComment;
+		this.memberWithdrawalDate = memberWithdrawalDate;
 	}
 
 	public MemberWithdrawalRequest() {
@@ -39,20 +39,20 @@ public class MemberWithdrawalRequest {
 		this.memberNumber = memberNumber;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getMemberWithdrawalComment() {
+		return memberWithdrawalComment;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setMemberWithdrawalComment(String memberWithdrawalComment) {
+		this.memberWithdrawalComment = memberWithdrawalComment;
 	}
 
-	public Date getWithdrawalDate() {
-		return withdrawalDate;
+	public Date getMemberWithdrawalDate() {
+		return memberWithdrawalDate;
 	}
 
-	public void setWithdrawalDate(Date withdrawalDate) {
-		this.withdrawalDate = withdrawalDate;
+	public void setMemberWithdrawalDate(Date memberWithdrawalDate) {
+		this.memberWithdrawalDate = memberWithdrawalDate;
 	}
 
 }

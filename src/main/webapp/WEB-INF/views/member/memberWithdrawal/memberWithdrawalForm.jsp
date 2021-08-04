@@ -96,13 +96,13 @@
 				<form:errors />
 
 
-				<label style="margin-top: 20px"> <form:input path="comment"
+				<label style="margin-top: 20px"> <form:input path="memberWithdrawalComment"
 						cssClass="single-input"
 						placeholder="Write for reason..."
 						onfocus="this.placeholder = ''"
 						onblur="this.placeholder = 'Write for reason...'" />
 				</label>
-				<form:errors path="comment" />
+				<form:errors path="memberWithdrawalComment" />
 				<br>
 				<br>
 				<input type="hidden" name="memberNumber"

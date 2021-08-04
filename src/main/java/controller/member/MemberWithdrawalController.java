@@ -104,8 +104,10 @@ public class MemberWithdrawalController {
 		cookie_delete_success_memberWithdrawal_cancel.setMaxAge(0);
 		response.addCookie(cookie_delete_success_memberWithdrawal_cancel);
 
-		session.invalidate();
-		ScriptWriter.write("회원탈퇴 취소 처리가 완료되었습니다!", "login", request, response);
+		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
+		authInfo.getMemberauth().setMemberAuthStatus(1);
+		
+		ScriptWriter.write("회원탈퇴 취소 처리가 완료되었습니다!", "profile", request, response);
 		return null;
 	}
 
