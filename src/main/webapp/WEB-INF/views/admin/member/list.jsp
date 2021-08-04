@@ -133,9 +133,10 @@
 									</div></td>
 
 								<td width="10%" align="center"><div align="center">
-										<a href="#"> <input type="button" name="btn_modify"
-											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="<spring:message code="edit" />" /></a> 
+										<a href="${pageContext.request.contextPath}/admin/member/modify/${member.memberNumber}"> 
+											<input type="button" name="btn_modify"
+												id="btn_modify" class="btn_modify {delivery_no: 4}"
+												value="<spring:message code="edit" />" /></a> 
 										<a href="${pageContext.request.contextPath}/admin/member/delete/${member.memberNumber}" onclick="return deleteConfirm();">
 											<input type="button" name="btn_delete"
 												id="btn_delete" class="btn_delete {delivery_no: 4}"
