@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.member;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import petProject.dao.MemberDAO;
 import petProject.service.member.MemberValidService;
 
-@Transactional
 @Service
+@Transactional(rollbackFor = SQLException.class)
 public class MemberValidServiceImpl implements MemberValidService {
 
 	@Autowired

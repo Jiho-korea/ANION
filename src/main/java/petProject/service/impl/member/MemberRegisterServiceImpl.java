@@ -22,6 +22,8 @@
 
 package petProject.service.impl.member;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,7 +46,7 @@ import petProject.vo.dto.Member;
 import petProject.vo.request.MemberRegisterRequest;
 
 @Service("memberRegisterService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class MemberRegisterServiceImpl implements MemberRegisterService {
 
 	@Autowired
@@ -78,7 +80,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		return cnt;
 	}
 
-	@Transactional
+	@Override
 	public int updateAuthStatus(Emailcode emailcode) throws Exception {
 		int cnt = memberDAO.updateAuthStatus(emailcode.getMemberId());
 		if (cnt == 0) {
@@ -104,7 +106,6 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 	}
 	
 	@Override
-	@Transactional
 	public void memberRegister(MemberRegisterRequest memberRegisterRequest, HttpServletRequest request, boolean isHtml)
 			throws Exception {
 		loginService.selectById(memberRegisterRequest.getMemberId());

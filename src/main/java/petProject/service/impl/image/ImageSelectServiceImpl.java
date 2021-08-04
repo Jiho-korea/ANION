@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.image;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,7 @@ import petProject.service.image.ImageSelectService;
 import petProject.vo.dto.Image;
 
 @Service("imageSelectService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class ImageSelectServiceImpl implements ImageSelectService {
 	@Autowired
 	private ImageDAO imageDAO;

@@ -10,6 +10,7 @@
 package petProject.service.impl.event.noseprint;
 
 import java.io.File;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import petProject.exception.ImageDeleteException;
 import petProject.service.event.noseprint.NoseprintImageDeleteService;
 
 @Service("noseprintImageDeleteService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class NoseprintImageDeleteServiceImpl implements NoseprintImageDeleteService {
 	@Autowired
 	private NoseprintImageDAO noseprintImageDAO;

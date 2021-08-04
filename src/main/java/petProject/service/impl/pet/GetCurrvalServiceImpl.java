@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.pet;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,7 @@ import petProject.dao.PetDAO;
 import petProject.service.pet.GetCurrvalService;
 
 @Service("getCurrvalService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class GetCurrvalServiceImpl implements GetCurrvalService {
 
 	@Autowired

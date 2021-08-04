@@ -11,7 +11,6 @@
 수  정  내  용 : 임시 비밀번호 변경 메서드 추가
 ========================================================================
 */
-
 package petProject.service.impl.member;
 
 import java.sql.SQLException;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +31,7 @@ import petProject.service.member.ChangePasswordService;
 import petProject.vo.dto.Member;
 
 @Service("changePasswordService")
-@Component
+@Transactional(rollbackFor = SQLException.class)
 public class ChangePasswordServiceImpl implements ChangePasswordService {
 
 	@Autowired
@@ -45,7 +43,7 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	@Transactional(rollbackFor = SQLException.class)
+	@Override
 	public void changePassword(String memberId, String oldPassword, String newPassword) throws Exception {
 		Member member = memberDAO.selectMemberById(memberId);
 		if (member == null) {
@@ -62,7 +60,7 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 		}
 	}
 
-	@Transactional(rollbackFor = SQLException.class)
+	@Override
 	public void updateTempPassword(Member member, String tempPassword, HttpServletRequest request, boolean isHtml)
 			throws Exception {
 		member.setMemberPassword(passwordEncoder.encode(tempPassword));

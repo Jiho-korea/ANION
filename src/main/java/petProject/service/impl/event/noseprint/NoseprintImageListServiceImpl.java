@@ -9,6 +9,7 @@
 */
 package petProject.service.impl.event.noseprint;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import petProject.service.event.noseprint.NoseprintImageListService;
 import petProject.vo.dto.NoseprintImage;
 
 @Service("noseprintImageListService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class NoseprintImageListServiceImpl implements NoseprintImageListService {
 	@Autowired
 	private NoseprintImageDAO noseprintImageDAO;

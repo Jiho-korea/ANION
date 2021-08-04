@@ -9,6 +9,7 @@
 */
 package petProject.service.impl.admin.member;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import petProject.service.admin.member.MemberListService;
 import petProject.vo.dto.Member;
 
 @Service("memberListService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class MemberListServiceImpl implements MemberListService {
 	@Autowired
 	private MemberDAO memberDAO;
