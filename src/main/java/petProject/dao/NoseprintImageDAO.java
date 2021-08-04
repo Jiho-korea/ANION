@@ -6,6 +6,10 @@
 작    성    일 : 2021.07.03
 작  성  내  용 : noseprint_image 등록, 리스트 불러오는 메소드 선언 인터페이스
 ========================================================================
+수    정    자 : 임원석
+수    정    일 : 2021.08.04
+작  성  내  용 :비문 사진 등급 변경 메소드 선언 인터페이스
+========================================================================
 */
 package petProject.dao;
 
@@ -29,4 +33,6 @@ public interface NoseprintImageDAO {
 			throws Exception;
 
 	int deleteNoseprintImage(@Param("noseprintImagePath") String noseprintImagePath) throws Exception;
+
+	int updateNoseprintImageAuthStatus(@Param("noseprintImagePath") String noseprintImagePath) throws Exception;
 }

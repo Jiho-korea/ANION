@@ -21,6 +21,7 @@ import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
 import controller.admin.code.kind.KindcodeUpdateController;
 import controller.admin.event.EventListController;
+import controller.admin.event.noseprint.image.NoseprintImageAuthChangeAdminController;
 import controller.admin.event.noseprint.image.NoseprintImageDownloadController;
 import controller.admin.event.noseprint.image.NoseprintImageListAdminController;
 import controller.admin.event.noseprint.pet.NoseprintPetListAdminController;
@@ -41,8 +42,8 @@ import controller.member.LoginController;
 import controller.member.LogoutController;
 import controller.member.MemberFindController;
 import controller.member.MemberRegisterController;
-import controller.member.ProfileEditController;
 import controller.member.MemberWithdrawalController;
+import controller.member.ProfileEditController;
 import controller.pet.PetInfoController;
 import controller.pet.PetKindPopupController;
 import controller.pet.PetListController;
@@ -218,7 +219,7 @@ public class ControllerConfig {
 	public MemberFindController memberFindController() {
 		return new MemberFindController();
 	}
-	
+
 	@Bean
 	public GlobalExceptionController globalExceptionController() {
 		return new GlobalExceptionController();
@@ -229,9 +230,15 @@ public class ControllerConfig {
 		return new PetLocationController();
 
 	}
-	
+
 	@Bean
 	public MemberWithdrawalController memberWithdrawalController() {
 		return new MemberWithdrawalController();
 	}
+
+	@Bean
+	public NoseprintImageAuthChangeAdminController noseprintImageAuthChangeAdminController() {
+		return new NoseprintImageAuthChangeAdminController();
+	}
+
 }

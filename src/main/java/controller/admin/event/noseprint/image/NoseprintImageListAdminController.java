@@ -137,4 +137,26 @@ public class NoseprintImageListAdminController {
 		}
 
 	}
+
+	@GetMapping("/{memberNumber}/check")
+	public String checklistImageAdmin(@PathVariable("memberNumber") int memberNumber,
+			@RequestParam(value = "petRegistrationNumber", required = false) Integer petRegistrationNumber,
+			RedirectAttributes redirect, HttpSession session, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		redirect.addFlashAttribute("check", 1);
+		System.out.println(request.getAttribute("check"));
+		return "redirect:/admin/pet/image/npevent/" + memberNumber + "?petRegistrationNumber=" + petRegistrationNumber;
+	}
+
+	@PostMapping("/{memberNumber}/check")
+	public String checklistImageAdmin(@PathVariable("memberNumber") int memberNumber,
+			@RequestParam(value = "petRegistrationNumber", required = true) Integer petRegistrationNumber,
+			HttpSession session, RedirectAttributes redirect, MultipartHttpServletRequest request,
+			HttpServletResponse response, Model model, Model redirectAttributes) {
+
+		redirect.addFlashAttribute("check", 1);
+		return "redirect:/admin/pet/image/npevent/" + memberNumber + "?petRegistrationNumber=" + petRegistrationNumber;
+	}
+
 }
