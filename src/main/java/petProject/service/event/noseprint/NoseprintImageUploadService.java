@@ -10,15 +10,12 @@
 package petProject.service.event.noseprint;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import petProject.vo.request.NoseprintImageUploadRequest;
 
 public interface NoseprintImageUploadService {
-	int insertNoseprintImage(
-			@Param("noseprintImageUploadRequest") NoseprintImageUploadRequest noseprintImageUploadRequest)
+	int insertNoseprintImage(NoseprintImageUploadRequest noseprintImageUploadRequest)
 			throws Exception;
 
 	void uploadNoseprintImage(int memberNumber, List<MultipartFile> file, String rootPath, int petRegistrationNumber)

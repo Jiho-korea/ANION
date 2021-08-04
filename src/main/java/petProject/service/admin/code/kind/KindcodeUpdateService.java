@@ -9,12 +9,10 @@
 */
 package petProject.service.admin.code.kind;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.Kindcode;
 
 public interface KindcodeUpdateService {
-	Kindcode selectKindcode(@Param("petKindcode") String petKindcode) throws Exception;
+	Kindcode selectKindcode(String petKindcode) throws Exception;
 
-	int updateKindcode(@Param("kindcode") Kindcode kindcode) throws Exception;
+	int updateKindcode(Kindcode kindcode) throws Exception;
 }

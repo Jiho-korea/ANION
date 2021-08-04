@@ -9,11 +9,9 @@
 */
 package petProject.service.bbs.image;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.Imgpost;
 
 public interface ViewImgpostService {
-	Imgpost viewImgpostInfo(@Param("imgpostNo") int imgpostNo) throws Exception;
+	Imgpost viewImgpostInfo(int imgpostNo) throws Exception;
 
 }

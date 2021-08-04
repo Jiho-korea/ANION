@@ -9,10 +9,8 @@
 */
 package petProject.service.bbs.image;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.request.ImagePostingRequest;
 
 public interface ImagePostingService {
-	int postingImage(@Param("imagePostingRequest") ImagePostingRequest imagePostingRequest) throws Exception;
+	int postingImage(ImagePostingRequest imagePostingRequest) throws Exception;
 }

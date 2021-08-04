@@ -9,10 +9,8 @@
 */
 package petProject.service.admin.member;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.Member;
 
 public interface MemberSelectService {
-	Member selectMemberByMemberNumber(@Param("memberNumber") int memberNumber) throws Exception;
+	Member selectMemberByMemberNumber(int memberNumber) throws Exception;
 }
