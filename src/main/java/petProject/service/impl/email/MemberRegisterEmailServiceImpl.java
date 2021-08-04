@@ -36,8 +36,9 @@ public class MemberRegisterEmailServiceImpl implements MemberRegisterEmailServic
 		String mailContent = null;
 
 		mailHead = "<h1>[ANION] 회원가입 인증메일</h1><br><p>안녕하세요, " + member.getMemberName() + "님</p>";
-		mailContent = "<p>아래 버튼을 클릭하시면 이메일 인증이 완료됩니다!</p><br><a href='" + url + request.getContextPath()
-				+ "/login?memberId=" + emailcode.getMemberId() + "&emailcode=" + emailcode.getEmailCode() + "'target='_blank'>[ANION]</a>";
+		mailContent = "<p>아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.</p><br><p>24시간내에 인증을 완료해주세요!</p><br><a href='" + url
+				+ request.getContextPath() + "/login?memberId=" + emailcode.getMemberId() + "&emailcode="
+				+ emailcode.getEmailCode() + "'target='_blank'>[ANION]</a>";
 
 		mailSendService.sendMail(member.getMemberId(), member.getMemberName(), mailHead, mailContent, request, isHtml);
 		return true;
