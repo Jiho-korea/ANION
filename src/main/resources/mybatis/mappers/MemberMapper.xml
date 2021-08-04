@@ -38,13 +38,15 @@
 		<association select="selectMemberauth"
 			property="memberauth" column="{memberAuthStatus=MEMBER_AUTH_STATUS}" />
 	</resultMap>
+	
 	<select id="selectByIdFromMember" parameterType="String" resultType="int">
-		SELECT count(*) FROM "member" WHERE "MEMBER_ID" =
-		#{memberId}
+		SELECT count(*) FROM "member" 
+		WHERE "MEMBER_ID" = #{memberId}
 	</select>
 
 	<select id="selectEmailcodeById" parameterType="String" resultType="int">
-		SELECT count(*) FROM "emailcode" WHERE "NEW_MEMBER_ID" = #{memberId}
+		SELECT count(*) FROM "emailcode" 
+		WHERE "NEW_MEMBER_ID" = #{memberId}
 	</select>
 
 	<select id="selectMemberList" resultMap="memberListResultMap">
@@ -119,6 +121,24 @@
 		#{changeIdCommand.memberNumber}
 	</update>
 
+	<update id="updateMemberWithdrawal" parameterType="int">
+		update "member"
+		set "MEMBER_AUTH_STATUS" = 3
+		where "MEMBER_NUMBER" = #{memberNumber}
+	</update>
+	
+	<update id="cancelMemberWithdrawal" parameterType="int">
+		update "member"
+		set "MEMBER_AUTH_STATUS" = 1
+		where "MEMBER_NUMBER" = #{memberNumber}
+	</update>
+
+	<!-- 1일 이상 회원을 인증하지 않은 사용자를 삭제 -->
+	<delete id="memberAuthStatusValid">
+		delete from "member" 
+		where "MEMBER_AUTH_STATUS" = 0 and extract(day from now()::timestamp - "MEMBER_REGISTRATION_DATE"::timestamp) >= 1
+	</delete>
+	
 	<resultMap type="member" id="memberListResultMap">
 		<id column="MEMBER_NUMBER" property="memberNumber" />
 		<result column="MEMBER_ID" property="memberId" />

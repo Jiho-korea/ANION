@@ -19,6 +19,7 @@ package config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -37,9 +38,11 @@ import interceptor.PopupPetKindCookieCheckInterceptor;
 import interceptor.PopupPetKindCookieDeleteInterceptor;
 import interceptor.PopupPetLocationCookieCheckInterceptor;
 import interceptor.PopupPetLocationCookieDeleteInterceptor;
+import interceptor.MemberWithdrawalCheckInterceptor;
 
 @Configuration
 @EnableWebMvc
+@EnableScheduling
 public class MvcConfig implements WebMvcConfigurer {
 
 	@Bean
@@ -99,6 +102,11 @@ public class MvcConfig implements WebMvcConfigurer {
 		return new EmailValidCheckInterceptor();
 	}
 
+	@Bean
+	public MemberWithdrawalCheckInterceptor memberWithdrawalCheckInterceptor() {
+		return new MemberWithdrawalCheckInterceptor();
+	}
+	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -123,10 +131,14 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginCheckInterceptor()).addPathPatterns("/pet/**", "/register/**", "/list/**",
-				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**");
+				"/admin/**", "/info/**", "/edit/**", "/profile/**", "/posting/**", "/popup/petKind/**", "/guidance/**",
+				"/memberWithdrawal/**");
 		registry.addInterceptor(emailValidCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
 				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
-				"/email/sent", "/member/find/**");
+				"/email/sent", "/memberWithdrawal/**", "/member/find/**");
+		registry.addInterceptor(memberWithdrawalCheckInterceptor()).excludePathPatterns("/home", "/about", "/vision",
+				"/preservation", "/directions", "/petFood", "/profile", "/popup/**", "/login", "/signup/**", "/logout",
+				"/email/sent", "/memberWithdrawal/**", "/member/find/**");
 		registry.addInterceptor(logoutCheckInterceptor()).addPathPatterns("/member/find/**", "/login", "/signup/step1");
 		registry.addInterceptor(localeChangeInterceptor()).addPathPatterns("/**");
 		registry.addInterceptor(adminCheckInterceptor()).addPathPatterns("/admin/**");

@@ -202,7 +202,7 @@
 						<label> <!--<spring:message code="pet.father" />--> <form:input
 								path="petFathername" cssClass="single-input"
 								placeholder="부견명 / Dog`s father" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '부견명`s / Dog father'" /> <form:errors
+								onblur="this.placeholder = '부견명 / Dog`s father'" /> <form:errors
 								path="petFathername" />
 						</label>
 					</div>

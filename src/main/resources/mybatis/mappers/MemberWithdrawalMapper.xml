@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="petProject.dao.MemberWithdrawalDAO">
+	<insert id="insertComment" parameterType="memberWithdrawalRequest">
+		INSERT INTO "memberwithdrawal"("MEMBER_NUMBER", "MEMBER_WITHDRAWAL_COMMENT", "MEMBER_WITHDRAWAL_DATE")
+		VALUES (#{memberWithdrawalRequest.memberNumber}, #{memberWithdrawalRequest.memberWithdrawalComment}, now())
+	</insert>
+	
+	<delete id="deleteMemberWithdrawal" parameterType="int">
+		DELETE FROM "memberwithdrawal"
+		WHERE "MEMBER_NUMBER" = #{memberNumber}
+	</delete>
+</mapper>

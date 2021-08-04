@@ -9,10 +9,8 @@
 */
 package petProject.service.pet;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.request.PetRegisterRequest;
 
 public interface PetRegisterService {
-	int insertPet(@Param("petRegisterRequest") PetRegisterRequest petRegisterRequest) throws Exception;
+	int insertPet(PetRegisterRequest petRegisterRequest) throws Exception;
 }

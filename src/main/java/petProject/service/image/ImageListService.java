@@ -11,11 +11,9 @@ package petProject.service.image;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.Image;
 
 public interface ImageListService {
-	List<Image> selectImageList(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+	List<Image> selectImageList(int petRegistrationNumber) throws Exception;
 
 }

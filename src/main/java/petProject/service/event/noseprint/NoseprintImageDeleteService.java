@@ -9,9 +9,7 @@
 */
 package petProject.service.event.noseprint;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface NoseprintImageDeleteService {
 
-	void deleteNoseprintImage(@Param("noseprintImagePath") String[] paths_id, String rootPath) throws Exception;
+	void deleteNoseprintImage(String[] paths_id, String rootPath) throws Exception;
 }
