@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.exception.PetNotFoundException;
@@ -27,6 +29,9 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 	@Resource(name = "petInfoService")
 	PetInfoService petInfoService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -38,16 +43,16 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 				pet = petInfoService.selectPet(Integer.parseInt(request.getParameter("petRegistrationNumber")));
 			} catch (PetNotFoundException e) {
 				e.printStackTrace();
-				return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			} catch (NumberFormatException e) {
-				return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return ScriptWriter.write("오류가 발생했습니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "home", request, response);
 			}
 			if (!"0".equals(authInfo.getMemberlevel().getMemberLevelCode())
 					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
-				return ScriptWriter.write("권한이 없습니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("auth.fail"), "home", request, response);
 			}
 			if ("0".equals(authInfo.getMemberlevel().getMemberLevelCode())
 					&& authInfo.getMemberNumber() != pet.getMember().getMemberNumber()) {
@@ -55,7 +60,7 @@ public class InfoAuthCheckInterceptor implements HandlerInterceptor {
 			}
 			return true;
 		} else {
-			return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 		}
 
 	}
