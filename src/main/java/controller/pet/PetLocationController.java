@@ -80,7 +80,7 @@ public class PetLocationController {
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petLocation/petLocationPopup", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "popup/petLocation/petLocationPopup", request, response);
 			return null;
 		}
 

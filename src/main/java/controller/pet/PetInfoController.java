@@ -116,7 +116,7 @@ public class PetInfoController {
 			return "redirect:/pet/list";
 		} catch (PetDeleteException e) { // DB에 없는 pet일경우 DeleteException발생
 			e.printStackTrace();
-			ScriptWriter.write(messageSourceAccessor.getMessage("pet.list.check"), "pet/list", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("list.pet.check"), "pet/list", request, response);
 			return null;
 		} catch (Exception e) { // 예외발생시 다시 pet페이지로 이동
 			e.printStackTrace();
