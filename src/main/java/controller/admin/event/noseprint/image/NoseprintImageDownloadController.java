@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +39,9 @@ public class NoseprintImageDownloadController {
 	@Resource(name = "noseprintImageDownloadService")
 	NoseprintImageDownloadService noseprintImageDownloadService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ImageDownloadController.class);
 
 	@GetMapping("/npimage/download")
@@ -50,19 +55,19 @@ public class NoseprintImageDownloadController {
 			noseprintImageDownloadService.downloadNoseprintImage(petRegistrationNumber, rootPath, model, response);
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("권한이 없습니다.", "pet/list/npevent", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("auth.fail"), "pet/list/npevent", request, response);
 			return null;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("파일이 존재하지 않습니다.", "pet/list/npevent", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("null.file"), "pet/list/npevent", request, response);
 			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
-			ScriptWriter.write("다운로드에 실패하였습니다.", "pet/list/npevent", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("failed.download"), "pet/list/npevent", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("다운로드에 실패하였습니다.", "pet/list/npevent", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("failed.download"), "pet/list/npevent", request, response);
 			return null;
 		}
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);

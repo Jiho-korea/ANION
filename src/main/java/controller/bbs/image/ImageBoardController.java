@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,9 @@ public class ImageBoardController {
 
 	@Resource(name = "imgpostListService")
 	ImgpostListService imgpostListService;
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	// 반려견 자랑 게시물을 작성하는 페이지로 이동시키는 메소드
 	@RequestMapping("/board/img")
@@ -52,11 +57,11 @@ public class ImageBoardController {
 			return "bbs/img/board";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
-			ScriptWriter.write("존재하지 않는 페이지입니다.", "board/img", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("null.post.page"), "board/img", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("알 수 없는 오류.", "board/img", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "board/img", request, response);
 			return null;
 		}
 

@@ -23,6 +23,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +51,9 @@ public class PetKindPopupController {
 	@Resource(name = "selectKindcodeService")
 	SelectKindcodeService selectKindcodeService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	static PetSearchRequest petSearchRequest = new PetSearchRequest();
 
 	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
@@ -80,15 +85,15 @@ public class PetKindPopupController {
 			return "popup/petKind/petKindPopup";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		} catch (NonExistentKindcodeException e) {
 			e.printStackTrace();
-			ScriptWriter.write("없는 품종입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		}
 	}
@@ -101,7 +106,7 @@ public class PetKindPopupController {
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		petSearchRequest.setPageNumber(pageNumber);
 		petSearchRequest.setPetKindWord(petKindWord);
-		
+
 		try {
 			boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
 
@@ -124,15 +129,15 @@ public class PetKindPopupController {
 			return "popup/petKind/kindcodeListAjax";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		} catch (NonExistentKindcodeException e) {
 			e.printStackTrace();
-			ScriptWriter.write("없는 품종입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		}
 	}

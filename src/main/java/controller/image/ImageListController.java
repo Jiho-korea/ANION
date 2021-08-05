@@ -32,6 +32,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,6 +66,9 @@ public class ImageListController {
 	@Resource(name = "petInfoService")
 	PetInfoService petInfoService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ImageListController.class);
 
 	@GetMapping("/image")
@@ -83,11 +88,11 @@ public class ImageListController {
 			return "pet/image/imageList";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response); // url로 아무 펫번호나 입력했을 때 여기서 걸림
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response); // url로 아무 펫번호나 입력했을 때 여기서 걸림
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("오류가 발생하였습니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "home", request, response);
 			return null;
 		}
 
@@ -119,12 +124,12 @@ public class ImageListController {
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+				ScriptWriter.write(messageSourceAccessor.getMessage("failed.posting.img"),
 						"info/list/image?petRegistrationNumber=" + petRegistrationNumber, request, response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
-				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+				ScriptWriter.write(messageSourceAccessor.getMessage("failed.posting.img"),
 						"info/list/image?petRegistrationNumber=" + petRegistrationNumber, request, response);
 				return null;
 			}

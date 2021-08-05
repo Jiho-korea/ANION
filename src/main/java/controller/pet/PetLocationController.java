@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,22 +40,25 @@ public class PetLocationController {
 	@Resource(name = "petInfoUpdateService")
 	PetInfoUpdateService petInfoUpdateService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	@GetMapping(value = { "/{petRegistrationNumber}", "/{petRegistrationNumber}/{address}" })
 	public String petLocationPopup(@PathVariable Integer petRegistrationNumber,
 			@PathVariable(name = "address", required = false) String address,
 			@RequestParam(name = "lat", required = false) String lat,
 			@RequestParam(name = "lon", required = false) String lon, Model model) {
-		
+
 		model.addAttribute("petRegistrationNumber", petRegistrationNumber);
 
 		if (address != null) {
 			model.addAttribute("address", address);
 		}
-		if(lat!=null & lon != null) {
+		if (lat != null & lon != null) {
 			model.addAttribute("lat", lat);
 			model.addAttribute("lon", lon);
 		}
-		
+
 		return "popup/petLocation/petLocationPopup";
 	}
 
@@ -67,15 +72,15 @@ public class PetLocationController {
 			petInfoUpdateService.updateLocation(pet);
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("등록 후 사용해주세요!", "popup/petLocation/petLocationPopup", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petLocation/petLocationPopup", request, response);
 			return null;
 		} catch (PetInfoUpdateException e) {
 			e.printStackTrace();
-			ScriptWriter.write("위치를 재 설정 해주세요!", "popup/petLocation/petLocationPopup", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "popup/petLocation/petLocationPopup", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petLocation/petLocationPopup", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petLocation/petLocationPopup", request, response);
 			return null;
 		}
 

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -68,6 +69,9 @@ public class PetInfoController {
 	@Autowired
 	ImageDAO imageDAO;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	public PetInfoController() {
 		super();
 	}
@@ -93,7 +97,7 @@ public class PetInfoController {
 			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response); // url로 아무 펫번호나 입력했을 때 여기서 걸림
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response); // url로 아무 펫번호나 입력했을 때 여기서 걸림
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,7 +116,7 @@ public class PetInfoController {
 			return "redirect:/pet/list";
 		} catch (PetDeleteException e) { // DB에 없는 pet일경우 DeleteException발생
 			e.printStackTrace();
-			ScriptWriter.write("목록을 다시 확인해주세요.", "pet/list", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("pet.list.check"), "pet/list", request, response);
 			return null;
 		} catch (Exception e) { // 예외발생시 다시 pet페이지로 이동
 			e.printStackTrace();
@@ -134,7 +138,7 @@ public class PetInfoController {
 			return "pet/info/petInfo";
 		} catch (PetNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();

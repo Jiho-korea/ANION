@@ -32,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -62,6 +64,9 @@ public class EmailValidController {
 
 	@Resource(name = "emailcodeDeleteService")
 	EmailcodeDeleteService emailcodeDeleteService;
+	
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	@GetMapping("/sent")
 	public String emailSentSuccess(
@@ -73,7 +78,7 @@ public class EmailValidController {
 		// 이메일 변경 과정(profile에서)을 안거치고 get방식으로 요청 한경우 (= 변경 확인 이메일 전송 완료 페이지에서 새로고침 한 경우)
 		// 반려견 등록과정 step1을 안거치고 get방식으로 요청 한경우 (= 반려견 등록 완료 페이지에서 새로고침 한 경우)
 		if (cookie_success_update_member_id == null && cookie_success_member_registration == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		}
 		if (cookie_success_update_member_id != null) {
@@ -112,14 +117,14 @@ public class EmailValidController {
 			model.addAttribute("memberId", authInfo.getMemberId());
 			return "member/email/emailAuthenticationForm";
 		} catch (MemberAuthStatusException e) {
-			ScriptWriter.write("만료된 링크입니다.", "profile", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("valid.email.expire"), "profile", request, response);
 			return null;
 		} catch (MemberNotFoundException e) {
-			ScriptWriter.write("아이디를 다시 확인해주세요", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("memberId.check"), "home", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		}
 	}
@@ -129,7 +134,7 @@ public class EmailValidController {
 			Model model, HttpServletResponse response, HttpServletRequest request, HttpSession session)
 			throws Exception {
 		if (cookie_success_update_id == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		}
 		if (cookie_success_update_id != null) {
@@ -188,7 +193,7 @@ public class EmailValidController {
 			return "member/profile/memberProfile";
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다", "profile", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "profile", request, response);
 			return null;
 		}
 

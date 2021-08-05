@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -36,6 +38,9 @@ public class MemberWithdrawalController {
 	@Resource(name = "withdrawalService")
 	MemberWithdrawalService memberWithdrawalService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	@GetMapping
 	public String withdrawalPage(MemberWithdrawalRequest memberWithdrawalRequest, HttpSession session) {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
@@ -50,7 +55,7 @@ public class MemberWithdrawalController {
 			@CookieValue(value = "successMemberWithdrawalRequest", required = false) Cookie cookie_success_memberWithdrawal_request,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		if (cookie_success_memberWithdrawal_request == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		}
 
@@ -66,8 +71,8 @@ public class MemberWithdrawalController {
 
 	// 탈퇴하는 이유 등록 & memberAuthStatus를 3으로 변경
 	@PostMapping("/request")
-	public String memberWithdrawalRequest(MemberWithdrawalRequest memberWithdrawalRequest, Errors errors, HttpServletResponse response,
-			HttpSession session) {
+	public String memberWithdrawalRequest(MemberWithdrawalRequest memberWithdrawalRequest, Errors errors,
+			HttpServletResponse response, HttpSession session) {
 		try {
 			memberWithdrawalService.requestMemberWithdrawal(memberWithdrawalRequest);
 
@@ -94,7 +99,7 @@ public class MemberWithdrawalController {
 			@CookieValue(value = "successMemberWithdrawalCancel", required = false) Cookie cookie_success_memberWithdrawal_cancel,
 			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		if (cookie_success_memberWithdrawal_cancel == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		}
 
@@ -106,8 +111,8 @@ public class MemberWithdrawalController {
 
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		authInfo.getMemberauth().setMemberAuthStatus(1);
-		
-		ScriptWriter.write("회원탈퇴 취소 처리가 완료되었습니다!", "profile", request, response);
+
+		ScriptWriter.write(messageSourceAccessor.getMessage("memberWithdrawal.cancel.done"), "profile", request, response);
 		return null;
 	}
 
