@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -57,6 +59,9 @@ public class ProfileEditController {
 
 	@Resource(name = "changeProfileService")
 	ChangeProfileService changeProfileService;
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	@GetMapping("/updateId")
 	public String updateId(ChangeIdCommand changeIdCommand, Model model) {
@@ -147,7 +152,7 @@ public class ProfileEditController {
 			throws Exception {
 
 		if (cookie_success_password_change == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "profile", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "profile", request, response);
 			return null;
 		}
 

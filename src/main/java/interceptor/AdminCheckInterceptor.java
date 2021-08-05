@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
@@ -21,6 +23,9 @@ import petProject.vo.dto.Memberlevel;
 
 public class AdminCheckInterceptor implements HandlerInterceptor {
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -28,7 +33,7 @@ public class AdminCheckInterceptor implements HandlerInterceptor {
 		AuthInfo authInfo = (AuthInfo) session.getAttribute("login");
 		Memberlevel memberLevel = authInfo.getMemberlevel();
 		if (!"0".equals(memberLevel.getMemberLevelCode())) {
-			return ScriptWriter.write("권한이 없습니다", "home", request, response);
+			return ScriptWriter.write(messageSourceAccessor.getMessage("auth.fail"), "home", request, response);
 		}
 
 		return true;

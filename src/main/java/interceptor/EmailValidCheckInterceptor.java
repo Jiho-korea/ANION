@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
@@ -20,6 +22,9 @@ import petProject.vo.AuthInfo;
 import petProject.vo.dto.Memberauth;
 
 public class EmailValidCheckInterceptor implements HandlerInterceptor {
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -30,10 +35,10 @@ public class EmailValidCheckInterceptor implements HandlerInterceptor {
 
 			Memberauth memberauth = authInfo.getMemberauth();
 			if (memberauth.getMemberAuthStatus() == 0) {
-				return ScriptWriter.write("이메일 인증을 완료하세요!", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("memberId.valid"), "home", request, response);
 			}
 		} catch (NullPointerException e) {
-			return ScriptWriter.write("로그인이 필요합니다", "home", request, response);
+			return ScriptWriter.write(messageSourceAccessor.getMessage("memberId"), "home", request, response);
 		}
 		return true;
 	}
