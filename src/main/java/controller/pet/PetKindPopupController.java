@@ -53,7 +53,7 @@ public class PetKindPopupController {
 
 	@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
-	
+
 	static PetSearchRequest petSearchRequest = new PetSearchRequest();
 
 	// 대동견지도 클릭시 = "/petKind", 대동견지도에서 품종 클릭 후 = "/petKind/{petKindcode}"
@@ -89,7 +89,8 @@ public class PetKindPopupController {
 			return null;
 		} catch (NonExistentKindcodeException e) {
 			e.printStackTrace();
-			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request,
+					response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +99,7 @@ public class PetKindPopupController {
 		}
 	}
 
-	// 페이지 넘길 때
+	// 페이지 넘길 때, 검색할때
 	@PostMapping("/petKind")
 	public String kindPopup2(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -120,6 +121,9 @@ public class PetKindPopupController {
 			model.addAttribute("selectOpen", true);
 			model.addAttribute("petKindWord", petKindWord);
 
+			if (searchKindcodeList.size() == 0) {
+				model.addAttribute("emptySearch", true);
+			}
 			// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
 			if (petKindcode != null) {
 				String petKind = selectKindcodeService.selectPetKind(petKindcode);
@@ -133,7 +137,8 @@ public class PetKindPopupController {
 			return null;
 		} catch (NonExistentKindcodeException e) {
 			e.printStackTrace();
-			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request,
+					response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();

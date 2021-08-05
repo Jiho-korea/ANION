@@ -93,6 +93,11 @@
 			<c:if test="${not empty petKind}">
 				<span class="current">${kindcode.petKind }</span>
 			</c:if>
+			<c:if test="${emptySearch }">
+				<li data-value=""
+					style="color: white; transform: translate(0, -5px);"><spring:message
+						code="search.emtpy" /></li>
+			</c:if>
 			<ul class="list">
 				<li data-value="<spring:message code="pet.kind" /> / Dog breed"
 					class="option selected focus" hidden=""><spring:message
