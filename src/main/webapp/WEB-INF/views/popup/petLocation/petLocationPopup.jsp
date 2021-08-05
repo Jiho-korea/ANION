@@ -128,7 +128,7 @@ a:hover {
 	<!-- Ctrl + Shift + F 사용하여 코드 정렬시 script구문의 function displayMarker(param)함수 정상작동 x -->
 	<div class="map_wrap">
 		<div id="map"
-			style="width: 100%; height: 720px; position: relative; overflow: hidden;"></div>
+			style="width: 100%; height: 718px; position: relative; overflow: hidden;"></div>
 		<div class="hAddr">
 			<span class="title"><spring:message
 					code="address.administrative.map.center" /></span> <span id="centerAddr"></span>
