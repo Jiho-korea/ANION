@@ -7,12 +7,12 @@
 작  성  내  용: 관리자 회면 - 회원목록
 ========================================================================
 --%>
+<%@page import="petProject.vo.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 <head>
@@ -133,12 +133,15 @@
 									</div></td>
 
 								<td width="10%" align="center"><div align="center">
-										<a href="#"> <input type="button" name="btn_modify"
-											id="btn_modify" class="btn_modify {delivery_no: 4}"
-											value="<spring:message code="edit" />" /></a> <a href="#"><input
-											type="button" name="btn_delete" id="btn_delete"
-											class="btn_delete {delivery_no: 4}"
-											value="<spring:message code="delete.button"/>" /> </a>
+										<a href="${pageContext.request.contextPath}/admin/member/modify/${member.memberNumber}"> 
+											<input type="button" name="btn_modify"
+												id="btn_modify" class="btn_modify {delivery_no: 4}"
+												value="<spring:message code="edit" />" /></a> 
+										<a href="${pageContext.request.contextPath}/admin/member/delete/${member.memberNumber}" onclick="return deleteConfirm();">
+											<input type="button" name="btn_delete"
+												id="btn_delete" class="btn_delete {delivery_no: 4}"
+												value="<spring:message code="delete.button"/>" /></a>
+											
 									</div></td>
 							</tr>
 							<!-- 
@@ -167,4 +170,14 @@
 	</div>
 	<!-- wapper 끝-->
 </body>
+<script defer type="text/javascript">
+	function deleteConfirm(){
+		 if (confirm("정말 삭제하시겠습니까??")){
+			 return true;
+		 }
+		 return false;
+	}
+	
+
+</script>
 </html>

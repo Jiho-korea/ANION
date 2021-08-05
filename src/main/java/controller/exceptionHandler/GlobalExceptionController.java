@@ -29,7 +29,7 @@ public class GlobalExceptionController {
 	}
 	
 	//500
-	@ExceptionHandler(Exception.class)
+	@ExceptionHandler({Exception.class, NullPointerException.class})
 	public String handleAll(Model model, Exception e){
 		e.printStackTrace();
 		model.addAttribute("errorCode","500");

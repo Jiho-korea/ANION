@@ -217,9 +217,8 @@
 				<br class="mb-4" />
 				<label> <!--<spring:message code="pet.microchip" />--> <form:input
 						path="petMicrochip" cssClass="single-input" cssStyle="width:350px"
-						oninput='numberMaxLength(this, 15)'
-						placeholder="마이크로칩 번호 / Microchip number" type="number"
-						onfocus="this.placeholder = ''"
+						placeholder="마이크로칩 번호 / Microchip number" type="text" maxlength='15'
+						onfocus="this.placeholder = ''" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
 						onblur="this.placeholder = '마이크로칩 번호 / Microchip number'" /> <form:errors
 						path="petMicrochip" />
 				</label>

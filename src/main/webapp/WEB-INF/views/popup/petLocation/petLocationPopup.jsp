@@ -136,7 +136,8 @@ a:hover {
 
 		<div class="hSearch">
 			<input type="text" class="hSearch_input" placeholder="Search..."
-				onkeyup="enterkey();" id="searchAddress" size="20"> &nbsp;
+				onkeyup="enterkey(); this.value=this.value.replace(/[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9|^-]/g,'');" 
+				id="searchAddress" size="20"> &nbsp;
 			&nbsp;<input type="image"
 				src="${pageContext.request.contextPath}/img/button/search.jpg"
 				onclick="searchFunction()" width="41" height="41">
