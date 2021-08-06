@@ -13,4 +13,5 @@ import org.apache.ibatis.annotations.Param;
 
 public interface NoseprintAuthChangeService {
 	void updateNoseprintImageAuthStatus(@Param("noseprintImagePath") String[] noseprintImagePath) throws Exception;
+
 }

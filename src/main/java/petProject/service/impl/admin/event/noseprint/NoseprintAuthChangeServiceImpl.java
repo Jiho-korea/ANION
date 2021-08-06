@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.NoseprintImageDAO;
-import petProject.exception.ImageDeleteException;
+import petProject.exception.NosePrintAuthChangeException;
 import petProject.service.admin.event.noseprint.NoseprintAuthChangeService;
 
 @Service("noseprintAuthChangeService")
@@ -26,15 +26,25 @@ public class NoseprintAuthChangeServiceImpl implements NoseprintAuthChangeServic
 	@Override
 	public void updateNoseprintImageAuthStatus(String[] noseprintImagePath) throws Exception {
 		for (int i = 0; i < noseprintImagePath.length; i++) {
-			int result = noseprintImageDAO.updateNoseprintImageAuthStatus(noseprintImagePath[i]);
-			System.out.print("서비스 임플");
-			System.out.print(noseprintImagePath[i]);
-			if (result < 0) {
-				throw new ImageDeleteException("imageDeleteException");
-			}
+			String str[] = noseprintImagePath[i].split("@");
+			String path = str[0];
+			int check = Integer.parseInt(str[1]);
 
+			if (check == 1) {
+				int result = noseprintImageDAO.updateNoseprintImageAuthStatus(path);
+
+				if (result < 0) {
+					throw new NosePrintAuthChangeException("AuthChangeException");
+
+				}
+			} else {
+				int result = noseprintImageDAO.updateNoseprintImageAuthStatus2(path);
+				if (result < 0) {
+					throw new NosePrintAuthChangeException("AuthChangeException");
+				}
+
+			}
 		}
 
 	}
-
 }

@@ -64,6 +64,12 @@
 		set "NOSEPRINT_IMAGE_AUTH_STATUS" = 1
 		where "NOSEPRINT_IMAGE_PATH" = #{noseprintImagePath}
 	</update>
+	
+		<update id="updateNoseprintImageAuthStatus2" parameterType="String">
+		update "noseprint_image"
+		set "NOSEPRINT_IMAGE_AUTH_STATUS" = 2
+		where "NOSEPRINT_IMAGE_PATH" = #{noseprintImagePath}
+	</update>
 
 
 	<resultMap type="noseprintImage" id="noseprintImageResultMap">

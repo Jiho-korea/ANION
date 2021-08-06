@@ -48,7 +48,6 @@ public class NoseprintImageAuthChangeAdminController {
 		}
 
 		try {
-			noseprintAuthChangeService.updateNoseprintImageAuthStatus(noseprintImagePath);
 
 			return "redirect:/admin/pet/image/npevent/" + memberNumber + "?petRegistrationNumber="
 					+ petRegistrationNumber;

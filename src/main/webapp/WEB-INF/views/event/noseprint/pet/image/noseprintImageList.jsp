@@ -211,8 +211,13 @@
 														<div
 															class="checkBox d-flex justify-content-center align-items-center">
 															<input type="checkbox" name="chBox" class="chBox"
-																value="${noseprintImage.noseprintImagePath}">&nbsp
+																value="${noseprintImage.noseprintImagePath}@1">&nbsp
 															<spring:message code="event.noseprint.ok" />
+															</input>
+															
+															<input type="checkbox" name="chBox" class="chBox"
+																value="${noseprintImage.noseprintImagePath}@2">&nbsp
+															<spring:message code="event.noseprint.no" />
 															</input>
 														</div>
 													</div>
@@ -301,6 +306,7 @@
 											class="checkBox d-flex justify-content-center align-items-center">
 											<input type="checkbox" name="chBox" class="chBox"
 												value="${noseprintImage.noseprintImagePath}" />
+											
 										</div>
 									</div>
 								</c:forEach>
