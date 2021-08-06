@@ -9,11 +9,14 @@
 */
 package petProject.service.impl.email;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import petProject.service.email.MailSendService;
 import petProject.service.email.MemberRegisterEmailService;
@@ -21,6 +24,7 @@ import petProject.vo.dto.Emailcode;
 import petProject.vo.dto.Member;
 
 @Service("memberRegisterEmailService")
+@Transactional(rollbackFor = SQLException.class)
 public class MemberRegisterEmailServiceImpl implements MemberRegisterEmailService {
 //	@Value("${mail.smtp.url.local}")
 	@Value("${mail.smtp.url.server}")

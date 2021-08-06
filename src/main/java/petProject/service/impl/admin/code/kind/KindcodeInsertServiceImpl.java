@@ -10,8 +10,11 @@
 
 package petProject.service.impl.admin.code.kind;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.KindcodeDAO;
 import petProject.exception.KindcodeInsertException;
@@ -19,6 +22,7 @@ import petProject.service.admin.code.kind.KindcodeInsertService;
 import petProject.vo.dto.Kindcode;
 
 @Service("kindcodeInsertService")
+@Transactional(rollbackFor = SQLException.class)
 public class KindcodeInsertServiceImpl implements KindcodeInsertService {
 
 	@Autowired

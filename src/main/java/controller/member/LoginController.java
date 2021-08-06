@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -57,6 +59,9 @@ public class LoginController {
 	@Resource(name = "memberRegisterService")
 	MemberRegisterService memberRegisterService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	public LoginController() {
 		super();
 	}
@@ -77,30 +82,30 @@ public class LoginController {
 				emailValidService.valid(data);
 
 				session.invalidate();
-				ScriptWriter.write("인증이 완료되었습니다!", "login", request, response);
+				ScriptWriter.write(messageSourceAccessor.getMessage("valid.email.done"), "login", request, response);
 				return null;
 			} catch (MemberNotFoundException e) {
 				e.printStackTrace();
-				ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+				ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 				return null;
 			} catch (MemberAuthStatusException e) {
 				e.printStackTrace();
-				ScriptWriter.write("회원인증을 완료한 사용자입니다", "home", request, response);
+				ScriptWriter.write(messageSourceAccessor.getMessage("memberId.authDone"), "home", request, response);
 				return null;
 			} catch (EmailcodeNotMatchException e) {
 				e.printStackTrace();
-				ScriptWriter.write("만료된 링크입니다", "home", request, response);
+				ScriptWriter.write(messageSourceAccessor.getMessage("valid.email.expire"), "home", request, response);
 				return null;
 			} catch (NullPointerException e) {
 				e.printStackTrace();
-				ScriptWriter.write("로그인이 필요합니다", "home", request, response);
+				ScriptWriter.write(messageSourceAccessor.getMessage("memberId"), "home", request, response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "login/loginFormPage";
 			}
 		} else if ((emailcode != null && memberId == null) || (emailcode == null && memberId != null)) {
-			ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			return null;
 		}
 
@@ -127,7 +132,7 @@ public class LoginController {
 					loginRequest.getMemberPassword());
 
 			session.setAttribute("login", authInfo);
-			
+
 			Cookie memoryCookie = new Cookie("memory", loginRequest.getMemberId());
 			memoryCookie.setPath("/");
 			if (loginRequest.isMemory()) {

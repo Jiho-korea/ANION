@@ -25,10 +25,11 @@
 </style>
 <div id="kindcodeListAjax">
 
-	<input id="petKindSearch" type="text" onKeyup="searchFunction()"
-		class="single-input" style="width: 200px;" value="${petKindWord }"
-		placeholder="Search..." autofocus/> &nbsp;<select style="display: none;"
-		id="childKind" name="childKind">
+	<input id="petKindSearch" type="text"
+		onKeyup="searchFunction(); this.value=this.value.replace(/[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/g,'');"
+		class="single-input" style="width: 190px;" value="${petKindWord }"
+		placeholder="Search..." autofocus /> &nbsp;&nbsp;<select
+		style="display: none;" id="childKind" name="childKind">
 		<c:if test="${empty petKind}">
 			<option value=""></option>
 		</c:if>
@@ -44,17 +45,20 @@
 	<c:if test="${empty selectOpen}">
 		<div class="nice-select" tabindex="0">
 			<c:if test="${empty petKind}">
-				<span class="current"><spring:message code="pet.kind" /> / Dog breed</span>
+				<span class="current"><spring:message code="pet.kind" /> /
+					Dog breed</span>
 			</c:if>
 			<c:if test="${not empty petKind}">
 				<span class="current">${petKind }</span>
 			</c:if>
 			<ul class="list">
-				<li data-value="<spring:message code="pet.kind" /> / Dog breed" class="option selected focus"
-					hidden=""><spring:message code="pet.kind" /> / Dog breed</li>
+				<li data-value="<spring:message code="pet.kind" /> / Dog breed"
+					class="option selected focus" hidden=""><spring:message
+						code="pet.kind" /> / Dog breed</li>
 				<c:forEach var="kindcode" items="${searchKindcodeList}"
 					varStatus="status">
-					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					<li data-value="${kindcode.petKind}" class="option"
+						style="width: 230px;">${kindcode.petKind}</li>
 				</c:forEach>
 
 				<div class="d-flex justify-content-center">
@@ -83,17 +87,25 @@
 	<c:if test="${!empty selectOpen}">
 		<div class="nice-select open" tabindex="0">
 			<c:if test="${empty petKind}">
-				<span class="current"><spring:message code="pet.kind" /> / Dog breed</span>
+				<span class="current"><spring:message code="pet.kind" /> /
+					Dog breed</span>
 			</c:if>
 			<c:if test="${not empty petKind}">
 				<span class="current">${kindcode.petKind }</span>
 			</c:if>
+			<c:if test="${emptySearch }">
+				<li data-value=""
+					style="color: white; transform: translate(0, -5px);"><spring:message
+						code="search.emtpy" /></li>
+			</c:if>
 			<ul class="list">
-				<li data-value="<spring:message code="pet.kind" /> / Dog breed" class="option selected focus"
-					hidden=""><spring:message code="pet.kind" /> / Dog breed</li>
+				<li data-value="<spring:message code="pet.kind" /> / Dog breed"
+					class="option selected focus" hidden=""><spring:message
+						code="pet.kind" /> / Dog breed</li>
 				<c:forEach var="kindcode" items="${searchKindcodeList}"
 					varStatus="status">
-					<li data-value="${kindcode.petKind}" class="option">${kindcode.petKind}</li>
+					<li data-value="${kindcode.petKind}" class="option"
+						style="width: 230px;">${kindcode.petKind}</li>
 				</c:forEach>
 
 				<div class="container d-flex justify-content-center">
@@ -119,7 +131,7 @@
 		</div>
 	</c:if>
 
-	&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;
 	<button type="button"
 		class="btn header-btn d-flex justify-content-center"
 		onclick="dogSelect();">OK</button>

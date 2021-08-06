@@ -10,6 +10,7 @@
 package petProject.service.impl.event.noseprint;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -25,13 +26,12 @@ import petProject.service.event.noseprint.NoseprintImageUploadService;
 import petProject.vo.request.NoseprintImageUploadRequest;
 
 @Service("noseprintImageUploadService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class NoseprintImageUploadServiceImpl implements NoseprintImageUploadService {
 	@Autowired
 	private NoseprintImageDAO noseprintImageDAO;
 
 	@Override
-	@Transactional
 	public void uploadNoseprintImage(int memberNumber, List<MultipartFile> file, String rootPath,
 			int petRegistrationNumber) throws Exception {
 		String savedName;

@@ -17,8 +17,11 @@
 */
 package config;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -93,6 +96,20 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 
 	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("classpath:/message");
+		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setCacheSeconds(10); // reload messages every 10 seconds
+		return messageSource;
+	}
+
+	@Bean
+	public MessageSourceAccessor MessageSourceAccessor() {
+		return new MessageSourceAccessor(messageSource());
+	}
+
+	@Bean
 	public LogoutCheckInterceptor logoutCheckInterceptor() {
 		return new LogoutCheckInterceptor();
 	}
@@ -106,7 +123,7 @@ public class MvcConfig implements WebMvcConfigurer {
 	public MemberWithdrawalCheckInterceptor memberWithdrawalCheckInterceptor() {
 		return new MemberWithdrawalCheckInterceptor();
 	}
-	
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();

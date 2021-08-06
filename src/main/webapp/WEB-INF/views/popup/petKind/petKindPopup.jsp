@@ -75,7 +75,7 @@ body {
 .fixed {
 	width: 100%;
 	position: relative;
-	margin-left: 180px;
+	margin-left: 160px;
 	align-items: center;
 	margin-bottom: 3rem;
 	display: -ms-flexbox;

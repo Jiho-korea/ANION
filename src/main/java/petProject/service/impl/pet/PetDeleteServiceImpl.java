@@ -27,7 +27,7 @@ import petProject.service.pet.PetDeleteService;
 import petProject.vo.dto.Image;
 
 @Service("petDeleteService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class PetDeleteServiceImpl implements PetDeleteService {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class PetDeleteServiceImpl implements PetDeleteService {
 	@Autowired
 	private ImageDAO imageDAO;
 
-	@Transactional(rollbackFor = SQLException.class)
+	@Override
 	public int deletePet(int petRegistrationNumber, HttpServletRequest request) throws Exception {
 		this.deleteImageList(petRegistrationNumber, request);
 		int result = petDAO.deletePet(petRegistrationNumber);

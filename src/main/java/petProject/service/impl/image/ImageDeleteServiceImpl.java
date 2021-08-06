@@ -10,6 +10,7 @@
 package petProject.service.impl.image;
 
 import java.io.File;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,12 @@ import petProject.exception.ImageDeleteException;
 import petProject.service.image.ImageDeleteService;
 
 @Service("imageDeleteService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class ImageDeleteServiceImpl implements ImageDeleteService {
 	@Autowired
 	private ImageDAO imageDAO;
 
 	@Override
-	@Transactional
 	public void deleteImage(String[] paths_id, String rootPath) throws Exception {
 		for (int i = 0; i < paths_id.length; i++) {
 			int result = imageDAO.deleteImage(paths_id[i]);

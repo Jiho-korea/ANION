@@ -1,15 +1,17 @@
 package petProject.service.impl.pet;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.KindcodeDAO;
 import petProject.exception.NonExistentKindcodeException;
 import petProject.service.pet.SelectKindcodeService;
 
 @Service("selectKindcodeService")
-@Component
+@Transactional(rollbackFor = SQLException.class)
 public class SelectKindcodeServiceImpl implements SelectKindcodeService {
 
 	@Autowired

@@ -9,6 +9,7 @@
 */
 package petProject.service.impl.image;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,12 @@ import petProject.service.image.ImageListService;
 import petProject.vo.dto.Image;
 
 @Service("imageListService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class ImageListServiceImpl implements ImageListService {
 	@Autowired
 	private ImageDAO imageDAO;
 
+	@Override
 	public List<Image> selectImageList(int petRegistrationNumber) throws Exception {
 		List<Image> imageList = imageDAO.selectImageList(petRegistrationNumber);
 		return imageList;

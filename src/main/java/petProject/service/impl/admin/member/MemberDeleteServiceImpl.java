@@ -9,29 +9,29 @@
 */
 package petProject.service.impl.admin.member;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.exception.ImageDeleteException;
+import petProject.exception.MemberDeleteException;
 import petProject.exception.MemberNotFoundException;
+import petProject.service.admin.member.MemberDeleteService;
 import petProject.service.admin.member.MemberSelectService;
 import petProject.vo.dto.Member;
 
-@Service("memberSelectService")
-@Transactional(rollbackFor = SQLException.class)
-public class MemberSelectServiceImpl implements MemberSelectService {
+@Service("memberDeleteService")
+@Transactional
+public class MemberDeleteServiceImpl implements MemberDeleteService {
 	@Autowired
 	private MemberDAO memberDAO;
 
 	@Override
-	public Member selectMemberByMemberNumber(int memberNumber) throws Exception {
-		Member member = memberDAO.selectMemberByMemberNumber(memberNumber);
-		if (member == null) {
-			throw new MemberNotFoundException("Invalid memberNumber");
+	public void deleteMember(int memberNumber) throws Exception {
+		int result = memberDAO.deleteMember(memberNumber);
+		if (result == 0) {
+			throw new MemberDeleteException("memberDeleteException");
 		}
-		return member;
 	}
 }

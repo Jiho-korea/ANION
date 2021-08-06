@@ -46,6 +46,8 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -81,6 +83,9 @@ public class PetRegisterController {
 	@Resource(name = "imageUploadService")
 	ImageUploadService imageUploadService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	List<Kindcode> kindcodeList = null;
 
 	@RequestMapping("/step1")
@@ -123,7 +128,7 @@ public class PetRegisterController {
 			Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		// 반려견 등록과정 step1을 안거치고 get방식으로 요청 한경우 (= 반려견 등록 완료 페이지에서 새로고침 한 경우)
 		if (cookie_success_pet_registration == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "pet/list", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "pet/list", request, response);
 			return null;
 		}
 

@@ -251,7 +251,7 @@
 									</c:if> <c:if test="${pet.petAddress ne null}">${pet.petAddress }
 										<a
 											href="${pageContext.request.contextPath}/pet/location/${pet.petRegistrationNumber}"
-											onclick="window.open(this.href, '_blank', 'width=960px, height=711px'); return false;"><img
+											onclick="window.open(this.href, '_blank', 'width=960px, height=720px'); return false;"><img
 											width="20" height="20"
 											src="${pageContext.request.contextPath}/img/button/dog_marker.png" />
 										</a>

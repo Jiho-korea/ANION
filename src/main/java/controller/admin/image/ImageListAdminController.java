@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +59,9 @@ public class ImageListAdminController {
 	@Resource(name = "memberSelectService")
 	MemberSelectService memberSelectService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ImageListController.class);
 
 	@GetMapping("/{memberNumber}")
@@ -67,7 +72,7 @@ public class ImageListAdminController {
 
 		// url로 접근 시 petRegistrationNumber 파라미터를 주지 않았을 때
 		if (petRegistrationNumber == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "admin/pet/" + memberNumber, request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "admin/pet/" + memberNumber, request, response);
 			return null;
 		}
 
@@ -90,7 +95,7 @@ public class ImageListAdminController {
 			return "pet/image/imageList";
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("오류가 발생하였습니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "home", request, response);
 			return null;
 		}
 
@@ -120,13 +125,13 @@ public class ImageListAdminController {
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+				ScriptWriter.write(messageSourceAccessor.getMessage("failed.posting.img"),
 						"admin/pet/image/" + memberNumber + "?petRegistrationNumber=" + petRegistrationNumber, request,
 						response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
-				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+				ScriptWriter.write(messageSourceAccessor.getMessage("failed.posting.img"),
 						"admin/pet/image/" + memberNumber + "?petRegistrationNumber=" + petRegistrationNumber, request,
 						response);
 				return null;

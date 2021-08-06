@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.admin.code.kind;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,7 @@ import petProject.exception.KindcodeDeleteException;
 import petProject.service.admin.code.kind.KindcodeDeleteService;
 
 @Service("kindcodeDeleteService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class KindcodeDeleteServiceImpl implements KindcodeDeleteService {
 
 	@Autowired

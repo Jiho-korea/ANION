@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +49,9 @@ public class ImageDeleteController {
 	@Resource(name = "imageDeleteService")
 	ImageDeleteService imageDeleteService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ImageListController.class);
 
 	@GetMapping("/imageDelete")
@@ -78,16 +83,16 @@ public class ImageDeleteController {
 			return "redirect:/info/list/image?petRegistrationNumber=" + petRegistrationNumber;
 
 		} catch (NullPointerException e) {
-			ScriptWriter.write("삭제할 사진을 선택해 주세요.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
+			ScriptWriter.write(messageSourceAccessor.getMessage("list.image.delete.select"), "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
 					request, response);
 			return null;
 		} catch (ImageDeleteException e) {
 			e.printStackTrace();
-			ScriptWriter.write("이미지 삭제에 실패하였습니다.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
+			ScriptWriter.write(messageSourceAccessor.getMessage("failed.deleting.img"), "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
 					request, response);
 			return null;
 		} catch (Exception e) {
-			ScriptWriter.write("이미지 파일 삭제에 실패하였습니다.", "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
+			ScriptWriter.write(messageSourceAccessor.getMessage("failed.deleting.img"), "info/list/image?petRegistrationNumber=" + petRegistrationNumber,
 					request, response);
 			return null;
 		}
