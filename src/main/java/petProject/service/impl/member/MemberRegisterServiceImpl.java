@@ -102,7 +102,7 @@ public class MemberRegisterServiceImpl implements MemberRegisterService {
 		}
 		return emailcode;
 	}
-
+	
 	@Override
 	@Transactional
 	public void memberRegister(MemberRegisterRequest memberRegisterRequest, HttpServletRequest request, boolean isHtml)

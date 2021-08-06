@@ -9,8 +9,6 @@
 */
 package petProject.service.admin.code.kind;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface KindcodeDeleteService {
-	int deleteKindcode(@Param("petKindcode") String petKindcode) throws Exception;
+	int deleteKindcode(String petKindcode) throws Exception;
 }

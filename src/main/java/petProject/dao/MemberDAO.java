@@ -58,9 +58,17 @@ public interface MemberDAO {
 
 	int updateId(@Param("changeIdCommand") ChangeIdCommand changeIdCommand) throws Exception;
 
+	int updateMemberWithdrawal(@Param("memberNumber") int memberNumber);
+
+	int cancelMemberWithdrawal(@Param("memberNumber") int memberNumber);
+
 	int selectMemberCount() throws Exception;
 
 	Memberauth checkMemberAuthStatus(@Param("memberId") String memberId) throws Exception;
 
 	Member selectProfileById(@Param("memberId") String memberId) throws Exception;
+	
+	int deleteMember(@Param("memberNumber") int memberNumber);
+
+	void memberAuthStatusValid();
 }

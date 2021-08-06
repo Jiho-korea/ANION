@@ -114,10 +114,6 @@
 						</c:when>
 					</c:choose>
 				</spring:message> --%>
-
-			<br class="mb-4" />
-			<hr class="mb-4" />
-			<div class="row"></div>
 		</div>
 	</div>
 

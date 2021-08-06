@@ -26,7 +26,9 @@ import controller.admin.event.noseprint.image.NoseprintImageListAdminController;
 import controller.admin.event.noseprint.pet.NoseprintPetListAdminController;
 import controller.admin.image.ImageDownloadController;
 import controller.admin.image.ImageListAdminController;
+import controller.admin.member.MemberDeleteController;
 import controller.admin.member.MemberListController;
+import controller.admin.member.MemberModifyController;
 import controller.admin.pet.PetListAdminController;
 import controller.event.noseprint.image.NoseprintImageDeleteController;
 import controller.event.noseprint.image.NoseprintImageEventGuidanceController;
@@ -42,6 +44,7 @@ import controller.member.LogoutController;
 import controller.member.MemberFindController;
 import controller.member.MemberRegisterController;
 import controller.member.ProfileEditController;
+import controller.member.MemberWithdrawalController;
 import controller.pet.PetInfoController;
 import controller.pet.PetKindPopupController;
 import controller.pet.PetListController;
@@ -227,5 +230,19 @@ public class ControllerConfig {
 	public PetLocationController petLocationController() {
 		return new PetLocationController();
 
+	}
+	
+	@Bean
+	public MemberDeleteController memberDeleteController() {
+		return new MemberDeleteController();
+	}
+	
+	@Bean
+	public MemberModifyController memberModifyController() {
+		return new MemberModifyController();
+	}
+		
+	public MemberWithdrawalController memberWithdrawalController() {
+		return new MemberWithdrawalController();
 	}
 }

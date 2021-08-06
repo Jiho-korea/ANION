@@ -1,4 +1,12 @@
-
+<%--
+========================================================================
+파    일    명 : memberWithdrawalSuccess.jsp
+========================================================================
+작    성    자 : 송찬영
+작    성    일 : 2021.07.30
+작  성  내  용 : 회원탈퇴 신청을 완료하였을때 나오는 페이지
+========================================================================
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -51,30 +59,19 @@
 <title><spring:message code="home.title" /></title>
 </head>
 <body>
-	<c:import url="../included/top.jsp">
+	<c:import url="../../included/top.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
-	<c:choose>
-		<c:when test="${errorCode eq '400'}"> 
-			<br><br>
-			<p id="error" style="text-align:center;"><spring:message code="error.badRequest" /></p> 
-		</c:when>
-		<c:when test="${errorCode eq '500'}">
-			<br><br>
-			<p id="error" style="text-align:center;"><spring:message code="error.server" /></p>
-		</c:when>
-		<c:otherwise>
-			<br><br>
-			<p id="error" style="text-align:center;"><spring:message code="error.notFound" /></p>
-		</c:otherwise>
-	</c:choose>
+	<div class="container text-center" id="main">
+		<div class="jumbotron border">
+		<br><br><br><br>
+			<spring:message code="memberWithdrawal.request" />
+			<br><br><br><br>
+		</div>
+	</div>
 
-	<script>
-		document.getElementById('error').style.font = 'bold 35px Arial';
-	</script>
-
-	<c:import url="../included/bottom.jsp">
+	<c:import url="../../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
 
@@ -146,5 +143,4 @@
 	<script defer src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </body>
-
 </html>

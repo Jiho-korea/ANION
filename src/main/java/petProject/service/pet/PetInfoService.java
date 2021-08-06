@@ -10,11 +10,9 @@
 
 package petProject.service.pet;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.Pet;
 
 public interface PetInfoService {
-	Pet selectPet(@Param("petRegistrationNumber") int petRegistrationNumber) throws Exception;
+	Pet selectPet(int petRegistrationNumber) throws Exception;
 
 }

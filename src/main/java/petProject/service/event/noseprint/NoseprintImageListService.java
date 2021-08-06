@@ -11,12 +11,10 @@ package petProject.service.event.noseprint;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import petProject.vo.dto.NoseprintImage;
 
 public interface NoseprintImageListService {
-	List<NoseprintImage> selectNoseprintImageList(@Param("petRegistrationNumber") int petRegistrationNumber)
+	List<NoseprintImage> selectNoseprintImageList(int petRegistrationNumber)
 			throws Exception;
 
 }
