@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.email;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,7 @@ import petProject.service.email.EmailcodeDeleteService;
 import petProject.vo.dto.Emailcode;
 
 @Service("emailcodeDeleteService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class EmailcodeDeleteServiceImpl implements EmailcodeDeleteService {
 
 	@Autowired

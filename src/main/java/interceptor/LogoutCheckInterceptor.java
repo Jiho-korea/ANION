@@ -13,12 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
 import petProject.vo.AuthInfo;
 
 public class LogoutCheckInterceptor implements HandlerInterceptor {
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -30,7 +35,7 @@ public class LogoutCheckInterceptor implements HandlerInterceptor {
 				if (authInfo.getMemberauth().getMemberAuthStatus() == 0) {
 					return true;
 				}
-				return ScriptWriter.write("로그인 상태입니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			}
 		}
 		return true;

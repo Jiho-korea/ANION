@@ -13,6 +13,8 @@
 */
 package petProject.service.impl.member;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ import petProject.vo.AuthInfo;
 import petProject.vo.dto.Member;
 
 @Service("loginService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class LoginServiceImpl implements LoginService {
 
 	@Autowired

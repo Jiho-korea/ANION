@@ -13,6 +13,7 @@
 */
 package petProject.service.impl.pet;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import petProject.service.pet.PetListService;
 import petProject.vo.dto.Pet;
 
 @Service("petListService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class PetListServiceImpl implements PetListService {
 	@Autowired
 	private PetDAO petDAO;

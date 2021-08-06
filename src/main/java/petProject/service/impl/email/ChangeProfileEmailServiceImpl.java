@@ -9,17 +9,21 @@
 */
 package petProject.service.impl.email;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import petProject.service.email.ChangeProfileEmailService;
 import petProject.service.email.MailSendService;
 import petProject.vo.dto.Emailcode;
 
 @Service("changeProfileEmailService")
+@Transactional(rollbackFor = SQLException.class)
 public class ChangeProfileEmailServiceImpl implements ChangeProfileEmailService {
 //	@Value("${mail.smtp.url.local}")
 	@Value("${mail.smtp.url.server}")

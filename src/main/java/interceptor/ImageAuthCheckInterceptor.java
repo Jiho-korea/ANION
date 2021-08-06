@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.exception.ImageNotExistException;
@@ -27,6 +29,9 @@ public class ImageAuthCheckInterceptor implements HandlerInterceptor {
 	@Resource(name = "imageSelectService")
 	ImageSelectService imageSelectService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -38,12 +43,12 @@ public class ImageAuthCheckInterceptor implements HandlerInterceptor {
 				image = imageSelectService.selectImage(Integer.parseInt(request.getParameter("imageNumber")));
 			} catch (ImageNotExistException e) {
 				e.printStackTrace();
-				return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			} catch (NumberFormatException e) {
-				return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return ScriptWriter.write("오류가 발생했습니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "home", request, response);
 			}
 			// 관리자가 다른 사람 이미지에 접근하게 하고 싶으면 이부분 주석 풀면됨
 //			if (!"0".equals(authInfo.getMemberlevel().getMemberLevelCode())
@@ -56,12 +61,12 @@ public class ImageAuthCheckInterceptor implements HandlerInterceptor {
 //			}
 
 			if (authInfo.getMemberNumber() != image.getMember().getMemberNumber()) {
-				return ScriptWriter.write("권한이 없습니다.", "home", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("auth.fail"), "home", request, response);
 			}
 
 			return true;
 		} else {
-			return ScriptWriter.write("잘못된 접근입니다.", "home", request, response);
+			return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 		}
 
 	}

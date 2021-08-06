@@ -14,6 +14,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -33,7 +34,7 @@ import petProject.vo.dto.NoseprintImage;
 import petProject.vo.dto.Pet;
 
 @Service("noseprintImageDownloadService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class NoseprintImageDownloadServiceImpl implements NoseprintImageDownloadService {
 	@Resource(name = "noseprintImageListService")
 	NoseprintImageListService noseprintImageListService;
@@ -42,7 +43,6 @@ public class NoseprintImageDownloadServiceImpl implements NoseprintImageDownload
 	PetInfoService petInfoService;
 
 	@Override
-	@Transactional
 	public void downloadNoseprintImage(int petRegistrationNumber, String rootPath, Model model,
 			HttpServletResponse response) throws Exception {
 		String zipFile = rootPath + "\\result.zip";
