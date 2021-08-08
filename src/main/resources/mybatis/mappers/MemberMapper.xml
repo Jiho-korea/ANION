@@ -80,12 +80,6 @@
 		FROM "member"
 		WHERE "MEMBER_ID" = #{memberId}
 	</select>
-	
-	<!-- 7일 이상 탈퇴신청을 유지한 회원의 memberNumber를 받는 쿼리 -->
-	<select id="selectMemberNumberByDate" resultType="int">
-		select "MEMBER_NUMBER" from "member" 
-		where "MEMBER_AUTH_STATUS" = 3 and extract(day from now()::timestamp - "MEMBER_REGISTRATION_DATE"::timestamp) >= 7
-	</select>
 
 	<insert id="insertMember" parameterType="memberRegisterRequest">
 		INSERT INTO
@@ -139,6 +133,7 @@
 		where "MEMBER_NUMBER" = #{memberNumber}
 	</update>
 
+	<!-- 7일이상 회원탈퇴신청 상태일 경우 아이디를 아이디 + #memberNumber, authStatus를 4로 변경 -->
 	<update id="updateMemberWithdrawalByMemberNumber" parameterType="int">
 		update "member" set "MEMBER_AUTH_STATUS" = 4, "MEMBER_ID" = concat("MEMBER_ID", '#', CAST(#{memberNumber} as text))
 		where "MEMBER_NUMBER" = #{memberNumber}

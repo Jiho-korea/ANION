@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import petProject.dao.MemberDAO;
+import petProject.dao.MemberWithdrawalDAO;
 import petProject.service.member.MemberValidService;
 
 @Service
@@ -26,6 +27,9 @@ public class MemberValidServiceImpl implements MemberValidService {
 
 	@Autowired
 	MemberDAO memberDAO;
+	
+	@Autowired
+	MemberWithdrawalDAO memberWithdrawalDAO;
 
 	// 한시간마다 memberAuthStatusValid메서드를 실행 : 이메일 인증을 하지 않은 사용자는 자동으로 삭제됨
 	@Override
@@ -38,7 +42,7 @@ public class MemberValidServiceImpl implements MemberValidService {
 	@Override
 	@Scheduled(fixedDelay = 1000 * 60 * 60)
 	public void memberWithdrawal() {
-		List<Integer> memberNumberList = memberDAO.selectMemberNumberByDate();
+		List<Integer> memberNumberList = memberWithdrawalDAO.selectMemberNumberByDate();
 		for (Integer memberNumber : memberNumberList) {
 			memberDAO.updateMemberWithdrawalByMemberNumber(memberNumber);
 		}
