@@ -71,4 +71,8 @@ public interface MemberDAO {
 	int deleteMember(@Param("memberNumber") int memberNumber);
 
 	void memberAuthStatusValid();
+
+	List<Integer> selectMemberNumberByDate();
+
+	void updateMemberWithdrawalByMemberNumber(@Param("memberNumber") Integer memberNumber);
 }

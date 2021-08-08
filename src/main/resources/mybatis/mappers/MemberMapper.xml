@@ -80,6 +80,12 @@
 		FROM "member"
 		WHERE "MEMBER_ID" = #{memberId}
 	</select>
+	
+	<!-- 7일 이상 탈퇴신청을 유지한 회원의 memberNumber를 받는 쿼리 -->
+	<select id="selectMemberNumberByDate" resultType="int">
+		select "MEMBER_NUMBER" from "member" 
+		where "MEMBER_AUTH_STATUS" = 3 and extract(day from now()::timestamp - "MEMBER_REGISTRATION_DATE"::timestamp) >= 7
+	</select>
 
 	<insert id="insertMember" parameterType="memberRegisterRequest">
 		INSERT INTO
@@ -133,6 +139,11 @@
 		where "MEMBER_NUMBER" = #{memberNumber}
 	</update>
 
+	<update id="updateMemberWithdrawalByMemberNumber" parameterType="int">
+		update "member" set "MEMBER_AUTH_STATUS" = 4, "MEMBER_ID" = concat("MEMBER_ID", '#', CAST(#{memberNumber} as text))
+		where "MEMBER_NUMBER" = #{memberNumber}
+	</update>
+	
 	<!-- 1일 이상 회원을 인증하지 않은 사용자를 삭제 -->
 	<delete id="memberAuthStatusValid">
 		delete from "member" 
@@ -181,7 +192,5 @@
 		DELETE FROM "member"
 		WHERE "MEMBER_NUMBER" = #{memberNumber} 
 	</delete>
-
-	
 
 </mapper>
