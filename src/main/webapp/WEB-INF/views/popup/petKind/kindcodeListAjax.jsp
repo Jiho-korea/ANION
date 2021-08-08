@@ -25,11 +25,19 @@
 </style>
 <div id="kindcodeListAjax">
 
+
 	<input id="petKindSearch" type="text"
 		onKeyup="searchFunction(); this.value=this.value.replace(/[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/g,'');"
 		class="single-input" style="width: 190px;" value="${petKindWord }"
 		placeholder="Search..." autofocus /> &nbsp;&nbsp;<select
 		style="display: none;" id="childKind" name="childKind">
+
+	<input id="petKindSearch" type="text" 
+		onKeyup="searchFunction(); this.value=this.value.replace(/[^ㄱ-ㅎ|^ㅏ-ㅣ|^가-힣|^a-z|^A-Z|^0-9]/g,'');"
+		class="single-input" style="width: 200px;" value="${petKindWord }"
+		placeholder="Search..." autofocus/> &nbsp;<select style="display: none;"
+		id="childKind" name="childKind" >
+
 		<c:if test="${empty petKind}">
 			<option value=""></option>
 		</c:if>
