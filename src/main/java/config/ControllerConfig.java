@@ -241,7 +241,8 @@ public class ControllerConfig {
 	public MemberModifyController memberModifyController() {
 		return new MemberModifyController();
 	}
-		
+	
+	@Bean
 	public MemberWithdrawalController memberWithdrawalController() {
 		return new MemberWithdrawalController();
 	}

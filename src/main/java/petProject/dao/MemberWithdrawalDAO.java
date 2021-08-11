@@ -9,6 +9,8 @@
 */
 package petProject.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +22,7 @@ public interface MemberWithdrawalDAO {
 	int insertComment(@Param("memberWithdrawalRequest") MemberWithdrawalRequest memberWithdrawalRequest);
 
 	int deleteMemberWithdrawal(@Param("memberNumber") int memberNumber);
+
+	List<Integer> selectMemberNumberByDate();
 
 }
