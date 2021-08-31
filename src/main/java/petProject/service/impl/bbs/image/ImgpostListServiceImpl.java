@@ -9,6 +9,7 @@
 */
 package petProject.service.impl.bbs.image;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,12 @@ import petProject.vo.dto.Imgpost;
 import petProject.vo.request.ImageBoardRequest;
 
 @Service("imgpostListService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class ImgpostListServiceImpl implements ImgpostListService {
 	@Autowired
 	private ImgpostDAO imgpostDAO;
 
 	@Override
-	@Transactional
 	public List<Imgpost> listImgpost(ImageBoardRequest imageBoardRequest) throws Exception {
 		if (imageBoardRequest.getPageNumber() == 0) {
 			throw new NonExistentPageException("non-existent page of image board" + imageBoardRequest.getPageNumber());

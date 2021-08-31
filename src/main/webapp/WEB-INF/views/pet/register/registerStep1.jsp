@@ -103,7 +103,7 @@
 	padding: 0 20px 0 10px;
 }
 
-.single-input-necessary {
+.single-input-petRegister {
 	display: block;
 	margin-left: -2%;
 	width: 104.5%;
@@ -141,7 +141,7 @@
 				<div class="row">
 					<div class="col-md-6 mb-1">
 						<label> <form:input path="petName"
-								cssClass="single-input-necessary" placeholder="* 견명 / Name"
+								cssClass="single-input-petRegister" placeholder="* 견명 / Name"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '* 견명 / Name'" /> <form:errors
 								path="petName" />
@@ -190,9 +190,9 @@
 				<div class="row">
 					<div class="col-md-6 mb-1">
 						<label> <form:input path="petMothername"
-								cssClass="single-input" placeholder="모견명 / Dog`s mother"
+								cssClass="single-input-petRegister" placeholder="  모견명 / Dog`s mother"
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '모견명 / Dog`s Mother'" /> <form:errors
+								onblur="this.placeholder = '  모견명 / Dog`s Mother'" /> <form:errors
 								path="petMothername" />
 
 
@@ -200,9 +200,9 @@
 					</div>
 					<div class="col-md-6 mb-1">
 						<label> <!--<spring:message code="pet.father" />--> <form:input
-								path="petFathername" cssClass="single-input"
-								placeholder="부견명 / Dog`s father" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '부견명 / Dog`s father'" /> <form:errors
+								path="petFathername" cssClass="single-input-petRegister"
+								placeholder="  부견명 / Dog`s father" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '  부견명 / Dog`s father'" /> <form:errors
 								path="petFathername" />
 						</label>
 					</div>

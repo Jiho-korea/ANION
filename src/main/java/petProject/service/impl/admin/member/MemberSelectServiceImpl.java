@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.admin.member;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,7 @@ import petProject.service.admin.member.MemberSelectService;
 import petProject.vo.dto.Member;
 
 @Service("memberSelectService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class MemberSelectServiceImpl implements MemberSelectService {
 	@Autowired
 	private MemberDAO memberDAO;

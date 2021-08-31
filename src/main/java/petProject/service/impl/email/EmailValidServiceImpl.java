@@ -13,6 +13,8 @@
 */
 package petProject.service.impl.email;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,7 @@ import petProject.vo.dto.Memberauth;
 import petProject.vo.request.ChangeIdCommand;
 
 @Service("emailValidService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class EmailValidServiceImpl implements EmailValidService {
 
 	@Resource(name = "memberRegisterService")

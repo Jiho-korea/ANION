@@ -7,8 +7,9 @@
 작  성  내  용 : Profile의 정보를 변경하는 service
 ========================================================================
 */
-
 package petProject.service.impl.member;
+
+import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +35,7 @@ import petProject.vo.request.ChangeIdCommand;
 import petProject.vo.request.ChangeNameCommand;
 
 @Service("changeProfileService")
+@Transactional(rollbackFor = SQLException.class)
 public class ChangeProfileServiceImpl implements ChangeProfileService {
 
 	@Autowired
@@ -58,7 +60,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		}
 	}
 
-	@Transactional
+	@Override
 	public void updateName(ChangeNameCommand changeNameCommand, AuthInfo authInfo) throws Exception {
 		Member member = memberSelectService.selectMemberByMemberNumber(changeNameCommand.getMemberNumber());
 
@@ -71,7 +73,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		}
 	}
 
-	@Transactional
+	@Override
 	public Emailcode updateEmailcode(String memberId, ChangeIdCommand changeIdCommand) throws Exception {
 		Emailcode emailcode = new Emailcode();
 
@@ -86,7 +88,7 @@ public class ChangeProfileServiceImpl implements ChangeProfileService {
 		return emailcode;
 	}
 
-	@Transactional
+	@Override
 	public void changeId(ChangeIdCommand changeIdCommand, AuthInfo authInfo, HttpServletRequest request)
 			throws MailException, Exception {
 		Member member = memberSelectService.selectMemberByMemberNumber(changeIdCommand.getMemberNumber());

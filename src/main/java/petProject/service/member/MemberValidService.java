@@ -12,4 +12,6 @@ package petProject.service.member;
 public interface MemberValidService {
 	
 	void memberAuthStatusValid();
+	
+	void memberWithdrawal();
 }

@@ -10,6 +10,7 @@
 package petProject.service.impl.email;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Message;
@@ -23,12 +24,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import petProject.exception.MailException;
 import petProject.service.email.MailSendService;
 import petProject.vo.MailStatus;;
 
 @Service("mailSendService")
+@Transactional(rollbackFor = SQLException.class)
 public class MailSendServiceImpl implements MailSendService {
 
 	@Autowired

@@ -10,6 +10,7 @@
 package petProject.service.impl.image;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -25,13 +26,12 @@ import petProject.service.image.ImageUploadService;
 import petProject.vo.request.ImageUploadRequest;
 
 @Service("imageUploadService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class ImageUploadServiceImpl implements ImageUploadService {
 	@Autowired
 	private ImageDAO imageDAO;
 
 	@Override
-	@Transactional
 	public void uploadImage(int memberNumber, List<MultipartFile> file, String rootPath, int petRegistrationNumber)
 			throws Exception {
 		String savedName;

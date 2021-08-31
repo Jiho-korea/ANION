@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
@@ -20,6 +22,9 @@ import petProject.vo.AuthInfo;
 import petProject.vo.dto.Memberauth;
 
 public class MemberWithdrawalCheckInterceptor implements HandlerInterceptor {
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -30,10 +35,10 @@ public class MemberWithdrawalCheckInterceptor implements HandlerInterceptor {
 
 			Memberauth memberauth = authInfo.getMemberauth();
 			if (memberauth.getMemberAuthStatus() == 3) {
-				return ScriptWriter.write("회원탈퇴를 신청한 상태입니다!", "memberWithdrawal", request, response);
+				return ScriptWriter.write(messageSourceAccessor.getMessage("memberId.memberWithdrawal"), "memberWithdrawal", request, response);
 			}
 		} catch (NullPointerException e) {
-			return ScriptWriter.write("로그인이 필요합니다", "home", request, response);
+			return ScriptWriter.write(messageSourceAccessor.getMessage("memberId"), "home", request, response);
 		}
 		return true;
 	}

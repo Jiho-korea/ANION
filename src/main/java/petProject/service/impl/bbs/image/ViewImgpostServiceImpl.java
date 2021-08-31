@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.bbs.image;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,7 @@ import petProject.service.bbs.image.ViewImgpostService;
 import petProject.vo.dto.Imgpost;
 
 @Service("viewImgpostService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class ViewImgpostServiceImpl implements ViewImgpostService {
 	@Autowired
 	private ImgpostDAO imgpostDAO;

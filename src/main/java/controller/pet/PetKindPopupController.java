@@ -23,6 +23,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +50,9 @@ public class PetKindPopupController {
 
 	@Resource(name = "selectKindcodeService")
 	SelectKindcodeService selectKindcodeService;
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	static PetSearchRequest petSearchRequest = new PetSearchRequest();
 
@@ -80,20 +85,21 @@ public class PetKindPopupController {
 			return "popup/petKind/petKindPopup";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		} catch (NonExistentKindcodeException e) {
 			e.printStackTrace();
-			ScriptWriter.write("없는 품종입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request,
+					response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		}
 	}
 
-	// 페이지 넘길 때
+	// 페이지 넘길 때, 검색할때
 	@PostMapping("/petKind")
 	public String kindPopup2(@PathVariable(name = "petKindcode", required = false) String petKindcode,
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
@@ -101,7 +107,7 @@ public class PetKindPopupController {
 			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		petSearchRequest.setPageNumber(pageNumber);
 		petSearchRequest.setPetKindWord(petKindWord);
-		
+
 		try {
 			boolean nextPage = kindcodeListService.nextPage(petSearchRequest);
 
@@ -115,6 +121,9 @@ public class PetKindPopupController {
 			model.addAttribute("selectOpen", true);
 			model.addAttribute("petKindWord", petKindWord);
 
+			if (searchKindcodeList.size() == 0) {
+				model.addAttribute("emptySearch", true);
+			}
 			// redirect 됬을경우, 사용자가 클릭한 petKind가 콤보박스에 채워짐
 			if (petKindcode != null) {
 				String petKind = selectKindcodeService.selectPetKind(petKindcode);
@@ -124,15 +133,16 @@ public class PetKindPopupController {
 			return "popup/petKind/kindcodeListAjax";
 		} catch (NonExistentPageException e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		} catch (NonExistentKindcodeException e) {
 			e.printStackTrace();
-			ScriptWriter.write("없는 품종입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("notfound.petKind"), "popup/petKind", request,
+					response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("잘못된 접근입니다.", "popup/petKind", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "popup/petKind", request, response);
 			return null;
 		}
 	}

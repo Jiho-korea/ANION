@@ -13,11 +13,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import petProject.service.ScriptWriter;
 
 public class PopupPetLocationCookieCheckInterceptor implements HandlerInterceptor {
+
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -38,7 +43,7 @@ public class PopupPetLocationCookieCheckInterceptor implements HandlerIntercepto
 				return false;
 			}
 		} catch (NullPointerException e) {
-			return ScriptWriter.write("잘못된 접근입니다", "home", request, response);
+			return ScriptWriter.write(messageSourceAccessor.getMessage("error"), "home", request, response);
 		}
 	}
 

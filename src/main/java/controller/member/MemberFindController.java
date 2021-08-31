@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -42,6 +44,9 @@ public class MemberFindController {
 	@Resource(name = "changePasswordService")
 	ChangePasswordService changePasswordService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	@GetMapping("/passwordForm")
 	public String findPasswordForm(MemberProfileRequest memberProfileRequest) {
 		return "member/find/passwordForm";
@@ -52,7 +57,7 @@ public class MemberFindController {
 			@CookieValue(value = "successFindPassword", required = false) Cookie cookie_success_find_password,
 			Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (cookie_success_find_password == null) {
-			ScriptWriter.write("잘못된 접근입니다.", "login", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("error"), "login", request, response);
 			return null;
 		}
 
@@ -88,11 +93,11 @@ public class MemberFindController {
 			return "redirect:/member/find/password";
 		} catch (MemberNotFoundException e) {
 			e.printStackTrace();
-			ScriptWriter.write("ID를 다시 확인해주세요.", "member/find/passwordForm", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("memberId.check"), "member/find/passwordForm", request, response);
 			return null;
 		} catch (MemberPasswordUpdateException e) {
 			e.printStackTrace();
-			ScriptWriter.write("임시 비밀번호 발급에 실패했습니다. 다시 시도해주세요!", "member/find/passwordForm", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("password.temp.fail"), "member/find/passwordForm", request, response);
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();

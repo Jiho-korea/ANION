@@ -9,6 +9,8 @@
  */
 package petProject.service.impl.email;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,7 +23,7 @@ import petProject.service.email.MemberPasswordEmailSendService;
 import petProject.vo.dto.Member;
 
 @Service("memberPasswordEmailSendService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class MemberPasswordEmailSendServiceImpl implements MemberPasswordEmailSendService {
 //	@Value("${mail.smtp.url.local}")
 	@Value("${mail.smtp.url.server}")

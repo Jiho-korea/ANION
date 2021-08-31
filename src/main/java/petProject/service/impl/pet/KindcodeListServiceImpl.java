@@ -13,6 +13,7 @@
 */
 package petProject.service.impl.pet;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import petProject.vo.dto.Kindcode;
 import petProject.vo.request.PetSearchRequest;
 
 @Service("kindcodeListService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class KindcodeListServiceImpl implements KindcodeListService {
 
 	@Autowired

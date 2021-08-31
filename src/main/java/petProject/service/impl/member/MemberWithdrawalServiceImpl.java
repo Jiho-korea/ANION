@@ -9,6 +9,8 @@
 */
 package petProject.service.impl.member;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ import petProject.service.member.MemberWithdrawalService;
 import petProject.vo.request.MemberWithdrawalRequest;
 
 @Service("withdrawalService")
-@Transactional
+@Transactional(rollbackFor = SQLException.class)
 public class MemberWithdrawalServiceImpl implements MemberWithdrawalService {
 
 	@Autowired
@@ -66,13 +68,13 @@ public class MemberWithdrawalServiceImpl implements MemberWithdrawalService {
 		}
 	}
 
-	@Transactional
+	@Override
 	public void requestMemberWithdrawal(MemberWithdrawalRequest memberWithdrawalRequest) {
 		this.insertComment(memberWithdrawalRequest);
 		this.updateAuthStatus(memberWithdrawalRequest.getMemberNumber());
 	}
 
-	@Transactional
+	@Override
 	public void cancelMemberWithdrawal(int memberNumber) {
 		this.deleteMemberWithdrawal(memberNumber);
 		this.updateMemberWithdrawal(memberNumber);

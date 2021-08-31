@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -53,6 +55,9 @@ public class NoseprintImageListController {
 	@Resource(name = "petInfoService")
 	PetInfoService petInfoService;
 
+	@Autowired
+	private MessageSourceAccessor messageSourceAccessor;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ImageListController.class);
 
 	@GetMapping("/npimage")
@@ -90,7 +95,7 @@ public class NoseprintImageListController {
 			return "event/noseprint/pet/image/noseprintImageList";
 		} catch (Exception e) {
 			e.printStackTrace();
-			ScriptWriter.write("오류가 발생하였습니다.", "home", request, response);
+			ScriptWriter.write(messageSourceAccessor.getMessage("bug"), "home", request, response);
 			return null;
 		}
 
@@ -124,12 +129,12 @@ public class NoseprintImageListController {
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+				ScriptWriter.write(messageSourceAccessor.getMessage("failed.posting.img"),
 						"info/list/npimage?petRegistrationNumber=" + petRegistrationNumber, request, response);
 				return null;
 			} catch (Exception e) {
 				e.printStackTrace();
-				ScriptWriter.write("이미지 업로드에 실패하였습니다.",
+				ScriptWriter.write(messageSourceAccessor.getMessage("failed.posting.img"),
 						"info/list/npimage?petRegistrationNumber=" + petRegistrationNumber, request, response);
 				return null;
 			}
