@@ -74,7 +74,6 @@
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
 	background: none;
-
 }
 
 /* Modal Content/Box */
@@ -82,7 +81,7 @@
 	background-color: #fefefe;
 	border: 1px solid #888;
 	width: 30%; /* Could be more or less, depending on screen size */
-	margin:0;
+	margin: 0;
 }
 
 .black {
@@ -98,30 +97,32 @@
 
 <body>
 
-	<div id="myModal" class="modal" style="max-width: 100%; width: auto;display: table;">
-		<div class="modal-content d-flex justify-content-center ml-5 mt-5" style="border:2px solid gray; width:70%;">
+	<div id="myModal" class="modal"
+		style="max-width: 100%; width: auto; display: table;">
+		<div class="modal-content d-flex justify-content-center ml-5 mt-5"
+			style="border: 2px solid gray; width: 70%;">
 			<table>
-			<div class="title" style="border-bottom:2px solid gray;">
-			비문등록 이벤트 설명
-			</div>
-			<a href="https://www.facebook.com/groups/3017696248465936"> <img
-				src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
-				style="max-width: 100%; height: auto; width:auto; border:1px solid; padding:5px;">
-			</a>
-			<div class="d-flex align-items-center justify-content-end p-2" style="border-top:2px solid gray;">
-				<form name="frm">
-					<input id="closeCheck" type="checkbox" name="Notice"
-						onclick="check()"> <a style="font-size: 13px;"><spring:message
-							code="event.popup.decide" /></a> &nbsp;<input type=button
-						value="<spring:message code="close" />" onclick="closeWin()"
-						style="width: 30pt; height: 20pt; font-size: 13px">
+				<div class="title" style="border-bottom: 2px solid gray;">
+					비문등록 이벤트 설명</div>
+				<a href="https://www.facebook.com/groups/3017696248465936"> <img
+					src="${pageContext.request.contextPath}/img/popupBack/popup_event.jpg"
+					style="max-width: 100%; height: auto; width: auto; border: 1px solid; padding: 5px;">
+				</a>
+				<div class="d-flex align-items-center justify-content-end p-2"
+					style="border-top: 2px solid gray;">
+					<form name="frm">
+						<input id="closeCheck" type="checkbox" name="Notice"
+							onclick="check()"> <a style="font-size: 13px;"><spring:message
+								code="event.popup.decide" /></a> &nbsp;<input type=button
+							value="<spring:message code="close" />" onclick="closeWin()"
+							style="width: 30pt; height: 20pt; font-size: 13px">
 
-				</form>
-			</div>
+					</form>
+				</div>
 			</table>
 		</div>
 
-		
+
 
 	</div>
 
@@ -136,7 +137,7 @@
 	<br>
 	<br>
 	<br>
-	
+
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/register/step1"
 			class="btn header-btn"><spring:message
@@ -147,11 +148,14 @@
 		<a href="${pageContext.request.contextPath}/pet/list"
 			class="btn header-btn"><spring:message code="pet.list.title" /></a>
 	</div>
-	
+
 	<div class="container d-flex justify-content-center mt-5">
 		<a href="${pageContext.request.contextPath}/pet/list/npevent"
 			class="btn header-btn"><spring:message code="event.nose" /></a>
 	</div>
+
+	<a class="btn header-btn"
+		href="${pageContext.request.contextPath}/auth/GOOGLE">hihihifrwreerwrw</a>
 	<br>
 	<br>
 	<br>
@@ -243,7 +247,6 @@
       <!-- video_end -->
    </div>
     --%>
-
 	<%--
    <!-- slider Area End--> <!--? Visit Our Tailor Start -->
    <div class="visit-tailor-area fix">
@@ -536,6 +539,7 @@
    <!-- Blog Area End -->
    </main>
 --%>
+
 	<c:import url="../included/bottom.jsp">
 		<c:param value="main" name="type" />
 	</c:import>
@@ -634,14 +638,13 @@
 	}
 	jQuery(document).ready(function() {
 		var cc = getCookie('Notice');
-		if(cc == 'done'){
+		if (cc == 'done') {
 			$('#myModal').hide();
-		}
-		else{
+		} else {
 			$('#myModal').show();
 		}
 	});
-	
+
 	function closeWin() {
 		$('#myModal').hide();
 	}
@@ -650,7 +653,5 @@
 		setCookie("Notice", "done", 1);
 		$('#myModal').hide();
 	}
-	
-
 </script>
 </html>

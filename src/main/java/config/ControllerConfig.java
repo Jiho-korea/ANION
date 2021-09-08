@@ -16,6 +16,7 @@ package config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import controller.OauthController;
 import controller.admin.code.kind.KindcodeDeleteController;
 import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
@@ -245,5 +246,10 @@ public class ControllerConfig {
 	@Bean
 	public MemberWithdrawalController memberWithdrawalController() {
 		return new MemberWithdrawalController();
+	}
+	
+	@Bean
+	public OauthController oauthController() {
+		return new OauthController();
 	}
 }
