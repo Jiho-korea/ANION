@@ -1,29 +1,32 @@
 package petProject.service;
 
+import org.springframework.stereotype.Component;
+
 import petProject.vo.FacebookOauth;
 import petProject.vo.GoogleOauth;
 import petProject.vo.KakaoOauth;
 import petProject.vo.NaverOauth;
 import petProject.vo.SocialLoginType;
 
+@Component
 public interface SocialOauth {
-	
-    String getOauthRedirectURL();
 
-    String requestAccessToken(String code);
+	String getOauthRedirectURL();
 
-    default SocialLoginType type() {
-        if (this instanceof FacebookOauth) {
-            return SocialLoginType.FACEBOOK;
-        } else if (this instanceof GoogleOauth) {
-            return SocialLoginType.GOOGLE;
-        } else if (this instanceof NaverOauth) {
-            return SocialLoginType.NAVER;
-        } else if (this instanceof KakaoOauth) {
-            return SocialLoginType.KAKAO;
-        } else {
-            return null;
-        }
-    }
-    
+	String requestAccessToken(String code);
+
+	default SocialLoginType type() {
+		if (this instanceof FacebookOauth) {
+			return SocialLoginType.FACEBOOK;
+		} else if (this instanceof GoogleOauth) {
+			return SocialLoginType.GOOGLE;
+		} else if (this instanceof NaverOauth) {
+			return SocialLoginType.NAVER;
+		} else if (this instanceof KakaoOauth) {
+			return SocialLoginType.KAKAO;
+		} else {
+			return null;
+		}
+	}
+
 }

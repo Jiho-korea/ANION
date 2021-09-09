@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -15,8 +14,8 @@ import petProject.vo.SocialLoginType;
 @RequiredArgsConstructor
 public class OauthService {
 
-	private List<SocialOauth> socialOauthList;
-	private HttpServletResponse response;
+	private final List<SocialOauth> socialOauthList;
+	private final HttpServletResponse response;
 
 	public void request(SocialLoginType socialLoginType) {
 		SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);

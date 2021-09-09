@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({ ContextDataSource.class, ContextSqlMapper.class, ImageUploadConfig.class, PasswordSecurityConfig.class,
 		MailSmtpAuthConfig.class, ContextMessageConfig.class })
-@ComponentScan(basePackages = { "petProject.service.impl" })
+@ComponentScan(basePackages = { "petProject.service.impl", "petProject.service", "petProject.vo" })
 public class RootContextConfiguration {
 
 }

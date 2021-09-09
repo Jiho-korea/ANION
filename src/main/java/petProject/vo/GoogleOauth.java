@@ -23,6 +23,7 @@ import petProject.service.SocialOauth;
 @RequiredArgsConstructor
 @PropertySource("classpath:/application.properties")
 public class GoogleOauth implements SocialOauth {
+	
 	@Value("${sns.google.url}")
 	private String GOOGLE_SNS_BASE_URL;
 	@Value("${sns.google.client.id}")

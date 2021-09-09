@@ -16,7 +16,6 @@ package config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import controller.OauthController;
 import controller.admin.code.kind.KindcodeDeleteController;
 import controller.admin.code.kind.KindcodeInsertController;
 import controller.admin.code.kind.KindcodeListController;
@@ -221,7 +220,7 @@ public class ControllerConfig {
 	public MemberFindController memberFindController() {
 		return new MemberFindController();
 	}
-	
+
 	@Bean
 	public GlobalExceptionController globalExceptionController() {
 		return new GlobalExceptionController();
@@ -232,24 +231,20 @@ public class ControllerConfig {
 		return new PetLocationController();
 
 	}
-	
+
 	@Bean
 	public MemberDeleteController memberDeleteController() {
 		return new MemberDeleteController();
 	}
-	
+
 	@Bean
 	public MemberModifyController memberModifyController() {
 		return new MemberModifyController();
 	}
-	
+
 	@Bean
 	public MemberWithdrawalController memberWithdrawalController() {
 		return new MemberWithdrawalController();
 	}
-	
-	@Bean
-	public OauthController oauthController() {
-		return new OauthController();
-	}
+
 }
