@@ -63,7 +63,7 @@
 }
 </style>
 <script defer src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script defer src="js/bootstrap.js"></script>
+<script defer src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <title><spring:message code="home.title" /></title>
 </head>
 <body>

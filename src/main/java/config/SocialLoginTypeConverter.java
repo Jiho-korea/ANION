@@ -10,7 +10,6 @@ public class SocialLoginTypeConverter implements Converter<String, SocialLoginTy
 
 	@Override
 	public SocialLoginType convert(String s) {
-		System.out.println("hi");
 		return SocialLoginType.valueOf(s.toUpperCase());
 	}
 }
